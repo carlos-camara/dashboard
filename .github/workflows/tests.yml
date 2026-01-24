@@ -1,0 +1,71 @@
+name: Tests - Behave SMOKE
+
+on:
+  pull_request:
+    branches: ["**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: write          # needed to publish the test report as a Check
+  pull-requests: write   # optional but useful for PR annotations/comments
+
+jobs:
+  behave:
+    name: Run Behave + Publish Test Report
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Run tests and always produce JUnit XML.
+      # We capture the exit code so we can still publish the report even if tests fail.
+      - name: Run Behave (@smoke) and generate JUnit
+        id: behave
+        run: |
+          mkdir -p reports
+          set +e
+          behave features/ -t @smoke --no-capture --junit --junit-directory reports
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      # Publishes a nice summary:
+      # - total tests
+      # - passed/failed/skipped
+      # - failure details + annotations
+      - name: Publish Test Report (JUnit)
+        if: always()
+        uses: dorny/test-reporter@v1
+        with:
+          name: Behave - API Test Report
+          path: reports/*.xml
+          reporter: java-junit
+          fail-on-error: false
+
+      - name: Upload JUnit reports (artifact)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: behave-junit-reports
+          path: reports
+          if-no-files-found: warn
+
+      # Make the job fail if Behave failed (so CI is red), but only AFTER publishing the report.
+      - name: Fail job if tests failed
+        if: ${{ steps.behave.outputs.exit_code != '0' }}
+        run: |
+          echo "Behave failed with exit code ${{ steps.behave.outputs.exit_code }}"
+          exit 1
