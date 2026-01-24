@@ -2,7 +2,7 @@
 [![Lint (devel)](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml?query=branch%3Adevel)
 [![Tests (devel)](https://github.com/carlos-camara/dashboard/actions/workflows/tests.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/tests.yml?query=branch%3Adevel)
 
-This repository is a *QA Dashboard/Framework* designed to *validate and visualize test executions* across *multiple projects, with a strong focus on **API testing* using *BDD (Behave)* in Python.
+This repository is a QA Dashboard/Framework designed to validate and visualize test executions across multiple projects, with a strong focus on API testing using BDD (Behave) in Python.
 
 It provides a scalable foundation to:
 - execute standardized BDD suites,
