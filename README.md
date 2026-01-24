@@ -1,35 +1,58 @@
-# QA Execution Dashboard (API BDD) — httpbin sample
+# QA Execution Dashboard (BDD Automation) — Multi-Project Validation
+[![Lint (devel)](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml?query=branch%3Adevel)
+[![Tests (devel)](https://github.com/carlos-camara/dashboard/actions/workflows/tests.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/tests.yml?query=branch%3Adevel)
 
-Este proyecto es una *Dashboard/Framework de QA* orientado a *validar y visualizar ejecuciones de tests* (principalmente pruebas de API) utilizando *BDD con Behave* en Python.
+This repository is a *QA Dashboard/Framework* designed to *validate and visualize test executions* across *multiple projects, with a strong focus on **API testing* using *BDD (Behave)* in Python.
 
-La base de pruebas se apoya en requests para validar endpoints de forma robusta y, opcionalmente, en Selenium para validaciones UI (si se añade más adelante). El objetivo es tener un repositorio preparado para integrarse con CI (Jenkins) y evolucionar hacia una *Dashboard* que consolide resultados, tendencias y calidad de las ejecuciones.
+It provides a scalable foundation to:
+- execute standardized BDD suites,
+- validate REST endpoints with professional assertions and diagnostics,
+- generate CI-friendly artifacts (JUnit),
+- and evolve into a *central execution dashboard* (trends, stability, recurring failures, performance signals).
+
+> The httpbin suite is included as a *reference implementation* and sandbox for endpoint validation patterns.
 
 ---
 
-## Objetivo del repositorio
+## Repository Goals
 
-- Ejecutar suites BDD (Behave) de forma estandarizada.
-- Validar endpoints (GET/POST/PUT/DELETE/OPTIONS) con aserciones profesionales.
-- Generar evidencias y resultados para CI (Jenkins).
-- Servir como base para una futura *Dashboard de ejecuciones* (histórico, estabilidad, fallos recurrentes, etc.).
+- Run *BDD (Behave)* suites in a consistent and reusable way.
+- Validate *HTTP methods* (GET/POST/PUT/DELETE/OPTIONS) with robust checks:
+  - status codes
+  - JSON paths and types
+  - contract checks (keys, nulls, empty payloads)
+  - response time thresholds
+  - header validation (case-insensitive, HTTP-compliant)
+- Produce *CI artifacts* (JUnit XML) for reporting and dashboard ingestion.
+- Support *multi-project testing* (multiple targets/services) by organizing features by domain/project.
 
 ---
 
-## Contenido
+## Key Features
 
-- *Features (BDD)* para validar métodos HTTP
-- *Steps* reutilizables + *helpers* separados para escalabilidad
-- *Jenkinsfile* para pipeline (instalación + ejecución)
+- *Reusable Steps + Helpers*
+  - Shared request/response state stored in Behave context
+  - Dedicated assertion steps with clear failure messages and request traceability (context.last_request)
+- *Debugging Support*
+  - Steps to print request headers / response JSON to speed up investigation
+- *CI-ready*
+  - Lint pipeline (Super-Linter)
+  - Test pipeline (Behave) producing *JUnit XML*
+  - Test run summary in GitHub via a reusable action (*dorny/test-reporter*)
 
-### Requisitos
+---
+
+---
+
+## Requirements
 
 - *Python 3.10+*
-- Acceso a internet
-- (Opcional) *Chrome/Chromium* si se ejecutan pruebas con Selenium
+- Internet access (for httpbin sample tests)
+- (Optional) Browser tooling if UI tests are added later (Selenium)
 
 ---
 
-## Instalación
+## Installation
 
 ### Windows (PowerShell)
 ```powershell
