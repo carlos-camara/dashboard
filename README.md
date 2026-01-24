@@ -17,14 +17,14 @@ La base de pruebas se apoya en requests para validar endpoints de forma robusta 
 
 ## Contenido
 
-- *Features (BDD)* para validar métodos HTTP contra https://httpbin.org
+- *Features (BDD)* para validar métodos HTTP
 - *Steps* reutilizables + *helpers* separados para escalabilidad
 - *Jenkinsfile* para pipeline (instalación + ejecución)
 
-# Requisitos
+### Requisitos
 
 - *Python 3.10+*
-- Acceso a internet para consumir https://httpbin.org
+- Acceso a internet
 - (Opcional) *Chrome/Chromium* si se ejecutan pruebas con Selenium
 
 ---
