@@ -16,6 +16,7 @@ Assumptions:
   - context.last_request    -> dict with method/url/headers/etc. for troubleshooting
 """
 
+import re
 from behave import then
 from http_helpers import get_json_path, loads_json_or_fail, parse_expected, get_header_case_insensitive
 
@@ -294,3 +295,121 @@ def step_assert_response_header(context, header_name: str, expected: str):
 
     actual = get_header_case_insensitive(headers, header_name)
     assert actual == expected, f"Expected header {header_name}='{expected}', got '{actual}'"
+
+
+@then('the response JSON path "{path}" should match regex "{pattern}"')
+def step_json_path_matches_regex(context, path: str, pattern: str):
+    """
+    Validates that a JSON field matches a regex.
+    Example: batch_id format checks.
+    """
+    assert context.response_json is not None, "Response JSON is empty or could not be parsed."
+    val = get_json_path(context.response_json, path)
+    assert isinstance(val, str), f"Expected '{path}' to be a string for regex match, got {type(val)} -> {val}"
+    assert re.match(pattern, val), f"Value at '{path}' did not match regex.\nPattern: {pattern}\nValue: {val}"
+
+
+@then("the response JSON should not be empty")
+def step_response_json_should_not_be_empty(context):
+    """
+    Ensures the response contains a non-empty JSON payload.
+
+    - If context.response_json is already available, it checks it is not {} or [].
+    - If context.response_json is None, it tries to parse the response body as JSON.
+    - Fails with a helpful message showing status, URL and a response snippet.
+    """
+    assert getattr(context, "response", None) is not None, "No response found. Did you send a request?"
+
+    data = getattr(context, "response_json", None)
+
+    # If JSON was not parsed in the request step, try parsing now.
+    if data is None:
+        raw = (context.response.text or "").strip()
+        if raw == "":
+            raise AssertionError(
+                f"Expected non-empty JSON, but response body is empty.\n"
+                f"Status: {context.response.status_code}\nURL: {context.response.url}"
+            )
+        try:
+            data = json.loads(raw)
+            context.response_json = data
+        except Exception as e:
+            raise AssertionError(
+                f"Expected JSON but failed to parse it.\n"
+                f"Error: {e}\n"
+                f"Status: {context.response.status_code}\nURL: {context.response.url}\n"
+                f"Body (first 500 chars): {raw[:500]}"
+            )
+
+    # Now validate it's not empty JSON object/array
+    assert data not in ({}, [], ""), (
+        f"Expected non-empty JSON, but got empty payload: {data}\n"
+        f"Status: {context.response.status_code}\nURL: {context.response.url}"
+    )
+
+
+@then('I store the response JSON path "{path}" as "{var_name}"')
+def step_store_response_json_path(context, path: str, var_name: str):
+    """
+    Stores a value from the last response JSON into context.vars so it can be reused
+    later in the scenario (e.g., compare two batch_id values from consecutive calls).
+
+    Example:
+      Then I store the response JSON path "batch_id" as "batch_id_1"
+    """
+    assert context.response_json is not None, "Response JSON is empty or could not be parsed."
+
+    value = get_json_path(context.response_json, path)
+
+    # Create a variables dict if it doesn't exist yet
+    if not hasattr(context, "vars") or context.vars is None:
+        context.vars = {}
+
+    context.vars[var_name] = value
+
+
+@then('the stored variables "{var_a}" and "{var_b}" should be different')
+def step_stored_vars_should_be_different(context, var_a: str, var_b: str):
+    """
+    Ensures two stored variables are not equal (e.g., batch_id uniqueness).
+    """
+    context.vars = getattr(context, "vars", {})
+    a = context.vars.get(var_a)
+    b = context.vars.get(var_b)
+
+    assert a is not None and b is not None, f"Missing stored vars. {var_a}={a}, {var_b}={b}"
+    assert a != b, f"Expected different values, but both were '{a}'"
+
+
+@then("the response should indicate method not allowed")
+def step_method_not_allowed(context):
+    """
+    Asserts the endpoint rejects an unsupported HTTP method.
+
+    Why we accept multiple status codes:
+    - 405 Method Not Allowed is the standard REST response.
+    - 404 Not Found is sometimes returned by gateways/services to avoid endpoint discovery.
+    """
+    assert getattr(context, "response", None) is not None, "No response found. Did you send a request?"
+    status = context.response.status_code
+    assert status in (405, 404), f"Expected 405 or 404 for unsupported method, got {status}. Body: {context.response.text[:500]}"
+
+
+@then('the response JSON path "{path}" should equal stored variable "{var_name}"')
+def step_json_path_equals_stored_var(context, path: str, var_name: str):
+    """
+    Compares a JSON field with a value previously stored in context.vars.
+    """
+    assert context.response_json is not None, "Response JSON is empty or could not be parsed."
+
+    context.vars = getattr(context, "vars", {}) or {}
+    expected = context.vars.get(var_name)
+    assert expected is not None, f"Stored variable '{var_name}' not found in context.vars."
+
+    actual = get_json_path(context.response_json, path)
+    assert actual == expected, (
+        f"JSON mismatch at '{path}'\n"
+        f"Expected (stored {var_name}): {expected}\n"
+        f"Actual: {actual}\n"
+        f"Request: {context.last_request}"
+    )

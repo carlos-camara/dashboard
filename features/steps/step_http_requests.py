@@ -5,6 +5,7 @@ from http_helpers import (
     loads_json_or_fail,
     table_to_params,
     table_to_form_including_headings,
+    substitute_vars
 )
 
 # -----------------------------------------------------------------------------
@@ -236,3 +237,36 @@ def step_post_with_form_data(context, path: str):
         "headers": dict(context.default_headers),
         "form": form,
     }
+
+
+@when('I send a "POST" request to "{path}" with JSON body using variables')
+def step_send_post_json_with_vars(context, path: str):
+    """
+    Sends a POST request where the JSON docstring may contain ${var} placeholders.
+    Placeholders are resolved from context.vars before JSON parsing and sending.
+    """
+    # Ensure vars dict exists
+    context.vars = getattr(context, "vars", {}) or {}
+
+    raw = context.text or ""
+    substituted = substitute_vars(raw, context.vars)
+    body = loads_json_or_fail(substituted)
+
+    # Ensure headers exist
+    if not hasattr(context, "default_headers") or context.default_headers is None:
+        context.default_headers = {}
+
+    url = full_url(context.base_url, path)
+    context.last_request = {
+        "method": "POST",
+        "url": url,
+        "json": body,
+        "headers": dict(context.default_headers),
+    }
+
+    resp = requests.post(url, json=body, headers=context.default_headers, timeout=20)
+    context.response = resp
+    try:
+        context.response_json = resp.json()
+    except Exception:
+        context.response_json = None

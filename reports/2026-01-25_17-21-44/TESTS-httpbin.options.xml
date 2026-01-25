@@ -1,0 +1,30 @@
+<testsuite name="httpbin.options.OPTIONS method validations for httpbin" tests="2" errors="0" failures="0" skipped="0" time="1.781517" timestamp="2026-01-25T17:21:53.179521" hostname="INSPIRON-CARLOS"><testcase classname="httpbin.options.OPTIONS method validations for httpbin" name="OPTIONS /anything returns JSON indicating method and url" status="passed" time="0.59268"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke
+  Scenario: OPTIONS /anything returns JSON indicating method and url
+    Given the API base URL is "https://httpbin.org" ... passed in 0.002s
+    When I send a "OPTIONS" request to "/get" ... passed in 0.587s
+    Then the response status code should be 200 ... passed in 0.002s
+    And the response should be empty ... passed in 0.002s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="httpbin.options.OPTIONS method validations for httpbin" name="OPTIONS /anything echoes custom headers" status="passed" time="1.188837"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: OPTIONS /anything echoes custom headers
+    Given the API base URL is "https://httpbin.org" ... passed in 0.001s
+    When I set request headers ... passed in 0.001s
+      | header      | Value |
+      | X-Preflight | test  |
+    And I send a "OPTIONS" request to "/get" ... passed in 1.186s
+    Then the response status code should be 200 ... passed in 0.000s
+    And the response should be empty ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
