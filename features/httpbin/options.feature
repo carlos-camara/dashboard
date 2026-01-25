@@ -8,12 +8,12 @@ Feature: OPTIONS method validations for httpbin
   Scenario: OPTIONS /anything returns JSON indicating method and url
     When I send a "OPTIONS" request to "/get"
     Then the response status code should be 200
-        And the response should be empty
+    And the response should be empty
 
   Scenario: OPTIONS /anything echoes custom headers
     When I set request headers
-         | header       | Value |
-         | X-Preflight  | test  |
-        And I send a "OPTIONS" request to "/get"
+      | header      | Value |
+      | X-Preflight | test  |
+    And I send a "OPTIONS" request to "/get"
     Then the response status code should be 200
-        And the response should be empty
+    And the response should be empty

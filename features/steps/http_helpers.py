@@ -1,6 +1,9 @@
 import json
+import re
 from typing import Any, Dict
 
+# Matches placeholders like ${batch_id}
+VAR_PATTERN = re.compile(r"\$\{([A-Za-z][A-Za-z0-9_]*)\}")
 
 def parse_expected(value: str) -> Any:
     """
@@ -118,3 +121,23 @@ def get_header_case_insensitive(headers: dict, name: str):
 
     # If not found, provide a helpful error with the headers we actually received
     raise AssertionError(f"Header '{name}' not found. Available: {list(headers.keys())}")
+
+
+def substitute_vars(raw: str, variables: dict) -> str:
+    """
+    Replaces ${var} placeholders using values stored in context.vars.
+
+    Example:
+      raw:  { "batch_id": "${batch_id}" }
+      vars: { "batch_id": "ABC123" }
+    """
+    def repl(match):
+        key = match.group(1)
+        if key not in variables:
+            raise AssertionError(
+                f"Variable '{key}' not found in context.vars. "
+                f"Set it first (e.g., store it from a previous response)."
+            )
+        return str(variables[key])
+
+    return VAR_PATTERN.sub(repl, raw)
