@@ -5,4 +5,3 @@ The hosted mock server empowers you to effortlessly simulate various Sendgrid V3
 
 Sendgrid V3 Rest/OpenAPI mock server is up and running!
 We have set up the mock routes to ensure a smooth adoption. Copy the URL below and set it as the API base URL in your code, and instantly harness the full potential of mocked Sendgrid V3 APIs.
-https://sendgrid-v3-api.mock.beeceptor.com
