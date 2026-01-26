@@ -1,0 +1,5 @@
+{
+  "name": "QA Hub - Execution Discovery Dashboard",
+  "description": "A robust QA dashboard that automatically discovers API endpoints from test run metadata, JUnit reports, and logs. Featuring endpoint exploration, trend analysis, and historical scenario tracking.",
+  "requestFramePermissions": []
+}

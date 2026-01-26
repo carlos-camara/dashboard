@@ -1,0 +1,71 @@
+<testsuite name="sendgrid.cancel_scheduled.scheduled_sends.validation_negative.SendGrid Scheduled Sends - Validation Errors (Negative)" tests="4" errors="0" failures="0" skipped="0" time="2.203271" timestamp="2026-01-25T19:21:06.034570" hostname="INSPIRON-CARLOS"><testcase classname="sendgrid.cancel_scheduled.scheduled_sends.validation_negative.SendGrid Scheduled Sends - Validation Errors (Negative)" name="Missing batch_id should return 400" status="passed" time="0.542387"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke
+  Scenario: Missing batch_id should return 400
+    Given the API base URL is "https://sendgrid-v3-api.mock.beeceptor.com" ... passed in 0.005s
+    When I set request headers ... passed in 0.002s
+      | header       | Value    |
+      | on-behalf-of | Ut minim |
+    When I send a "POST" request to "/v3/user/scheduled_sends" with JSON body ... passed in 0.535s
+      """
+      { "status": "pause" }
+      """
+    Then the response status code should be 400 ... passed in 0.001s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="sendgrid.cancel_scheduled.scheduled_sends.validation_negative.SendGrid Scheduled Sends - Validation Errors (Negative)" name="Missing status should return 400" status="passed" time="0.551733"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Missing status should return 400
+    Given the API base URL is "https://sendgrid-v3-api.mock.beeceptor.com" ... passed in 0.004s
+    When I set request headers ... passed in 0.005s
+      | header       | Value    |
+      | on-behalf-of | Ut minim |
+    When I send a "POST" request to "/v3/user/scheduled_sends" with JSON body ... passed in 0.542s
+      """
+      { "batch_id": "dummy" }
+      """
+    Then the response status code should be 400 ... passed in 0.001s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="sendgrid.cancel_scheduled.scheduled_sends.validation_negative.SendGrid Scheduled Sends - Validation Errors (Negative)" name="Invalid status value should return 400" status="passed" time="0.549027"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Invalid status value should return 400
+    Given the API base URL is "https://sendgrid-v3-api.mock.beeceptor.com" ... passed in 0.002s
+    When I set request headers ... passed in 0.001s
+      | header       | Value    |
+      | on-behalf-of | Ut minim |
+    When I send a "POST" request to "/v3/user/scheduled_sends" with JSON body ... passed in 0.544s
+      """
+      { "batch_id": "dummy", "status": "paused" }
+      """
+    Then the response status code should be 400 ... passed in 0.003s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="sendgrid.cancel_scheduled.scheduled_sends.validation_negative.SendGrid Scheduled Sends - Validation Errors (Negative)" name="Empty batch_id should return 400" status="passed" time="0.560124"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Empty batch_id should return 400
+    Given the API base URL is "https://sendgrid-v3-api.mock.beeceptor.com" ... passed in 0.001s
+    When I set request headers ... passed in 0.001s
+      | header       | Value    |
+      | on-behalf-of | Ut minim |
+    When I send a "POST" request to "/v3/user/scheduled_sends" with JSON body ... passed in 0.558s
+      """
+      { "batch_id": "", "status": "pause" }
+      """
+    Then the response status code should be 400 ... passed in 0.001s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

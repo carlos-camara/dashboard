@@ -1,0 +1,562 @@
+<testsuite name="sendgrid.mail.validation_negative.SendGrid Mail Send - Validation Errors (400)" tests="5" errors="0" failures="0" skipped="0" time="2.863697" timestamp="2026-01-25T19:21:10.357959" hostname="INSPIRON-CARLOS"><testcase classname="sendgrid.mail.validation_negative.SendGrid Mail Send - Validation Errors (400)" name="Missing &quot;from&quot; should return 400" status="passed" time="0.580156"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Missing "from" should return 400
+    Given the API base URL is "https://sendgrid-v3-api.mock.beeceptor.com" ... passed in 0.003s
+    When I set request headers ... passed in 0.003s
+      | Header       | Value            |
+      | Content-Type | application/json |
+    When I send a "POST" request to "/v3/mail/send" with JSON body ... passed in 0.570s
+      """
+      {
+        "personalizations": [
+          {
+            "to": [
+              {
+                "email": "john_doe@example.com",
+                "name": "John Doe"
+              },
+              {
+                "email": "julia_doe@example.com",
+                "name": "Julia Doe"
+              }
+            ],
+            "cc": [
+              {
+                "email": "jane_doe@example.com",
+                "name": "Jane Doe"
+              }
+            ],
+            "bcc": [
+              {
+                "email": "james_doe@example.com",
+                "name": "Jim Doe"
+              }
+            ]
+          },
+          {
+            "from": {
+              "email": "sales@example.com",
+              "name": "Example Sales Team"
+            },
+            "to": [
+              {
+                "email": "janice_doe@example.com",
+                "name": "Janice Doe"
+              }
+            ],
+            "bcc": [
+              {
+                "email": "jordan_doe@example.com",
+                "name": "Jordan Doe"
+              }
+            ]
+          }
+        ],
+        "reply_to": {
+          "email": "customer_service@example.com",
+          "name": "Example Customer Service Team"
+        },
+        "subject": "Your Example Order Confirmation",
+        "content": [
+          {
+            "type": "text/html",
+            "value": "<p>Hello from Twilio SendGrid!</p><p>Sending with the email service trusted by developers and marketers for <strong>time-savings</strong>, <strong>scalability</strong>, and <strong>delivery expertise</strong>.</p><p>%open-track%</p>"
+          }
+        ],
+        "attachments": [
+          {
+            "content": "PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KCiAgICA8aGVhZD4KICAgICAgICA8bWV0YSBjaGFyc2V0PSJVVEYtOCI+CiAgICAgICAgPG1ldGEgaHR0cC1lcXVpdj0iWC1VQS1Db21wYXRpYmxlIiBjb250ZW50PSJJRT1lZGdlIj4KICAgICAgICA8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCI+CiAgICAgICAgPHRpdGxlPkRvY3VtZW50PC90aXRsZT4KICAgIDwvaGVhZD4KCiAgICA8Ym9keT4KCiAgICA8L2JvZHk+Cgo8L2h0bWw+Cg==",
+            "filename": "index.html",
+            "type": "text/html",
+            "disposition": "attachment"
+          }
+        ],
+        "categories": [
+          "cake",
+          "pie",
+          "baking"
+        ],
+        "send_at": 1617260400,
+        "batch_id": "AsdFgHjklQweRTYuIopzXcVBNm0aSDfGHjklmZcVbNMqWert1znmOP2asDFjkl",
+        "asm": {
+          "group_id": 12345,
+          "groups_to_display": [
+            12345
+          ]
+        },
+        "ip_pool_name": "transactional email",
+        "mail_settings": {
+          "bypass_list_management": {
+            "enable": false
+          },
+          "footer": {
+            "enable": false
+          },
+          "sandbox_mode": {
+            "enable": false
+          }
+        },
+        "tracking_settings": {
+          "click_tracking": {
+            "enable": true,
+            "enable_text": false
+          },
+          "open_tracking": {
+            "enable": true,
+            "substitution_tag": "%open-track%"
+          },
+          "subscription_tracking": {
+            "enable": false
+          }
+        }
+      }
+      """
+    Then the response status code should be 400 ... passed in 0.004s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="sendgrid.mail.validation_negative.SendGrid Mail Send - Validation Errors (400)" name="Missing &quot;personalizations&quot; should return 400" status="passed" time="0.567453"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Missing "personalizations" should return 400
+    Given the API base URL is "https://sendgrid-v3-api.mock.beeceptor.com" ... passed in 0.003s
+    When I set request headers ... passed in 0.004s
+      | Header       | Value            |
+      | Content-Type | application/json |
+    When I send a "POST" request to "/v3/mail/send" with JSON body ... passed in 0.560s
+      """
+      {
+        "from": {
+          "email": "orders@example.com",
+          "name": "Example Order Confirmation"
+        },
+        "reply_to": {
+          "email": "customer_service@example.com",
+          "name": "Example Customer Service Team"
+        },
+        "subject": "Your Example Order Confirmation",
+        "content": [
+          {
+            "type": "text/html",
+            "value": "<p>Hello from Twilio SendGrid!</p><p>Sending with the email service trusted by developers and marketers for <strong>time-savings</strong>, <strong>scalability</strong>, and <strong>delivery expertise</strong>.</p><p>%open-track%</p>"
+          }
+        ],
+        "attachments": [
+          {
+            "content": "PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KCiAgICA8aGVhZD4KICAgICAgICA8bWV0YSBjaGFyc2V0PSJVVEYtOCI+CiAgICAgICAgPG1ldGEgaHR0cC1lcXVpdj0iWC1VQS1Db21wYXRpYmxlIiBjb250ZW50PSJJRT1lZGdlIj4KICAgICAgICA8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCI+CiAgICAgICAgPHRpdGxlPkRvY3VtZW50PC90aXRsZT4KICAgIDwvaGVhZD4KCiAgICA8Ym9keT4KCiAgICA8L2JvZHk+Cgo8L2h0bWw+Cg==",
+            "filename": "index.html",
+            "type": "text/html",
+            "disposition": "attachment"
+          }
+        ],
+        "categories": [
+          "cake",
+          "pie",
+          "baking"
+        ],
+        "send_at": 1617260400,
+        "batch_id": "AsdFgHjklQweRTYuIopzXcVBNm0aSDfGHjklmZcVbNMqWert1znmOP2asDFjkl",
+        "asm": {
+          "group_id": 12345,
+          "groups_to_display": [
+            12345
+          ]
+        },
+        "ip_pool_name": "transactional email",
+        "mail_settings": {
+          "bypass_list_management": {
+            "enable": false
+          },
+          "footer": {
+            "enable": false
+          },
+          "sandbox_mode": {
+            "enable": false
+          }
+        },
+        "tracking_settings": {
+          "click_tracking": {
+            "enable": true,
+            "enable_text": false
+          },
+          "open_tracking": {
+            "enable": true,
+            "substitution_tag": "%open-track%"
+          },
+          "subscription_tracking": {
+            "enable": false
+          }
+        }
+      }
+      """
+    Then the response status code should be 400 ... passed in 0.001s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="sendgrid.mail.validation_negative.SendGrid Mail Send - Validation Errors (400)" name="Invalid email format should return 400" status="passed" time="0.549328"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Invalid email format should return 400
+    Given the API base URL is "https://sendgrid-v3-api.mock.beeceptor.com" ... passed in 0.003s
+    When I set request headers ... passed in 0.001s
+      | Header       | Value            |
+      | Content-Type | application/json |
+    When I send a "POST" request to "/v3/mail/send" with JSON body ... passed in 0.544s
+      """
+      {
+        "personalizations": [
+          {
+            "to": [
+              {
+                "email": "not-an-email",
+                "name": "John Doe"
+              }
+            ],
+            "cc": [
+              {
+                "email": "jane_doe@example.com",
+                "name": "Jane Doe"
+              }
+            ],
+            "bcc": [
+              {
+                "email": "james_doe@example.com",
+                "name": "Jim Doe"
+              }
+            ]
+          },
+          {
+            "from": {
+              "email": "sales@example.com",
+              "name": "Example Sales Team"
+            },
+            "to": [
+              {
+                "email": "janice_doe@example.com",
+                "name": "Janice Doe"
+              }
+            ],
+            "bcc": [
+              {
+                "email": "jordan_doe@example.com",
+                "name": "Jordan Doe"
+              }
+            ]
+          }
+        ],
+        "from": {
+          "email": "orders@example.com",
+          "name": "Example Order Confirmation"
+        },
+        "reply_to": {
+          "email": "customer_service@example.com",
+          "name": "Example Customer Service Team"
+        },
+        "subject": "Your Example Order Confirmation",
+        "content": [
+          {
+            "type": "text/html",
+            "value": "<p>Hello from Twilio SendGrid!</p><p>Sending with the email service trusted by developers and marketers for <strong>time-savings</strong>, <strong>scalability</strong>, and <strong>delivery expertise</strong>.</p><p>%open-track%</p>"
+          }
+        ],
+        "attachments": [
+          {
+            "content": "PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KCiAgICA8aGVhZD4KICAgICAgICA8bWV0YSBjaGFyc2V0PSJVVEYtOCI+CiAgICAgICAgPG1ldGEgaHR0cC1lcXVpdj0iWC1VQS1Db21wYXRpYmxlIiBjb250ZW50PSJJRT1lZGdlIj4KICAgICAgICA8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCI+CiAgICAgICAgPHRpdGxlPkRvY3VtZW50PC90aXRsZT4KICAgIDwvaGVhZD4KCiAgICA8Ym9keT4KCiAgICA8L2JvZHk+Cgo8L2h0bWw+Cg==",
+            "filename": "index.html",
+            "type": "text/html",
+            "disposition": "attachment"
+          }
+        ],
+        "categories": [
+          "cake",
+          "pie",
+          "baking"
+        ],
+        "send_at": 1617260400,
+        "batch_id": "AsdFgHjklQweRTYuIopzXcVBNm0aSDfGHjklmZcVbNMqWert1znmOP2asDFjkl",
+        "asm": {
+          "group_id": 12345,
+          "groups_to_display": [
+            12345
+          ]
+        },
+        "ip_pool_name": "transactional email",
+        "mail_settings": {
+          "bypass_list_management": {
+            "enable": false
+          },
+          "footer": {
+            "enable": false
+          },
+          "sandbox_mode": {
+            "enable": false
+          }
+        },
+        "tracking_settings": {
+          "click_tracking": {
+            "enable": true,
+            "enable_text": false
+          },
+          "open_tracking": {
+            "enable": true,
+            "substitution_tag": "%open-track%"
+          },
+          "subscription_tracking": {
+            "enable": false
+          }
+        }
+      }
+      """
+    Then the response status code should be 400 ... passed in 0.001s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="sendgrid.mail.validation_negative.SendGrid Mail Send - Validation Errors (400)" name="Missing subject (no template) should return 400" status="passed" time="0.557471"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Missing subject (no template) should return 400
+    Given the API base URL is "https://sendgrid-v3-api.mock.beeceptor.com" ... passed in 0.004s
+    When I set request headers ... passed in 0.002s
+      | Header       | Value            |
+      | Content-Type | application/json |
+    When I send a "POST" request to "/v3/mail/send" with JSON body ... passed in 0.551s
+      """
+      {
+        "personalizations": [
+          {
+            "to": [
+              {
+                "email": "john_doe@example.com",
+                "name": "John Doe"
+              },
+              {
+                "email": "julia_doe@example.com",
+                "name": "Julia Doe"
+              }
+            ],
+            "cc": [
+              {
+                "email": "jane_doe@example.com",
+                "name": "Jane Doe"
+              }
+            ],
+            "bcc": [
+              {
+                "email": "james_doe@example.com",
+                "name": "Jim Doe"
+              }
+            ]
+          },
+          {
+            "from": {
+              "email": "sales@example.com",
+              "name": "Example Sales Team"
+            },
+            "to": [
+              {
+                "email": "janice_doe@example.com",
+                "name": "Janice Doe"
+              }
+            ],
+            "bcc": [
+              {
+                "email": "jordan_doe@example.com",
+                "name": "Jordan Doe"
+              }
+            ]
+          }
+        ],
+        "from": {
+          "email": "orders@example.com",
+          "name": "Example Order Confirmation"
+        },
+        "reply_to": {
+          "email": "customer_service@example.com",
+          "name": "Example Customer Service Team"
+        },
+        "content": [
+          {
+            "type": "text/html",
+            "value": "<p>Hello from Twilio SendGrid!</p><p>Sending with the email service trusted by developers and marketers for <strong>time-savings</strong>, <strong>scalability</strong>, and <strong>delivery expertise</strong>.</p><p>%open-track%</p>"
+          }
+        ],
+        "attachments": [
+          {
+            "content": "PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KCiAgICA8aGVhZD4KICAgICAgICA8bWV0YSBjaGFyc2V0PSJVVEYtOCI+CiAgICAgICAgPG1ldGEgaHR0cC1lcXVpdj0iWC1VQS1Db21wYXRpYmxlIiBjb250ZW50PSJJRT1lZGdlIj4KICAgICAgICA8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCI+CiAgICAgICAgPHRpdGxlPkRvY3VtZW50PC90aXRsZT4KICAgIDwvaGVhZD4KCiAgICA8Ym9keT4KCiAgICA8L2JvZHk+Cgo8L2h0bWw+Cg==",
+            "filename": "index.html",
+            "type": "text/html",
+            "disposition": "attachment"
+          }
+        ],
+        "categories": [
+          "cake",
+          "pie",
+          "baking"
+        ],
+        "send_at": 1617260400,
+        "batch_id": "AsdFgHjklQweRTYuIopzXcVBNm0aSDfGHjklmZcVbNMqWert1znmOP2asDFjkl",
+        "asm": {
+          "group_id": 12345,
+          "groups_to_display": [
+            12345
+          ]
+        },
+        "ip_pool_name": "transactional email",
+        "mail_settings": {
+          "bypass_list_management": {
+            "enable": false
+          },
+          "footer": {
+            "enable": false
+          },
+          "sandbox_mode": {
+            "enable": false
+          }
+        },
+        "tracking_settings": {
+          "click_tracking": {
+            "enable": true,
+            "enable_text": false
+          },
+          "open_tracking": {
+            "enable": true,
+            "substitution_tag": "%open-track%"
+          },
+          "subscription_tracking": {
+            "enable": false
+          }
+        }
+      }
+      """
+    Then the response status code should be 400 ... passed in 0.001s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="sendgrid.mail.validation_negative.SendGrid Mail Send - Validation Errors (400)" name="Attachment missing filename should return 400" status="passed" time="0.60929"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Attachment missing filename should return 400
+    Given the API base URL is "https://sendgrid-v3-api.mock.beeceptor.com" ... passed in 0.002s
+    When I set request headers ... passed in 0.003s
+      | Header       | Value            |
+      | Content-Type | application/json |
+    When I send a "POST" request to "/v3/mail/send" with JSON body ... passed in 0.603s
+      """
+      {
+        "personalizations": [
+          {
+            "to": [
+              {
+                "email": "john_doe@example.com",
+                "name": "John Doe"
+              },
+              {
+                "email": "julia_doe@example.com",
+                "name": "Julia Doe"
+              }
+            ],
+            "cc": [
+              {
+                "email": "jane_doe@example.com",
+                "name": "Jane Doe"
+              }
+            ],
+            "bcc": [
+              {
+                "email": "james_doe@example.com",
+                "name": "Jim Doe"
+              }
+            ]
+          },
+          {
+            "from": {
+              "email": "sales@example.com",
+              "name": "Example Sales Team"
+            },
+            "to": [
+              {
+                "email": "janice_doe@example.com",
+                "name": "Janice Doe"
+              }
+            ],
+            "bcc": [
+              {
+                "email": "jordan_doe@example.com",
+                "name": "Jordan Doe"
+              }
+            ]
+          }
+        ],
+        "from": {
+          "email": "orders@example.com",
+          "name": "Example Order Confirmation"
+        },
+        "reply_to": {
+          "email": "customer_service@example.com",
+          "name": "Example Customer Service Team"
+        },
+        "subject": "Your Example Order Confirmation",
+        "content": [
+          {
+            "type": "text/html",
+            "value": "<p>Hello from Twilio SendGrid!</p><p>Sending with the email service trusted by developers and marketers for <strong>time-savings</strong>, <strong>scalability</strong>, and <strong>delivery expertise</strong>.</p><p>%open-track%</p>"
+          }
+        ],
+        "attachments": [
+          {
+            "content": "SGVsbG8=",
+            "type": "text/plain",
+            "disposition": "attachment"
+          }
+        ],
+        "categories": [
+          "cake",
+          "pie",
+          "baking"
+        ],
+        "send_at": 1617260400,
+        "batch_id": "AsdFgHjklQweRTYuIopzXcVBNm0aSDfGHjklmZcVbNMqWert1znmOP2asDFjkl",
+        "asm": {
+          "group_id": 12345,
+          "groups_to_display": [
+            12345
+          ]
+        },
+        "ip_pool_name": "transactional email",
+        "mail_settings": {
+          "bypass_list_management": {
+            "enable": false
+          },
+          "footer": {
+            "enable": false
+          },
+          "sandbox_mode": {
+            "enable": false
+          }
+        },
+        "tracking_settings": {
+          "click_tracking": {
+            "enable": true,
+            "enable_text": false
+          },
+          "open_tracking": {
+            "enable": true,
+            "substitution_tag": "%open-track%"
+          },
+          "subscription_tracking": {
+            "enable": false
+          }
+        }
+      }
+      """
+    Then the response status code should be 400 ... passed in 0.001s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
