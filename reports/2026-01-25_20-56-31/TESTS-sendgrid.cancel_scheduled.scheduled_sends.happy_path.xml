@@ -1,0 +1,59 @@
+<testsuite name="sendgrid.cancel_scheduled.scheduled_sends.happy_path.SendGrid Scheduled Sends - Pause/Cancel (Happy Path)" tests="2" errors="0" failures="0" skipped="0" time="2.95313" timestamp="2026-01-25T20:56:48.601375" hostname="INSPIRON-CARLOS"><testcase classname="sendgrid.cancel_scheduled.scheduled_sends.happy_path.SendGrid Scheduled Sends - Pause/Cancel (Happy Path)" name="Pause a scheduled send by batch_id" status="passed" time="1.586362"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Pause a scheduled send by batch_id
+    Given the API base URL is "https://sendgrid-v3-api.mock.beeceptor.com" ... passed in 0.002s
+    When I set request headers ... passed in 0.002s
+      | header       | Value    |
+      | on-behalf-of | Ut minim |
+    When I send a "POST" request to "/v3/mail/batch" ... passed in 0.796s
+    Then the response status code should be 201 ... passed in 0.001s
+    And I store the response JSON path "batch_id" as "batch_id" ... passed in 0.001s
+    When I send a "POST" request to "/v3/user/scheduled_sends" with JSON body using variables ... passed in 0.783s
+      """
+      {
+        "batch_id": "${batch_id}",
+        "status": "pause"
+      }
+      """
+    Then the response status code should be 201 ... passed in 0.001s
+    And the response JSON should contain keys ... passed in 0.000s
+      | batch_id |
+      | status   |
+      | batch_id |
+    And the response JSON path "batch_id" should equal stored variable "batch_id" ... passed in 0.001s
+    And the response JSON path "status" should be "pause" ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="sendgrid.cancel_scheduled.scheduled_sends.happy_path.SendGrid Scheduled Sends - Pause/Cancel (Happy Path)" name="Cancel a scheduled send by batch_id" status="passed" time="1.366768"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Cancel a scheduled send by batch_id
+    Given the API base URL is "https://sendgrid-v3-api.mock.beeceptor.com" ... passed in 0.001s
+    When I set request headers ... passed in 0.001s
+      | header       | Value    |
+      | on-behalf-of | Ut minim |
+    When I send a "POST" request to "/v3/mail/batch" ... passed in 0.688s
+    Then the response status code should be 201 ... passed in 0.002s
+    And I store the response JSON path "batch_id" as "batch_id" ... passed in 0.003s
+    When I send a "POST" request to "/v3/user/scheduled_sends" with JSON body using variables ... passed in 0.669s
+      """
+      {
+        "batch_id": "${batch_id}",
+        "status": "cancel"
+      }
+      """
+    Then the response status code should be 201 ... passed in 0.001s
+    And the response JSON should contain keys ... passed in 0.001s
+      | batch_id |
+      | status   |
+      | batch_id |
+    And the response JSON path "batch_id" should equal stored variable "batch_id" ... passed in 0.001s
+    And the response JSON path "status" should be "cancel" ... passed in 0.001s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

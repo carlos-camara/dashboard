@@ -24,7 +24,7 @@ if (-not $installed) {
 }
 
 # JUnit
-behave features/httpbin --no-capture --junit --junit-directory $dir
+behave features/sendgrid --no-capture --junit --junit-directory $dir
 
 Write-Host "Done. Files created:"
 Get-ChildItem -Path $dir
