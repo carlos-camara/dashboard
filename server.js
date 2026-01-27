@@ -22,6 +22,7 @@ app.use(cors());
 app.use(express.json());
 
 const REPORTS_DIR = "reports";
+const SWAGGERS_DIR = "swaggers";
 const DB_PATH = "qa_hub.db";
 
 // Initialize Database
@@ -442,6 +443,52 @@ app.delete("/api/endpoints", (req, res) => {
         db.prepare("DELETE FROM endpoints WHERE id = ?").run(epId);
         res.json({ success: true, message: `Endpoint ${epId} deleted.` });
     } catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+});
+
+// Swagger/Spec Management
+if (!fs.existsSync(SWAGGERS_DIR)) {
+    fs.mkdirSync(SWAGGERS_DIR);
+}
+
+app.get("/api/spec", (req, res) => {
+    const { method, path: epPath } = req.query;
+    if (!method || !epPath) return res.status(400).json({ error: "Missing method or path" });
+
+    // Try to find matching file: method-normalized_path.json
+    // Example: post-v3-mail-send.json
+    const cleanPath = epPath.replace(/^\//, '').replace(/\//g, '-');
+    const filename = `${method.toLowerCase()}-${cleanPath}.json`;
+    const filePath = path.join(SWAGGERS_DIR, filename);
+
+    if (fs.existsSync(filePath)) {
+        try {
+            const content = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+            return res.json({ found: true, content });
+        } catch (e) {
+            return res.status(500).json({ error: "Failed to parse spec file" });
+        }
+    }
+
+    res.json({ found: false });
+});
+
+app.post("/api/spec", upload.single('file'), (req, res) => {
+    try {
+        const { method, path: epPath } = req.body;
+        if (!req.file || !method || !epPath) return res.status(400).json({ error: "Missing file or metadata" });
+
+        const cleanPath = epPath.replace(/^\//, '').replace(/\//g, '-');
+        const filename = `${method.toLowerCase()}-${cleanPath}.json`;
+        const targetPath = path.join(SWAGGERS_DIR, filename);
+
+        // Move/Rename uploaded file
+        fs.renameSync(req.file.path, targetPath);
+
+        res.json({ success: true, filename });
+    } catch (e) {
+        console.error("Spec upload error:", e);
         res.status(500).json({ error: e.message });
     }
 });
