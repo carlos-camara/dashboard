@@ -8,11 +8,25 @@ Write-Host "Running from: $(Get-Location)"
 $py = if (Test-Path "$PSScriptRoot\.venv\Scripts\python.exe") { "$PSScriptRoot\.venv\Scripts\python.exe" } else { "python" }
 Write-Host "Using Python: $py"
 
-# Timestamp folder for GUI reports
-$ts = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
-$dir = Join-Path (Join-Path $PSScriptRoot "reports") "gui_$ts"
-New-Item -ItemType Directory -Force $dir | Out-Null
-Write-Host "GUI Reports folder: $dir"
+# Unified reports logic: find most recent folder created today if it's "fresh" (last 10 mins)
+$reportsDir = Join-Path $PSScriptRoot "reports"
+if (-not (Test-Path $reportsDir)) { New-Item -ItemType Directory -Path $reportsDir | Out-Null }
+
+$recentDir = Get-ChildItem -Path $reportsDir -Directory | 
+Where-Object { $_.CreationTime -gt (Get-Date).AddMinutes(-10) } | 
+Sort-Object CreationTime -Descending | 
+Select-Object -First 1
+
+if ($recentDir) {
+    $dir = $recentDir.FullName
+    Write-Host "Reusing existing reports folder: $dir"
+}
+else {
+    $ts = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
+    $dir = Join-Path $reportsDir $ts
+    New-Item -ItemType Directory -Force $dir | Out-Null
+    Write-Host "Created new reports folder: $dir"
+}
 
 # Ensure dependencies are installed
 Write-Host "Checking/Installing dependencies..."
