@@ -51,7 +51,7 @@ jobs:
             echo "No changes in reports to commit."
           else
             git commit -m "docs: auto-generate smoke test report [skip ci]"
-            git push origin HEAD:$HEAD_REF
+            git push origin "HEAD:$HEAD_REF"
           fi
 
       # Publishes a nice summary:
