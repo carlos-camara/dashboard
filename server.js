@@ -14,16 +14,59 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const REPORTS_DIR = "reports";
+// Use absolute path
+const SWAGGERS_DIR = path.join(__dirname, "swaggers");
+const UPLOADS_DIR = path.join(__dirname, "uploads");
+const DB_PATH = "qa_hub.db";
+
+if (!fs.existsSync(UPLOADS_DIR)) {
+    fs.mkdirSync(UPLOADS_DIR);
+}
+
 const app = express();
 const port = process.env.PORT || 3001;
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: UPLOADS_DIR });
 
 app.use(cors());
 app.use(express.json());
 
-const REPORTS_DIR = "reports";
-const SWAGGERS_DIR = "swaggers";
-const DB_PATH = "qa_hub.db";
+// ... (code omitted) ...
+
+app.get("/api/spec", (req, res) => {
+    const { method, path: epPath } = req.query;
+    if (!method || !epPath) return res.status(400).json({ error: "Missing method or path" });
+
+    // Try to find matching file: method-normalized_path.json
+    // Example: post-v3-mail-send.json
+    const cleanPath = epPath.replace(/^\//, '').replace(/\//g, '-');
+    const filename = `${method.toLowerCase()}-${cleanPath}.json`;
+    const filePath = path.join(SWAGGERS_DIR, filename);
+
+    console.log(`[Spec Lookup] Method: ${method}, Path: ${epPath}`);
+    console.log(`[Spec Lookup] Normalized Filename: ${filename}`);
+    console.log(`[Spec Lookup] Full Path: ${filePath}`);
+
+    if (fs.existsSync(filePath)) {
+        try {
+            const content = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+            return res.json({ found: true, content });
+        } catch (e) {
+            console.error(`[Spec Lookup] Parse error for ${filePath}:`, e);
+            return res.status(500).json({ error: "Failed to parse spec file" });
+        }
+    } else {
+        console.log(`[Spec Lookup] Not found. Available files in ${SWAGGERS_DIR}:`);
+        try {
+            const files = fs.readdirSync(SWAGGERS_DIR);
+            console.log(files.join(", "));
+        } catch (e) {
+            console.log("Could not list directory.");
+        }
+    }
+
+    res.json({ found: false });
+});
 
 // Initialize Database
 const db = new Database(DB_PATH);
@@ -452,32 +495,17 @@ if (!fs.existsSync(SWAGGERS_DIR)) {
     fs.mkdirSync(SWAGGERS_DIR);
 }
 
-app.get("/api/spec", (req, res) => {
-    const { method, path: epPath } = req.query;
-    if (!method || !epPath) return res.status(400).json({ error: "Missing method or path" });
-
-    // Try to find matching file: method-normalized_path.json
-    // Example: post-v3-mail-send.json
-    const cleanPath = epPath.replace(/^\//, '').replace(/\//g, '-');
-    const filename = `${method.toLowerCase()}-${cleanPath}.json`;
-    const filePath = path.join(SWAGGERS_DIR, filename);
-
-    if (fs.existsSync(filePath)) {
-        try {
-            const content = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-            return res.json({ found: true, content });
-        } catch (e) {
-            return res.status(500).json({ error: "Failed to parse spec file" });
-        }
-    }
-
-    res.json({ found: false });
-});
 
 app.post("/api/spec", upload.single('file'), (req, res) => {
     try {
+        console.log(`[Spec Upload] Body:`, req.body);
+        console.log(`[Spec Upload] File:`, req.file);
+
         const { method, path: epPath } = req.body;
-        if (!req.file || !method || !epPath) return res.status(400).json({ error: "Missing file or metadata" });
+        if (!req.file || !method || !epPath) {
+            console.error("[Spec Upload] Missing fields");
+            return res.status(400).json({ error: "Missing file or metadata" });
+        }
 
         const cleanPath = epPath.replace(/^\//, '').replace(/\//g, '-');
         const filename = `${method.toLowerCase()}-${cleanPath}.json`;

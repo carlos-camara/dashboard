@@ -31,21 +31,18 @@
                                         "type": "string",
                                         "minLength": 3,
                                         "maxLength": 20,
-                                        "description": "Unique identifier for the user.",
-                                        "example": "jdoe_99"
+                                        "description": "Unique identifier for the user."
                                     },
                                     "email": {
                                         "type": "string",
                                         "format": "email",
-                                        "description": "Valid email address for notifications.",
-                                        "example": "john.doe@example.com"
+                                        "description": "Valid email address for notifications."
                                     },
                                     "password": {
                                         "type": "string",
                                         "format": "password",
                                         "minLength": 8,
-                                        "description": "Strong password containing at least one number and special character.",
-                                        "example": "SecretPass123!"
+                                        "description": "Strong password containing at least one number and special character."
                                     },
                                     "role": {
                                         "type": "string",
@@ -54,8 +51,7 @@
                                             "admin",
                                             "moderator"
                                         ],
-                                        "description": "Assigned permission level.",
-                                        "example": "user"
+                                        "description": "Assigned permission level."
                                     },
                                     "preferences": {
                                         "type": "object",

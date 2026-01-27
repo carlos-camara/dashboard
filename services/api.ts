@@ -176,9 +176,9 @@ export const api = {
   uploadSpec: async (method: string, path: string, file: File): Promise<boolean> => {
     try {
       const formData = new FormData();
-      formData.append('file', file);
       formData.append('method', method);
       formData.append('path', path);
+      formData.append('file', file);
 
       const response = await fetch(`${BASE_URL}/spec`, {
         method: 'POST',
