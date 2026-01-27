@@ -1,0 +1,143 @@
+name: Unified Test Suite
+
+on:
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  checks: write
+  pull-requests: write
+
+jobs:
+  api-tests:
+    name: Run Behave API Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run API Tests
+        shell: pwsh
+        run: |
+          ./run_api_smoke_reports.ps1
+
+      - name: Upload API Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-reports
+          path: reports/
+
+  gui-tests:
+    name: Run Dashboard + GUI Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Node dependencies
+        run: npm install
+
+      - name: Start Dashboard Services
+        run: |
+          npm run start-backend > backend.log 2>&1 &
+          npm run dev > frontend.log 2>&1 &
+          
+      - name: Wait for Dashboard to be ready
+        run: |
+          npx wait-on http://localhost:3000 http://localhost:3001/api/health --timeout 60000 || (cat backend.log && cat frontend.log && exit 1)
+
+      - name: Run GUI Tests
+        shell: pwsh
+        run: |
+          ./run_gui_smoke_reports.ps1
+        env:
+          HEADLESS: "true"
+
+      - name: Upload GUI Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: gui-reports
+          path: reports/
+
+  publish-reports:
+    name: Publish Integrated Reports
+    needs: [api-tests, gui-tests]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download API Reports
+        uses: actions/download-artifact@v4
+        with:
+          name: api-reports
+          path: temp_reports/api
+
+      - name: Download GUI Reports
+        uses: actions/download-artifact@v4
+        with:
+          name: gui-reports
+          path: temp_reports/gui
+
+      - name: Merge and Commit Reports
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          mkdir -p reports
+          cp -r temp_reports/api/* reports/ || true
+          cp -r temp_reports/gui/* reports/ || true
+          
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add reports/
+          if git diff --staged --quiet; then
+            echo "No changes in reports to commit."
+          else
+            git commit -m "docs: auto-generate integrated test reports [skip ci]"
+            git push origin "HEAD:$HEAD_REF"
+          fi
+
+      - name: Publish Test Report (JUnit)
+        uses: dorny/test-reporter@v1
+        with:
+          name: Unified Test Report
+          path: reports/**/*.xml
+          reporter: java-junit
+          fail-on-error: false
