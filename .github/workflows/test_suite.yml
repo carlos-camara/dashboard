@@ -73,12 +73,12 @@ jobs:
 
       - name: Start Dashboard Services
         run: |
-          npm run start-backend &
-          npm run dev &
+          npm run start-backend > backend.log 2>&1 &
+          npm run dev > frontend.log 2>&1 &
           
       - name: Wait for Dashboard to be ready
         run: |
-          npx wait-on http://localhost:3000 http://localhost:3001 --timeout 60000
+          npx wait-on http://localhost:3000 http://localhost:3001/api/health --timeout 60000 || (cat backend.log && cat frontend.log && exit 1)
 
       - name: Run GUI Tests
         shell: pwsh
