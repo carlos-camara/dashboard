@@ -12,7 +12,7 @@ Write-Host "Reports folder: $dir"
 
 # Ensure HTML formatter is installed (robust against pip warnings)
 try {
-  $out = python -m pip show behave-html-formatter 2>&1
+  python -m pip show behave-html-formatter 2>&1 | Out-Null
   $installed = ($LASTEXITCODE -eq 0)
 }
 catch {
@@ -25,7 +25,7 @@ if (-not $installed) {
 }
 
 # JUnit
-behave features --tags smoke --no-capture --junit --junit-directory $dir
+behave features --tags="smoke and api" --no-capture --junit --junit-directory $dir
 
 Write-Host "Done. Files created:"
 Get-ChildItem -Path $dir
