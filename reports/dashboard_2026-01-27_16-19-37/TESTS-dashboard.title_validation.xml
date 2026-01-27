@@ -1,0 +1,11 @@
+<testsuite name="dashboard.title_validation.Dashboard UI Validation" tests="1" errors="0" failures="0" skipped="0" time="0.745099" timestamp="2026-01-27T16:19:37.380871" hostname="runnervmymu0l"><testcase classname="dashboard.title_validation.Dashboard UI Validation" name="Verify Dashboard Page Title" status="passed" time="0.745099"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Dashboard Page Title
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.718s
+    Then the page title should be "QA Hub - Execution Dashboard" ... passed in 0.027s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
