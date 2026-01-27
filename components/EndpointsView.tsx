@@ -3,6 +3,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { api } from '../services/api';
 import { Endpoint } from '../types';
 import { Search, Filter, TrendingUp, Clock, Activity, Zap, ExternalLink, Globe, ChevronDown, CheckCircle2, AlertCircle, Calendar, Layers, Hash, Link as LinkIcon, History, Server, Shield, Trash2, ChevronLeft, ChevronRight, LayoutList, Box } from 'lucide-react';
+import EndpointDetailView from './EndpointDetailView';
 
 interface EndpointsViewProps {
   refreshKey?: number;
@@ -22,6 +23,7 @@ const EndpointsView: React.FC<EndpointsViewProps> = ({ refreshKey }) => {
   const [healthFilter, setHealthFilter] = useState('ALL');
   const [serviceFilter, setServiceFilter] = useState('ALL');
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const [selectedEndpoint, setSelectedEndpoint] = useState<Endpoint | null>(null);
 
   // State for collapsible project groups
   const [expandedProjects, setExpandedProjects] = useState<Set<string>>(new Set());
@@ -43,7 +45,8 @@ const EndpointsView: React.FC<EndpointsViewProps> = ({ refreshKey }) => {
     setProjectPages({});
   }, [search, methodFilter, healthFilter, serviceFilter]);
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
     if (confirm('¿Estás seguro de que deseas eliminar este endpoint?')) {
       await api.deleteEndpoint(id);
       fetchEndpoints();
@@ -125,6 +128,10 @@ const EndpointsView: React.FC<EndpointsViewProps> = ({ refreshKey }) => {
 
   const sortedProjects = Object.keys(groupedEndpoints).sort();
   const methods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
+
+  if (selectedEndpoint) {
+    return <EndpointDetailView endpoint={selectedEndpoint} onBack={() => setSelectedEndpoint(null)} />;
+  }
 
   return (
     <div className="space-y-8 animate-in slide-in-from-bottom-4 duration-500 pb-20">
@@ -311,7 +318,11 @@ const EndpointsView: React.FC<EndpointsViewProps> = ({ refreshKey }) => {
                       const successRate = (ep.passCount / (Math.max(1, ep.passCount + ep.failCount))) * 100;
 
                       return (
-                        <div key={ep.id} className="group flex flex-col md:flex-row md:items-center justify-between p-4 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-indigo-500/30 transition-all hover:bg-slate-900">
+                        <div
+                          key={ep.id}
+                          onClick={() => setSelectedEndpoint(ep)}
+                          className="group flex flex-col md:flex-row md:items-center justify-between p-4 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-indigo-500/30 transition-all hover:bg-slate-900 cursor-pointer"
+                        >
                           <div className="flex items-start space-x-4">
                             <div className={`px-3 py-2 rounded-lg font-mono text-xs font-black min-w-[60px] text-center
                                          ${ep.method === 'POST' ? 'bg-orange-500/10 text-orange-500 border border-orange-500/20' :
@@ -325,7 +336,7 @@ const EndpointsView: React.FC<EndpointsViewProps> = ({ refreshKey }) => {
                               <div className="flex items-center space-x-2 text-[9px] font-black uppercase tracking-wider text-slate-500 mb-1">
                                 <Globe size={10} /> <span>{ep.service}</span>
                               </div>
-                              <h4 className="text-sm font-bold text-white font-mono break-all">
+                              <h4 className="text-sm font-bold text-white font-mono break-all group-hover:text-indigo-300 transition-colors">
                                 <span className="text-slate-500 font-normal mr-1">{baseUrl}</span>
                                 <span className={ep.method === 'GET' ? 'text-blue-300' : 'text-orange-300'}>{resourcePath}</span>
                               </h4>
@@ -346,8 +357,8 @@ const EndpointsView: React.FC<EndpointsViewProps> = ({ refreshKey }) => {
                             </div>
 
                             <button
-                              onClick={() => handleDelete(ep.id)}
-                              className="p-2 text-slate-600 hover:text-rose-500 transition-colors ml-2"
+                              onClick={(e) => handleDelete(ep.id, e)}
+                              className="p-2 text-slate-600 hover:text-rose-500 transition-colors ml-2 z-20 relative"
                             >
                               <Trash2 size={14} />
                             </button>
