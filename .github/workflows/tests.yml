@@ -40,6 +40,8 @@ jobs:
 
       - name: Commit and Push Reports
         if: always()
+        env:
+          HEAD_REF: ${{ github.head_ref }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -49,7 +51,7 @@ jobs:
             echo "No changes in reports to commit."
           else
             git commit -m "docs: auto-generate smoke test report [skip ci]"
-            git push origin HEAD:${{ github.head_ref }}
+            git push origin HEAD:$HEAD_REF
           fi
 
       # Publishes a nice summary:
