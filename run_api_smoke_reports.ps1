@@ -4,28 +4,23 @@
 Set-Location -Path $PSScriptRoot
 Write-Host "Running from: $(Get-Location)"
 
+# Detect Python from .venv or use global
+$py = if (Test-Path "$PSScriptRoot\.venv\Scripts\python.exe") { "$PSScriptRoot\.venv\Scripts\python.exe" } else { "python" }
+Write-Host "Using Python: $py"
+
 # Timestamp folder
 $ts = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
 $dir = Join-Path (Join-Path $PSScriptRoot "reports") $ts
 New-Item -ItemType Directory -Force $dir | Out-Null
 Write-Host "Reports folder: $dir"
 
-# Ensure HTML formatter is installed (robust against pip warnings)
-try {
-  python -m pip show behave-html-formatter 2>&1 | Out-Null
-  $installed = ($LASTEXITCODE -eq 0)
-}
-catch {
-  $installed = $false
-}
+# Ensure dependencies are installed
+Write-Host "Checking/Installing dependencies..."
+& $py -m pip install -r requirements.txt behave-html-formatter --quiet
 
-if (-not $installed) {
-  Write-Host "Installing behave-html-formatter..."
-  python -m pip install behave-html-formatter
-}
-
-# JUnit
-behave features --tags="smoke and api" --no-capture --junit --junit-directory $dir
+# Run tests with multiple tags for better compatibility (AND logic)
+Write-Host "Executing API Smoke Tests..."
+& $py -m behave features --tags=smoke --tags=api --no-capture --junit --junit-directory $dir
 
 Write-Host "Done. Files created:"
 Get-ChildItem -Path $dir
