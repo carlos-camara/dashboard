@@ -5,7 +5,7 @@ Set-Location -Path $PSScriptRoot
 Write-Host "Running from: $(Get-Location)"
 
 # Timestamp folder
-$ts  = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
+$ts = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
 $dir = Join-Path (Join-Path $PSScriptRoot "reports") $ts
 New-Item -ItemType Directory -Force $dir | Out-Null
 Write-Host "Reports folder: $dir"
@@ -14,7 +14,8 @@ Write-Host "Reports folder: $dir"
 try {
   $out = python -m pip show behave-html-formatter 2>&1
   $installed = ($LASTEXITCODE -eq 0)
-} catch {
+}
+catch {
   $installed = $false
 }
 
@@ -24,7 +25,7 @@ if (-not $installed) {
 }
 
 # JUnit
-behave features/sendgrid --no-capture --junit --junit-directory $dir
+behave features --tags smoke --no-capture --junit --junit-directory $dir
 
 Write-Host "Done. Files created:"
 Get-ChildItem -Path $dir

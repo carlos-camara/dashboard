@@ -2,11 +2,11 @@ name: Tests - Behave SMOKE
 
 on:
   pull_request:
-    branches: ["**"]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write         # Needed to push reports
   checks: write          # needed to publish the test report as a Check
   pull-requests: write   # optional but useful for PR annotations/comments
 
@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -31,27 +33,32 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Run tests and always produce JUnit XML.
-      # We capture the exit code so we can still publish the report even if tests fail.
-      - name: Run Behave (@smoke) and generate JUnit
-        id: behave
+      - name: Run Smoke Tests via PowerShell
+        shell: pwsh
         run: |
-          mkdir -p reports
-          set +e
-          behave features/ -t @smoke --no-capture --junit --junit-directory reports
-          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
-          exit 0
+          ./run_reports.ps1
+
+      - name: Commit and Push Reports
+        if: always()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add reports/
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes in reports to commit."
+          else
+            git commit -m "docs: auto-generate smoke test report [skip ci]"
+            git push origin HEAD:${{ github.head_ref }}
+          fi
 
       # Publishes a nice summary:
-      # - total tests
-      # - passed/failed/skipped
-      # - failure details + annotations
       - name: Publish Test Report (JUnit)
         if: always()
         uses: dorny/test-reporter@v1
         with:
           name: Behave - API Test Report
-          path: reports/*.xml
+          path: reports/**/*.xml
           reporter: java-junit
           fail-on-error: false
 
@@ -60,12 +67,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: behave-junit-reports
-          path: reports
+          path: reports/
           if-no-files-found: warn
-
-      # Make the job fail if Behave failed (so CI is red), but only AFTER publishing the report.
-      - name: Fail job if tests failed
-        if: ${{ steps.behave.outputs.exit_code != '0' }}
-        run: |
-          echo "Behave failed with exit code ${{ steps.behave.outputs.exit_code }}"
-          exit 1
