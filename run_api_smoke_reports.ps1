@@ -8,33 +8,54 @@ Write-Host "Running from: $(Get-Location)"
 $py = if (Test-Path "$PSScriptRoot\.venv\Scripts\python.exe") { "$PSScriptRoot\.venv\Scripts\python.exe" } else { "python" }
 Write-Host "Using Python: $py"
 
-# Unified reports logic: find most recent folder created today if it's "fresh" (last 10 mins)
-$reportsDir = Join-Path $PSScriptRoot "reports"
-if (-not (Test-Path $reportsDir)) { New-Item -ItemType Directory -Path $reportsDir | Out-Null }
-
-$recentDir = Get-ChildItem -Path $reportsDir -Directory | 
-Where-Object { $_.CreationTime -gt (Get-Date).AddMinutes(-10) } | 
-Sort-Object CreationTime -Descending | 
-Select-Object -First 1
-
-if ($recentDir) {
-  $dir = $recentDir.FullName
-  Write-Host "Reusing existing reports folder: $dir"
-}
-else {
-  $ts = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
-  $dir = Join-Path $reportsDir $ts
-  New-Item -ItemType Directory -Force $dir | Out-Null
-  Write-Host "Created new reports folder: $dir"
-}
-
 # Ensure dependencies are installed
 Write-Host "Checking/Installing dependencies..."
 & $py -m pip install -r requirements.txt behave-html-formatter --quiet
 
-# Run tests with multiple tags for better compatibility (AND logic)
-Write-Host "Executing API Smoke Tests..."
-& $py -m behave features --tags=smoke --tags=api --no-capture --junit --junit-directory $dir
+# Temporary directory for intermediate results
+$tempDir = Join-Path $PSScriptRoot "temp_junit_api"
+if (Test-Path $tempDir) { Remove-Item -Path $tempDir -Recurse -Force }
+New-Item -ItemType Directory -Force $tempDir | Out-Null
 
-Write-Host "Done. Files created:"
-Get-ChildItem -Path $dir
+# Run tests
+Write-Host "Executing API Smoke Tests..."
+& $py -m behave features --tags=smoke --tags=api --no-capture --junit --junit-directory $tempDir
+
+# Process generated files
+$reportsBase = Join-Path $PSScriptRoot "reports"
+if (-not (Test-Path $reportsBase)) { New-Item -ItemType Directory -Path $reportsBase | Out-Null }
+
+$xmlFiles = Get-ChildItem -Path $tempDir -Filter "TESTS-*.xml"
+if ($xmlFiles.Count -eq 0) {
+  Write-Host "No tests were executed matching the tags."
+  return
+}
+
+# Group files by project (prefix after TESTS-)
+foreach ($file in $xmlFiles) {
+  $projectName = "unknown"
+  if ($file.Name -match "TESTS-([^.]+)") {
+    $projectName = $Matches[1]
+  }
+    
+  # Find or create a project-specific report folder
+  $recentDir = Get-ChildItem -Path $reportsBase -Directory | 
+  Where-Object { $_.Name -like "$projectName`_*" -and $_.CreationTime -gt (Get-Date).AddMinutes(-10) } | 
+  Sort-Object CreationTime -Descending | 
+  Select-Object -First 1
+                 
+  if ($recentDir) {
+    $targetDir = $recentDir.FullName
+  }
+  else {
+    $ts = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
+    $targetDir = Join-Path $reportsBase "$projectName`_$ts"
+    New-Item -ItemType Directory -Force $targetDir | Out-Null
+  }
+    
+  Move-Item -Path $file.FullName -Destination $targetDir -Force
+  Write-Host "Moved $($file.Name) to $targetDir"
+}
+
+Remove-Item -Path $tempDir -Recurse -Force
+Write-Host "API Smoke Reports processing done."
