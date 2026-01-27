@@ -1,0 +1,66 @@
+<testsuite name="dashboard.title_validation.Dashboard UI Validation" tests="1" errors="1" failures="0" skipped="0" time="5.379688" timestamp="2026-01-27T14:51:29.222033" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.title_validation.Dashboard UI Validation" name="Verify Dashboard Page Title" status="failed" time="5.379688"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=142.0.7444.60)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff76da5a235&#10;&#09;0x7ff76d7b2630&#10;&#09;0x7ff76d5416dd&#10;&#09;0x7ff76d53e228&#10;&#09;0x7ff76d52eba9&#10;&#09;0x7ff76d5309d7&#10;&#09;0x7ff76d52f160&#10;&#09;0x7ff76d52e917&#10;&#09;0x7ff76d52e5db&#10;&#09;0x7ff76d52c145&#10;&#09;0x7ff76d52c9dc&#10;&#09;0x7ff76d5459ea&#10;&#09;0x7ff76d5ec8be&#10;&#09;0x7ff76d5c2b0a&#10;&#09;0x7ff76d5ebaba&#10;&#09;0x7ff76d58b0ed&#10;&#09;0x7ff76d58bf63&#10;&#09;0x7ff76da85d60&#10;&#09;0x7ff76da7fe8a&#10;&#09;0x7ff76daa1005&#10;&#09;0x7ff76d7cd71e&#10;&#09;0x7ff76d7d4e1f&#10;&#09;0x7ff76d7bb7c4&#10;&#09;0x7ff76d7bb97f&#10;&#09;0x7ff76d7a18e8&#10;&#09;0x7ffd52b47374&#10;&#09;0x7ffd54b5cc91&#10;">
+<![CDATA[
+Failing step: Given I navigate to the dashboard at "http://localhost:3000" ... failed in 5.380s
+Location: features/dashboard/title_validation.feature:8
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "features\steps\step_gui_validation.py", line 11, in step_navigate_to_dashboard
+    context.driver.get(url)
+    ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=142.0.7444.60)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff76da5a235
+	0x7ff76d7b2630
+	0x7ff76d5416dd
+	0x7ff76d53e228
+	0x7ff76d52eba9
+	0x7ff76d5309d7
+	0x7ff76d52f160
+	0x7ff76d52e917
+	0x7ff76d52e5db
+	0x7ff76d52c145
+	0x7ff76d52c9dc
+	0x7ff76d5459ea
+	0x7ff76d5ec8be
+	0x7ff76d5c2b0a
+	0x7ff76d5ebaba
+	0x7ff76d58b0ed
+	0x7ff76d58bf63
+	0x7ff76da85d60
+	0x7ff76da7fe8a
+	0x7ff76daa1005
+	0x7ff76d7cd71e
+	0x7ff76d7d4e1f
+	0x7ff76d7bb7c4
+	0x7ff76d7bb97f
+	0x7ff76d7a18e8
+	0x7ffd52b47374
+	0x7ffd54b5cc91
+
+]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Dashboard Page Title
+    Given I navigate to the dashboard at "http://localhost:3000" ... failed in 5.380s
+    Then the page title should be "QA Hub - Execution Dashboard" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
