@@ -161,6 +161,34 @@ export const api = {
       console.error('Error processing files:', e);
       return { projectName: "Error", endpointsFound: 0, scenariosFound: 0, isDuplicate: false };
     }
+  },
+
+  getSpec: async (method: string, path: string): Promise<any> => {
+    try {
+      const response = await fetch(`${BASE_URL}/spec?method=${encodeURIComponent(method)}&path=${encodeURIComponent(path)}`);
+      if (response.ok) return await response.json();
+    } catch (e) {
+      console.error('Error fetching spec:', e);
+    }
+    return { found: false };
+  },
+
+  uploadSpec: async (method: string, path: string, file: File): Promise<boolean> => {
+    try {
+      const formData = new FormData();
+      formData.append('method', method);
+      formData.append('path', path);
+      formData.append('file', file);
+
+      const response = await fetch(`${BASE_URL}/spec`, {
+        method: 'POST',
+        body: formData
+      });
+      return response.ok;
+    } catch (e) {
+      console.error('Error uploading spec:', e);
+      return false;
+    }
   }
 };
 

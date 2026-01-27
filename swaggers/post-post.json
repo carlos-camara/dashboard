@@ -1,0 +1,161 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "User Management API",
+        "description": "API for managing user identities and access control.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/users": {
+            "post": {
+                "summary": "Create a new user",
+                "description": "Registers a new user in the system. Requires a unique username and email.",
+                "operationId": "createUser",
+                "tags": [
+                    "Users"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "username",
+                                    "email",
+                                    "password",
+                                    "role"
+                                ],
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "minLength": 3,
+                                        "maxLength": 20,
+                                        "description": "Unique identifier for the user.",
+                                        "example": "jdoe_99"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "description": "Valid email address for notifications.",
+                                        "example": "john.doe@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "minLength": 8,
+                                        "description": "Strong password containing at least one number and special character.",
+                                        "example": "SecretPass123!"
+                                    },
+                                    "role": {
+                                        "type": "string",
+                                        "enum": [
+                                            "user",
+                                            "admin",
+                                            "moderator"
+                                        ],
+                                        "description": "Assigned permission level.",
+                                        "example": "user"
+                                    },
+                                    "preferences": {
+                                        "type": "object",
+                                        "properties": {
+                                            "newsletter": {
+                                                "type": "boolean",
+                                                "default": false
+                                            },
+                                            "theme": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "light",
+                                                    "dark"
+                                                ],
+                                                "default": "light"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "standard_user": {
+                                    "summary": "Standard User Registration",
+                                    "value": {
+                                        "username": "alex_smith",
+                                        "email": "alex.s@example.com",
+                                        "password": "SecurePassword99!",
+                                        "role": "user",
+                                        "preferences": {
+                                            "newsletter": true,
+                                            "theme": "dark"
+                                        }
+                                    }
+                                },
+                                "admin_user": {
+                                    "summary": "Admin Registration",
+                                    "value": {
+                                        "username": "root_master",
+                                        "email": "admin@sys.com",
+                                        "password": "SuperComplexPass_2024",
+                                        "role": "admin"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User successfully created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "format": "uuid"
+                                        },
+                                        "username": {
+                                            "type": "string"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "id": "550e8400-e29b-41d4-a716-446655440000",
+                                    "username": "alex_smith",
+                                    "created_at": "2024-03-20T10:00:00Z"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Email already exists",
+                                    "code": 1024
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
