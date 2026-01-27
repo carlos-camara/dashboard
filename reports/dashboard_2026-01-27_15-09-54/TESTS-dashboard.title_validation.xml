@@ -1,9 +1,18 @@
-<testsuite name="dashboard.title_validation.Dashboard UI Validation" tests="1" errors="0" failures="0" skipped="0" time="1.477567" timestamp="2026-01-27T14:40:49.518102" hostname="runnervmymu0l"><testcase classname="dashboard.title_validation.Dashboard UI Validation" name="Verify Dashboard Page Title" status="passed" time="1.477567"><system-out>
+<<<<<<< HEAD
+<testsuite name="dashboard.title_validation.Dashboard UI Validation" tests="1" errors="0" failures="0" skipped="0" time="1.369794" timestamp="2026-01-27T15:09:48.145247" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.title_validation.Dashboard UI Validation" name="Verify Dashboard Page Title" status="passed" time="1.369794"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Verify Dashboard Page Title
-    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.958s
-    Then the page title should be "QA Hub - Execution Dashboard" ... passed in 0.519s
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 1.352s
+    Then the page title should be "QA Hub - Execution Dashboard" ... passed in 0.018s
+=======
+<testsuite name="dashboard.title_validation.Dashboard UI Validation" tests="1" errors="0" failures="0" skipped="0" time="1.610346" timestamp="2026-01-27T19:39:25.668286" hostname="runnervmymu0l"><testcase classname="dashboard.title_validation.Dashboard UI Validation" name="Verify Dashboard Page Title" status="passed" time="1.610346"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Dashboard Page Title
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 1.112s
+    Then the page title should be "QA Hub - Execution Dashboard" ... passed in 0.498s
+>>>>>>> 7f6df217949ae7b67050624b758e66bc66a72d5f
 
 @scenario.end
 --------------------------------------------------------------------------------

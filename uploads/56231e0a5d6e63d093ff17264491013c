@@ -1,0 +1,518 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "SendGrid Mail Send API",
+    "version": "1.0.0",
+    "description": "OpenAPI (Swagger) specification for the SendGrid v3 Mail Send endpoint. Use this spec to document, mock, or generate clients for POST /v3/mail/send.\n"
+  },
+  "servers": [
+    {
+      "url": "https://api.sendgrid.com"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Mail",
+      "description": "Email sending operations"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "SendGrid API key as Bearer token. Example: Authorization: Bearer SG.xxxxxx"
+      }
+    },
+    "schemas": {
+      "EmailAddress": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "john_doe@example.com"
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      },
+      "Personalization": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "to": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmailAddress"
+            }
+          },
+          "cc": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmailAddress"
+            }
+          },
+          "bcc": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmailAddress"
+            }
+          },
+          "subject": {
+            "type": "string",
+            "description": "Subject override for this personalization.",
+            "example": "Hello from SendGrid"
+          },
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Custom headers for this personalization.",
+            "example": {
+              "X-Custom-Header": "value"
+            }
+          },
+          "substitutions": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Legacy substitutions map (deprecated by SendGrid)."
+          },
+          "dynamic_template_data": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Data for dynamic templates.",
+            "example": {
+              "first_name": "Julia",
+              "order_id": 12345
+            }
+          },
+          "custom_args": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Custom arguments for tracking.",
+            "example": {
+              "customer_id": "abc123"
+            }
+          },
+          "send_at": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unix timestamp for scheduling this personalization.",
+            "example": 1714761600
+          }
+        },
+        "required": [
+          "to"
+        ]
+      },
+      "Content": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "MIME type.",
+            "example": "text/plain"
+          },
+          "value": {
+            "type": "string",
+            "description": "Content body.",
+            "example": "Hello, world!"
+          }
+        },
+        "required": [
+          "type",
+          "value"
+        ]
+      },
+      "Attachment": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "Base64 encoded content."
+          },
+          "type": {
+            "type": "string",
+            "description": "MIME type.",
+            "example": "application/pdf"
+          },
+          "filename": {
+            "type": "string",
+            "example": "invoice.pdf"
+          },
+          "disposition": {
+            "type": "string",
+            "enum": [
+              "attachment",
+              "inline"
+            ],
+            "example": "attachment"
+          },
+          "content_id": {
+            "type": "string",
+            "description": "Content ID for inline attachments.",
+            "example": "ii_12345"
+          }
+        },
+        "required": [
+          "content",
+          "filename"
+        ]
+      },
+      "Asm": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "group_id": {
+            "type": "integer",
+            "example": 1
+          },
+          "groups_to_display": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "example": [
+              1,
+              2,
+              3
+            ]
+          }
+        },
+        "required": [
+          "group_id"
+        ]
+      },
+      "MailSettings": {
+        "type": "object",
+        "additionalProperties": true,
+        "description": "Optional SendGrid mail settings (structure can vary).",
+        "example": {
+          "sandbox_mode": {
+            "enable": false
+          }
+        }
+      },
+      "TrackingSettings": {
+        "type": "object",
+        "additionalProperties": true,
+        "description": "Optional SendGrid tracking settings (structure can vary).",
+        "example": {
+          "click_tracking": {
+            "enable": true,
+            "enable_text": true
+          }
+        }
+      },
+      "MailSendRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "personalizations": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/Personalization"
+            }
+          },
+          "from": {
+            "$ref": "#/components/schemas/EmailAddress"
+          },
+          "reply_to": {
+            "$ref": "#/components/schemas/EmailAddress"
+          },
+          "subject": {
+            "type": "string",
+            "description": "Default subject (can be overridden per personalization).",
+            "example": "Hello"
+          },
+          "content": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/Content"
+            }
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Attachment"
+            }
+          },
+          "template_id": {
+            "type": "string",
+            "description": "SendGrid template ID (for dynamic templates).",
+            "example": "d-1234567890abcdef1234567890abcdef"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "onboarding",
+              "transactional"
+            ]
+          },
+          "custom_args": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "example": {
+              "env": "prod"
+            }
+          },
+          "send_at": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unix timestamp to schedule the email (global).",
+            "example": 1714761600
+          },
+          "batch_id": {
+            "type": "string",
+            "description": "Batch ID for sending multiple emails.",
+            "example": "NjQzNjQzNjQzLTY0MzYtNDY0My0xOTY0LTY0MzY0MzY0MzY0Mw=="
+          },
+          "asm": {
+            "$ref": "#/components/schemas/Asm"
+          },
+          "ip_pool_name": {
+            "type": "string",
+            "example": "marketing"
+          },
+          "mail_settings": {
+            "$ref": "#/components/schemas/MailSettings"
+          },
+          "tracking_settings": {
+            "$ref": "#/components/schemas/TrackingSettings"
+          }
+        },
+        "required": [
+          "personalizations",
+          "from"
+        ],
+        "oneOf": [
+          {
+            "required": [
+              "content"
+            ]
+          },
+          {
+            "required": [
+              "template_id"
+            ]
+          }
+        ]
+      },
+      "ErrorDetail": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "The from email does not contain a valid address."
+          },
+          "field": {
+            "type": "string",
+            "example": "from.email"
+          },
+          "help": {
+            "type": "string",
+            "example": "http://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/errors.html"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            }
+          }
+        },
+        "required": [
+          "errors"
+        ]
+      }
+    }
+  },
+  "paths": {
+    "/v3/mail/send": {
+      "post": {
+        "tags": [
+          "Mail"
+        ],
+        "summary": "Send an email",
+        "description": "Sends an email using SendGrid's v3 Mail Send endpoint. This operation typically returns **202 Accepted** with an empty body when the request is valid.\n",
+        "operationId": "sendMail",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MailSendRequest"
+              },
+              "examples": {
+                "basic": {
+                  "summary": "Simple email with plain text",
+                  "value": {
+                    "personalizations": [
+                      {
+                        "to": [
+                          {
+                            "email": "john_doe@example.com",
+                            "name": "John Doe"
+                          }
+                        ],
+                        "cc": [
+                          {
+                            "email": "julia_doe@example.com",
+                            "name": "Julia Doe"
+                          }
+                        ],
+                        "subject": "Hello!"
+                      }
+                    ],
+                    "from": {
+                      "email": "no-reply@yourdomain.com",
+                      "name": "Your App"
+                    },
+                    "content": [
+                      {
+                        "type": "text/plain",
+                        "value": "Hola, este es un correo de prueba."
+                      }
+                    ]
+                  }
+                },
+                "template": {
+                  "summary": "Dynamic template email",
+                  "value": {
+                    "personalizations": [
+                      {
+                        "to": [
+                          {
+                            "email": "john_doe@example.com",
+                            "name": "John Doe"
+                          }
+                        ],
+                        "dynamic_template_data": {
+                          "first_name": "John",
+                          "product": "Premium"
+                        }
+                      }
+                    ],
+                    "from": {
+                      "email": "no-reply@yourdomain.com",
+                      "name": "Your App"
+                    },
+                    "template_id": "d-1234567890abcdef1234567890abcdef"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted (queued for delivery)",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request (validation error)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "errors": [
+                    {
+                      "message": "The from email does not contain a valid address.",
+                      "field": "from.email",
+                      "help": "http://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/errors.html"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (missing/invalid API key)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "errors": [
+                    {
+                      "message": "Permission denied, wrong credentials"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden (insufficient permissions)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Payload Too Large (attachments too big)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests (rate limit)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
