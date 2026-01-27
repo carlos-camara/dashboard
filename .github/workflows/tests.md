@@ -1,51 +1,43 @@
-# Test Execution in GitHub Actions (with Summary & Failure Details)
+# Smoke Test Execution & Automated Reporting
 
-This repository runs *Behave (BDD) API tests* in GitHub Actions and publishes a *test summary*
-showing:
-
-- How many tests were executed
-- How many passed / failed / skipped
-- Which scenarios failed and why (failure details)
-
-It achieves this by generating *JUnit XML* reports and using an existing GitHub Action to render
-those reports as a *Check* in the Actions/PR UI.
+This workflow automates the execution of **BDD (Behave) Smoke Tests** and persists the results directly in the repository for historical tracking and easy access.
 
 ---
 
-## Where it is configured
+## Configuration & Trigger
 
-The test workflow is located at:
-
-- .github/workflows/tests.yml
-
-It runs on:
-- push (any branch)
-- pull_request (any branch)
-- manual trigger (workflow_dispatch)
+- **Workflow**: `.github/workflows/tests.yml`
+- **Trigger**: Runs only when a **Pull Request** is opened or updated against the `main` branch.
+- **Scope**: Executes scenarios tagged with `@smoke`.
 
 ---
 
-## How it works (high level)
+## How it works (The Pipeline)
 
-1. *Install dependencies*
-2. *Run Behave* and generate *JUnit XML* files under reports/
-3. *Publish a test report* using dorny/test-reporter@v1:
-   - creates a GitHub Check with totals and failure details
-   - annotates failures so they are easy to find in the UI
-4. *Upload JUnit XML* as an artifact for download
-5. Fail the job if tests failed (so CI becomes red), *after* publishing the report
+1. **Environment Setup**: Standard Python 3.11 environment with project dependencies.
+2. **Execute Tests**: Runs the `run_reports.ps1` PowerShell script.
+   - Scans all `features/` for the `@smoke` tag.
+   - Generates a **timestamped folder** (e.g., `reports/2026-01-25_20-56-31/`).
+   - Produces JUnit XML reports within that folder.
+3. **Persist Reports**:
+   - The generated folder is automatically committed and pushed back to the PR source branch by the `github-actions[bot]`.
+   - This ensures every PR contains its own execution evidence.
+4. **Publish Summary**:
+   - Uses `dorny/test-reporter` to render a summary directly in the PR's "Checks" tab.
+   - Annotates specific code lines where BDD steps failed.
+5. **Archive Artifacts**: Uploads the `reports/` directory as a downloadable GitHub artifact.
 
 ---
 
-## Why JUnit XML?
+## Local Replication
 
-Behave can output results in *JUnit XML* format, which is widely supported by CI tooling.
-This makes it easy to:
-- show totals and failure details in the GitHub UI
-- archive reports as artifacts
-- feed a future execution dashboard
+To run the same suite locally with the exact same reporting structure:
 
-The workflow runs Behave with:
+```powershell
+./run_reports.ps1
+```
 
+The script internally executes:
 ```bash
-behave features -t @smoke --no-capture --junit --junit-directory reports
+behave features --tags smoke --no-capture --junit --junit-directory reports/<timestamp>
+```
