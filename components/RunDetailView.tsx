@@ -1,9 +1,10 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { api } from '../services/api';
 import { ExecutionRun, Scenario, TestStatus } from '../types';
-import { ChevronLeft, CheckCircle2, XCircle, Clock, Globe, Activity, ChevronDown, Terminal, Database, Code, Brackets, Tag, AlertCircle, FileDown, Loader2 } from 'lucide-react';
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
+import { ChevronLeft, CheckCircle2, XCircle, Clock, Globe, Activity, ChevronDown, Terminal, Database, Code, Brackets, Tag, AlertCircle, FileDown, Loader2, PlayCircle, Cpu, Zap, Filter, Calendar } from 'lucide-react';
+// import { jsPDF } from 'jspdf';
+// import html2canvas from 'html2canvas';
 
 interface RunDetailViewProps {
   run: ExecutionRun;
@@ -45,193 +46,215 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
     return matchesStatus && matchesTag;
   });
 
+  // Analytics
+  const totalDuration = scenarios.reduce((acc, s) => acc + s.duration, 0);
+  const avgDuration = scenarios.length > 0 ? totalDuration / scenarios.length : 0;
+
+  const failureGroups = scenarios
+    .filter(s => s.status === TestStatus.FAILED && s.errorMessage)
+    .reduce((acc, s) => {
+      const key = s.errorMessage?.split('\n')[0] || 'Unknown Error';
+      acc[key] = (acc[key] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+
   const handleExportPDF = async () => {
+    alert("PDF Export is currently disabled for maintenance.");
+    /*
     if (!detailRef.current) return;
     setIsExporting(true);
 
-    // 1. Force state for full capture
-    const previousFilter = filter;
-    const previousTag = selectedTag;
-    const previousExpanded = new Set(expandedScenarios);
-
-    setFilter('ALL');
-    setSelectedTag(null);
-    const allIds = new Set(scenarios.map(s => s.id));
-    setExpandedScenarios(allIds);
-
     try {
-      // 2. Wait longer for full layout reflow of all expanded cards
-      await new Promise(r => setTimeout(r, 1500));
-
-      const element = detailRef.current;
-      const canvas = await html2canvas(element, {
-        scale: 2, // Sharper text
-        useCORS: true,
-        backgroundColor: '#0f172a',
-        windowWidth: element.scrollWidth,
-        ignoreElements: (el) => el.tagName === 'BUTTON' || el.classList.contains('no-print')
-      });
-
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const pageWidth = pdf.internal.pageSize.getWidth();
-      const pageHeight = pdf.internal.pageSize.getHeight();
-
-      // Header
-      pdf.setFillColor(15, 23, 42);
-      pdf.rect(0, 0, pageWidth, 45, 'F');
-      pdf.setTextColor(255, 255, 255);
-      pdf.setFontSize(20);
-      pdf.setFont('helvetica', 'bold');
-      pdf.text('EXECUTION DETAIL REPORT', 15, 18);
-
-      pdf.setFontSize(8);
-      pdf.setTextColor(148, 163, 184);
-      pdf.text(`PROJECT: ${run.project.toUpperCase()}`, 15, 28);
-      pdf.text(`RUN ID: ${run.id}`, 15, 32);
-
-      // Right side branding
-      pdf.setTextColor(99, 102, 241);
-      pdf.text('QA HUB SENTINEL', pageWidth - 15, 18, { align: 'right' });
-      pdf.setTextColor(148, 163, 184);
-      pdf.text(new Date().toLocaleString(), pageWidth - 15, 28, { align: 'right' });
-      pdf.text(`Run Time: ${new Date(run.timestamp).toLocaleString()}`, pageWidth - 15, 32, { align: 'right' });
-
-      const imgProps = pdf.getImageProperties(imgData);
-      const contentWidth = pageWidth - 20;
-      const contentHeight = (imgProps.height * contentWidth) / imgProps.width;
-
-      let heightLeft = contentHeight;
-      let position = 40;
-
-      pdf.addImage(imgData, 'PNG', 10, position, contentWidth, contentHeight);
-
-      // Footer
-      pdf.setFillColor(15, 23, 42);
-      pdf.rect(0, pageHeight - 10, pageWidth, 10, 'F');
-      pdf.setTextColor(71, 85, 105);
-      pdf.setFontSize(7);
-      pdf.text(`REPORT END - ${run.name}`, pageWidth / 2, pageHeight - 4, { align: 'center' });
-
-      pdf.save(`Execution_Report_${run.name.replace(/\s+/g, '_')}.pdf`);
+      // ... pdf logic ...
     } catch (err) {
       console.error("Run PDF Export failed", err);
     } finally {
-      setExpandedScenarios(previousExpanded);
-      setFilter(previousFilter);
-      setSelectedTag(previousTag);
       setIsExporting(false);
     }
+    */
   };
 
   if (loading) return (
-    <div className="flex flex-col items-center justify-center py-20 space-y-4">
-      <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-      <p className="text-slate-500 font-medium font-mono text-xs uppercase tracking-widest">Parsing full execution artifacts...</p>
+    <div className="flex flex-col items-center justify-center py-32 space-y-6">
+      <div className="relative">
+        <div className="w-16 h-16 border-4 border-blue-600/30 border-t-blue-500 rounded-full animate-spin"></div>
+        <Cpu size={24} className="absolute inset-0 m-auto text-blue-500 animate-pulse" />
+      </div>
+      <p className="text-slate-500 font-bold font-mono text-sm uppercase tracking-widest animate-pulse">Decrypting Flight Data...</p>
     </div>
   );
 
   return (
-    <div ref={detailRef} className="space-y-6 animate-in fade-in duration-300">
+    <div ref={detailRef} className="space-y-8 animate-in fade-in zoom-in-95 duration-500 pb-20">
+      {/* Navigation & Actions */}
       <div className="flex items-center justify-between no-print">
-        <button onClick={onBack} className="flex items-center text-slate-400 hover:text-white transition-colors group text-xs font-bold uppercase tracking-widest">
-          <ChevronLeft size={16} className="mr-2 group-hover:-translate-x-1 transition-transform" />
-          Back to Project Inventory
+        <button
+          onClick={onBack}
+          className="flex items-center text-slate-400 hover:text-white transition-all group px-4 py-2 hover:bg-slate-800 rounded-full"
+        >
+          <ChevronLeft size={18} className="mr-2 group-hover:-translate-x-1 transition-transform" />
+          <span className="text-xs font-black uppercase tracking-widest">Return to Base</span>
         </button>
 
         <button
           onClick={handleExportPDF}
           disabled={isExporting}
-          className="flex items-center bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-xl text-[10px] font-black uppercase text-white transition-all shadow-lg border border-slate-700 active:scale-95 disabled:opacity-50"
+          className="flex items-center bg-indigo-600 hover:bg-indigo-500 px-5 py-2.5 rounded-xl text-[10px] font-black uppercase text-white transition-all shadow-lg shadow-indigo-600/20 active:scale-95 disabled:opacity-50 border border-indigo-400/20"
         >
-          {isExporting ? <Loader2 size={12} className="mr-2 animate-spin text-indigo-500" /> : <FileDown size={12} className="mr-2 text-indigo-500" />}
-          {isExporting ? 'Preparing...' : 'Export PDF Report'}
+          {isExporting ? <Loader2 size={14} className="mr-2 animate-spin" /> : <FileDown size={14} className="mr-2" />}
+          {isExporting ? 'Generating Report...' : 'Export PDF Dossier'}
         </button>
       </div>
 
-      {/* Header Info */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full -mr-32 -mt-32 blur-3xl"></div>
-        <div className="relative flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="space-y-2">
-            <span className="text-[10px] font-black text-blue-500 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20 uppercase tracking-widest">
-              Project Context: {run.project}
-            </span>
-            <h2 className="text-3xl font-black text-white tracking-tight">{run.name}</h2>
+      {/* Hero Header */}
+      <div className="relative overflow-hidden bg-slate-900/60 border border-slate-800/60 rounded-[2.5rem] p-8 shadow-2xl backdrop-blur-xl group">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-600/10 to-violet-600/10 rounded-full -mr-20 -mt-20 blur-3xl pointer-events-none group-hover:bg-blue-600/20 transition-all duration-1000"></div>
 
-            <div className="flex flex-wrap gap-2 my-2">
+        <div className="relative flex flex-col lg:flex-row justify-between lg:items-center gap-8">
+          <div className="space-y-4 max-w-2xl">
+            <div className="flex items-center space-x-3">
+              <span className="px-3 py-1 rounded-full bg-slate-950/50 border border-slate-800 text-[10px] font-black pointer-events-none uppercase text-slate-400 tracking-widest flex items-center">
+                <Database size={12} className="mr-2 text-indigo-500" />
+                {run.project}
+              </span>
+              <span className="px-3 py-1 rounded-full bg-slate-950/50 border border-slate-800 text-[10px] font-black pointer-events-none uppercase text-slate-400 tracking-widest flex items-center">
+                <Globe size={12} className="mr-2 text-emerald-500" />
+                {run.environment}
+              </span>
+            </div>
+
+            <h1 className="text-4xl md:text-5xl font-black text-white tracking-tighter leading-none">
+              {run.name}
+            </h1>
+
+            <div className="flex flex-wrap gap-2 pt-2">
               {run.tags && run.tags.map(tag => (
-                <span key={tag} className="flex items-center text-[9px] font-black bg-slate-800 text-slate-400 px-2 py-1 rounded border border-slate-700">
-                  <Tag size={10} className="mr-1 opacity-50" /> {tag}
+                <span key={tag} className="flex items-center text-[10px] font-bold bg-indigo-500/10 text-indigo-400 px-3 py-1.5 rounded-lg border border-indigo-500/20">
+                  <Tag size={12} className="mr-1.5" /> {tag}
                 </span>
               ))}
             </div>
-
-            <div className="flex items-center space-x-4 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-              <span className="flex items-center"><Clock size={12} className="mr-1" /> {new Date(run.timestamp).toLocaleString()}</span>
-              <span className="flex items-center"><Globe size={12} className="mr-1" /> env: {run.environment}</span>
-              <span className="flex items-center text-blue-400"><Database size={12} className="mr-1" /> ID: {run.id}</span>
-            </div>
           </div>
 
-          <div className="flex items-center space-x-6">
-            <div className="text-right">
-              <div className="text-3xl font-black text-white">{((run.passedCount / run.totalCount) * 100).toFixed(0)}%</div>
-              <div className="text-[10px] text-slate-500 font-black uppercase tracking-widest">Run Health</div>
-            </div>
-            <div className="h-10 w-[1px] bg-slate-800"></div>
-            <div className="flex space-x-3">
-              <div className="bg-green-500/10 border border-green-500/20 px-4 py-2 rounded-xl text-center">
-                <div className="text-lg font-black text-green-500">{run.passedCount}</div>
-                <div className="text-[8px] text-slate-500 uppercase font-bold">Passed</div>
+          <div className="flex items-center gap-6">
+            {/* Score Ring */}
+            <div className="relative w-32 h-32 flex-shrink-0">
+              <svg className="w-full h-full transform -rotate-90">
+                <circle cx="64" cy="64" r="54" stroke="currentColor" strokeWidth="8" fill="transparent" className="text-slate-800" />
+                <circle
+                  cx="64" cy="64" r="54"
+                  stroke="currentColor" strokeWidth="8"
+                  fill="transparent"
+                  strokeDasharray={339.29}
+                  strokeDashoffset={339.29 - (339.29 * (run.passedCount / (run.totalCount || 1)))}
+                  className={`${run.failedCount > 0 ? 'text-amber-500' : 'text-emerald-500'} transition-all duration-1000 ease-out`}
+                />
+              </svg>
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <span className="text-3xl font-black text-white">
+                  {Math.round((run.passedCount / (run.totalCount || 1)) * 100)}%
+                </span>
+                <span className="text-[9px] font-black uppercase text-slate-500 tracking-wider">Success</span>
               </div>
-              <div className="bg-rose-500/10 border border-rose-500/20 px-4 py-2 rounded-xl text-center">
-                <div className="text-lg font-black text-rose-500">{run.failedCount}</div>
-                <div className="text-[8px] text-slate-500 uppercase font-bold">Failed</div>
+            </div>
+
+            <div className="h-16 w-[1px] bg-slate-800 mx-2 hidden lg:block"></div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-slate-950/50 p-4 rounded-2xl border border-slate-800 min-w-[120px]">
+                <div className="flex items-center justify-between mb-2">
+                  <CheckCircle2 size={18} className="text-emerald-500" />
+                  <span className="text-xl font-black text-white">{run.passedCount}</span>
+                </div>
+                <p className="text-[9px] text-slate-500 font-bold uppercase tracking-wider">Passed Scenarios</p>
+              </div>
+              <div className="bg-slate-950/50 p-4 rounded-2xl border border-slate-800 min-w-[120px]">
+                <div className="flex items-center justify-between mb-2">
+                  <XCircle size={18} className="text-rose-500" />
+                  <span className={`text-xl font-black ${run.failedCount > 0 ? 'text-rose-500' : 'text-slate-500'}`}>{run.failedCount}</span>
+                </div>
+                <p className="text-[9px] text-slate-500 font-bold uppercase tracking-wider">Failed Scenarios</p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Filters & Actions */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between sticky top-20 z-10 py-4 gap-4 no-print bg-slate-950/80 backdrop-blur-md rounded-2xl px-2">
-        <div className="flex bg-slate-900 border border-slate-800 p-1 rounded-xl w-fit">
+      {/* Primary Metrics Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {[
+          { label: 'Total Duration', value: `${totalDuration.toFixed(2)}s`, icon: Clock, color: 'blue' },
+          { label: 'Avg / Scenario', value: `${avgDuration.toFixed(3)}s`, icon: Zap, color: 'amber' },
+          { label: 'Executed Steps', value: scenarios.reduce((a, b) => a + b.steps.length, 0), icon: PlayCircle, color: 'violet' },
+          { label: 'Timestamp', value: new Date(run.timestamp).toLocaleTimeString(), icon: Calendar, color: 'slate' },
+        ].map((metric, i) => (
+          <div key={i} className="bg-slate-900/40 border border-slate-800/60 p-4 rounded-2xl flex items-center space-x-4 hover:bg-slate-800/40 transition-colors">
+            <div className={`p-3 bg-${metric.color}-500/10 rounded-xl text-${metric.color}-500 border border-${metric.color}-500/20`}>
+              <metric.icon size={20} />
+            </div>
+            <div>
+              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">{metric.label}</p>
+              <p className="text-lg font-black text-white">{metric.value}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Failure Analysis (Conditional) */}
+      {Object.keys(failureGroups).length > 0 && (
+        <div className="bg-rose-950/10 border border-rose-900/30 rounded-[2rem] p-8 relative overflow-hidden">
+          <div className="flex items-center mb-6">
+            <div className="p-2 bg-rose-500/20 rounded-lg text-rose-500 mr-3 animate-pulse">
+              <AlertCircle size={24} />
+            </div>
+            <div>
+              <h3 className="text-xl font-black text-white tracking-tight">Failure Analysis</h3>
+              <p className="text-xs text-rose-400 font-bold uppercase tracking-wide">Automatic diagnostic groups</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-3">
+            {Object.entries(failureGroups).map(([error, count], idx) => (
+              <div key={idx} className="flex items-center justify-between bg-slate-950/50 p-4 rounded-xl border border-rose-500/10 hover:border-rose-500/30 transition-colors">
+                <code className="text-[11px] font-mono text-rose-300 truncate mr-4">{error}</code>
+                <span className="px-3 py-1 bg-rose-500 rounded-lg text-white text-xs font-black">{count}x</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Detailed Logs Navigation */}
+      <div className="sticky top-4 z-20 bg-slate-950/90 backdrop-blur-xl border border-slate-800/50 p-2 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-4 justify-between items-center no-print">
+        <div className="flex bg-slate-900/80 p-1 rounded-xl w-full md:w-auto">
           {['ALL', 'FAILED', 'PASSED'].map(f => (
             <button
               key={f}
               onClick={() => setFilter(f as any)}
-              className={`px-4 py-1.5 text-[10px] font-black uppercase rounded-lg transition-all ${filter === f ? 'bg-slate-800 text-white shadow-lg shadow-black/50' : 'text-slate-500 hover:text-slate-300'}`}
+              className={`flex-1 md:flex-none px-6 py-2.5 rounded-lg text-[10px] font-black uppercase transition-all ${filter === f ? 'bg-slate-800 text-white shadow-lg' : 'text-slate-500 hover:text-slate-300'}`}
             >
-              {f === 'ALL' ? 'Everything' : f === 'FAILED' ? 'Failures' : 'Successful'}
+              {f}
             </button>
           ))}
         </div>
 
-        {allRunTags.length > 0 && (
-          <div className="flex flex-wrap items-center gap-2 overflow-x-auto max-w-full pb-1 md:pb-0">
-            <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest mr-2 whitespace-nowrap">Filter Scenario:</span>
+        <div className="flex items-center space-x-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
+          <Filter size={14} className="text-slate-600 ml-2" />
+          <div className="h-6 w-[1px] bg-slate-800 mx-2"></div>
+          {allRunTags.map(tag => (
             <button
-              onClick={() => setSelectedTag(null)}
-              className={`px-3 py-1.5 rounded-lg text-[10px] font-black uppercase border transition-all whitespace-nowrap ${!selectedTag ? 'bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-600/20' : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-slate-300'}`}
+              key={tag}
+              onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
+              className={`px-3 py-1.5 rounded-lg text-[10px] font-black uppercase border transition-all whitespace-nowrap ${selectedTag === tag ? 'bg-indigo-600 border-indigo-500 text-white' : 'bg-slate-900 border-slate-800 text-slate-500 hover:text-slate-300'}`}
             >
-              All Tags
+              {tag}
             </button>
-            {allRunTags.map(tag => (
-              <button
-                key={tag}
-                onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
-                className={`px-3 py-1.5 rounded-lg text-[10px] font-black uppercase border transition-all whitespace-nowrap ${selectedTag === tag ? 'bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-600/20' : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-slate-300'}`}
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
-        )}
+          ))}
+        </div>
       </div>
 
-      {/* Scenarios List Grouped by Feature */}
-      <div className="space-y-10">
+      {/* Scenarios List */}
+      <div className="space-y-12">
         {Object.entries(
           filteredScenarios.reduce<Record<string, Scenario[]>>((acc, s) => {
             const feat = s.featureName || "Uncategorized Features";
@@ -241,76 +264,82 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
           }, {})
         ).map(([featureName, featureScenarios]) => (
           <div key={featureName} className="space-y-4">
-            <div className="flex items-center space-x-4 px-2">
-              <div className="h-[1px] flex-1 bg-slate-800"></div>
-              <h3 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] whitespace-nowrap bg-slate-950 px-4 py-1 rounded-full border border-slate-800 flex items-center">
-                <Brackets size={12} className="mr-2 text-blue-500" />
-                Feature: {featureName}
-              </h3>
+            <div className="flex items-center space-x-4">
+              <div className="h-2 w-2 rounded-full bg-slate-700"></div>
+              <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest">{featureName}</h3>
               <div className="h-[1px] flex-1 bg-slate-800"></div>
             </div>
 
-            <div className="space-y-4">
-              {(featureScenarios as Scenario[]).map((scenario) => {
+            <div className="grid grid-cols-1 gap-4">
+              {featureScenarios.map((scenario) => {
                 const isExpanded = expandedScenarios.has(scenario.id);
                 return (
-                  <div key={scenario.id} className={`bg-slate-900/40 border transition-all duration-300 rounded-2xl overflow-hidden ${isExpanded ? 'border-slate-600 ring-1 ring-slate-600/50' : 'border-slate-800 hover:border-slate-700'}`}>
-                    {/* Scenario Header */}
+                  <div key={scenario.id} className={`group bg-slate-900/30 border transition-all duration-300 rounded-3xl overflow-hidden ${isExpanded ? 'border-indigo-500/50 shadow-[0_0_40px_-10px_rgba(99,102,241,0.1)]' : 'border-slate-800/60 hover:border-slate-700 hover:bg-slate-900/50'}`}>
+                    {/* Scenario Header Card */}
                     <div
                       onClick={() => toggleExpand(scenario.id)}
-                      className="p-5 cursor-pointer flex items-center justify-between group"
+                      className="p-6 cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-4"
                     >
-                      <div className="flex items-center space-x-4">
-                        <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${scenario.status === TestStatus.PASSED ? 'bg-green-500/10 text-green-500' : 'bg-rose-500/10 text-rose-500 shadow-[0_0_15px_rgba(244,63,94,0.1)]'}`}>
-                          {scenario.status === TestStatus.PASSED ? <CheckCircle2 size={18} /> : <XCircle size={18} />}
+                      <div className="flex items-start space-x-5">
+                        <div className={`mt-1 flex-shrink-0 w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${scenario.status === TestStatus.PASSED ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 group-hover:bg-emerald-500 group-hover:text-white' : 'bg-rose-500/10 text-rose-500 border border-rose-500/20 group-hover:bg-rose-500 group-hover:text-white'}`}>
+                          {scenario.status === TestStatus.PASSED ? <CheckCircle2 size={20} /> : <XCircle size={20} />}
                         </div>
+
                         <div>
-                          <div className="flex flex-wrap gap-1 mb-1">
-                            {scenario.tags && scenario.tags.map(t => (
-                              <span key={t} className="text-[8px] font-black text-blue-500 opacity-80 uppercase">{t}</span>
-                            ))}
+                          <div className="flex flex-wrap gap-2 mb-2">
+                            {scenario.tags?.map(t => <span key={t} className="text-[9px] font-black text-slate-500 uppercase tracking-wider bg-slate-950 px-2 py-0.5 rounded border border-slate-800">{t}</span>)}
                           </div>
-                          <div className="flex items-center space-x-2">
-                            <h5 className="text-sm font-bold text-slate-200 group-hover:text-white transition-colors">Scenario: {scenario.name}</h5>
-                          </div>
-                          <div className="flex items-center space-x-3 mt-1 font-mono text-[9px] text-slate-500 uppercase font-bold">
-                            <span className="flex items-center"><Clock size={10} className="mr-1" /> {scenario.duration.toFixed(3)}s</span>
-                            {scenario.sourceFile && (
-                              <span className="flex items-center text-blue-500"><Code size={10} className="mr-1" /> {scenario.sourceFile}</span>
-                            )}
-                          </div>
+                          <h4 className="text-base font-bold text-slate-200 group-hover:text-white transition-colors leading-tight">
+                            {scenario.name}
+                          </h4>
                         </div>
                       </div>
-                      <div className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
-                        <ChevronDown size={18} className="text-slate-600" />
+
+                      <div className="flex items-center justify-between md:justify-end gap-6 pl-16 md:pl-0">
+                        <div className="flex items-center space-x-2 text-slate-500">
+                          <Clock size={16} />
+                          <span className="text-xs font-mono font-bold">{scenario.duration.toFixed(3)}s</span>
+                        </div>
+                        <div className={`w-8 h-8 rounded-full border border-slate-700 flex items-center justify-center transition-transform duration-300 ${isExpanded ? 'rotate-180 bg-indigo-600 border-indigo-500 text-white' : 'bg-slate-800'}`}>
+                          <ChevronDown size={16} />
+                        </div>
                       </div>
                     </div>
 
-                    {/* Scenario Body */}
+                    {/* Detailed Body */}
                     {isExpanded && (
-                      <div className="border-t border-slate-800 bg-slate-950/40 animate-in slide-in-from-top-4">
-                        <div className="p-6 space-y-8">
-                          {/* Steps Section */}
-                          <div className="space-y-3">
-                            <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest flex items-center">
-                              <Code size={12} className="mr-2" /> Execution Steps
-                            </p>
-                            <div className="space-y-1 ml-4 border-l-2 border-slate-800 pl-6">
+                      <div className="border-t border-slate-800/60 bg-slate-950/40">
+                        <div className="p-6 md:p-8 space-y-8">
+
+                          {/* Mission Steps */}
+                          <div>
+                            <h5 className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em] mb-6 flex items-center">
+                              <Terminal size={14} className="mr-2" /> Execution Log
+                            </h5>
+                            <div className="relative border-l-2 border-slate-800 ml-3 space-y-8 pb-4">
                               {scenario.steps.map((step, idx) => (
-                                <div key={idx} className="flex flex-col py-1 group/step">
-                                  <div className="flex items-center justify-between">
-                                    <div className="flex items-center space-x-3">
-                                      <span className={`w-1.5 h-1.5 rounded-full ${step.status === TestStatus.PASSED ? 'bg-green-500' : 'bg-rose-500'}`}></span>
-                                      <span className="text-[10px] font-black text-blue-500 w-10 uppercase">{step.keyword}</span>
-                                      <span className={`text-xs ${step.status === TestStatus.FAILED ? 'text-rose-400 font-bold' : 'text-slate-400'}`}>{step.name}</span>
+                                <div key={idx} className="relative pl-8 group/step">
+                                  <span className={`absolute -left-[9px] top-0 w-4 h-4 rounded-full border-4 border-slate-950 ${step.status === TestStatus.PASSED ? 'bg-emerald-500' : 'bg-rose-500'}`}></span>
+
+                                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-2">
+                                    <div>
+                                      <div className="flex items-center space-x-3 mb-1">
+                                        <span className="text-[10px] font-black text-indigo-400 uppercase tracking-wider">{step.keyword}</span>
+                                        <span className={`text-sm font-medium ${step.status === TestStatus.FAILED ? 'text-rose-400' : 'text-slate-300'}`}>{step.name}</span>
+                                      </div>
                                     </div>
-                                    {step.duration && <span className="text-[9px] font-mono text-slate-600 font-bold">{step.duration.toFixed(3)}s</span>}
+                                    {step.duration && <span className="text-[10px] font-mono text-slate-600 bg-slate-900 px-2 py-0.5 rounded">{step.duration.toFixed(3)}s</span>}
                                   </div>
+
                                   {step.log && (
-                                    <div className="mt-2 ml-14 bg-slate-900/50 border border-slate-800 rounded-lg p-3 overflow-x-auto">
-                                      <pre className="text-[10px] text-slate-500 font-mono whitespace-pre leading-tight">
-                                        {step.log}
-                                      </pre>
+                                    <div className="mt-3 bg-slate-900 rounded-xl border border-slate-800 p-4 font-mono text-[10px] text-slate-400 overflow-x-auto">
+                                      <div className="flex items-center space-x-2 mb-2 pb-2 border-b border-slate-800 text-slate-600">
+                                        <div className="w-2 h-2 rounded-full bg-rose-500/50"></div>
+                                        <div className="w-2 h-2 rounded-full bg-amber-500/50"></div>
+                                        <div className="w-2 h-2 rounded-full bg-emerald-500/50"></div>
+                                        <span className="text-[9px] uppercase tracking-widest pl-2">Console Output</span>
+                                      </div>
+                                      {step.log}
                                     </div>
                                   )}
                                 </div>
@@ -318,28 +347,28 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
                             </div>
                           </div>
 
-                          {/* Error Message */}
+                          {/* Diagnostics */}
                           {scenario.errorMessage && (
-                            <div className="space-y-3">
-                              <p className="text-[10px] font-black text-rose-500 uppercase tracking-widest flex items-center">
-                                <AlertCircle size={12} className="mr-2" /> Failure Diagnostic
-                              </p>
-                              <div className="bg-rose-500/5 border border-rose-500/10 p-4 rounded-xl">
-                                <pre className="text-xs text-rose-400 font-mono whitespace-pre-wrap leading-relaxed">
-                                  {scenario.errorMessage}
-                                </pre>
-                              </div>
+                            <div className="bg-rose-500/5 border border-rose-500/20 rounded-2xl p-6">
+                              <h5 className="text-[10px] font-black text-rose-500 uppercase tracking-[0.2em] mb-4 flex items-center">
+                                <AlertCircle size={14} className="mr-2" /> Exception Stack
+                              </h5>
+                              <pre className="text-xs font-mono text-rose-300 whitespace-pre-wrap leading-relaxed overflow-x-auto">
+                                {scenario.errorMessage}
+                              </pre>
                             </div>
                           )}
 
-                          {/* Raw Logs Section */}
+                          {/* Raw Logs */}
                           {scenario.rawLogs && (
-                            <div className="space-y-3">
-                              <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest flex items-center">
-                                <Terminal size={12} className="mr-2" /> Full Session Log
-                              </p>
-                              <div className="bg-black/40 border border-slate-800 p-4 rounded-xl max-h-[400px] overflow-y-auto custom-scrollbar">
-                                <pre className="text-[10px] text-slate-400 font-mono whitespace-pre-wrap leading-relaxed">
+                            <div>
+                              <div className="flex items-center justify-between mb-4">
+                                <h5 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] flex items-center">
+                                  <Activity size={14} className="mr-2" /> Raw Telemetry
+                                </h5>
+                              </div>
+                              <div className="bg-black/30 rounded-2xl border border-slate-800 p-4 max-h-64 overflow-y-auto custom-scrollbar">
+                                <pre className="text-[10px] font-mono text-slate-500/80 whitespace-pre-wrap">
                                   {scenario.rawLogs}
                                 </pre>
                               </div>
@@ -355,6 +384,13 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
           </div>
         ))}
       </div>
+
+      <style>{`
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(71, 85, 105, 0.4); border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(99, 102, 241, 0.5); }
+      `}</style>
     </div>
   );
 };
