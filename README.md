@@ -1,8 +1,8 @@
-# 💎 Ultra-Premium QA Automation Dashboard
-> **The ultimate command center for Multi-Project Test Orchestration & Validation.**
+# QA Automation Dashboard
+> **Command center for Multi-Project Test Orchestration & Validation.**
 
-[![Build Status](https://img.shields.io/github/actions/workflow/status/carlos-camara/dashboard/test_suite.yml?branch=main&style=for-the-badge&logo=github-actions&logoColor=white&label=CI%20Pipeline)](https://github.com/carlos-camara/dashboard/actions)
-[![License](https://img.shields.io/github/license/carlos-camara/dashboard?style=for-the-badge&color=blue)](LICENSE)
+[![Tests Status](https://img.shields.io/github/actions/workflow/status/carlos-camara/dashboard/test_suite.yml?branch=main&style=for-the-badge&logo=github-actions&logoColor=white&label=Tests)](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml?query=branch%3Amain)
+[![Linter Status](https://img.shields.io/github/actions/workflow/status/carlos-camara/dashboard/lint.yml?branch=main&style=for-the-badge&logo=github-actions&logoColor=white&label=Linter)](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml?query=branch%3Amain)
 [![Python Version](https://img.shields.io/badge/Python-3.11%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Node Version](https://img.shields.io/badge/Node.js-20%2B-green?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 
@@ -10,7 +10,7 @@
 
 ## 🌟 Executive Overview
 
-This is not just another test runner. This is a **high-performance, ultra-premium QA ecosystem** designed to bridge the gap between technical BDD execution and executive-level visibility. Built with a state-of-the-art **Glassmorphism UI**, it provides real-time insights into your multi-project quality landscape.
+This is not just another test runner. This is designed to bridge the gap between technical BDD execution and executive-level visibility. Built with a state-of-the-art **Glassmorphism UI**, it provides real-time insights into your multi-project quality landscape.
 
 ### 🚀 Key Pillars
 - **Unified Vision**: One dashboard for API (Behave) and GUI (Selenium) test suites.
