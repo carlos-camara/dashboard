@@ -1,71 +1,87 @@
 # Contributing to QA Hub
 
-First off, thanks for taking the time to contribute! 🎉
+First off, thank you for considering contributing to QA Hub! It's people like you that make it a great tool for the community. 🎉
 
-The following is a set of guidelines for contributing to **QA Hub & Execution Dashboard**. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
+> [!NOTE]
+> These are guidelines, not rigid rules. Use your best judgment and feel free to propose changes to this document.
 
-## 🛠️ Development Setup
+## 🛠️ Development Environment Setup
 
-### prerequisites
-1.  **Node.js**: v18 or higher (v20 Recommended)
-2.  **Python**: 3.10 or higher
-3.  **Git**: Latest version
+Follow these steps to get your local environment ready for contribution.
 
-### 1. Frontend & Backend (Node.js)
+### Prerequisites
+* **Node.js**: v18 or higher (v20+ recommended)
+* **Python**: 3.10 or higher
+* **Git**: Latest version
+
+### 1. Initialize the Core Services
+The dashboard requires both a backend (mock API/DB) and a frontend to function locally.
 
 ```bash
-# Install dependencies
+# Install all dependencies
 npm install
 
-# Start Backend (API + DB)
+# In terminal A: Start the Backend
 npm run start-backend
 
-# Start Frontend (Vite)
+# In terminal B: Start the UI
 npm run dev
 ```
 
-### 2. Automation (Python)
+### 2. Prepare the Automation Engine
+The test logic is powered by Python and Behave.
 
 ```powershell
-# Create venv
-py -m venv .venv
+# Create and activate virtual environment
+python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 
-# Install Test Dependencies
+# Install automation requirements
 pip install -r requirements.txt
 ```
 
 ---
 
-## 🎨 Coding Standards
+## 🎨 Engineering Standards
 
-### TypeScript / React
-*   We use **Lucide React** for icons.
-*   We use **TailwindCSS** for styling. Avoid inline styles where possible.
-*   Components should be functional and typed with `React.FC<Props>`.
+### TypeScript & React
+* **Styling**: Always use **TailwindCSS**. Avoid inline styles or custom CSS files unless strictly necessary.
+* **Icons**: Use **Lucide React** for consistency.
+* **Typing**: All components and functions must be strictly typed. No `any` allowed.
 
-### Python / Behave
-*   Feature files uses standard **Gherkin** syntax.
-*   Step definitions should be strictly typed where possible.
-*   Use `context` for passing data between steps, but document what you put there.
+### Python & BDD (Behave)
+* **Feature Files**: Must follow clean **Gherkin** syntax. Use `Background` for common setup steps.
+* **Step Definitions**: Document all `context` variables within the step file.
+* **Locators**: Never hardcode selectors in Python. Use the YAML-driven locator system in `features/page_objects/locators.yaml`.
 
 ---
 
-## 🔄 Workflow
+## 🔄 The Contribution Workflow
 
-1.  **Fork & Branch**: Create a branch for your feature (`feat/cool-new-thing`) or fix (`fix/memory-leak`).
-2.  **Commit**: Use descriptive commit messages.
-3.  **Verify**:
-    *   Run `npm run build` to check for compilation errors.
-    *   Run a smoke test `.\run_api_smoke_reports.ps1` to ensure no regression.
-4.  **Pull Request**: Submit your PR targeted at the `devel` branch.
+1. **Find an Issue**: Browse the issues or create one to discuss your proposed change.
+2. **Branching Strategy**: 
+   - Feature: `feat/amazing-feature`
+   - Fix: `fix/critical-bug`
+3. **Quality Check**:
+   - Run `npm run lint` to check for style issues.
+   - Run `.\run_api_smoke_reports.ps1` to ensure no core regressions.
+4. **Submitting a Pull Request**:
+   - Target the `main` or `devel` branch as specified in the issue.
+   - Include screenshots or recordings for UI changes.
+   - Link the PR to the relevant issue.
 
 ---
 
 ## 🐞 Reporting Bugs
 
-Bugs are tracked as GitHub issues. When opening an issue, please include:
-*   A clear title and description.
-*   Steps to reproduce.
-*   Screenshots (if applicable).
-*   Logs from the generic `server.log` or console output.
+> [!WARNING]
+> Before reporting a bug, please search existing issues to see if it has already been reported.
+
+When opening an issue, please provide:
+* **Context**: What were you trying to achieve?
+* **Reproduce**: Exact steps to trigger the bug.
+* **Evidence**: Screenshots, console logs, or `server.log` snippets.
+* **Environment**: OS, Node version, and Browser.
+
+---
+> Happy coding! 🚀

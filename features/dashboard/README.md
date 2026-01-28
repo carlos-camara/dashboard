@@ -1,79 +1,60 @@
-# Dashboard GUI Tests
+# Dashboard GUI Testing Suite
 
-This directory contains visual/GUI tests for the QA Hub Dashboard using Selenium and BDD.
+This directory contains the visual and functional validation tests for the QA Hub Dashboard, utilizing **Selenium WebDriver** and **Behave (BDD)**.
 
-## Test Files
+## 🛠 Architecture
+Our GUI tests follow the **Page Object Model (POM)** pattern. Locators are decoupled from logic using a YAML configuration for maximum maintainability.
 
-- **`title_validation.feature`** - Basic page title validation
-- **`dashboard_visual.feature`** - Comprehensive visual validation tests
+## 📂 Test Organization
 
-## Running GUI Tests
+- **`dashboard_visual.feature`**: Focuses on HSL color accuracy, glassmorphism effects, and layout integrity across viewports.
+- **`gui_navigation.feature`**: Validates routing, button interactions, and user flow between screens.
+- **`gui_smoke.feature`**: Critical path validation to ensure the core dashboard is accessible and functional.
 
-### Run all GUI tests:
+---
+
+## 🏃 Execution Guide
+
+### Run all GUI tests
 ```bash
 behave features/dashboard --tags=@gui
 ```
 
-### Run only smoke GUI tests:
+### Run only smoke GUI tests
 ```bash
 behave features/dashboard --tags="@gui and @smoke"
 ```
 
-### Run specific test categories:
+### Visual Verification
+To run tests specifically focused on element visibility and aesthetic integrity:
 ```bash
-# Navigation tests
-behave features/dashboard --tags=@navigation
-
-# Component visibility tests
-behave features/dashboard --tags=@components
-
-# Interaction tests
-behave features/dashboard --tags=@interaction
-
-# Screenshot tests
 behave features/dashboard --tags=@visual
 ```
 
-## Screenshots
+---
 
-All screenshots are automatically saved to:
-```
-features/resources/screenshots/
-```
+## 📸 Automated Evidence
+All GUI tests automatically capture evidence:
+- **Location**: `features/resources/screenshots/`
+- **Naming**: `{scenario_name}_{timestamp}.png`
+- **Failures**: Any failed step automatically triggers a `FAILED_...` screenshot for instant debugging.
 
-Screenshot naming format: `{name}_{timestamp}.png`
+---
 
-## Test Scenarios
+## 🔧 Debugging Tips
 
-### Navigation Tests
-- Dashboard loads successfully
-- Page title verification
-- URL validation
+> [!TIP]
+> **Disable Headless Mode**: If a test is failing inexplicably, run it in headed mode to see what the browser is doing.
+> Set `HEADLESS=false` in your environment variables.
 
-### Component Tests
-- Statistics cards visibility
-- Timeline chart presence
-- Recent runs section
-- Endpoints catalog
+### Common Issues
+1. **Element Not Found**: Check if the ID/XPath in `locators.yaml` matches the current UI build.
+2. **Timeout**: If the dashboard is slow, increase the `wait_time` in `environment.py`.
+3. **Chromedriver Version**: Ensure your local Chromedriver version matches your installed Chrome browser.
 
-### Interaction Tests
-- Sync button functionality
-- Time filter buttons (7 Days, 30 Days, All Time)
-- Navigation to run details
+---
 
-### Visual Tests
-- Full page screenshots
-- Header/footer validation
-- Responsive design checks
-
-## Prerequisites
-
-- Dashboard server running on `http://localhost:3000`
-- Chrome browser installed
-- ChromeDriver in PATH or configured in environment.py
-
-## Step Definitions
-
-GUI-specific steps are defined in:
-- `features/steps/step_gui_validation.py` - Basic navigation and title checks
-- `features/steps/step_gui_interactions.py` - Advanced interactions and screenshots
+## 🧪 Step Registry
+GUI-specific steps are modularized for reusability:
+- [step_gui_validation.py](file:///c:/Users/Carlos/Desktop/test/dashboard/features/steps/step_gui_validation.py): Basic assertions (title, presence, text).
+- [step_gui_interactions.py](file:///c:/Users/Carlos/Desktop/test/dashboard/features/steps/step_gui_interactions.py): Clicks, hovers, scroll actions, and screenshot logic.

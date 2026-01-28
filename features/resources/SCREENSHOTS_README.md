@@ -1,77 +1,54 @@
-# Screenshot Visualization in Test Reports
+# Visual Evidence & Screenshot Engine
 
-## Overview
-Los screenshots capturados durante la ejecución de tests se visualizan automáticamente en los reportes.
+We believe that **visual proof** is non-negotiable for high-quality GUI automation. Our framework captures high-definition evidence for every critical interaction.
 
-## Características
+## 📸 Automated Capture Modes
 
-### 1. Screenshots Manuales
-Cuando usas los steps:
+### 1. Programmatic Screenshots
+You can trigger a screenshot at any time in your feature files:
 ```gherkin
-Then I take a screenshot named "dashboard_home"
-Then I take a full page screenshot named "complete_view"
+Then I take a screenshot named "user_profile_modal"
+Then I take a full page screenshot named "dashboard_complete"
 ```
 
-Los screenshots se:
-- ✅ Guardan en `features/resources/screenshots/`
-- ✅ Se imprimen en la consola con formato HTML
-- ✅ Se incluyen en reportes HTML de Behave
+### 2. Failure Auto-Surveillance
+> [!IMPORTANT]
+> **Safety Net**: If a test fails, the framework automatically captures the browser's state at the exact millisecond of the failure.
+> - **Filename**: `FAILED_{scenario_name}_{timestamp}.png`
+> - **Visibility**: The screenshot path is printed directly in the test log for immediate discovery.
 
-### 2. Screenshots Automáticos en Fallos
-Cuando un step falla:
-- ✅ Se captura automáticamente un screenshot
-- ✅ Nombre: `FAILED_{scenario}_{timestamp}.png`
-- ✅ Se muestra en el output del test
+---
 
-## Formato de Output
+## 📂 Storage Architecture
 
-### En Consola
-```
-📸 Screenshot captured: dashboard_home
-   Location: features/resources/screenshots/dashboard_home_20260128_163000.png
-   <img src='file:///...' width='800' alt='dashboard_home' />
+All evidence is stored in a dedicated resource directory:
+```text
+features/resources/screenshots/
+├── dashboard_home_20260128_163000.png
+├── FAILED_Navigation_Flow_20260128_163210.png
+└── ...
 ```
 
-### En Fallos
-```
-❌ FAILURE Screenshot captured
-   Scenario: Verify Dashboard Loads
-   Failed Step: Then I should see the text "QA Hub"
-   Location: features/resources/screenshots/FAILED_Verify_Dashboard_Loads_20260128_163000.png
-```
+---
 
-## Generar Reporte HTML
+## 📊 Integration with Dashboards
 
-Para generar un reporte HTML con screenshots embebidos:
-
+### Local HTML Reports
+Run tests with the HTML formatter to see screenshots embedded directly in the results:
 ```bash
 behave features/dashboard --tags=@gui -f html -o reports/gui_report.html
 ```
 
-## Estructura de Screenshots
+### GitHub Actions CI/CD
+Our pipelines manage visual evidence automatically:
+1. **Unified Test Suite**: Captures screenshots and uploads them as temporary artifacts.
+2. **Result Upload Pipeline**: Downloads the artifacts and **commits** them back to the repository under `features/resources/screenshots/`.
 
-```
-features/resources/screenshots/
-├── dashboard_home_20260128_163000.png
-├── dashboard_stats_20260128_163005.png
-├── FAILED_Verify_Dashboard_20260128_163010.png
-└── ...
-```
+> [!TIP]
+> This ensures that after every successful merge, you can browse the repository to see the latest visual state of the application.
 
-## Integración con CI/CD
+---
 
-En tu pipeline, los screenshots se guardan automáticamente y pueden ser:
-- Archivados como artifacts
-- Incluidos en reportes de Jenkins/GitHub Actions
-- Enviados a sistemas de almacenamiento
-
-## Ejemplo de Configuración en GitHub Actions
-
-```yaml
-- name: Upload Screenshots
-  if: always()
-  uses: actions/upload-artifact@v3
-  with:
-    name: test-screenshots
-    path: features/resources/screenshots/
-```
+## 🛠 Troubleshooting
+- **Missing Screenshots**: Ensure the `features/resources/screenshots/` folder exists or the runner has write permissions.
+- **Blurry Images**: This usually happens if the browser is closed before the disk write completes. The framework uses a 500ms safety buffer to prevent this.

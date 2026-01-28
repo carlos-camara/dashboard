@@ -1,76 +1,63 @@
-# Dashboard Page Objects - Locator Reference
+# Dashboard Page Objects - Locator Framework
 
-## Overview
-This document lists all available element locators defined in the `DashboardPage` class.
+We use a **YAML-driven Locator System** to ensure our tests are resilient to UI changes and easy to maintain by non-developers.
 
-## Usage in Tests
+## 🚀 Why YAML Locators?
 
-Instead of hardcoding XPath or CSS selectors in feature files, use descriptive text that matches the locators defined here.
+> [!NOTE]
+> By separating the **"What"** (the selector) from the **"How"** (the Python logic), we achieve:
+> - **Zero Code Maintenance**: Fix broken tests by updating a single YAML file instead of hunting through Python scripts.
+> - **Unified Language**: Feature files can use descriptive aliases that map directly to technical locators.
+> - **Multi-Targeting**: Easily switch between ID, XPath, and CSS without changing the step definitions.
 
-## Available Locators
+## 🛠 Usage in Python
 
-### Header Elements
-- **QA Hub Title**: Text "QA Hub"
-- **Execution Dashboard**: Text "Execution Dashboard"
+The Page Object class automatically loads the YAML file. You access locators using their logical keys.
 
-### Statistics Cards
-- **Pass Rate**: Text "Pass Rate"
-- **Total Runs**: Text "Total Runs"
-- **Avg Duration**: Text "Avg Duration"
+```python
+# features/page_objects/dashboard_page.py
 
-### Sections
-- **Timeline**: Heading "Timeline"
-- **Recent Runs**: Heading "Recent Runs"
-- **Endpoints**: Text "Endpoints"
-
-### Action Buttons
-- **Sync**: Button "Sync"
-- **7 Days Filter**: Button "7 Days"
-- **30 Days Filter**: Button "30 Days"
-- **All Time Filter**: Button "All Time"
-
-## Adding New Locators
-
-To add new element locators:
-
-1. **Edit** `features/page_objects/dashboard_page.py`
-2. **Add** new locator constant:
-   ```python
-   NEW_ELEMENT = (By.XPATH, "//your/xpath/here")
-   ```
-3. **Optionally** add a helper method:
-   ```python
-   def click_new_element(self):
-       self.click(self.NEW_ELEMENT)
-   ```
-
-## Example Feature File Usage
-
-```gherkin
-# Good - Uses text matching locators
-When I click on the button with text "Sync"
-Then I should see the text "Timeline"
-
-# Also works - Generic element click
-When I click on the element with text "Recent Runs"
+class DashboardPage(BasePage):
+    def click_sync_button(self):
+        # 'sync_button' is a key defined in locators.yaml
+        self.click_element("sync_button")
 ```
 
-## Page Object Structure
+---
 
-```
+## 📂 System Structure
+
+```text
 features/
 ├── page_objects/
-│   ├── __init__.py           # Package init
-│   ├── base_page.py          # Base class with common methods
-│   └── dashboard_page.py     # Dashboard-specific locators
+│   ├── locators.yaml         # 🚩 The Single Source of Truth
+│   ├── base_page.py          # Core Selenium wrapper methods
+│   └── dashboard_page.py     # Screen-specific logical actions
 └── steps/
-    └── step_gui_interactions.py  # Uses page objects
+    └── step_gui_interactions.py
 ```
 
-## Benefits
+---
 
-✅ **Centralized Maintenance**: Update locators in one place  
-✅ **Reusability**: Same locators across multiple tests  
-✅ **Readability**: Descriptive names instead of XPath  
-✅ **Type Safety**: IDE autocomplete for locators  
-✅ **Easier Debugging**: Clear separation of concerns
+## 📝 Adding New Locators
+
+1. **Identify the element** using Chrome DevTools.
+2. **Open** `features/page_objects/locators.yaml`.
+3. **Add** the entry under the appropriate section:
+   ```yaml
+   dashboard:
+     new_feature_btn: "xpath://button[contains(@class, 'new-feat')]"
+   ```
+4. **Use it** in your Page Object or directly in a generic step.
+
+---
+
+## ✅ Best Practices
+
+- **Naming**: Use `snake_case` for locator keys (e.g., `login_error_msg`).
+- **Specificity**: Prefer **IDs** or **data-testid** attributes over long, fragile XPaths.
+- **Grouping**: Keep locators organized by screen or component within the YAML file.
+- **Uniqueness**: Ensure each key is unique to avoid collision during lookups.
+
+> [!IMPORTANT]
+> If a developer changes a CSS class name, ONLY `locators.yaml` needs to be updated. Your tests will remain green without a single line of Python code changing.
