@@ -21,3 +21,12 @@ def step_verify_page_title(context, expected_title):
     )
     actual_title = context.driver.title
     assert actual_title == expected_title, f"Expected title '{expected_title}' but got '{actual_title}'"
+
+@then('I should see at least {count:d} elements with selector "{locator_name}" in "{section}"')
+def step_verify_element_count_section(context, count, locator_name, section):
+    from features.steps.step_gui_interactions import get_dashboard_page
+    page = get_dashboard_page(context)
+    locator = page.get_locator(f"{section}.{locator_name}")
+    elements = page.find_elements(locator)
+    actual_count = len(elements)
+    assert actual_count >= count, f"Expected at least {count} elements for {section}.{locator_name}, found {actual_count}"

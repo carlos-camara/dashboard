@@ -319,3 +319,21 @@ def step_scroll_to_top(context):
     page = get_dashboard_page(context)
     page.scroll_to_top()
     time.sleep(0.5)
+
+@when('I click on the "{locator_name}" in the sidebar')
+def step_click_sidebar_element(context, locator_name):
+    page = get_dashboard_page(context)
+    locator = page.get_locator(f"sidebar.{locator_name}")
+    page.click(locator)
+
+@when('I click on the "{locator_name}" in "{section}"')
+def step_click_section_element(context, locator_name, section):
+    page = get_dashboard_page(context)
+    locator = page.get_locator(f"{section}.{locator_name}")
+    page.click(locator)
+
+@when('I type "{text}" into the "{locator_name}" in "{section}"')
+def step_type_section_element(context, text, locator_name, section):
+    page = get_dashboard_page(context)
+    locator = page.get_locator(f"{section}.{locator_name}")
+    page.send_keys(locator, text)

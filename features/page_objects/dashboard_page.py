@@ -151,3 +151,19 @@ class DashboardPage(BasePage):
             self.driver.execute_script("arguments[0].scrollTop = 0;", main_content)
         except:
             self.driver.execute_script("window.scrollTo(0, 0);")
+
+    def get_locator(self, locator_path):
+        """
+        Retrieves a locator from the YAML definition based on a dot-separated path.
+        Example: "sidebar.test_runs_link"
+        """
+        parts = locator_path.split('.')
+        if len(parts) == 2:
+            return self.get_locator_def(parts[0], parts[1])
+        return self.get_locator_def('dashboard', locator_path)
+
+    def send_keys(self, locator, text):
+        """Types text into an element after clearing it"""
+        element = self.find_element(locator)
+        element.clear()
+        element.send_keys(text)

@@ -1,37 +1,53 @@
-# QA Automation Dashboard
-> **Command center for Multi-Project Test Orchestration & Validation.**
+# QA Hub: Automation Dashboard
+> **The ultimate command center for Multi-Project Test Orchestration & Validation.**
 
-[![Lint (devel)](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml?query=branch%3Adevel)
-[![Tests (devel)](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml?query=branch%3Adevel)
+[![Tests Status](https://img.shields.io/github/actions/workflow/status/carlos-camara/dashboard/test_suite.yml?branch=main&style=for-the-badge&logo=github-actions&logoColor=white&label=Tests)](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml?query=branch%3Amain)
+[![Linter Status](https://img.shields.io/github/actions/workflow/status/carlos-camara/dashboard/lint.yml?branch=main&style=for-the-badge&logo=github-actions&logoColor=white&label=Linter)](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml?query=branch%3Amain)
 [![Python Version](https://img.shields.io/badge/Python-3.11%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Node Version](https://img.shields.io/badge/Node.js-20%2B-green?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 
-![Hero Image](features/resources/screenshots/dashboard_complete_view_fullpage.png)
+![Hero Image](features/resources/screenshots/dashboard_header_status.png)
 
 ## 🌟 Executive Overview
 
-This is not just another test runner. This is designed to bridge the gap between technical BDD execution and executive-level visibility. Built with a state-of-the-art **Glassmorphism UI**, it provides real-time insights into your multi-project quality landscape.
+This is not just another test runner. This is a **high-performance, ultra-premium QA ecosystem** designed to bridge the gap between technical BDD execution and executive-level visibility. Built with a state-of-the-art **Glassmorphism UI**, it provides real-time insights into your multi-project quality landscape.
 
 ### 🚀 Key Pillars
 - **Unified Vision**: One dashboard for API (Behave) and GUI (Selenium) test suites.
 - **Micro-Services Ready**: Validates complex REST flows with professional-grade diagnostics.
 - **Real-Time Analytics**: Instant visualization of success rates, volume trends, and failure patterns.
-- **Enterprise-Grade UI**: immersive dark mode, fluid responsiveness, and premium aesthetics.
+- **Enterprise-Grade UI**: Immersive dark mode, fluid responsiveness, and premium aesthetics.
 
 ---
 
-## 🎨 Design & Experience
+## 📸 The Visual Ecosystem
 
-Our dashboard is built with a focus on **visual excellence** and **user experience**.
+Explore the depth of our dashboard through its specialized views, each designed for maximum clarity and technical detail.
 
-| Glassmorphism Excellence | Data-Driven Insights |
-| :--- | :--- |
-| ![Stats Grid](features/resources/screenshots/dashboard_stats_grid.png) | ![Timeline Chart](features/resources/screenshots/dashboard_timeline_chart.png) |
-| **Precision Statistics**: High-level overview of success rates and test volume. | **Execution Trends**: Track your quality stability over time. |
+<table border="0">
+  <tr>
+    <td width="33%">
+      <h3>📈 Main Insights</h3>
+      <img src="features/resources/screenshots/dashboard_stats_grid.png" alt="Stats Grid" />
+      <p><i>Real-time KPIs and system health metrics at a glance.</i></p>
+    </td>
+    <td width="33%">
+      <h3>📂 Execution Archives</h3>
+      <img src="features/resources/screenshots/archives_search_results.png" alt="Archives" />
+      <p><i>Deep search and project-based grouping for historical data.</i></p>
+    </td>
+    <td width="33%">
+      <h3>📡 Endpoint Catalog</h3>
+      <img src="features/resources/screenshots/endpoints_advanced_filters.png" alt="Endpoints" />
+      <p><i>Integrated API registry with advanced infrastructure filtering.</i></p>
+    </td>
+  </tr>
+</table>
 
-### 📱 Fully Responsive
-Whether you are on a 4K monitor or a mobile device, the dashboard adapts perfectly.
-![Responsiveness](features/resources/screenshots/dashboard_responsiveness.png)
+### 🔍 Precision Run Exploration
+When a failure occurs, the **Run Detail View** provides surgical precision for diagnostics, allowing you to filter by status and view detailed scenario metrics.
+
+![Run Detail](features/resources/screenshots/run_detail_full_view.png)
 
 ---
 
@@ -47,11 +63,11 @@ Leverage Python's **Behave** to write human-readable tests while performing deep
 Custom **Page Object Model (POM)** implementation with centralized locators:
 - **YAML-driven Locators**: Maintain tests without touching code.
 - **Automatic Syncing**: Reliable element interaction with intelligent waits.
-- **Visual Proof**: Automated screenshots on failure (or on demand).
+- **Visual Proof**: Automated screenshots on every step of the validation flow.
 
-### 📊 Integrated Catalog
-Maintain a clean inventory of all your endpoints and their health status.
-![Endpoints Catalog](features/resources/screenshots/dashboard_endpoints_catalog.png)
+### 📱 Fully Responsive Experience
+Engineered for the modern workforce. Access your quality metrics from any device without compromising on the premium aesthetic.
+![Responsiveness](features/resources/screenshots/dashboard_responsiveness.png)
 
 ---
 
@@ -116,4 +132,4 @@ Our **GitHub Actions** pipeline ensures every PR is validated:
 - **Auto-Publishing**: Test reports are automatically merged and pushed back to the docs.
 
 ---
-> Created with by Carlos Camara
+> Created with by [Carlos Camara](https://github.com/carlos-camara)

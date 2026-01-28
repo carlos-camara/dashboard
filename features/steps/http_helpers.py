@@ -31,6 +31,7 @@ def get_json_path(payload: Any, path: str) -> Any:
     Minimal JSON-path via dot-notation:
       "args.foo" -> payload["args"]["foo"]
       "json.id"  -> payload["json"]["id"]
+      "0.id"     -> payload[0]["id"] (if payload is a list)
     """
     if payload is None:
         raise AssertionError("Response JSON is empty / None")
@@ -39,6 +40,14 @@ def get_json_path(payload: Any, path: str) -> Any:
     for part in path.split("."):
         if isinstance(current, dict) and part in current:
             current = current[part]
+        elif isinstance(current, list) and part.isdigit():
+            index = int(part)
+            if index < len(current):
+                current = current[index]
+            else:
+                raise AssertionError(
+                    f"JSON path index out of range: '{path}'. Index: {index}, List length: {len(current)}"
+                )
         else:
             raise AssertionError(
                 f"JSON path not found: '{path}'. Missing part: '{part}'. Current type: {type(current)}"

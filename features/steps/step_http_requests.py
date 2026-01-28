@@ -5,7 +5,8 @@ from http_helpers import (
     loads_json_or_fail,
     table_to_params,
     table_to_form_including_headings,
-    substitute_vars
+    substitute_vars,
+    parse_expected
 )
 
 # -----------------------------------------------------------------------------
@@ -56,8 +57,13 @@ def step_send_request_simple(context, method: str, path: str):
     - Uses context.default_headers if already set by a previous "I set request headers" step.
     - Stores last_request for debugging when assertions fail.
     - Tries to parse response as JSON; if parsing fails, response_json remains None.
+    - Supports ${var} substitution in the path.
     """
-    url = full_url(context.base_url, path)
+    # Resolve variables in path if present
+    context.vars = getattr(context, "vars", {}) or {}
+    resolved_path = substitute_vars(path, context.vars) if "${" in path else path
+
+    url = full_url(context.base_url, resolved_path)
     method_u = method.upper()
 
     # Store request metadata for later debugging (assertion error messages, reports, etc.)
@@ -99,7 +105,32 @@ def step_send_request_with_query(context, method: str, path: str):
     method_u = method.upper()
 
     # Convert Behave table into query parameters (dict)
-    params = table_to_params(context.table)
+    params: Dict[str, Any] = {}
+    context.vars = getattr(context, "vars", {}) or {}
+    
+    # Behave tables treat the first row as headings. 
+    # If the user provides a single row table for a single param, it becomes headings with 0 rows.
+    if context.table:
+        # 1. Check headings (often used as the first/only data row if not careful)
+        if len(context.table.headings) >= 2:
+            h_key = context.table.headings[0].strip()
+            h_val = context.table.headings[1].strip()
+            
+            # If headings don't look like labels (Field/Value), treat them as data
+            if h_key.lower() not in ("field", "key", "name", "parameter") or \
+               h_val.lower() not in ("value", "val"):
+                
+                if "${" in h_val:
+                    h_val = substitute_vars(h_val, context.vars)
+                params[h_key] = parse_expected(h_val)
+
+        # 2. Process all rows
+        for row in context.table:
+            key = row[0].strip()
+            val_raw = row[1].strip()
+            if "${" in val_raw:
+                val_raw = substitute_vars(val_raw, context.vars)
+            params[key] = parse_expected(val_raw)
 
     context.last_request = {"method": method_u, "url": url, "params": params, "json": None}
 
