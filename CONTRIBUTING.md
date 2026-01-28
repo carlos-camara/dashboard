@@ -59,7 +59,7 @@ pip install -r requirements.txt
 ## 🔄 The Contribution Workflow
 
 1. **Find an Issue**: Browse the issues or create one to discuss your proposed change.
-2. **Branching Strategy**: 
+2. **Branching Strategy**:
    - Feature: `feat/amazing-feature`
    - Fix: `fix/critical-bug`
 3. **Quality Check**:

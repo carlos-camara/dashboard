@@ -27,19 +27,25 @@ This is a **high-performance, ultra-premium QA ecosystem** designed for modern e
 
 The dashboard is structured into specialized views designed for different engineering needs.
 
-````carousel
-### 📈 Main Insights
-![Stats Grid](features/resources/screenshots/dashboard_stats_grid.png)
-*Real-time KPIs and system health metrics at a glance.*
-<!-- slide -->
-### 📂 Execution Archives
-![Archives](features/resources/screenshots/archives_search_results.png)
-*Historical data exploration with project-based grouping.*
-<!-- slide -->
-### 📡 Endpoint Catalog
-![Endpoints](features/resources/screenshots/endpoints_advanced_filters.png)
-*Technical registry of all infrastructure endpoints and their status.*
-````
+<table border="0">
+  <tr>
+    <td width="33%" align="center">
+      <h3>📈 Main Insights</h3>
+      <img src="features/resources/screenshots/dashboard_stats_grid.png" alt="Stats Grid" />
+      <p><i>Real-time KPIs and system health metrics at a glance.</i></p>
+    </td>
+    <td width="33%" align="center">
+      <h3>📂 Execution Archives</h3>
+      <img src="features/resources/screenshots/archives_search_results.png" alt="Archives" />
+      <p><i>Historical data exploration with project-based grouping.</i></p>
+    </td>
+    <td width="33%" align="center">
+      <h3>📡 Endpoint Catalog</h3>
+      <img src="features/resources/screenshots/endpoints_advanced_filters.png" alt="Endpoints" />
+      <p><i>Technical registry of all infrastructure endpoints and their status.</i></p>
+    </td>
+  </tr>
+</table>
 
 ### 🔍 Surgical Diagnostics
 When a test fails, the **Run Detail View** allows you to drill down into specific failures, viewing headers, bodies, and visual proof simultaneously.
@@ -132,4 +138,4 @@ Our **GitHub Actions** pipeline orchestrates the entire lifecycle:
 > Use the `workflow_dispatch` event to manually trigger a full suite validation from the GitHub UI.
 
 ---
-> Dashboard designed with ❤️ for the QA community.
+> Created with by [Carlos Camara](https://github.com/carlos-camara)
