@@ -1,0 +1,66 @@
+name: Upload Test Results
+
+on:
+  workflow_run:
+    workflows: ["Unified Test Suite"]
+    types:
+      - completed
+
+jobs:
+  upload-results:
+    name: Merge and Commit Reports
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_branch }}
+          fetch-depth: 0
+
+      - name: Download API Reports
+        uses: actions/download-artifact@v4
+        with:
+          name: api-reports
+          path: temp_reports/api
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Download GUI Reports
+        uses: actions/download-artifact@v4
+        with:
+          name: gui-reports
+          path: temp_reports/gui
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Download GUI Screenshots
+        uses: actions/download-artifact@v4
+        with:
+          name: gui-screenshots
+          path: temp_reports/screenshots
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Merge and Commit Results
+        run: |
+          mkdir -p reports
+          cp -r temp_reports/api/* reports/ || true
+          cp -r temp_reports/gui/* reports/ || true
+          
+          mkdir -p features/resources/screenshots
+          cp temp_reports/screenshots/*.png features/resources/screenshots/ || true
+          
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add reports/
+          git add features/resources/screenshots/*.png
+          
+          if git diff --staged --quiet; then
+            echo "No changes in reports or screenshots to commit."
+          else
+            git commit -m "docs: auto-generate integrated test reports and screenshots [skip ci]"
+            git push origin "HEAD:${{ github.event.workflow_run.head_branch }}"
+          fi

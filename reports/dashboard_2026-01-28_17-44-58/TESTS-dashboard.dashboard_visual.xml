@@ -1,0 +1,280 @@
+<testsuite name="dashboard.dashboard_visual.Dashboard Visual Validation" tests="12" errors="0" failures="0" skipped="0" time="50.240606" timestamp="2026-01-28T17:50:31.546416" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Dashboard Loads Successfully" status="passed" time="5.443169"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @navigation
+  Scenario: Verify Dashboard Loads Successfully
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.955s
+    When I wait for 2 seconds ... passed in 2.001s
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.231s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then the page title should be "QA Hub - Execution Dashboard" ... passed in 0.012s
+    And I should see the text "Dashboard Cluster" ... passed in 0.040s
+    And I take a screenshot named "dashboard_home" ... passed in 0.202s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_home
+   Location: features\resources\screenshots\dashboard_home.png
+   <img src='file:///features\resources\screenshots\dashboard_home.png' width='800' alt='dashboard_home' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Dashboard Statistics Cards Are Visible" status="passed" time="2.49332"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @components @stats
+  Scenario: Verify Dashboard Statistics Cards Are Visible
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.180s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then I should see the text "Pass Rate" ... passed in 0.027s
+    And I should see the text "Total Executions" ... passed in 0.029s
+    And I should see the text "Avg Latency" ... passed in 0.030s
+    And I take a screenshot named "dashboard_stats_cards" ... passed in 0.226s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_stats_cards
+   Location: features\resources\screenshots\dashboard_stats_cards.png
+   <img src='file:///features\resources\screenshots\dashboard_stats_cards.png' width='800' alt='dashboard_stats_cards' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Timeline Chart Is Present" status="passed" time="2.475167"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @components @charts
+  Scenario: Verify Timeline Chart Is Present
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.236s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then I should see the text "Signal Velocity" ... passed in 0.029s
+    And I take a screenshot named "dashboard_timeline_chart" ... passed in 0.210s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_timeline_chart
+   Location: features\resources\screenshots\dashboard_timeline_chart.png
+   <img src='file:///features\resources\screenshots\dashboard_timeline_chart.png' width='800' alt='dashboard_timeline_chart' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Recent Runs Section" status="passed" time="2.477537"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @components @runs
+  Scenario: Verify Recent Runs Section
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.229s
+    When I wait for 2 seconds ... passed in 2.002s
+    Then I should see the text "Sector Integrity" ... passed in 0.034s
+    And I take a screenshot named "dashboard_recent_runs" ... passed in 0.213s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_recent_runs
+   Location: features\resources\screenshots\dashboard_recent_runs.png
+   <img src='file:///features\resources\screenshots\dashboard_recent_runs.png' width='800' alt='dashboard_recent_runs' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Endpoints Catalog Section" status="passed" time="3.487987"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @components @endpoints
+  Scenario: Verify Endpoints Catalog Section
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.219s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I scroll to the bottom of the page ... passed in 0.525s
+    Then I should see the text "Latency Anomalies" ... passed in 0.040s
+    And I take a screenshot named "dashboard_endpoints_catalog" ... passed in 0.195s
+    When I scroll to the top of the page ... passed in 0.508s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_endpoints_catalog
+   Location: features\resources\screenshots\dashboard_endpoints_catalog.png
+   <img src='file:///features\resources\screenshots\dashboard_endpoints_catalog.png' width='800' alt='dashboard_endpoints_catalog' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Sync Button Interaction" status="passed" time="4.568409"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @interaction @sync
+  Scenario: Verify Sync Button Interaction
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.230s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I click on the sync button ... passed in 0.129s
+    And I wait for 2 seconds ... passed in 2.001s
+    Then I take a screenshot named "dashboard_after_sync" ... passed in 0.207s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_after_sync
+   Location: features\resources\screenshots\dashboard_after_sync.png
+   <img src='file:///features\resources\screenshots\dashboard_after_sync.png' width='800' alt='dashboard_after_sync' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Time Filter Buttons" status="passed" time="9.524751"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @interaction @filters
+  Scenario: Verify Time Filter Buttons
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.249s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I apply the "7 Days" time filter ... passed in 0.080s
+    And I wait for 1 seconds ... passed in 1.001s
+    Then I take a screenshot named "dashboard_7days_filter" ... passed in 0.202s
+    When I apply the "30 Days" time filter ... passed in 0.114s
+    And I wait for 1 seconds ... passed in 1.001s
+    Then I take a screenshot named "dashboard_30days_filter" ... passed in 0.206s
+    When I export the report ... passed in 0.126s
+    And I wait for 1 seconds ... passed in 1.002s
+    Then I take a screenshot named "dashboard_export_action" ... passed in 3.540s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_7days_filter
+   Location: features\resources\screenshots\dashboard_7days_filter.png
+   <img src='file:///features\resources\screenshots\dashboard_7days_filter.png' width='800' alt='dashboard_7days_filter' />
+
+[SCREENSHOT] dashboard_30days_filter
+   Location: features\resources\screenshots\dashboard_30days_filter.png
+   <img src='file:///features\resources\screenshots\dashboard_30days_filter.png' width='800' alt='dashboard_30days_filter' />
+
+[SCREENSHOT] dashboard_export_action
+   Location: features\resources\screenshots\dashboard_export_action.png
+   <img src='file:///features\resources\screenshots\dashboard_export_action.png' width='800' alt='dashboard_export_action' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Capture Full Dashboard View" status="passed" time="5.599227"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @fullpage @visual
+  Scenario: Capture Full Dashboard View
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.390s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I wait for 3 seconds ... passed in 3.002s
+    Then I take a full page screenshot named "dashboard_complete_view" ... passed in 0.206s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] Full page: dashboard_complete_view
+   Location: features\resources\screenshots\dashboard_complete_view_fullpage.png
+   <img src='file:///features\resources\screenshots\dashboard_complete_view_fullpage.png' width='800' alt='dashboard_complete_view' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Dashboard on Mobile Viewport" status="passed" time="2.497814"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @responsive @mobile
+  Scenario: Verify Dashboard on Mobile Viewport
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.245s
+    When I wait for 2 seconds ... passed in 2.002s
+    Then I should see the text "QA Hub" ... passed in 0.047s
+    And I take a screenshot named "dashboard_mobile_view" ... passed in 0.204s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_mobile_view
+   Location: features\resources\screenshots\dashboard_mobile_view.png
+   <img src='file:///features\resources\screenshots\dashboard_mobile_view.png' width='800' alt='dashboard_mobile_view' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Navigate to Run Details" status="passed" time="4.628954"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @navigation @runs_detail
+  Scenario: Navigate to Run Details
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.167s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I expand the "Recent Runs" section ... passed in 0.090s
+    And I wait for 2 seconds ... passed in 2.001s
+    Then I take a screenshot named "dashboard_runs_section_expanded" ... passed in 0.371s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_runs_section_expanded
+   Location: features\resources\screenshots\dashboard_runs_section_expanded.png
+   <img src='file:///features\resources\screenshots\dashboard_runs_section_expanded.png' width='800' alt='dashboard_runs_section_expanded' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Dashboard Header Elements" status="passed" time="2.555853"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @validation @header
+  Scenario: Verify Dashboard Header Elements
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.309s
+    When I wait for 2 seconds ... passed in 2.002s
+    Then I should see the text "QA Hub" ... passed in 0.028s
+    And I should see the text "Execution Dashboard" ... passed in 0.027s
+    And I take a screenshot named "dashboard_header" ... passed in 0.191s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_header
+   Location: features\resources\screenshots\dashboard_header.png
+   <img src='file:///features\resources\screenshots\dashboard_header.png' width='800' alt='dashboard_header' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Dashboard Footer Elements" status="passed" time="4.488418"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @validation @footer
+  Scenario: Verify Dashboard Footer Elements
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.245s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I scroll to the bottom of the page ... passed in 0.536s
+    And I wait for 1 seconds ... passed in 1.001s
+    Then I take a screenshot named "dashboard_footer" ... passed in 0.199s
+    When I scroll to the top of the page ... passed in 0.507s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_footer
+   Location: features\resources\screenshots\dashboard_footer.png
+   <img src='file:///features\resources\screenshots\dashboard_footer.png' width='800' alt='dashboard_footer' />
+
+]]>
+</system-out></testcase></testsuite>

@@ -173,6 +173,16 @@ export const api = {
     return { found: false };
   },
 
+  getProjectSpec: async (projectName: string): Promise<any> => {
+    try {
+      const response = await fetch(`${BASE_URL}/spec/project/${encodeURIComponent(projectName)}`);
+      if (response.ok) return await response.json();
+    } catch (e) {
+      console.error('Error fetching project spec:', e);
+    }
+    return { found: false };
+  },
+
   uploadSpec: async (method: string, path: string, file: File): Promise<boolean> => {
     try {
       const formData = new FormData();

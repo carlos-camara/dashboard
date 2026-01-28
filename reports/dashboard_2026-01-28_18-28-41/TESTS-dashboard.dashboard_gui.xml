@@ -1,0 +1,302 @@
+<testsuite name="dashboard.dashboard_gui.Comprehensive Dashboard GUI Validation" tests="7" errors="1" failures="6" skipped="0" time="148.201512" timestamp="2026-01-28T18:38:28.066223" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.dashboard_gui.Comprehensive Dashboard GUI Validation" name="Verify Header and Status Ticker" status="failed" time="19.120466"><failure type="AssertionError" message="Text 'Dashboard Cluster' not found or not visible on page">
+<![CDATA[
+Failing step: And I should see the text "Dashboard Cluster" ... failed in 16.626s
+Location: features/dashboard/dashboard_gui.feature:14
+Assertion Failed: Text 'Dashboard Cluster' not found or not visible on page
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Header and Status Ticker
+   Failed Step: I should see the text "Dashboard Cluster"
+   Location: features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Header_and_Status_Ticker_I_should_see_the_text_"Dashboa.png
+   <img src='file:///C:\Users\Carlos\Desktop\test\dashboard\features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Header_and_Status_Ticker_I_should_see_the_text_"Dashboa.png' width='800' alt='Failure Screenshot' />]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @structure @header
+  Scenario: Verify Header and Status Ticker
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.481s
+    When I wait for 2 seconds ... passed in 2.002s
+    Then the page title should be "QA Hub - Execution Dashboard" ... passed in 0.012s
+    And I should see the text "Dashboard Cluster" ... failed in 16.626s
+    And the system status should be valid ... skipped in 0.000s
+    And I take a screenshot named "dashboard_header_status" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Header and Status Ticker
+   Failed Step: I should see the text "Dashboard Cluster"
+   Location: features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Header_and_Status_Ticker_I_should_see_the_text_"Dashboa.png
+   <img src='file:///C:\Users\Carlos\Desktop\test\dashboard\features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Header_and_Status_Ticker_I_should_see_the_text_"Dashboa.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_gui.Comprehensive Dashboard GUI Validation" name="Verify Statistics Cards" status="failed" time="18.741373"><failure type="AssertionError" message="Text 'System Health' not found or not visible on page">
+<![CDATA[
+Failing step: Then I should see the text "System Health" ... failed in 16.696s
+Location: features/dashboard/dashboard_gui.feature:20
+Assertion Failed: Text 'System Health' not found or not visible on page
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Statistics Cards
+   Failed Step: I should see the text "System Health"
+   Location: features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Statistics_Cards_I_should_see_the_text_"System_.png
+   <img src='file:///C:\Users\Carlos\Desktop\test\dashboard\features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Statistics_Cards_I_should_see_the_text_"System_.png' width='800' alt='Failure Screenshot' />]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @components @stats
+  Scenario: Verify Statistics Cards
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.045s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then I should see the text "System Health" ... failed in 16.696s
+    And I should see the text "Total Executions" ... skipped in 0.000s
+    And I should see the text "Pass Rate" ... skipped in 0.000s
+    And I should see the text "Avg Latency" ... skipped in 0.000s
+    And I take a screenshot of the "stats grid" named "dashboard_stats_grid" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Statistics Cards
+   Failed Step: I should see the text "System Health"
+   Location: features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Statistics_Cards_I_should_see_the_text_"System_.png
+   <img src='file:///C:\Users\Carlos\Desktop\test\dashboard\features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Statistics_Cards_I_should_see_the_text_"System_.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_gui.Comprehensive Dashboard GUI Validation" name="Verify Timeline Controls" status="failed" time="18.666068"><failure type="AssertionError" message="Text 'Signal Velocity' not found or not visible on page">
+<![CDATA[
+Failing step: Then I should see the text "Signal Velocity" ... failed in 16.618s
+Location: features/dashboard/dashboard_gui.feature:28
+Assertion Failed: Text 'Signal Velocity' not found or not visible on page
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Timeline Controls
+   Failed Step: I should see the text "Signal Velocity"
+   Location: features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Timeline_Controls_I_should_see_the_text_"Signal_.png
+   <img src='file:///C:\Users\Carlos\Desktop\test\dashboard\features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Timeline_Controls_I_should_see_the_text_"Signal_.png' width='800' alt='Failure Screenshot' />]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @components @charts
+  Scenario: Verify Timeline Controls
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.047s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then I should see the text "Signal Velocity" ... failed in 16.618s
+    When I switch the chart view to "Volume" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I take a screenshot of the "chart" named "dashboard_chart_volume" ... skipped in 0.000s
+    When I switch the chart view to "Success" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I take a screenshot of the "chart" named "dashboard_chart_success" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Timeline Controls
+   Failed Step: I should see the text "Signal Velocity"
+   Location: features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Timeline_Controls_I_should_see_the_text_"Signal_.png
+   <img src='file:///C:\Users\Carlos\Desktop\test\dashboard\features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Timeline_Controls_I_should_see_the_text_"Signal_.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_gui.Comprehensive Dashboard GUI Validation" name="Verify Incident and Sector Lists" status="failed" time="18.61895"><failure type="AssertionError" message="Text 'Sector Integrity' not found or not visible on page">
+<![CDATA[
+Failing step: Then I should see the text "Sector Integrity" ... failed in 16.579s
+Location: features/dashboard/dashboard_gui.feature:39
+Assertion Failed: Text 'Sector Integrity' not found or not visible on page
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Incident and Sector Lists
+   Failed Step: I should see the text "Sector Integrity"
+   Location: features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Incident_and_Sector_Lists_I_should_see_the_text_"Sector_.png
+   <img src='file:///C:\Users\Carlos\Desktop\test\dashboard\features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Incident_and_Sector_Lists_I_should_see_the_text_"Sector_.png' width='800' alt='Failure Screenshot' />]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @components @lists
+  Scenario: Verify Incident and Sector Lists
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.039s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then I should see the text "Sector Integrity" ... failed in 16.579s
+    And I should see at least 1 elements with class "bg-slate-950/50" ... skipped in 0.000s
+    Then I should see the text "Incident Taxonomy" ... skipped in 0.000s
+    And I take a screenshot of the "lists panel" named "dashboard_lists_panels" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Incident and Sector Lists
+   Failed Step: I should see the text "Sector Integrity"
+   Location: features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Incident_and_Sector_Lists_I_should_see_the_text_"Sector_.png
+   <img src='file:///C:\Users\Carlos\Desktop\test\dashboard\features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Incident_and_Sector_Lists_I_should_see_the_text_"Sector_.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_gui.Comprehensive Dashboard GUI Validation" name="Verify Endpoints Catalog and Scroll" status="failed" time="35.730778"><failure type="AssertionError" message="Text 'Latency Anomalies' not found or not visible on page">
+<![CDATA[
+Failing step: Then I should see the text "Latency Anomalies" ... failed in 16.570s
+Location: features/dashboard/dashboard_gui.feature:47
+Assertion Failed: Text 'Latency Anomalies' not found or not visible on page
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Endpoints Catalog and Scroll
+   Failed Step: I should see the text "Latency Anomalies"
+   Location: features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Endpoints_Catalog_and_Scroll_I_should_see_the_text_"Latency.png
+   <img src='file:///C:\Users\Carlos\Desktop\test\dashboard\features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Endpoints_Catalog_and_Scroll_I_should_see_the_text_"Latency.png' width='800' alt='Failure Screenshot' />]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @components @endpoints
+  Scenario: Verify Endpoints Catalog and Scroll
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.044s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I scroll to the bottom of the page ... passed in 17.116s
+    Then I should see the text "Latency Anomalies" ... failed in 16.570s
+    And I take a screenshot of the "endpoints footer" named "dashboard_footer_area" ... skipped in 0.000s
+    When I scroll to the top of the page ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Endpoints Catalog and Scroll
+   Failed Step: I should see the text "Latency Anomalies"
+   Location: features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Endpoints_Catalog_and_Scroll_I_should_see_the_text_"Latency.png
+   <img src='file:///C:\Users\Carlos\Desktop\test\dashboard\features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Endpoints_Catalog_and_Scroll_I_should_see_the_text_"Latency.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_gui.Comprehensive Dashboard GUI Validation" name="Verify Global Actions and Filters" status="failed" time="18.680214"><error type="TimeoutException" message="Message: &#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff734faa235&#10;&#09;0x7ff734d02630&#10;&#09;0x7ff734a916dd&#10;&#09;0x7ff734aea27e&#10;&#09;0x7ff734aea58c&#10;&#09;0x7ff734b3ed77&#10;&#09;0x7ff734b3baba&#10;&#09;0x7ff734adb0ed&#10;&#09;0x7ff734adbf63&#10;&#09;0x7ff734fd5d60&#10;&#09;0x7ff734fcfe8a&#10;&#09;0x7ff734ff1005&#10;&#09;0x7ff734d1d71e&#10;&#09;0x7ff734d24e1f&#10;&#09;0x7ff734d0b7c4&#10;&#09;0x7ff734d0b97f&#10;&#09;0x7ff734cf18e8&#10;&#09;0x7ff916ef7374&#10;&#09;0x7ff91751cc91&#10;">
+<![CDATA[
+Failing step: When I apply the "7 Days" time filter ... failed in 16.636s
+Location: features/dashboard/dashboard_gui.feature:55
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "features\steps\step_gui_interactions.py", line 69, in step_apply_7_days_filter
+    page.click(page.FILTER_7_DAYS)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\features\page_objects\base_page.py", line 95, in click
+    element = self.wait.until(EC.element_to_be_clickable(locator))
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff734faa235
+	0x7ff734d02630
+	0x7ff734a916dd
+	0x7ff734aea27e
+	0x7ff734aea58c
+	0x7ff734b3ed77
+	0x7ff734b3baba
+	0x7ff734adb0ed
+	0x7ff734adbf63
+	0x7ff734fd5d60
+	0x7ff734fcfe8a
+	0x7ff734ff1005
+	0x7ff734d1d71e
+	0x7ff734d24e1f
+	0x7ff734d0b7c4
+	0x7ff734d0b97f
+	0x7ff734cf18e8
+	0x7ff916ef7374
+	0x7ff91751cc91
+
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Global Actions and Filters
+   Failed Step: I apply the "7 Days" time filter
+   Location: features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Global_Actions_and_Filters_I_apply_the_"7_Days"_time_filt.png
+   <img src='file:///C:\Users\Carlos\Desktop\test\dashboard\features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Global_Actions_and_Filters_I_apply_the_"7_Days"_time_filt.png' width='800' alt='Failure Screenshot' />]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+
+  @actions @filters
+  Scenario: Verify Global Actions and Filters
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.043s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I apply the "7 Days" time filter ... failed in 16.636s
+    And I wait for 1 seconds ... skipped in 0.000s
+    When I apply the "30 Days" time filter ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    When I export the report ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I take a screenshot named "dashboard_actions_log" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Global Actions and Filters
+   Failed Step: I apply the "7 Days" time filter
+   Location: features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Global_Actions_and_Filters_I_apply_the_"7_Days"_time_filt.png
+   <img src='file:///C:\Users\Carlos\Desktop\test\dashboard\features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Global_Actions_and_Filters_I_apply_the_"7_Days"_time_filt.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_gui.Comprehensive Dashboard GUI Validation" name="Verify Mobile Viewport Layout" status="failed" time="18.643663"><failure type="AssertionError" message="Text 'Dashboard Cluster' not found or not visible on page">
+<![CDATA[
+Failing step: Then I should see the text "Dashboard Cluster" ... failed in 16.600s
+Location: features/dashboard/dashboard_gui.feature:66
+Assertion Failed: Text 'Dashboard Cluster' not found or not visible on page
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Mobile Viewport Layout
+   Failed Step: I should see the text "Dashboard Cluster"
+   Location: features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Mobile_Viewport_Layout_I_should_see_the_text_"Dashboa.png
+   <img src='file:///C:\Users\Carlos\Desktop\test\dashboard\features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Mobile_Viewport_Layout_I_should_see_the_text_"Dashboa.png' width='800' alt='Failure Screenshot' />]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @responsive @mobile
+  Scenario: Verify Mobile Viewport Layout
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.042s
+    When I wait for 2 seconds ... passed in 2.002s
+    Then I should see the text "Dashboard Cluster" ... failed in 16.600s
+    And I take a screenshot named "dashboard_responsiveness" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Mobile Viewport Layout
+   Failed Step: I should see the text "Dashboard Cluster"
+   Location: features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Mobile_Viewport_Layout_I_should_see_the_text_"Dashboa.png
+   <img src='file:///C:\Users\Carlos\Desktop\test\dashboard\features\resources\screenshots\2026-01-28_18-35-59\FAILED_Verify_Mobile_Viewport_Layout_I_should_see_the_text_"Dashboa.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase></testsuite>

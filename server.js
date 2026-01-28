@@ -8,6 +8,7 @@ import xml2js from 'xml2js';
 const { Parser } = xml2js;
 import dotenv from 'dotenv';
 import multer from 'multer';
+import yaml from 'js-yaml';
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ const REPORTS_DIR = "reports";
 // Use absolute path
 const SWAGGERS_DIR = path.join(__dirname, "swaggers");
 const UPLOADS_DIR = path.join(__dirname, "uploads");
+const SCREENSHOTS_DIR = path.join(__dirname, "features", "resources", "screenshots");
 const DB_PATH = "qa_hub.db";
 
 if (!fs.existsSync(UPLOADS_DIR)) {
@@ -31,7 +33,63 @@ const upload = multer({ dest: UPLOADS_DIR });
 app.use(cors());
 app.use(express.json());
 
+// Serve screenshots statically
+// Access via: http://localhost:3001/screenshots/filename.png
+app.use('/screenshots', express.static(SCREENSHOTS_DIR));
+
 // ... (code omitted) ...
+
+// NEW: Get project-level Swagger file (e.g., dashboard.yaml, petstore.json)
+app.get("/api/spec/project/:projectName", (req, res) => {
+    const { projectName } = req.params;
+    if (!projectName) return res.status(400).json({ error: "Missing project name" });
+
+    // Try both .yaml and .json extensions
+    const extensions = ['.yaml', '.yml', '.json'];
+    let filePath = null;
+    let fileExt = null;
+
+    for (const ext of extensions) {
+        const testPath = path.join(SWAGGERS_DIR, `${projectName}${ext}`);
+        if (fs.existsSync(testPath)) {
+            filePath = testPath;
+            fileExt = ext;
+            break;
+        }
+    }
+
+    console.log(`[Project Spec Lookup] Project: ${projectName}`);
+    console.log(`[Project Spec Lookup] File Path: ${filePath}`);
+
+    if (filePath) {
+        try {
+            const content = fs.readFileSync(filePath, 'utf8');
+            let parsed;
+
+            if (fileExt === '.json') {
+                parsed = JSON.parse(content);
+            } else {
+                // Parse YAML
+                parsed = yaml.load(content);
+            }
+
+            return res.json({ found: true, content: parsed });
+        } catch (e) {
+            console.error(`[Project Spec Lookup] Parse error for ${filePath}:`, e);
+            return res.status(500).json({ error: "Failed to parse spec file" });
+        }
+    } else {
+        console.log(`[Project Spec Lookup] Not found. Available files in ${SWAGGERS_DIR}:`);
+        try {
+            const files = fs.readdirSync(SWAGGERS_DIR);
+            console.log(files.join(", "));
+        } catch (e) {
+            console.log("Could not list directory.");
+        }
+    }
+
+    res.json({ found: false });
+});
 
 app.get("/api/spec", (req, res) => {
     const { method, path: epPath } = req.query;

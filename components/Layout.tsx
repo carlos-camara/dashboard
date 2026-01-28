@@ -17,9 +17,14 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab, setActiveTab, onNe
   ];
 
   return (
-    <div className="flex h-screen overflow-hidden bg-slate-950 text-slate-200">
+    <div className="flex h-screen overflow-hidden bg-slate-950 text-slate-200 relative selection:bg-indigo-500/30 selection:text-indigo-200">
+      {/* Global Dynamic Background */}
+      <div className="fixed inset-0 bg-slate-950 pointer-events-none z-0"></div>
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(99,102,241,0.15),transparent_50%)] pointer-events-none z-0"></div>
+      <div className="fixed inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] pointer-events-none mix-blend-overlay z-0"></div>
+
       {/* Sidebar */}
-      <aside className="w-64 border-r border-slate-800 bg-slate-900 flex flex-col no-print">
+      <aside className="w-64 border-r border-slate-800 bg-slate-900/50 backdrop-blur-xl flex flex-col no-print z-40 relative">
         <div className="p-6 flex items-center space-x-3 border-b border-slate-800">
           <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/20">
             Q
