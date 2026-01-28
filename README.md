@@ -1,8 +1,7 @@
+[![Lint (devel)](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml?query=branch%3Adevel)
+[![Tests (devel)](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml?query=branch%3Adevel)
 # QA Hub: Automation Dashboard
 > **The ultimate command center for Multi-Project Test Orchestration & Validation.**
-
-[![Tests Status](https://img.shields.io/github/actions/workflow/status/carlos-camara/dashboard/test_suite.yml?branch=main&style=for-the-badge&logo=github-actions&logoColor=white&label=Tests)](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml?query=branch%3Amain)
-[![Linter Status](https://img.shields.io/github/actions/workflow/status/carlos-camara/dashboard/lint.yml?branch=main&style=for-the-badge&logo=github-actions&logoColor=white&label=Linter)](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml?query=branch%3Amain)
 [![Python Version](https://img.shields.io/badge/Python-3.11%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Node Version](https://img.shields.io/badge/Node.js-20%2B-green?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 

@@ -93,51 +93,9 @@ jobs:
           name: gui-reports
           path: reports/
 
-  publish-reports:
-    name: Publish Integrated Reports
-    needs: [api-tests, gui-tests]
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Upload GUI Screenshots
+        uses: actions/upload-artifact@v4
         with:
-          fetch-depth: 0
+          name: gui-screenshots
+          path: features/resources/screenshots/*.png
 
-      - name: Download API Reports
-        uses: actions/download-artifact@v4
-        with:
-          name: api-reports
-          path: temp_reports/api
-
-      - name: Download GUI Reports
-        uses: actions/download-artifact@v4
-        with:
-          name: gui-reports
-          path: temp_reports/gui
-
-      - name: Merge and Commit Reports
-        env:
-          HEAD_REF: ${{ github.head_ref }}
-        run: |
-          mkdir -p reports
-          cp -r temp_reports/api/* reports/ || true
-          cp -r temp_reports/gui/* reports/ || true
-          
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add reports/
-          if git diff --staged --quiet; then
-            echo "No changes in reports to commit."
-          else
-            git commit -m "docs: auto-generate integrated test reports [skip ci]"
-            git push origin "HEAD:$HEAD_REF"
-          fi
-
-      - name: Publish Test Report (JUnit)
-        uses: dorny/test-reporter@v1
-        with:
-          name: Unified Test Report
-          path: reports/**/*.xml
-          reporter: java-junit
-          fail-on-error: false
