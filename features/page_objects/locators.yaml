@@ -1,0 +1,94 @@
+dashboard:
+  header:
+    title:
+      by: xpath
+      value: "//h1" # "Command Center"
+    subtitle:
+      by: xpath
+      value: "//*[contains(normalize-space(.), 'Dashboard Cluster')]"
+    qa_hub_text:
+        by: xpath
+        value: "//*[contains(normalize-space(.), 'Command Center')]"
+  
+  stats:
+    pass_rate:
+      by: xpath
+      value: "//*[contains(normalize-space(.), 'Pass Rate')]"
+    total_runs:
+      by: xpath
+      value: "//*[contains(normalize-space(.), 'Total Executions')]"
+    avg_duration:
+      by: xpath
+      value: "//*[contains(normalize-space(.), 'Avg Latency')]"
+    passed_card:
+        by: xpath
+        value: "//*[contains(normalize-space(.), 'System Health')]"
+    failed_card:
+        by: xpath
+        value: "//*[contains(normalize-space(.), 'Incident Taxonomy')]"
+
+  status_ticker:
+    bar:
+      by: css
+      value: "div.animate-marquee"
+    system_status:
+      by: xpath
+      value: "//span[contains(@class, 'tracking-[0.2em]')]" # Matches specifically the status span
+
+  timeline:
+    heading:
+      by: xpath
+      value: "//*[contains(normalize-space(.), 'Signal Velocity')]"
+    chart:
+      by: css
+      value: ".recharts-wrapper"
+    toggle_success:
+       by: xpath
+       value: "//button[contains(normalize-space(.), 'Stability')]"
+    toggle_volume:
+       by: xpath
+       value: "//button[contains(normalize-space(.), 'Volume')]"
+
+  recent_runs:
+    heading:
+      by: xpath
+      value: "//*[contains(normalize-space(.), 'Sector Integrity')]"
+    section:
+        by: xpath
+        value: "//div[contains(., 'Sector Integrity')]"
+    list_item:
+        by: xpath
+        value: "//div[contains(., 'Sector Integrity')]/..//div[contains(@class, 'bg-slate-950/50')]"
+
+  incidents:
+    heading:
+       by: xpath
+       value: "//*[contains(normalize-space(.), 'Incident Taxonomy')]"
+    list_item:
+       by: xpath
+       value: "//div[contains(., 'Incident Taxonomy')]/..//div[contains(@class, 'bg-slate-950/30')]"
+
+  endpoints:
+    heading:
+      by: xpath
+      value: "//*[contains(normalize-space(.), 'Latency Anomalies')]"
+    catalog:
+      by: xpath
+      value: "//div[contains(., 'Latency Anomalies')]"
+
+  actions:
+    sync_button:
+      by: xpath
+      value: "//button[@aria-label='Sync Data']"
+    filter_7_days:
+      by: xpath
+      value: "//button[@aria-label='7D Window']"
+    filter_30_days:
+      by: xpath
+      value: "//button[@aria-label='30D Window']"
+    filter_all_time:
+      by: xpath
+      value: "//button[@aria-label='Export Report']" # Mapping to export as temp fallback or remove
+    export_button:
+      by: xpath
+      value: "//button[@aria-label='Export Report']"

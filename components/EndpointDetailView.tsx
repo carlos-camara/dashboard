@@ -174,11 +174,21 @@ const EndpointDetailView: React.FC<EndpointDetailViewProps> = ({ endpoint, onBac
     const [viewMode, setViewMode] = useState<'schema' | 'example'>('schema');
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    // Fetch linked swagger spec
+    // Fetch linked swagger spec - NOW USING PROJECT-LEVEL SPEC
     useEffect(() => {
-        api.getSpec(endpoint.method, endpoint.path).then(res => {
+        // First try to get project-level spec (e.g., dashboard.yaml)
+        api.getProjectSpec(endpoint.service).then(res => {
             if (res.found) {
                 setSpec(res.content);
+            } else {
+                // Fallback to individual endpoint spec
+                api.getSpec(endpoint.method, endpoint.path).then(fallbackRes => {
+                    if (fallbackRes.found) {
+                        setSpec(fallbackRes.content);
+                    }
+                    setLoadingSpec(false);
+                });
+                return;
             }
             setLoadingSpec(false);
         });

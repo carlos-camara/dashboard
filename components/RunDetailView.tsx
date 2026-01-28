@@ -123,14 +123,15 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
               </span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-black text-white tracking-tighter leading-none">
+            <h1 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-200 to-indigo-400 tracking-tighter leading-tight drop-shadow-2xl">
               {run.name}
             </h1>
 
-            <div className="flex flex-wrap gap-2 pt-2">
+            <div className="flex flex-wrap gap-3 pt-4">
               {run.tags && run.tags.map(tag => (
-                <span key={tag} className="flex items-center text-[10px] font-bold bg-indigo-500/10 text-indigo-400 px-3 py-1.5 rounded-lg border border-indigo-500/20">
-                  <Tag size={12} className="mr-1.5" /> {tag}
+                <span key={tag} className="inline-flex items-center px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-black text-slate-300 uppercase tracking-wider shadow-sm backdrop-blur-md">
+                  <Tag size={12} className="mr-2 text-indigo-400" />
+                  {tag.replace(/^@/, '')}
                 </span>
               ))}
             </div>
@@ -245,9 +246,17 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
             <button
               key={tag}
               onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
-              className={`px-3 py-1.5 rounded-lg text-[10px] font-black uppercase border transition-all whitespace-nowrap ${selectedTag === tag ? 'bg-indigo-600 border-indigo-500 text-white' : 'bg-slate-900 border-slate-800 text-slate-500 hover:text-slate-300'}`}
+              className={`
+                group relative px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-300
+                ${selectedTag === tag
+                  ? 'bg-indigo-600 shadow-[0_0_20px_-5px_rgba(79,70,229,0.5)] text-white scale-105'
+                  : 'bg-slate-900/50 hover:bg-slate-800 text-slate-400 hover:text-indigo-400 border border-slate-800 hover:border-indigo-500/30'}
+              `}
             >
-              {tag}
+              <span className="relative z-10 flex items-center">
+                <Tag size={12} className={`mr-2 transition-transform duration-300 ${selectedTag === tag ? 'rotate-12' : 'group-hover:rotate-12'}`} />
+                {tag}
+              </span>
             </button>
           ))}
         </div>
@@ -262,7 +271,7 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
             acc[feat].push(s);
             return acc;
           }, {})
-        ).map(([featureName, featureScenarios]) => (
+        ).map(([featureName, featureScenarios]: [string, Scenario[]]) => (
           <div key={featureName} className="space-y-4">
             <div className="flex items-center space-x-4">
               <div className="h-2 w-2 rounded-full bg-slate-700"></div>
@@ -274,7 +283,7 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
               {featureScenarios.map((scenario) => {
                 const isExpanded = expandedScenarios.has(scenario.id);
                 return (
-                  <div key={scenario.id} className={`group bg-slate-900/30 border transition-all duration-300 rounded-3xl overflow-hidden ${isExpanded ? 'border-indigo-500/50 shadow-[0_0_40px_-10px_rgba(99,102,241,0.1)]' : 'border-slate-800/60 hover:border-slate-700 hover:bg-slate-900/50'}`}>
+                  <div key={scenario.id} className={`group bg-slate-900/40 border transition-all duration-500 rounded-3xl overflow-hidden ${isExpanded ? 'border-indigo-500/50 shadow-[0_0_50px_-10px_rgba(99,102,241,0.2)] bg-slate-900/60' : 'border-slate-800/60 hover:border-indigo-500/30 hover:shadow-[0_0_30px_-10px_rgba(99,102,241,0.1)] hover:bg-slate-900/60'}`}>
                     {/* Scenario Header Card */}
                     <div
                       onClick={() => toggleExpand(scenario.id)}
@@ -286,8 +295,12 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
                         </div>
 
                         <div>
-                          <div className="flex flex-wrap gap-2 mb-2">
-                            {scenario.tags?.map(t => <span key={t} className="text-[9px] font-black text-slate-500 uppercase tracking-wider bg-slate-950 px-2 py-0.5 rounded border border-slate-800">{t}</span>)}
+                          <div className="flex flex-wrap gap-2 mb-3">
+                            {scenario.tags?.map(t => (
+                              <span key={t} className="inline-flex items-center px-2.5 py-1 rounded-md bg-indigo-500/5 border border-indigo-500/10 text-[9px] font-black text-indigo-400/80 uppercase tracking-widest hover:bg-indigo-500/10 hover:border-indigo-500/20 transition-colors cursor-default">
+                                {t.replace(/^@/, '')}
+                              </span>
+                            ))}
                           </div>
                           <h4 className="text-base font-bold text-slate-200 group-hover:text-white transition-colors leading-tight">
                             {scenario.name}
@@ -332,14 +345,62 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
                                   </div>
 
                                   {step.log && (
-                                    <div className="mt-3 bg-slate-900 rounded-xl border border-slate-800 p-4 font-mono text-[10px] text-slate-400 overflow-x-auto">
-                                      <div className="flex items-center space-x-2 mb-2 pb-2 border-b border-slate-800 text-slate-600">
-                                        <div className="w-2 h-2 rounded-full bg-rose-500/50"></div>
-                                        <div className="w-2 h-2 rounded-full bg-amber-500/50"></div>
-                                        <div className="w-2 h-2 rounded-full bg-emerald-500/50"></div>
-                                        <span className="text-[9px] uppercase tracking-widest pl-2">Console Output</span>
+                                    <div className="mt-3 bg-[#0d1117] rounded-xl border border-slate-800/80 p-5 font-mono text-[10px] text-slate-400 overflow-x-auto shadow-inner relative group/logs">
+                                      <div className="absolute top-0 right-0 p-2 opacity-0 group-hover/logs:opacity-100 transition-opacity">
+                                        <div className="bg-slate-800/50 p-1 rounded text-slate-500 text-[9px] font-bold uppercase tracking-wider">Terminal</div>
                                       </div>
-                                      {step.log}
+                                      <div className="flex items-center space-x-2 mb-3 pb-3 border-b border-slate-800/50 text-slate-600">
+                                        <div className="flex space-x-1.5">
+                                          <div className="w-2.5 h-2.5 rounded-full bg-rose-500/50 hover:bg-rose-500 transition-colors"></div>
+                                          <div className="w-2.5 h-2.5 rounded-full bg-amber-500/50 hover:bg-amber-500 transition-colors"></div>
+                                          <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/50 hover:bg-emerald-500 transition-colors"></div>
+                                        </div>
+                                        <span className="text-[9px] font-bold uppercase tracking-widest pl-2 opacity-50">Console Output</span>
+                                      </div>
+                                      <div className="space-y-1">
+                                        {step.log.split('\n').map((line, logIdx) => {
+                                          // Specific parser for our screenshot format: [SCREENSHOT] Filename
+                                          // or [FAILURE] Screenshot captured... Location: ...
+
+                                          // Check for manual screenshot marker
+                                          // Format from step_gui_interactions.py: print(f"\n[SCREENSHOT] {screenshot_name}")
+                                          // ... print(f"   Location: ...")
+                                          // ... print(f"   <img ... />")
+
+                                          // We look for valid image paths in the log or the markers
+                                          // Since getting the exact filename from the complex log structure might be tricky,
+                                          // let's look for the <img src='file:///...'> pattern which contains the full path,
+                                          // extracting the filename from it.
+
+                                          const imgMatch = line.match(/<img src='file:\/\/\/.*[\\\/]([^'"]+\.png)'/);
+                                          if (imgMatch) {
+                                            const filename = imgMatch[1];
+                                            const imageUrl = `http://localhost:3001/screenshots/${filename}`;
+                                            return (
+                                              <div key={logIdx} className="mt-2 mb-2">
+                                                <div className="text-[10px] font-bold text-indigo-400 mb-1">📸 Screenshot Captured:</div>
+                                                <a href={imageUrl} target="_blank" rel="noopener noreferrer" className="block relative group cursor-zoom-in max-w-lg">
+                                                  <img
+                                                    src={imageUrl}
+                                                    alt="Step Screenshot"
+                                                    className="rounded-lg border border-slate-700 shadow-xl transition-all group-hover:scale-[1.02]"
+                                                    onError={(e) => {
+                                                      (e.target as HTMLImageElement).style.display = 'none';
+                                                      // Fallback text if needed, or just hide
+                                                    }}
+                                                  />
+                                                  <div className="absolute inset-0 bg-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg pointer-events-none"></div>
+                                                </a>
+                                              </div>
+                                            );
+                                          }
+
+                                          // Filter out the raw HTML img tag line if we just rendered it, nicely
+                                          if (line.trim().startsWith("<img src='file:///")) return null;
+
+                                          return <div key={logIdx}>{line}</div>;
+                                        })}
+                                      </div>
                                     </div>
                                   )}
                                 </div>

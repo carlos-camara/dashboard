@@ -1,0 +1,354 @@
+<testsuite name="dashboard.dashboard_visual.Dashboard Visual Validation" tests="12" errors="3" failures="6" skipped="0" time="132.755097" timestamp="2026-01-28T16:37:58.764804" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Dashboard Loads Successfully" status="failed" time="13.430821"><failure type="AssertionError" message="Text 'QA Hub' not found or not visible on page">
+<![CDATA[
+Failing step: And I should see the text "QA Hub" ... failed in 10.461s
+Location: features/dashboard/dashboard_visual.feature:14
+Assertion Failed: Text 'QA Hub' not found or not visible on page]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @navigation
+  Scenario: Verify Dashboard Loads Successfully
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.952s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then the page title should be "QA Hub - Execution Dashboard" ... passed in 0.017s
+    And I should see the text "QA Hub" ... failed in 10.461s
+    And I take a screenshot named "dashboard_home" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Dashboard Statistics Cards Are Visible" status="failed" time="13.42482"><failure type="AssertionError" message="Text 'Total Runs' not found or not visible on page">
+<![CDATA[
+Failing step: And I should see the text "Total Runs" ... failed in 11.082s
+Location: features/dashboard/dashboard_visual.feature:20
+Assertion Failed: Text 'Total Runs' not found or not visible on page]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @components @stats
+  Scenario: Verify Dashboard Statistics Cards Are Visible
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.304s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then I should see the text "Pass Rate" ... passed in 0.038s
+    And I should see the text "Total Runs" ... failed in 11.082s
+    And I should see the text "Avg Duration" ... skipped in 0.000s
+    And I take a screenshot named "dashboard_stats_cards" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Timeline Chart Is Present" status="failed" time="13.319844"><failure type="AssertionError" message="Text 'Timeline' not found or not visible on page">
+<![CDATA[
+Failing step: Then I should see the text "Timeline" ... failed in 11.066s
+Location: features/dashboard/dashboard_visual.feature:26
+Assertion Failed: Text 'Timeline' not found or not visible on page]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @components @charts
+  Scenario: Verify Timeline Chart Is Present
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.253s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then I should see the text "Timeline" ... failed in 11.066s
+    And I take a screenshot named "dashboard_timeline_chart" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Recent Runs Section" status="failed" time="13.33486"><failure type="AssertionError" message="Text 'Recent Runs' not found or not visible on page">
+<![CDATA[
+Failing step: Then I should see the text "Recent Runs" ... failed in 11.108s
+Location: features/dashboard/dashboard_visual.feature:31
+Assertion Failed: Text 'Recent Runs' not found or not visible on page]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @components @runs
+  Scenario: Verify Recent Runs Section
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.226s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then I should see the text "Recent Runs" ... failed in 11.108s
+    And I take a screenshot named "dashboard_recent_runs" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Endpoints Catalog Section" status="passed" time="3.719677"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @components @endpoints
+  Scenario: Verify Endpoints Catalog Section
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.471s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I scroll to the bottom of the page ... passed in 0.510s
+    Then I should see the text "Endpoints" ... passed in 0.031s
+    And I take a screenshot named "dashboard_endpoints_catalog" ... passed in 0.200s
+    When I scroll to the top of the page ... passed in 0.508s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+Screenshot saved: features\resources\screenshots\dashboard_endpoints_catalog_20260128_163642.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Sync Button Interaction" status="failed" time="13.320329"><error type="TimeoutException" message="Message: &#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff734faa235&#10;&#09;0x7ff734d02630&#10;&#09;0x7ff734a916dd&#10;&#09;0x7ff734aea27e&#10;&#09;0x7ff734aea58c&#10;&#09;0x7ff734b3ed77&#10;&#09;0x7ff734b3baba&#10;&#09;0x7ff734adb0ed&#10;&#09;0x7ff734adbf63&#10;&#09;0x7ff734fd5d60&#10;&#09;0x7ff734fcfe8a&#10;&#09;0x7ff734ff1005&#10;&#09;0x7ff734d1d71e&#10;&#09;0x7ff734d24e1f&#10;&#09;0x7ff734d0b7c4&#10;&#09;0x7ff734d0b97f&#10;&#09;0x7ff734cf18e8&#10;&#09;0x7ff916ef7374&#10;&#09;0x7ff91751cc91&#10;">
+<![CDATA[
+Failing step: When I click on the button with text "Sync" ... failed in 11.073s
+Location: features/dashboard/dashboard_visual.feature:43
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "features\steps\step_gui_interactions.py", line 59, in step_click_button_by_text
+    page.click(locator)
+    ~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\features\page_objects\base_page.py", line 33, in click
+    element = self.wait.until(EC.element_to_be_clickable(locator))
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff734faa235
+	0x7ff734d02630
+	0x7ff734a916dd
+	0x7ff734aea27e
+	0x7ff734aea58c
+	0x7ff734b3ed77
+	0x7ff734b3baba
+	0x7ff734adb0ed
+	0x7ff734adbf63
+	0x7ff734fd5d60
+	0x7ff734fcfe8a
+	0x7ff734ff1005
+	0x7ff734d1d71e
+	0x7ff734d24e1f
+	0x7ff734d0b7c4
+	0x7ff734d0b97f
+	0x7ff734cf18e8
+	0x7ff916ef7374
+	0x7ff91751cc91
+
+]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+
+  @interaction @sync
+  Scenario: Verify Sync Button Interaction
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.247s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I click on the button with text "Sync" ... failed in 11.073s
+    And I wait for 2 seconds ... skipped in 0.000s
+    Then I take a screenshot named "dashboard_after_sync" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Time Filter Buttons" status="failed" time="13.401949"><error type="TimeoutException" message="Message: &#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff734faa235&#10;&#09;0x7ff734d02630&#10;&#09;0x7ff734a916dd&#10;&#09;0x7ff734aea27e&#10;&#09;0x7ff734aea58c&#10;&#09;0x7ff734b3ed77&#10;&#09;0x7ff734b3baba&#10;&#09;0x7ff734adb0ed&#10;&#09;0x7ff734adbf63&#10;&#09;0x7ff734fd5d60&#10;&#09;0x7ff734fcfe8a&#10;&#09;0x7ff734ff1005&#10;&#09;0x7ff734d1d71e&#10;&#09;0x7ff734d24e1f&#10;&#09;0x7ff734d0b7c4&#10;&#09;0x7ff734d0b97f&#10;&#09;0x7ff734cf18e8&#10;&#09;0x7ff916ef7374&#10;&#09;0x7ff91751cc91&#10;">
+<![CDATA[
+Failing step: When I click on the button with text "7 Days" ... failed in 11.109s
+Location: features/dashboard/dashboard_visual.feature:49
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "features\steps\step_gui_interactions.py", line 59, in step_click_button_by_text
+    page.click(locator)
+    ~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\features\page_objects\base_page.py", line 33, in click
+    element = self.wait.until(EC.element_to_be_clickable(locator))
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff734faa235
+	0x7ff734d02630
+	0x7ff734a916dd
+	0x7ff734aea27e
+	0x7ff734aea58c
+	0x7ff734b3ed77
+	0x7ff734b3baba
+	0x7ff734adb0ed
+	0x7ff734adbf63
+	0x7ff734fd5d60
+	0x7ff734fcfe8a
+	0x7ff734ff1005
+	0x7ff734d1d71e
+	0x7ff734d24e1f
+	0x7ff734d0b7c4
+	0x7ff734d0b97f
+	0x7ff734cf18e8
+	0x7ff916ef7374
+	0x7ff91751cc91
+
+]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+
+  @interaction @filters
+  Scenario: Verify Time Filter Buttons
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.292s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I click on the button with text "7 Days" ... failed in 11.109s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I take a screenshot named "dashboard_7days_filter" ... skipped in 0.000s
+    When I click on the button with text "30 Days" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I take a screenshot named "dashboard_30days_filter" ... skipped in 0.000s
+    When I click on the button with text "All Time" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I take a screenshot named "dashboard_alltime_filter" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Capture Full Dashboard View" status="passed" time="5.507715"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @fullpage @visual
+  Scenario: Capture Full Dashboard View
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.252s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I wait for 3 seconds ... passed in 3.001s
+    Then I take a full page screenshot named "dashboard_complete_view" ... passed in 0.254s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+Full page screenshot saved: features\resources\screenshots\dashboard_complete_view_fullpage_20260128_163715.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Dashboard on Mobile Viewport" status="failed" time="12.658731"><failure type="AssertionError" message="Text 'QA Hub' not found or not visible on page">
+<![CDATA[
+Failing step: Then I should see the text "QA Hub" ... failed in 10.424s
+Location: features/dashboard/dashboard_visual.feature:70
+Assertion Failed: Text 'QA Hub' not found or not visible on page]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @responsive @mobile
+  Scenario: Verify Dashboard on Mobile Viewport
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.233s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then I should see the text "QA Hub" ... failed in 10.424s
+    And I take a screenshot named "dashboard_mobile_view" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Navigate to Run Details" status="failed" time="13.530354"><error type="TimeoutException" message="Message: &#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff734faa235&#10;&#09;0x7ff734d02630&#10;&#09;0x7ff734a916dd&#10;&#09;0x7ff734aea27e&#10;&#09;0x7ff734aea58c&#10;&#09;0x7ff734b3ed77&#10;&#09;0x7ff734b3baba&#10;&#09;0x7ff734adb0ed&#10;&#09;0x7ff734adbf63&#10;&#09;0x7ff734fd5d60&#10;&#09;0x7ff734fcfe8a&#10;&#09;0x7ff734ff1005&#10;&#09;0x7ff734d1d71e&#10;&#09;0x7ff734d24e1f&#10;&#09;0x7ff734d0b7c4&#10;&#09;0x7ff734d0b97f&#10;&#09;0x7ff734cf18e8&#10;&#09;0x7ff916ef7374&#10;&#09;0x7ff91751cc91&#10;">
+<![CDATA[
+Failing step: When I click on the element with text "Recent Runs" ... failed in 11.046s
+Location: features/dashboard/dashboard_visual.feature:75
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "features\steps\step_gui_interactions.py", line 40, in step_click_element_by_text
+    page.click(locator)
+    ~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\features\page_objects\base_page.py", line 33, in click
+    element = self.wait.until(EC.element_to_be_clickable(locator))
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff734faa235
+	0x7ff734d02630
+	0x7ff734a916dd
+	0x7ff734aea27e
+	0x7ff734aea58c
+	0x7ff734b3ed77
+	0x7ff734b3baba
+	0x7ff734adb0ed
+	0x7ff734adbf63
+	0x7ff734fd5d60
+	0x7ff734fcfe8a
+	0x7ff734ff1005
+	0x7ff734d1d71e
+	0x7ff734d24e1f
+	0x7ff734d0b7c4
+	0x7ff734d0b97f
+	0x7ff734cf18e8
+	0x7ff916ef7374
+	0x7ff91751cc91
+
+]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+
+  @navigation @runs_detail
+  Scenario: Navigate to Run Details
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.483s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I click on the element with text "Recent Runs" ... failed in 11.046s
+    And I wait for 2 seconds ... skipped in 0.000s
+    Then I take a screenshot named "dashboard_runs_section_expanded" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Dashboard Header Elements" status="failed" time="12.658381"><failure type="AssertionError" message="Text 'QA Hub' not found or not visible on page">
+<![CDATA[
+Failing step: Then I should see the text "QA Hub" ... failed in 10.445s
+Location: features/dashboard/dashboard_visual.feature:81
+Assertion Failed: Text 'QA Hub' not found or not visible on page]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @validation @header
+  Scenario: Verify Dashboard Header Elements
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.212s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then I should see the text "QA Hub" ... failed in 10.445s
+    And I should see the text "Execution Dashboard" ... skipped in 0.000s
+    And I take a screenshot named "dashboard_header" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Dashboard Footer Elements" status="passed" time="4.447617"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @validation @footer
+  Scenario: Verify Dashboard Footer Elements
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.222s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I scroll to the bottom of the page ... passed in 0.510s
+    And I wait for 1 seconds ... passed in 1.002s
+    Then I take a screenshot named "dashboard_footer" ... passed in 0.204s
+    When I scroll to the top of the page ... passed in 0.508s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+Screenshot saved: features\resources\screenshots\dashboard_footer_20260128_163758.png
+
+]]>
+</system-out></testcase></testsuite>

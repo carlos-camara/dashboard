@@ -1,0 +1,322 @@
+openapi: 3.0.0
+info:
+  title: QA Hub Dashboard API
+  version: 1.0.0
+  description: API for managing test runs, scenarios, and endpoints discovery.
+servers:
+  - url: http://localhost:3001
+tags:
+  - name: System
+  - name: Runs
+  - name: Endpoints
+  - name: Specs
+
+paths:
+  /api/health:
+    get:
+      tags: [System]
+      summary: Health check
+      responses:
+        '200':
+          description: Server is online
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "ok"
+                  timestamp:
+                    type: string
+                    format: date-time
+
+  /api/sync:
+    post:
+      tags: [System]
+      summary: Trigger report scan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reports_path:
+                  type: string
+                  description: Optional custom path to scan.
+      responses:
+        '200':
+          description: Scan completed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  new_runs_discovered:
+                    type: integer
+                  scanned_path:
+                    type: string
+
+  /api/upload:
+    post:
+      tags: [Runs]
+      summary: Upload JUnit XML reports
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: Upload processed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  runId:
+                    type: string
+                  projectName:
+                    type: string
+                  totalCount:
+                    type: integer
+
+  /api/runs:
+    get:
+      tags: [Runs]
+      summary: Get all runs
+      responses:
+        '200':
+          description: List of runs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Run'
+    delete:
+      tags: [Runs]
+      summary: Delete a run
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Run deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+
+  /api/runs/{run_id}/scenarios:
+    get:
+      tags: [Runs]
+      summary: Get scenarios for a run
+      parameters:
+        - in: path
+          name: run_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of scenarios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Scenario'
+
+  /api/projects:
+    delete:
+      tags: [Runs]
+      summary: Delete a project and all its data
+      parameters:
+        - in: query
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Project deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+
+  /api/endpoints:
+    get:
+      tags: [Endpoints]
+      summary: Get discovered endpoints
+      responses:
+        '200':
+          description: List of endpoints
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Endpoint'
+    delete:
+      tags: [Endpoints]
+      summary: Delete an endpoint
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Endpoint deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+
+  /api/spec:
+    get:
+      tags: [Specs]
+      summary: Retrieve an OpenAPI fragment
+      parameters:
+        - in: query
+          name: method
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Spec content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  found:
+                    type: boolean
+                  content:
+                    type: object
+                    description: The swagger fragment
+    post:
+      tags: [Specs]
+      summary: Upload an OpenAPI fragment
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file, method, path]
+              properties:
+                file:
+                  type: string
+                  format: binary
+                method:
+                  type: string
+                path:
+                  type: string
+      responses:
+        '200':
+          description: Spec uploaded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  filename:
+                    type: string
+
+components:
+  schemas:
+    Run:
+      type: object
+      properties:
+        id:
+          type: string
+        source_folder:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        project:
+          type: string
+        passedCount:
+          type: integer
+        failedCount:
+          type: integer
+        totalCount:
+          type: integer
+        tags:
+          type: array
+          items:
+            type: string
+    
+    Scenario:
+      type: object
+      properties:
+        id:
+          type: string
+        runId:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        duration:
+          type: number
+        featureName:
+          type: string
+        steps:
+          type: array
+          items:
+            type: object
+            
+    Endpoint:
+      type: object
+      properties:
+        id:
+          type: string
+        method:
+          type: string
+        path:
+          type: string
+        service:
+          type: string
+        passCount:
+          type: integer
+        failCount:
+          type: integer

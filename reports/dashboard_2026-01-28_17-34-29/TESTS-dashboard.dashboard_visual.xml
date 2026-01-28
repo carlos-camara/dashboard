@@ -1,0 +1,388 @@
+<testsuite name="dashboard.dashboard_visual.Dashboard Visual Validation" tests="12" errors="2" failures="1" skipped="0" time="90.410762" timestamp="2026-01-28T17:34:23.646347" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Dashboard Loads Successfully" status="failed" time="22.022056"><failure type="AssertionError" message="Text 'Command Center' not found or not visible on page">
+<![CDATA[
+Failing step: And I should see the text "Command Center" ... failed in 16.616s
+Location: features/dashboard/dashboard_visual.feature:16
+Assertion Failed: Text 'Command Center' not found or not visible on page
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Dashboard Loads Successfully
+   Failed Step: I should see the text "Command Center"
+   Location: features\resources\screenshots\FAILED_Verify_Dashboard_Loads_Successfully_20260128_173314.png
+   <img src='file:///features\resources\screenshots\FAILED_Verify_Dashboard_Loads_Successfully_20260128_173314.png' width='800' alt='Failure Screenshot' />]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @navigation
+  Scenario: Verify Dashboard Loads Successfully
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 1.168s
+    When I wait for 2 seconds ... passed in 2.001s
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.222s
+    When I wait for 2 seconds ... passed in 2.002s
+    Then the page title should be "QA Hub - Execution Dashboard" ... passed in 0.014s
+    And I should see the text "Command Center" ... failed in 16.616s
+    And I take a screenshot named "dashboard_home" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Dashboard Loads Successfully
+   Failed Step: I should see the text "Command Center"
+   Location: features\resources\screenshots\FAILED_Verify_Dashboard_Loads_Successfully_20260128_173314.png
+   <img src='file:///features\resources\screenshots\FAILED_Verify_Dashboard_Loads_Successfully_20260128_173314.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Dashboard Statistics Cards Are Visible" status="passed" time="2.528086"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @components @stats
+  Scenario: Verify Dashboard Statistics Cards Are Visible
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.222s
+    When I wait for 2 seconds ... passed in 2.002s
+    Then I should see the text "Pass Rate" ... passed in 0.041s
+    And I should see the text "Total Executions" ... passed in 0.027s
+    And I should see the text "Avg Latency" ... passed in 0.028s
+    And I take a screenshot named "dashboard_stats_cards" ... passed in 0.209s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_stats_cards
+   Location: features\resources\screenshots\dashboard_stats_cards.png
+   <img src='file:///features\resources\screenshots\dashboard_stats_cards.png' width='800' alt='dashboard_stats_cards' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Timeline Chart Is Present" status="passed" time="2.548289"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @components @charts
+  Scenario: Verify Timeline Chart Is Present
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.307s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then I should see the text "Signal Velocity" ... passed in 0.033s
+    And I take a screenshot named "dashboard_timeline_chart" ... passed in 0.207s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_timeline_chart
+   Location: features\resources\screenshots\dashboard_timeline_chart.png
+   <img src='file:///features\resources\screenshots\dashboard_timeline_chart.png' width='800' alt='dashboard_timeline_chart' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Recent Runs Section" status="passed" time="2.457271"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @components @runs
+  Scenario: Verify Recent Runs Section
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.222s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then I should see the text "Sector Integrity" ... passed in 0.028s
+    And I take a screenshot named "dashboard_recent_runs" ... passed in 0.206s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_recent_runs
+   Location: features\resources\screenshots\dashboard_recent_runs.png
+   <img src='file:///features\resources\screenshots\dashboard_recent_runs.png' width='800' alt='dashboard_recent_runs' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Endpoints Catalog Section" status="passed" time="3.466434"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @components @endpoints
+  Scenario: Verify Endpoints Catalog Section
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.216s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I scroll to the bottom of the page ... passed in 0.511s
+    Then I should see the text "Latency Anomalies" ... passed in 0.031s
+    And I take a screenshot named "dashboard_endpoints_catalog" ... passed in 0.200s
+    When I scroll to the top of the page ... passed in 0.508s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_endpoints_catalog
+   Location: features\resources\screenshots\dashboard_endpoints_catalog.png
+   <img src='file:///features\resources\screenshots\dashboard_endpoints_catalog.png' width='800' alt='dashboard_endpoints_catalog' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Sync Button Interaction" status="passed" time="4.576627"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @interaction @sync
+  Scenario: Verify Sync Button Interaction
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.217s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I click on the sync button ... passed in 0.126s
+    And I wait for 2 seconds ... passed in 2.001s
+    Then I take a screenshot named "dashboard_after_sync" ... passed in 0.231s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_after_sync
+   Location: features\resources\screenshots\dashboard_after_sync.png
+   <img src='file:///features\resources\screenshots\dashboard_after_sync.png' width='800' alt='dashboard_after_sync' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Time Filter Buttons" status="failed" time="18.900501"><error type="TimeoutException" message="Message: &#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff734faa235&#10;&#09;0x7ff734d02630&#10;&#09;0x7ff734a916dd&#10;&#09;0x7ff734aea27e&#10;&#09;0x7ff734aea58c&#10;&#09;0x7ff734b3ed77&#10;&#09;0x7ff734b3baba&#10;&#09;0x7ff734adb0ed&#10;&#09;0x7ff734adbf63&#10;&#09;0x7ff734fd5d60&#10;&#09;0x7ff734fcfe8a&#10;&#09;0x7ff734ff1005&#10;&#09;0x7ff734d1d71e&#10;&#09;0x7ff734d24e1f&#10;&#09;0x7ff734d0b7c4&#10;&#09;0x7ff734d0b97f&#10;&#09;0x7ff734cf18e8&#10;&#09;0x7ff916ef7374&#10;&#09;0x7ff91751cc91&#10;">
+<![CDATA[
+Failing step: When I click on the button with text "7 Days" ... failed in 16.628s
+Location: features/dashboard/dashboard_visual.feature:51
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "features\steps\step_gui_interactions.py", line 59, in step_click_button_by_text
+    page.click(locator)
+    ~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\features\page_objects\base_page.py", line 95, in click
+    element = self.wait.until(EC.element_to_be_clickable(locator))
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff734faa235
+	0x7ff734d02630
+	0x7ff734a916dd
+	0x7ff734aea27e
+	0x7ff734aea58c
+	0x7ff734b3ed77
+	0x7ff734b3baba
+	0x7ff734adb0ed
+	0x7ff734adbf63
+	0x7ff734fd5d60
+	0x7ff734fcfe8a
+	0x7ff734ff1005
+	0x7ff734d1d71e
+	0x7ff734d24e1f
+	0x7ff734d0b7c4
+	0x7ff734d0b97f
+	0x7ff734cf18e8
+	0x7ff916ef7374
+	0x7ff91751cc91
+
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Time Filter Buttons
+   Failed Step: I click on the button with text "7 Days"
+   Location: features\resources\screenshots\FAILED_Verify_Time_Filter_Buttons_20260128_173349.png
+   <img src='file:///features\resources\screenshots\FAILED_Verify_Time_Filter_Buttons_20260128_173349.png' width='800' alt='Failure Screenshot' />]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+
+  @interaction @filters
+  Scenario: Verify Time Filter Buttons
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.271s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I click on the button with text "7 Days" ... failed in 16.628s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I take a screenshot named "dashboard_7days_filter" ... skipped in 0.000s
+    When I click on the button with text "30 Days" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I take a screenshot named "dashboard_30days_filter" ... skipped in 0.000s
+    When I click on the button with text "All Time" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I take a screenshot named "dashboard_alltime_filter" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Time Filter Buttons
+   Failed Step: I click on the button with text "7 Days"
+   Location: features\resources\screenshots\FAILED_Verify_Time_Filter_Buttons_20260128_173349.png
+   <img src='file:///features\resources\screenshots\FAILED_Verify_Time_Filter_Buttons_20260128_173349.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Capture Full Dashboard View" status="passed" time="5.615291"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @fullpage @visual
+  Scenario: Capture Full Dashboard View
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.348s
+    When I wait for 2 seconds ... passed in 2.002s
+    When I wait for 3 seconds ... passed in 3.002s
+    Then I take a full page screenshot named "dashboard_complete_view" ... passed in 0.263s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] Full page: dashboard_complete_view
+   Location: features\resources\screenshots\dashboard_complete_view_fullpage.png
+   <img src='file:///features\resources\screenshots\dashboard_complete_view_fullpage.png' width='800' alt='dashboard_complete_view' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Dashboard on Mobile Viewport" status="passed" time="2.511534"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @responsive @mobile
+  Scenario: Verify Dashboard on Mobile Viewport
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.239s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then I should see the text "QA Hub" ... passed in 0.071s
+    And I take a screenshot named "dashboard_mobile_view" ... passed in 0.200s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_mobile_view
+   Location: features\resources\screenshots\dashboard_mobile_view.png
+   <img src='file:///features\resources\screenshots\dashboard_mobile_view.png' width='800' alt='dashboard_mobile_view' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Navigate to Run Details" status="failed" time="18.803163"><error type="TimeoutException" message="Message: &#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff734faa235&#10;&#09;0x7ff734d02630&#10;&#09;0x7ff734a916dd&#10;&#09;0x7ff734aea27e&#10;&#09;0x7ff734aea58c&#10;&#09;0x7ff734b3ed77&#10;&#09;0x7ff734b3baba&#10;&#09;0x7ff734adb0ed&#10;&#09;0x7ff734adbf63&#10;&#09;0x7ff734fd5d60&#10;&#09;0x7ff734fcfe8a&#10;&#09;0x7ff734ff1005&#10;&#09;0x7ff734d1d71e&#10;&#09;0x7ff734d24e1f&#10;&#09;0x7ff734d0b7c4&#10;&#09;0x7ff734d0b97f&#10;&#09;0x7ff734cf18e8&#10;&#09;0x7ff916ef7374&#10;&#09;0x7ff91751cc91&#10;">
+<![CDATA[
+Failing step: When I click on the element with text "Recent Runs" ... failed in 16.571s
+Location: features/dashboard/dashboard_visual.feature:77
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "features\steps\step_gui_interactions.py", line 40, in step_click_element_by_text
+    page.click(locator)
+    ~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\features\page_objects\base_page.py", line 95, in click
+    element = self.wait.until(EC.element_to_be_clickable(locator))
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff734faa235
+	0x7ff734d02630
+	0x7ff734a916dd
+	0x7ff734aea27e
+	0x7ff734aea58c
+	0x7ff734b3ed77
+	0x7ff734b3baba
+	0x7ff734adb0ed
+	0x7ff734adbf63
+	0x7ff734fd5d60
+	0x7ff734fcfe8a
+	0x7ff734ff1005
+	0x7ff734d1d71e
+	0x7ff734d24e1f
+	0x7ff734d0b7c4
+	0x7ff734d0b97f
+	0x7ff734cf18e8
+	0x7ff916ef7374
+	0x7ff91751cc91
+
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Navigate to Run Details
+   Failed Step: I click on the element with text "Recent Runs"
+   Location: features\resources\screenshots\FAILED_Navigate_to_Run_Details_20260128_173416.png
+   <img src='file:///features\resources\screenshots\FAILED_Navigate_to_Run_Details_20260128_173416.png' width='800' alt='Failure Screenshot' />]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+
+  @navigation @runs_detail
+  Scenario: Navigate to Run Details
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.232s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I click on the element with text "Recent Runs" ... failed in 16.571s
+    And I wait for 2 seconds ... skipped in 0.000s
+    Then I take a screenshot named "dashboard_runs_section_expanded" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Navigate to Run Details
+   Failed Step: I click on the element with text "Recent Runs"
+   Location: features\resources\screenshots\FAILED_Navigate_to_Run_Details_20260128_173416.png
+   <img src='file:///features\resources\screenshots\FAILED_Navigate_to_Run_Details_20260128_173416.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Dashboard Header Elements" status="passed" time="2.519555"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @validation @header
+  Scenario: Verify Dashboard Header Elements
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.235s
+    When I wait for 2 seconds ... passed in 2.002s
+    Then I should see the text "QA Hub" ... passed in 0.039s
+    And I should see the text "Execution Dashboard" ... passed in 0.029s
+    And I take a screenshot named "dashboard_header" ... passed in 0.214s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_header
+   Location: features\resources\screenshots\dashboard_header.png
+   <img src='file:///features\resources\screenshots\dashboard_header.png' width='800' alt='dashboard_header' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard_visual.Dashboard Visual Validation" name="Verify Dashboard Footer Elements" status="passed" time="4.461955"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @validation @footer
+  Scenario: Verify Dashboard Footer Elements
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.229s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I scroll to the bottom of the page ... passed in 0.508s
+    And I wait for 1 seconds ... passed in 1.001s
+    Then I take a screenshot named "dashboard_footer" ... passed in 0.215s
+    When I scroll to the top of the page ... passed in 0.508s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_footer
+   Location: features\resources\screenshots\dashboard_footer.png
+   <img src='file:///features\resources\screenshots\dashboard_footer.png' width='800' alt='dashboard_footer' />
+
+]]>
+</system-out></testcase></testsuite>
