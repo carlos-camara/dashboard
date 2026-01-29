@@ -16,7 +16,7 @@ import { generateExecutiveReport } from '../services/reportGenerator';
 
 interface DashboardViewProps {
   refreshKey?: number;
-  onNavigate?: (tab: string) => void;
+  onNavigate: (tab: string, state?: any) => void;
 }
 
 const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate }) => {
@@ -277,7 +277,11 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
                 </h3>
                 <div className="flex-1 space-y-3 overflow-y-auto custom-scrollbar pr-2 max-h-[300px]">
                   {projectHealthData.map(p => (
-                    <div key={p.name} className="flex items-center justify-between p-4 bg-slate-950/40 rounded-2xl border border-white/5 hover:border-white/10 transition-colors group">
+                    <div
+                      key={p.name}
+                      onClick={() => onNavigate('runs', { project: p.name })}
+                      className="flex items-center justify-between p-4 bg-slate-950/40 rounded-2xl border border-white/5 hover:border-indigo-500/30 hover:bg-slate-900/60 transition-all group cursor-pointer"
+                    >
                       <div className="flex items-center gap-3">
                         <div className={`w-2 h-8 rounded-full ${p.rate > 90 ? 'bg-emerald-500' : p.rate > 70 ? 'bg-amber-500' : 'bg-rose-500'}`}></div>
                         <div>
@@ -320,7 +324,11 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
                 </h3>
                 <div className="space-y-4">
                   {slowestEndpoints.map((ep, i) => (
-                    <div key={i} className="group">
+                    <div
+                      key={i}
+                      onClick={() => onNavigate('endpoints', { endpoint: ep })}
+                      className="group cursor-pointer p-2 rounded-xl hover:bg-slate-900/40 transition-all border border-transparent hover:border-white/5"
+                    >
                       <div className="flex justify-between text-xs font-bold text-slate-500 mb-2 group-hover:text-amber-400 transition-colors">
                         <span className="font-mono">{ep.method} {ep.path}</span>
                         <span>{ep.avgDuration.toFixed(0)}ms</span>

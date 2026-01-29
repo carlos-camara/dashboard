@@ -16,14 +16,22 @@ interface ProjectGroup {
 
 interface TestRunsViewProps {
   refreshKey?: number;
+  initialProject?: string | null;
 }
 
-const TestRunsView: React.FC<TestRunsViewProps> = ({ refreshKey }) => {
+const TestRunsView: React.FC<TestRunsViewProps> = ({ refreshKey, initialProject }) => {
   const [runs, setRuns] = useState<ExecutionRun[]>([]);
   const [loading, setLoading] = useState(true);
-  const [expandedProjects, setExpandedProjects] = useState<Set<string>>(new Set());
+  const [expandedProjects, setExpandedProjects] = useState<Set<string>>(new Set(initialProject ? [initialProject] : []));
   const [selectedRun, setSelectedRun] = useState<ExecutionRun | null>(null);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(initialProject || '');
+
+  useEffect(() => {
+    if (initialProject) {
+      setSearchQuery(initialProject);
+      setExpandedProjects(new Set([initialProject]));
+    }
+  }, [initialProject]);
   const [projectPages, setProjectPages] = useState<Record<string, number>>({});
   const RUNS_PER_PAGE = 5;
 

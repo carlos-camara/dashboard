@@ -8,19 +8,31 @@ import TestRunsView from './components/TestRunsView';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [navigationState, setNavigationState] = useState<any>(null);
   const [isIngestModalOpen, setIsIngestModalOpen] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
+
+  const handleNavigate = (tab: string, state: any = null) => {
+    setActiveTab(tab);
+    setNavigationState(state);
+  };
 
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard':
-        return <DashboardView refreshKey={refreshKey} onNavigate={setActiveTab} />;
+        return <DashboardView refreshKey={refreshKey} onNavigate={handleNavigate} />;
       case 'endpoints':
-        return <EndpointsView refreshKey={refreshKey} />;
+        return <EndpointsView
+          refreshKey={refreshKey}
+          initialEndpoint={navigationState?.endpoint}
+        />;
       case 'runs':
-        return <TestRunsView refreshKey={refreshKey} />;
+        return <TestRunsView
+          refreshKey={refreshKey}
+          initialProject={navigationState?.project}
+        />;
       default:
-        return <DashboardView refreshKey={refreshKey} onNavigate={setActiveTab} />;
+        return <DashboardView refreshKey={refreshKey} onNavigate={handleNavigate} />;
     }
   };
 
