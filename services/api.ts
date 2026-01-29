@@ -168,9 +168,10 @@ export const api = {
         scenariosFound: data.totalCount,
         isDuplicate: false
       };
-    } catch (e) {
-      console.error('Error processing files:', e);
-      return { projectName: "Error", endpointsFound: 0, scenariosFound: 0, isDuplicate: false };
+    } catch (e: any) {
+      console.error('Error processing files details:', e);
+      const errorMessage = e.message || 'Unknown error';
+      return { projectName: `Error: ${errorMessage}`, endpointsFound: 0, scenariosFound: 0, isDuplicate: false };
     }
   },
 
