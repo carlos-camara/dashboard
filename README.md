@@ -1,15 +1,20 @@
-# QA Hub: Automation Dashboard
+# QA COMMAND CENTER
 
 > [!IMPORTANT]
-> **The ultimate command center for Multi-Project Test Orchestration & Validation.**
-> Bridge the gap between technical execution and executive visibility with clinical precision.
+> **NEXT-GEN TEST ORCHESTRATION & INTELLIGENCE PLATFORM**
+>
+> A complete visualization layer that bridges the gap between technical execution logs and executive decision-making.
 
-[![Python Version](https://img.shields.io/badge/Python-3.11%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![Node Version](https://img.shields.io/badge/Node.js-20%2B-green?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-0F172A?style=for-the-badge&logo=python&logoColor=38bdf8)](https://www.python.org/)
+[![React 18](https://img.shields.io/badge/React-18-0F172A?style=for-the-badge&logo=react&logoColor=61dafb)](https://react.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-Ultramodern-0F172A?style=for-the-badge&logo=tailwindcss&logoColor=38bdf8)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-0F172A?style=for-the-badge&logo=open-source-initiative&logoColor=white)](LICENSE)
 [![Lint Status](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml)
 [![Test Suite Status](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml)
 
-![Hero Image](features/resources/screenshots/dashboard_complete_view_fullpage.png)
+<br/>
+
+![Hero Dashboard](features/resources/screenshots/dashboard_complete_view_fullpage.png)
 
 ## 🌟 Executive Overview
 
@@ -165,5 +170,5 @@ Our **GitHub Actions** pipeline orchestrates the entire lifecycle:
 > [!TIP]
 > Use the `workflow_dispatch` event to manually trigger a full suite validation from the GitHub UI.
 
----
-> Created by [Carlos Camara](https://github.com/carlos-camara)
+> **Designed & Engineered by [Carlos Camara](https://github.com/carlos-camara)**
+> *Quality is not an act, it is a habit.*

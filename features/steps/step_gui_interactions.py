@@ -154,6 +154,7 @@ def step_verify_system_status_valid(context):
         "SYSTEM OPTIMAL", 
         "ALL SYSTEMS OPERATIONAL", 
         "PARTIAL SERVICE DEGRADATION", 
+        "MINOR ANOMALIES DETECTED",
         "CRITICAL INSTABILITY DETECTED",
         "CONNECTION SEVERED - OFFLINE MODE"
     ]

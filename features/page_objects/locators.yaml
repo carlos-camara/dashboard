@@ -85,19 +85,19 @@ dashboard:
   actions:
     sync_button:
       by: xpath
-      value: "//button[@aria-label='Sync Data']"
+      value: "//button[@title='Synchronize Data']"
     filter_7_days:
       by: xpath
-      value: "//button[@aria-label='7D Window']"
+      value: "//button[contains(normalize-space(.), '7 Days')]"
     filter_30_days:
       by: xpath
-      value: "//button[@aria-label='30D Window']"
+      value: "//button[contains(normalize-space(.), '30 Days')]"
     filter_all_time:
       by: xpath
-      value: "//button[@aria-label='Export Report']" # Mapping to export as temp fallback or remove
+      value: "//button[@title='Generate Report']"
     export_button:
       by: xpath
-      value: "//button[@aria-label='Export Report']"
+      value: "//button[@title='Generate Report']"
 
 sidebar:
   dashboard_link:

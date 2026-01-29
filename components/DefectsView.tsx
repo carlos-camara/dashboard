@@ -27,22 +27,20 @@ const DefectsView: React.FC<DefectsViewProps> = ({ refreshKey }) => {
         {defects.map((defect) => (
           <div key={defect.id} className="bg-slate-900/50 border border-slate-800 rounded-2xl overflow-hidden hover:border-rose-500/30 transition-all group">
             <div className="flex p-6">
-              <div className={`mt-1 mr-4 p-2 rounded-lg ${
-                defect.status === 'Open' ? 'bg-rose-500/10 text-rose-500' :
-                defect.status === 'Investigating' ? 'bg-orange-500/10 text-orange-500' :
-                'bg-green-500/10 text-green-500'
-              }`}>
+              <div className={`mt-1 mr-4 p-2 rounded-lg ${defect.status === 'Open' ? 'bg-rose-500/10 text-rose-500' :
+                  defect.status === 'Investigating' ? 'bg-orange-500/10 text-orange-500' :
+                    'bg-green-500/10 text-green-500'
+                }`}>
                 <AlertTriangle size={20} />
               </div>
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center space-x-3">
                     <span className="text-xs font-mono font-bold text-slate-500">{defect.id}</span>
-                    <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider border ${
-                      defect.status === 'Open' ? 'border-rose-500/20 text-rose-400' :
-                      defect.status === 'Investigating' ? 'border-orange-500/20 text-orange-400' :
-                      'border-green-500/20 text-green-400'
-                    }`}>
+                    <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider border ${defect.status === 'Open' ? 'border-rose-500/20 text-rose-400' :
+                        defect.status === 'Investigating' ? 'border-orange-500/20 text-orange-400' :
+                          'border-green-500/20 text-green-400'
+                      }`}>
                       {defect.status}
                     </span>
                   </div>
@@ -52,8 +50,8 @@ const DefectsView: React.FC<DefectsViewProps> = ({ refreshKey }) => {
                   </div>
                 </div>
                 <h3 className="text-lg font-bold text-white group-hover:text-rose-400 transition-colors mb-4">{defect.errorMessage}</h3>
-                
-                <div className="grid grid-cols-3 gap-6 pt-4 border-t border-slate-800">
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-slate-800">
                   <div className="flex flex-col">
                     <span className="text-[10px] text-slate-500 uppercase font-bold tracking-widest mb-1">Affected Endpoint</span>
                     <div className="flex items-center text-sm font-mono text-slate-300">

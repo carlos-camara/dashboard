@@ -158,11 +158,17 @@ class DashboardPage(BasePage):
         Example: "sidebar.test_runs_link"
         """
         parts = locator_path.split('.')
+        
+        # Known root pages in locators.yaml other than dashboard
+        root_pages = ['sidebar', 'test_runs', 'run_detail', 'endpoints_view', 'endpoint_detail']
+        
+        if parts[0] in root_pages:
+            return self.get_locator_def(parts[0], '.'.join(parts[1:]))
+            
         if parts[0] == 'dashboard':
-             # If path starts with dashboard, look in dashboard page using the rest of the path
              return self.get_locator_def('dashboard', '.'.join(parts[1:]))
-        if len(parts) == 2:
-            return self.get_locator_def(parts[0], parts[1])
+
+        # Default to checking under dashboard for sections like 'actions', 'stats', etc.
         return self.get_locator_def('dashboard', locator_path)
 
     def send_keys(self, locator, text):

@@ -3,8 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { api } from '../services/api';
 import { ExecutionRun, Scenario, TestStatus } from '../types';
 import { ChevronLeft, CheckCircle2, XCircle, Clock, Globe, Activity, ChevronDown, Terminal, Database, Code, Brackets, Tag, AlertCircle, FileDown, Loader2, PlayCircle, Cpu, Zap, Filter, Calendar } from 'lucide-react';
-// import { jsPDF } from 'jspdf';
-// import html2canvas from 'html2canvas';
+import { pdfGenerator } from '../services/PdfGeneratorService';
 
 interface RunDetailViewProps {
   run: ExecutionRun;
@@ -18,6 +17,7 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
   const [expandedScenarios, setExpandedScenarios] = useState<Set<string>>(new Set());
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [isExporting, setIsExporting] = useState(false);
+  const [isTagsExpanded, setIsTagsExpanded] = useState(false);
   const detailRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -58,20 +58,27 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
       return acc;
     }, {} as Record<string, number>);
 
+
   const handleExportPDF = async () => {
-    alert("PDF Export is currently disabled for maintenance.");
-    /*
-    if (!detailRef.current) return;
+    if (!detailRef.current || isExporting) return;
     setIsExporting(true);
 
     try {
-      // ... pdf logic ...
+      const pdfBytes = await pdfGenerator.generateRunDossier(run, scenarios);
+      const blob = new Blob([pdfBytes as any], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `Dossier_${run.project}_${new Date().toISOString().split('T')[0]}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     } catch (err) {
       console.error("Run PDF Export failed", err);
+      alert("Failed to generate PDF dossier.");
     } finally {
       setIsExporting(false);
     }
-    */
   };
 
   if (loading) return (
@@ -107,7 +114,7 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
       </div>
 
       {/* Hero Header */}
-      <div className="relative overflow-hidden bg-slate-900/60 border border-slate-800/60 rounded-[2.5rem] p-8 shadow-2xl backdrop-blur-xl group">
+      <div className="relative overflow-hidden bg-slate-900/60 border border-slate-800/60 rounded-[2rem] md:rounded-[2.5rem] p-4 md:p-8 shadow-2xl backdrop-blur-xl group">
         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-600/10 to-violet-600/10 rounded-full -mr-20 -mt-20 blur-3xl pointer-events-none group-hover:bg-blue-600/20 transition-all duration-1000"></div>
 
         <div className="relative flex flex-col lg:flex-row justify-between lg:items-center gap-8">
@@ -203,7 +210,7 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
 
       {/* Failure Analysis (Conditional) */}
       {Object.keys(failureGroups).length > 0 && (
-        <div className="bg-rose-950/10 border border-rose-900/30 rounded-[2rem] p-8 relative overflow-hidden">
+        <div className="bg-rose-950/10 border border-rose-900/30 rounded-[2rem] p-4 md:p-8 relative overflow-hidden">
           <div className="flex items-center mb-6">
             <div className="p-2 bg-rose-500/20 rounded-lg text-rose-500 mr-3 animate-pulse">
               <AlertCircle size={24} />
@@ -239,26 +246,90 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
           ))}
         </div>
 
-        <div className="flex items-center space-x-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
-          <Filter size={14} className="text-slate-600 ml-2" />
-          <div className="h-6 w-[1px] bg-slate-800 mx-2"></div>
-          {allRunTags.map(tag => (
+        <div className={`flex flex-col w-full md:w-auto transition-all duration-300 ${isTagsExpanded ? 'bg-slate-900/80 p-4 rounded-2xl border border-slate-800/60 w-full' : ''}`}>
+          <div className="flex items-center justify-between w-full">
+            <div className="flex items-center space-x-2 overflow-hidden w-full">
+              {/* Filter Label / Icon */}
+              <div className="flex items-center text-slate-500 flex-shrink-0">
+                <Filter size={14} className="mr-2" />
+                <div className="h-4 w-[1px] bg-slate-800 mr-2"></div>
+              </div>
+
+              {/* Collapsed View: Horizontal Scroll */}
+              {!isTagsExpanded && (
+                <div className="flex items-center space-x-2 overflow-x-auto pb-1 no-scrollbar flex-1 mask-linear-fade">
+                  {selectedTag && (
+                    <button
+                      onClick={() => setSelectedTag(null)}
+                      className="flex-shrink-0 flex items-center px-3 py-1.5 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-400 text-[10px] font-bold uppercase hover:bg-rose-500/20 transition-all"
+                    >
+                      <XCircle size={12} className="mr-1" /> Clear
+                    </button>
+                  )}
+
+                  {allRunTags.map((tag: string) => (
+                    <button
+                      key={tag}
+                      onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
+                      className={`
+                        flex-shrink-0 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all duration-200 border
+                        ${selectedTag === tag
+                          ? 'bg-indigo-600 border-indigo-500 text-white shadow-lg shadow-indigo-500/20'
+                          : 'bg-slate-900/50 border-slate-800 text-slate-400 hover:text-indigo-300 hover:border-indigo-500/30 hover:bg-slate-800'}
+                      `}
+                    >
+                      {tag.replace(/^@/, '')}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {/* Expanded View Header */}
+              {isTagsExpanded && (
+                <span className="text-[10px] font-bold uppercase text-slate-500 tracking-wider">
+                  Filter by Tag ({allRunTags.length})
+                </span>
+              )}
+            </div>
+
+            {/* Toggle Button */}
             <button
-              key={tag}
-              onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
-              className={`
-                group relative px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-300
-                ${selectedTag === tag
-                  ? 'bg-indigo-600 shadow-[0_0_20px_-5px_rgba(79,70,229,0.5)] text-white scale-105'
-                  : 'bg-slate-900/50 hover:bg-slate-800 text-slate-400 hover:text-indigo-400 border border-slate-800 hover:border-indigo-500/30'}
-              `}
+              onClick={() => setIsTagsExpanded(!isTagsExpanded)}
+              className="ml-3 p-2 rounded-lg bg-slate-800/50 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors flex-shrink-0"
+              title={isTagsExpanded ? "Collapse filters" : "Show all tags"}
             >
-              <span className="relative z-10 flex items-center">
-                <Tag size={12} className={`mr-2 transition-transform duration-300 ${selectedTag === tag ? 'rotate-12' : 'group-hover:rotate-12'}`} />
-                {tag}
-              </span>
+              <ChevronDown size={14} className={`transition-transform duration-300 ${isTagsExpanded ? 'rotate-180' : ''}`} />
             </button>
-          ))}
+          </div>
+
+          {/* Expanded View: Grid */}
+          {isTagsExpanded && (
+            <div className="mt-4 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
+              {selectedTag && (
+                <button
+                  onClick={() => setSelectedTag(null)}
+                  className="col-span-full mb-2 flex items-center justify-center p-2 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-bold uppercase hover:bg-rose-500/20 transition-all"
+                >
+                  <XCircle size={14} className="mr-2" /> Clear Filter
+                </button>
+              )}
+              {allRunTags.sort().map((tag: string) => (
+                <button
+                  key={tag}
+                  onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
+                  className={`
+                    flex items-center justify-center px-3 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all duration-200 border
+                    ${selectedTag === tag
+                      ? 'bg-indigo-600 border-indigo-500 text-white shadow-lg shadow-indigo-500/20 scale-[1.02]'
+                      : 'bg-slate-950/50 border-slate-800/80 text-slate-400 hover:text-indigo-300 hover:border-indigo-500/50 hover:bg-slate-900'}
+                  `}
+                >
+                  <Tag size={12} className={`mr-2 opacity-50 ${selectedTag === tag ? 'opacity-100' : ''}`} />
+                  {tag.replace(/^@/, '')}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
