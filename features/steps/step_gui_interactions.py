@@ -1,4 +1,4 @@
-from behave import given, when, then
+from behave import given, when, then, step
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -21,7 +21,7 @@ def get_dashboard_page(context):
         context.dashboard_page = DashboardPage(context.driver)
     return context.dashboard_page
 
-@when('I wait for {seconds:d} seconds')
+@step('I wait for {seconds:d} seconds')
 def step_wait_seconds(context, seconds):
     """
     Explicit wait for a specified number of seconds.
@@ -132,6 +132,17 @@ def step_verify_multiple_elements(context, count, class_name):
     elements = page.find_elements(locator)
     actual_count = len(elements)
     assert actual_count >= count, f"Expected at least {count} elements with class '{class_name}', found {actual_count}"
+
+@step('I should see at least {count:d} elements with selector "{locator_name}" in "{section}"')
+def step_verify_multiple_elements_by_selector(context, count, locator_name, section):
+    """
+    Verifies that at least N elements for a specific Page Object locator exist.
+    """
+    page = get_dashboard_page(context)
+    locator = page.get_locator(f"{section}.{locator_name}")
+    elements = page.find_elements(locator)
+    actual_count = len(elements)
+    assert actual_count >= count, f"Expected at least {count} elements for '{section}.{locator_name}', found {actual_count}"
 
 @then('the system status should be valid')
 def step_verify_system_status_valid(context):

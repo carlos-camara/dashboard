@@ -58,7 +58,10 @@ dashboard:
         value: "//div[contains(., 'Sector Integrity')]"
     list_item:
         by: xpath
-        value: "//div[contains(., 'Sector Integrity')]/..//div[contains(@class, 'bg-slate-950/50')]"
+        value: "//div[contains(., 'Sector Integrity')]/..//div[contains(@class, 'bg-slate-950/40')]"
+    project_item:
+        by: xpath
+        value: "//h3[contains(., 'Sector Integrity')]/ancestor::div[contains(@class, 'glass-panel')]//div[contains(@class, 'cursor-pointer')][1]"
 
   incidents:
     heading:
@@ -66,7 +69,7 @@ dashboard:
        value: "//*[contains(normalize-space(.), 'Incident Taxonomy')]"
     list_item:
        by: xpath
-       value: "//div[contains(., 'Incident Taxonomy')]/..//div[contains(@class, 'bg-slate-950/30')]"
+       value: "//h3[contains(., 'Incident Taxonomy')]/ancestor::div[contains(@class, 'glass-panel')]//div[contains(@class, 'border-l-4')]"
 
   endpoints:
     heading:
@@ -74,7 +77,10 @@ dashboard:
       value: "//*[contains(normalize-space(.), 'Latency Anomalies')]"
     catalog:
       by: xpath
-      value: "//div[contains(., 'Latency Anomalies')]"
+      value: "//h3[contains(., 'Latency Anomalies')]/ancestor::div[contains(@class, 'glass-panel')]"
+    anomaly_item:
+      by: xpath
+      value: "//h3[contains(., 'Latency Anomalies')]/ancestor::div[contains(@class, 'glass-panel')]//div[contains(@class, 'cursor-pointer')][1]"
 
   actions:
     sync_button:
@@ -163,3 +169,8 @@ endpoints_view:
   endpoint_item:
     by: xpath
     value: "//div[contains(@class, 'group flex flex-col md:flex-row')]"
+
+endpoint_detail:
+  back_button:
+    by: xpath
+    value: "//button[contains(., 'Back to Catalog')]"

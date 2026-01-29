@@ -90,10 +90,18 @@ class BasePage:
     
     def click(self, locator):
         """
-        Click on element using locator
+        Click on element using locator with JS fallback
         """
-        element = self.wait.until(EC.element_to_be_clickable(locator))
-        element.click()
+        try:
+            element = self.wait.until(EC.element_to_be_clickable(locator))
+            element.click()
+        except Exception as e:
+            # Fallback to JS click if standard click fails (e.g. obscured by sticky header)
+            try:
+                element = self.wait.until(EC.presence_of_element_located(locator))
+                self.driver.execute_script("arguments[0].click();", element)
+            except Exception as e2:
+                raise e
     
     def is_visible(self, locator):
         """

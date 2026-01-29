@@ -133,6 +133,13 @@ const EndpointsView: React.FC<EndpointsViewProps> = ({ refreshKey, initialEndpoi
     return stats;
   }, [groupedEndpoints]);
 
+  // Auto-expand projects when filters are active
+  useEffect(() => {
+    if (search || methodFilter !== 'ALL' || healthFilter !== 'ALL' || serviceFilter !== 'ALL') {
+      setExpandedProjects(new Set(Object.keys(groupedEndpoints)));
+    }
+  }, [groupedEndpoints, search, methodFilter, healthFilter, serviceFilter]);
+
   const sortedProjects = Object.keys(groupedEndpoints).sort();
   const methods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
 
