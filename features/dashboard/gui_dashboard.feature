@@ -36,7 +36,7 @@ Feature: Dashboard View Validation
   @components @lists
   Scenario: Verify Incident and Sector Lists
     Then I should see the text "Sector Integrity"
-    And I should see at least 1 elements with class "bg-slate-950/50"
+    And I should see at least 1 elements with class "bg-slate-950/40"
     Then I should see the text "Incident Taxonomy"
     Then I take a screenshot of the "lists panel" named "dashboard_lists_panels"
 
