@@ -86,14 +86,14 @@ We utilize a modern stack to ensure scalability and developer comfort.
 
 ```mermaid
 graph TD
-    A[GitHub Actions CI] -->|Triggers| B(Python Behave)
-    A -->|Triggers| C(Selenium GUI)
-    B -->|Logs| D[REST API Validation]
-    C -->|Captures| E[Visual Evidence (Screenshots)]
-    D & E -->|Generate| F[JUnit XML & JSON Reports]
-    F -->|Ingested by| G[Render Backend API]
-    G -->|Served to| H[GitHub Pages Frontend]
-    H -->|Presents| I{Executive Insights}
+    A["GitHub Actions CI"] -->|Triggers| B("Python Behave")
+    A -->|Triggers| C("Selenium GUI")
+    B -->|Logs| D["REST API Validation"]
+    C -->|Captures| E["Visual Evidence (Screenshots)"]
+    D & E -->|Generate| F["JUnit XML & JSON Reports"]
+    F -->|Ingested by| G["Render Backend API"]
+    G -->|Served to| H["GitHub Pages Frontend"]
+    H -->|Presents| I{"Executive Insights"}
     
     style G fill:#6d28d9,color:#fff
     style H fill:#2563eb,color:#fff
