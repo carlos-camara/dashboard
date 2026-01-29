@@ -55,7 +55,10 @@ jobs:
         shell: pwsh
         run: |
           ./run_api_smoke_reports.ps1
-          mv reports api_reports_tmp
+          # Stash API reports for later upload
+          cp -r reports api_reports_tmp
+          # Clear reports for the next specific run
+          rm -rf reports
 
       - name: Run GUI Tests
         shell: pwsh
@@ -64,21 +67,65 @@ jobs:
         env:
           HEADLESS: "true"
 
+      - name: Collect All JUnit XMLs
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p junit-results
+          if [ -d "api_reports_tmp" ]; then
+            find api_reports_tmp -name "*.xml" -exec cp {} junit-results/ \;
+          fi
+          if [ -d "reports" ]; then
+            find reports -name "*.xml" -exec cp {} junit-results/ \;
+          fi
+          echo "Collected $(find junit-results -maxdepth 1 -name "*.xml" | wc -l) XML files."
+
       - name: Upload API Reports
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: api-reports
           path: api_reports_tmp/
 
       - name: Upload GUI Reports
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: gui-reports
           path: reports/
 
       - name: Upload GUI Screenshots
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: gui-screenshots
           path: features/resources/screenshots/*.png
+
+      - name: Publish Test Results (PR)
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Unified Test Report
+          path: junit-results/*.xml
+          reporter: java-junit
+          fail-on-error: false
+
+      - name: Generate Job Summary
+        if: always()
+        run: |
+          {
+            echo "### 🚦 Test Suite Summary"
+            echo "| Test Type | Status |"
+            echo "| :--- | :--- |"
+            if [ -d "api_reports_tmp" ]; then
+              echo "| 📡 API Tests | ✅ Completed |"
+            else
+              echo "| 📡 API Tests | ❌ Failed |"
+            fi
+            if [ -d "reports" ]; then
+              echo "| 🌐 GUI Tests | ✅ Completed |"
+            else
+              echo "| 🌐 GUI Tests | ❌ Failed |"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
 

@@ -1,0 +1,36 @@
+<testsuite name="dashboard.gui_run_detail.Run Detail View Validation" tests="1" errors="0" failures="0" skipped="0" time="7.133986" timestamp="2026-01-29T10:00:09.528885" hostname="runnervmkj6or"><testcase classname="dashboard.gui_run_detail.Run Detail View Validation" name="Explore Run Detail View" status="passed" time="7.133986"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @navigation @detail
+  Scenario: Explore Run Detail View
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.166s
+    When I wait for 2 seconds ... passed in 2.000s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.103s
+    And I wait for 1 seconds ... passed in 1.000s
+    When I click on the "project_card" in "test_runs" ... passed in 0.125s
+    And I wait for 1 seconds ... passed in 1.000s
+    When I click on the "latest_badge" in "test_runs" ... passed in 0.105s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then I should see the text "Return to Base" ... passed in 0.025s
+    And I should see the text "Success" ... passed in 0.023s
+    Then I take a screenshot named "run_detail_full_view" ... passed in 0.258s
+    When I click on the "filter_failed" in "run_detail" ... passed in 0.082s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then I take a screenshot named "run_detail_filtered_failed" ... passed in 0.247s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] run_detail_full_view
+   Location: features/resources/screenshots/run_detail_full_view.png
+   <img src='file:///features/resources/screenshots/run_detail_full_view.png' width='800' alt='run_detail_full_view' />
+
+[SCREENSHOT] run_detail_filtered_failed
+   Location: features/resources/screenshots/run_detail_filtered_failed.png
+   <img src='file:///features/resources/screenshots/run_detail_filtered_failed.png' width='800' alt='run_detail_filtered_failed' />
+
+]]>
+</system-out></testcase></testsuite>
