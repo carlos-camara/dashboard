@@ -281,7 +281,7 @@ const EndpointDetailView: React.FC<EndpointDetailViewProps> = ({ endpoint, onBac
             </div>
 
             {/* Hero Card */}
-            <div className={`relative overflow-hidden rounded-[2.5rem] p-8 border shadow-2xl backdrop-blur-xl ${endpoint.method === 'POST' ? 'bg-orange-500/5 border-orange-500/20' :
+            <div className={`relative overflow-hidden rounded-[2rem] md:rounded-[2.5rem] p-4 md:p-8 border shadow-2xl backdrop-blur-xl ${endpoint.method === 'POST' ? 'bg-orange-500/5 border-orange-500/20' :
                 endpoint.method === 'GET' ? 'bg-blue-500/5 border-blue-500/20' :
                     'bg-slate-900/60 border-slate-800/60'
                 }`}>

@@ -272,7 +272,7 @@ const EndpointsView: React.FC<EndpointsViewProps> = ({ refreshKey, initialEndpoi
               <div key={projectName} className={`relative overflow-hidden rounded-[2rem] border transition-all duration-500 ${isExpanded ? 'bg-slate-900/40 border-indigo-500/30 shadow-2xl' : 'bg-slate-900/20 border-slate-800/50 hover:border-slate-700'}`}>
 
                 {/* Project Header */}
-                <div onClick={() => toggleProject(projectName)} className="relative p-6 cursor-pointer z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div onClick={() => toggleProject(projectName)} className="relative p-4 md:p-6 cursor-pointer z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
                   <div className="flex items-center space-x-6">
                     <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg transition-transform duration-500 ${isExpanded ? 'scale-110 bg-indigo-600 text-white' : 'bg-slate-800 text-slate-500'}`}>
                       <Box size={32} />
@@ -312,7 +312,7 @@ const EndpointsView: React.FC<EndpointsViewProps> = ({ refreshKey, initialEndpoi
 
                 {/* Detailed List */}
                 {isExpanded && (
-                  <div className="border-t border-slate-800/50 bg-slate-950/30 px-6 py-6 space-y-4">
+                  <div className="border-t border-slate-800/50 bg-slate-950/30 p-4 md:p-6 space-y-4">
                     {paginatedEps.map(ep => {
                       let baseUrl = "";
                       let resourcePath = ep.path;

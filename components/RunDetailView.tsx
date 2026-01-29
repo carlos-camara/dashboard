@@ -114,7 +114,7 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
       </div>
 
       {/* Hero Header */}
-      <div className="relative overflow-hidden bg-slate-900/60 border border-slate-800/60 rounded-[2.5rem] p-8 shadow-2xl backdrop-blur-xl group">
+      <div className="relative overflow-hidden bg-slate-900/60 border border-slate-800/60 rounded-[2rem] md:rounded-[2.5rem] p-4 md:p-8 shadow-2xl backdrop-blur-xl group">
         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-600/10 to-violet-600/10 rounded-full -mr-20 -mt-20 blur-3xl pointer-events-none group-hover:bg-blue-600/20 transition-all duration-1000"></div>
 
         <div className="relative flex flex-col lg:flex-row justify-between lg:items-center gap-8">
@@ -210,7 +210,7 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
 
       {/* Failure Analysis (Conditional) */}
       {Object.keys(failureGroups).length > 0 && (
-        <div className="bg-rose-950/10 border border-rose-900/30 rounded-[2rem] p-8 relative overflow-hidden">
+        <div className="bg-rose-950/10 border border-rose-900/30 rounded-[2rem] p-4 md:p-8 relative overflow-hidden">
           <div className="flex items-center mb-6">
             <div className="p-2 bg-rose-500/20 rounded-lg text-rose-500 mr-3 animate-pulse">
               <AlertCircle size={24} />

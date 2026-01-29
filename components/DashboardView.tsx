@@ -48,7 +48,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
 
       const failingProjects = Object.values(processProjectHealth(r)).filter(p => p.rate < 80).length;
       if (failingProjects > 2) setSystemStatus("CRITICAL INSTABILITY DETECTED");
-      else if (failingProjects > 0) setSystemStatus("PARTIAL SERVICE DEGRADATION");
+      else if (failingProjects > 0) setSystemStatus("MINOR ANOMALIES DETECTED");
       else setSystemStatus("SYSTEM OPTIMAL");
 
     } catch (err) {
@@ -141,15 +141,16 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
       {/* Status Bar */}
       <div className="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/5 h-10 flex items-center px-4 md:px-6 shadow-2xl">
         <div className="flex items-center space-x-3 text-cyan-400 border-r border-white/10 pr-6 mr-6 h-full">
-          <Monitor size={14} className="animate-pulse" />
-          <span className="text-[10px] font-black tracking-[0.2em]">{systemStatus}</span>
+          <Monitor size={14} className="animate-pulse flex-shrink-0" />
+          <span className="text-[10px] font-black tracking-[0.2em] hidden sm:inline">{systemStatus}</span>
+          <span className="text-[10px] font-black tracking-[0.2em] sm:hidden">{systemStatus.split('-')[0]}</span>
         </div>
         <div className="flex-1 overflow-hidden relative group">
           <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-slate-950 to-transparent z-10"></div>
           <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-slate-950 to-transparent z-10"></div>
           <div className="inline-block animate-marquee whitespace-nowrap text-[10px] font-mono text-slate-400/80">
             {runs.slice(0, 5).map((r, i) => (
-              <span key={i} className="mx-8 flex items-center inline-flex">
+              <span key={i} className="mx-4 md:mx-8 flex items-center inline-flex">
                 <span className={`w-1.5 h-1.5 rounded-full mr-2 ${r.failedCount > 0 ? 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.5)]' : 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]'}`}></span>
                 RUN {r.id.split('-')[0]} :: {r.project} :: <span className={r.failedCount > 0 ? "text-rose-400 ml-1" : "text-emerald-400 ml-1"}>{r.passedCount}/{r.totalCount} PASS</span>
               </span>
@@ -158,32 +159,73 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto p-6 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+      <div className="max-w-7xl mx-auto p-4 md:p-6 space-y-6 md:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
 
         {/* Header Section */}
-        <header className="flex flex-col lg:flex-row justify-between items-end gap-6 pb-6 border-b border-white/5">
-          <div className="space-y-4">
+        <header className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 pb-6 border-b border-white/5">
+          <div className="space-y-2 md:space-y-4 w-full">
             <div className="flex items-center space-x-2 text-indigo-400">
               <LayoutDashboard size={18} />
               <span className="text-xs font-bold tracking-[0.2em] uppercase">Dashboard Cluster</span>
             </div>
-            <h1 className="text-6xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-indigo-100 to-indigo-500/50 leading-[0.9] animate-float">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-indigo-100 to-indigo-500/50 leading-[0.9] animate-float">
               COMMAND<br />CENTER
             </h1>
           </div>
 
-          <div className="flex items-center gap-4 glass-panel p-2 rounded-2xl">
-            <div className="flex p-1 bg-slate-950/50 rounded-xl">
-              <button onClick={() => setDateRange(7)} aria-label="7D Window" className={`px-4 py-2 text-xs font-bold rounded-lg transition-all ${dateRange === 7 ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}>7D</button>
-              <button onClick={() => setDateRange(30)} aria-label="30D Window" className={`px-4 py-2 text-xs font-bold rounded-lg transition-all ${dateRange === 30 ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}>30D</button>
+          <div className="flex items-center gap-4 w-full lg:w-auto mt-4 lg:mt-0">
+            <div className="flex items-center gap-3 w-full lg:w-auto">
+              {/* Sliding Date Toggle */}
+              <div className="relative flex bg-slate-950/80 backdrop-blur-md rounded-2xl border border-slate-800 p-1.5 shadow-2xl flex-shrink-0">
+                {/* Background Slider */}
+                <div
+                  className={`absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-gradient-to-r from-indigo-600 to-blue-600 rounded-xl shadow-lg shadow-indigo-500/20 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] ${dateRange === 30 ? 'translate-x-[calc(100%+6px)]' : 'translate-x-0'}`}
+                ></div>
+
+                {/* Buttons (Transparent on top) */}
+                <button
+                  onClick={() => setDateRange(7)}
+                  className={`relative z-10 w-24 py-2 text-xs font-black tracking-wide transition-colors duration-200 ${dateRange === 7 ? 'text-white' : 'text-slate-500 hover:text-slate-300'}`}
+                >
+                  7 Days
+                </button>
+                <button
+                  onClick={() => setDateRange(30)}
+                  className={`relative z-10 w-24 py-2 text-xs font-black tracking-wide transition-colors duration-200 ${dateRange === 30 ? 'text-white' : 'text-slate-500 hover:text-slate-300'}`}
+                >
+                  30 Days
+                </button>
+              </div>
+
+              {/* Action Group */}
+              <div className="flex items-center gap-2 ml-auto">
+                {/* Export PDF */}
+                <button
+                  onClick={handleExportPDF}
+                  disabled={isExporting}
+                  title="Generate Report"
+                  className="p-3 rounded-2xl bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-all hover:scale-105 active:scale-95 group"
+                >
+                  {isExporting ? <Loader2 size={20} className="animate-spin" /> : <FileDown size={20} className="group-hover:animate-bounce" />}
+                </button>
+
+                {/* Sync Button */}
+                <button
+                  onClick={handleSync}
+                  disabled={isSyncing}
+                  title="Synchronize Data"
+                  className={`
+                      relative group p-3 rounded-2xl border border-indigo-500/20 text-white shadow-xl overflow-hidden
+                      bg-gradient-to-br from-indigo-600 to-violet-600
+                      hover:shadow-indigo-500/40
+                      transition-all duration-300 hover:scale-105 active:scale-95
+                    `}
+                >
+                  <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity blur-md"></div>
+                  <RefreshCw size={20} className={isSyncing ? 'animate-spin' : 'group-hover:rotate-180 transition-transform duration-700'} />
+                </button>
+              </div>
             </div>
-            <div className="h-8 w-px bg-white/10 mx-2"></div>
-            <button onClick={handleExportPDF} disabled={isExporting} aria-label="Export Report" className="p-3 hover:bg-slate-800 rounded-xl text-indigo-400 transition-colors">
-              {isExporting ? <Loader2 size={18} className="animate-spin" /> : <FileDown size={18} />}
-            </button>
-            <button onClick={handleSync} disabled={isSyncing} aria-label="Sync Data" className="p-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl shadow-lg shadow-indigo-600/20 transition-all active:scale-95 group">
-              <RefreshCw size={18} className={`group-hover:rotate-180 transition-transform duration-700 ${isSyncing ? 'animate-spin' : ''}`} />
-            </button>
           </div>
         </header>
 
@@ -195,37 +237,37 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
         ) : (
           <>
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {[
                 { label: 'System Health', value: `${qualityScore}%`, icon: Activity, color: qualityScore > 90 ? 'emerald' : qualityScore > 70 ? 'amber' : 'rose' },
                 { label: 'Total Executions', value: safeStats.totalRuns, icon: Layers, color: 'violet' },
                 { label: 'Pass Rate', value: `${safeStats.passRate}%`, icon: ShieldCheck, color: 'cyan' },
                 { label: 'Avg Latency', value: `${safeStats.avgDuration}ms`, icon: Clock, color: 'indigo' }
               ].map((stat, i) => (
-                <div key={i} className="group relative glass-panel p-6 rounded-3xl overflow-hidden hover:bg-slate-900/60 transition-all hover:scale-[1.02] hover:shadow-2xl hover:shadow-indigo-500/10 hover:border-indigo-500/30">
+                <div key={i} className="group relative glass-panel p-4 md:p-6 rounded-3xl overflow-hidden hover:bg-slate-900/60 transition-all hover:scale-[1.02] hover:shadow-2xl hover:shadow-indigo-500/10 hover:border-indigo-500/30">
                   <div className={`absolute -right-4 -top-4 w-32 h-32 bg-${stat.color}-500/10 rounded-full blur-3xl group-hover:bg-${stat.color}-500/20 transition-all`}></div>
                   <div className="relative z-10">
                     <div className="flex justify-between items-start mb-4">
                       <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">{stat.label}</p>
                       <stat.icon size={20} className={`text-${stat.color}-500 drop-shadow-[0_0_8px_rgba(var(--${stat.color}-500-rgb),0.5)]`} />
                     </div>
-                    <h3 className="text-4xl font-black text-white tracking-tight">{stat.value}</h3>
+                    <h3 className="text-3xl md:text-4xl font-black text-white tracking-tight">{stat.value}</h3>
                   </div>
                 </div>
               ))}
             </div>
 
             {/* Main Chart Area */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2 glass-panel p-8 rounded-[2.5rem] relative overflow-hidden">
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+              <div className="lg:col-span-2 glass-panel p-4 md:p-8 rounded-[2rem] md:rounded-[2.5rem] relative overflow-hidden">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-8 gap-4">
                   <div>
-                    <h3 className="text-2xl font-black text-white flex items-center gap-3">
+                    <h3 className="text-xl md:text-2xl font-black text-white flex items-center gap-3">
                       <Signal size={24} className="text-indigo-500" />
                       Signal Velocity
                     </h3>
                   </div>
-                  <div className="bg-slate-950/80 p-1.5 rounded-xl border border-white/5 flex gap-1">
+                  <div className="bg-slate-950/80 p-1.5 rounded-xl border border-white/5 flex gap-1 self-start sm:self-auto">
                     <button
                       onClick={() => setChartMode('success')}
                       className={`px-4 py-2 rounded-lg text-xs font-bold uppercase transition-all flex items-center gap-2 ${chartMode === 'success' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}
@@ -241,7 +283,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
                   </div>
                 </div>
 
-                <div className="h-[300px] w-full">
+                <div className="h-[250px] md:h-[300px] w-full">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={timeline} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                       <defs>
@@ -271,7 +313,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
               </div>
 
               {/* Sector Integrity */}
-              <div className="glass-panel p-8 rounded-[2.5rem] flex flex-col h-full">
+              <div className="glass-panel p-4 md:p-8 rounded-[2rem] md:rounded-[2.5rem] flex flex-col h-full">
                 <h3 className="text-xl font-black text-white mb-6 flex items-center gap-3">
                   <Box size={22} className="text-violet-500" /> Sector Integrity
                 </h3>
@@ -300,9 +342,9 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
             </div>
 
             {/* Incidents & Endpoints */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 pb-20">
               {/* Incidents */}
-              <div className="glass-panel p-8 rounded-[2.5rem]">
+              <div className="glass-panel p-4 md:p-8 rounded-[2rem] md:rounded-[2.5rem]">
                 <h3 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
                   <AlertTriangle size={16} className="text-rose-500" /> Incident Taxonomy
                 </h3>
@@ -318,7 +360,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
               </div>
 
               {/* Endpoints */}
-              <div className="glass-panel p-8 rounded-[2.5rem]">
+              <div className="glass-panel p-4 md:p-8 rounded-[2rem] md:rounded-[2.5rem]">
                 <h3 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
                   <Zap size={16} className="text-amber-500" /> Latency Anomalies
                 </h3>

@@ -19,12 +19,12 @@ const SettingsView: React.FC = () => {
             </div>
             <h3 className="text-lg font-bold text-white">Endpoint Discovery</h3>
           </div>
-          
+
           <div className="space-y-4">
             <div>
               <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Normalization Regex</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 defaultValue="/[0-9a-fA-F-]{36}/"
                 className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-sm font-mono focus:border-blue-500 outline-none"
               />
@@ -50,18 +50,18 @@ const SettingsView: React.FC = () => {
             </div>
             <h3 className="text-lg font-bold text-white">Alerting & Notifications</h3>
           </div>
-          
-          <div className="grid grid-cols-2 gap-6">
-             <div className="p-4 border border-slate-800 rounded-xl bg-slate-800/20">
-               <p className="text-sm font-bold text-white mb-1">Slack Integration</p>
-               <p className="text-xs text-slate-500 mb-4">Notify on critical failure trends</p>
-               <button className="text-xs font-bold text-blue-500 hover:underline">Configure Webhook</button>
-             </div>
-             <div className="p-4 border border-slate-800 rounded-xl bg-slate-800/20">
-               <p className="text-sm font-bold text-white mb-1">Email Reports</p>
-               <p className="text-xs text-slate-500 mb-4">Daily summary of new endpoints</p>
-               <button className="text-xs font-bold text-blue-500 hover:underline">Manage Subscribers</button>
-             </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-4 border border-slate-800 rounded-xl bg-slate-800/20">
+              <p className="text-sm font-bold text-white mb-1">Slack Integration</p>
+              <p className="text-xs text-slate-500 mb-4">Notify on critical failure trends</p>
+              <button className="text-xs font-bold text-blue-500 hover:underline">Configure Webhook</button>
+            </div>
+            <div className="p-4 border border-slate-800 rounded-xl bg-slate-800/20">
+              <p className="text-sm font-bold text-white mb-1">Email Reports</p>
+              <p className="text-xs text-slate-500 mb-4">Daily summary of new endpoints</p>
+              <button className="text-xs font-bold text-blue-500 hover:underline">Manage Subscribers</button>
+            </div>
           </div>
         </section>
 
