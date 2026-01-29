@@ -57,9 +57,6 @@ jobs:
           ./run_api_smoke_reports.ps1
           # Stash API reports for later upload
           cp -r reports api_reports_tmp
-          # Collect XMLs for the PR reporter
-          mkdir -p junit-results
-          find reports -name "*.xml" -exec cp {} junit-results/ \;
           # Clear reports for the next specific run
           rm -rf reports
 
@@ -67,10 +64,21 @@ jobs:
         shell: pwsh
         run: |
           ./run_gui_smoke_reports.ps1
-          # Collect GUI XMLs for the PR reporter
-          find reports -name "*.xml" -exec cp {} junit-results/ \;
         env:
           HEADLESS: "true"
+
+      - name: Collect All JUnit XMLs
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p junit-results
+          if [ -d "api_reports_tmp" ]; then
+            find api_reports_tmp -name "*.xml" -exec cp {} junit-results/ \;
+          fi
+          if [ -d "reports" ]; then
+            find reports -name "*.xml" -exec cp {} junit-results/ \;
+          fi
+          echo "Collected $(ls junit-results | wc -l) XML files."
 
       - name: Upload API Reports
         if: always()
