@@ -432,6 +432,34 @@ app.get("/api/health", (req, res) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
+app.get("/api/debug", (req, res) => {
+    const reportsPath = path.join(__dirname, REPORTS_DIR);
+    const exists = fs.existsSync(reportsPath);
+    let structure = [];
+    if (exists) {
+        structure = fs.readdirSync(reportsPath).map(f => {
+            const full = path.join(reportsPath, f);
+            const stats = fs.statSync(full);
+            return {
+                name: f,
+                isDir: stats.isDirectory(),
+                files: stats.isDirectory() ? fs.readdirSync(full).filter(x => x.endsWith('.xml')).length : 0
+            };
+        });
+    }
+    res.json({
+        cwd: process.cwd(),
+        dirname: __dirname,
+        reportsPath,
+        exists,
+        structure,
+        env: {
+            NODE_ENV: process.env.NODE_ENV,
+            PORT: process.env.PORT
+        }
+    });
+});
+
 app.post("/api/sync", async (req, res) => {
     const reportsPath = req.query.reports_path || REPORTS_DIR;
     const targetDir = path.isAbsolute(reportsPath) ? reportsPath : path.join(__dirname, reportsPath);
@@ -579,6 +607,20 @@ app.post("/api/spec", upload.single('file'), (req, res) => {
     }
 });
 
+// Auto-sync function to run on startup
+async function autoSyncOnStartup() {
+    const targetDir = path.join(__dirname, REPORTS_DIR);
+    if (!fs.existsSync(targetDir)) return;
+
+    console.log(`[Auto-Sync] Scanning for reports in ${targetDir}...`);
+    const folders = fs.readdirSync(targetDir).filter(f => fs.statSync(path.join(targetDir, f)).isDirectory());
+    for (const folder of folders) {
+        await parseRunFolder(path.join(targetDir, folder));
+    }
+    console.log(`[Auto-Sync] Sync complete. Processed ${folders.length} folders.`);
+}
+
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
+    autoSyncOnStartup().catch(err => console.error("[Auto-Sync] Failed:", err));
 });

@@ -17,7 +17,18 @@ const saveStored = <T>(key: string, data: T) => {
   localStorage.setItem(key, JSON.stringify(data));
 };
 
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
+const getBaseUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (!envUrl) return "http://localhost:3001/api";
+
+  // Ensure it ends with /api and no double slashes
+  let sanitized = envUrl.trim();
+  if (sanitized.endsWith('/')) sanitized = sanitized.slice(0, -1);
+  if (!sanitized.endsWith('/api')) sanitized += '/api';
+  return sanitized;
+};
+
+const BASE_URL = getBaseUrl();
 
 export const api = {
   checkHealth: async (): Promise<boolean> => {
