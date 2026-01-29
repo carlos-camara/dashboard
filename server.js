@@ -33,6 +33,10 @@ const upload = multer({ dest: UPLOADS_DIR });
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => {
+    res.send("<h1>QA Hub API is running</h1><p>The dashboard is hosted on GitHub Pages. Go to your GitHub Pages URL to view it.</p><p>Check <a href='/api/health'>/api/health</a> for status.</p>");
+});
+
 // Serve screenshots statically
 // Access via: http://localhost:3001/screenshots/filename.png
 app.use('/screenshots', express.static(SCREENSHOTS_DIR));
