@@ -3,129 +3,172 @@
 > [!IMPORTANT]
 > **NEXT-GEN TEST ORCHESTRATION & INTELLIGENCE PLATFORM**
 >
-> An ultra-premium visualization layer that bridges the gap between technical execution logs and executive decision-making.
+> A complete visualization layer that bridges the gap between technical execution logs and executive decision-making.
 
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-0F172A?style=for-the-badge&logo=python&logoColor=38bdf8)](https://www.python.org/)
 [![React 18](https://img.shields.io/badge/React-18-0F172A?style=for-the-badge&logo=react&logoColor=61dafb)](https://react.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-Ultramodern-0F172A?style=for-the-badge&logo=tailwindcss&logoColor=38bdf8)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-0F172A?style=for-the-badge&logo=open-source-initiative&logoColor=white)](LICENSE)
+[![Lint Status](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml)
+[![Test Suite Status](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml)
 
 <br/>
 
 ![Hero Dashboard](features/resources/screenshots/dashboard_complete_view_fullpage.png)
 
-## 🌌 MISSION OVERVIEW
+## 🌟 Executive Overview
 
-**SENTINEL** is not just a dashboard; it's a **Quality Assurance Operating System**. Designed for high-velocity engineering teams, it consumes test telemetry from disparate sources (API Smoke, GUI Regression, Load Tests) and synthesizes them into a unified, glass-morphic interface.
+This is a **high-performance, ultra-premium QA ecosystem** designed for modern engineering teams. Built with a state-of-the-art **Glassmorphism UI**, it provides real-time insights into your multi-project quality landscape, moving beyond simple test pass/fail metrics.
 
-We have moved beyond "Pass/Fail". We provide **Context, Trend Analysis, and Visual Proof**.
-
----
-
-## ⚡ CORE CAPABILITIES
-
-### 📱 **Hyper-Responsive Mobile Architecture**
-Engineered with a **"Mobile-First, Desktop-Ultra"** philosophy. The entire command center adapts fluidly to any viewport.
-*   **Touch-Optimized Controls**: Sliding date toggles and large targets for field usage.
-*   **Off-Canvas Navigation**: Smooth, native-app like sidebar transitions.
-*   **Adaptive Grids**: Data panels intelligently stack and resize for phone screens without losing fidelity.
-
-### 📄 **Executive Intelligence Dossiers (PDF)**
-Generate professional-grade PDF reports with a single click.
-*   **Automated Synthesis**: Compiles health metrics, failure taxonomies, and risk assessments into a clean document.
-*   **Stakeholder Ready**: Formatted specifically for C-level review—clean, concise, and branded.
-*   **Instant Export**: Available globally via the dashboard header actions.
-
-### 🎨 **"Ultra Premium" Visual Language**
-A redesign focused on clarity, depth, and futuristic aesthetics.
-*   **Glassmorphism**: Apple-vision-pro inspired translucency and blur effects.
-*   **Live Telemetry**: Pulsing indicators for system status and real-time connectivity.
-*   **Motion Design**: Interactive hover states, sliding toggles, and smooth ingress animations.
+### 🚀 Key Pillars
+- **Unified Vision**: One dashboard for API (Behave) and GUI (Selenium) test suites across all your repositories.
+- **Smart Diagnostics**: Identifies failure patterns and provides immersive visual proof (screenshots) for every step.
+- **Micro-Services Ready**: Professional-grade assertion engine for complex REST flows and contract validation.
+- **Enterprise Aesthetics**: Immersive dark mode, fluid transitions, and a mobile-responsive interface.
 
 ---
 
-## 📸 VISUAL RECONNAISSANCE
+## 🌐 Live Demonstration
 
-### 1. The Command Deck
-*Real-time situational awareness of your quality landscape.*
-<div align="center">
-  <img src="features/resources/screenshots/dashboard_stats_grid.png" width="100%" alt="Stats Grid" />
-</div>
+Experience the future of test reporting. The dashboard is live and accessible globally:
 
-<br/>
-
-### 2. Surgical Precision (Run Details)
-*Drill down from global trends to individual atomic failures with millisecond precision.*
-<div align="center">
-  <img src="features/resources/screenshots/run_detail_full_view.png" width="100%" alt="Run Detail" />
-</div>
-
-<br/>
-
-### 3. Action & Control Layer
-*Fluid controls for time-travel (7D/30D) and data synchronization.*
-<div align="center">
-  <img src="features/resources/screenshots/dashboard_header_status.png" width="100%" alt="Header Controls" />
-</div>
+> **[View Live Dashboard](https://carlos-camara.github.io/dashboard/)**
 
 ---
 
-## 🏗️ SYSTEM ARCHITECTURE
+## 📸 Visual Core
+
+The dashboard is structured into specialized views designed for different engineering needs.
+
+<table border="0">
+  <tr>
+    <td width="33%" align="center">
+      <h3>📈 Main Insights</h3>
+      <img src="features/resources/screenshots/dashboard_stats_grid.png" alt="Stats Grid" />
+      <p><i>Real-time KPIs and system health metrics at a glance.</i></p>
+    </td>
+    <td width="33%" align="center">
+      <h3>📂 Execution Archives</h3>
+      <img src="features/resources/screenshots/test_runs_search_results.png" alt="Archives" />
+      <p><i>Historical data exploration with project-based grouping.</i></p>
+    </td>
+    <td width="33%" align="center">
+      <h3>📡 Endpoint Catalog</h3>
+      <img src="features/resources/screenshots/endpoints_deep_detail.png" alt="Endpoints" />
+      <p><i>Technical registry of all infrastructure endpoints and their status.</i></p>
+    </td>
+  </tr>
+</table>
+
+### 🔍 Surgical Diagnostics
+When a test fails, the **Run Detail View** allows you to drill down into specific failures, viewing headers, bodies, and visual proof simultaneously.
+
+![Run Detail](features/resources/screenshots/run_detail_full_view.png)
+
+---
+
+## ☁️ Deployment Strategy
+
+Our infrastructure leverages a decoupled architecture for maximum performance and reliability.
+
+### **Frontend: GitHub Pages**
+The React-based dashboard interface is statically generated and hosted on **GitHub Pages**. This ensures:
+- **Global Edge Delivery**: Lightning-fast load times worldwide.
+- **Zero-Downtime Updates**: Atomic deployments triggered automatically by our CI pipelines.
+- **Security**: Hardened static assets with no server-side attack surface.
+
+### **Backend: Render**
+The reporting API and data aggregation layer run on **Render Cloud**. This provides:
+- **Scalable Compute**: Automatically adjusts resources based on test suite load.
+- **Persistent Data**: SQlite/PostgreSQL integrations for long-term historical analysis.
+- **Health Checks**: Automated liveness probes to ensure reporting availability.
+
+---
+
+## 🏗 System Architecture
+
+We utilize a modern stack to ensure scalability and developer comfort.
 
 ```mermaid
 graph TD
-    subgraph "Ingestion Layer"
-        A[GitHub Actions] -->|Trigger| B(PyTest / Behave)
-        A -->|Trigger| C(Selenium Grid)
-    end
-
-    subgraph "Core Processing"
-        B -->|JSON/XML| D{Sentinel Engine}
-        C -->|Screenshots| D
-        D -->|Heuristics| E[Risk Analysis]
-        D -->|Aggregation| F[Project Health]
-    end
-
-    subgraph "Presentation Layer"
-        E & F --> G[Render API]
-        G --> H[GitHub Pages Frontend]
-        H -->|User Action| I[PDF Generator]
-    end
+    A["GitHub Actions CI"] -->|Triggers| B("Python Behave")
+    A -->|Triggers| C("Selenium GUI")
+    B -->|Logs| D["REST API Validation"]
+    C -->|Captures| E["Visual Evidence (Screenshots)"]
+    D & E -->|Generate| F["JUnit XML & JSON Reports"]
+    F -->|Ingested by| G["Render Backend API"]
+    G -->|Served to| H["GitHub Pages Frontend"]
+    H -->|Presents| I{"Executive Insights"}
     
-    style H fill:#4f46e5,stroke:#fff,stroke-width:2px,color:#fff
-    style D fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#fff
+    style G fill:#6d28d9,color:#fff
+    style H fill:#2563eb,color:#fff
+    style I fill:#059669,color:#fff
 ```
 
 ---
 
-## 🚀 DEPLOYMENT PROTOCOLS
+## 🛠 Feature Showcase
 
-### Local Development
-Initialize the Sentinel environment on your local machine.
+### 🔍 Technical API Validation
+- **Contract & Schema**: Automatic validation of response structures against YAML definitions.
+- **SLA Monitoring**: Integrated performance benchmarking for response times.
+- **Traceability**: Comprehensive logging of headers and payloads for every request.
 
-```bash
-# 1. Clone the repository
-git clone https://github.com/carlos-camara/dashboard.git
+### 🌐 Advanced GUI Automation
+- **YAML Locator Engine**: Maintainable tests with descriptive element references.
+- **Smart Waits**: Industrial-grade synchronization for dynamic modern web apps.
+- **Evidence Collection**: High-resolution screenshots on every interaction and failure.
 
-# 2. Ignite Backend & Test Engine
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+---
 
-# 3. Launch UI Matrix
-npm install
-npm run dev
-```
+## 🚦 Getting Started
 
-### Execution Commands
+### 📋 Prerequisites
+- **Python 3.11+**
+- **Node.js 20+**
+- **Chrome / Chromedriver** (for local GUI tests)
 
-| Directive | Command | Description |
+### 💻 Local Setup
+
+1. **Clone & Browse**:
+   ```bash
+   git clone https://github.com/carlos-camara/dashboard.git
+   cd dashboard
+   ```
+
+2. **Backend & Test Logic**:
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate  # Windows: .venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+
+3. **Frontend Dashboard**:
+   ```bash
+   npm install
+   ```
+
+---
+
+## 🏃 Execution Commands
+
+| Mode | Command | Description |
 | :--- | :--- | :--- |
-| **GUI Validation** | `npm run test:gui` | Launches full visual regression suite |
-| **API Check** | `npm run test:api` | Fast execution of API contract tests |
-| **Generate Report**| via UI | Click the "Download" icon in header |
+| **Development** | `npm run dev` | Spins up the dashboard UI locally |
+| **API Smoke** | `./run_api_smoke_reports.ps1` | Rapid validation of core endpoints |
+| **GUI Smoke** | `./run_gui_smoke_reports.ps1` | Visual verification of critical paths |
+| **Backend** | `npm run start-backend` | Starts the mock API and database services |
 
 ---
+
+## 🛡️ CI/CD Workflow
+Our **GitHub Actions** pipeline orchestrates the entire lifecycle:
+1. **Linting**: Enforces strict code quality standards for Python and TypeScript.
+2. **Unified Suite**: Runs API and GUI tests in parallel within a headless environment.
+3. **Auto-Publishing**: Merges artifacts and deploys the frontend to GitHub Pages.
+
+> [!TIP]
+> Use the `workflow_dispatch` event to manually trigger a full suite validation from the GitHub UI.
 
 > **Designed & Engineered by [Carlos Camara](https://github.com/carlos-camara)**
 > *Quality is not an act, it is a habit.*
