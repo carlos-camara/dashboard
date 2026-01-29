@@ -17,7 +17,7 @@ const saveStored = <T>(key: string, data: T) => {
   localStorage.setItem(key, JSON.stringify(data));
 };
 
-const BASE_URL = "http://localhost:3001/api";
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
 
 export const api = {
   checkHealth: async (): Promise<boolean> => {
