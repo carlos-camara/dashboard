@@ -375,7 +375,7 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
                                           const imgMatch = line.match(/<img src='file:\/\/\/.*[\\\/]([^'"]+\.png)'/);
                                           if (imgMatch) {
                                             const filename = imgMatch[1];
-                                            const imageUrl = `http://localhost:3001/screenshots/${filename}`;
+                                            const imageUrl = api.getScreenshotUrl(filename);
                                             return (
                                               <div key={logIdx} className="mt-2 mb-2">
                                                 <div className="text-[10px] font-bold text-indigo-400 mb-1">📸 Screenshot Captured:</div>

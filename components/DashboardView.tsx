@@ -12,7 +12,7 @@ import {
   LayoutDashboard
 } from 'lucide-react';
 import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
+import { generateExecutiveReport } from '../services/reportGenerator';
 
 interface DashboardViewProps {
   refreshKey?: number;
@@ -111,31 +111,23 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
   };
 
   const handleExportPDF = async () => {
-    if (!dashboardRef.current || !stats) return;
+    if (!stats) return;
     setIsExporting(true);
     try {
-      // PDF Export Logic here (simplified for brevity as logic is robust)
-      await new Promise(r => setTimeout(r, 500));
-      const element = dashboardRef.current;
-      element.classList.add('printing-mode');
-      const canvas = await html2canvas(element, { scale: 2, useCORS: true, logging: false, backgroundColor: '#0f172a', ignoreElements: (el) => el.tagName === 'BUTTON' });
-      element.classList.remove('printing-mode');
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const pageWidth = pdf.internal.pageSize.getWidth();
-      const pageHeight = pdf.internal.pageSize.getHeight();
-
-      pdf.setFillColor(15, 23, 42);
-      pdf.rect(0, 0, pageWidth, pageHeight, 'F');
-
-      const contentWidth = pageWidth - 20;
-      const imgProps = pdf.getImageProperties(imgData);
-      const contentHeight = (imgProps.height * contentWidth) / imgProps.width;
-
-      pdf.addImage(imgData, 'PNG', 10, 10, contentWidth, contentHeight);
-      pdf.save(`Sentinel_Report_${new Date().toISOString().split('T')[0]}.pdf`);
-    } catch (err) { console.error(err); }
-    finally { setIsExporting(false); }
+      // Use the professional report generator
+      generateExecutiveReport(
+        stats,
+        filteredRuns,
+        endpoints,
+        projectHealthData,
+        topErrors,
+        slowestEndpoints
+      );
+    } catch (err) {
+      console.error("Professional report generation failed:", err);
+    } finally {
+      setIsExporting(false);
+    }
   };
 
   useEffect(() => { fetchData(); }, [dateRange, refreshKey]);
