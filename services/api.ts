@@ -211,6 +211,11 @@ export const api = {
       console.error('Error uploading spec:', e);
       return false;
     }
+  },
+
+  getScreenshotUrl: (filename: string): string => {
+    // BASE_URL is something like http://localhost:3001/api or https://app.onrender.com/api
+    return BASE_URL.replace(/\/api$/, '') + `/screenshots/${filename}`;
   }
 };
 

@@ -7,6 +7,7 @@ import EndpointDetailView from './EndpointDetailView';
 
 interface EndpointsViewProps {
   refreshKey?: number;
+  initialEndpoint?: Endpoint | null;
 }
 
 interface ProjectStats {
@@ -16,14 +17,20 @@ interface ProjectStats {
   failingCount: number;
 }
 
-const EndpointsView: React.FC<EndpointsViewProps> = ({ refreshKey }) => {
+const EndpointsView: React.FC<EndpointsViewProps> = ({ refreshKey, initialEndpoint }) => {
   const [endpoints, setEndpoints] = useState<Endpoint[]>([]);
   const [search, setSearch] = useState('');
   const [methodFilter, setMethodFilter] = useState('ALL');
   const [healthFilter, setHealthFilter] = useState('ALL');
   const [serviceFilter, setServiceFilter] = useState('ALL');
   const [showAdvanced, setShowAdvanced] = useState(false);
-  const [selectedEndpoint, setSelectedEndpoint] = useState<Endpoint | null>(null);
+  const [selectedEndpoint, setSelectedEndpoint] = useState<Endpoint | null>(initialEndpoint || null);
+
+  useEffect(() => {
+    if (initialEndpoint) {
+      setSelectedEndpoint(initialEndpoint);
+    }
+  }, [initialEndpoint]);
 
   // State for collapsible project groups
   const [expandedProjects, setExpandedProjects] = useState<Set<string>>(new Set());
@@ -89,7 +96,7 @@ const EndpointsView: React.FC<EndpointsViewProps> = ({ refreshKey }) => {
   }, [endpoints, search, methodFilter, healthFilter, serviceFilter]);
 
   // 2. Group by Project
-  const groupedEndpoints = useMemo(() => {
+  const groupedEndpoints = useMemo<Record<string, Endpoint[]>>(() => {
     const groups: Record<string, Endpoint[]> = {};
     const uncategorizedKey = "Global / Uncategorized";
 
@@ -108,9 +115,9 @@ const EndpointsView: React.FC<EndpointsViewProps> = ({ refreshKey }) => {
   }, [filteredEndpoints]);
 
   // 3. Calculate Stats per Project
-  const projectStats = useMemo(() => {
+  const projectStats = useMemo<Record<string, ProjectStats>>(() => {
     const stats: Record<string, ProjectStats> = {};
-    Object.entries(groupedEndpoints).forEach(([proj, eps]) => {
+    (Object.entries(groupedEndpoints) as [string, Endpoint[]][]).forEach(([proj, eps]) => {
       const totalStart = eps.reduce((acc, e) => acc + (e.avgDuration || 0), 0);
       const totalPass = eps.reduce((acc, e) => acc + e.passCount, 0);
       const totalFail = eps.reduce((acc, e) => acc + e.failCount, 0);
@@ -125,6 +132,13 @@ const EndpointsView: React.FC<EndpointsViewProps> = ({ refreshKey }) => {
     });
     return stats;
   }, [groupedEndpoints]);
+
+  // Auto-expand projects when filters are active
+  useEffect(() => {
+    if (search || methodFilter !== 'ALL' || healthFilter !== 'ALL' || serviceFilter !== 'ALL') {
+      setExpandedProjects(new Set(Object.keys(groupedEndpoints)));
+    }
+  }, [groupedEndpoints, search, methodFilter, healthFilter, serviceFilter]);
 
   const sortedProjects = Object.keys(groupedEndpoints).sort();
   const methods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];

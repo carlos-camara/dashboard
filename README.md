@@ -9,7 +9,7 @@
 [![Lint Status](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml)
 [![Test Suite Status](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml)
 
-![Hero Image](features/resources/screenshots/dashboard_header_status.png)
+![Hero Image](features/resources/screenshots/dashboard_complete_view_fullpage.png)
 
 ## 🌟 Executive Overview
 
@@ -20,6 +20,14 @@ This is a **high-performance, ultra-premium QA ecosystem** designed for modern e
 - **Smart Diagnostics**: Identifies failure patterns and provides immersive visual proof (screenshots) for every step.
 - **Micro-Services Ready**: Professional-grade assertion engine for complex REST flows and contract validation.
 - **Enterprise Aesthetics**: Immersive dark mode, fluid transitions, and a mobile-responsive interface.
+
+---
+
+## 🌐 Live Demonstration
+
+Experience the future of test reporting. The dashboard is live and accessible globally:
+
+> **[View Live Dashboard](https://carlos-camara.github.io/dashboard/)**
 
 ---
 
@@ -36,12 +44,12 @@ The dashboard is structured into specialized views designed for different engine
     </td>
     <td width="33%" align="center">
       <h3>📂 Execution Archives</h3>
-      <img src="features/resources/screenshots/archives_search_results.png" alt="Archives" />
+      <img src="features/resources/screenshots/test_runs_search_results.png" alt="Archives" />
       <p><i>Historical data exploration with project-based grouping.</i></p>
     </td>
     <td width="33%" align="center">
       <h3>📡 Endpoint Catalog</h3>
-      <img src="features/resources/screenshots/endpoints_advanced_filters.png" alt="Endpoints" />
+      <img src="features/resources/screenshots/endpoints_deep_detail.png" alt="Endpoints" />
       <p><i>Technical registry of all infrastructure endpoints and their status.</i></p>
     </td>
   </tr>
@@ -54,22 +62,42 @@ When a test fails, the **Run Detail View** allows you to drill down into specifi
 
 ---
 
+## ☁️ Deployment Strategy
+
+Our infrastructure leverages a decoupled architecture for maximum performance and reliability.
+
+### **Frontend: GitHub Pages**
+The React-based dashboard interface is statically generated and hosted on **GitHub Pages**. This ensures:
+- **Global Edge Delivery**: Lightning-fast load times worldwide.
+- **Zero-Downtime Updates**: Atomic deployments triggered automatically by our CI pipelines.
+- **Security**: Hardened static assets with no server-side attack surface.
+
+### **Backend: Render**
+The reporting API and data aggregation layer run on **Render Cloud**. This provides:
+- **Scalable Compute**: Automatically adjusts resources based on test suite load.
+- **Persistent Data**: SQlite/PostgreSQL integrations for long-term historical analysis.
+- **Health Checks**: Automated liveness probes to ensure reporting availability.
+
+---
+
 ## 🏗 System Architecture
 
 We utilize a modern stack to ensure scalability and developer comfort.
 
 ```mermaid
 graph TD
-    A[GitHub Actions CI] -->|Triggers| B(Python Behave)
-    A -->|Triggers| C(Selenium GUI)
-    B -->|Logs| D[REST API Validation]
-    C -->|Captures| E[Visual Evidence]
-    D & E -->|Generate| F[JUnit XML & Screenshots]
-    F -->|Ingested by| G[Next.js Dashboard]
-    G -->|Presents| H{Executive Insights}
+    A["GitHub Actions CI"] -->|Triggers| B("Python Behave")
+    A -->|Triggers| C("Selenium GUI")
+    B -->|Logs| D["REST API Validation"]
+    C -->|Captures| E["Visual Evidence (Screenshots)"]
+    D & E -->|Generate| F["JUnit XML & JSON Reports"]
+    F -->|Ingested by| G["Render Backend API"]
+    G -->|Served to| H["GitHub Pages Frontend"]
+    H -->|Presents| I{"Executive Insights"}
     
-    style G fill:#2563eb,color:#fff
-    style H fill:#059669,color:#fff
+    style G fill:#6d28d9,color:#fff
+    style H fill:#2563eb,color:#fff
+    style I fill:#059669,color:#fff
 ```
 
 ---
@@ -132,10 +160,10 @@ graph TD
 Our **GitHub Actions** pipeline orchestrates the entire lifecycle:
 1. **Linting**: Enforces strict code quality standards for Python and TypeScript.
 2. **Unified Suite**: Runs API and GUI tests in parallel within a headless environment.
-3. **Auto-Publishing**: Merges artifacts and updates the dashboard data automatically.
+3. **Auto-Publishing**: Merges artifacts and deploys the frontend to GitHub Pages.
 
 > [!TIP]
 > Use the `workflow_dispatch` event to manually trigger a full suite validation from the GitHub UI.
 
 ---
-> Created with by [Carlos Camara](https://github.com/carlos-camara)
+> Created by [Carlos Camara](https://github.com/carlos-camara)

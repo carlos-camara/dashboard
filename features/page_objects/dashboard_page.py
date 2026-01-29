@@ -158,6 +158,9 @@ class DashboardPage(BasePage):
         Example: "sidebar.test_runs_link"
         """
         parts = locator_path.split('.')
+        if parts[0] == 'dashboard':
+             # If path starts with dashboard, look in dashboard page using the rest of the path
+             return self.get_locator_def('dashboard', '.'.join(parts[1:]))
         if len(parts) == 2:
             return self.get_locator_def(parts[0], parts[1])
         return self.get_locator_def('dashboard', locator_path)
