@@ -400,7 +400,9 @@ async function parseRunFolder(folderPath) {
 // Routes
 app.post("/api/upload", upload.array('files'), async (req, res) => {
     try {
+        console.log(`[Upload] Request received. Files: ${req.files?.length || 0}`);
         if (!req.files || req.files.length === 0) {
+            console.error("[Upload] No files in request.");
             return res.status(400).json({ error: "No files uploaded." });
         }
 
@@ -409,21 +411,36 @@ app.post("/api/upload", upload.array('files'), async (req, res) => {
         let projectName = "Auto-discovered";
         let totalPassed = 0, totalFailed = 0, totalCount = 0;
 
+        console.log(`[Upload] Starting database transaction for Run ${runId}`);
         db.prepare(`INSERT INTO runs (id, source_folder, timestamp, project, passed, failed, total, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`).run(runId, "UPLOAD", new Date().toISOString(), projectName, 0, 0, 0, JSON.stringify([]));
 
         for (const file of req.files) {
+            console.log(`[Upload] Processing file: ${file.originalname} (${file.size} bytes)`);
             const content = fs.readFileSync(file.path, 'utf8');
-            const { stats, inferredProject } = await parseXmlContent(content, runId, projectName, discoveredTags);
-            totalPassed += stats.passed; totalFailed += stats.failed; totalCount += stats.total;
-            projectName = inferredProject;
-            fs.unlinkSync(file.path);
+
+            try {
+                const { stats, inferredProject } = await parseXmlContent(content, runId, projectName, discoveredTags, [], file.originalname);
+                totalPassed += stats.passed;
+                totalFailed += stats.failed;
+                totalCount += stats.total;
+                projectName = inferredProject;
+                console.log(`[Upload] File Parsed: ${file.originalname}. Stats: ${JSON.stringify(stats)}`);
+            } catch (parseErr) {
+                console.error(`[Upload] Failed to parse ${file.originalname}:`, parseErr);
+                // Continue with other files if one fails? Or fail whole?
+                // Let's fail for now to be safe and find the bug
+                throw new Error(`Parse error in ${file.originalname}: ${parseErr.message}`);
+            } finally {
+                if (fs.existsSync(file.path)) fs.unlinkSync(file.path);
+            }
         }
 
+        console.log(`[Upload] Finalizing run record. Project: ${projectName}, Total: ${totalCount}`);
         db.prepare(`UPDATE runs SET project = ?, passed = ?, failed = ?, total = ?, tags = ? WHERE id = ?`).run(projectName, totalPassed, totalFailed, totalCount, JSON.stringify([]), runId);
 
         res.json({ success: true, runId, projectName, totalCount });
     } catch (e) {
-        console.error("Upload error:", e);
+        console.error("[Upload] Fatal error during upload processing:", e);
         res.status(500).json({ error: e.message });
     }
 });
