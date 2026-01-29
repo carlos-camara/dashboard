@@ -78,7 +78,7 @@ jobs:
           if [ -d "reports" ]; then
             find reports -name "*.xml" -exec cp {} junit-results/ \;
           fi
-          echo "Collected $(ls junit-results | wc -l) XML files."
+          echo "Collected $(find junit-results -maxdepth 1 -name "*.xml" | wc -l) XML files."
 
       - name: Upload API Reports
         if: always()
@@ -113,17 +113,19 @@ jobs:
       - name: Generate Job Summary
         if: always()
         run: |
-          echo "### 🚦 Test Suite Summary" >> $GITHUB_STEP_SUMMARY
-          echo "| Test Type | Status |" >> $GITHUB_STEP_SUMMARY
-          echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
-          if [ -d "api_reports_tmp" ]; then
-            echo "| 📡 API Tests | ✅ Completed |" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "| 📡 API Tests | ❌ Failed |" >> $GITHUB_STEP_SUMMARY
-          fi
-          if [ -d "reports" ]; then
-            echo "| 🌐 GUI Tests | ✅ Completed |" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "| 🌐 GUI Tests | ❌ Failed |" >> $GITHUB_STEP_SUMMARY
-          fi
+          {
+            echo "### 🚦 Test Suite Summary"
+            echo "| Test Type | Status |"
+            echo "| :--- | :--- |"
+            if [ -d "api_reports_tmp" ]; then
+              echo "| 📡 API Tests | ✅ Completed |"
+            else
+              echo "| 📡 API Tests | ❌ Failed |"
+            fi
+            if [ -d "reports" ]; then
+              echo "| 🌐 GUI Tests | ✅ Completed |"
+            else
+              echo "| 🌐 GUI Tests | ❌ Failed |"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
 
