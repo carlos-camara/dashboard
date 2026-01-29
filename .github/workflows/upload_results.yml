@@ -5,19 +5,27 @@ on:
     workflows: ["Unified Test Suite"]
     types:
       - completed
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: 'Run ID of the Unified Test Suite to process'
+        required: false
+        type: string
 
 jobs:
   upload-results:
     name: Merge and Commit Reports
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: |
+      github.event_name == 'workflow_dispatch' || 
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
     permissions:
       contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_branch }}
+          ref: ${{ github.event.workflow_run.head_branch || github.ref_name }}
           fetch-depth: 0
 
       - name: Download API Reports
@@ -26,7 +34,7 @@ jobs:
           name: api-reports
           path: temp_reports/api
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          run-id: ${{ github.event.workflow_run.id }}
+          run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
 
       - name: Download GUI Reports
         uses: actions/download-artifact@v4
@@ -34,7 +42,7 @@ jobs:
           name: gui-reports
           path: temp_reports/gui
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          run-id: ${{ github.event.workflow_run.id }}
+          run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
 
       - name: Download GUI Screenshots
         uses: actions/download-artifact@v4
@@ -42,7 +50,7 @@ jobs:
           name: gui-screenshots
           path: temp_reports/screenshots
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          run-id: ${{ github.event.workflow_run.id }}
+          run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
 
       - name: Merge and Commit Results
         run: |
@@ -62,5 +70,5 @@ jobs:
             echo "No changes in reports or screenshots to commit."
           else
             git commit -m "docs: auto-generate integrated test reports and screenshots [skip ci]"
-            git push origin "HEAD:${{ github.event.workflow_run.head_branch }}"
+            git push origin "HEAD:${{ github.event.workflow_run.head_branch || github.ref_name }}"
           fi
