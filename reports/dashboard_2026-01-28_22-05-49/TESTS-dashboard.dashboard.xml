@@ -1,0 +1,74 @@
+<testsuite name="dashboard.dashboard.Dashboard API Validations" tests="4" errors="0" failures="0" skipped="0" time="0.14854" timestamp="2026-01-29T09:59:28.823066" hostname="runnervmkj6or"><testcase classname="dashboard.dashboard.Dashboard API Validations" name="Health check returns 200 OK" status="passed" time="0.006039"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke @health
+  Scenario: Health check returns 200 OK
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I send a "GET" request to "/api/health" ... passed in 0.005s
+    Then the response status code should be 200 ... passed in 0.000s
+    And the response JSON path "status" should be "ok" ... passed in 0.000s
+    And the response JSON should contain keys ... passed in 0.000s
+      | timestamp |
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard.Dashboard API Validations" name="Upload, Verify, and Explore a Run" status="passed" time="0.036845"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke @runs @crud_flow
+  Scenario: Upload, Verify, and Explore a Run
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I upload the file "test_run_sample.xml" to "/api/upload" ... passed in 0.015s
+    Then the response status code should be 200 ... passed in 0.000s
+    And the response JSON path "success" should be true ... passed in 0.000s
+    And the response JSON path "totalCount" should be 1 ... passed in 0.000s
+    And I store the response JSON path "runId" as "uploaded_run_id" ... passed in 0.000s
+    When I send a "GET" request to "/api/runs" ... passed in 0.017s
+    Then the response status code should be 200 ... passed in 0.000s
+    And the response JSON path "0.id" should equal stored variable "uploaded_run_id" ... passed in 0.000s
+    And the response JSON path "0.totalCount" should be 1 ... passed in 0.000s
+    When I send a "GET" request to "/api/runs/${uploaded_run_id}/scenarios" ... passed in 0.003s
+    Then the response status code should be 200 ... passed in 0.000s
+    And the response JSON should not be empty ... passed in 0.000s
+    And the response JSON path "0.name" should be a "str" ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard.Dashboard API Validations" name="Trigger Sync scans reports directory" status="passed" time="0.097146"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke @sync
+  Scenario: Trigger Sync scans reports directory
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I send a "POST" request to "/api/sync" ... passed in 0.097s
+    Then the response status code should be 200 ... passed in 0.000s
+    And the response JSON should contain keys ... passed in 0.000s
+      | new_runs_discovered |
+      | scanned_path        |
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.dashboard.Dashboard API Validations" name="Delete the uploaded run" status="passed" time="0.008509"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke @cleanup
+  Scenario: Delete the uploaded run
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I send a "GET" request to "/api/runs" ... passed in 0.004s
+    Then I store the response JSON path "0.id" as "run_to_delete" ... passed in 0.000s
+    When I send a "DELETE" request to "/api/runs" with query parameters ... passed in 0.004s
+      | id | ${run_to_delete} |
+    Then the response status code should be 200 ... passed in 0.000s
+    Then the response JSON path "success" should be true ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
