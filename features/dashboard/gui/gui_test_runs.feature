@@ -1,8 +1,5 @@
 @gui @test_runs @smoke
 Feature: Test Runs View Validation
-  As a QA Engineer
-  I want to verify the Execution Archives and search functionality
-  So that I can ensure historical data is accessible and searchable
 
   Background:
     Given I navigate to the dashboard at "http://localhost:3000"

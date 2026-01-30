@@ -1,0 +1,34 @@
+<testsuite name="dashboard.gui_endpoints.Endpoints Catalog Validation" tests="1" errors="0" failures="0" skipped="0" time="8.702534" timestamp="2026-01-29T23:49:57.644845" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui_endpoints.Endpoints Catalog Validation" name="Deep Dive into Endpoint Detail" status="passed" time="8.702534"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @navigation @endpoints @detail
+  Scenario: Deep Dive into Endpoint Detail
+    Given I navigate to the dashboard at "http://localhost:3000" ... passed in 0.317s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.165s
+    And I wait for 1 seconds ... passed in 1.001s
+    When I type "dashboard" into the "search_input" in "endpoints_view" ... passed in 0.612s
+    And I wait for 1 seconds ... passed in 1.002s
+    When I click on the "endpoint_item" in "endpoints_view" ... passed in 0.213s
+    And I wait for 1 seconds ... passed in 1.001s
+    Then I should see the text "Back to Catalog" ... passed in 0.211s
+    And I should see the text "Success Rate" ... passed in 0.053s
+    And I should see the text "Avg Latency" ... passed in 0.071s
+    And I should see the text "Live Discovery Data" ... passed in 0.096s
+    Then I take a screenshot named "endpoints_deep_detail" ... passed in 0.602s
+    When I click on the "back_button" in "endpoint_detail" ... passed in 0.315s
+    And I wait for 1 seconds ... passed in 1.002s
+    Then I should see the text "Endpoint Catalog" ... passed in 0.040s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] endpoints_deep_detail
+   Location: features\resources\screenshots\endpoints_deep_detail.png
+   <img src='file:///features\resources\screenshots\endpoints_deep_detail.png' width='800' alt='endpoints_deep_detail' />
+
+]]>
+</system-out></testcase></testsuite>

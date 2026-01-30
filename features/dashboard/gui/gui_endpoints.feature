@@ -1,8 +1,5 @@
 @gui @endpoints @smoke
 Feature: Endpoints Catalog Validation
-  As a QA Engineer
-  I want to verify the API Registry and advanced filters
-  So that I can effectively monitor API interface health
 
   Background:
     Given I navigate to the dashboard at "http://localhost:3000"

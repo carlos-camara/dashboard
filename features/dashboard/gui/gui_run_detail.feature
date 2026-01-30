@@ -1,8 +1,5 @@
 @gui @run_detail @smoke
 Feature: Run Detail View Validation
-  As a QA Engineer
-  I want to explore the details of a specific test run
-  So that I can diagnose failures and analyze performance metrics
 
   Background:
     Given I navigate to the dashboard at "http://localhost:3000"

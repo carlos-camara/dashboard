@@ -1,0 +1,4 @@
+endpoint_detail:
+  back_button:
+    by: xpath
+    value: "//button[contains(., 'Back to Catalog')]"

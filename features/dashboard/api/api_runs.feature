@@ -1,19 +1,8 @@
-@api @dashboard
-Feature: Dashboard API Validations
-  As a QA Engineer
-  I want to verify the dashboard server APIs
-  So that I can ensure test results are correctly processed and displayed
+@api @dashboard @runs
+Feature: Runs Endpoint Validations
 
   Background:
     Given the API base URL is "http://localhost:3001"
-
-  @smoke @health
-  Scenario: Health check returns 200 OK
-    When I send a "GET" request to "/api/health"
-    Then the response status code should be 200
-    And the response JSON path "status" should be "ok"
-    And the response JSON should contain keys
-      | timestamp |
 
   @smoke @runs @crud_flow
   Scenario: Upload, Verify, and Explore a Run
@@ -36,20 +25,6 @@ Feature: Dashboard API Validations
     And the response JSON should not be empty
     And the response JSON path "0.name" should be a "str"
 
-  @smoke@endpoints @discovery
-  Scenario: Retrieve Discovered Endpoints
-    When I send a "GET" request to "/api/endpoints"
-    Then the response status code should be 200
-    And the response JSON should not be empty
-
-  @smoke @sync
-  Scenario: Trigger Sync scans reports directory
-    When I send a "POST" request to "/api/sync"
-    Then the response status code should be 200
-    And the response JSON should contain keys
-      | new_runs_discovered |
-      | scanned_path        |
-
   @smoke @cleanup
   Scenario: Delete the uploaded run
     When I send a "GET" request to "/api/runs"
@@ -59,3 +34,18 @@ Feature: Dashboard API Validations
       | id | ${run_to_delete} |
     Then the response status code should be 200
     Then the response JSON path "success" should be true
+
+  @smoke @runs @negative
+  Scenario: Get non-existent run
+    When I send a "GET" request to "/api/runs/INVALID_RUN_ID"
+    Then the response status code should be 404
+
+  @smoke @runs @negative
+  Scenario: Verify Method Not Allowed (PUT)
+    When I send a "PUT" request to "/api/runs"
+    Then the response status code should be 404
+
+  @smoke @runs @negative
+  Scenario: Verify Method Not Allowed (PATCH)
+    When I send a "PATCH" request to "/api/runs"
+    Then the response status code should be 404

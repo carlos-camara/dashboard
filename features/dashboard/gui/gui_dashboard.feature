@@ -1,8 +1,5 @@
 @gui @dashboard @smoke
 Feature: Dashboard View Validation
-  As a QA Engineer
-  I want to verify the visual components of the main Dashboard
-  So that I can ensure the "Ultra Premium" experience is delivered correctly
 
   Background:
     Given I navigate to the dashboard at "http://localhost:3000"

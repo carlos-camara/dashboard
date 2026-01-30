@@ -1,0 +1,17 @@
+<testsuite name="dashboard.api.api_health.Health Endpoint Validations" tests="1" errors="0" failures="0" skipped="0" time="0.012991" timestamp="2026-01-30T00:40:03.888793" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="Health check returns 200 OK" status="passed" time="0.012991"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke @health
+  Scenario: Health check returns 200 OK
+    Given the API base URL is "http://localhost:3001" ... passed in 0.003s
+    When I send a "GET" request to "/api/health" ... passed in 0.009s
+    Then the response status code should be 200 ... passed in 0.000s
+    And the response JSON path "status" should be "ok" ... passed in 0.000s
+    And the response JSON should contain keys ... passed in 0.000s
+      | timestamp |
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
