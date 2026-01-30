@@ -1,0 +1,48 @@
+<testsuite name="dashboard.gui.gui_navigation.Application Navigation Validation" tests="1" errors="0" failures="0" skipped="0" time="13.26534" timestamp="2026-01-30T22:38:24.737896" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Navigate to all main sections" status="passed" time="13.26534"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @sidebar @smoke
+  Scenario: Navigate to all main sections
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.026s
+    And I wait for 2 seconds ... passed in 2.005s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.344s
+    And I wait for 1 seconds ... passed in 1.002s
+    Then I should see the text "Execution Archives" ... passed in 0.074s
+    Then I take a screenshot named "nav_test_runs" ... passed in 0.851s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.458s
+    And I wait for 1 seconds ... passed in 1.005s
+    Then I should see the text "Endpoint Catalog" ... passed in 0.090s
+    Then I take a screenshot named "nav_endpoints" ... passed in 0.889s
+    When I click on the "incidents_link" in the sidebar ... passed in 0.987s
+    And I wait for 1 seconds ... passed in 1.004s
+    Then I should see the text "Incident Taxonomy" ... passed in 0.082s
+    Then I take a screenshot named "nav_incidents" ... passed in 0.889s
+    When I click on the "dashboard_link" in the sidebar ... passed in 0.374s
+    And I wait for 1 seconds ... passed in 1.002s
+    Then I should see the text "Dashboard Cluster" ... passed in 0.091s
+    Then I take a screenshot named "nav_dashboard_return" ... passed in 1.093s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] nav_test_runs
+   Location: features\resources\screenshots\nav_test_runs.png
+   <img src='file:///features\resources\screenshots\nav_test_runs.png' width='800' alt='nav_test_runs' />
+
+[SCREENSHOT] nav_endpoints
+   Location: features\resources\screenshots\nav_endpoints.png
+   <img src='file:///features\resources\screenshots\nav_endpoints.png' width='800' alt='nav_endpoints' />
+
+[SCREENSHOT] nav_incidents
+   Location: features\resources\screenshots\nav_incidents.png
+   <img src='file:///features\resources\screenshots\nav_incidents.png' width='800' alt='nav_incidents' />
+
+[SCREENSHOT] nav_dashboard_return
+   Location: features\resources\screenshots\nav_dashboard_return.png
+   <img src='file:///features\resources\screenshots\nav_dashboard_return.png' width='800' alt='nav_dashboard_return' />
+
+]]>
+</system-out></testcase></testsuite>

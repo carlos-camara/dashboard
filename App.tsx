@@ -44,6 +44,7 @@ const App: React.FC = () => {
         return <PerformanceReportView
           reportUrl={navigationState?.reportUrl}
           timestamp={navigationState?.timestamp}
+          selectedEndpoint={navigationState?.endpoint}
           onBack={() => handleNavigate('endpoints', { endpoint: navigationState?.endpoint })}
         />;
       default:

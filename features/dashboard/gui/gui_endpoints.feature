@@ -2,7 +2,7 @@
 Feature: Endpoints Catalog Validation
 
   Background:
-    Given I navigate to the dashboard at "http://localhost:3000"
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     When I wait for 2 seconds
 
   @navigation @endpoints @detail

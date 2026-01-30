@@ -1,16 +1,40 @@
 performance_report_view:
-  analysis_title:
+  audit_title:
     by: xpath
-    value: "//h2[contains(., 'Performance Analysis')]"
+    value: "//*[@data-testid='performance-audit-title']"
   back_button:
     by: xpath
     value: "//button[./*[local-name()='svg' and contains(@class, 'lucide-chevron-left')]]"
-  report_iframe:
-    by: css
-    value: "iframe[title='Locust Performance Report']"
+  rps_section:
+    by: xpath
+    value: "//h3[contains(., 'Requests per Second')]"
+  latency_section:
+    by: xpath
+    value: "//h3[contains(., 'Response Times')]"
+  rps_image:
+    by: xpath
+    value: "//*[contains(normalize-space(.), 'Throughput Chronology')]"
+  latency_image:
+    by: xpath
+    value: "//*[contains(normalize-space(.), 'Spectral Latency Audit')]"
+  audit_matrix:
+    by: xpath
+    value: "//h3[contains(., 'Audit')]"
   export_button:
     by: xpath
-    value: "//button[contains(., 'Export PDF')]"
-  report_date:
+    value: "//button[contains(., 'Dossier')]"
+  original_report_link:
     by: xpath
-    value: "//span[contains(., 'Report Date')]/following-sibling::span"
+    value: "//a[contains(., 'Raw View')]"
+  summary_efficiency:
+    by: xpath
+    value: "//*[@data-testid='summary-efficiency']"
+  summary_velocity:
+    by: xpath
+    value: "//*[@data-testid='summary-velocity']"
+  summary_integrity:
+    by: xpath
+    value: "//*[@data-testid='summary-integrity']"
+  summary_saturation:
+    by: xpath
+    value: "//*[@data-testid='summary-saturation']"

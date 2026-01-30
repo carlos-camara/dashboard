@@ -2,7 +2,7 @@
 Feature: Incident Taxonomy View Validation
 
   Background:
-    Given I navigate to the dashboard at "http://localhost:3000"
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     And I wait for 2 seconds
     When I click on the "incidents_link" in the sidebar
     And I wait for 1 seconds

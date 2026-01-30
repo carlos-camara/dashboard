@@ -659,20 +659,18 @@ app.get("/api/performance/latest", (req, res) => {
             return res.json({ found: false, stats: [] });
         }
 
-        // Sort by time (filename usually has timestamp, but stat is safer)
+        // Sort by time
         const latestFile = statsFiles.map(f => ({
             name: f,
             time: fs.statSync(path.join(perfDir, f)).mtime.getTime()
         })).sort((a, b) => b.time - a.time)[0];
 
+        // 1. Current Stats (Full Percentile Range)
         const filePath = path.join(perfDir, latestFile.name);
         const content = fs.readFileSync(filePath, 'utf8');
         const lines = content.split('\n').filter(l => l.trim().length > 0);
-
         if (lines.length < 2) return res.json({ found: false, stats: [] });
 
-        // Parse CSV manually (header is line 0)
-        // Header: "Type","Name","Request Count","Failure Count","Median Response Time","Average Response Time","Min Response Time","Max Response Time","Average Content Size","Requests/s","Failures/s","50%","66%","75%","80%","90%","95%","98%","99%","99.9%","99.99%","100%"
         const headers = lines[0].replace(/"/g, '').split(',');
         const stats = lines.slice(1).map(line => {
             const values = line.replace(/"/g, '').split(',');
@@ -683,11 +681,55 @@ app.get("/api/performance/latest", (req, res) => {
             return obj;
         });
 
-        // Get the matching HTML report path
-        // The stats file is like: performance_2026-01-30_19-12-06_stats.csv
-        // The HTML file is like: performance_2026-01-30_19-12-06.html
+        // 2. History Data (Rich Trends)
+        let history = [];
+        const historyPath = filePath.replace('_stats.csv', '_stats_history.csv');
+        if (fs.existsSync(historyPath)) {
+            const hContent = fs.readFileSync(historyPath, 'utf8');
+            const hLines = hContent.split('\n').filter(l => l.trim().length > 0);
+            if (hLines.length > 1) {
+                const hHeaders = hLines[0].replace(/"/g, '').split(',');
+                history = hLines.slice(1).map(line => {
+                    const values = line.replace(/"/g, '').split(',');
+                    const obj = {};
+                    hHeaders.forEach((h, i) => {
+                        obj[h] = values[i];
+                    });
+
+                    return {
+                        timestamp: parseInt(obj["Timestamp"]),
+                        users: parseInt(obj["User Count"]),
+                        rps: parseFloat(obj["Requests/s"]) || 0,
+                        failures: parseFloat(obj["Failures/s"]) || 0,
+                        p50: parseFloat(obj["50%"]) || 0,
+                        p90: parseFloat(obj["90%"]) || 0,
+                        p95: parseFloat(obj["95%"]) || 0,
+                        p99: parseFloat(obj["99%"]) || 0
+                    };
+                });
+            }
+        }
+
+        // 3. Failures & Exceptions
+        let failuresAudit = [];
+        const failPath = filePath.replace('_stats.csv', '_failures.csv');
+        if (fs.existsSync(failPath)) {
+            const fContent = fs.readFileSync(failPath, 'utf8');
+            const fLines = fContent.split('\n').filter(l => l.trim().length > 0);
+            if (fLines.length > 1) {
+                const fHeaders = fLines[0].replace(/"/g, '').split(',');
+                failuresAudit = fLines.slice(1).map(line => {
+                    const values = line.replace(/"/g, '').split(',');
+                    const obj = {};
+                    fHeaders.forEach((h, i) => {
+                        obj[h] = values[i];
+                    });
+                    return obj;
+                });
+            }
+        }
+
         const baseName = latestFile.name.replace('_stats.csv', '.html');
-        // Serve relative path to reports directory
         const reportUrl = `/reports/performance_run/${baseName}`;
 
         res.json({
@@ -699,11 +741,23 @@ app.get("/api/performance/latest", (req, res) => {
                 name: s["Name"],
                 requests: parseInt(s["Request Count"]),
                 failures: parseInt(s["Failure Count"]),
-                median_response_time: parseFloat(s["Median Response Time"]),
-                avg_response_time: parseFloat(s["Average Response Time"]),
+                median: parseFloat(s["Median Response Time"]),
+                avg: parseFloat(s["Average Response Time"]),
+                min: parseFloat(s["Min Response Time"]),
+                max: parseFloat(s["Max Response Time"]),
                 rps: parseFloat(s["Requests/s"]),
-                p95: parseFloat(s["95%"])
-            }))
+                p50: parseFloat(s["50%"]),
+                p66: parseFloat(s["66%"]),
+                p75: parseFloat(s["75%"]),
+                p80: parseFloat(s["80%"]),
+                p90: parseFloat(s["90%"]),
+                p95: parseFloat(s["95%"]),
+                p98: parseFloat(s["98%"]),
+                p99: parseFloat(s["99%"]),
+                p100: parseFloat(s["100%"])
+            })),
+            history,
+            failures: failuresAudit
         });
 
     } catch (e) {
