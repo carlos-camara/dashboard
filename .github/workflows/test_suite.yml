@@ -58,7 +58,7 @@ jobs:
           # Stash API reports for later upload
           cp -r reports api_reports_tmp
           # Clear reports for the next specific run
-          rm -rf reports
+          rm -rf reports/test_run
 
       - name: Run GUI Tests
         shell: pwsh
@@ -69,7 +69,6 @@ jobs:
 
       - name: Run Performance Tests
         shell: pwsh
-        if: success() || failure()
         run: |
           ./run_load_test.ps1
 
