@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.1.0
 info:
   title: QA Hub Dashboard API
   version: 1.0.0
@@ -30,6 +30,19 @@ paths:
                   timestamp:
                     type: string
                     format: date-time
+        '4XX':
+          description: Client Error (Bad Request, Unauthorized, Not Found)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 
   /api/sync:
     post:
@@ -56,6 +69,19 @@ paths:
                     type: integer
                   scanned_path:
                     type: string
+        '4XX':
+          description: Client Error (Bad Request, Unauthorized, Not Found)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 
   /api/upload:
     post:
@@ -88,6 +114,19 @@ paths:
                     type: string
                   totalCount:
                     type: integer
+        '4XX':
+          description: Client Error (Bad Request, Unauthorized, Not Found)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 
   /api/runs:
     get:
@@ -102,6 +141,19 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Run'
+        '4XX':
+          description: Client Error (Bad Request, Unauthorized, Not Found)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
     delete:
       tags: [Runs]
       summary: Delete a run
@@ -123,6 +175,19 @@ paths:
                     type: boolean
                   message:
                     type: string
+        '4XX':
+          description: Client Error (Bad Request, Unauthorized, Not Found)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 
   /api/runs/{run_id}/scenarios:
     get:
@@ -143,6 +208,19 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Scenario'
+        '4XX':
+          description: Client Error (Bad Request, Unauthorized, Not Found)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 
   /api/projects:
     delete:
@@ -166,6 +244,19 @@ paths:
                     type: boolean
                   message:
                     type: string
+        '4XX':
+          description: Client Error (Bad Request, Unauthorized, Not Found)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 
   /api/endpoints:
     get:
@@ -180,6 +271,19 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Endpoint'
+        '4XX':
+          description: Client Error (Bad Request, Unauthorized, Not Found)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
     delete:
       tags: [Endpoints]
       summary: Delete an endpoint
@@ -201,6 +305,19 @@ paths:
                     type: boolean
                   message:
                     type: string
+        '4XX':
+          description: Client Error (Bad Request, Unauthorized, Not Found)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 
   /api/spec:
     get:
@@ -230,6 +347,19 @@ paths:
                   content:
                     type: object
                     description: The swagger fragment
+        '4XX':
+          description: Client Error (Bad Request, Unauthorized, Not Found)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
     post:
       tags: [Specs]
       summary: Upload an OpenAPI fragment
@@ -259,6 +389,19 @@ paths:
                     type: boolean
                   filename:
                     type: string
+        '4XX':
+          description: Client Error (Bad Request, Unauthorized, Not Found)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 
 components:
   schemas:
@@ -320,3 +463,12 @@ components:
           type: integer
         failCount:
           type: integer
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+
