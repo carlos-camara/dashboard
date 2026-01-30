@@ -1,0 +1,100 @@
+<testsuite name="dashboard.gui.gui_navigation.Application Navigation Validation" tests="1" errors="1" failures="0" skipped="0" time="4.453007" timestamp="2026-01-30T23:04:00.967302" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Navigate to all main sections" status="failed" time="4.453007"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.110)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff7ebf8a535&#10;&#09;0x7ff7ebf8a590&#10;&#09;0x7ff7ebd310bd&#10;&#09;0x7ff7ebd2dbe4&#10;&#09;0x7ff7ebd1e071&#10;&#09;0x7ff7ebd1ff5f&#10;&#09;0x7ff7ebd1e611&#10;&#09;0x7ff7ebd1dddb&#10;&#09;0x7ff7ebd1da91&#10;&#09;0x7ff7ebd1b6a7&#10;&#09;0x7ff7ebd1be22&#10;&#09;0x7ff7ebd35366&#10;&#09;0x7ff7ebddad54&#10;&#09;0x7ff7ebdb5a3a&#10;&#09;0x7ff7ebdd9ef5&#10;&#09;0x7ff7ebd7cc9c&#10;&#09;0x7ff7ebd7dbe3&#10;&#09;0x7ff7ec267b60&#10;&#09;0x7ff7ec261f5d&#10;&#09;0x7ff7ec28311a&#10;&#09;0x7ff7ebfa60a5&#10;&#09;0x7ff7ebfae73c&#10;&#09;0x7ff7ebf93844&#10;&#09;0x7ff7ebf939f6&#10;&#09;0x7ff7ebf79a07&#10;&#09;0x7ffab6777374&#10;&#09;0x7ffab6ffcc91&#10;">
+<![CDATA[
+Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 4.453s
+Location: features/dashboard/gui/gui_navigation.feature:5
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "features\steps\step_gui_validation.py", line 11, in step_navigate_to_dashboard
+    context.driver.get(url)
+    ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\test\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=144.0.7559.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff7ebf8a535
+	0x7ff7ebf8a590
+	0x7ff7ebd310bd
+	0x7ff7ebd2dbe4
+	0x7ff7ebd1e071
+	0x7ff7ebd1ff5f
+	0x7ff7ebd1e611
+	0x7ff7ebd1dddb
+	0x7ff7ebd1da91
+	0x7ff7ebd1b6a7
+	0x7ff7ebd1be22
+	0x7ff7ebd35366
+	0x7ff7ebddad54
+	0x7ff7ebdb5a3a
+	0x7ff7ebdd9ef5
+	0x7ff7ebd7cc9c
+	0x7ff7ebd7dbe3
+	0x7ff7ec267b60
+	0x7ff7ec261f5d
+	0x7ff7ec28311a
+	0x7ff7ebfa60a5
+	0x7ff7ebfae73c
+	0x7ff7ebf93844
+	0x7ff7ebf939f6
+	0x7ff7ebf79a07
+	0x7ffab6777374
+	0x7ffab6ffcc91
+
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Navigate to all main sections
+   Failed Step: I navigate to the dashboard at "http://localhost:3000/dashboard/"
+   Location: features\resources\screenshots\2026-01-30_23-03-14\FAILED_Navigate_to_all_main_sections_I_navigate_to_the_dashboard_at.png
+   <img src='file:///C:\Users\Carlos\Desktop\test\dashboard\features\resources\screenshots\2026-01-30_23-03-14\FAILED_Navigate_to_all_main_sections_I_navigate_to_the_dashboard_at.png' width='800' alt='Failure Screenshot' />]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+
+  @sidebar @smoke
+  Scenario: Navigate to all main sections
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 4.453s
+    And I wait for 2 seconds ... skipped in 0.000s
+    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I should see the text "Execution Archives" ... skipped in 0.000s
+    Then I take a screenshot named "nav_test_runs" ... skipped in 0.000s
+    When I click on the "endpoints_link" in the sidebar ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I should see the text "Endpoint Catalog" ... skipped in 0.000s
+    Then I take a screenshot named "nav_endpoints" ... skipped in 0.000s
+    When I click on the "incidents_link" in the sidebar ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I should see the text "Incident Taxonomy" ... skipped in 0.000s
+    Then I take a screenshot named "nav_incidents" ... skipped in 0.000s
+    When I click on the "dashboard_link" in the sidebar ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I should see the text "Dashboard Cluster" ... skipped in 0.000s
+    Then I take a screenshot named "nav_dashboard_return" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Navigate to all main sections
+   Failed Step: I navigate to the dashboard at "http://localhost:3000/dashboard/"
+   Location: features\resources\screenshots\2026-01-30_23-03-14\FAILED_Navigate_to_all_main_sections_I_navigate_to_the_dashboard_at.png
+   <img src='file:///C:\Users\Carlos\Desktop\test\dashboard\features\resources\screenshots\2026-01-30_23-03-14\FAILED_Navigate_to_all_main_sections_I_navigate_to_the_dashboard_at.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase></testsuite>

@@ -8,9 +8,12 @@ if (-not (Test-Path $reportsDir)) {
     New-Item -ItemType Directory -Path $reportsDir | Out-Null 
 }
 
-# Generate Report Filename (e.g., performance_2026-01-30_19-00-00.html)
+# Generate Run ID and Directory
 $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
-$reportFile = Join-Path $reportsDir "performance_$timestamp.html"
+$runDir = Join-Path $reportsDir "performance_$timestamp"
+New-Item -ItemType Directory -Path $runDir | Out-Null
+
+$reportFile = Join-Path $runDir "report.html"
 
 # Detect Python from .venv or use global
 $py = if (Test-Path "$PSScriptRoot\.venv\Scripts\python.exe") { "$PSScriptRoot\.venv\Scripts\python.exe" } else { "python" }
@@ -32,7 +35,7 @@ Write-Host "--------------------------------" -ForegroundColor Gray
 # --host: Target server
 # --html: Generate HTML report
 # --json: Generate JSON stats
-& $py -m locust -f performance/locustfile.py --headless -u 10 -r 1 --run-time 30s --host=http://localhost:3001 --html "$reportFile" --csv "$reportsDir\performance_$timestamp"
+& $py -m locust -f performance/locustfile.py --headless -u 10 -r 1 --run-time 30s --host=http://localhost:3001 --html "$reportFile" --csv "$runDir\locust"
 
 Write-Host "--------------------------------" -ForegroundColor Gray
 Write-Host "Load Test Finished!" -ForegroundColor Green

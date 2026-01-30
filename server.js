@@ -651,22 +651,33 @@ app.get("/api/performance/latest", (req, res) => {
             return res.json({ found: false, stats: [] });
         }
 
-        const files = fs.readdirSync(perfDir);
-        // Look for _stats.csv
-        const statsFiles = files.filter(f => f.endsWith('_stats.csv'));
+        const folders = fs.readdirSync(perfDir).filter(f => fs.statSync(path.join(perfDir, f)).isDirectory());
 
-        if (statsFiles.length === 0) {
+        if (folders.length === 0) {
             return res.json({ found: false, stats: [] });
         }
 
-        // Sort by time
-        const latestFile = statsFiles.map(f => ({
+        // Sort by time (folder name contains timestamp, but fs mtime is safer)
+        const latestFolder = folders.map(f => ({
             name: f,
             time: fs.statSync(path.join(perfDir, f)).mtime.getTime()
         })).sort((a, b) => b.time - a.time)[0];
 
-        // 1. Current Stats (Full Percentile Range)
-        const filePath = path.join(perfDir, latestFile.name);
+        const latestRunDir = path.join(perfDir, latestFolder.name);
+        const runFiles = fs.readdirSync(latestRunDir);
+
+        // Look for _stats.csv (Locust default output)
+        const statsFile = runFiles.find(f => f.endsWith('_stats.csv'));
+        if (!statsFile) return res.json({ found: false, stats: [] });
+
+        const filePath = path.join(latestRunDir, statsFile);
+
+        // Metadata from folder timestamp
+        const latestFile = {
+            name: statsFile,
+            time: latestFolder.time,
+            runDirName: latestFolder.name
+        };
         const content = fs.readFileSync(filePath, 'utf8');
         const lines = content.split('\n').filter(l => l.trim().length > 0);
         if (lines.length < 2) return res.json({ found: false, stats: [] });
@@ -729,8 +740,8 @@ app.get("/api/performance/latest", (req, res) => {
             }
         }
 
-        const baseName = latestFile.name.replace('_stats.csv', '.html');
-        const reportUrl = `/reports/performance_run/${baseName}`;
+        const baseName = 'report.html';
+        const reportUrl = `/reports/performance_run/${latestFile.runDirName}/${baseName}`;
 
         res.json({
             found: true,
