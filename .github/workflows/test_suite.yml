@@ -69,6 +69,7 @@ jobs:
 
       - name: Run Performance Tests
         shell: pwsh
+        if: success() || failure()
         run: |
           ./run_load_test.ps1
 
