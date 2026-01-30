@@ -22,7 +22,7 @@ Write-Host "Executing API Smoke Tests..."
 & $py -m behave features --tags=smoke --tags=api --no-capture --junit --junit-directory $tempDir
 
 # Process generated files
-$reportsBase = Join-Path $PSScriptRoot "reports"
+$reportsBase = Join-Path $PSScriptRoot "reports\test_run"
 if (-not (Test-Path $reportsBase)) { New-Item -ItemType Directory -Path $reportsBase | Out-Null }
 
 $xmlFiles = Get-ChildItem -Path $tempDir -Filter "TESTS-*.xml"

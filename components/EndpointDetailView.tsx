@@ -172,10 +172,30 @@ const EndpointDetailView: React.FC<EndpointDetailViewProps> = ({ endpoint, onBac
     const [loadingSpec, setLoadingSpec] = useState(true);
     const [isUploading, setIsUploading] = useState(false);
     const [viewMode, setViewMode] = useState<'schema' | 'example'>('schema');
+    const [perfStats, setPerfStats] = useState<any>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     // Fetch linked swagger spec - NOW USING PROJECT-LEVEL SPEC
     useEffect(() => {
+        // Fetch Performance Stats
+        fetch('http://localhost:3001/api/performance/latest')
+            .then(res => res.json())
+            .then(data => {
+                if (data.found && data.stats) {
+                    // Match endpoint simple logic: Method + Path
+                    // Note: Locust usually logs path like "/api/runs (List)" or just "/api/runs"
+                    // We need to find the best match
+                    const match = data.stats.find((s: any) =>
+                        s.method === endpoint.method &&
+                        (s.name.includes(endpoint.path) || endpoint.path.includes(s.name.split(' ')[0]))
+                    );
+                    if (match) {
+                        setPerfStats({ ...match, reportUrl: data.reportUrl, timestamp: data.timestamp });
+                    }
+                }
+            })
+            .catch(console.error);
+
         // First try to get project-level spec (e.g., dashboard.yaml)
         api.getProjectSpec(endpoint.service).then(res => {
             if (res.found) {
@@ -342,6 +362,56 @@ const EndpointDetailView: React.FC<EndpointDetailViewProps> = ({ endpoint, onBac
                     </div>
                 </div>
             </div>
+
+            {/* Performance Card (Locust Data) */}
+            {perfStats && (
+                <div className="bg-gradient-to-br from-indigo-900/20 to-violet-900/20 border border-indigo-500/30 rounded-[2.5rem] p-8 relative overflow-hidden group hover:border-indigo-500/50 transition-colors">
+                    <div className="absolute top-0 right-0 p-8 opacity-20 pointer-events-none">
+                        <Activity size={120} className="text-indigo-400" />
+                    </div>
+
+                    <div className="flex items-center justify-between mb-8 relative z-10">
+                        <div>
+                            <h3 className="text-2xl font-black text-white mb-2 flex items-center">
+                                <div className="p-2 bg-indigo-500 rounded-lg mr-3 shadow-lg shadow-indigo-500/30">
+                                    <Activity size={20} className="text-white" />
+                                </div>
+                                Performance Insights
+                            </h3>
+                            <p className="text-indigo-300/60 text-xs font-mono uppercase tracking-widest ml-1">
+                                Latest Load Test Report • {new Date(perfStats.timestamp).toLocaleString()}
+                            </p>
+                        </div>
+                        <a
+                            href={`http://localhost:3001${perfStats.reportUrl}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg shadow-indigo-600/20 transition-all hover:scale-105 flex items-center"
+                        >
+                            Open Full Report <ChevronRight size={14} className="ml-2" />
+                        </a>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative z-10">
+                        <div className="bg-slate-950/60 p-5 rounded-2xl border border-indigo-500/20 backdrop-blur-sm">
+                            <div className="text-indigo-400 text-[10px] font-black uppercase tracking-widest mb-1">Total Requests</div>
+                            <div className="text-3xl font-black text-white">{perfStats.requests.toLocaleString()}</div>
+                        </div>
+                        <div className="bg-slate-950/60 p-5 rounded-2xl border border-indigo-500/20 backdrop-blur-sm">
+                            <div className="text-indigo-400 text-[10px] font-black uppercase tracking-widest mb-1">RPS (Load)</div>
+                            <div className="text-3xl font-black text-white">{perfStats.rps.toFixed(1)}/s</div>
+                        </div>
+                        <div className="bg-slate-950/60 p-5 rounded-2xl border border-indigo-500/20 backdrop-blur-sm">
+                            <div className="text-indigo-400 text-[10px] font-black uppercase tracking-widest mb-1">P95 Latency</div>
+                            <div className={`text-3xl font-black ${perfStats.p95 > 500 ? 'text-amber-400' : 'text-emerald-400'}`}>{perfStats.p95.toFixed(0)}ms</div>
+                        </div>
+                        <div className="bg-slate-950/60 p-5 rounded-2xl border border-indigo-500/20 backdrop-blur-sm">
+                            <div className="text-indigo-400 text-[10px] font-black uppercase tracking-widest mb-1">Failure Rate</div>
+                            <div className={`text-3xl font-black ${perfStats.failures > 0 ? 'text-rose-500' : 'text-emerald-500'}`}>{perfStats.failures}</div>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* Content Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

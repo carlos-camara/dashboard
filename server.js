@@ -15,7 +15,7 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const REPORTS_DIR = "reports";
+const REPORTS_DIR = path.join("reports", "test_run");
 // Use absolute path
 const SWAGGERS_DIR = path.join(__dirname, "swaggers");
 const UPLOADS_DIR = path.join(__dirname, "uploads");
@@ -644,5 +644,78 @@ async function autoSyncOnStartup() {
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
+    const REPORTS_PERF_DIR = path.join("reports", "performance_run");
+
+    app.get("/api/performance/latest", (req, res) => {
+        try {
+            const perfDir = path.join(__dirname, REPORTS_PERF_DIR);
+            if (!fs.existsSync(perfDir)) {
+                return res.json({ found: false, stats: [] });
+            }
+
+            const files = fs.readdirSync(perfDir);
+            // Look for _stats.csv
+            const statsFiles = files.filter(f => f.endsWith('_stats.csv'));
+
+            if (statsFiles.length === 0) {
+                return res.json({ found: false, stats: [] });
+            }
+
+            // Sort by time (filename usually has timestamp, but stat is safer)
+            const latestFile = statsFiles.map(f => ({
+                name: f,
+                time: fs.statSync(path.join(perfDir, f)).mtime.getTime()
+            })).sort((a, b) => b.time - a.time)[0];
+
+            const filePath = path.join(perfDir, latestFile.name);
+            const content = fs.readFileSync(filePath, 'utf8');
+            const lines = content.split('\n').filter(l => l.trim().length > 0);
+
+            if (lines.length < 2) return res.json({ found: false, stats: [] });
+
+            // Parse CSV manually (header is line 0)
+            // Header: "Type","Name","Request Count","Failure Count","Median Response Time","Average Response Time","Min Response Time","Max Response Time","Average Content Size","Requests/s","Failures/s","50%","66%","75%","80%","90%","95%","98%","99%","99.9%","99.99%","100%"
+            const headers = lines[0].replace(/"/g, '').split(',');
+            const stats = lines.slice(1).map(line => {
+                const values = line.replace(/"/g, '').split(',');
+                const obj = {};
+                headers.forEach((h, i) => {
+                    obj[h] = values[i];
+                });
+                return obj;
+            });
+
+            // Get the matching HTML report path
+            // The stats file is like: performance_2026-01-30_19-12-06_stats.csv
+            // The HTML file is like: performance_2026-01-30_19-12-06.html
+            const baseName = latestFile.name.replace('_stats.csv', '.html');
+            // Serve relative path to reports directory
+            const reportUrl = `/reports/performance_run/${baseName}`;
+
+            res.json({
+                found: true,
+                timestamp: new Date(latestFile.time).toISOString(),
+                reportUrl,
+                stats: stats.map(s => ({
+                    method: s["Type"],
+                    name: s["Name"],
+                    requests: parseInt(s["Request Count"]),
+                    failures: parseInt(s["Failure Count"]),
+                    median_response_time: parseFloat(s["Median Response Time"]),
+                    avg_response_time: parseFloat(s["Average Response Time"]),
+                    rps: parseFloat(s["Requests/s"]),
+                    p95: parseFloat(s["95%"])
+                }))
+            });
+
+        } catch (e) {
+            console.error("Performance stats error:", e);
+            res.status(500).json({ error: e.message });
+        }
+    });
+
+    // Serve report files statically
+    app.use('/reports', express.static(path.join(__dirname, 'reports')));
+
     autoSyncOnStartup().catch(err => console.error("[Auto-Sync] Failed:", err));
 });
