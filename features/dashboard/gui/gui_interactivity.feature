@@ -1,8 +1,5 @@
 @gui @interactivity @smoke
 Feature: Dashboard Cross-Navigation Interactivity
-  As a QA Engineer
-  I want to verify that the dashboard's interactive elements redirect to the correct filtered views
-  So that I can ensure a seamless analysis workflow
 
   Background:
     Given I navigate to the dashboard at "http://localhost:3000"

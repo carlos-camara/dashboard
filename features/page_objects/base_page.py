@@ -23,17 +23,25 @@ class BasePage:
         self._load_locators()
         
     def _load_locators(self):
-        """Load locators from YAML file if not already loaded"""
+        """Load locators from YAML files in locators/ directory if not already loaded"""
         if BasePage._LOCATORS is None:
-            # Assume locators.yaml is in the same directory as this file
+            BasePage._LOCATORS = {}
             current_dir = os.path.dirname(os.path.abspath(__file__))
-            yaml_path = os.path.join(current_dir, "locators.yaml")
+            locators_dir = os.path.join(current_dir, "locators")
+            
             try:
-                with open(yaml_path, 'r') as f:
-                    BasePage._LOCATORS = yaml.safe_load(f)
+                if os.path.exists(locators_dir):
+                    for filename in os.listdir(locators_dir):
+                        if filename.endswith(".yaml") or filename.endswith(".yml"):
+                            file_path = os.path.join(locators_dir, filename)
+                            with open(file_path, 'r') as f:
+                                data = yaml.safe_load(f)
+                                if data:
+                                    BasePage._LOCATORS.update(data)
+                else:
+                    print(f"Locators directory not found at {locators_dir}")
             except Exception as e:
-                print(f"Error loading locators.yaml: {e}")
-                BasePage._LOCATORS = {}
+                print(f"Error loading locators: {e}")
 
     def get_locator_def(self, page_name, locator_path):
         """

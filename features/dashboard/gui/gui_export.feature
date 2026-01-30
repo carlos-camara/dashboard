@@ -1,8 +1,5 @@
 @gui @export @wip
 Feature: Export Functionality Validation
-  As a Stakeholder
-  I want to be able to export reports from the dashboard
-  So that I can share executive summaries with the team
 
   Background:
     Given I navigate to the dashboard at "http://localhost:3000"

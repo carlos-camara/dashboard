@@ -321,7 +321,9 @@ async function parseXmlContent(content, runId, projectName, discoveredTags, meta
             endpointInfo = { method: methodPathMatch[1].toUpperCase(), path: methodPathMatch[2] };
         }
 
-        if (endpointInfo) {
+
+
+        if (endpointInfo && !scenarioTags.has('@negative')) {
             const { method, path: fullPath } = endpointInfo;
             const normPath = normalizePath(fullPath);
             const epId = `${inferredProject}-${method}-${normPath}`;
@@ -431,9 +433,8 @@ app.post("/api/upload", upload.array('files'), async (req, res) => {
                 console.log(`[Upload] File Parsed: ${file.originalname}. Stats: ${JSON.stringify(stats)}`);
             } catch (parseErr) {
                 console.error(`[Upload] Failed to parse ${file.originalname}:`, parseErr);
-                // Continue with other files if one fails? Or fail whole?
-                // Let's fail for now to be safe and find the bug
-                throw new Error(`Parse error in ${file.originalname}: ${parseErr.message}`);
+                // Return 400 immediately for validation errors
+                return res.status(400).json({ error: `Parse error in ${file.originalname}: ${parseErr.message}` });
             } finally {
                 if (fs.existsSync(file.path)) fs.unlinkSync(file.path);
             }

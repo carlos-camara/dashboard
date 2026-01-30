@@ -144,7 +144,7 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
             </div>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex flex-col md:flex-row items-center gap-6">
             {/* Score Ring */}
             <div className="relative w-32 h-32 flex-shrink-0">
               <svg className="w-full h-full transform -rotate-90">
@@ -223,9 +223,9 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
 
           <div className="grid grid-cols-1 gap-3">
             {Object.entries(failureGroups).map(([error, count], idx) => (
-              <div key={idx} className="flex items-center justify-between bg-slate-950/50 p-4 rounded-xl border border-rose-500/10 hover:border-rose-500/30 transition-colors">
-                <code className="text-[11px] font-mono text-rose-300 truncate mr-4">{error}</code>
-                <span className="px-3 py-1 bg-rose-500 rounded-lg text-white text-xs font-black">{count}x</span>
+              <div key={idx} className="flex flex-col md:flex-row md:items-center justify-between bg-slate-950/50 p-4 rounded-xl border border-rose-500/10 hover:border-rose-500/30 transition-colors gap-3 md:gap-0">
+                <code className="text-[11px] font-mono text-rose-300 whitespace-pre-wrap break-all md:truncate md:whitespace-nowrap mr-0 md:mr-4">{error}</code>
+                <span className="self-end md:self-auto px-3 py-1 bg-rose-500 rounded-lg text-white text-xs font-black flex-shrink-0">{count}x</span>
               </div>
             ))}
           </div>
