@@ -1,0 +1,16 @@
+performance_report_view:
+  analysis_title:
+    by: xpath
+    value: "//h2[contains(., 'Performance Analysis')]"
+  back_button:
+    by: xpath
+    value: "//button[./*[local-name()='svg' and contains(@class, 'lucide-chevron-left')]]"
+  report_iframe:
+    by: css
+    value: "iframe[title='Locust Performance Report']"
+  export_button:
+    by: xpath
+    value: "//button[contains(., 'Export PDF')]"
+  report_date:
+    by: xpath
+    value: "//span[contains(., 'Report Date')]/following-sibling::span"

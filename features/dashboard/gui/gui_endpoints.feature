@@ -16,6 +16,8 @@ Feature: Endpoints Catalog Validation
     Then I should see the text "Back to Catalog"
     And I should see the text "Success Rate"
     And I should see the text "Avg Latency"
+    And I should see the "performance_card" in "endpoint_detail"
+    And I should see the text "Performance Insights"
     And I should see the text "Live Discovery Data"
     Then I take a screenshot named "endpoints_deep_detail"
     When I click on the "back_button" in "endpoint_detail"

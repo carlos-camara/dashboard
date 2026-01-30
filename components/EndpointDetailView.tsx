@@ -13,6 +13,7 @@ import {
 interface EndpointDetailViewProps {
     endpoint: Endpoint;
     onBack: () => void;
+    onNavigate?: (tab: string, state?: any) => void;
 }
 
 // --- SUBMIT COMPONENTS ---
@@ -167,7 +168,7 @@ const SchemaNode: React.FC<{ name?: string, schema: any, required?: boolean, dep
 
 // --- MAIN WRAPPER ---
 
-const EndpointDetailView: React.FC<EndpointDetailViewProps> = ({ endpoint, onBack }) => {
+const EndpointDetailView: React.FC<EndpointDetailViewProps> = ({ endpoint, onBack, onNavigate }) => {
     const [spec, setSpec] = useState<any>(null);
     const [loadingSpec, setLoadingSpec] = useState(true);
     const [isUploading, setIsUploading] = useState(false);
@@ -382,14 +383,16 @@ const EndpointDetailView: React.FC<EndpointDetailViewProps> = ({ endpoint, onBac
                                 Latest Load Test Report • {new Date(perfStats.timestamp).toLocaleString()}
                             </p>
                         </div>
-                        <a
-                            href={`http://localhost:3001${perfStats.reportUrl}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <button
+                            onClick={() => onNavigate && onNavigate('performance-report', {
+                                reportUrl: perfStats.reportUrl,
+                                timestamp: perfStats.timestamp,
+                                endpoint: endpoint // Save current endpoint to "go back" later
+                            })}
                             className="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg shadow-indigo-600/20 transition-all hover:scale-105 flex items-center"
                         >
                             Open Full Report <ChevronRight size={14} className="ml-2" />
-                        </a>
+                        </button>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative z-10">

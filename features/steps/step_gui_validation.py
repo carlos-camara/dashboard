@@ -30,3 +30,10 @@ def step_verify_element_count_section(context, count, locator_name, section):
     elements = page.find_elements(locator)
     actual_count = len(elements)
     assert actual_count >= count, f"Expected at least {count} elements for {section}.{locator_name}, found {actual_count}"
+
+@then('I should see the "{locator_name}" in "{section}"')
+def step_verify_element_visible_section(context, locator_name, section):
+    from features.steps.step_gui_interactions import get_dashboard_page
+    page = get_dashboard_page(context)
+    locator = page.get_locator(f"{section}.{locator_name}")
+    assert page.is_visible(locator), f"Element {section}.{locator_name} is not visible"
