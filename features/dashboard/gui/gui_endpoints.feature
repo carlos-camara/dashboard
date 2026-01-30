@@ -10,7 +10,7 @@ Feature: Endpoints Catalog Validation
     When I click on the "endpoints_link" in the sidebar
     And I wait for 1 seconds
     When I type "dashboard" into the "search_input" in "endpoints_view"
-    And I wait for 1 seconds
+    And I wait for 2 seconds
     When I click on the "endpoint_item" in "endpoints_view"
     And I wait for 1 seconds
     Then I should see the text "Back to Catalog"
