@@ -5,6 +5,9 @@ import DashboardView from './components/DashboardView';
 import EndpointsView from './components/EndpointsView';
 import IngestModal from './components/IngestModal';
 import TestRunsView from './components/TestRunsView';
+import IncidentView from './components/IncidentView';
+
+import PerformanceReportView from './components/PerformanceReportView';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -25,11 +28,24 @@ const App: React.FC = () => {
         return <EndpointsView
           refreshKey={refreshKey}
           initialEndpoint={navigationState?.endpoint}
+          onNavigate={handleNavigate}
         />;
       case 'runs':
         return <TestRunsView
           refreshKey={refreshKey}
           initialProject={navigationState?.project}
+        />;
+      case 'incidents':
+        return <IncidentView
+          refreshKey={refreshKey}
+          initialProject={navigationState?.project}
+        />;
+      case 'performance-report':
+        return <PerformanceReportView
+          reportUrl={navigationState?.reportUrl}
+          timestamp={navigationState?.timestamp}
+          selectedEndpoint={navigationState?.endpoint}
+          onBack={() => handleNavigate('endpoints', { endpoint: navigationState?.endpoint })}
         />;
       default:
         return <DashboardView refreshKey={refreshKey} onNavigate={handleNavigate} />;

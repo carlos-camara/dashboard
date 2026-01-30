@@ -2,7 +2,7 @@
 Feature: Export Functionality Validation
 
   Background:
-    Given I navigate to the dashboard at "http://localhost:3000"
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     And I wait for 2 seconds
 
   @critical

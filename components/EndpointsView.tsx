@@ -8,6 +8,7 @@ import EndpointDetailView from './EndpointDetailView';
 interface EndpointsViewProps {
   refreshKey?: number;
   initialEndpoint?: Endpoint | null;
+  onNavigate?: (tab: string, state?: any) => void;
 }
 
 interface ProjectStats {
@@ -17,7 +18,7 @@ interface ProjectStats {
   failingCount: number;
 }
 
-const EndpointsView: React.FC<EndpointsViewProps> = ({ refreshKey, initialEndpoint }) => {
+const EndpointsView: React.FC<EndpointsViewProps> = ({ refreshKey, initialEndpoint, onNavigate }) => {
   const [endpoints, setEndpoints] = useState<Endpoint[]>([]);
   const [search, setSearch] = useState('');
   const [methodFilter, setMethodFilter] = useState('ALL');
@@ -144,7 +145,7 @@ const EndpointsView: React.FC<EndpointsViewProps> = ({ refreshKey, initialEndpoi
   const methods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
 
   if (selectedEndpoint) {
-    return <EndpointDetailView endpoint={selectedEndpoint} onBack={() => setSelectedEndpoint(null)} />;
+    return <EndpointDetailView endpoint={selectedEndpoint} onBack={() => setSelectedEndpoint(null)} onNavigate={onNavigate} />;
   }
 
   return (

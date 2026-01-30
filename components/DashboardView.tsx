@@ -9,7 +9,7 @@ import {
   Zap, Clock, Target, ShieldCheck, Box, Activity,
   RefreshCw, TrendingUp, Layers, FileDown, Loader2,
   Terminal, Radio, Signal, CheckCircle2, AlertTriangle, Monitor,
-  LayoutDashboard
+  LayoutDashboard, ChevronRight
 } from 'lucide-react';
 import { jsPDF } from 'jspdf';
 import { generateExecutiveReport } from '../services/reportGenerator';
@@ -82,13 +82,16 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
   const projectHealthData = useMemo(() => processProjectHealth(filteredRuns), [filteredRuns]);
 
   const topErrors = useMemo(() => {
-    const errors: Record<string, number> = {};
+    const errors: Record<string, { count: number, project: string }> = {};
     filteredRuns.filter(r => r.failedCount > 0).forEach(run => {
       const key = `${run.project}: Logic Verification Failed`;
-      errors[key] = (errors[key] || 0) + run.failedCount;
+      if (!errors[key]) {
+        errors[key] = { count: 0, project: run.project };
+      }
+      errors[key].count += run.failedCount;
     });
     return Object.entries(errors)
-      .map(([msg, count]) => ({ msg, count }))
+      .map(([msg, data]) => ({ msg, count: data.count, project: data.project }))
       .sort((a, b) => b.count - a.count)
       .slice(0, 5);
   }, [filteredRuns]);
@@ -283,29 +286,66 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
                   </div>
                 </div>
 
-                <div className="h-[250px] md:h-[300px] w-full">
+                <div className="h-[250px] md:h-[300px] w-full relative group/chart">
+                  {timeline.length === 0 && (
+                    <div className="absolute inset-0 flex items-center justify-center z-10 bg-slate-950/20 backdrop-blur-sm rounded-xl">
+                      <div className="flex flex-col items-center gap-2">
+                        <Signal size={24} className="text-slate-700 animate-pulse" />
+                        <p className="text-slate-600 font-mono text-[10px] tracking-[0.2em] uppercase">No Signal Detected</p>
+                      </div>
+                    </div>
+                  )}
                   <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={timeline} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                    <AreaChart data={timeline} margin={{ top: 20, right: 10, left: -20, bottom: 0 }}>
                       <defs>
-                        <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#6366f1" stopOpacity={0.4} />
-                          <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
+                        <filter id="glow" height="300%" width="300%" x="-75%" y="-75%">
+                          <feGaussianBlur stdDeviation="6" result="coloredBlur" />
+                          <feMerge>
+                            <feMergeNode in="coloredBlur" />
+                            <feMergeNode in="SourceGraphic" />
+                          </feMerge>
+                        </filter>
+                        <linearGradient id="velocityGradient" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="#a78bfa" stopOpacity={0.5} />
+                          <stop offset="60%" stopColor="#8b5cf6" stopOpacity={0.1} />
+                          <stop offset="100%" stopColor="#8b5cf6" stopOpacity={0} />
                         </linearGradient>
                       </defs>
-                      <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fill: '#475569', fontSize: 10, fontWeight: 700 }} dy={10} />
-                      <YAxis axisLine={false} tickLine={false} tick={{ fill: '#475569', fontSize: 10, fontWeight: 700 }} />
+                      <CartesianGrid strokeDasharray="2 4" stroke="#475569" opacity={0.2} vertical={false} />
+                      <XAxis
+                        dataKey="day"
+                        axisLine={false}
+                        tickLine={false}
+                        tick={{ fill: '#64748b', fontSize: 10, fontWeight: 600, fontFamily: 'monospace', letterSpacing: '1px' }}
+                        dy={15}
+                      />
+                      <YAxis
+                        axisLine={false}
+                        tickLine={false}
+                        tick={{ fill: '#64748b', fontSize: 10, fontWeight: 600, fontFamily: 'monospace' }}
+                      />
                       <Tooltip
-                        contentStyle={{ backgroundColor: '#020617', border: '1px solid #1e293b', borderRadius: '16px', boxShadow: '0 10px 40px -10px rgba(0,0,0,0.5)' }}
-                        itemStyle={{ fontSize: '12px', fontWeight: 'bold' }}
-                        cursor={{ stroke: '#6366f1', strokeWidth: 1, strokeDasharray: '4 4' }}
+                        contentStyle={{
+                          backgroundColor: 'rgba(2, 6, 23, 0.8)',
+                          backdropFilter: 'blur(12px)',
+                          border: '1px solid rgba(139, 92, 246, 0.2)',
+                          borderRadius: '16px',
+                          boxShadow: '0 20px 50px -10px rgba(0,0,0,0.8)'
+                        }}
+                        itemStyle={{ fontSize: '12px', fontWeight: 'bold', color: '#fff' }}
+                        cursor={{ stroke: '#c084fc', strokeWidth: 1, strokeDasharray: '4 4' }}
+                        labelStyle={{ color: '#94a3b8', fontSize: '10px', marginBottom: '8px', letterSpacing: '2px', textTransform: 'uppercase' }}
                       />
                       <Area
                         type="monotone"
                         dataKey={chartMode === 'success' ? 'pass' : 'total'}
-                        stroke="#6366f1"
-                        strokeWidth={4}
-                        fill="url(#colorGradient)"
-                        animationDuration={1500}
+                        stroke="#a78bfa"
+                        strokeWidth={3}
+                        fill="url(#velocityGradient)"
+                        filter="url(#glow)"
+                        animationDuration={2000}
+                        dot={{ fill: '#0f172a', r: 3, strokeWidth: 2, stroke: '#a78bfa' }}
+                        activeDot={{ r: 6, strokeWidth: 0, fill: '#fff', stroke: '#fff' }}
                       />
                     </AreaChart>
                   </ResponsiveContainer>
@@ -345,13 +385,19 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 pb-20">
               {/* Incidents */}
               <div className="glass-panel p-4 md:p-8 rounded-[2rem] md:rounded-[2.5rem]">
-                <h3 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
-                  <AlertTriangle size={16} className="text-rose-500" /> Incident Taxonomy
-                </h3>
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em] flex items-center gap-2">
+                    <AlertTriangle size={16} className="text-rose-500" /> Incident Taxonomy
+                  </h3>
+                </div>
                 <div className="space-y-3">
                   {topErrors.map((err, i) => (
-                    <div key={i} className="flex justify-between items-center p-4 bg-slate-950/30 rounded-2xl border border-white/5 border-l-4 border-l-rose-500/50 hover:bg-slate-950/50 transition-colors">
-                      <span className="text-xs font-mono text-rose-300/80 w-3/4 truncate">{err.msg}</span>
+                    <div
+                      key={i}
+                      onClick={() => onNavigate('incidents', { project: err.project })}
+                      className="flex justify-between items-center p-4 bg-slate-950/30 rounded-2xl border border-white/5 border-l-4 border-l-rose-500/50 hover:bg-slate-950/50 transition-colors cursor-pointer group/item"
+                    >
+                      <span className="text-xs font-mono text-rose-300/80 w-3/4 truncate group-hover/item:text-rose-300 transition-colors">{err.msg}</span>
                       <span className="px-3 py-1 bg-rose-500/10 text-rose-400 text-[10px] font-black rounded-full border border-rose-500/20">{err.count}</span>
                     </div>
                   ))}

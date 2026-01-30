@@ -2,7 +2,7 @@
 Feature: Test Runs View Validation
 
   Background:
-    Given I navigate to the dashboard at "http://localhost:3000"
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     When I wait for 5 seconds
 
   @navigation @runs @search

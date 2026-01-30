@@ -52,11 +52,22 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
 
+      - name: Download Performance Reports
+        uses: actions/download-artifact@v4
+        with:
+          name: performance-reports
+          path: temp_reports/performance
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
+
       - name: Merge and Commit Results
         run: |
           mkdir -p reports
           cp -r temp_reports/api/* reports/ || true
           cp -r temp_reports/gui/* reports/ || true
+          
+          mkdir -p reports/performance_run
+          cp -r temp_reports/performance/* reports/performance_run/ || true
           
           mkdir -p features/resources/screenshots
           cp temp_reports/screenshots/*.png features/resources/screenshots/ || true
