@@ -8,6 +8,9 @@ sidebar:
   endpoints_link:
     by: xpath
     value: "//button[contains(., 'Endpoints')]"
+  incidents_link:
+    by: xpath
+    value: "//button[contains(., 'Incident Taxonomy')]"
   new_run_button:
     by: xpath
     value: "//button[contains(., 'New Run')]"

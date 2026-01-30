@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { LayoutDashboard, FolderKanban, TrendingUp, Plus, Search, ChevronRight, Cpu, Menu, X } from 'lucide-react';
+import { LayoutDashboard, FolderKanban, TrendingUp, Plus, Search, ChevronRight, Cpu, Menu, X, ShieldAlert } from 'lucide-react';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -15,6 +15,7 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab, setActiveTab, onNe
   const menuItems = [
     { id: 'dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { id: 'runs', icon: FolderKanban, label: 'Test Runs' },
+    { id: 'incidents', icon: ShieldAlert, label: 'Incident Taxonomy' },
     { id: 'endpoints', icon: TrendingUp, label: 'Endpoints' },
   ];
 

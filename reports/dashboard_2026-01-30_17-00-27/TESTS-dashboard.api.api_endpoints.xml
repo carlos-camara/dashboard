@@ -1,4 +1,4 @@
-<testsuite name="dashboard.api.api_endpoints.Endpoints Discovery Validations" tests="1" errors="0" failures="0" skipped="0" time="0.006816" timestamp="2026-01-30T00:52:40.344233" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Retrieve Discovered Endpoints" status="passed" time="0.006816"><system-out>
+<testsuite name="dashboard.api.api_endpoints.Endpoints Discovery Validations" tests="1" errors="0" failures="0" skipped="0" time="0.007402" timestamp="2026-01-30T17:09:12.893166" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Retrieve Discovered Endpoints" status="passed" time="0.007402"><system-out>
 <![CDATA[
 @scenario.begin
 

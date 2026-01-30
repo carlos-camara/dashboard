@@ -23,6 +23,7 @@ Feature: Dashboard View Validation
   @components @charts
   Scenario: Verify Timeline Controls
     Then I should see the text "Signal Velocity"
+    And I should see at least 1 elements with selector "chart" in "dashboard.timeline"
     When I switch the chart view to "Volume"
     And I wait for 1 seconds
     Then I take a screenshot of the "chart" named "dashboard_chart_volume"
@@ -57,3 +58,12 @@ Feature: Dashboard View Validation
   Scenario: Verify Mobile Viewport Layout
     Then I should see the text "Dashboard Cluster"
     Then I take a screenshot named "dashboard_responsiveness"
+
+  @navigation @incidents
+  Scenario: Verify Navigation to Incident Taxonomy
+    When I click on the "incidents_link" in the sidebar
+    And I wait for 1 seconds
+    Then I should see the text "INCIDENT"
+    And I should see the text "TAXONOMY"
+    And I should see the text "Global Scope"
+    Then I take a screenshot named "incident_taxonomy_page"

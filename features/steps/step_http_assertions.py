@@ -413,3 +413,29 @@ def step_json_path_equals_stored_var(context, path: str, var_name: str):
         f"Actual: {actual}\n"
         f"Request: {context.last_request}"
     )
+
+
+@then('the response header "{header_name}" should contain "{substring}"')
+def step_assert_header_contains(context, header_name: str, substring: str):
+    """
+    Validates that a real HTTP response header contains a specific substring.
+    Case-insensitive check for the header name.
+    """
+    assert context.response is not None, "No response found. Did you send a request?"
+    
+    # helper to find key case-insensitively
+    actual_value = None
+    for k, v in context.response.headers.items():
+        if k.lower() == header_name.lower():
+            actual_value = v
+            break
+            
+    assert actual_value is not None, (
+        f"Header '{header_name}' not found in response headers.\n"
+        f"Available headers: {list(context.response.headers.keys())}"
+    )
+    
+    assert substring in actual_value, (
+        f"Expected header '{header_name}' to contain '{substring}'\n"
+        f"Actual value: '{actual_value}'"
+    )

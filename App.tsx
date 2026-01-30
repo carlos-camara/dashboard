@@ -5,6 +5,7 @@ import DashboardView from './components/DashboardView';
 import EndpointsView from './components/EndpointsView';
 import IngestModal from './components/IngestModal';
 import TestRunsView from './components/TestRunsView';
+import IncidentView from './components/IncidentView';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -28,6 +29,11 @@ const App: React.FC = () => {
         />;
       case 'runs':
         return <TestRunsView
+          refreshKey={refreshKey}
+          initialProject={navigationState?.project}
+        />;
+      case 'incidents':
+        return <IncidentView
           refreshKey={refreshKey}
           initialProject={navigationState?.project}
         />;
