@@ -171,4 +171,3 @@ Our **GitHub Actions** pipeline orchestrates the entire lifecycle:
 > Use the `workflow_dispatch` event to manually trigger a full suite validation from the GitHub UI.
 
 > **Designed & Engineered by [Carlos Camara](https://github.com/carlos-camara)**
-> *Quality is not an act, it is a habit.*
