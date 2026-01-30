@@ -1,27 +1,27 @@
-<testsuite name="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" tests="1" errors="0" failures="0" skipped="0" time="22.997327" timestamp="2026-01-31T00:18:27.799174" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" name="Validate High-Density Performance Audit Dossier" status="passed" time="22.997327"><system-out>
+<testsuite name="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" tests="1" errors="0" failures="0" skipped="0" time="22.157327" timestamp="2026-01-30T23:54:01.565629" hostname="runnervmkj6or"><testcase classname="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" name="Validate High-Density Performance Audit Dossier" status="passed" time="22.157327"><system-out>
 <![CDATA[
 @scenario.begin
 
   @performance @detail @integration
   Scenario: Validate High-Density Performance Audit Dossier
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.421s
-    And I wait for 5 seconds ... passed in 5.001s
-    When I click on the "endpoints_link" in the sidebar ... passed in 0.170s
-    And I wait for 2 seconds ... passed in 2.001s
-    When I type "dashboard" into the "search_input" in "endpoints_view" ... passed in 0.418s
-    And I wait for 2 seconds ... passed in 2.001s
-    When I click on the "endpoint_item" in "endpoints_view" ... passed in 0.161s
-    And I wait for 2 seconds ... passed in 2.001s
-    Then I should see the "performance_card" in "endpoint_detail" ... passed in 0.031s
-    When I click on the "open_report_button" in "endpoint_detail" ... passed in 0.143s
-    And I wait for 10 seconds ... passed in 10.002s
-    Then I should see the text "Tactical Audit" ... passed in 0.037s
-    And I should see the text "Performance" ... passed in 0.038s
-    And I should see the text "Efficiency" ... passed in 0.033s
-    And I should see the "rps_image" in "performance_report_view" ... passed in 0.034s
-    And I should see the "latency_image" in "performance_report_view" ... passed in 0.038s
-    And I should see the "original_report_link" in "performance_report_view" ... passed in 0.034s
-    Then I take a screenshot named "final_performance_dashboard_verification" ... passed in 0.432s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.205s
+    And I wait for 5 seconds ... passed in 5.000s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.109s
+    And I wait for 2 seconds ... passed in 2.000s
+    When I type "dashboard" into the "search_input" in "endpoints_view" ... passed in 0.239s
+    And I wait for 2 seconds ... passed in 2.000s
+    When I click on the "endpoint_item" in "endpoints_view" ... passed in 0.104s
+    And I wait for 2 seconds ... passed in 2.000s
+    Then I should see the "performance_card" in "endpoint_detail" ... passed in 0.018s
+    When I click on the "open_report_button" in "endpoint_detail" ... passed in 0.099s
+    And I wait for 10 seconds ... passed in 10.000s
+    Then I should see the text "Tactical Audit" ... passed in 0.027s
+    And I should see the text "Performance" ... passed in 0.024s
+    And I should see the text "Efficiency" ... passed in 0.020s
+    And I should see the "rps_image" in "performance_report_view" ... passed in 0.020s
+    And I should see the "latency_image" in "performance_report_view" ... passed in 0.020s
+    And I should see the "original_report_link" in "performance_report_view" ... passed in 0.020s
+    Then I take a screenshot named "final_performance_dashboard_verification" ... passed in 0.250s
 
 @scenario.end
 --------------------------------------------------------------------------------
@@ -29,8 +29,8 @@
 Captured stdout:
 
 [SCREENSHOT] final_performance_dashboard_verification
-   Location: features\resources\screenshots\final_performance_dashboard_verification.png
-   <img src='file:///features\resources\screenshots\final_performance_dashboard_verification.png' width='800' alt='final_performance_dashboard_verification' />
+   Location: features/resources/screenshots/final_performance_dashboard_verification.png
+   <img src='file:///features/resources/screenshots/final_performance_dashboard_verification.png' width='800' alt='final_performance_dashboard_verification' />
 
 ]]>
 </system-out></testcase></testsuite>

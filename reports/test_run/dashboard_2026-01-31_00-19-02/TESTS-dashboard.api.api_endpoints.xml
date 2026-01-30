@@ -1,4 +1,4 @@
-<testsuite name="dashboard.api.api_endpoints.Endpoints Discovery Validations" tests="4" errors="0" failures="0" skipped="0" time="0.018946" timestamp="2026-01-30T23:47:52.568595" hostname="runnervmkj6or"><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Retrieve Discovered Endpoints" status="passed" time="0.006219"><system-out>
+<testsuite name="dashboard.api.api_endpoints.Endpoints Discovery Validations" tests="4" errors="0" failures="0" skipped="0" time="0.016908" timestamp="2026-01-30T23:52:36.800002" hostname="runnervmkj6or"><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Retrieve Discovered Endpoints" status="passed" time="0.005762"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -20,20 +20,20 @@
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Verify Method Not Allowed (POST)" status="passed" time="0.005811"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Verify Method Not Allowed (POST)" status="passed" time="0.004169"><system-out>
 <![CDATA[
 @scenario.begin
 
   @smoke @endpoints @negative
   Scenario: Verify Method Not Allowed (POST)
     Given the API base URL is "http://localhost:3001" ... passed in 0.000s
-    When I send a "POST" request to "/api/endpoints" ... passed in 0.006s
+    When I send a "POST" request to "/api/endpoints" ... passed in 0.004s
     Then the response status code should be 404 ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Verify Method Not Allowed (PUT)" status="passed" time="0.003848"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Verify Method Not Allowed (PUT)" status="passed" time="0.003444"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -46,7 +46,7 @@
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Verify Method Not Allowed (PATCH)" status="passed" time="0.003067"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Verify Method Not Allowed (PATCH)" status="passed" time="0.003533"><system-out>
 <![CDATA[
 @scenario.begin
 
