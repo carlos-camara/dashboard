@@ -183,19 +183,25 @@ const EndpointDetailView: React.FC<EndpointDetailViewProps> = ({ endpoint, onBac
             .then(res => res.json())
             .then(data => {
                 if (data.found && data.stats) {
+                    console.log('Performance Data:', data);
+                    console.log('Target Endpoint:', endpoint);
                     // Match endpoint simple logic: Method + Path
                     // Note: Locust usually logs path like "/api/runs (List)" or just "/api/runs"
                     // We need to find the best match
-                    const match = data.stats.find((s: any) =>
-                        s.method === endpoint.method &&
-                        (s.name.includes(endpoint.path) || endpoint.path.includes(s.name.split(' ')[0]))
-                    );
+                    const match = data.stats.find((s: any) => {
+                        const methodMatch = s.method === endpoint.method;
+                        const nameMatch = s.name.includes(endpoint.path) || endpoint.path.includes(s.name.split(' ')[0]);
+                        console.log(`Checking ${s.id || s.name}: Method=${methodMatch}, NameMatch=${nameMatch}`);
+                        return methodMatch && nameMatch;
+                    });
                     if (match) {
                         setPerfStats({ ...match, reportUrl: data.reportUrl, timestamp: data.timestamp });
                     }
                 }
             })
-            .catch(console.error);
+            .catch(err => {
+                console.error("Performance fetch error:", err);
+            });
 
         // First try to get project-level spec (e.g., dashboard.yaml)
         api.getProjectSpec(endpoint.service).then(res => {
