@@ -1,27 +1,27 @@
-<testsuite name="dashboard.gui.gui_navigation.Application Navigation Validation" tests="1" errors="0" failures="0" skipped="0" time="7.756423" timestamp="2026-01-30T23:53:39.403316" hostname="runnervmkj6or"><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Navigate to all main sections" status="passed" time="7.756423"><system-out>
+<testsuite name="dashboard.gui.gui_navigation.Application Navigation Validation" tests="1" errors="0" failures="0" skipped="0" time="7.836872" timestamp="2026-01-30T23:59:52.379475" hostname="runnervmkj6or"><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Navigate to all main sections" status="passed" time="7.836872"><system-out>
 <![CDATA[
 @scenario.begin
 
   @sidebar @smoke
   Scenario: Navigate to all main sections
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.198s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.199s
     And I wait for 2 seconds ... passed in 2.000s
-    When I click on the "test_runs_link" in the sidebar ... passed in 0.095s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.101s
     And I wait for 1 seconds ... passed in 1.000s
-    Then I should see the text "Execution Archives" ... passed in 0.019s
-    Then I take a screenshot named "nav_test_runs" ... passed in 0.238s
-    When I click on the "endpoints_link" in the sidebar ... passed in 0.098s
+    Then I should see the text "Execution Archives" ... passed in 0.021s
+    Then I take a screenshot named "nav_test_runs" ... passed in 0.242s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.111s
     And I wait for 1 seconds ... passed in 1.000s
-    Then I should see the text "Endpoint Catalog" ... passed in 0.018s
-    Then I take a screenshot named "nav_endpoints" ... passed in 0.243s
-    When I click on the "incidents_link" in the sidebar ... passed in 0.106s
+    Then I should see the text "Endpoint Catalog" ... passed in 0.022s
+    Then I take a screenshot named "nav_endpoints" ... passed in 0.281s
+    When I click on the "incidents_link" in the sidebar ... passed in 0.117s
     And I wait for 1 seconds ... passed in 1.000s
-    Then I should see the text "Incident Taxonomy" ... passed in 0.026s
-    Then I take a screenshot named "nav_incidents" ... passed in 0.288s
-    When I click on the "dashboard_link" in the sidebar ... passed in 0.092s
+    Then I should see the text "Incident Taxonomy" ... passed in 0.028s
+    Then I take a screenshot named "nav_incidents" ... passed in 0.299s
+    When I click on the "dashboard_link" in the sidebar ... passed in 0.093s
     And I wait for 1 seconds ... passed in 1.000s
-    Then I should see the text "Dashboard Cluster" ... passed in 0.031s
-    Then I take a screenshot named "nav_dashboard_return" ... passed in 0.304s
+    Then I should see the text "Dashboard Cluster" ... passed in 0.024s
+    Then I take a screenshot named "nav_dashboard_return" ... passed in 0.297s
 
 @scenario.end
 --------------------------------------------------------------------------------

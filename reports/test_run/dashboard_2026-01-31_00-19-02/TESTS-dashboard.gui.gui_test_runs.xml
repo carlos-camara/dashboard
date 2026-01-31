@@ -1,4 +1,4 @@
-<testsuite name="dashboard.gui.gui_test_runs.Test Runs View Validation" tests="2" errors="0" failures="0" skipped="0" time="19.498322" timestamp="2026-01-30T23:54:28.275977" hostname="runnervmkj6or"><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Search and Grouping in Test Runs" status="passed" time="11.84354"><system-out>
+<testsuite name="dashboard.gui.gui_test_runs.Test Runs View Validation" tests="2" errors="0" failures="0" skipped="0" time="19.530652" timestamp="2026-01-31T00:00:47.695877" hostname="runnervmkj6or"><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Search and Grouping in Test Runs" status="passed" time="11.845054"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -6,17 +6,17 @@
   Scenario: Search and Grouping in Test Runs
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.220s
     When I wait for 5 seconds ... passed in 5.000s
-    When I click on the "test_runs_link" in the sidebar ... passed in 0.096s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.093s
     And I wait for 2 seconds ... passed in 2.000s
-    Then I should see the text "Execution Archives" ... passed in 0.026s
-    When I type "dashboard" into the "search_input" in "test_runs" ... passed in 0.119s
+    Then I should see the text "Execution Archives" ... passed in 0.025s
+    When I type "dashboard" into the "search_input" in "test_runs" ... passed in 0.118s
     And I wait for 3 seconds ... passed in 3.000s
-    Then I should see the text "dashboard" ... passed in 0.022s
-    And I should see at least 1 elements with selector "project_card" in "test_runs" ... passed in 0.010s
-    When I click on the "project_card" in "test_runs" ... passed in 0.109s
+    Then I should see the text "dashboard" ... passed in 0.026s
+    And I should see at least 1 elements with selector "project_card" in "test_runs" ... passed in 0.009s
+    When I click on the "project_card" in "test_runs" ... passed in 0.117s
     And I wait for 1 seconds ... passed in 1.000s
-    And I should see at least 1 elements with selector "latest_badge" in "test_runs" ... passed in 0.010s
-    Then I take a screenshot named "test_runs_search_results" ... passed in 0.230s
+    And I should see at least 1 elements with selector "latest_badge" in "test_runs" ... passed in 0.013s
+    Then I take a screenshot named "test_runs_search_results" ... passed in 0.224s
 
 @scenario.end
 --------------------------------------------------------------------------------
@@ -28,20 +28,20 @@ Captured stdout:
    <img src='file:///features/resources/screenshots/test_runs_search_results.png' width='800' alt='test_runs_search_results' />
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Verify Pagination in Project History" status="passed" time="7.654782"><system-out>
+</system-out></testcase><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Verify Pagination in Project History" status="passed" time="7.685598"><system-out>
 <![CDATA[
 @scenario.begin
 
   @navigation @runs @pagination
   Scenario: Verify Pagination in Project History
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.208s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.212s
     When I wait for 5 seconds ... passed in 5.000s
-    When I click on the "test_runs_link" in the sidebar ... passed in 0.088s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.093s
     And I wait for 1 seconds ... passed in 1.000s
-    When I click on the "project_card" in "test_runs" ... passed in 0.105s
+    When I click on the "project_card" in "test_runs" ... passed in 0.111s
     And I wait for 1 seconds ... passed in 1.000s
-    Then I should see the text "Recent Executions" ... passed in 0.022s
-    Then I take a screenshot of the "project_card" named "test_runs_pagination_area" ... passed in 0.231s
+    Then I should see the text "Recent Executions" ... passed in 0.025s
+    Then I take a screenshot of the "project_card" named "test_runs_pagination_area" ... passed in 0.244s
 
 @scenario.end
 --------------------------------------------------------------------------------
