@@ -651,7 +651,9 @@ app.get("/api/performance/latest", (req, res) => {
             return res.json({ found: false, stats: [] });
         }
 
-        const folders = fs.readdirSync(perfDir).filter(f => fs.statSync(path.join(perfDir, f)).isDirectory());
+        const folders = fs.readdirSync(perfDir).filter(f =>
+            fs.statSync(path.join(perfDir, f)).isDirectory() && f.startsWith('performance_')
+        );
 
         if (folders.length === 0) {
             return res.json({ found: false, stats: [] });

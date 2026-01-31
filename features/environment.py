@@ -41,7 +41,7 @@ def before_all(context):
         os.makedirs(reports_perf_dir)
 
     # Check if any report subfolder exists, if not, create a dummy one
-    existing_reports = [d for d in os.listdir(reports_perf_dir) if os.path.isdir(os.path.join(reports_perf_dir, d))]
+    existing_reports = [d for d in os.listdir(reports_perf_dir) if os.path.isdir(os.path.join(reports_perf_dir, d)) and d.startswith("performance_")]
     if not existing_reports:
         print("[SETUP] Seeding dummy performance report for testing...")
         dummy_dir_name = f"performance_{run_timestamp}"
