@@ -1,11 +1,11 @@
-<testsuite name="dashboard.api.api_sync.Sync Endpoint Validations" tests="6" errors="0" failures="0" skipped="0" time="0.507294" timestamp="2026-01-31T00:41:09.450062" hostname="runnervmkj6or"><testcase classname="dashboard.api.api_sync.Sync Endpoint Validations" name="Trigger Sync scans reports directory" status="passed" time="0.195577"><system-out>
+<testsuite name="dashboard.api.api_sync.Sync Endpoint Validations" tests="6" errors="0" failures="0" skipped="0" time="0.517497" timestamp="2026-01-30T23:58:34.459740" hostname="runnervmkj6or"><testcase classname="dashboard.api.api_sync.Sync Endpoint Validations" name="Trigger Sync scans reports directory" status="passed" time="0.190629"><system-out>
 <![CDATA[
 @scenario.begin
 
   @smoke @sync
   Scenario: Trigger Sync scans reports directory
     Given the API base URL is "http://localhost:3001" ... passed in 0.000s
-    When I send a "POST" request to "/api/sync" ... passed in 0.195s
+    When I send a "POST" request to "/api/sync" ... passed in 0.190s
     Then the response status code should be 200 ... passed in 0.000s
     And the response time should be less than 2000 ms ... passed in 0.000s
     And the response JSON should contain keys ... passed in 0.000s
@@ -18,23 +18,23 @@
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_sync.Sync Endpoint Validations" name="Sync is idempotent" status="passed" time="0.300277"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_sync.Sync Endpoint Validations" name="Sync is idempotent" status="passed" time="0.315818"><system-out>
 <![CDATA[
 @scenario.begin
 
   @smoke @sync @idempotency
   Scenario: Sync is idempotent
     Given the API base URL is "http://localhost:3001" ... passed in 0.000s
-    When I send a "POST" request to "/api/sync" ... passed in 0.146s
+    When I send a "POST" request to "/api/sync" ... passed in 0.147s
     Then the response status code should be 200 ... passed in 0.000s
-    When I send a "POST" request to "/api/sync" ... passed in 0.153s
+    When I send a "POST" request to "/api/sync" ... passed in 0.168s
     Then the response status code should be 200 ... passed in 0.000s
     And the response JSON path "new_runs_discovered" should be >= 0 ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_sync.Sync Endpoint Validations" name="Verify Method Not Allowed (GET)" status="passed" time="0.003134"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_sync.Sync Endpoint Validations" name="Verify Method Not Allowed (GET)" status="passed" time="0.003392"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -47,20 +47,20 @@
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_sync.Sync Endpoint Validations" name="Verify Method Not Allowed (PUT)" status="passed" time="0.002863"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_sync.Sync Endpoint Validations" name="Verify Method Not Allowed (PUT)" status="passed" time="0.002738"><system-out>
 <![CDATA[
 @scenario.begin
 
   @smoke @sync @negative
   Scenario: Verify Method Not Allowed (PUT)
     Given the API base URL is "http://localhost:3001" ... passed in 0.000s
-    When I send a "PUT" request to "/api/sync" ... passed in 0.003s
+    When I send a "PUT" request to "/api/sync" ... passed in 0.002s
     Then the response status code should be 404 ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_sync.Sync Endpoint Validations" name="Verify Method Not Allowed (DELETE)" status="passed" time="0.002489"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_sync.Sync Endpoint Validations" name="Verify Method Not Allowed (DELETE)" status="passed" time="0.00247"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -73,14 +73,14 @@
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_sync.Sync Endpoint Validations" name="Verify Method Not Allowed (PATCH)" status="passed" time="0.002953"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_sync.Sync Endpoint Validations" name="Verify Method Not Allowed (PATCH)" status="passed" time="0.00245"><system-out>
 <![CDATA[
 @scenario.begin
 
   @smoke @sync @negative
   Scenario: Verify Method Not Allowed (PATCH)
     Given the API base URL is "http://localhost:3001" ... passed in 0.000s
-    When I send a "PATCH" request to "/api/sync" ... passed in 0.003s
+    When I send a "PATCH" request to "/api/sync" ... passed in 0.002s
     Then the response status code should be 404 ... passed in 0.000s
 
 @scenario.end

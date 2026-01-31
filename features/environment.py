@@ -34,6 +34,30 @@ def before_all(context):
     run_timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     context.failure_screenshots_dir = os.path.join("features", "resources", "screenshots", run_timestamp)
 
+    # SEEDING: Ensure performance reports exist for the UI to display the card
+    # This fixes the CI issue where the report directory is empty
+    reports_perf_dir = os.path.join("reports", "performance_run")
+    if not os.path.exists(reports_perf_dir):
+        os.makedirs(reports_perf_dir)
+
+    # Check if any report subfolder exists, if not, create a dummy one
+    existing_reports = [d for d in os.listdir(reports_perf_dir) if os.path.isdir(os.path.join(reports_perf_dir, d))]
+    if not existing_reports:
+        print("[SETUP] Seeding dummy performance report for testing...")
+        dummy_dir_name = f"performance_{run_timestamp}"
+        dummy_path = os.path.join(reports_perf_dir, dummy_dir_name)
+        os.makedirs(dummy_path)
+        
+        # Create dummy _stats.csv
+        csv_path = os.path.join(dummy_path, "dummy_stats.csv")
+        with open(csv_path, "w") as f:
+            # Minimal headers required by server.js
+            f.write('"Type","Name","Request Count","Failure Count","Median Response Time","Average Response Time","Min Response Time","Max Response Time","Average Content Size","Requests/s","Failures/s","50%","66%","75%","80%","90%","95%","98%","99%","100%"\n')
+            f.write('"GET","/api/test",1000,0,50,55,10,200,500,50.0,0.0,50,60,70,80,90,100,120,150,200\n')
+
+def before_scenario(context, scenario):
+     pass
+
 def after_step(context, step):
     """
     Se ejecuta después de cada step.

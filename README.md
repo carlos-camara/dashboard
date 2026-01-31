@@ -198,4 +198,3 @@ Our **GitHub Actions** pipeline orchestrates the entire lifecycle:
 <!-- -->
 
 > **Designed & Engineered by [Carlos Camara](https://github.com/carlos-camara)**
-

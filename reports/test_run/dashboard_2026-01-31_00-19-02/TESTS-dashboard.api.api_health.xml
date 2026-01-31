@@ -1,4 +1,4 @@
-<testsuite name="dashboard.api.api_health.Health Endpoint Validations" tests="4" errors="0" failures="0" skipped="0" time="0.013959" timestamp="2026-01-31T00:41:08.877222" hostname="runnervmkj6or"><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="Health check returns 200 OK" status="passed" time="0.003453"><system-out>
+<testsuite name="dashboard.api.api_health.Health Endpoint Validations" tests="4" errors="0" failures="0" skipped="0" time="0.014492" timestamp="2026-01-30T23:58:33.871987" hostname="runnervmkj6or"><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="Health check returns 200 OK" status="passed" time="0.003669"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -14,7 +14,7 @@
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="METHOD NOT ALLOWED (POST)" status="passed" time="0.003411"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="METHOD NOT ALLOWED (POST)" status="passed" time="0.003648"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -27,7 +27,7 @@
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="METHOD NOT ALLOWED (PUT)" status="passed" time="0.003474"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="METHOD NOT ALLOWED (PUT)" status="passed" time="0.003295"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -40,7 +40,7 @@
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="METHOD NOT ALLOWED (DELETE)" status="passed" time="0.003622"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="METHOD NOT ALLOWED (DELETE)" status="passed" time="0.003879"><system-out>
 <![CDATA[
 @scenario.begin
 
