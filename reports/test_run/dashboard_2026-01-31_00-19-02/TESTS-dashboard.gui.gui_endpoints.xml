@@ -1,36 +1,50 @@
-<testsuite name="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" tests="1" errors="0" failures="0" skipped="0" time="9.34646" timestamp="2026-01-31T00:17:38.554671" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" name="Deep Dive into Endpoint Detail" status="passed" time="9.34646"><system-out>
+<testsuite name="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" tests="1" errors="0" failures="1" skipped="0" time="23.366414" timestamp="2026-01-30T23:59:29.697071" hostname="runnervmkj6or"><testcase classname="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" name="Deep Dive into Endpoint Detail" status="failed" time="23.366414"><failure type="AssertionError" message="Element endpoint_detail.performance_card is not visible">
+<![CDATA[
+Failing step: And I should see the "performance_card" in "endpoint_detail" ... failed in 16.590s
+Location: features/dashboard/gui/gui_endpoints.feature:19
+Assertion Failed: Element endpoint_detail.performance_card is not visible
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Deep Dive into Endpoint Detail
+   Failed Step: I should see the "performance_card" in "endpoint_detail"
+   Location: features/resources/screenshots/2026-01-30_23-58-36/FAILED_Deep_Dive_into_Endpoint_Detail_I_should_see_the_"performance_.png
+   <img src='file:////home/runner/work/dashboard/dashboard/features/resources/screenshots/2026-01-30_23-58-36/FAILED_Deep_Dive_into_Endpoint_Detail_I_should_see_the_"performance_.png' width='800' alt='Failure Screenshot' />]]>
+</failure><system-out>
 <![CDATA[
 @scenario.begin
 
   @navigation @endpoints @detail
   Scenario: Deep Dive into Endpoint Detail
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.372s
-    When I wait for 2 seconds ... passed in 2.001s
-    When I click on the "endpoints_link" in the sidebar ... passed in 0.230s
-    And I wait for 1 seconds ... passed in 1.001s
-    When I type "dashboard" into the "search_input" in "endpoints_view" ... passed in 0.555s
-    And I wait for 2 seconds ... passed in 2.001s
-    When I click on the "endpoint_item" in "endpoints_view" ... passed in 0.221s
-    And I wait for 1 seconds ... passed in 1.002s
-    Then I should see the text "Back to Catalog" ... passed in 0.046s
-    And I should see the text "Success Rate" ... passed in 0.044s
-    And I should see the text "Avg Latency" ... passed in 0.038s
-    And I should see the "performance_card" in "endpoint_detail" ... passed in 0.033s
-    And I should see the text "Performance Insights" ... passed in 0.043s
-    And I should see the text "Live Discovery Data" ... passed in 0.041s
-    Then I take a screenshot named "endpoints_deep_detail" ... passed in 0.520s
-    When I click on the "back_button" in "endpoint_detail" ... passed in 0.153s
-    And I wait for 1 seconds ... passed in 1.001s
-    Then I should see the text "Endpoint Catalog" ... passed in 0.045s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.181s
+    When I wait for 2 seconds ... passed in 2.000s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.123s
+    And I wait for 1 seconds ... passed in 1.000s
+    When I type "dashboard" into the "search_input" in "endpoints_view" ... passed in 0.276s
+    And I wait for 2 seconds ... passed in 2.000s
+    When I click on the "endpoint_item" in "endpoints_view" ... passed in 0.133s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then I should see the text "Back to Catalog" ... passed in 0.022s
+    And I should see the text "Success Rate" ... passed in 0.020s
+    And I should see the text "Avg Latency" ... passed in 0.021s
+    And I should see the "performance_card" in "endpoint_detail" ... failed in 16.590s
+    And I should see the text "Performance Insights" ... skipped in 0.000s
+    And I should see the text "Live Discovery Data" ... skipped in 0.000s
+    Then I take a screenshot named "endpoints_deep_detail" ... skipped in 0.000s
+    When I click on the "back_button" in "endpoint_detail" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I should see the text "Endpoint Catalog" ... skipped in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
 
-[SCREENSHOT] endpoints_deep_detail
-   Location: features\resources\screenshots\endpoints_deep_detail.png
-   <img src='file:///features\resources\screenshots\endpoints_deep_detail.png' width='800' alt='endpoints_deep_detail' />
+[FAILURE] Screenshot captured
+   Scenario: Deep Dive into Endpoint Detail
+   Failed Step: I should see the "performance_card" in "endpoint_detail"
+   Location: features/resources/screenshots/2026-01-30_23-58-36/FAILED_Deep_Dive_into_Endpoint_Detail_I_should_see_the_"performance_.png
+   <img src='file:////home/runner/work/dashboard/dashboard/features/resources/screenshots/2026-01-30_23-58-36/FAILED_Deep_Dive_into_Endpoint_Detail_I_should_see_the_"performance_.png' width='800' alt='Failure Screenshot' />
 
 ]]>
 </system-out></testcase></testsuite>
