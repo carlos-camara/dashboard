@@ -1,4 +1,4 @@
-<testsuite name="dashboard.api.api_endpoints.Endpoints Discovery Validations" tests="4" errors="0" failures="0" skipped="0" time="0.018274" timestamp="2026-01-30T23:58:33.852002" hostname="runnervmkj6or"><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Retrieve Discovered Endpoints" status="passed" time="0.006305"><system-out>
+<testsuite name="dashboard.api.api_endpoints.Endpoints Discovery Validations" tests="4" errors="0" failures="0" skipped="0" time="0.019148" timestamp="2026-01-31T00:41:08.858139" hostname="runnervmkj6or"><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Retrieve Discovered Endpoints" status="passed" time="0.006584"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -20,7 +20,7 @@
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Verify Method Not Allowed (POST)" status="passed" time="0.004869"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Verify Method Not Allowed (POST)" status="passed" time="0.005294"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -33,7 +33,7 @@
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Verify Method Not Allowed (PUT)" status="passed" time="0.003279"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Verify Method Not Allowed (PUT)" status="passed" time="0.003422"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -46,7 +46,7 @@
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Verify Method Not Allowed (PATCH)" status="passed" time="0.003822"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Verify Method Not Allowed (PATCH)" status="passed" time="0.003848"><system-out>
 <![CDATA[
 @scenario.begin
 
