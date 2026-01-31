@@ -9,7 +9,7 @@ Feature: Endpoints Catalog Validation
   Scenario: Deep Dive into Endpoint Detail
     When I click on the "endpoints_link" in the sidebar
     And I wait for 1 seconds
-    When I type "runs" into the "search_input" in "endpoints_view"
+    When I type "health" into the "search_input" in "endpoints_view"
     And I wait for 2 seconds
     When I click on the "endpoint_item" in "endpoints_view"
     And I wait for 1 seconds
