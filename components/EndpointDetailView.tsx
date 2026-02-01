@@ -188,12 +188,24 @@ const EndpointDetailView: React.FC<EndpointDetailViewProps> = ({ endpoint, onBac
                     // Match endpoint simple logic: Method + Path
                     // Note: Locust usually logs path like "/api/runs (List)" or just "/api/runs"
                     // We need to find the best match
+                    const normalize = (p: string) => p.replace(/\/$/, '').toLowerCase();
+                    const epPath = normalize(endpoint.path);
+
                     const match = data.stats.find((s: any) => {
-                        const methodMatch = s.method === endpoint.method;
-                        const nameMatch = s.name.includes(endpoint.path) || endpoint.path.includes(s.name.split(' ')[0]);
-                        console.log(`Checking ${s.id || s.name}: Method=${methodMatch}, NameMatch=${nameMatch}`);
-                        return methodMatch && nameMatch;
+                        if (s.method !== endpoint.method) return false;
+
+                        const statName = normalize(s.name.split(' ')[0]); // Handle "Path (Name)" format
+
+                        // exact match
+                        if (statName === epPath) return true;
+
+                        // partial match if one is subset of other (handles IDs vs Placeholders)
+                        // e.g. /api/users/123 vs /api/users/{id}
+                        if (statName.includes(epPath) || epPath.includes(statName)) return true;
+
+                        return false;
                     });
+
                     if (match) {
                         setPerfStats({ ...match, reportUrl: data.reportUrl, timestamp: data.timestamp });
                     }
