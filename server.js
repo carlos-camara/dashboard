@@ -657,11 +657,51 @@ app.get("/api/performance/latest", (req, res) => {
             return res.json({ found: false, stats: [] });
         }
 
-        // Sort by time (folder name contains timestamp, but fs mtime is safer)
-        const latestFolder = folders.map(f => ({
-            name: f,
-            time: fs.statSync(path.join(perfDir, f)).mtime.getTime()
-        })).sort((a, b) => b.time - a.time)[0];
+        // Filter for valid performance folder names: performance_YYYY-MM-DD_HH-MM-SS
+        const perfFolderRegex = /^performance_(\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2})$/;
+
+        const validFolders = folders
+            .map(f => {
+                const match = f.match(perfFolderRegex);
+                if (match) {
+                    // unexpected format: YYYY-MM-DD_HH-MM-SS
+                    // replace _ with T and last - with nothing and second to last - with :
+                    // easier: just remove non-digits and parse manually
+
+                    // Actually, let's just parse the components directly for reliable sorting
+                    // YYYY-MM-DD_HH-MM-SS
+                    // 0123456789012345678
+                    const tsStr = match[1]; // 2026-01-30_23-02-10
+                    const parts = tsStr.split('_');
+                    const datePart = parts[0]; // 2026-01-30
+                    const timePart = parts[1]; // 23-02-10
+                    const dateComp = datePart.split('-');
+                    const timeComp = timePart.split('-');
+
+                    const dateObj = new Date(
+                        parseInt(dateComp[0]), // YYYY
+                        parseInt(dateComp[1]) - 1, // MM (0-indexed)
+                        parseInt(dateComp[2]), // DD
+                        parseInt(timeComp[0]), // HH
+                        parseInt(timeComp[1]), // mm
+                        parseInt(timeComp[2])  // ss
+                    );
+
+                    return {
+                        name: f,
+                        time: dateObj.getTime()
+                    };
+                }
+                return null;
+            })
+            .filter(item => item !== null)
+            .sort((a, b) => b.time - a.time);
+
+        if (validFolders.length === 0) {
+            return res.json({ found: false, stats: [] });
+        }
+
+        const latestFolder = validFolders[0];
 
         const latestRunDir = path.join(perfDir, latestFolder.name);
         const runFiles = fs.readdirSync(latestRunDir);
