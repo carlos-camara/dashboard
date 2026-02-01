@@ -1,48 +1,52 @@
 <!--
-Pull Request Template
-Tip: keep the title clear and use present tense (e.g., "Add X", "Fix Y").
+  ✨ Thanks for contributing!
+  
+  Please provide a clear and concise description of your changes.
+  Ensure your branch is up-to-date with the main branch before submitting.
 -->
 
-# Pull Request
+# 📝 Pull Request
 
-## Summary
-<!-- What does this PR change? (1–3 bullets) -->
--
+## 🌟 Type of Change
+<!-- Select the option that best fits your change -->
+- [ ] 🐛 **Bug Fix** (Non-breaking change which fixes an issue)
+- [ ] ✨ **New Feature** (Non-breaking change which adds functionality)
+- [ ] 💥 **Breaking Change** (Fix or feature that would cause existing functionality to not work as expected)
+- [ ] ♻️ **Refactor** (Code improvement without changing behavior)
+- [ ] 🎨 **Style/Design** (UI adjustments, CSS, assets)
+- [ ] 📚 **Documentation** (Updates to README, docs, or inline comments)
+- [ ] 🔧 **Configuration** (CI/CD, settings, scripts)
 
-## Motivation / Context
-<!-- Why is this change needed? Link to issue(s) or background. -->
--
+## 🎯 Objective
+<!-- What is the goal of this PR? Link to relevant issues if applicable. -->
+> 
 
-## Changes
-<!-- Key technical changes and decisions -->
--
--
+## 🛠️ Technical Details
+<!-- Briefly explain the technical approach or specific decisions made. -->
+- 
+- 
 
-## How to Test
-<!-- Provide step-by-step instructions so reviewers can reproduce -->
-1.
-2.
+## 🖼️ Visuals (Screenshots / Videos)
+<!-- If applicable, please attach screenshots or screen recordings to demonstrate the changes. -->
+| Before | After |
+| :---: | :---: |
+| _[Image/Video]_ | _[Image/Video]_ |
 
-## Screenshots / Recordings (if applicable)
-<!-- Before/After, UI changes, logs, etc. -->
--
+## 🧪 Testing Plan
+<!-- How can reviewers verify your changes? Provide step-by-step instructions. -->
+1. 
+2. 
+3. 
 
-## Checklist
-- [ ] I ran tests locally (unit, integration, etc.) and they passed
-- [ ] I added or updated tests (or explained why not)
-- [ ] I updated documentation (README, comments, ADRs) if needed
-- [ ] I verified linting/formatting (if applicable)
-- [ ] I considered backward compatibility / migrations (if applicable)
-- [ ] I added appropriate logging/monitoring (if applicable)
+## ✅ Checklist
+- [ ] 🏗️ I have performed a **self-review** of my code.
+- [ ] 🧹 I have **linted/formatted** the code locally.
+- [ ] 🧪 I have added/updated **tests** to cover my changes.
+- [ ] 📖 I have updated the **documentation** accordingly.
+- [ ] ⚠️ I have checked for **breaking changes** and documented them.
 
-## Related Issues
-<!-- Use keywords to auto-close issues: "Closes #123" / "Fixes #123" -->
-- Closes #
+## 🚀 Deployment Notes
+<!-- Any special instructions for deployment? (e.g., environment variables, database migrations) -->
+- 
 
-## Deployment / Rollout Notes (if applicable)
-<!-- Anything special: feature flags, config changes, migrations, risks -->
--
-
-## Reviewer Notes
-<!-- What should reviewers focus on? Any tricky parts? -->
--
+---
