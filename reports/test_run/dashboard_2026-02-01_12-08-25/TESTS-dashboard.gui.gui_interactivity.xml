@@ -1,0 +1,54 @@
+<testsuite name="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" tests="2" errors="0" failures="0" skipped="0" time="14.719629" timestamp="2026-02-01T12:07:28.551216" hostname="runnervmkj6or"><testcase classname="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" name="Redirect from Sector Integrity to Filtered Test Runs" status="passed" time="6.584507"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @navigation @sector_integrity
+  Scenario: Redirect from Sector Integrity to Filtered Test Runs
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.203s
+    And I wait for 5 seconds ... passed in 5.000s
+    Then I should see the text "Sector Integrity" ... passed in 0.027s
+    When I click on the "project_item" in "dashboard.recent_runs" ... passed in 0.111s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then I should see the text "Execution Archives" ... passed in 0.023s
+    And I should see at least 1 elements with selector "project_card" in "test_runs" ... passed in 0.010s
+    And I should see at least 1 elements with class "bg-blue-600" ... passed in 0.009s
+    Then I take a screenshot named "interactivity_sector_redirect" ... passed in 0.201s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] interactivity_sector_redirect
+   Location: features/resources/screenshots/interactivity_sector_redirect.png
+   <img src='file:///features/resources/screenshots/interactivity_sector_redirect.png' width='800' alt='interactivity_sector_redirect' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" name="Redirect from Latency Anomalies to Endpoint Detail" status="passed" time="8.135122"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @navigation @latency_anomalies
+  Scenario: Redirect from Latency Anomalies to Endpoint Detail
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.202s
+    And I wait for 5 seconds ... passed in 5.000s
+    When I scroll to the bottom of the page ... passed in 1.425s
+    Then I should see the text "Latency Anomalies" ... passed in 0.023s
+    When I click on the "anomaly_item" in "dashboard.endpoints" ... passed in 0.144s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then I should see the text "Back to Catalog" ... passed in 0.022s
+    And I should see the text "Success Rate" ... passed in 0.020s
+    And I should see the text "Avg Latency" ... passed in 0.018s
+    Then I take a screenshot named "interactivity_anomaly_redirect" ... passed in 0.281s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] interactivity_anomaly_redirect
+   Location: features/resources/screenshots/interactivity_anomaly_redirect.png
+   <img src='file:///features/resources/screenshots/interactivity_anomaly_redirect.png' width='800' alt='interactivity_anomaly_redirect' />
+
+]]>
+</system-out></testcase></testsuite>
