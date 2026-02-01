@@ -19,12 +19,12 @@
 
 ## 🎯 Objective
 <!-- What is the goal of this PR? Link to relevant issues if applicable. -->
-> 
+>
 
 ## 🛠️ Technical Details
 <!-- Briefly explain the technical approach or specific decisions made. -->
-- 
-- 
+-
+-
 
 ## 🖼️ Visuals (Screenshots / Videos)
 <!-- If applicable, please attach screenshots or screen recordings to demonstrate the changes. -->
@@ -34,9 +34,9 @@
 
 ## 🧪 Testing Plan
 <!-- How can reviewers verify your changes? Provide step-by-step instructions. -->
-1. 
-2. 
-3. 
+1.
+2.
+3.
 
 ## ✅ Checklist
 - [ ] 🏗️ I have performed a **self-review** of my code.
@@ -47,6 +47,7 @@
 
 ## 🚀 Deployment Notes
 <!-- Any special instructions for deployment? (e.g., environment variables, database migrations) -->
-- 
+-
 
 ---
+_made with ❤️ for excellence_
