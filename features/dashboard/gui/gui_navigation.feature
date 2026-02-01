@@ -5,7 +5,6 @@ Feature: Application Navigation Validation
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     And I wait for 2 seconds
 
-  @sidebar @smoke
   Scenario: Navigate to all main sections
     # Test Runs
     When I click on the "test_runs_link" in the sidebar

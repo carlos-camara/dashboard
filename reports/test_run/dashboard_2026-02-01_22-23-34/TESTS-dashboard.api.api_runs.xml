@@ -1,0 +1,62 @@
+<testsuite name="dashboard.api.api_runs.Runs Endpoint Validations" tests="2" errors="0" failures="1" skipped="0" time="0.052923" timestamp="2026-02-01T21:32:26.333025" hostname="runnervmkj6or"><testcase classname="dashboard.api.api_runs.Runs Endpoint Validations" name="Upload, Verify, and Explore a Run" status="failed" time="0.049075"><failure type="AssertionError" message="JSON mismatch at '0.id'&#10;Expected (stored uploaded_run_id): UPLOAD - 1769981546221 &#10;Actual: RUN - dashboard_2026-02-01_22-23-34 &#10;Request: {'method': 'GET', 'url': 'http://localhost:3001/api/runs', 'params': None, 'json': None}">
+<![CDATA[
+Failing step: And the response JSON path "0.id" should equal stored variable "uploaded_run_id" ... failed in 0.000s
+Location: features/dashboard/api/api_runs.feature:19
+Assertion Failed: JSON mismatch at '0.id'
+Expected (stored uploaded_run_id): UPLOAD - 1769981546221 
+Actual: RUN - dashboard_2026-02-01_22-23-34 
+Request: {'method': 'GET', 'url': 'http://localhost:3001/api/runs', 'params': None, 'json': None}
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Upload, Verify, and Explore a Run
+   Failed Step: the response JSON path "0.id" should equal stored variable "uploaded_run_id"
+   Location: features/resources/screenshots/2026-02-01_21-32-26/FAILED_Upload,_Verify,_and_Explore_a_Run_the_response_JSON_path_"0.id"_.png
+   <img src='file:////home/runner/work/dashboard/dashboard/features/resources/screenshots/2026-02-01_21-32-26/FAILED_Upload,_Verify,_and_Explore_a_Run_the_response_JSON_path_"0.id"_.png' width='800' alt='Failure Screenshot' />]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke
+  Scenario: Upload, Verify, and Explore a Run
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I upload the file "test_run_sample.xml" to "/api/upload" ... passed in 0.025s
+    Then the response status code should be 200 ... passed in 0.000s
+    And the response JSON path "success" should be true ... passed in 0.000s
+    And the response JSON path "totalCount" should be 1 ... passed in 0.000s
+    And I store the response JSON path "runId" as "uploaded_run_id" ... passed in 0.000s
+    When I send a "GET" request to "/api/runs" ... passed in 0.023s
+    Then the response status code should be 200 ... passed in 0.000s
+    And the response JSON path "0.id" should equal stored variable "uploaded_run_id" ... failed in 0.000s
+    And the response JSON path "0.totalCount" should be 1 ... skipped in 0.000s
+    When I send a "GET" request to "/api/runs/${uploaded_run_id}/scenarios" ... skipped in 0.000s
+    Then the response status code should be 200 ... skipped in 0.000s
+    And the response JSON should not be empty ... skipped in 0.000s
+    And the response JSON path "0.name" should be a "str" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Upload, Verify, and Explore a Run
+   Failed Step: the response JSON path "0.id" should equal stored variable "uploaded_run_id"
+   Location: features/resources/screenshots/2026-02-01_21-32-26/FAILED_Upload,_Verify,_and_Explore_a_Run_the_response_JSON_path_"0.id"_.png
+   <img src='file:////home/runner/work/dashboard/dashboard/features/resources/screenshots/2026-02-01_21-32-26/FAILED_Upload,_Verify,_and_Explore_a_Run_the_response_JSON_path_"0.id"_.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.api.api_runs.Runs Endpoint Validations" name="Get non-existent run" status="passed" time="0.003849"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke @negative
+  Scenario: Get non-existent run
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I send a "GET" request to "/api/runs/INVALID_RUN_ID" ... passed in 0.003s
+    Then the response status code should be 404 ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

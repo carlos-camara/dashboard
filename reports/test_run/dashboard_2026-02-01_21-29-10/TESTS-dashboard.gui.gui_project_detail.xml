@@ -1,0 +1,435 @@
+<testsuite name="dashboard.gui.gui_project_detail.Project Detail View Validation" tests="4" errors="4" failures="0" skipped="0" time="164.856482" timestamp="2026-02-01T21:26:55.623415" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Architecture Analysis Section" status="failed" time="41.008816"><error type="TimeoutException" message="Message: &#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff7863ca535&#10;&#09;0x7ff7863ca590&#10;&#09;0x7ff7861710bd&#10;&#09;0x7ff7861cc48e&#10;&#09;0x7ff7861cc79c&#10;&#09;0x7ff78621d3a7&#10;&#09;0x7ff786219ef5&#10;&#09;0x7ff7861bcc9c&#10;&#09;0x7ff7861bdbe3&#10;&#09;0x7ff7866a7b60&#10;&#09;0x7ff7866a1f5d&#10;&#09;0x7ff7866c311a&#10;&#09;0x7ff7863e60a5&#10;&#09;0x7ff7863ee73c&#10;&#09;0x7ff7863d3844&#10;&#09;0x7ff7863d39f6&#10;&#09;0x7ff7863b9a07&#10;&#09;0x7ffd54ed7374&#10;&#09;0x7ffd56adcc91&#10;">
+<![CDATA[
+Failing step: When I click on the "project_card" in "test_runs" ... failed in 33.300s
+Location: features/dashboard/gui/gui_project_detail.feature:9
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\features\page_objects\base_page.py", line 109, in click
+    element = self.wait.until(EC.presence_of_element_located(locator))
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff7863ca535
+	0x7ff7863ca590
+	0x7ff7861710bd
+	0x7ff7861cc48e
+	0x7ff7861cc79c
+	0x7ff78621d3a7
+	0x7ff786219ef5
+	0x7ff7861bcc9c
+	0x7ff7861bdbe3
+	0x7ff7866a7b60
+	0x7ff7866a1f5d
+	0x7ff7866c311a
+	0x7ff7863e60a5
+	0x7ff7863ee73c
+	0x7ff7863d3844
+	0x7ff7863d39f6
+	0x7ff7863b9a07
+	0x7ffd54ed7374
+	0x7ffd56adcc91
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "features\steps\step_gui_interactions.py", line 345, in step_click_section_element
+    page.click(locator)
+    ~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\features\page_objects\base_page.py", line 112, in click
+    raise e
+  File "C:\Users\Carlos\Desktop\github\dashboard\features\page_objects\base_page.py", line 104, in click
+    element = self.wait.until(EC.element_to_be_clickable(locator))
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff7863ca535
+	0x7ff7863ca590
+	0x7ff7861710bd
+	0x7ff7861cc48e
+	0x7ff7861cc79c
+	0x7ff78621d3a7
+	0x7ff786219ef5
+	0x7ff7861bcc9c
+	0x7ff7861bdbe3
+	0x7ff7866a7b60
+	0x7ff7866a1f5d
+	0x7ff7866c311a
+	0x7ff7863e60a5
+	0x7ff7863ee73c
+	0x7ff7863d3844
+	0x7ff7863d39f6
+	0x7ff7863b9a07
+	0x7ffd54ed7374
+	0x7ffd56adcc91
+
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Architecture Analysis Section
+   Failed Step: I click on the "project_card" in "test_runs"
+   Location: features\resources\screenshots\2026-02-01_21-20-26\FAILED_Verify_Architecture_Analysis_Section_I_click_on_the_"project_card"_.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-01_21-20-26\FAILED_Verify_Architecture_Analysis_Section_I_click_on_the_"project_card"_.png' width='800' alt='Failure Screenshot' />]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Architecture Analysis Section
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.520s
+    When I wait for 5 seconds ... passed in 5.001s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.186s
+    And I wait for 2 seconds ... passed in 2.001s
+    When I click on the "project_card" in "test_runs" ... failed in 33.300s
+    And I wait for 2 seconds ... skipped in 0.000s
+    Then I should see the text "Architecture Analysis" ... skipped in 0.000s
+    And I should see the text "Layer Stability" ... skipped in 0.000s
+    And I should see the text "Layer Latency" ... skipped in 0.000s
+    And I should see at least 1 elements with selector "stability_comparison" in "project_detail" ... skipped in 0.000s
+    And I should see at least 1 elements with selector "latency_comparison" in "project_detail" ... skipped in 0.000s
+    Then I take a screenshot named "project_detail_architecture" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Architecture Analysis Section
+   Failed Step: I click on the "project_card" in "test_runs"
+   Location: features\resources\screenshots\2026-02-01_21-20-26\FAILED_Verify_Architecture_Analysis_Section_I_click_on_the_"project_card"_.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-01_21-20-26\FAILED_Verify_Architecture_Analysis_Section_I_click_on_the_"project_card"_.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Execution Metrics and Trend" status="failed" time="41.284617"><error type="TimeoutException" message="Message: &#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff7863ca535&#10;&#09;0x7ff7863ca590&#10;&#09;0x7ff7861710bd&#10;&#09;0x7ff7861cc48e&#10;&#09;0x7ff7861cc79c&#10;&#09;0x7ff78621d3a7&#10;&#09;0x7ff786219ef5&#10;&#09;0x7ff7861bcc9c&#10;&#09;0x7ff7861bdbe3&#10;&#09;0x7ff7866a7b60&#10;&#09;0x7ff7866a1f5d&#10;&#09;0x7ff7866c311a&#10;&#09;0x7ff7863e60a5&#10;&#09;0x7ff7863ee73c&#10;&#09;0x7ff7863d3844&#10;&#09;0x7ff7863d39f6&#10;&#09;0x7ff7863b9a07&#10;&#09;0x7ffd54ed7374&#10;&#09;0x7ffd56adcc91&#10;">
+<![CDATA[
+Failing step: When I click on the "project_card" in "test_runs" ... failed in 33.224s
+Location: features/dashboard/gui/gui_project_detail.feature:9
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\features\page_objects\base_page.py", line 109, in click
+    element = self.wait.until(EC.presence_of_element_located(locator))
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff7863ca535
+	0x7ff7863ca590
+	0x7ff7861710bd
+	0x7ff7861cc48e
+	0x7ff7861cc79c
+	0x7ff78621d3a7
+	0x7ff786219ef5
+	0x7ff7861bcc9c
+	0x7ff7861bdbe3
+	0x7ff7866a7b60
+	0x7ff7866a1f5d
+	0x7ff7866c311a
+	0x7ff7863e60a5
+	0x7ff7863ee73c
+	0x7ff7863d3844
+	0x7ff7863d39f6
+	0x7ff7863b9a07
+	0x7ffd54ed7374
+	0x7ffd56adcc91
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "features\steps\step_gui_interactions.py", line 345, in step_click_section_element
+    page.click(locator)
+    ~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\features\page_objects\base_page.py", line 112, in click
+    raise e
+  File "C:\Users\Carlos\Desktop\github\dashboard\features\page_objects\base_page.py", line 104, in click
+    element = self.wait.until(EC.element_to_be_clickable(locator))
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff7863ca535
+	0x7ff7863ca590
+	0x7ff7861710bd
+	0x7ff7861cc48e
+	0x7ff7861cc79c
+	0x7ff78621d3a7
+	0x7ff786219ef5
+	0x7ff7861bcc9c
+	0x7ff7861bdbe3
+	0x7ff7866a7b60
+	0x7ff7866a1f5d
+	0x7ff7866c311a
+	0x7ff7863e60a5
+	0x7ff7863ee73c
+	0x7ff7863d3844
+	0x7ff7863d39f6
+	0x7ff7863b9a07
+	0x7ffd54ed7374
+	0x7ffd56adcc91
+
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Execution Metrics and Trend
+   Failed Step: I click on the "project_card" in "test_runs"
+   Location: features\resources\screenshots\2026-02-01_21-20-26\FAILED_Verify_Execution_Metrics_and_Trend_I_click_on_the_"project_card"_.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-01_21-20-26\FAILED_Verify_Execution_Metrics_and_Trend_I_click_on_the_"project_card"_.png' width='800' alt='Failure Screenshot' />]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Execution Metrics and Trend
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.766s
+    When I wait for 5 seconds ... passed in 5.001s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.292s
+    And I wait for 2 seconds ... passed in 2.001s
+    When I click on the "project_card" in "test_runs" ... failed in 33.224s
+    And I wait for 2 seconds ... skipped in 0.000s
+    Then I should see the text "Stability Score" ... skipped in 0.000s
+    And I should see the text "Execution Velocity" ... skipped in 0.000s
+    And I should see at least 1 elements with selector "velocity_trend" in "project_detail" ... skipped in 0.000s
+    Then I take a screenshot named "project_detail_metrics" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Execution Metrics and Trend
+   Failed Step: I click on the "project_card" in "test_runs"
+   Location: features\resources\screenshots\2026-02-01_21-20-26\FAILED_Verify_Execution_Metrics_and_Trend_I_click_on_the_"project_card"_.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-01_21-20-26\FAILED_Verify_Execution_Metrics_and_Trend_I_click_on_the_"project_card"_.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Run History List" status="failed" time="40.749629"><error type="TimeoutException" message="Message: &#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff7863ca535&#10;&#09;0x7ff7863ca590&#10;&#09;0x7ff7861710bd&#10;&#09;0x7ff7861cc48e&#10;&#09;0x7ff7861cc79c&#10;&#09;0x7ff78621d3a7&#10;&#09;0x7ff786219ef5&#10;&#09;0x7ff7861bcc9c&#10;&#09;0x7ff7861bdbe3&#10;&#09;0x7ff7866a7b60&#10;&#09;0x7ff7866a1f5d&#10;&#09;0x7ff7866c311a&#10;&#09;0x7ff7863e60a5&#10;&#09;0x7ff7863ee73c&#10;&#09;0x7ff7863d3844&#10;&#09;0x7ff7863d39f6&#10;&#09;0x7ff7863b9a07&#10;&#09;0x7ffd54ed7374&#10;&#09;0x7ffd56adcc91&#10;">
+<![CDATA[
+Failing step: When I click on the "project_card" in "test_runs" ... failed in 33.200s
+Location: features/dashboard/gui/gui_project_detail.feature:9
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\features\page_objects\base_page.py", line 109, in click
+    element = self.wait.until(EC.presence_of_element_located(locator))
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff7863ca535
+	0x7ff7863ca590
+	0x7ff7861710bd
+	0x7ff7861cc48e
+	0x7ff7861cc79c
+	0x7ff78621d3a7
+	0x7ff786219ef5
+	0x7ff7861bcc9c
+	0x7ff7861bdbe3
+	0x7ff7866a7b60
+	0x7ff7866a1f5d
+	0x7ff7866c311a
+	0x7ff7863e60a5
+	0x7ff7863ee73c
+	0x7ff7863d3844
+	0x7ff7863d39f6
+	0x7ff7863b9a07
+	0x7ffd54ed7374
+	0x7ffd56adcc91
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "features\steps\step_gui_interactions.py", line 345, in step_click_section_element
+    page.click(locator)
+    ~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\features\page_objects\base_page.py", line 112, in click
+    raise e
+  File "C:\Users\Carlos\Desktop\github\dashboard\features\page_objects\base_page.py", line 104, in click
+    element = self.wait.until(EC.element_to_be_clickable(locator))
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff7863ca535
+	0x7ff7863ca590
+	0x7ff7861710bd
+	0x7ff7861cc48e
+	0x7ff7861cc79c
+	0x7ff78621d3a7
+	0x7ff786219ef5
+	0x7ff7861bcc9c
+	0x7ff7861bdbe3
+	0x7ff7866a7b60
+	0x7ff7866a1f5d
+	0x7ff7866c311a
+	0x7ff7863e60a5
+	0x7ff7863ee73c
+	0x7ff7863d3844
+	0x7ff7863d39f6
+	0x7ff7863b9a07
+	0x7ffd54ed7374
+	0x7ffd56adcc91
+
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Run History List
+   Failed Step: I click on the "project_card" in "test_runs"
+   Location: features\resources\screenshots\2026-02-01_21-20-26\FAILED_Verify_Run_History_List_I_click_on_the_"project_card"_.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-01_21-20-26\FAILED_Verify_Run_History_List_I_click_on_the_"project_card"_.png' width='800' alt='Failure Screenshot' />]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Run History List
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.377s
+    When I wait for 5 seconds ... passed in 5.002s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.170s
+    And I wait for 2 seconds ... passed in 2.001s
+    When I click on the "project_card" in "test_runs" ... failed in 33.200s
+    And I wait for 2 seconds ... skipped in 0.000s
+    Then I should see the text "Execution History" ... skipped in 0.000s
+    And I should see at least 1 elements with selector "item" in "project_detail.run_list" ... skipped in 0.000s
+    Then I take a screenshot of the "run_list" named "project_detail_history" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Run History List
+   Failed Step: I click on the "project_card" in "test_runs"
+   Location: features\resources\screenshots\2026-02-01_21-20-26\FAILED_Verify_Run_History_List_I_click_on_the_"project_card"_.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-01_21-20-26\FAILED_Verify_Run_History_List_I_click_on_the_"project_card"_.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Dossier Download Button" status="failed" time="41.81342"><error type="TimeoutException" message="Message: &#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff7863ca535&#10;&#09;0x7ff7863ca590&#10;&#09;0x7ff7861710bd&#10;&#09;0x7ff7861cc48e&#10;&#09;0x7ff7861cc79c&#10;&#09;0x7ff78621d3a7&#10;&#09;0x7ff786219ef5&#10;&#09;0x7ff7861bcc9c&#10;&#09;0x7ff7861bdbe3&#10;&#09;0x7ff7866a7b60&#10;&#09;0x7ff7866a1f5d&#10;&#09;0x7ff7866c311a&#10;&#09;0x7ff7863e60a5&#10;&#09;0x7ff7863ee73c&#10;&#09;0x7ff7863d3844&#10;&#09;0x7ff7863d39f6&#10;&#09;0x7ff7863b9a07&#10;&#09;0x7ffd54ed7374&#10;&#09;0x7ffd56adcc91&#10;">
+<![CDATA[
+Failing step: When I click on the "project_card" in "test_runs" ... failed in 33.595s
+Location: features/dashboard/gui/gui_project_detail.feature:9
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\features\page_objects\base_page.py", line 109, in click
+    element = self.wait.until(EC.presence_of_element_located(locator))
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff7863ca535
+	0x7ff7863ca590
+	0x7ff7861710bd
+	0x7ff7861cc48e
+	0x7ff7861cc79c
+	0x7ff78621d3a7
+	0x7ff786219ef5
+	0x7ff7861bcc9c
+	0x7ff7861bdbe3
+	0x7ff7866a7b60
+	0x7ff7866a1f5d
+	0x7ff7866c311a
+	0x7ff7863e60a5
+	0x7ff7863ee73c
+	0x7ff7863d3844
+	0x7ff7863d39f6
+	0x7ff7863b9a07
+	0x7ffd54ed7374
+	0x7ffd56adcc91
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "features\steps\step_gui_interactions.py", line 345, in step_click_section_element
+    page.click(locator)
+    ~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\features\page_objects\base_page.py", line 112, in click
+    raise e
+  File "C:\Users\Carlos\Desktop\github\dashboard\features\page_objects\base_page.py", line 104, in click
+    element = self.wait.until(EC.element_to_be_clickable(locator))
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff7863ca535
+	0x7ff7863ca590
+	0x7ff7861710bd
+	0x7ff7861cc48e
+	0x7ff7861cc79c
+	0x7ff78621d3a7
+	0x7ff786219ef5
+	0x7ff7861bcc9c
+	0x7ff7861bdbe3
+	0x7ff7866a7b60
+	0x7ff7866a1f5d
+	0x7ff7866c311a
+	0x7ff7863e60a5
+	0x7ff7863ee73c
+	0x7ff7863d3844
+	0x7ff7863d39f6
+	0x7ff7863b9a07
+	0x7ffd54ed7374
+	0x7ffd56adcc91
+
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Dossier Download Button
+   Failed Step: I click on the "project_card" in "test_runs"
+   Location: features\resources\screenshots\2026-02-01_21-20-26\FAILED_Verify_Dossier_Download_Button_I_click_on_the_"project_card"_.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-01_21-20-26\FAILED_Verify_Dossier_Download_Button_I_click_on_the_"project_card"_.png' width='800' alt='Failure Screenshot' />]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Dossier Download Button
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.600s
+    When I wait for 5 seconds ... passed in 5.002s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.615s
+    And I wait for 2 seconds ... passed in 2.002s
+    When I click on the "project_card" in "test_runs" ... failed in 33.595s
+    And I wait for 2 seconds ... skipped in 0.000s
+    Then I should see at least 1 elements with selector "download_button" in "project_detail" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Dossier Download Button
+   Failed Step: I click on the "project_card" in "test_runs"
+   Location: features\resources\screenshots\2026-02-01_21-20-26\FAILED_Verify_Dossier_Download_Button_I_click_on_the_"project_card"_.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-01_21-20-26\FAILED_Verify_Dossier_Download_Button_I_click_on_the_"project_card"_.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase></testsuite>

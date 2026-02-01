@@ -5,7 +5,6 @@ Feature: Endpoints Catalog Validation
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     When I wait for 2 seconds
 
-  @navigation @endpoints @detail
   Scenario: Deep Dive into Endpoint Detail
     When I click on the "endpoints_link" in the sidebar
     And I wait for 1 seconds

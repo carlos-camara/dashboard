@@ -13,6 +13,7 @@ interface RunDetailViewProps {
 const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
   const [scenarios, setScenarios] = useState<Scenario[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<'ALL' | 'FAILED' | 'PASSED'>('ALL');
   const [expandedScenarios, setExpandedScenarios] = useState<Set<string>>(new Set());
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
@@ -21,11 +22,36 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
   const detailRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    api.getScenariosByRun(run.id).then((data) => {
-      setScenarios(data);
+    // Force scroll to top of the main container (Layout)
+    const mainContainer = document.querySelector('main');
+    if (mainContainer) {
+      mainContainer.scrollTop = 0;
+    }
+
+    // Also try standard window scroll just in case
+    window.scrollTo(0, 0);
+
+    if (detailRef.current) {
+      detailRef.current.scrollIntoView({ behavior: 'auto', block: 'start' });
+    }
+
+    if (!run?.id) {
+      setError("Invalid Run ID");
       setLoading(false);
-    });
-  }, [run.id]);
+      return;
+    }
+
+    api.getScenariosByRun(run.id)
+      .then((data) => {
+        setScenarios(data || []);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Failed to fetch scenarios:", err);
+        setError("Failed to load execution details.");
+        setLoading(false);
+      });
+  }, [run?.id]);
 
   const toggleExpand = (id: string) => {
     const next = new Set(expandedScenarios);
@@ -47,7 +73,7 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
   });
 
   // Analytics
-  const totalDuration = scenarios.reduce((acc, s) => acc + s.duration, 0);
+  const totalDuration = scenarios.reduce((acc, s) => acc + (s.duration || 0), 0);
   const avgDuration = scenarios.length > 0 ? totalDuration / scenarios.length : 0;
 
   const failureGroups = scenarios
@@ -82,7 +108,7 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
   };
 
   if (loading) return (
-    <div className="flex flex-col items-center justify-center py-32 space-y-6">
+    <div className="flex flex-col items-center justify-center min-h-screen py-32 space-y-6 bg-slate-950 w-full">
       <div className="relative">
         <div className="w-16 h-16 border-4 border-blue-600/30 border-t-blue-500 rounded-full animate-spin"></div>
         <Cpu size={24} className="absolute inset-0 m-auto text-blue-500 animate-pulse" />
@@ -91,10 +117,18 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
     </div>
   );
 
+  if (error) return (
+    <div className="flex flex-col items-center justify-center min-h-screen py-32 space-y-6 bg-slate-950 w-full">
+      <AlertCircle size={48} className="text-rose-500" />
+      <h3 className="text-xl font-bold text-white">{error}</h3>
+      <button onClick={onBack} className="text-slate-400 hover:text-white underline">Return to Project</button>
+    </div>
+  );
+
   return (
-    <div ref={detailRef} className="space-y-8 animate-in fade-in zoom-in-95 duration-500 pb-20">
+    <div ref={detailRef} className="space-y-8 animate-in fade-in zoom-in-95 duration-500 pb-20 w-full min-h-screen bg-slate-950">
       {/* Navigation & Actions */}
-      <div className="flex items-center justify-between no-print">
+      <div className="flex items-center justify-between no-print pt-4">
         <button
           onClick={onBack}
           className="flex items-center text-slate-400 hover:text-white transition-all group px-4 py-2 hover:bg-slate-800 rounded-full"

@@ -7,7 +7,7 @@ Feature: Incident Taxonomy View Validation
     When I click on the "incidents_link" in the sidebar
     And I wait for 1 seconds
 
-  @structure @header
+  @smoke
   Scenario: Verify Incident Page Structure
     Then the page title should be "QA Hub - Execution Dashboard"
     And I should see the text "INCIDENT"
@@ -15,14 +15,12 @@ Feature: Incident Taxonomy View Validation
     And I should see the text "Anomaly Detection"
     Then I take a screenshot named "incident_page_structure"
 
-  @components @stats
   Scenario: Verify Incident Statistics
     Then I should see the text "Total Incidents"
     And I should see the text "Affected Sectors"
     And I should see the text "Unique Signatures"
     Then I take a screenshot of the "stats" named "incident_stats_cards"
 
-  @actions @filtering
   Scenario: Verify Project Filtering
     Then I should see the text "Global Scope"
     When I click on the button with text "Global Scope"
@@ -31,7 +29,6 @@ Feature: Incident Taxonomy View Validation
     # Note: Specific project names depend on dynamic data, so we verify the dropdown opens
     And I should see at least 1 elements with class "absolute"
 
-  @components @list @details
   Scenario: Verify Incident Expansion and Details
     Then I should see at least 1 elements with class "glass-panel"
     When I click on the element with class "cursor-pointer"

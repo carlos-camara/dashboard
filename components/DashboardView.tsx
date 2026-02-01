@@ -361,7 +361,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
                   {projectHealthData.map(p => (
                     <div
                       key={p.name}
-                      onClick={() => onNavigate('runs', { project: p.name })}
+                      onClick={() => onNavigate('project-report', { project: p.name })}
                       className="flex items-center justify-between p-4 bg-slate-950/40 rounded-2xl border border-white/5 hover:border-indigo-500/30 hover:bg-slate-900/60 transition-all group cursor-pointer"
                     >
                       <div className="flex items-center gap-3">
