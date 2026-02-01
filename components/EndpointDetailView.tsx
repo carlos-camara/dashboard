@@ -179,8 +179,7 @@ const EndpointDetailView: React.FC<EndpointDetailViewProps> = ({ endpoint, onBac
     // Fetch linked swagger spec - NOW USING PROJECT-LEVEL SPEC
     useEffect(() => {
         // Fetch Performance Stats
-        fetch('http://localhost:3001/api/performance/latest')
-            .then(res => res.json())
+        api.getLatestPerformanceStats()
             .then(data => {
                 if (data.found && data.stats) {
                     console.log('Performance Data:', data);
@@ -207,7 +206,9 @@ const EndpointDetailView: React.FC<EndpointDetailViewProps> = ({ endpoint, onBac
                     });
 
                     if (match) {
-                        setPerfStats({ ...match, reportUrl: data.reportUrl, timestamp: data.timestamp });
+                        // Ensure reportUrl is absolute using api.getAssetUrl
+                        const fullReportUrl = api.getAssetUrl(data.reportUrl);
+                        setPerfStats({ ...match, reportUrl: fullReportUrl, timestamp: data.timestamp });
                     }
                 }
             })
