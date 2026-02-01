@@ -215,6 +215,12 @@ async function parseXmlContent(content, runId, projectName, discoveredTags, meta
         });
     }
 
+    // Timestamp Logic
+    let suiteTimestamp = new Date().toISOString();
+    if (suite.$.timestamp) {
+        suiteTimestamp = new Date(suite.$.timestamp).toISOString();
+    }
+
     let stats = { passed: 0, failed: 0, total: 0 };
     let inferredProject = projectName;
 
@@ -327,7 +333,7 @@ async function parseXmlContent(content, runId, projectName, discoveredTags, meta
             const { method, path: fullPath } = endpointInfo;
             const normPath = normalizePath(fullPath);
             const epId = `${inferredProject}-${method}-${normPath}`;
-            const nowStr = new Date().toISOString();
+            const nowStr = suiteTimestamp; // Use suite timestamp
 
             db.prepare(`
                 INSERT OR IGNORE INTO endpoints (id, method, path, normalized_path, service, last_seen) 
@@ -355,7 +361,7 @@ async function parseXmlContent(content, runId, projectName, discoveredTags, meta
             status,
             errorTxt,
             duration,
-            new Date().toISOString(),
+            suiteTimestamp, // Use suite timestamp
             trimmedLog,
             JSON.stringify(Array.from(scenarioTags)),
             JSON.stringify(parsedSteps),
@@ -363,7 +369,7 @@ async function parseXmlContent(content, runId, projectName, discoveredTags, meta
             sourceFile
         );
     }
-    return { stats, inferredProject };
+    return { stats, inferredProject, timestamp: suiteTimestamp };
 }
 
 async function parseRunFolder(folderPath) {
@@ -385,21 +391,32 @@ async function parseRunFolder(folderPath) {
     const discoveredTags = new Set(metadata.run_info?.tags || []);
     let projectName = metadata.run_info?.project || "Auto-discovered";
 
-    // Insert placeholder
-    db.prepare(`INSERT INTO runs (id, source_folder, timestamp, project, passed, failed, total, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`).run(runId, folderName, new Date().toISOString(), projectName, 0, 0, 0, JSON.stringify([]));
+    // Track earliest timestamp from XMLs
+    let earliestTimestamp = new Date().toISOString();
+    let isFirstFile = true;
+
+    // Insert placeholder (will update timestamp later)
+    db.prepare(`INSERT INTO runs (id, source_folder, timestamp, project, passed, failed, total, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`).run(runId, folderName, earliestTimestamp, projectName, 0, 0, 0, JSON.stringify([]));
 
     for (const xmlFile of xmlFiles) {
         try {
             const content = fs.readFileSync(path.join(folderPath, xmlFile), 'utf8');
-            const { stats, inferredProject } = await parseXmlContent(content, runId, projectName, discoveredTags, metadata.scenarios, xmlFile);
+            const { stats, inferredProject, timestamp } = await parseXmlContent(content, runId, projectName, discoveredTags, metadata.scenarios, xmlFile);
             totalPassed += stats.passed; totalFailed += stats.failed; totalCount += stats.total;
             projectName = inferredProject;
+
+            if (timestamp) {
+                if (isFirstFile || new Date(timestamp) < new Date(earliestTimestamp)) {
+                    earliestTimestamp = timestamp;
+                    isFirstFile = false;
+                }
+            }
         } catch (e) {
             console.error(`Error parsing ${xmlFile}:`, e);
         }
     }
 
-    db.prepare(`UPDATE runs SET project = ?, passed = ?, failed = ?, total = ?, tags = ? WHERE id = ?`).run(projectName, totalPassed, totalFailed, totalCount, JSON.stringify([]), runId);
+    db.prepare(`UPDATE runs SET project = ?, passed = ?, failed = ?, total = ?, tags = ?, timestamp = ? WHERE id = ?`).run(projectName, totalPassed, totalFailed, totalCount, JSON.stringify([]), earliestTimestamp, runId);
     return true;
 }
 

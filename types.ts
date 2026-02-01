@@ -85,4 +85,5 @@ export interface TimelineData {
   pass: number;
   fail: number;
   skip: number;
+  total: number;
 }
