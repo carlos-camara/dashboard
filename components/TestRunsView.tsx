@@ -48,17 +48,21 @@ const TestRunsView: React.FC<TestRunsViewProps> = ({ refreshKey, initialProject,
   // 1. Define projectsList FIRST so it's available for rendering
   const projectsList: ProjectGroup[] = Object.values(
     runs.reduce<Record<string, ProjectGroup>>((acc, run) => {
+      // Use project name, or source_folder, or 'Unknown Project' as key
+      const projectName = run.project?.trim() ||
+        (run.source_folder && run.source_folder !== 'UPLOAD' ? run.source_folder : 'Unknown Project');
+
       const query = searchQuery.toLowerCase();
 
-      // GRANULAR FILTERING: Apply filters per individual run
+      // Filter applies to the project name or individual run attributes
       const matchesSearch = !searchQuery ||
-        run.name.toLowerCase().includes(query) ||
-        run.project.toLowerCase().includes(query);
+        projectName.toLowerCase().includes(query) ||
+        run.name.toLowerCase().includes(query);
 
       if (matchesSearch) {
-        if (!acc[run.project]) {
-          acc[run.project] = {
-            projectName: run.project,
+        if (!acc[projectName]) {
+          acc[projectName] = {
+            projectName: projectName,
             runs: [],
             lastActivity: run.timestamp,
             totalScenarios: 0,
@@ -66,13 +70,14 @@ const TestRunsView: React.FC<TestRunsViewProps> = ({ refreshKey, initialProject,
             allTags: new Set<string>(),
           };
         }
-        acc[run.project].runs.push(run);
-        acc[run.project].totalScenarios += run.totalCount;
+        const group = acc[projectName];
+        group.runs.push(run);
+        group.totalScenarios += run.totalCount;
         if (run.tags) {
-          run.tags.forEach(tag => acc[run.project].allTags.add(tag));
+          run.tags.forEach(tag => group.allTags.add(tag));
         }
-        if (new Date(run.timestamp) > new Date(acc[run.project].lastActivity)) {
-          acc[run.project].lastActivity = run.timestamp;
+        if (new Date(run.timestamp) > new Date(group.lastActivity)) {
+          group.lastActivity = run.timestamp;
         }
       }
       return acc;
@@ -164,8 +169,10 @@ const TestRunsView: React.FC<TestRunsViewProps> = ({ refreshKey, initialProject,
           {projectsList.map((group) => (
             <div
               key={group.projectName}
+              id={`project-card-${group.projectName}`}
+              data-testid="project-card"
               onClick={() => onNavigate && onNavigate('project-report', { project: group.projectName, runs: group.runs })}
-              className="relative overflow-hidden rounded-3xl border border-slate-800/60 bg-slate-900/40 hover:bg-slate-900/60 hover:border-blue-500/30 hover:shadow-[0_0_50px_-12px_rgba(59,130,246,0.1)] transition-all duration-300 cursor-pointer group"
+              className="project-card relative overflow-hidden rounded-3xl border border-slate-800/60 bg-slate-900/40 hover:bg-slate-900/60 hover:border-blue-500/30 hover:shadow-[0_0_50px_-12px_rgba(59,130,246,0.1)] transition-all duration-300 cursor-pointer group"
             >
               <div
                 className="p-6 sm:p-8 relative z-10"

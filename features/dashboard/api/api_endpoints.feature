@@ -4,7 +4,7 @@ Feature: Endpoints Discovery Validations
   Background:
     Given the API base URL is "http://localhost:3001"
 
-  @smoke @endpoints @discovery
+  @smoke
   Scenario: Retrieve Discovered Endpoints
     When I send a "GET" request to "/api/endpoints"
     Then the response status code should be 200
@@ -18,17 +18,17 @@ Feature: Endpoints Discovery Validations
     And the response JSON path "0.passCount" should be a "int"
     And the response JSON path "0.failCount" should be a "int"
 
-  @smoke @endpoints @negative
+  @smoke @negative
   Scenario: Verify Method Not Allowed (POST)
     When I send a "POST" request to "/api/endpoints"
     Then the response status code should be 404
 
-  @smoke @endpoints @negative
+  @negative
   Scenario: Verify Method Not Allowed (PUT)
     When I send a "PUT" request to "/api/endpoints"
     Then the response status code should be 404
 
-  @smoke @endpoints @negative
+  @negative
   Scenario: Verify Method Not Allowed (PATCH)
     When I send a "PATCH" request to "/api/endpoints"
     Then the response status code should be 404

@@ -7,13 +7,13 @@ test_runs:
     value: "//input[@placeholder='Search by project identifier, run ID, or tags...']"
   project_card:
     by: xpath
-    value: "//div[contains(@class, 'rounded-3xl border transition-all')]"
+    value: "//*[@data-testid='project-card']"
   project_title:
     by: xpath
     value: "//h3[contains(@class, 'text-2xl font-black')]"
   delete_project_button:
     by: xpath
     value: "//button[contains(., 'Delete Project')]"
-  latest_badge:
+  view_analytics_button:
     by: xpath
-    value: "//span[contains(., 'Latest')]"
+    value: "//*[contains(text(), 'View Analytics')]"

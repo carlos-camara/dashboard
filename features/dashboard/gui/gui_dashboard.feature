@@ -5,14 +5,12 @@ Feature: Dashboard View Validation
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     When I wait for 2 seconds
 
-  @structure @header
   Scenario: Verify Header and Status Ticker
     Then the page title should be "QA Hub - Execution Dashboard"
     And I should see the text "Dashboard Cluster"
     And the system status should be valid
     Then I take a screenshot named "dashboard_header_status"
 
-  @components @stats
   Scenario: Verify Statistics Cards
     Then I should see the text "System Health"
     And I should see the text "Total Executions"
@@ -20,7 +18,6 @@ Feature: Dashboard View Validation
     And I should see the text "Avg Latency"
     Then I take a screenshot of the "stats grid" named "dashboard_stats_grid"
 
-  @components @charts
   Scenario: Verify Timeline Controls
     Then I should see the text "Signal Velocity"
     And I should see at least 1 elements with selector "chart" in "dashboard.timeline"
@@ -31,20 +28,17 @@ Feature: Dashboard View Validation
     And I wait for 1 seconds
     Then I take a screenshot of the "chart" named "dashboard_chart_success"
 
-  @components @lists
   Scenario: Verify Incident and Sector Lists
     Then I should see the text "Sector Integrity"
     And I should see at least 1 elements with class "bg-slate-950/40"
     Then I should see the text "Incident Taxonomy"
     Then I take a screenshot of the "lists panel" named "dashboard_lists_panels"
 
-  @components @endpoints_scroll
   Scenario: Verify Endpoints Catalog and Scroll
     When I scroll to the bottom of the page
     Then I should see the text "Latency Anomalies"
     Then I take a screenshot named "dashboard_bottom_fullpage"
 
-  @actions @filters
   Scenario: Verify Global Actions and Filters
     When I apply the "7 Days" time filter
     And I wait for 1 seconds
@@ -59,7 +53,6 @@ Feature: Dashboard View Validation
     Then I should see the text "Dashboard Cluster"
     Then I take a screenshot named "dashboard_responsiveness"
 
-  @navigation @incidents
   Scenario: Verify Navigation to Incident Taxonomy
     When I click on the "incidents_link" in the sidebar
     And I wait for 1 seconds

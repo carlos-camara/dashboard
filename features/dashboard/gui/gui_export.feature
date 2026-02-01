@@ -1,4 +1,4 @@
-@gui @export @wip
+@gui @export
 Feature: Export Functionality Validation
 
   Background:

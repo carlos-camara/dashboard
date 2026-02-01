@@ -134,6 +134,7 @@ app.get("/api/spec", (req, res) => {
 const db = new Database(DB_PATH);
 db.pragma('journal_mode = WAL');
 
+
 function initDb() {
     db.exec(`
         CREATE TABLE IF NOT EXISTS runs (
@@ -144,36 +145,47 @@ function initDb() {
             passed INTEGER DEFAULT 0,
             failed INTEGER DEFAULT 0,
             total INTEGER DEFAULT 0,
+            duration REAL DEFAULT 0,
             tags TEXT
         );
-        CREATE TABLE IF NOT EXISTS endpoints (
-            id TEXT PRIMARY KEY,
-            method TEXT,
-            path TEXT,
-            normalized_path TEXT,
-            service TEXT,
-            avg_duration REAL DEFAULT 0,
-            pass_count INTEGER DEFAULT 0,
-            fail_count INTEGER DEFAULT 0,
-            last_seen TEXT,
-            last_failure_at TEXT
-        );
-        CREATE TABLE IF NOT EXISTS scenarios (
-            id TEXT PRIMARY KEY,
-            run_id TEXT,
-            name TEXT,
-            status TEXT,
-            error_message TEXT,
-            duration REAL DEFAULT 0,
-            timestamp TEXT,
-            raw_logs TEXT,
-            tags TEXT,
-            steps TEXT,
-            feature_name TEXT,
-            hostname TEXT,
-            source_file TEXT,
-            FOREIGN KEY(run_id) REFERENCES runs(id)
-        );
+
+    `);
+
+    // Migration for existing tables
+    try { db.prepare("ALTER TABLE runs ADD COLUMN duration REAL DEFAULT 0").run(); } catch (e) { }
+
+    // ... rest of initDb
+
+    // Tables for Endpoints and Scenarios
+    db.exec(`
+    CREATE TABLE IF NOT EXISTS endpoints(
+        id TEXT PRIMARY KEY,
+        method TEXT,
+        path TEXT,
+        normalized_path TEXT,
+        service TEXT,
+        avg_duration REAL DEFAULT 0,
+        pass_count INTEGER DEFAULT 0,
+        fail_count INTEGER DEFAULT 0,
+        last_seen TEXT,
+        last_failure_at TEXT
+    );
+    CREATE TABLE IF NOT EXISTS scenarios(
+        id TEXT PRIMARY KEY,
+        run_id TEXT,
+        name TEXT,
+        status TEXT,
+        error_message TEXT,
+        duration REAL DEFAULT 0,
+        timestamp TEXT,
+        raw_logs TEXT,
+        tags TEXT,
+        steps TEXT,
+        feature_name TEXT,
+        hostname TEXT,
+        source_file TEXT,
+        FOREIGN KEY(run_id) REFERENCES runs(id)
+    );
     `);
 
     // Migrations
@@ -202,6 +214,7 @@ async function parseXmlContent(content, runId, projectName, discoveredTags, meta
     // Suite Metadata
     const suite = result.testsuite || (result.testsuites && result.testsuites.testsuite ? (Array.isArray(result.testsuites.testsuite) ? result.testsuites.testsuite[0] : result.testsuites.testsuite) : {});
     const featureName = suite.$.name || projectName;
+    const suiteTime = parseFloat(suite.$.time || 0);
 
     let testcases = [];
     if (result.testsuite && result.testsuite.testcase) {
@@ -221,13 +234,20 @@ async function parseXmlContent(content, runId, projectName, discoveredTags, meta
         suiteTimestamp = new Date(suite.$.timestamp).toISOString();
     }
 
-    let stats = { passed: 0, failed: 0, total: 0 };
-    let inferredProject = projectName;
+    let stats = { passed: 0, failed: 0, total: 0, duration: 0 };
+    let inferredProject = projectName !== "Auto-discovered" ? projectName : "";
+
+    // If suite has a meaningful name, use it as a candidate for project identification
+    const candidateName = suite.$.name || "";
+    if (!inferredProject && candidateName && !candidateName.toLowerCase().includes('suite')) {
+        inferredProject = candidateName;
+    }
 
     for (const tc of testcases) {
         const tcName = tc.$.name || "Unnamed Scenario";
         const className = tc.$.classname || "";
         const duration = parseFloat(tc.$.time || 0);
+        stats.duration += duration;
         const failure = tc.failure || tc.error;
         const status = failure ? "FAILED" : "PASSED";
         const errorTxt = failure ? (failure._ || failure.$?.message || JSON.stringify(failure)) : null;
@@ -307,6 +327,18 @@ async function parseXmlContent(content, runId, projectName, discoveredTags, meta
         else stats.failed++;
         stats.total++;
 
+        // Add scenario tags to suite-level discovery
+        scenarioTags.forEach(t => discoveredTags.add(t));
+
+        // Discover Endpoint
+        // ... (omitted for brevity, assume no changes to middle logic)
+        // Actually need to return discoveredTags logic or modifying the arg?
+        // logic: parseXmlContent receives discoveredTags set. It iterates scenarios.
+        // I just need to add to it!
+        // Line 372 returns { stats, inferredProject, timestamp }.
+        // Since discoverTags is passed by reference, simply adding to it is enough!
+        // I will add the code to add each scenarioTag to discoveredTags.
+
         // Discover Endpoint
         let endpointInfo = null;
         const methodPathMatch = tcName.match(/(GET|POST|PUT|DELETE|PATCH)\s+(\/[^\s]+)/i);
@@ -332,30 +364,30 @@ async function parseXmlContent(content, runId, projectName, discoveredTags, meta
         if (endpointInfo && !scenarioTags.has('@negative')) {
             const { method, path: fullPath } = endpointInfo;
             const normPath = normalizePath(fullPath);
-            const epId = `${inferredProject}-${method}-${normPath}`;
+            const epId = `${inferredProject} -${method} -${normPath} `;
             const nowStr = suiteTimestamp; // Use suite timestamp
 
             db.prepare(`
-                INSERT OR IGNORE INTO endpoints (id, method, path, normalized_path, service, last_seen) 
-                VALUES (?, ?, ?, ?, ?, ?)
-            `).run(epId, method, fullPath, normPath, inferredProject, nowStr);
+                INSERT OR IGNORE INTO endpoints(id, method, path, normalized_path, service, last_seen)
+    VALUES(?, ?, ?, ?, ?, ?)
+        `).run(epId, method, fullPath, normPath, inferredProject, nowStr);
 
             db.prepare(`
-                UPDATE endpoints SET 
-                pass_count = pass_count + ?, 
-                fail_count = fail_count + ?,
-                last_seen = ?,
-                last_failure_at = CASE WHEN ? = 'FAILED' THEN ? ELSE last_failure_at END,
-                avg_duration = (avg_duration * (pass_count + fail_count) + ?) / (pass_count + fail_count + 1)
+                UPDATE endpoints SET
+    pass_count = pass_count + ?,
+        fail_count = fail_count + ?,
+        last_seen = ?,
+        last_failure_at = CASE WHEN ? = 'FAILED' THEN ? ELSE last_failure_at END,
+            avg_duration = (avg_duration * (pass_count + fail_count) + ?) / (pass_count + fail_count + 1)
                 WHERE id = ?
-            `).run(status === "PASSED" ? 1 : 0, status === "FAILED" ? 1 : 0, nowStr, status, nowStr, duration * 1000, epId);
+        `).run(status === "PASSED" ? 1 : 0, status === "FAILED" ? 1 : 0, nowStr, status, nowStr, duration * 1000, epId);
         }
 
         db.prepare(`
-            INSERT INTO scenarios (id, run_id, name, status, error_message, duration, timestamp, raw_logs, tags, steps, feature_name, source_file)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO scenarios(id, run_id, name, status, error_message, duration, timestamp, raw_logs, tags, steps, feature_name, source_file)
+    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `).run(
-            `${runId}-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
+            `${runId} -${Date.now()} -${Math.random().toString(36).substr(2, 5)} `,
             runId,
             tcName,
             status,
@@ -369,12 +401,12 @@ async function parseXmlContent(content, runId, projectName, discoveredTags, meta
             sourceFile
         );
     }
-    return { stats, inferredProject, timestamp: suiteTimestamp };
+    return { stats: { ...stats, duration: Math.max(suiteTime, stats.duration) }, inferredProject, timestamp: suiteTimestamp };
 }
 
 async function parseRunFolder(folderPath) {
     const folderName = path.basename(folderPath);
-    const runId = `RUN-${folderName}`;
+    const runId = `RUN - ${folderName} `;
 
     // Clear existing data for this run to allow re-parsing and enrichment
     db.prepare("DELETE FROM scenarios WHERE run_id = ?").run(runId);
@@ -387,7 +419,7 @@ async function parseRunFolder(folderPath) {
     }
 
     const xmlFiles = fs.readdirSync(folderPath).filter(f => f.endsWith('.xml'));
-    let totalPassed = 0, totalFailed = 0, totalCount = 0;
+    let totalPassed = 0, totalFailed = 0, totalCount = 0, totalRunDuration = 0;
     const discoveredTags = new Set(metadata.run_info?.tags || []);
     let projectName = metadata.run_info?.project || "Auto-discovered";
 
@@ -396,14 +428,19 @@ async function parseRunFolder(folderPath) {
     let isFirstFile = true;
 
     // Insert placeholder (will update timestamp later)
-    db.prepare(`INSERT INTO runs (id, source_folder, timestamp, project, passed, failed, total, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`).run(runId, folderName, earliestTimestamp, projectName, 0, 0, 0, JSON.stringify([]));
+    db.prepare(`INSERT INTO runs(id, source_folder, timestamp, project, passed, failed, total, duration, tags) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)`).run(runId, folderName, earliestTimestamp, projectName, 0, 0, 0, 0, JSON.stringify([]));
 
     for (const xmlFile of xmlFiles) {
         try {
             const content = fs.readFileSync(path.join(folderPath, xmlFile), 'utf8');
             const { stats, inferredProject, timestamp } = await parseXmlContent(content, runId, projectName, discoveredTags, metadata.scenarios, xmlFile);
             totalPassed += stats.passed; totalFailed += stats.failed; totalCount += stats.total;
-            projectName = inferredProject;
+            totalRunDuration += stats.duration || 0;
+
+            // Only update projectName if the inferred one is more specific (not empty/generic)
+            if (stats.inferredProject && stats.inferredProject !== "Auto-discovered") {
+                projectName = stats.inferredProject;
+            }
 
             if (timestamp) {
                 if (isFirstFile || new Date(timestamp) < new Date(earliestTimestamp)) {
@@ -411,31 +448,36 @@ async function parseRunFolder(folderPath) {
                     isFirstFile = false;
                 }
             }
+
+            // Infer tags from filename logic to ensure GUI/API are captured even if not in logs
+            if (xmlFile.toLowerCase().includes('api')) discoveredTags.add('API');
+            if (xmlFile.toLowerCase().includes('gui')) discoveredTags.add('GUI');
+
         } catch (e) {
-            console.error(`Error parsing ${xmlFile}:`, e);
+            console.error(`Error parsing ${xmlFile}: `, e);
         }
     }
 
-    db.prepare(`UPDATE runs SET project = ?, passed = ?, failed = ?, total = ?, tags = ?, timestamp = ? WHERE id = ?`).run(projectName, totalPassed, totalFailed, totalCount, JSON.stringify([]), earliestTimestamp, runId);
+    db.prepare(`UPDATE runs SET project = ?, passed = ?, failed = ?, total = ?, tags = ?, timestamp = ?, duration = ? WHERE id = ? `).run(projectName, totalPassed, totalFailed, totalCount, JSON.stringify([...discoveredTags]), earliestTimestamp, totalRunDuration, runId);
     return true;
 }
 
 // Routes
 app.post("/api/upload", upload.array('files'), async (req, res) => {
     try {
-        console.log(`[Upload] Request received. Files: ${req.files?.length || 0}`);
+        console.log(`[Upload] Request received.Files: ${req.files?.length || 0} `);
         if (!req.files || req.files.length === 0) {
             console.error("[Upload] No files in request.");
             return res.status(400).json({ error: "No files uploaded." });
         }
 
-        const runId = `UPLOAD-${Date.now()}`;
+        const runId = `UPLOAD - ${Date.now()} `;
         const discoveredTags = new Set();
         let projectName = "Auto-discovered";
         let totalPassed = 0, totalFailed = 0, totalCount = 0;
 
         console.log(`[Upload] Starting database transaction for Run ${runId}`);
-        db.prepare(`INSERT INTO runs (id, source_folder, timestamp, project, passed, failed, total, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`).run(runId, "UPLOAD", new Date().toISOString(), projectName, 0, 0, 0, JSON.stringify([]));
+        db.prepare(`INSERT INTO runs(id, source_folder, timestamp, project, passed, failed, total, tags) VALUES(?, ?, ?, ?, ?, ?, ?, ?)`).run(runId, "UPLOAD", new Date().toISOString(), projectName, 0, 0, 0, JSON.stringify([]));
 
         for (const file of req.files) {
             console.log(`[Upload] Processing file: ${file.originalname} (${file.size} bytes)`);
@@ -447,18 +489,19 @@ app.post("/api/upload", upload.array('files'), async (req, res) => {
                 totalFailed += stats.failed;
                 totalCount += stats.total;
                 projectName = inferredProject;
-                console.log(`[Upload] File Parsed: ${file.originalname}. Stats: ${JSON.stringify(stats)}`);
+                console.log(`[Upload] File Parsed: ${file.originalname}.Stats: ${JSON.stringify(stats)} `);
             } catch (parseErr) {
-                console.error(`[Upload] Failed to parse ${file.originalname}:`, parseErr);
+                console.error(`[Upload] Failed to parse ${file.originalname}: `, parseErr);
                 // Return 400 immediately for validation errors
-                return res.status(400).json({ error: `Parse error in ${file.originalname}: ${parseErr.message}` });
+                return res.status(400).json({ error: `Parse error in ${file.originalname}: ${parseErr.message} ` });
             } finally {
                 if (fs.existsSync(file.path)) fs.unlinkSync(file.path);
             }
         }
 
-        console.log(`[Upload] Finalizing run record. Project: ${projectName}, Total: ${totalCount}`);
-        db.prepare(`UPDATE runs SET project = ?, passed = ?, failed = ?, total = ?, tags = ? WHERE id = ?`).run(projectName, totalPassed, totalFailed, totalCount, JSON.stringify([]), runId);
+        const sourceRef = req.files.length === 1 ? req.files[0].originalname : "Batch Upload";
+        console.log(`[Upload] Finalizing run record.Project: ${projectName}, Source: ${sourceRef}, Total: ${totalCount} `);
+        db.prepare(`UPDATE runs SET project = ?, source_folder = ?, passed = ?, failed = ?, total = ?, tags = ? WHERE id = ? `).run(projectName, sourceRef, totalPassed, totalFailed, totalCount, JSON.stringify([]), runId);
 
         res.json({ success: true, runId, projectName, totalCount });
     } catch (e) {
@@ -522,11 +565,11 @@ app.post("/api/sync", async (req, res) => {
 });
 
 app.get("/api/runs", (req, res) => {
-    const rows = db.prepare("SELECT id, source_folder, timestamp, project, passed as passedCount, failed as failedCount, total as totalCount, tags FROM runs ORDER BY timestamp DESC").all();
+    const rows = db.prepare("SELECT id, source_folder, timestamp, project, passed as passedCount, failed as failedCount, total as totalCount, duration, tags FROM runs ORDER BY timestamp DESC").all();
     const result = rows.map(r => ({
         ...r,
         name: r.source_folder && r.source_folder !== "UPLOAD" ? r.source_folder : `${r.project} (${new Date(r.timestamp).toLocaleTimeString()})`,
-        duration: 0,
+        duration: r.duration || 0,
         environment: 'Detected',
         triggeredBy: 'System',
         tags: r.tags ? JSON.parse(r.tags) : [],
@@ -552,10 +595,10 @@ app.get("/api/runs/:run_id/scenarios", (req, res) => {
 
 app.get("/api/endpoints", (req, res) => {
     const rows = db.prepare(`
-        SELECT id, method, path, normalized_path as normalizedPath, service, 
-               avg_duration as avgDuration, pass_count as passCount, 
-               fail_count as failCount, last_seen as lastSeen, 
-               last_failure_at as lastFailureAt 
+        SELECT id, method, path, normalized_path as normalizedPath, service,
+        avg_duration as avgDuration, pass_count as passCount,
+        fail_count as failCount, last_seen as lastSeen,
+        last_failure_at as lastFailureAt 
         FROM endpoints
     `).all();
     const result = rows.map(r => ({
@@ -587,7 +630,7 @@ app.delete("/api/projects", (req, res) => {
         // 1. Delete scenarios for all runs of this project
         db.prepare(`
             DELETE FROM scenarios 
-            WHERE run_id IN (SELECT id FROM runs WHERE project = ?)
+            WHERE run_id IN(SELECT id FROM runs WHERE project = ?)
         `).run(projectName);
 
         // 2. Delete runs of this project
@@ -623,8 +666,8 @@ if (!fs.existsSync(SWAGGERS_DIR)) {
 
 app.post("/api/spec", upload.single('file'), (req, res) => {
     try {
-        console.log(`[Spec Upload] Body:`, req.body);
-        console.log(`[Spec Upload] File:`, req.file);
+        console.log(`[Spec Upload]Body: `, req.body);
+        console.log(`[Spec Upload]File: `, req.file);
 
         const { method, path: epPath } = req.body;
         if (!req.file || !method || !epPath) {
@@ -633,7 +676,7 @@ app.post("/api/spec", upload.single('file'), (req, res) => {
         }
 
         const cleanPath = epPath.replace(/^\//, '').replace(/\//g, '-');
-        const filename = `${method.toLowerCase()}-${cleanPath}.json`;
+        const filename = `${method.toLowerCase()} -${cleanPath}.json`;
         const targetPath = path.join(SWAGGERS_DIR, filename);
 
         // Move/Rename uploaded file
@@ -651,12 +694,12 @@ async function autoSyncOnStartup() {
     const targetDir = path.join(__dirname, REPORTS_DIR);
     if (!fs.existsSync(targetDir)) return;
 
-    console.log(`[Auto-Sync] Scanning for reports in ${targetDir}...`);
+    console.log(`[Auto - Sync] Scanning for reports in ${targetDir}...`);
     const folders = fs.readdirSync(targetDir).filter(f => fs.statSync(path.join(targetDir, f)).isDirectory());
     for (const folder of folders) {
         await parseRunFolder(path.join(targetDir, folder));
     }
-    console.log(`[Auto-Sync] Sync complete. Processed ${folders.length} folders.`);
+    console.log(`[Auto - Sync] Sync complete.Processed ${folders.length} folders.`);
 }
 
 const REPORTS_PERF_DIR = path.join("reports", "performance_run");
@@ -738,7 +781,7 @@ app.get("/api/performance/latest", (req, res) => {
             runDirName: latestFolder.name
         };
         const content = fs.readFileSync(filePath, 'utf8').replace(/^\uFEFF/, '');
-        console.log(`[Perf Stats] Reading ${filePath}. Content Length: ${content.length}`);
+        console.log(`[Perf Stats] Reading ${filePath}. Content Length: ${content.length} `);
         const lines = content.split('\n').filter(l => l.trim().length > 0);
         if (lines.length < 2) return res.json({ found: false, stats: [] });
 
@@ -801,7 +844,7 @@ app.get("/api/performance/latest", (req, res) => {
         }
 
         const baseName = 'report.html';
-        const reportUrl = `/reports/performance_run/${latestFile.runDirName}/${baseName}`;
+        const reportUrl = `/ reports / performance_run / ${latestFile.runDirName}/${baseName}`;
 
         res.json({
             found: true,

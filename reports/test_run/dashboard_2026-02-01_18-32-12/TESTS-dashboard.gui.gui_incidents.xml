@@ -1,0 +1,78 @@
+<testsuite name="dashboard.gui.gui_incidents.Incident Taxonomy View Validation" tests="4" errors="0" failures="0" skipped="0" time="0.0" timestamp="2026-02-01T18:28:57.504397" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_incidents.Incident Taxonomy View Validation" name="Verify Incident Page Structure" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @structure @header
+  Scenario: Verify Incident Page Structure
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... untested in 0.000s
+    And I wait for 2 seconds ... untested in 0.000s
+    When I click on the "incidents_link" in the sidebar ... untested in 0.000s
+    And I wait for 1 seconds ... untested in 0.000s
+    Then the page title should be "QA Hub - Execution Dashboard" ... untested in 0.000s
+    And I should see the text "INCIDENT" ... untested in 0.000s
+    And I should see the text "TAXONOMY" ... untested in 0.000s
+    And I should see the text "Anomaly Detection" ... untested in 0.000s
+    Then I take a screenshot named "incident_page_structure" ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_incidents.Incident Taxonomy View Validation" name="Verify Incident Statistics" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @components @stats
+  Scenario: Verify Incident Statistics
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... untested in 0.000s
+    And I wait for 2 seconds ... untested in 0.000s
+    When I click on the "incidents_link" in the sidebar ... untested in 0.000s
+    And I wait for 1 seconds ... untested in 0.000s
+    Then I should see the text "Total Incidents" ... untested in 0.000s
+    And I should see the text "Affected Sectors" ... untested in 0.000s
+    And I should see the text "Unique Signatures" ... untested in 0.000s
+    Then I take a screenshot of the "stats" named "incident_stats_cards" ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_incidents.Incident Taxonomy View Validation" name="Verify Project Filtering" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @actions @filtering
+  Scenario: Verify Project Filtering
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... untested in 0.000s
+    And I wait for 2 seconds ... untested in 0.000s
+    When I click on the "incidents_link" in the sidebar ... untested in 0.000s
+    And I wait for 1 seconds ... untested in 0.000s
+    Then I should see the text "Global Scope" ... untested in 0.000s
+    When I click on the button with text "Global Scope" ... untested in 0.000s
+    And I wait for 1 seconds ... untested in 0.000s
+    Then I take a screenshot named "incident_project_dropdown" ... untested in 0.000s
+    And I should see at least 1 elements with class "absolute" ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_incidents.Incident Taxonomy View Validation" name="Verify Incident Expansion and Details" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @components @list @details
+  Scenario: Verify Incident Expansion and Details
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... untested in 0.000s
+    And I wait for 2 seconds ... untested in 0.000s
+    When I click on the "incidents_link" in the sidebar ... untested in 0.000s
+    And I wait for 1 seconds ... untested in 0.000s
+    Then I should see at least 1 elements with class "glass-panel" ... untested in 0.000s
+    When I click on the element with class "cursor-pointer" ... untested in 0.000s
+    And I wait for 1 seconds ... untested in 0.000s
+    Then I should see the text "Stack Trace Context" ... untested in 0.000s
+    And I should see the text "AI Root Cause Analysis" ... untested in 0.000s
+    And I should see the text "Affecting Projects" ... untested in 0.000s
+    Then I take a screenshot named "incident_expanded_details" ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

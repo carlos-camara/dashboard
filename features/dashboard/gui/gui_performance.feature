@@ -5,7 +5,6 @@ Feature: Ultra-Professional Performance Dashboard Validation
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     And I wait for 5 seconds
 
-  @performance @detail @integration
   Scenario: Validate High-Density Performance Audit Dossier
     When I click on the "endpoints_link" in the sidebar
     And I wait for 2 seconds

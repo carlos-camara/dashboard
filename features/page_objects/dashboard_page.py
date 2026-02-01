@@ -160,7 +160,7 @@ class DashboardPage(BasePage):
         parts = locator_path.split('.')
         
         # Known root pages in locators.yaml other than dashboard
-        root_pages = ['sidebar', 'test_runs', 'run_detail', 'endpoints_view', 'endpoint_detail', 'performance_report_view']
+        root_pages = ['sidebar', 'test_runs', 'run_detail', 'endpoints_view', 'endpoint_detail', 'performance_report_view', 'project_detail']
         
         if parts[0] in root_pages:
             return self.get_locator_def(parts[0], '.'.join(parts[1:]))

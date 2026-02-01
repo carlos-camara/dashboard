@@ -5,13 +5,12 @@ Feature: Run Detail View Validation
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     When I wait for 2 seconds
 
-  @navigation @detail
   Scenario: Explore Run Detail View
     When I click on the "test_runs_link" in the sidebar
     And I wait for 1 seconds
     When I click on the "project_card" in "test_runs"
     And I wait for 1 seconds
-    When I click on the "latest_badge" in "test_runs"
+    When I click on the "item" in "project_detail"
     And I wait for 1 seconds
     Then I should see the text "Return to Base"
     And I should see the text "Success"

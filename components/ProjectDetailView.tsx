@@ -5,11 +5,12 @@ import { api } from '../services/api';
 import {
     Activity, Clock, CheckCircle2, XCircle, Calendar,
     TrendingUp, PieChart, ChevronLeft,
-    Download, Share2, Layers, History, Trash2, ChevronRight
+    Download, Share2, Layers, History, Trash2, ChevronRight, Package
 } from 'lucide-react';
 import {
     AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip,
-    ResponsiveContainer, PieChart as RePieChart, Pie, Cell, Legend
+    ResponsiveContainer, PieChart as RePieChart, Pie, Cell, Legend,
+    BarChart, Bar
 } from 'recharts';
 import { generateProjectDossier } from '../services/reportGenerator';
 import RunDetailView from './RunDetailView';
@@ -78,12 +79,39 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ projectName, init
 
     // Trend Data
     const trendData = useMemo(() => {
-        return runs.slice(0, 20).reverse().map(r => ({
-            name: new Date(r.timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }),
-            pass: r.passedCount,
-            fail: r.failedCount,
-            total: r.totalCount,
-            duration: r.duration
+        const grouped = runs.reduce((acc, r) => {
+            const date = new Date(r.timestamp);
+            const key = date.toISOString().split('T')[0];
+
+            if (!acc[key]) {
+                acc[key] = {
+                    date: date,
+                    pass: 0,
+                    fail: 0,
+                    total: 0,
+                    durationSum: 0,
+                    count: 0
+                };
+            }
+
+            acc[key].pass += (r.passedCount || 0);
+            acc[key].fail += (r.failedCount || 0);
+            acc[key].total += (r.totalCount || 0);
+            acc[key].durationSum += (r.duration || 0);
+            acc[key].count += 1;
+
+            return acc;
+        }, {} as Record<string, any>);
+
+        const sorted = Object.values(grouped).sort((a: any, b: any) => a.date.getTime() - b.date.getTime());
+
+        // Take last 14 days to keep chart clean
+        return sorted.slice(-14).map((g: any) => ({
+            name: g.date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }),
+            pass: g.pass,
+            fail: g.fail,
+            total: g.total,
+            duration: g.durationSum / g.count
         }));
     }, [runs]);
 
@@ -102,18 +130,69 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ projectName, init
             { name: 'API Tests', value: types.API, color: '#10b981' }, // Emerald
             { name: 'Other', value: types.Other, color: '#64748b' }    // Slate
         ].filter(d => d.value > 0);
+
     }, [runs]);
 
-    const totalPages = Math.ceil(runs.length / RUNS_PER_PAGE); const displayedRuns = runs.slice((page - 1) * RUNS_PER_PAGE, page * RUNS_PER_PAGE);
+    // Comparison Data (New)
+    const layerComparisonData = useMemo(() => {
+        const getMetrics = (filterFn: (r: ExecutionRun) => boolean) => {
+            const subset = runs.filter(filterFn);
+            const total = subset.length;
+            if (!total) return { passRate: 0, avgDuration: 0 };
+
+            const totalTests = subset.reduce((acc, r) => acc + (r.totalCount || 0), 0);
+            const totalPassed = subset.reduce((acc, r) => acc + (r.passedCount || 0), 0);
+
+            return {
+                passRate: totalTests > 0 ? (totalPassed / totalTests) * 100 : 0,
+                // Ensure duration is handled gracefully if missing
+                avgDuration: subset.reduce((acc, r) => acc + (r.duration || 0), 0) / (total || 1)
+            };
+        };
+
+        // Helper for safe robust access
+        const safeIncludes = (str: string | undefined, term: string) => (str || '').toLowerCase().includes(term);
+        const safeTags = (tags: any) => Array.isArray(tags) ? tags : [];
+
+        const apiMetrics = getMetrics(r => safeIncludes(r.name, 'api') || safeTags(r.tags).some((t: string) => safeIncludes(t, 'api')));
+        const guiMetrics = getMetrics(r => safeIncludes(r.name, 'gui') || safeTags(r.tags).some((t: string) => safeIncludes(t, 'gui')));
+
+        return [
+            { name: 'API Layer', passRate: apiMetrics.passRate, duration: apiMetrics.avgDuration, fill: 'url(#gradientApi)', stroke: '#10b981' },
+            { name: 'GUI Layer', passRate: guiMetrics.passRate, duration: guiMetrics.avgDuration, fill: 'url(#gradientGui)', stroke: '#8b5cf6' }
+        ];
+    }, [runs]);
+
+    // Custom Tooltip for Charts
+    const CustomChartTooltip = ({ active, payload, label, unit }: any) => {
+        if (active && payload && payload.length) {
+            return (
+                <div className="bg-slate-900/90 border border-slate-700 p-4 rounded-xl shadow-2xl backdrop-blur-md">
+                    <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-2">{label}</p>
+                    <div className="flex items-end gap-2">
+                        <span className="text-2xl font-black text-white">
+                            {typeof payload[0].value === 'number' ? payload[0].value.toFixed(1) : payload[0].value}
+                        </span>
+                        <span className="text-xs font-bold text-slate-500 mb-1">{unit}</span>
+                    </div>
+                </div>
+            );
+        }
+        return null;
+    };
+
+    const totalPages = Math.ceil(runs.length / RUNS_PER_PAGE);
+    const displayedRuns = runs.slice((page - 1) * RUNS_PER_PAGE, page * RUNS_PER_PAGE);
 
     const handleDeleteProject = async () => {
         try {
             setLoading(true);
             await api.deleteProject(projectName);
-            onBack(); // Return to registry after deletion
-        } catch (error) {
-            console.error("Failed to delete project:", error);
-            alert("Failed to delete project. Please try again.");
+            onBack();
+        } catch (err) {
+            console.error('Failed to delete project:', err);
+            // Ideally show error toast
+        } finally {
             setLoading(false);
         }
     };
@@ -123,19 +202,31 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ projectName, init
         generateProjectDossier(projectName, stats, runs);
     };
 
+    const fetchProjectData = async () => {
+        setLoading(true);
+        try {
+            const allRuns = await api.getRecentRuns();
+            const projectRuns = allRuns.filter(r => r.project === projectName)
+                .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+            setRuns(projectRuns);
+        } catch (error) {
+            console.error("Failed to reload project data", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     if (selectedRun) {
         return <RunDetailView run={selectedRun} onBack={() => setSelectedRun(null)} />;
     }
 
 
-    if (loading) {
-        return (
-            <div className="flex flex-col items-center justify-center h-96 space-y-4">
-                <div className="w-12 h-12 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin"></div>
-                <p className="text-slate-500 font-mono text-xs uppercase tracking-widest animate-pulse">Loading Dossier...</p>
-            </div>
-        );
-    }
+    if (loading) return (
+        <div className="flex flex-col items-center justify-center min-h-[400px] space-y-4">
+            <div className="w-12 h-12 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin"></div>
+            <p className="text-slate-500 font-mono text-xs animate-pulse">Analyzing Architecture...</p>
+        </div>
+    );
 
     if (runs.length === 0) {
         return (
@@ -153,34 +244,45 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ projectName, init
     }
 
     return (
-        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 pb-24 w-full">
+        <div className="space-y-8 animate-in fade-in duration-700 pb-24 w-full">
 
-            {/* Header */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div className="space-y-2">
-                    <button onClick={onBack} className="group flex items-center text-slate-500 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest mb-1">
-                        <ChevronLeft size={14} className="mr-1 group-hover:-translate-x-1 transition-transform" /> Back to Registry
-                    </button>
-                    <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter">{projectName || 'Unknown Project'}</h1>
-                    <div className="flex items-center space-x-4 text-sm text-slate-400">
-                        <span className="flex items-center"><Layers size={14} className="mr-1.5" /> Project Dossier</span>
-                        <span className="w-1 h-1 bg-slate-700 rounded-full"></span>
-                        <span className="flex items-center text-indigo-400 font-mono"><Activity size={14} className="mr-1.5" /> ID: {projectName ? projectName.toUpperCase().substring(0, 6) : 'N/A'}</span>
+            {/* Header Section */}
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 bg-gradient-to-br from-slate-900 via-slate-900/50 to-indigo-900/10 p-8 rounded-[2.5rem] border border-slate-800/60 shadow-2xl relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none group-hover:bg-indigo-500/20 transition-all duration-1000"></div>
+
+                <div className="relative z-10">
+                    <div className="flex items-center gap-3 mb-2">
+                        <span className="px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-[10px] font-black uppercase text-indigo-400 tracking-widest flex items-center">
+                            <Package size={12} className="mr-2" /> Project
+                        </span>
+                        <span className="px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-[10px] font-black uppercase text-slate-500 tracking-widest">
+                            {runs.length} Runs Detected
+                        </span>
                     </div>
+                    <h1 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 tracking-tighter">
+                        {projectName}
+                    </h1>
                 </div>
-                <div className="flex gap-2">
+
+                <div className="flex gap-4 relative z-10">
                     <button
-                        onClick={handleDeleteProject}
-                        title="Delete Project Hierarchy"
-                        className="p-3 bg-slate-900 border border-slate-800 rounded-xl text-slate-400 hover:text-rose-500 hover:border-rose-500/50 hover:bg-rose-500/10 transition-all font-bold group"
+                        onClick={onBack}
+                        className="p-3 rounded-full bg-slate-800/50 text-slate-400 hover:text-white hover:bg-slate-700 border border-slate-700 hover:border-slate-600 transition-all"
                     >
-                        <Trash2 size={18} className="group-hover:animate-bounce" />
+                        <ChevronLeft size={20} />
                     </button>
                     <button
                         onClick={handleExportReport}
-                        className="flex items-center px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold text-sm shadow-lg shadow-indigo-600/20 transition-all hover:scale-105 active:scale-95"
+                        className="p-3 rounded-full bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500 hover:text-white border border-indigo-500/20 hover:border-indigo-500 transition-all shadow-lg shadow-indigo-500/10"
+                        title="Download Dossier"
                     >
-                        <Download size={18} className="mr-2" /> Export Report
+                        <Download size={20} />
+                    </button>
+                    <button
+                        onClick={handleDeleteProject}
+                        className="p-3 rounded-full bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white border border-rose-500/20 hover:border-rose-500 transition-all shadow-lg shadow-rose-500/10"
+                    >
+                        <Trash2 size={20} />
                     </button>
                 </div>
             </div>
@@ -286,10 +388,85 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ projectName, init
                 </div>
             </div>
 
+            {/* Architecture Analysis (New) */}
+            <div className="flex items-center gap-4 mb-8">
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-800 to-slate-800"></div>
+                <h2 id="architecture-analysis-heading" className="text-sm font-black uppercase tracking-[0.3em] text-slate-500 whitespace-nowrap bg-slate-950 px-6 py-2 rounded-full border border-slate-800 shadow-xl shadow-slate-900/50">
+                    Architecture Analysis
+                </h2>
+                <div className="h-px flex-1 bg-gradient-to-l from-transparent via-slate-800 to-slate-800"></div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Stability Comparison */}
+                <div className="bg-slate-900/40 border border-slate-800 p-6 rounded-[2rem] backdrop-blur-sm">
+                    <h3 className="text-lg font-bold text-white mb-6 flex items-center">
+                        <Activity size={20} className="mr-2 text-indigo-400" /> Layer Stability (Pass Rate)
+                    </h3>
+                    <div className="h-[200px] w-full">
+                        <ResponsiveContainer width="100%" height="100%">
+                            <BarChart data={layerComparisonData} layout="vertical" margin={{ top: 0, right: 30, left: 20, bottom: 0 }}>
+                                <defs>
+                                    <linearGradient id="gradientApi" x1="0" y1="0" x2="1" y2="0">
+                                        <stop offset="0%" stopColor="#059669" stopOpacity={0.8} />
+                                        <stop offset="100%" stopColor="#10b981" stopOpacity={1} />
+                                    </linearGradient>
+                                    <linearGradient id="gradientGui" x1="0" y1="0" x2="1" y2="0">
+                                        <stop offset="0%" stopColor="#7c3aed" stopOpacity={0.8} />
+                                        <stop offset="100%" stopColor="#8b5cf6" stopOpacity={1} />
+                                    </linearGradient>
+                                </defs>
+                                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" horizontal={false} />
+                                <XAxis type="number" domain={[0, 100]} hide />
+                                <YAxis dataKey="name" type="category" width={80} tick={{ fill: '#94a3b8', fontSize: 11, fontWeight: 'bold' }} axisLine={false} tickLine={false} />
+                                <RechartsTooltip content={<CustomChartTooltip />} cursor={{ fill: '#1e293b', opacity: 0.2 }} />
+                                <Bar dataKey="passRate" radius={[0, 4, 4, 0]} barSize={24} animationDuration={1500}>
+                                    {layerComparisonData.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={entry.fill} />
+                                    ))}
+                                </Bar>
+                            </BarChart>
+                        </ResponsiveContainer>
+                    </div>
+                </div>
+
+                {/* Latency Comparison */}
+                <div className="bg-slate-900/40 border border-slate-800 p-6 rounded-[2rem] backdrop-blur-sm">
+                    <h3 className="text-lg font-bold text-white mb-6 flex items-center">
+                        <Clock size={20} className="mr-2 text-indigo-400" /> Layer Latency (Duration)
+                    </h3>
+                    <div className="h-[200px] w-full">
+                        <ResponsiveContainer width="100%" height="100%">
+                            <BarChart data={layerComparisonData} layout="vertical" margin={{ top: 0, right: 30, left: 20, bottom: 0 }}>
+                                <defs>
+                                    <linearGradient id="gradientApi" x1="0" y1="0" x2="1" y2="0">
+                                        <stop offset="0%" stopColor="#059669" stopOpacity={0.8} />
+                                        <stop offset="100%" stopColor="#10b981" stopOpacity={1} />
+                                    </linearGradient>
+                                    <linearGradient id="gradientGui" x1="0" y1="0" x2="1" y2="0">
+                                        <stop offset="0%" stopColor="#7c3aed" stopOpacity={0.8} />
+                                        <stop offset="100%" stopColor="#8b5cf6" stopOpacity={1} />
+                                    </linearGradient>
+                                </defs>
+                                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" horizontal={false} />
+                                <XAxis type="number" hide />
+                                <YAxis dataKey="name" type="category" width={80} tick={{ fill: '#94a3b8', fontSize: 11, fontWeight: 'bold' }} axisLine={false} tickLine={false} />
+                                <RechartsTooltip content={<CustomChartTooltip />} cursor={{ fill: '#1e293b', opacity: 0.2 }} />
+                                <Bar dataKey="duration" radius={[0, 4, 4, 0]} barSize={24} animationDuration={1500}>
+                                    {layerComparisonData.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={entry.fill} />
+                                    ))}
+                                </Bar>
+                            </BarChart>
+                        </ResponsiveContainer>
+                    </div>
+                </div>
+            </div>
+
             {/* Run List */}
             <div className="bg-slate-900/20 border border-slate-800/50 rounded-[2.5rem] p-8">
                 <h3 className="text-xl font-bold text-white mb-6 flex items-center">
-                    <History size={20} className="mr-2 text-slate-400" /> Recent Activity Log
+                    <History size={20} className="mr-2 text-slate-400" /> Execution History
                 </h3>
 
                 <div className="space-y-3">
@@ -301,8 +478,10 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ projectName, init
 
                             return (
                                 <div key={run.id}
+                                    id={`run-item-${run.id}`}
                                     onClick={() => setSelectedRun(run)}
-                                    className="group relative overflow-hidden bg-slate-950/40 border border-slate-800/60 rounded-2xl p-4 hover:bg-slate-900/60 hover:border-slate-700/80 transition-all duration-300 cursor-pointer">
+                                    className="group relative overflow-hidden bg-slate-950/40 border border-slate-800/60 rounded-2xl p-4 hover:bg-slate-900/60 hover:border-slate-700/80 transition-all duration-300 cursor-pointer"
+                                >
                                     <div className={`absolute left-0 top-0 bottom-0 w-1 bg-${statusColor}-500 transition-all group-hover:w-1.5`}></div>
 
                                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pl-3">
@@ -317,11 +496,13 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ projectName, init
                                             <div>
                                                 <h4 className="text-white font-bold text-sm flex items-center gap-2">
                                                     {run.name}
-                                                    {run.tags?.map(t => (
-                                                        <span key={t} className="px-1.5 py-0.5 rounded text-[9px] bg-slate-800 text-slate-400 uppercase tracking-wider border border-slate-700">
-                                                            {t}
-                                                        </span>
-                                                    ))}
+                                                    {/* Auto-detected Type Badge */}
+                                                    {run.name.toLowerCase().includes('api') && (
+                                                        <span className="px-1.5 py-0.5 rounded text-[9px] bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 uppercase tracking-wider font-bold">API</span>
+                                                    )}
+                                                    {run.name.toLowerCase().includes('gui') && (
+                                                        <span className="px-1.5 py-0.5 rounded text-[9px] bg-violet-500/10 text-violet-500 border border-violet-500/20 uppercase tracking-wider font-bold">GUI</span>
+                                                    )}
                                                 </h4>
                                                 <div className="flex items-center gap-3 mt-1.5 text-xs text-slate-500 font-medium">
                                                     <span className="flex items-center gap-1.5">

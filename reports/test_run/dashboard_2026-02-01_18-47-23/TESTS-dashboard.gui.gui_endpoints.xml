@@ -1,0 +1,36 @@
+<testsuite name="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" tests="1" errors="0" failures="0" skipped="0" time="12.850783" timestamp="2026-02-01T18:44:16.676424" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" name="Deep Dive into Endpoint Detail" status="passed" time="12.850783"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @navigation @endpoints @detail
+  Scenario: Deep Dive into Endpoint Detail
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.007s
+    When I wait for 2 seconds ... passed in 2.002s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.586s
+    And I wait for 1 seconds ... passed in 1.004s
+    When I type "health" into the "search_input" in "endpoints_view" ... passed in 0.843s
+    And I wait for 2 seconds ... passed in 2.002s
+    When I click on the "endpoint_item" in "endpoints_view" ... passed in 0.699s
+    And I wait for 1 seconds ... passed in 1.003s
+    Then I should see the text "Back to Catalog" ... passed in 0.123s
+    And I should see the text "Success Rate" ... passed in 0.130s
+    And I should see the text "Avg Latency" ... passed in 0.084s
+    And I should see the "performance_card" in "endpoint_detail" ... passed in 0.180s
+    And I should see the text "Performance Insights" ... passed in 0.122s
+    And I should see the text "Live Discovery Data" ... passed in 0.140s
+    Then I take a screenshot named "endpoints_deep_detail" ... passed in 1.098s
+    When I click on the "back_button" in "endpoint_detail" ... passed in 0.603s
+    And I wait for 1 seconds ... passed in 1.002s
+    Then I should see the text "Endpoint Catalog" ... passed in 0.223s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] endpoints_deep_detail
+   Location: features\resources\screenshots\endpoints_deep_detail.png
+   <img src='file:///features\resources\screenshots\endpoints_deep_detail.png' width='800' alt='endpoints_deep_detail' />
+
+]]>
+</system-out></testcase></testsuite>
