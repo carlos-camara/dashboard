@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { api } from '../services/api';
 import {
     AreaChart,
     Area,
@@ -121,10 +122,10 @@ const PerformanceReportView: React.FC<PerformanceReportViewProps> = ({ reportUrl
             // However, our API currently only supports 'latest' efficiently via JSON parsing of CSV.
             // For now, we fetch 'latest' but in a real scenario we'd pass an ID to the API.
             // We'll stick to 'latest' to uphold the current architecture but ensure consistent UI.
-            fetch('http://localhost:3001/api/performance/latest')
-                .then(res => res.json())
+            api.getLatestPerformanceStats()
                 .then(res => {
-                    if (res.found) setData(res);
+                    // Ensure the reportUrl is absolute so it works in deployed environments
+                    if (res.found) setData({ ...res, reportUrl: api.getAssetUrl(res.reportUrl) });
                     setLoading(false);
                 })
                 .catch(err => {
@@ -483,8 +484,8 @@ const PerformanceReportView: React.FC<PerformanceReportViewProps> = ({ reportUrl
                                             <td className="py-6 px-4 first:pl-0">
                                                 <div className="flex items-center space-x-4">
                                                     <span className={`text-[9px] font-black px-2.5 py-1.5 rounded-lg border shadow-lg ${row.method === 'GET' ? 'bg-blue-500/10 border-blue-500/20 text-blue-400 shadow-blue-500/10' :
-                                                            row.method === 'POST' ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400 shadow-emerald-500/10' :
-                                                                'bg-slate-500/10 border-slate-500/20 text-slate-400'
+                                                        row.method === 'POST' ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400 shadow-emerald-500/10' :
+                                                            'bg-slate-500/10 border-slate-500/20 text-slate-400'
                                                         }`}>{row.method}</span>
                                                     <span className="text-xs font-mono font-bold text-slate-300 group-hover:text-white transition-colors tracking-tight">{row.name}</span>
                                                 </div>

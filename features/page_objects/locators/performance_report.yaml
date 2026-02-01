@@ -13,10 +13,10 @@ performance_report_view:
     value: "//h3[contains(., 'Response Times')]"
   rps_image:
     by: xpath
-    value: "//*[contains(normalize-space(.), 'Throughput Chronology')]"
+    value: "//h3[contains(., 'Traffic') and contains(., 'Velocity')]"
   latency_image:
     by: xpath
-    value: "//*[contains(normalize-space(.), 'Spectral Latency Audit')]"
+    value: "//h3[contains(., 'Spectral') and contains(., 'Latency')]"
   audit_matrix:
     by: xpath
     value: "//h3[contains(., 'Audit')]"
@@ -25,7 +25,7 @@ performance_report_view:
     value: "//button[contains(., 'Dossier')]"
   original_report_link:
     by: xpath
-    value: "//a[contains(., 'Raw View')]"
+    value: "//a[contains(., 'Raw Locust Report')]"
   summary_efficiency:
     by: xpath
     value: "//*[@data-testid='summary-efficiency']"

@@ -1,0 +1,50 @@
+<testsuite name="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" tests="1" errors="0" failures="1" skipped="0" time="38.634604" timestamp="2026-02-01T12:02:05.467047" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" name="Validate High-Density Performance Audit Dossier" status="failed" time="38.634604"><failure type="AssertionError" message="Text 'Tactical Audit' not found or not visible on page">
+<![CDATA[
+Failing step: Then I should see the text "Tactical Audit" ... failed in 16.597s
+Location: features/dashboard/gui/gui_performance.feature:19
+Assertion Failed: Text 'Tactical Audit' not found or not visible on page
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Validate High-Density Performance Audit Dossier
+   Failed Step: I should see the text "Tactical Audit"
+   Location: features\resources\screenshots\2026-02-01_12-00-15\FAILED_Validate_High-Density_Performance_Audit_Dossier_I_should_see_the_text_"Tactica.png
+   <img src='file:///C:\Users\Carlos\Desktop\test\dashboard\features\resources\screenshots\2026-02-01_12-00-15\FAILED_Validate_High-Density_Performance_Audit_Dossier_I_should_see_the_text_"Tactica.png' width='800' alt='Failure Screenshot' />]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @performance @detail @integration
+  Scenario: Validate High-Density Performance Audit Dossier
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.268s
+    And I wait for 5 seconds ... passed in 5.001s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.181s
+    And I wait for 2 seconds ... passed in 2.001s
+    When I type "runs" into the "search_input" in "endpoints_view" ... passed in 0.212s
+    And I wait for 2 seconds ... passed in 2.001s
+    When I click on the "endpoint_item" in "endpoints_view" ... passed in 0.180s
+    And I wait for 2 seconds ... passed in 2.001s
+    Then I should see the "performance_card" in "endpoint_detail" ... passed in 0.031s
+    When I click on the "open_report_button" in "endpoint_detail" ... passed in 0.159s
+    And I wait for 10 seconds ... passed in 10.001s
+    Then I should see the text "Tactical Audit" ... failed in 16.597s
+    And I should see the text "Performance" ... skipped in 0.000s
+    And I should see the text "Efficiency" ... skipped in 0.000s
+    And I should see the "rps_image" in "performance_report_view" ... skipped in 0.000s
+    And I should see the "latency_image" in "performance_report_view" ... skipped in 0.000s
+    And I should see the "original_report_link" in "performance_report_view" ... skipped in 0.000s
+    Then I take a screenshot named "final_performance_dashboard_verification" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Validate High-Density Performance Audit Dossier
+   Failed Step: I should see the text "Tactical Audit"
+   Location: features\resources\screenshots\2026-02-01_12-00-15\FAILED_Validate_High-Density_Performance_Audit_Dossier_I_should_see_the_text_"Tactica.png
+   <img src='file:///C:\Users\Carlos\Desktop\test\dashboard\features\resources\screenshots\2026-02-01_12-00-15\FAILED_Validate_High-Density_Performance_Audit_Dossier_I_should_see_the_text_"Tactica.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase></testsuite>

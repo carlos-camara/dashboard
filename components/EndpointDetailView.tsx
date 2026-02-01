@@ -179,10 +179,11 @@ const EndpointDetailView: React.FC<EndpointDetailViewProps> = ({ endpoint, onBac
     // Fetch linked swagger spec - NOW USING PROJECT-LEVEL SPEC
     useEffect(() => {
         // Fetch Performance Stats
-        fetch('http://localhost:3001/api/performance/latest')
-            .then(res => res.json())
+        api.getLatestPerformanceStats()
             .then(data => {
                 if (data.found && data.stats) {
+                    console.log('Performance Data:', data);
+                    console.log('Target Endpoint:', endpoint);
                     // Match endpoint simple logic: Method + Path
                     // Note: Locust usually logs path like "/api/runs (List)" or just "/api/runs"
                     // We need to find the best match
@@ -205,11 +206,15 @@ const EndpointDetailView: React.FC<EndpointDetailViewProps> = ({ endpoint, onBac
                     });
 
                     if (match) {
-                        setPerfStats({ ...match, reportUrl: data.reportUrl, timestamp: data.timestamp });
+                        // Ensure reportUrl is absolute using api.getAssetUrl
+                        const fullReportUrl = api.getAssetUrl(data.reportUrl);
+                        setPerfStats({ ...match, reportUrl: fullReportUrl, timestamp: data.timestamp });
                     }
                 }
             })
-            .catch(console.error);
+            .catch(err => {
+                console.error("Performance fetch error:", err);
+            });
 
         // First try to get project-level spec (e.g., dashboard.yaml)
         api.getProjectSpec(endpoint.service).then(res => {

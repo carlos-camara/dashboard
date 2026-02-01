@@ -1,16 +1,20 @@
 # QA COMMAND CENTER
-
 > [!IMPORTANT]
-> **NEXT-GEN TEST ORCHESTRATION & INTELLIGENCE PLATFORM**
+> **NEXT-GEN ORCHESTRATION & INTELLIGENCE PLATFORM**
 >
 > A complete visualization layer that bridges the gap between technical execution logs and executive decision-making.
 
+<div align="center">
+
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-0F172A?style=for-the-badge&logo=python&logoColor=38bdf8)](https://www.python.org/)
-[![React 18](https://img.shields.io/badge/React-18-0F172A?style=for-the-badge&logo=react&logoColor=61dafb)](https://react.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-Ultramodern-0F172A?style=for-the-badge&logo=tailwindcss&logoColor=38bdf8)](https://tailwindcss.com/)
+[![React 19](https://img.shields.io/badge/React-19-0F172A?style=for-the-badge&logo=react&logoColor=61dafb)](https://react.dev/)
+[![Tailwind CSS 4](https://img.shields.io/badge/Tailwind_CSS_4-Ultramodern-0F172A?style=for-the-badge&logo=tailwindcss&logoColor=38bdf8)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-0F172A?style=for-the-badge&logo=open-source-initiative&logoColor=white)](LICENSE)
+
 [![Lint Status](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml)
 [![Test Suite Status](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml)
+
+</div>
 
 <br/>
 
@@ -33,6 +37,27 @@ This is a **high-performance, ultra-premium QA ecosystem** designed for modern e
 Experience the future of test reporting. The dashboard is live and accessible globally:
 
 > **[View Live Dashboard](https://carlos-camara.github.io/dashboard/)**
+
+---
+
+## ✨ New Generation Features
+
+### 📊 Performance Digital Twin
+Go beyond functional testing with our new **Performance Analytics Engine**.
+- **Signal Velocity**: Visualize throughput trends over time, establishing a baseline for system performance.
+- **Throughput Chronology**: Detect regression spikes and latency drifts with precision using interactive bar charts.
+- **Spectral Latency Audit**: A heatmap of your system's responsiveness.
+
+![Performance Dashboard](features/resources/screenshots/ultra_professional_performance_dashboard.png)
+
+### 📑 Smart PDF Dossiers
+Generate executive-ready PDF reports with a single click. These aren't just logs; they are **Intelligent Dossiers** containing:
+- **Executive Summary**: High-level pass/fail metrics.
+- **Failure Analysis**: Detailed breakdown of failed steps with error messages and context.
+- **Visual Evidence**: Embedded screenshots of the state at failure.
+
+### 📱 Mobile-First Design
+The dashboard is now fully responsive. Whether you are on a 4K monitor or an iPhone, the glassmorphism UI adapts perfectly to provide critical insights on the go.
 
 ---
 
@@ -173,4 +198,3 @@ Our **GitHub Actions** pipeline orchestrates the entire lifecycle:
 <!-- -->
 
 > **Designed & Engineered by [Carlos Camara](https://github.com/carlos-camara)**
-> *Quality is not an act, it is a habit.*

@@ -60,17 +60,17 @@ jobs:
           # Clear reports for the next specific run
           rm -rf reports/test_run
 
+      - name: Run Performance Tests
+        shell: pwsh
+        run: |
+          ./run_load_test.ps1
+
       - name: Run GUI Tests
         shell: pwsh
         run: |
           ./run_gui_smoke_reports.ps1
         env:
           HEADLESS: "true"
-
-      - name: Run Performance Tests
-        shell: pwsh
-        run: |
-          ./run_load_test.ps1
 
       - name: Collect All JUnit XMLs
         if: always()

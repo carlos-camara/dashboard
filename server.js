@@ -651,7 +651,9 @@ app.get("/api/performance/latest", (req, res) => {
             return res.json({ found: false, stats: [] });
         }
 
-        const folders = fs.readdirSync(perfDir).filter(f => fs.statSync(path.join(perfDir, f)).isDirectory());
+        const folders = fs.readdirSync(perfDir).filter(f =>
+            fs.statSync(path.join(perfDir, f)).isDirectory() && f.startsWith('performance_')
+        );
 
         if (folders.length === 0) {
             return res.json({ found: false, stats: [] });
@@ -718,7 +720,8 @@ app.get("/api/performance/latest", (req, res) => {
             time: latestFolder.time,
             runDirName: latestFolder.name
         };
-        const content = fs.readFileSync(filePath, 'utf8');
+        const content = fs.readFileSync(filePath, 'utf8').replace(/^\uFEFF/, '');
+        console.log(`[Perf Stats] Reading ${filePath}. Content Length: ${content.length}`);
         const lines = content.split('\n').filter(l => l.trim().length > 0);
         if (lines.length < 2) return res.json({ found: false, stats: [] });
 

@@ -216,6 +216,25 @@ export const api = {
   getScreenshotUrl: (filename: string): string => {
     // BASE_URL is something like http://localhost:3001/api or https://app.onrender.com/api
     return BASE_URL.replace(/\/api$/, '') + `/screenshots/${filename}`;
+  },
+
+  getAssetUrl: (relativePath: string): string => {
+    // Helper to generate full URLs for assets served by the backend
+    // Ensures they point to the correct backend host (localhost or deployed)
+    // relativePath should start with / (e.g. /reports/...)
+    const baseUrl = BASE_URL.replace(/\/api$/, '');
+    const pathToUse = relativePath.startsWith('/') ? relativePath : `/${relativePath}`;
+    return `${baseUrl}${pathToUse}`;
+  },
+
+  getLatestPerformanceStats: async (): Promise<any> => {
+    try {
+      const response = await fetch(`${BASE_URL}/performance/latest`);
+      if (response.ok) return await response.json();
+    } catch (e) {
+      console.error('Error fetching performance stats:', e);
+    }
+    return { found: false, stats: [], history: [], failures: [] };
   }
 };
 
