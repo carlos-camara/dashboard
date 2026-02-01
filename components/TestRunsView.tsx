@@ -4,6 +4,7 @@ import { api } from '../services/api';
 import { ExecutionRun } from '../types';
 import { Folder, Trash2, Calendar, ChevronRight, Package, ChevronDown, Activity, History, Tag, Search, ChevronLeft } from 'lucide-react';
 import RunDetailView from './RunDetailView';
+import Pagination from './Pagination';
 
 interface ProjectGroup {
   projectName: string;
@@ -328,24 +329,15 @@ const TestRunsView: React.FC<TestRunsViewProps> = ({ refreshKey, initialProject 
                           ))}
 
                           {totalPages > 1 && (
-                            <div className="flex items-center justify-between px-4 py-2 mt-2 border-t border-slate-800/50">
-                              <button
-                                disabled={page === 1}
-                                onClick={(e) => { e.stopPropagation(); changePage(group.projectName, page - 1); }}
-                                className="text-[10px] font-bold uppercase text-slate-500 disabled:opacity-30 hover:text-white transition-colors flex items-center"
-                              >
-                                <ChevronLeft size={14} className="mr-1" /> Previous
-                              </button>
-                              <span className="text-[10px] font-mono text-slate-600">
-                                Page {page} of {totalPages}
-                              </span>
-                              <button
-                                disabled={page === totalPages}
-                                onClick={(e) => { e.stopPropagation(); changePage(group.projectName, page + 1); }}
-                                className="text-[10px] font-bold uppercase text-slate-500 disabled:opacity-30 hover:text-white transition-colors flex items-center"
-                              >
-                                Next <ChevronRight size={14} className="ml-1" />
-                              </button>
+                            <div className="mt-4 px-4 border-t border-slate-800/30 pt-2">
+                              <Pagination
+                                currentPage={page}
+                                totalPages={totalPages}
+                                onPageChange={(newPage) => changePage(group.projectName, newPage)}
+                              />
+                              <div className="text-center mt-2 text-[9px] font-mono text-slate-600 uppercase tracking-widest">
+                                Showing {startIndex + 1}-{Math.min(startIndex + RUNS_PER_PAGE, group.runs.length)} of {group.runs.length} Runs
+                              </div>
                             </div>
                           )}
                         </>

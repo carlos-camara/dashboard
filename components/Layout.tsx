@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { LayoutDashboard, FolderKanban, TrendingUp, Plus, Search, ChevronRight, Cpu, Menu, X, ShieldAlert } from 'lucide-react';
 
 interface LayoutProps {
@@ -11,6 +11,14 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children, activeTab, setActiveTab, onNewRun }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const mainRef = useRef<HTMLElement>(null);
+
+  // Reset scroll position when switching tabs
+  useEffect(() => {
+    if (mainRef.current) {
+      mainRef.current.scrollTop = 0;
+    }
+  }, [activeTab]);
 
   const menuItems = [
     { id: 'dashboard', icon: LayoutDashboard, label: 'Dashboard' },
@@ -92,7 +100,7 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab, setActiveTab, onNe
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 flex flex-col h-full relative overflow-y-auto">
+      <main ref={mainRef} className="flex-1 flex flex-col h-full relative overflow-y-auto">
         <header className="h-16 border-b border-slate-800 bg-slate-900/50 backdrop-blur-md flex items-center justify-between px-4 md:px-8 sticky top-0 z-20 no-print">
           <div className="flex items-center">
             <button
