@@ -1,0 +1,390 @@
+
+import React, { useEffect, useState, useMemo } from 'react';
+import { ExecutionRun } from '../types';
+import { api } from '../services/api';
+import {
+    Activity, Clock, CheckCircle2, XCircle, Calendar,
+    TrendingUp, PieChart, ChevronLeft,
+    Download, Share2, Layers, History, Trash2, ChevronRight
+} from 'lucide-react';
+import {
+    AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip,
+    ResponsiveContainer, PieChart as RePieChart, Pie, Cell, Legend
+} from 'recharts';
+import { generateProjectDossier } from '../services/reportGenerator';
+import RunDetailView from './RunDetailView';
+import Pagination from './Pagination';
+
+interface ProjectDetailViewProps {
+    projectName: string;
+    initialRuns?: ExecutionRun[];
+    onBack: () => void;
+}
+
+const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ projectName, initialRuns, onBack }) => {
+    const [runs, setRuns] = useState<ExecutionRun[]>(initialRuns || []);
+    const [loading, setLoading] = useState(!initialRuns);
+    const [page, setPage] = useState(1);
+    const [selectedRun, setSelectedRun] = useState<ExecutionRun | null>(null);
+    const RUNS_PER_PAGE = 8;
+
+    // ... (useEffect and everything else stays same)
+
+
+
+    // ... (rest of the render)
+
+    useEffect(() => {
+        if (initialRuns && initialRuns.length > 0) {
+            setLoading(false);
+            return;
+        }
+
+        const loadData = async () => {
+            if (!projectName) {
+                setLoading(false);
+                return;
+            }
+            setLoading(true);
+            try {
+                const allRuns = await api.getRecentRuns();
+                const projectRuns = allRuns.filter(r => r.project === projectName)
+                    .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+                setRuns(projectRuns);
+            } catch (error) {
+                console.error("Failed to load project data", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        loadData();
+    }, [projectName, initialRuns]);
+
+    // Stats
+    const stats = useMemo(() => {
+        const total = runs.length;
+        if (total === 0) return { passRate: 0, stabilityScore: 0, avgDuration: 0, totalExecutions: 0 };
+        const passed = runs.reduce((acc, r) => acc + (r.passedCount / r.totalCount >= 0.95 ? 1 : 0), 0);
+        const totalTests = runs.reduce((acc, r) => acc + r.totalCount, 0);
+        const totalPassed = runs.reduce((acc, r) => acc + r.passedCount, 0);
+        const avgDuration = runs.reduce((acc, r) => acc + r.duration, 0) / total;
+        return {
+            passRate: totalTests > 0 ? (totalPassed / totalTests) * 100 : 0,
+            stabilityScore: (passed / total) * 100,
+            avgDuration,
+            totalExecutions: total
+        };
+    }, [runs]);
+
+    // Trend Data
+    const trendData = useMemo(() => {
+        return runs.slice(0, 20).reverse().map(r => ({
+            name: new Date(r.timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }),
+            pass: r.passedCount,
+            fail: r.failedCount,
+            total: r.totalCount,
+            duration: r.duration
+        }));
+    }, [runs]);
+
+    // Type Data (GUI vs API)
+    const typeData = useMemo(() => {
+        const types = { GUI: 0, API: 0, Other: 0 };
+        runs.forEach(r => {
+            const name = r.name.toLowerCase();
+            const tags = r.tags || [];
+            if (name.includes('gui') || tags.some(t => t.toLowerCase().includes('gui'))) types.GUI++;
+            else if (name.includes('api') || tags.some(t => t.toLowerCase().includes('api'))) types.API++;
+            else types.Other++;
+        });
+        return [
+            { name: 'GUI Tests', value: types.GUI, color: '#8b5cf6' }, // Violet
+            { name: 'API Tests', value: types.API, color: '#10b981' }, // Emerald
+            { name: 'Other', value: types.Other, color: '#64748b' }    // Slate
+        ].filter(d => d.value > 0);
+    }, [runs]);
+
+    const totalPages = Math.ceil(runs.length / RUNS_PER_PAGE); const displayedRuns = runs.slice((page - 1) * RUNS_PER_PAGE, page * RUNS_PER_PAGE);
+
+    const handleDeleteProject = async () => {
+        try {
+            setLoading(true);
+            await api.deleteProject(projectName);
+            onBack(); // Return to registry after deletion
+        } catch (error) {
+            console.error("Failed to delete project:", error);
+            alert("Failed to delete project. Please try again.");
+            setLoading(false);
+        }
+    };
+
+    const handleExportReport = () => {
+        if (!runs.length) return;
+        generateProjectDossier(projectName, stats, runs);
+    };
+
+    if (selectedRun) {
+        return <RunDetailView run={selectedRun} onBack={() => setSelectedRun(null)} />;
+    }
+
+
+    if (loading) {
+        return (
+            <div className="flex flex-col items-center justify-center h-96 space-y-4">
+                <div className="w-12 h-12 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin"></div>
+                <p className="text-slate-500 font-mono text-xs uppercase tracking-widest animate-pulse">Loading Dossier...</p>
+            </div>
+        );
+    }
+
+    if (runs.length === 0) {
+        return (
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 pb-24">
+                <button onClick={onBack} className="group flex items-center text-slate-500 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest mb-1">
+                    <ChevronLeft size={14} className="mr-1 group-hover:-translate-x-1 transition-transform" /> Back to Registry
+                </button>
+                <div className="flex flex-col items-center justify-center h-96 border border-dashed border-slate-800 rounded-3xl bg-slate-900/20">
+                    <Activity size={48} className="text-slate-600 mb-4 opacity-50" />
+                    <h3 className="text-xl font-bold text-white mb-2">No Data Available</h3>
+                    <p className="text-slate-500 text-sm max-w-md text-center">No execution history found for <span className="text-indigo-400 font-mono">{projectName}</span>.</p>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 pb-24 w-full">
+
+            {/* Header */}
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div className="space-y-2">
+                    <button onClick={onBack} className="group flex items-center text-slate-500 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest mb-1">
+                        <ChevronLeft size={14} className="mr-1 group-hover:-translate-x-1 transition-transform" /> Back to Registry
+                    </button>
+                    <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter">{projectName || 'Unknown Project'}</h1>
+                    <div className="flex items-center space-x-4 text-sm text-slate-400">
+                        <span className="flex items-center"><Layers size={14} className="mr-1.5" /> Project Dossier</span>
+                        <span className="w-1 h-1 bg-slate-700 rounded-full"></span>
+                        <span className="flex items-center text-indigo-400 font-mono"><Activity size={14} className="mr-1.5" /> ID: {projectName ? projectName.toUpperCase().substring(0, 6) : 'N/A'}</span>
+                    </div>
+                </div>
+                <div className="flex gap-2">
+                    <button
+                        onClick={handleDeleteProject}
+                        title="Delete Project Hierarchy"
+                        className="p-3 bg-slate-900 border border-slate-800 rounded-xl text-slate-400 hover:text-rose-500 hover:border-rose-500/50 hover:bg-rose-500/10 transition-all font-bold group"
+                    >
+                        <Trash2 size={18} className="group-hover:animate-bounce" />
+                    </button>
+                    <button
+                        onClick={handleExportReport}
+                        className="flex items-center px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold text-sm shadow-lg shadow-indigo-600/20 transition-all hover:scale-105 active:scale-95"
+                    >
+                        <Download size={18} className="mr-2" /> Export Report
+                    </button>
+                </div>
+            </div>
+
+            {/* KPI Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="bg-slate-950/50 border border-slate-800 p-6 rounded-3xl relative overflow-hidden group hover:border-slate-700 transition-all">
+                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><Activity size={64} /></div>
+                    <p className="text-slate-500 text-xs font-black uppercase tracking-widest mb-2">Stability Score</p>
+                    <div className="flex items-baseline space-x-2">
+                        <h3 className={`text-4xl font-black ${stats.stabilityScore >= 80 ? 'text-emerald-400' : 'text-rose-400'}`}>{stats.stabilityScore.toFixed(0)}%</h3>
+                    </div>
+                </div>
+                <div className="bg-slate-950/50 border border-slate-800 p-6 rounded-3xl relative overflow-hidden group hover:border-slate-700 transition-all">
+                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><CheckCircle2 size={64} /></div>
+                    <p className="text-slate-500 text-xs font-black uppercase tracking-widest mb-2">Avg Pass Rate</p>
+                    <h3 className="text-4xl font-black text-white">{stats.passRate.toFixed(1)}%</h3>
+                </div>
+                <div className="bg-slate-950/50 border border-slate-800 p-6 rounded-3xl relative overflow-hidden group hover:border-slate-700 transition-all">
+                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><Clock size={64} /></div>
+                    <p className="text-slate-500 text-xs font-black uppercase tracking-widest mb-2">Avg Duration</p>
+                    <h3 className="text-4xl font-black text-white">{stats.avgDuration.toFixed(1)}s</h3>
+                </div>
+                <div className="bg-slate-950/50 border border-slate-800 p-6 rounded-3xl relative overflow-hidden group hover:border-slate-700 transition-all">
+                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><Layers size={64} /></div>
+                    <p className="text-slate-500 text-xs font-black uppercase tracking-widest mb-2">Total Flights</p>
+                    <h3 className="text-4xl font-black text-white">{stats.totalExecutions}</h3>
+                </div>
+            </div>
+
+            {/* Charts Section */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                {/* Trend Chart */}
+                <div className="lg:col-span-2 bg-slate-900/40 border border-slate-800 p-6 rounded-[2rem] backdrop-blur-sm">
+                    <h3 className="text-lg font-bold text-white mb-6 flex items-center">
+                        <TrendingUp size={20} className="mr-2 text-indigo-400" /> Execution Velocity
+                    </h3>
+                    <div className="h-[300px] w-full">
+                        <ResponsiveContainer width="100%" height="100%">
+                            <AreaChart data={trendData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                                <defs>
+                                    <linearGradient id="colorPass" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="5%" stopColor="#10b981" stopOpacity={0.3} />
+                                        <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+                                    </linearGradient>
+                                    <linearGradient id="colorFail" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="5%" stopColor="#f43f5e" stopOpacity={0.3} />
+                                        <stop offset="95%" stopColor="#f43f5e" stopOpacity={0} />
+                                    </linearGradient>
+                                </defs>
+                                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
+                                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 10 }} dy={10} />
+                                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 10 }} />
+                                <RechartsTooltip
+                                    contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px' }}
+                                    itemStyle={{ fontSize: '12px', fontWeight: 'bold' }}
+                                    labelStyle={{ color: '#94a3b8', fontSize: '10px', marginBottom: '8px' }}
+                                />
+                                <Area type="monotone" dataKey="pass" stroke="#10b981" fillOpacity={1} fill="url(#colorPass)" strokeWidth={2} />
+                                <Area type="monotone" dataKey="fail" stroke="#f43f5e" fillOpacity={1} fill="url(#colorFail)" strokeWidth={2} />
+                            </AreaChart>
+                        </ResponsiveContainer>
+                    </div>
+                </div>
+
+                {/* Distribution Chart */}
+                <div className="bg-slate-900/40 border border-slate-800 p-6 rounded-[2rem] backdrop-blur-sm">
+                    <h3 className="text-lg font-bold text-white mb-6 flex items-center">
+                        <PieChart size={20} className="mr-2 text-indigo-400" /> Test Composition
+                    </h3>
+                    <div className="h-[300px] w-full relative">
+                        <ResponsiveContainer width="100%" height="100%">
+                            <RePieChart>
+                                <Pie
+                                    data={typeData}
+                                    cx="50%"
+                                    cy="50%"
+                                    innerRadius={60}
+                                    outerRadius={80}
+                                    paddingAngle={5}
+                                    dataKey="value"
+                                    stroke="none"
+                                >
+                                    {typeData.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={entry.color} />
+                                    ))}
+                                </Pie>
+                                <RechartsTooltip
+                                    contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px' }}
+                                    itemStyle={{ color: '#fff' }}
+                                />
+                                <Legend verticalAlign="bottom" height={36} iconType="circle" />
+                            </RePieChart>
+                        </ResponsiveContainer>
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <div className="text-center">
+                                <p className="text-xs font-bold text-slate-500 uppercase">Total</p>
+                                <p className="text-3xl font-black text-white">{runs.length}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Run List */}
+            <div className="bg-slate-900/20 border border-slate-800/50 rounded-[2.5rem] p-8">
+                <h3 className="text-xl font-bold text-white mb-6 flex items-center">
+                    <History size={20} className="mr-2 text-slate-400" /> Recent Activity Log
+                </h3>
+
+                <div className="space-y-3">
+                    <div className="space-y-4">
+                        {displayedRuns.map(run => {
+                            const passRate = run.totalCount > 0 ? (run.passedCount / run.totalCount) * 100 : 0;
+                            const isSuccess = passRate >= 95;
+                            const statusColor = isSuccess ? 'emerald' : 'rose';
+
+                            return (
+                                <div key={run.id}
+                                    onClick={() => setSelectedRun(run)}
+                                    className="group relative overflow-hidden bg-slate-950/40 border border-slate-800/60 rounded-2xl p-4 hover:bg-slate-900/60 hover:border-slate-700/80 transition-all duration-300 cursor-pointer">
+                                    <div className={`absolute left-0 top-0 bottom-0 w-1 bg-${statusColor}-500 transition-all group-hover:w-1.5`}></div>
+
+                                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pl-3">
+                                        {/* Left: Identity */}
+                                        <div className="flex items-start gap-4">
+                                            <div className={`p-3 rounded-xl bg-${statusColor}-500/10 border border-${statusColor}-500/20 shadow-[0_0_15px_-3px_rgba(0,0,0,0.2)]`}>
+                                                {isSuccess ?
+                                                    <CheckCircle2 className={`text-${statusColor}-500`} size={20} /> :
+                                                    <XCircle className={`text-${statusColor}-500`} size={20} />
+                                                }
+                                            </div>
+                                            <div>
+                                                <h4 className="text-white font-bold text-sm flex items-center gap-2">
+                                                    {run.name}
+                                                    {run.tags?.map(t => (
+                                                        <span key={t} className="px-1.5 py-0.5 rounded text-[9px] bg-slate-800 text-slate-400 uppercase tracking-wider border border-slate-700">
+                                                            {t}
+                                                        </span>
+                                                    ))}
+                                                </h4>
+                                                <div className="flex items-center gap-3 mt-1.5 text-xs text-slate-500 font-medium">
+                                                    <span className="flex items-center gap-1.5">
+                                                        <Calendar size={12} className="text-slate-600" />
+                                                        {new Date(run.timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
+                                                    </span>
+                                                    <span className="w-1 h-1 rounded-full bg-slate-700"></span>
+                                                    <span className="flex items-center gap-1.5">
+                                                        <Clock size={12} className="text-slate-600" />
+                                                        {new Date(run.timestamp).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Middle: Mini Stats and Visual Bar */}
+                                        <div className="flex items-center gap-8 md:border-l md:border-white/5 md:pl-8 flex-1">
+                                            <div className="hidden md:block">
+                                                <p className="text-[10px] uppercase tracking-widest text-slate-600 font-bold mb-0.5">Duration</p>
+                                                <p className="text-slate-300 font-mono text-sm">{run.duration.toFixed(2)}s</p>
+                                            </div>
+
+                                            {/* Visual Health Bar */}
+                                            <div className="flex-1 max-w-[200px] hidden sm:block">
+                                                <div className="flex justify-between text-[10px] font-bold text-slate-500 mb-1">
+                                                    <span>Progress</span>
+                                                    <span className={isSuccess ? 'text-emerald-400' : 'text-rose-400'}>{run.passedCount}/{run.totalCount}</span>
+                                                </div>
+                                                <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden flex">
+                                                    <div className="h-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" style={{ width: `${passRate}%` }}></div>
+                                                    <div className="h-full bg-rose-500" style={{ width: `${100 - passRate}%` }}></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Right: Pass Rate Badge */}
+                                        <div className="text-right pl-4">
+                                            <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border bg-slate-950/50 ${isSuccess
+                                                ? 'border-emerald-500/30 text-emerald-400 shadow-[0_0_15px_-5px_rgba(16,185,129,0.3)]'
+                                                : 'border-rose-500/30 text-rose-400 shadow-[0_0_15px_-5px_rgba(244,63,94,0.3)]'
+                                                }`}>
+                                                <Activity size={14} />
+                                                <span className="font-black font-mono text-lg">{passRate.toFixed(0)}%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+
+                <div className="mt-6 flex justify-center">
+                    <Pagination
+                        currentPage={page}
+                        totalPages={totalPages}
+                        onPageChange={setPage}
+                    />
+                </div>
+            </div>
+
+        </div>
+    );
+};
+
+export default ProjectDetailView;

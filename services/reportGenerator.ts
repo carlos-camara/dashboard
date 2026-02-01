@@ -211,3 +211,107 @@ export const generateExecutiveReport = (
 
     pdf.save(`SENTINEL_EXECUTIVE_REPORT_${new Date().toISOString().split('T')[0]}.pdf`);
 };
+
+export const generateProjectDossier = (
+    projectName: string,
+    stats: { passRate: number, stabilityScore: number, avgDuration: number, totalExecutions: number },
+    runs: ExecutionRun[]
+) => {
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const margin = 20;
+
+    // --- Shared Helpers (Duplicated for safety/speed) ---
+    const addHeader = (text: string, y: number, size = 18, color = [99, 102, 241]) => {
+        pdf.setFontSize(size);
+        pdf.setTextColor(color[0], color[1], color[2]);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text(text.toUpperCase(), margin, y);
+        pdf.setDrawColor(color[0], color[1], color[2]);
+        pdf.setLineWidth(0.5);
+        pdf.line(margin, y + 2, pageWidth - margin, y + 2);
+    };
+
+    const addBodyText = (text: string, y: number, fontSize = 10, color = [71, 85, 105]) => {
+        pdf.setFontSize(fontSize);
+        pdf.setTextColor(color[0], color[1], color[2]);
+        pdf.setFont('helvetica', 'normal');
+        const splitText = pdf.splitTextToSize(text, pageWidth - (margin * 2));
+        pdf.text(splitText, margin, y);
+        return y + (splitText.length * (fontSize * 0.5)) + 5;
+    };
+
+    // --- COVER PAGE ---
+    pdf.setFillColor(15, 23, 42); // Slate 950
+    pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+
+    pdf.setDrawColor(99, 102, 241, 0.2);
+    for (let i = 0; i < pageWidth; i += 10) pdf.line(i, 0, i, pageHeight);
+
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFontSize(10);
+    pdf.setFont('courier', 'bold');
+    pdf.text('CONFIDENTIAL // PROJECT DOSSIER', margin, 30);
+
+    pdf.setFontSize(48);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text(projectName.toUpperCase(), margin, 70);
+
+    pdf.setFontSize(24);
+    pdf.setTextColor(148, 163, 184); // Slate 400
+    pdf.text('PERFORMANCE INSPECTION', margin, 85);
+
+    pdf.setDrawColor(99, 102, 241);
+    pdf.setLineWidth(2);
+    pdf.line(margin, 115, margin + 40, 115);
+
+    pdf.setFontSize(12);
+    pdf.text(`GENERATED: ${new Date().toLocaleDateString()}`, margin, 130);
+    pdf.text(`TOTAL EXECUTIONS: ${stats.totalExecutions}`, margin, 138);
+    pdf.text(`PASS RATE: ${stats.passRate.toFixed(1)}%`, margin, 146);
+
+    // --- PAGE 2: DETAILS ---
+    pdf.addPage();
+    addHeader('Project Stability Analysis', 30);
+
+    const summary = `This dossier contains a detailed audit of the "${projectName}" project. The current stability score is ${stats.stabilityScore.toFixed(1)}%, with an average execution duration of ${stats.avgDuration.toFixed(2)}ms.`;
+    let currentY = addBodyText(summary, 45);
+
+    currentY += 10;
+    addHeader('Recent Execution Events', currentY, 14, [16, 185, 129]);
+    currentY += 15;
+
+    // List recent runs
+    runs.slice(0, 15).forEach((run, i) => {
+        // Page break check
+        if (currentY > pageHeight - 20) {
+            pdf.addPage();
+            currentY = margin + 10;
+        }
+
+        const isSuccess = run.passedCount / run.totalCount >= 0.95;
+        const color = isSuccess ? [16, 185, 129] : [244, 63, 94]; // Emerald vs Rose
+
+        pdf.setDrawColor(color[0], color[1], color[2]);
+        pdf.setLineWidth(0.5);
+        pdf.rect(margin, currentY, 2, 8, 'F'); // Status bar
+
+        pdf.setFontSize(10);
+        pdf.setTextColor(15, 23, 42);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text(run.name, margin + 5, currentY + 5);
+
+        pdf.setFont('courier', 'normal');
+        pdf.setFontSize(9);
+        pdf.setTextColor(100, 116, 139);
+        const dateStr = new Date(run.timestamp).toLocaleDateString();
+        pdf.text(`${dateStr} | ${run.passedCount}/${run.totalCount} PASS | ${run.duration.toFixed(2)}s`, margin + 100, currentY + 5);
+
+        currentY += 12;
+    });
+
+    // Save
+    const safeName = projectName.replace(/[^a-z0-9]/gi, '_').toUpperCase();
+    pdf.save(`PROJECT_DOSSIER_${safeName}_${new Date().toISOString().split('T')[0]}.pdf`);
+};

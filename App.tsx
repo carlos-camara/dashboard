@@ -6,6 +6,7 @@ import EndpointsView from './components/EndpointsView';
 import IngestModal from './components/IngestModal';
 import TestRunsView from './components/TestRunsView';
 import IncidentView from './components/IncidentView';
+import ProjectDetailView from './components/ProjectDetailView';
 
 import PerformanceReportView from './components/PerformanceReportView';
 
@@ -34,11 +35,18 @@ const App: React.FC = () => {
         return <TestRunsView
           refreshKey={refreshKey}
           initialProject={navigationState?.project}
+          onNavigate={handleNavigate}
         />;
       case 'incidents':
         return <IncidentView
           refreshKey={refreshKey}
           initialProject={navigationState?.project}
+        />;
+      case 'project-report':
+        return <ProjectDetailView
+          projectName={navigationState?.project}
+          initialRuns={navigationState?.runs}
+          onBack={() => handleNavigate('runs', { project: navigationState?.project })}
         />;
       case 'performance-report':
         return <PerformanceReportView
