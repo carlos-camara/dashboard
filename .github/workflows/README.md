@@ -64,9 +64,9 @@ The flagship validation process. It spins up a temporary instance of the entire 
 - **Environment**: Ubuntu Latest, Node.js 20, Python 3.11.
 - **Services**: Frontend (Vite) + Backend (Node/Express).
 - **Validation Layers**:
-    - **API**: Behave-driven smoke tests.
-    - **Performance**: High-density audit dossiers.
-    - **GUI**: Selenium-based interaction flows.
+  - **API**: Behave-driven smoke tests.
+  - **Performance**: High-density audit dossiers.
+  - **GUI**: Selenium-based interaction flows.
 
 ### 📦 Upload Test Results
 A critical reactive pipeline that ensures our local `reports/` folder is always synchronized with the latest CI execution.
