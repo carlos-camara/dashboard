@@ -12,6 +12,7 @@ import {
     ResponsiveContainer, PieChart as RePieChart, Pie, Cell, Legend,
     BarChart, Bar
 } from 'recharts';
+import html2canvas from 'html2canvas';
 import { generateProjectDossier } from '../services/reportGenerator';
 import RunDetailView from './RunDetailView';
 import Pagination from './Pagination';
@@ -28,6 +29,10 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ projectName, init
     const [page, setPage] = useState(1);
     const [selectedRun, setSelectedRun] = useState<ExecutionRun | null>(null);
     const RUNS_PER_PAGE = 8;
+
+    // Print Refs
+    const printTrendRef = React.useRef<HTMLDivElement>(null);
+    const printDistRef = React.useRef<HTMLDivElement>(null);
 
     // ... (useEffect and everything else stays same)
 
@@ -197,9 +202,38 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ projectName, init
         }
     };
 
-    const handleExportReport = () => {
+    const handleExportReport = async () => {
         if (!runs.length) return;
-        generateProjectDossier(projectName, stats, runs);
+
+        let trendImage = '';
+        let distributionImage = '';
+
+        const captureOptions = {
+            backgroundColor: '#020617', // Match slate-950
+            scale: 2,
+            logging: false
+        };
+
+        try {
+            if (printTrendRef.current) {
+                const canvas = await html2canvas(printTrendRef.current, captureOptions);
+                trendImage = canvas.toDataURL('image/png');
+            }
+            if (printDistRef.current) {
+                const canvas = await html2canvas(printDistRef.current, captureOptions);
+                distributionImage = canvas.toDataURL('image/png');
+            }
+        } catch (e) {
+            console.error("Chart capture failed", e);
+        }
+
+        generateProjectDossier(
+            projectName,
+            stats,
+            runs,
+            { trend: trendImage, distribution: distributionImage },
+            trendData // Pass the raw data for deep analysis
+        );
     };
 
     const fetchProjectData = async () => {
@@ -564,7 +598,72 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ projectName, init
                 </div>
             </div>
 
-        </div>
+
+            <div className="fixed -left-[9999px] top-0 w-[1000px] h-[500px] pointer-events-none">
+                {/* Trend Print Chart */}
+                <div ref={printTrendRef} className="w-full h-full bg-slate-950 p-8 flex flex-col justify-center">
+                    <div className="flex items-center gap-3 mb-6 relative z-10 text-white">
+                        <TrendingUp size={32} className="text-emerald-500" />
+                        <h2 className="text-3xl font-black">EXECUTION VELOCITY & SUCCESS</h2>
+                    </div>
+                    <div className="w-full h-[350px]">
+                        <AreaChart width={900} height={350} data={trendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                            <defs>
+                                <linearGradient id="printColorPass" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.6} />
+                                    <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+                                </linearGradient>
+                                <linearGradient id="printColorFail" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="#f43f5e" stopOpacity={0.6} />
+                                    <stop offset="95%" stopColor="#f43f5e" stopOpacity={0} />
+                                </linearGradient>
+                            </defs>
+                            <CartesianGrid strokeDasharray="3 3" stroke="#334155" opacity={0.5} vertical={false} />
+                            <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 14, fontWeight: 700 }} dy={10} />
+                            <YAxis axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 14, fontWeight: 700 }} />
+                            <Area type="monotone" dataKey="pass" stroke="#10b981" fillOpacity={1} fill="url(#printColorPass)" strokeWidth={4} isAnimationActive={false} dot={{ r: 5, fill: '#059669', stroke: '#fff', strokeWidth: 2 }} />
+                            <Area type="monotone" dataKey="fail" stroke="#f43f5e" fillOpacity={1} fill="url(#printColorFail)" strokeWidth={4} isAnimationActive={false} dot={{ r: 5, fill: '#e11d48', stroke: '#fff', strokeWidth: 2 }} />
+                        </AreaChart>
+                    </div>
+                </div>
+
+                {/* Distribution Print Chart */}
+                <div ref={printDistRef} className="w-full h-full bg-slate-950 p-8 flex flex-col items-center justify-center mt-20">
+                    <div className="flex items-center gap-3 mb-6 text-white self-start w-full">
+                        <PieChart size={32} className="text-indigo-500" />
+                        <h2 className="text-3xl font-black">TEST SUITE COMPOSITION</h2>
+                    </div>
+                    <div className="w-[800px] h-[400px] flex items-center justify-center relative">
+                        <RePieChart width={800} height={400}>
+                            <Pie
+                                data={typeData}
+                                cx="50%"
+                                cy="50%"
+                                innerRadius={100}
+                                outerRadius={160}
+                                paddingAngle={5}
+                                dataKey="value"
+                                stroke="none"
+                                isAnimationActive={false}
+                            >
+                                {typeData.map((entry, index) => (
+                                    <Cell key={`cell-${index}`} fill={entry.color} />
+                                ))}
+                            </Pie>
+                            <Legend verticalAlign="bottom" height={36} iconType="circle" wrapperStyle={{ fontSize: '18px', fontWeight: 'bold', color: '#cbd5e1' }} />
+                        </RePieChart>
+                        {/* Center Text Overlay */}
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none pb-8">
+                            <div className="text-center">
+                                <p className="text-xl font-bold text-slate-500 uppercase tracking-widest">Total</p>
+                                <p className="text-7xl font-black text-white">{runs.length}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div >
     );
 };
 
