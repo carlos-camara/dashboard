@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { api } from '../services/api';
 import { ExecutionRun, Scenario, TestStatus } from '../types';
 import { ChevronLeft, CheckCircle2, XCircle, Clock, Globe, Activity, ChevronDown, Terminal, Database, Code, Brackets, Tag, AlertCircle, FileDown, Loader2, PlayCircle, Cpu, Zap, Filter, Calendar } from 'lucide-react';
-import { pdfGenerator } from '../services/PdfGeneratorService';
+import { generateRunDossier } from '../services/reportGenerator';
 
 interface RunDetailViewProps {
   run: ExecutionRun;
@@ -90,18 +90,10 @@ const RunDetailView: React.FC<RunDetailViewProps> = ({ run, onBack }) => {
     setIsExporting(true);
 
     try {
-      const pdfBytes = await pdfGenerator.generateRunDossier(run, scenarios);
-      const blob = new Blob([pdfBytes as any], { type: 'application/pdf' });
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `Dossier_${run.project}_${new Date().toISOString().split('T')[0]}.pdf`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      generateRunDossier(run, scenarios);
     } catch (err) {
       console.error("Run PDF Export failed", err);
-      alert("Failed to generate PDF dossier.");
+      // Optional: Add toast notification here
     } finally {
       setIsExporting(false);
     }
