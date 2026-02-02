@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy to GitHub Pages
-        uses: ./.github/actions/deploy-gh-pages
+        uses: carlos-camara/qa-hub-actions/deploy-gh-pages@main
         with:
           install-command: 'npm install' # Workflow used 'npm install' not ci
           vite-api-url: ${{ secrets.VITE_API_URL }}

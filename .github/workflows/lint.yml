@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0
 
       - name: Lint Codebase Standard
-        uses: ./.github/actions/lint-codebase
+        uses: carlos-camara/qa-hub-actions/lint-codebase@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           default-branch: ${{ github.event.repository.default_branch }}

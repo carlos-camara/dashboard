@@ -28,7 +28,7 @@ jobs:
           ref: ${{ github.event.workflow_run.head_branch || github.ref_name }}
 
       - name: Publish Results to Repo
-        uses: ./.github/actions/upload-results
+        uses: carlos-camara/qa-hub-actions/upload-results@main
         with:
           run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
           branch: ${{ github.event.workflow_run.head_branch || github.ref_name }}
