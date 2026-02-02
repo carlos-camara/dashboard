@@ -23,13 +23,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Environment
-        uses: ./.github/actions/setup-environment
+        uses: carlos-camara/qa-hub-actions/setup-environment@main
         with:
           python-version: "3.11"
           node-version: "20"
 
       - name: Execute Test Suite
-        uses: ./.github/actions/run-tests
+        uses: carlos-camara/qa-hub-actions/run-tests@main
         with:
           start-services-command: "npm run start-backend > backend.log 2>&1 & npm run dev > frontend.log 2>&1 &"
           health-check-urls: "http://localhost:3000 http://localhost:3001/api/health"
@@ -43,7 +43,7 @@ jobs:
 
       - name: Collect & Publish
         if: always()
-        uses: ./.github/actions/collect-and-publish
+        uses: carlos-camara/qa-hub-actions/collect-and-publish@main
         with:
           api-reports-path: "api_reports_tmp/"
           gui-reports-path: "reports/"
