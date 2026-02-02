@@ -11,7 +11,7 @@ import {
   Terminal, Radio, Signal, CheckCircle2, AlertTriangle, Monitor,
   LayoutDashboard, ChevronRight
 } from 'lucide-react';
-import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 import { generateExecutiveReport } from '../services/reportGenerator';
 
 interface DashboardViewProps {
@@ -31,6 +31,8 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
   const [systemStatus, setSystemStatus] = useState<string>("SYSTEM OPTIMAL");
 
   const dashboardRef = useRef<HTMLDivElement>(null);
+  const printStabilityRef = useRef<HTMLDivElement>(null);
+  const printVolumeRef = useRef<HTMLDivElement>(null);
 
   const fetchData = async (silent = false) => {
     if (!silent) setStats(null);
@@ -117,6 +119,26 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
     if (!stats) return;
     setIsExporting(true);
     try {
+      // Capture the charts
+      let velocityImage = '';
+      let volumeImage = '';
+
+      const captureOptions = {
+        backgroundColor: '#020617',
+        scale: 2,
+        logging: false
+      };
+
+      if (printStabilityRef.current) {
+        const canvas = await html2canvas(printStabilityRef.current, captureOptions);
+        velocityImage = canvas.toDataURL('image/png');
+      }
+
+      if (printVolumeRef.current) {
+        const canvas = await html2canvas(printVolumeRef.current, captureOptions);
+        volumeImage = canvas.toDataURL('image/png');
+      }
+
       // Use the professional report generator
       generateExecutiveReport(
         stats,
@@ -124,7 +146,9 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
         endpoints,
         projectHealthData,
         topErrors,
-        slowestEndpoints
+        slowestEndpoints,
+        timeline,
+        { velocity: velocityImage, volume: volumeImage }
       );
     } catch (err) {
       console.error("Professional report generation failed:", err);
@@ -441,6 +465,53 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
       `}</style>
+
+      {/* Hidden Print Stage (Off-screen but rendered for high-res capture) */}
+      <div className="fixed -left-[9999px] top-0 w-[1200px] h-[400px] pointer-events-none">
+        {/* Stability Print Chart */}
+        <div ref={printStabilityRef} className="w-full h-full bg-slate-950 p-8">
+          <div className="flex items-center gap-3 mb-4 text-white">
+            <Activity size={32} className="text-indigo-500" />
+            <h2 className="text-3xl font-black">SIGNAL VELOCITY // STABILITY</h2>
+          </div>
+          <div className="w-full h-[300px]">
+            <AreaChart width={1100} height={300} data={timeline} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+              <defs>
+                <linearGradient id="printVelocityGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#a78bfa" stopOpacity={0.5} />
+                  <stop offset="100%" stopColor="#8b5cf6" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" stroke="#334155" opacity={0.5} vertical={false} />
+              <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 14, fontWeight: 700 }} dy={10} />
+              <YAxis axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 14, fontWeight: 700 }} />
+              <Area type="monotone" dataKey="pass" stroke="#a78bfa" strokeWidth={4} fill="url(#printVelocityGradient)" isAnimationActive={false} dot={{ r: 6, fill: '#8b5cf6', stroke: '#fff', strokeWidth: 2 }} />
+            </AreaChart>
+          </div>
+        </div>
+
+        {/* Volume Print Chart */}
+        <div ref={printVolumeRef} className="w-full h-full bg-slate-950 p-8 mt-20">
+          <div className="flex items-center gap-3 mb-4 text-white">
+            <TrendingUp size={32} className="text-indigo-500" />
+            <h2 className="text-3xl font-black">SIGNAL VELOCITY // LOAD VOLUME</h2>
+          </div>
+          <div className="w-full h-[300px]">
+            <AreaChart width={1100} height={300} data={timeline} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+              <defs>
+                <linearGradient id="printVolumeGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#6366f1" stopOpacity={0.5} />
+                  <stop offset="100%" stopColor="#4338ca" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" stroke="#334155" opacity={0.5} vertical={false} />
+              <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 14, fontWeight: 700 }} dy={10} />
+              <YAxis axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 14, fontWeight: 700 }} />
+              <Area type="monotone" dataKey="total" stroke="#6366f1" strokeWidth={4} fill="url(#printVolumeGradient)" isAnimationActive={false} dot={{ r: 6, fill: '#4338ca', stroke: '#fff', strokeWidth: 2 }} />
+            </AreaChart>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

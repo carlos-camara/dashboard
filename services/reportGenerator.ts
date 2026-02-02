@@ -1,6 +1,5 @@
-
 import { jsPDF } from 'jspdf';
-import { DashboardStats, ExecutionRun, Endpoint } from '../types';
+import { DashboardStats, ExecutionRun, Endpoint, TimelineData } from '../types';
 
 export const generateExecutiveReport = (
     stats: DashboardStats,
@@ -8,7 +7,9 @@ export const generateExecutiveReport = (
     endpoints: Endpoint[],
     projectHealth: any[],
     topErrors: any[],
-    slowestEndpoints: any[]
+    slowestEndpoints: any[],
+    timeline: TimelineData[] = [],
+    charts: { velocity?: string, volume?: string } = {}
 ) => {
     const pdf = new jsPDF('p', 'mm', 'a4');
 
@@ -46,6 +47,63 @@ export const generateExecutiveReport = (
             suggested: 'Rerun the suite to verify reproducibility or check integration logs.'
         };
     };
+
+    const generateDeepAnalysis = (data: TimelineData[]) => {
+        if (!data || data.length < 2) return {
+            trend: "Insufficient Data",
+            stability: "Unknown",
+            correlation: "N/A"
+        };
+
+        const totalPass = data.reduce((acc, d) => acc + d.pass, 0);
+        const totalRuns = data.reduce((acc, d) => acc + d.total, 0);
+        const avgPassRate = totalRuns > 0 ? (totalPass / totalRuns) : 0;
+
+        // Volatility Calculation (Standard Deviation of Volume)
+        const avgVol = totalRuns / data.length;
+        const variance = data.reduce((acc, d) => acc + Math.pow(d.total - avgVol, 2), 0) / data.length;
+        const stdDev = Math.sqrt(variance);
+        const volatilityIndex = stdDev / (avgVol || 1); // Normalized
+
+        // Trend Regression (Slope)
+        let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
+        const n = data.length;
+        data.forEach((d, i) => {
+            sumX += i;
+            sumY += d.total;
+            sumXY += i * d.total;
+            sumXX += i * i;
+        });
+        const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+
+        // Load vs Quality Correlation
+        // If Volume increases and Pass Rate decreases -> Fragile under load
+        // Simple heuristic: compare high volume days vs low volume days pass rates
+        const highLoadDays = data.filter(d => d.total > avgVol);
+        const lowLoadDays = data.filter(d => d.total <= avgVol);
+
+        const highLoadPassRate = highLoadDays.reduce((acc, d) => acc + d.pass, 0) / (highLoadDays.reduce((acc, d) => acc + d.total, 0) || 1);
+        const lowLoadPassRate = lowLoadDays.reduce((acc, d) => acc + d.pass, 0) / (lowLoadDays.reduce((acc, d) => acc + d.total, 0) || 1);
+
+        let resilienceStatus = "SCALABLE"; // Default
+        if (highLoadDays.length > 0 && (lowLoadPassRate - highLoadPassRate) > 0.1) {
+            resilienceStatus = "FRAGILE UNDER LOAD";
+        } else if (volatilityIndex > 0.5) {
+            resilienceStatus = "HIGHLY VOLATILE";
+        }
+
+        return {
+            trend: slope > 0.5 ? "ACCELERATING" : slope < -0.5 ? "DECELERATING" : "STABLE",
+            stability: volatilityIndex < 0.2 ? "HIGH" : volatilityIndex < 0.5 ? "MODERATE" : "LOW",
+            correlation: resilienceStatus,
+            metrics: {
+                avgVolume: Math.round(avgVol),
+                peakVolume: Math.max(...data.map(d => d.total)),
+                loadImpact: (lowLoadPassRate - highLoadPassRate)
+            }
+        };
+    };
+
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
     const margin = 20;
@@ -139,7 +197,110 @@ export const generateExecutiveReport = (
         currentY += 10;
     });
 
-    // --- PAGE 3: RISK ASSESSMENT ---
+    // --- PAGE 3: VISUAL TELEMETRY (DEEP ANALYTICS) ---
+    if ((charts.velocity || charts.volume) && timeline.length > 0) {
+        pdf.addPage();
+        addHeader('Visual Telemetry & Trend Analysis', 30);
+
+        // Deep Analysis
+        const analytics = generateDeepAnalysis(timeline);
+
+        // Render KPI Box
+        pdf.setFillColor(248, 250, 252);
+        pdf.setDrawColor(226, 232, 240);
+        pdf.roundedRect(margin, 40, pageWidth - (margin * 2), 25, 3, 3, 'FD');
+
+        const kpiY = 56;
+        const boxWidth = pageWidth - (margin * 2);
+
+        // KPI 1: Trend
+        pdf.setFontSize(8);
+        pdf.setTextColor(100, 116, 139);
+        pdf.text('VELOCITY TREND', margin + 10, kpiY - 8);
+        pdf.setFontSize(12);
+        pdf.setTextColor(15, 23, 42);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text(analytics.trend, margin + 10, kpiY);
+
+        // KPI 2: Stability
+        pdf.setFontSize(8);
+        pdf.setTextColor(100, 116, 139);
+        pdf.setFont('helvetica', 'normal');
+        pdf.text('VOLATILITY INDEX', margin + 60, kpiY - 8);
+        pdf.setFontSize(12);
+        const stabilityColor = analytics.stability === "HIGH" ? [16, 185, 129] : [245, 158, 11];
+        pdf.setTextColor(stabilityColor[0], stabilityColor[1], stabilityColor[2]);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text(analytics.stability, margin + 60, kpiY);
+
+        // KPI 3: Correlation
+        pdf.setFontSize(8);
+        pdf.setTextColor(100, 116, 139);
+        pdf.setFont('helvetica', 'normal');
+        pdf.text('LOAD RESILIENCE', margin + 110, kpiY - 8);
+        pdf.setFontSize(12);
+        const resilienceColor = analytics.correlation === "SCALABLE" ? [16, 185, 129] : [244, 63, 94];
+        pdf.setTextColor(resilienceColor[0], resilienceColor[1], resilienceColor[2]);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text(analytics.correlation, margin + 110, kpiY);
+
+        currentY = 75;
+
+        // Render Charts
+        const renderChartBlock = (title: string, img: string | undefined, caption: string) => {
+            if (!img) return;
+
+            try {
+                const imgProps = pdf.getImageProperties(img);
+                const pdfImgWidth = pageWidth - (margin * 2);
+                const pdfImgHeight = (imgProps.height * pdfImgWidth) / imgProps.width;
+
+                // Title
+                pdf.setFontSize(10);
+                pdf.setTextColor(15, 23, 42);
+                pdf.setFont('helvetica', 'bold');
+                pdf.text(title, margin, currentY);
+
+                // Image
+                pdf.addImage(img, 'PNG', margin, currentY + 5, pdfImgWidth, pdfImgHeight);
+
+                // Caption
+                currentY += pdfImgHeight + 10;
+                pdf.setFontSize(8);
+                pdf.setTextColor(148, 163, 184); // Slate 400
+                pdf.setFont('helvetica', 'italic');
+                pdf.text(caption, margin, currentY);
+
+                currentY += 15;
+            } catch (e) {
+                console.warn("Failed to embed chart image", e);
+            }
+        };
+
+        if (charts.velocity) {
+            renderChartBlock(
+                'Velocity & Stability Composite',
+                charts.velocity,
+                `Figure 1.A: 7-Day execution stability. The system demonstrates ${analytics.trend.toLowerCase()} output with ${analytics.metrics.peakVolume} peak actions.`
+            );
+        }
+
+        // Check if we need new page for Volume chart
+        if (currentY > pageHeight - 80 && charts.volume) {
+            pdf.addPage();
+            currentY = margin + 10;
+        }
+
+        if (charts.volume) {
+            renderChartBlock(
+                'Load Volume Distribution',
+                charts.volume,
+                `Figure 1.B: System load distribution. Correlation analysis indicates the system is ${analytics.correlation.toLowerCase()}.`
+            );
+        }
+    }
+
+    // --- PAGE 4: RISK ASSESSMENT ---
     pdf.addPage();
     addHeader('Risk Heatmap & Incident Taxonomy', 30);
 
