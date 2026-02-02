@@ -9,6 +9,7 @@ const { Parser } = xml2js;
 import dotenv from 'dotenv';
 import multer from 'multer';
 import yaml from 'js-yaml';
+import { S3Client, ListObjectsV2Command, GetObjectCommand } from "@aws-sdk/client-s3";
 
 dotenv.config();
 
@@ -554,7 +555,93 @@ app.get("/api/debug", (req, res) => {
     });
 });
 
+async function syncFromS3() {
+    const bucketName = process.env.AWS_S3_BUCKET;
+    const region = process.env.AWS_REGION || 'us-east-1';
+    const projectName = "dashboard";
+
+    console.log(`[S3 Sync] Environment Check - BUCKET: ${bucketName || 'MISSING'}, REGION: ${region}, KEY_ID: ${process.env.AWS_ACCESS_KEY_ID ? 'PRESENT' : 'MISSING'}`);
+
+    if (!bucketName || !process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
+        console.warn("[S3 Sync] Missing AWS credentials or bucket name. Skipping S3 sync.");
+        return;
+    }
+
+    const s3Client = new S3Client({
+        region,
+        credentials: {
+            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+        }
+    });
+
+    try {
+        console.log(`[S3 Sync] Authenticated. Listing s3://${bucketName}/${projectName}/reports/...`);
+
+        let continuationToken = undefined;
+        let downloadedCount = 0;
+
+        do {
+            const listCommand = new ListObjectsV2Command({
+                Bucket: bucketName,
+                Prefix: `${projectName}/reports/`,
+                ContinuationToken: continuationToken
+            });
+
+            const listedObjects = await s3Client.send(listCommand);
+
+            if (listedObjects.Contents) {
+                for (const object of listedObjects.Contents) {
+                    const s3Key = object.Key;
+                    if (s3Key.endsWith('/')) continue; // Skip directory markers
+
+                    const relativePath = s3Key.replace(`${projectName}/`, "");
+                    const localPath = path.join(__dirname, relativePath);
+
+                    if (fs.existsSync(localPath)) continue;
+
+                    console.log(`[S3 Sync] Downloading ${s3Key} -> ${localPath}`);
+                    const getCommand = new GetObjectCommand({
+                        Bucket: bucketName,
+                        Key: s3Key
+                    });
+
+                    const response = await s3Client.send(getCommand);
+                    const parentDir = path.dirname(localPath);
+                    if (!fs.existsSync(parentDir)) {
+                        fs.mkdirSync(parentDir, { recursive: true });
+                    }
+
+                    const bodyStream = response.Body;
+                    const writer = fs.createWriteStream(localPath);
+                    await new Promise((resolve, reject) => {
+                        if (!bodyStream) return reject("No body stream");
+                        // @ts-ignore
+                        bodyStream.pipe(writer);
+                        writer.on('finish', resolve);
+                        writer.on('error', reject);
+                    });
+                    downloadedCount++;
+                }
+            }
+            continuationToken = listedObjects.NextContinuationToken;
+        } while (continuationToken);
+
+        if (downloadedCount > 0) {
+            console.log(`[S3 Sync] Successfully downloaded ${downloadedCount} new files.`);
+        } else {
+            console.log("[S3 Sync] Already up to date.");
+        }
+    } catch (err) {
+        console.error("[S3 Sync] Error during S3 synchronization:", err);
+    }
+}
+
 app.post("/api/sync", async (req, res) => {
+    // 1. Sync from S3 first
+    await syncFromS3();
+
+    // 2. Original sync logic
     const reportsPath = req.query.reports_path || REPORTS_DIR;
     const targetDir = path.isAbsolute(reportsPath) ? reportsPath : path.join(__dirname, reportsPath);
 
@@ -703,15 +790,19 @@ app.post("/api/spec", upload.single('file'), (req, res) => {
 
 // Auto-sync function to run on startup
 async function autoSyncOnStartup() {
+    // 1. Sync from Cloud
+    await syncFromS3();
+
+    // 2. Scan Local
     const targetDir = path.join(__dirname, REPORTS_DIR);
     if (!fs.existsSync(targetDir)) return;
 
-    console.log(`[Auto - Sync] Scanning for reports in ${targetDir}...`);
+    console.log(`[Auto-Sync] Scanning for reports in ${targetDir}...`);
     const folders = fs.readdirSync(targetDir).filter(f => fs.statSync(path.join(targetDir, f)).isDirectory());
     for (const folder of folders) {
         await parseRunFolder(path.join(targetDir, folder));
     }
-    console.log(`[Auto - Sync] Sync complete.Processed ${folders.length} folders.`);
+    console.log(`[Auto-Sync] Sync complete. Processed ${folders.length} folders.`);
 }
 
 const REPORTS_PERF_DIR = path.join("reports", "performance_run");

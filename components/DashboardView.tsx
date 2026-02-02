@@ -110,9 +110,21 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
 
   const handleSync = async () => {
     setIsSyncing(true);
-    const result = await api.syncReports();
-    if (result.newRuns > 0) fetchData(true);
-    setTimeout(() => setIsSyncing(false), 1500);
+    setSystemStatus("SYNCHRONIZING CLOUD DATA...");
+
+    try {
+      const result = await api.syncReports();
+      if (result.newRuns > 0) {
+        await fetchData(true);
+        setSystemStatus(`${result.newRuns} NEW EXECUTIONS DISCOVERED`);
+      } else {
+        setSystemStatus("CLOUD DATA SYNCHRONIZED - NO NEW RUNS");
+      }
+    } catch (err) {
+      setSystemStatus("S3 SYNCHRONIZATION ERROR - CHECK CREDENTIALS");
+    } finally {
+      setTimeout(() => setIsSyncing(false), 2000);
+    }
   };
 
   const handleExportPDF = async () => {

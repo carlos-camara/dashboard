@@ -1,0 +1,182 @@
+<testsuite name="dashboard.gui.gui_dashboard.Dashboard View Validation" tests="8" errors="0" failures="0" skipped="0" time="31.255065" timestamp="2026-02-02T18:21:07.714323" hostname="runnervmkj6or"><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Header and Status Ticker" status="passed" time="3.549374"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Header and Status Ticker
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.112s
+    When I wait for 2 seconds ... passed in 2.000s
+    Then the page title should be "QA Hub - Execution Dashboard" ... passed in 0.009s
+    And I should see the text "Dashboard Cluster" ... passed in 0.067s
+    And the system status should be valid ... passed in 0.031s
+    Then I take a screenshot named "dashboard_header_status" ... passed in 0.330s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_header_status
+   Location: features/resources/screenshots/dashboard_header_status.png
+   <img src='file:///features/resources/screenshots/dashboard_header_status.png' width='800' alt='dashboard_header_status' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Statistics Cards" status="passed" time="2.578105"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Statistics Cards
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.340s
+    When I wait for 2 seconds ... passed in 2.000s
+    Then I should see the text "System Health" ... passed in 0.028s
+    And I should see the text "Total Executions" ... passed in 0.021s
+    And I should see the text "Pass Rate" ... passed in 0.027s
+    And I should see the text "Avg Latency" ... passed in 0.027s
+    Then I take a screenshot of the "stats grid" named "dashboard_stats_grid" ... passed in 0.136s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_stats_grid
+   Location: features/resources/screenshots/dashboard_stats_grid.png
+   <img src='file:///features/resources/screenshots/dashboard_stats_grid.png' width='800' alt='dashboard_stats_grid' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Timeline Controls" status="passed" time="5.078579"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Timeline Controls
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.364s
+    When I wait for 2 seconds ... passed in 2.002s
+    Then I should see the text "Signal Velocity" ... passed in 0.029s
+    And I should see at least 1 elements with selector "chart" in "dashboard.timeline" ... passed in 0.022s
+    When I switch the chart view to "Volume" ... passed in 0.204s
+    And I wait for 1 seconds ... passed in 1.001s
+    Then I take a screenshot of the "chart" named "dashboard_chart_volume" ... passed in 0.152s
+    When I switch the chart view to "Success" ... passed in 0.139s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then I take a screenshot of the "chart" named "dashboard_chart_success" ... passed in 0.165s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_chart_volume
+   Location: features/resources/screenshots/dashboard_chart_volume.png
+   <img src='file:///features/resources/screenshots/dashboard_chart_volume.png' width='800' alt='dashboard_chart_volume' />
+
+[SCREENSHOT] dashboard_chart_success
+   Location: features/resources/screenshots/dashboard_chart_success.png
+   <img src='file:///features/resources/screenshots/dashboard_chart_success.png' width='800' alt='dashboard_chart_success' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Incident and Sector Lists" status="passed" time="2.615215"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Incident and Sector Lists
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.454s
+    When I wait for 2 seconds ... passed in 2.000s
+    Then I should see the text "Sector Integrity" ... passed in 0.033s
+    And I should see at least 1 elements with class "bg-slate-950/40" ... passed in 0.012s
+    Then I should see the text "Incident Taxonomy" ... passed in 0.025s
+    Then I take a screenshot of the "lists panel" named "dashboard_lists_panels" ... passed in 0.091s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_lists_panels
+   Location: features/resources/screenshots/dashboard_lists_panels.png
+   <img src='file:///features/resources/screenshots/dashboard_lists_panels.png' width='800' alt='dashboard_lists_panels' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Endpoints Catalog and Scroll" status="passed" time="4.073706"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Endpoints Catalog and Scroll
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.416s
+    When I wait for 2 seconds ... passed in 2.000s
+    When I scroll to the bottom of the page ... passed in 1.428s
+    Then I should see the text "Latency Anomalies" ... passed in 0.023s
+    Then I take a screenshot named "dashboard_bottom_fullpage" ... passed in 0.207s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_bottom_fullpage
+   Location: features/resources/screenshots/dashboard_bottom_fullpage.png
+   <img src='file:///features/resources/screenshots/dashboard_bottom_fullpage.png' width='800' alt='dashboard_bottom_fullpage' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Global Actions and Filters" status="passed" time="6.973767"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Global Actions and Filters
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.292s
+    When I wait for 2 seconds ... passed in 2.000s
+    When I apply the "7 Days" time filter ... passed in 0.076s
+    And I wait for 1 seconds ... passed in 1.000s
+    When I apply the "30 Days" time filter ... passed in 0.163s
+    And I wait for 1 seconds ... passed in 1.000s
+    When I export the report ... passed in 0.511s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then I take a screenshot named "dashboard_actions_log" ... passed in 0.931s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_actions_log
+   Location: features/resources/screenshots/dashboard_actions_log.png
+   <img src='file:///features/resources/screenshots/dashboard_actions_log.png' width='800' alt='dashboard_actions_log' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Mobile Viewport Layout" status="passed" time="2.626268"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @responsive @mobile
+  Scenario: Verify Mobile Viewport Layout
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.287s
+    When I wait for 2 seconds ... passed in 2.000s
+    Then I should see the text "Dashboard Cluster" ... passed in 0.025s
+    Then I take a screenshot named "dashboard_responsiveness" ... passed in 0.314s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] dashboard_responsiveness
+   Location: features/resources/screenshots/dashboard_responsiveness.png
+   <img src='file:///features/resources/screenshots/dashboard_responsiveness.png' width='800' alt='dashboard_responsiveness' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Navigation to Incident Taxonomy" status="passed" time="3.760051"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Navigation to Incident Taxonomy
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.250s
+    When I wait for 2 seconds ... passed in 2.000s
+    When I click on the "incidents_link" in the sidebar ... passed in 0.130s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then I should see the text "INCIDENT" ... passed in 0.024s
+    And I should see the text "TAXONOMY" ... passed in 0.024s
+    And I should see the text "Global Scope" ... passed in 0.020s
+    Then I take a screenshot named "incident_taxonomy_page" ... passed in 0.311s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] incident_taxonomy_page
+   Location: features/resources/screenshots/incident_taxonomy_page.png
+   <img src='file:///features/resources/screenshots/incident_taxonomy_page.png' width='800' alt='incident_taxonomy_page' />
+
+]]>
+</system-out></testcase></testsuite>
