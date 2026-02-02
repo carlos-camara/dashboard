@@ -2,7 +2,7 @@ name: Unified Test Suite
 
 on:
   pull_request:
-    branches: ["main"]
+    branches: ["devel"]
   workflow_dispatch:
 
 concurrency:

@@ -11,8 +11,11 @@ Our CI/CD pipeline is designed for high observability and rapid feedback. We lev
 ```mermaid
 graph TD
     %% Triggers
-    Start([Push / Pull Request]) style Start fill:#f9f,stroke:#333,stroke-width:4px
-    Manual([Workflow Dispatch]) style Manual fill:#f9f,stroke:#333,stroke-width:4px
+    Start([Push / Pull Request])
+    Manual([Workflow Dispatch])
+    
+    style Start fill:#f9f,stroke:#333,stroke-width:4px
+    style Manual fill:#f9f,stroke:#333,stroke-width:4px
 
     %% Main Workflows
     Lint["<b>🧹 Linting & Standards</b><br/>Super-Linter Cluster"]
