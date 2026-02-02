@@ -36,3 +36,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
           run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
+          upload-api: false

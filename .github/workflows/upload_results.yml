@@ -32,3 +32,4 @@ jobs:
         with:
           run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
           branch: ${{ github.event.workflow_run.head_branch || github.ref_name }}
+          upload-api: false
