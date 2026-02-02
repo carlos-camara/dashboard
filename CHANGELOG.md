@@ -26,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 ## [0.2.0] - 2026-02-02
-### 🚀 Added
+### 🚀 Features
 - **CI/CD Intelligence**: Integrated PR Auto-Labeler and Auto-Assigner for better workflow management.
 - **Reporting Persistence**: Consolidated report uploading and S3 archival workflows.
 

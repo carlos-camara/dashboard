@@ -14,7 +14,7 @@ The following versions of QA Hub are currently supported with security updates:
 We take the security of our project seriously. If you believe you have found a security vulnerability, please report it to us by:
 
 1. Opening a confidential issue on GitHub (if available).
-2. Sending an email to **carlos.camara@example.com**.
+2. Sending an email to **<carlos.camara@example.com>**.
 
 Please provide a detailed description of the vulnerability, steps to reproduce it, and any potential impact. We will acknowledge your report within 48 hours and provide a timeline for a fix if necessary.
 
