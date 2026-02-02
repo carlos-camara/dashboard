@@ -56,5 +56,5 @@ All GUI tests automatically capture evidence:
 
 ## 🧪 Step Registry
 GUI-specific steps are modularized for reusability:
-- [step_gui_validation.py](file:///c:/Users/Carlos/Desktop/test/dashboard/features/steps/step_gui_validation.py): Basic assertions (title, presence, text).
-- [step_gui_interactions.py](file:///c:/Users/Carlos/Desktop/test/dashboard/features/steps/step_gui_interactions.py): Clicks, hovers, scroll actions, and screenshot logic.
+- [step_gui_validation.py](../../../steps/step_gui_validation.py): Basic assertions (title, presence, text).
+- [step_gui_interactions.py](../../../steps/step_gui_interactions.py): Clicks, hovers, scroll actions, and screenshot logic.

@@ -69,6 +69,7 @@ pip install -r requirements.txt
    - Target the `main` or `devel` branch as specified in the issue.
    - Include screenshots or recordings for UI changes.
    - Link the PR to the relevant issue.
+   - **Note**: PRs are automatically labeled based on the files changed (e.g., `QA` for features, `DevOps` for workflows, `documentation` for .md files).
 
 ---
 

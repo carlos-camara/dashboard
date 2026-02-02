@@ -191,6 +191,7 @@ Our **GitHub Actions** pipeline orchestrates the entire lifecycle:
 1. **Linting**: Enforces strict code quality standards for Python and TypeScript.
 2. **Unified Suite**: Runs API and GUI tests in parallel within a headless environment.
 3. **Auto-Publishing**: Merges artifacts and deploys the frontend to GitHub Pages.
+4. **PR Intelligence**: Automated labeling and reviewer assignment for streamlined collaboration.
 
 > [!TIP]
 > Use the `workflow_dispatch` event to manually trigger a full suite validation from the GitHub UI.
