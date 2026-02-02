@@ -27,35 +27,25 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_branch || github.ref_name }}
 
-      - name: Download Test Reports
+      - name: Merge and Commit Results
+        uses: carlos-camara/qa-hub-actions/upload-results@main
+        with:
+          run-id: ${{ github.event.workflow_run.id || github.event.inputs.run_id }}
+          branch: ${{ github.event.workflow_run.head_branch || github.ref_name }}
+          upload-reports: 'true'
+          upload-perf: 'true'
+
+      - name: Download Artifacts for Summary
         uses: actions/download-artifact@v4
         with:
           name: test-reports
-          path: reports_for_upload
+          path: temp_junit
           github-token: ${{ github.token }}
-          run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
+          run-id: ${{ github.event.workflow_run.id || github.event.inputs.run_id }}
 
-      - name: Download GUI Screenshots
-        uses: actions/download-artifact@v4
-        with:
-          name: gui-screenshots
-          path: reports_for_upload/screenshots
-          github-token: ${{ github.token }}
-          run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
-
-      - name: Download Performance Reports
-        uses: actions/download-artifact@v4
-        with:
-          name: performance-reports
-          path: reports_for_upload/performance_run
-          github-token: ${{ github.token }}
-          run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
-
-      - name: Collect & Publish
+      - name: Publish Test Summary
         uses: carlos-camara/qa-hub-actions/collect-and-publish@main
         with:
-          reports-path: "reports_for_upload"
-          screenshots-path: "reports_for_upload/screenshots/*.png"
-          performance-reports-path: "reports_for_upload/performance_run/"
-          upload-artifacts: false # Already uploaded by main suite or S3 job
+          reports-path: "temp_junit"
+          upload-artifacts: false
           publish-results: true
