@@ -51,7 +51,7 @@ graph TD
 | :---: | :--- | :--- | :--- |
 | `🧹` | **[Lint Codebase](./lint.yml)** | Static analysis, YAML validation & formatting. | `qa-hub-actions/lint-codebase` |
 | `🛡️` | **[Unified Test Suite](./test_suite.yml)** | Multi-layer validation (API, Performance, GUI). | `qa-hub-actions` (Shared Suite) |
-| `📦` | **[Upload Results](./upload_results.yml)** | Synchronization of evidence and JUnit data. | `qa-hub-actions/upload-results` |
+| `📦` | **[Upload Results](./upload_results.yml)** | Aggregation of evidence and JUnit publishing. | `qa-hub-actions/collect-and-publish` |
 | `🌐` | **[Deploy Frontend](./deploy_frontend.yml)** | Production delivery to GitHub Pages. | `qa-hub-actions/deploy-gh-pages` |
 | `☁️` | **[Deploy Reports S3](./deploy_reports_s3.yml)** | Data persistence in AWS S3 infra. | `qa-hub-actions/deploy-reports-s3` |
 
@@ -69,10 +69,10 @@ The flagship validation process. It spins up a temporary instance of the entire 
   - **GUI**: Selenium-based interaction flows.
 
 ### 📦 Upload Test Results
-A critical reactive pipeline that ensures our local `reports/` folder is always synchronized with the latest CI execution.
+A reactive pipeline that ensures all test evidence and JUnit data are aggregated and published as a unified suite summary.
 - **Mechanism**: Triggered by `workflow_run` completion.
-- **Evidence**: Fetches screenshots, JUnit XMLs, and logs.
-- **Persistence**: Commits results back to the branch with a `[skip ci]` tag.
+- **Evidence**: Fetches screenshots, JUnit XMLs, and performance reports.
+- **Persistence**: Publishes the "Unified Test Report" summary back to the pull request.
 
 > [!CAUTION]
 > **Infinite Loop Guard**: The Upload Pipeline uses specialized Git tokens. Ensure `[skip ci]` remains in the commit message template to prevent recursive workflow triggers.
