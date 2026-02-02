@@ -1,4 +1,4 @@
-<testsuite name="dashboard.api.api_endpoints.Endpoints Discovery Validations" tests="2" errors="0" failures="0" skipped="0" time="0.011106" timestamp="2026-02-01T21:32:26.185157" hostname="runnervmkj6or"><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Retrieve Discovered Endpoints" status="passed" time="0.006249"><system-out>
+<testsuite name="dashboard.api.api_endpoints.Endpoints Discovery Validations" tests="2" errors="0" failures="0" skipped="0" time="0.011456" timestamp="2026-02-02T00:14:08.297613" hostname="runnervmkj6or"><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Retrieve Discovered Endpoints" status="passed" time="0.006764"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -20,14 +20,14 @@
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Verify Method Not Allowed (POST)" status="passed" time="0.004858"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_endpoints.Endpoints Discovery Validations" name="Verify Method Not Allowed (POST)" status="passed" time="0.004692"><system-out>
 <![CDATA[
 @scenario.begin
 
   @smoke @negative
   Scenario: Verify Method Not Allowed (POST)
     Given the API base URL is "http://localhost:3001" ... passed in 0.000s
-    When I send a "POST" request to "/api/endpoints" ... passed in 0.005s
+    When I send a "POST" request to "/api/endpoints" ... passed in 0.004s
     Then the response status code should be 404 ... passed in 0.000s
 
 @scenario.end
