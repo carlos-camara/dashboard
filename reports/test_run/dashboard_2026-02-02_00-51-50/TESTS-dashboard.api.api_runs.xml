@@ -1,0 +1,38 @@
+<testsuite name="dashboard.api.api_runs.Runs Endpoint Validations" tests="2" errors="0" failures="0" skipped="0" time="0.026495" timestamp="2026-02-02T01:06:11.991654" hostname="runnervmkj6or"><testcase classname="dashboard.api.api_runs.Runs Endpoint Validations" name="Upload, Verify, and Explore a Run" status="passed" time="0.023032"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke
+  Scenario: Upload, Verify, and Explore a Run
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I upload the file "test_run_sample.xml" to "/api/upload" ... passed in 0.014s
+    Then the response status code should be 200 ... passed in 0.000s
+    And the response JSON path "success" should be true ... passed in 0.000s
+    And the response JSON path "totalCount" should be 1 ... passed in 0.000s
+    And I store the response JSON path "runId" as "uploaded_run_id" ... passed in 0.000s
+    When I send a "GET" request to "/api/runs" ... passed in 0.004s
+    Then the response status code should be 200 ... passed in 0.000s
+    And the response JSON path "0.id" should equal stored variable "uploaded_run_id" ... passed in 0.000s
+    And the response JSON path "0.totalCount" should be 1 ... passed in 0.000s
+    When I send a "GET" request to "/api/runs/${uploaded_run_id}/scenarios" ... passed in 0.004s
+    Then the response status code should be 200 ... passed in 0.000s
+    And the response JSON should not be empty ... passed in 0.000s
+    And the response JSON path "0.name" should be a "str" ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.api.api_runs.Runs Endpoint Validations" name="Get non-existent run" status="passed" time="0.003463"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke @negative
+  Scenario: Get non-existent run
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I send a "GET" request to "/api/runs/INVALID_RUN_ID" ... passed in 0.003s
+    Then the response status code should be 404 ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
