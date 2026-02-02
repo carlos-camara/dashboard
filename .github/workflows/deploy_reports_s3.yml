@@ -1,0 +1,72 @@
+name: Deploy Reports to S3
+
+on:
+  workflow_run:
+    workflows: ["Unified Test Suite"]
+    types:
+      - completed
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: 'Run ID of the Unified Test Suite to process'
+        required: false
+        type: string
+
+jobs:
+  deploy-s3:
+    name: Sync Reports to S3
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'workflow_dispatch' || 
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+    permissions:
+      contents: read
+      id-token: write # Required for AWS OIDC if we ever upgrade, but good practice
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download API Reports
+        uses: actions/download-artifact@v4
+        with:
+          name: api-reports
+          path: reports_to_upload/api
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
+
+      - name: Download GUI Reports
+        uses: actions/download-artifact@v4
+        with:
+          name: gui-reports
+          path: reports_to_upload/gui
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
+
+      - name: Download GUI Screenshots
+        uses: actions/download-artifact@v4
+        with:
+          name: gui-screenshots
+          path: reports_to_upload/screenshots
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
+
+      - name: Download Performance Reports
+        uses: actions/download-artifact@v4
+        with:
+          name: performance-reports
+          path: reports_to_upload/performance_run
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Sync to S3
+        run: |
+          echo "Deploying reports to s3://${{ secrets.AWS_S3_BUCKET }}/dashboard"
+          aws s3 sync ./reports_to_upload s3://${{ secrets.AWS_S3_BUCKET }}/dashboard --delete
