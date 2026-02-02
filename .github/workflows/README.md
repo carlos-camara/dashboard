@@ -54,6 +54,8 @@ graph TD
 | `📦` | **[Upload Results](./upload_results.yml)** | Aggregation of evidence and JUnit publishing. | `qa-hub-actions/collect-and-publish` |
 | `🌐` | **[Deploy Frontend](./deploy_frontend.yml)** | Production delivery to GitHub Pages. | `qa-hub-actions/deploy-gh-pages` |
 | `☁️` | **[Deploy Reports S3](./deploy_reports_s3.yml)** | Data persistence in AWS S3 infra. | `qa-hub-actions/deploy-reports-s3` |
+| `👤` | **[Auto Assign PR](./auto_assign.yml)** | Automated ownership assignment for PRs. | Native `gh` CLI |
+| `🏷️` | **[PR Labeler](./pr_labeler.yml)** | Automatic categorization based on file paths. | `actions/labeler` |
 
 ---
 
