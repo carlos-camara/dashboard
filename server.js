@@ -235,12 +235,17 @@ async function parseXmlContent(content, runId, projectName, discoveredTags, meta
     }
 
     let stats = { passed: 0, failed: 0, total: 0, duration: 0 };
-    let inferredProject = projectName !== "Auto-discovered" ? projectName : "";
+    let inferredProject = (projectName && projectName !== "Auto-discovered") ? projectName : "";
 
     // If suite has a meaningful name, use it as a candidate for project identification
-    const candidateName = suite.$.name || "";
-    if (!inferredProject && candidateName && !candidateName.toLowerCase().includes('suite')) {
-        inferredProject = candidateName;
+    const suiteName = suite.$.name || "";
+    if (!inferredProject && suiteName) {
+        // Map dashboard.gui, dashboard.api -> dashboard
+        if (suiteName.toLowerCase().startsWith('dashboard')) {
+            inferredProject = 'dashboard';
+        } else if (!suiteName.toLowerCase().includes('suite')) {
+            inferredProject = suiteName;
+        }
     }
 
     for (const tc of testcases) {
@@ -423,6 +428,13 @@ async function parseRunFolder(folderPath) {
     const discoveredTags = new Set(metadata.run_info?.tags || []);
     let projectName = metadata.run_info?.project || "Auto-discovered";
 
+    // Fallback to folder name hint if still Auto-discovered
+    if (projectName === "Auto-discovered") {
+        if (folderName.toLowerCase().includes('dashboard')) {
+            projectName = "dashboard";
+        }
+    }
+
     // Track earliest timestamp from XMLs
     let earliestTimestamp = new Date().toISOString();
     let isFirstFile = true;
@@ -438,8 +450,8 @@ async function parseRunFolder(folderPath) {
             totalRunDuration += stats.duration || 0;
 
             // Only update projectName if the inferred one is more specific (not empty/generic)
-            if (stats.inferredProject && stats.inferredProject !== "Auto-discovered") {
-                projectName = stats.inferredProject;
+            if (inferredProject && inferredProject !== "Auto-discovered") {
+                projectName = inferredProject;
             }
 
             if (timestamp) {
