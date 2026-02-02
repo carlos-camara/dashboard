@@ -84,4 +84,4 @@ runs:
       run: |
         echo "Deploying reports for project: ${{ inputs.project-name }}"
         echo "Target: s3://${{ inputs.s3-bucket }}/${{ inputs.project-name }}"
-        aws s3 sync ./reports_to_upload s3://${{ inputs.s3-bucket }}/${{ inputs.project-name }} --delete
+        aws s3 sync ./reports_to_upload s3://${{ inputs.s3-bucket }}/${{ inputs.project-name }}
