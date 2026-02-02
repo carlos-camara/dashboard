@@ -11,6 +11,21 @@ on:
         description: 'Run ID of the Unified Test Suite to process'
         required: false
         type: string
+      upload_reports:
+        description: 'Upload test reports (consolidated)?'
+        required: false
+        default: 'true'
+        type: string
+      upload_screenshots:
+        description: 'Upload GUI screenshots?'
+        required: false
+        default: 'true'
+        type: string
+      upload_perf:
+        description: 'Upload Performance reports?'
+        required: false
+        default: 'true'
+        type: string
 
 jobs:
   deploy-s3:
@@ -27,46 +42,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Download API Reports
-        uses: actions/download-artifact@v4
+      - name: Deploy QA Reports to S3
+        uses: carlos-camara/qa-hub-actions/deploy-reports-s3@main
         with:
-          name: api-reports
-          path: reports_to_upload/api
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
-
-      - name: Download GUI Reports
-        uses: actions/download-artifact@v4
-        with:
-          name: gui-reports
-          path: reports_to_upload/gui
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
-
-      - name: Download GUI Screenshots
-        uses: actions/download-artifact@v4
-        with:
-          name: gui-screenshots
-          path: reports_to_upload/screenshots
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
-
-      - name: Download Performance Reports
-        uses: actions/download-artifact@v4
-        with:
-          name: performance-reports
-          path: reports_to_upload/performance_run
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
+          project-name: "dashboard"
+          s3-bucket: ${{ secrets.AWS_S3_BUCKET }}
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-
-      - name: Sync to S3
-        run: |
-          echo "Deploying reports to s3://${{ secrets.AWS_S3_BUCKET }}/dashboard"
-          aws s3 sync ./reports_to_upload s3://${{ secrets.AWS_S3_BUCKET }}/dashboard --delete
+          run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
+          upload-reports: ${{ github.event.inputs.upload_reports || 'true' }}
+          upload-screenshots: ${{ github.event.inputs.upload_screenshots || 'true' }}
+          upload-perf: ${{ github.event.inputs.upload_perf || 'true' }}
