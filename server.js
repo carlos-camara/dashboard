@@ -235,12 +235,17 @@ async function parseXmlContent(content, runId, projectName, discoveredTags, meta
     }
 
     let stats = { passed: 0, failed: 0, total: 0, duration: 0 };
-    let inferredProject = projectName !== "Auto-discovered" ? projectName : "";
+    let inferredProject = (projectName && projectName !== "Auto-discovered") ? projectName : "";
 
     // If suite has a meaningful name, use it as a candidate for project identification
-    const candidateName = suite.$.name || "";
-    if (!inferredProject && candidateName && !candidateName.toLowerCase().includes('suite')) {
-        inferredProject = candidateName;
+    const suiteName = suite.$.name || "";
+    if (!inferredProject && suiteName) {
+        // Map dashboard.gui, dashboard.api -> dashboard
+        if (suiteName.toLowerCase().startsWith('dashboard')) {
+            inferredProject = 'dashboard';
+        } else if (!suiteName.toLowerCase().includes('suite')) {
+            inferredProject = suiteName;
+        }
     }
 
     for (const tc of testcases) {
@@ -364,7 +369,7 @@ async function parseXmlContent(content, runId, projectName, discoveredTags, meta
         if (endpointInfo && !scenarioTags.has('@negative')) {
             const { method, path: fullPath } = endpointInfo;
             const normPath = normalizePath(fullPath);
-            const epId = `${inferredProject} -${method} -${normPath} `;
+            const epId = `${inferredProject}-${method}-${normPath}`;
             const nowStr = suiteTimestamp; // Use suite timestamp
 
             db.prepare(`
@@ -387,7 +392,7 @@ async function parseXmlContent(content, runId, projectName, discoveredTags, meta
             INSERT INTO scenarios(id, run_id, name, status, error_message, duration, timestamp, raw_logs, tags, steps, feature_name, source_file)
     VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `).run(
-            `${runId} -${Date.now()} -${Math.random().toString(36).substr(2, 5)} `,
+            `${runId}-${Date.now()}-${Math.random().toString(36).substr(3, 5)}`,
             runId,
             tcName,
             status,
@@ -406,7 +411,7 @@ async function parseXmlContent(content, runId, projectName, discoveredTags, meta
 
 async function parseRunFolder(folderPath) {
     const folderName = path.basename(folderPath);
-    const runId = `RUN - ${folderName} `;
+    const runId = `RUN-${folderName}`;
 
     // Clear existing data for this run to allow re-parsing and enrichment
     db.prepare("DELETE FROM scenarios WHERE run_id = ?").run(runId);
@@ -423,6 +428,13 @@ async function parseRunFolder(folderPath) {
     const discoveredTags = new Set(metadata.run_info?.tags || []);
     let projectName = metadata.run_info?.project || "Auto-discovered";
 
+    // Fallback to folder name hint if still Auto-discovered
+    if (projectName === "Auto-discovered") {
+        if (folderName.toLowerCase().includes('dashboard')) {
+            projectName = "dashboard";
+        }
+    }
+
     // Track earliest timestamp from XMLs
     let earliestTimestamp = new Date().toISOString();
     let isFirstFile = true;
@@ -438,8 +450,8 @@ async function parseRunFolder(folderPath) {
             totalRunDuration += stats.duration || 0;
 
             // Only update projectName if the inferred one is more specific (not empty/generic)
-            if (stats.inferredProject && stats.inferredProject !== "Auto-discovered") {
-                projectName = stats.inferredProject;
+            if (inferredProject && inferredProject !== "Auto-discovered") {
+                projectName = inferredProject;
             }
 
             if (timestamp) {
@@ -471,7 +483,7 @@ app.post("/api/upload", upload.array('files'), async (req, res) => {
             return res.status(400).json({ error: "No files uploaded." });
         }
 
-        const runId = `UPLOAD - ${Date.now()} `;
+        const runId = `UPLOAD-${Date.now()}`;
         const discoveredTags = new Set();
         let projectName = "Auto-discovered";
         let totalPassed = 0, totalFailed = 0, totalCount = 0;
@@ -763,22 +775,35 @@ app.get("/api/performance/latest", (req, res) => {
             return res.json({ found: false, stats: [] });
         }
 
-        const latestFolder = validFolders[0];
+        let latestRunDir = null;
+        let statsFile = null;
+        let latestMatch = null;
 
-        const latestRunDir = path.join(perfDir, latestFolder.name);
-        const runFiles = fs.readdirSync(latestRunDir);
+        for (const folderItem of validFolders) {
+            const dir = path.join(perfDir, folderItem.name);
+            const files = fs.readdirSync(dir);
+            const foundStats = files.find(f => f.endsWith('_stats.csv'));
+            const foundHistory = files.find(f => f.endsWith('_stats_history.csv'));
 
-        // Look for _stats.csv (Locust default output)
-        const statsFile = runFiles.find(f => f.endsWith('_stats.csv'));
-        if (!statsFile) return res.json({ found: false, stats: [] });
+            if (foundStats && foundHistory) {
+                latestRunDir = dir;
+                statsFile = foundStats;
+                latestMatch = folderItem;
+                break;
+            }
+        }
+
+        if (!latestRunDir || !statsFile) {
+            return res.json({ found: false, stats: [] });
+        }
 
         const filePath = path.join(latestRunDir, statsFile);
 
         // Metadata from folder timestamp
         const latestFile = {
             name: statsFile,
-            time: latestFolder.time,
-            runDirName: latestFolder.name
+            time: latestMatch.time,
+            runDirName: latestMatch.name
         };
         const content = fs.readFileSync(filePath, 'utf8').replace(/^\uFEFF/, '');
         console.log(`[Perf Stats] Reading ${filePath}. Content Length: ${content.length} `);
@@ -799,7 +824,7 @@ app.get("/api/performance/latest", (req, res) => {
         let history = [];
         const historyPath = filePath.replace('_stats.csv', '_stats_history.csv');
         if (fs.existsSync(historyPath)) {
-            const hContent = fs.readFileSync(historyPath, 'utf8');
+            const hContent = fs.readFileSync(historyPath, 'utf8').replace(/^\uFEFF/, '');
             const hLines = hContent.split('\n').filter(l => l.trim().length > 0);
             if (hLines.length > 1) {
                 const hHeaders = hLines[0].replace(/"/g, '').split(',');
@@ -844,7 +869,7 @@ app.get("/api/performance/latest", (req, res) => {
         }
 
         const baseName = 'report.html';
-        const reportUrl = `/ reports / performance_run / ${latestFile.runDirName}/${baseName}`;
+        const reportUrl = `/reports/performance_run/${latestFile.runDirName}/${baseName}`;
 
         res.json({
             found: true,

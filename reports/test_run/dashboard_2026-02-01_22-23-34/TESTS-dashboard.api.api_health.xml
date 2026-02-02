@@ -1,4 +1,4 @@
-<testsuite name="dashboard.api.api_health.Health Endpoint Validations" tests="2" errors="0" failures="0" skipped="0" time="0.00809" timestamp="2026-02-01T21:32:26.196951" hostname="runnervmkj6or"><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="Health check returns 200 OK" status="passed" time="0.003791"><system-out>
+<testsuite name="dashboard.api.api_health.Health Endpoint Validations" tests="2" errors="0" failures="0" skipped="0" time="0.007274" timestamp="2026-02-02T00:14:08.308612" hostname="runnervmkj6or"><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="Health check returns 200 OK" status="passed" time="0.003807"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -14,14 +14,14 @@
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="METHOD NOT ALLOWED (POST)" status="passed" time="0.004299"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="METHOD NOT ALLOWED (POST)" status="passed" time="0.003467"><system-out>
 <![CDATA[
 @scenario.begin
 
   @smoke @negative
   Scenario: METHOD NOT ALLOWED (POST)
     Given the API base URL is "http://localhost:3001" ... passed in 0.000s
-    When I send a "POST" request to "/api/health" ... passed in 0.004s
+    When I send a "POST" request to "/api/health" ... passed in 0.003s
     Then the response status code should be 404 ... passed in 0.000s
 
 @scenario.end
