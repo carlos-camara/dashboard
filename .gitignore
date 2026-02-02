@@ -31,6 +31,5 @@ qa_hub.db*
 database.db
 
 # Reports and Uploads
-reports/
 uploads/*
 !uploads/.gitkeep
