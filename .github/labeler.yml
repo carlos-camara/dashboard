@@ -1,0 +1,19 @@
+DevOps:
+  - changed-files:
+    - any-glob-to-any-file: ".github/**/*"
+
+QA:
+  - changed-files:
+    - any-glob-to-any-file: ["features/**/*", "!**/screenshots/**/*"]
+
+documentation:
+  - changed-files:
+    - any-glob-to-any-file: ["**/*.md", "**/README*"]
+
+Frontend:
+  - changed-files:
+    - any-glob-to-any-file: "components/**/*"
+
+Backend:
+  - changed-files:
+    - any-glob-to-any-file: "services/**/*"
