@@ -10,22 +10,10 @@ def before_all(context):
     Configura Chrome en modo headless por defecto para CI (Jenkins).
     """
     headless = os.getenv("HEADLESS", "true").lower() == "true"
-
-    options = Options()
-    if headless:
-        # Headless moderno (Chrome)
-        options.add_argument("--headless=new")
-
-    # Recomendado para contenedores/CI
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-
-    # Extras útiles
-    options.add_argument("--window-size=1365,768")
-    options.add_argument("--disable-gpu")
-
-    context.driver = webdriver.Chrome(options=options)
-    context.driver.implicitly_wait(5)
+    
+    # Use generic driver factory from framework
+    from qa_framework.utils.driver import get_driver
+    context.driver = get_driver(headless=headless)
     
     # Initialize screenshots list and run timestamp
     context.screenshots = []

@@ -1,0 +1,27 @@
+<testsuite name="dashboard.gui.gui_navigation.Application Navigation Validation" tests="1" errors="0" failures="0" skipped="0" time="9.133221" timestamp="2026-02-03T11:02:57.874004" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Navigate to all main sections" status="passed" time="9.133221"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Navigate to all main sections
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.552s
+    And I wait for 2 seconds ... passed in 2.001s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.197s
+    And I wait for 1 seconds ... passed in 1.002s
+    Then I should see the text "Execution Archives" ... passed in 0.015s
+    Then I take a screenshot named "nav_test_runs" ... passed in 0.419s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.177s
+    And I wait for 1 seconds ... passed in 1.001s
+    Then I should see the text "Endpoint Catalog" ... passed in 0.017s
+    Then I take a screenshot named "nav_endpoints" ... passed in 0.395s
+    When I click on the "incidents_link" in the sidebar ... passed in 0.159s
+    And I wait for 1 seconds ... passed in 1.001s
+    Then I should see the text "Incident Taxonomy" ... passed in 0.017s
+    Then I take a screenshot named "nav_incidents" ... passed in 0.464s
+    When I click on the "dashboard_link" in the sidebar ... passed in 0.200s
+    And I wait for 1 seconds ... passed in 1.001s
+    Then I should see the text "Dashboard Cluster" ... passed in 0.018s
+    Then I take a screenshot named "nav_dashboard_return" ... passed in 0.497s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
