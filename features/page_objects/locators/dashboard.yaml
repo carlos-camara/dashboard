@@ -3,11 +3,11 @@ dashboard:
     title:
       type: text
       by: css
-      value: "h1" # "COMMAND\nCENTER"
+      value: "h1.font-black" # "COMMAND\nCENTER"
     subtitle:
       type: text
-      by: css
-      value: "header span.tracking-\\[0\\.2em\\]"
+      by: xpath
+      value: "//div[contains(@class, 'text-indigo-400')]//span[contains(., 'Dashboard Cluster')]"
     qa_hub_text:
       type: text
       by: css
@@ -17,23 +17,23 @@ dashboard:
     pass_rate:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'PASS RATE')]"
+      value: "//p[contains(text(), 'Pass Rate')]/ancestor::div[contains(@class, 'glass-panel')]//h3"
     total_runs:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'TOTAL EXECUTIONS')]"
+      value: "//p[contains(text(), 'Total Executions')]/ancestor::div[contains(@class, 'glass-panel')]//h3"
     avg_duration:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'AVG LATENCY')]"
+      value: "//p[contains(text(), 'Avg Latency')]/ancestor::div[contains(@class, 'glass-panel')]//h3"
     passed_card:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'SYSTEM HEALTH')]"
+      value: "//p[contains(text(), 'System Health')]/ancestor::div[contains(@class, 'glass-panel')]//h3"
     failed_card:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'INCIDENT TAXONOMY')]"
+      value: "//p[contains(text(), 'Incident Taxonomy')]/ancestor::div[contains(@class, 'glass-panel')]//h3"
 
   status_ticker:
     bar:
@@ -49,7 +49,7 @@ dashboard:
     heading:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'SIGNAL VELOCITY')]"
+      value: "//div[contains(@class, 'glass-panel')]//h3[contains(., 'Signal Velocity')]"
     chart:
       type: webelement
       by: css
@@ -67,7 +67,7 @@ dashboard:
     heading:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'SECTOR INTEGRITY')]"
+      value: "//h3[contains(., 'Sector Integrity')]"
     section:
       type: webelement
       by: xpath
@@ -85,7 +85,7 @@ dashboard:
     heading:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'INCIDENT TAXONOMY')]"
+      value: "//h3[contains(., 'Incident Taxonomy')]"
     list_item:
       type: webelement
       by: xpath
@@ -95,7 +95,7 @@ dashboard:
     heading:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'LATENCY ANOMALIES')]"
+      value: "//h3[contains(., 'Latency Anomalies')]"
     catalog:
       type: webelement
       by: xpath
