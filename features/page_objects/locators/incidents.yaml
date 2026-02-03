@@ -1,41 +1,37 @@
 incidents:
-  header:
-    title:
-      type: text
-      by: css
-      value: "main h1.font-black" # "INCIDENT\nTAXONOMY"
-    subtitle:
-      type: text
-      by: css
-      value: "main h1.font-black" # "INCIDENT\nTAXONOMY"
-  stats:
-    total_sign:
-      type: text
-      by: xpath
-      value: "//*[contains(normalize-space(.), 'Total Incidents')]"
-    sectors_sign:
-      type: text
-      by: xpath
-      value: "//*[contains(normalize-space(.), 'Affected Sectors')]"
-  filters:
-    scope_dropdown:
-      type: button
-      by: xpath
-      value: "//button[contains(., 'Global Scope')]"
-    project_item:
-      type: button
-      by: xpath
-      value: "//div[contains(@class, 'absolute')]//div[contains(@class, 'cursor-pointer')]"
-  list:
-    item:
-      type: webelement
-      by: xpath
-      value: "//div[contains(@class, 'glass-panel') and .//div[contains(@class, 'cursor-pointer')]]"
-    expand_button:
-      type: button
-      by: xpath
-      value: "//div[contains(@class, 'glass-panel')]//div[contains(@class, 'cursor-pointer')][1]"
-    details_context:
-      type: text
-      by: xpath
-      value: "//*[contains(normalize-space(.), 'Stack Trace Context')]"
+  header_title:
+    type: text
+    by: css
+    value: "main h1.font-black" # "INCIDENT\nTAXONOMY"
+  header_subtitle:
+    type: text
+    by: css
+    value: "main h1.font-black" # "INCIDENT\nTAXONOMY"
+  stats_total_sign:
+    type: text
+    by: xpath
+    value: "//*[contains(normalize-space(.), 'Total Incidents')]"
+  stats_sectors_sign:
+    type: text
+    by: xpath
+    value: "//*[contains(normalize-space(.), 'Affected Sectors')]"
+  filters_scope_dropdown:
+    type: button
+    by: xpath
+    value: "//button[contains(., 'Global Scope')]"
+  filters_project_item:
+    type: button
+    by: xpath
+    value: "//div[contains(@class, 'absolute')]//div[contains(@class, 'cursor-pointer')]"
+  list_item:
+    type: webelement
+    by: xpath
+    value: "//div[contains(@class, 'glass-panel') and .//div[contains(@class, 'cursor-pointer')]]"
+  list_expand_button:
+    type: button
+    by: xpath
+    value: "//div[contains(@class, 'glass-panel')]//div[contains(@class, 'cursor-pointer')][1]"
+  list_details_context:
+    type: text
+    by: xpath
+    value: "//*[contains(normalize-space(.), 'Stack Trace Context')]"

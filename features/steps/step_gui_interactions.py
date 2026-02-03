@@ -48,7 +48,10 @@ def step_apply_time_filter(context, filter_name):
             raise ValueError(f"Unknown filter: {filter_name}")
     else:
         element_name = filter_mapping[filter_name]
-    step_click_page_object(context, element_name, "dashboard.actions")
+    
+    # Use flattened locator name
+    element_name = f"actions_{element_name}"
+    step_click_page_object(context, element_name, "dashboard")
 
 
 @when('I switch the chart view to "{mode}"')
@@ -73,7 +76,10 @@ def step_switch_chart_mode(context, mode):
             
     if not mapping_found:
         raise ValueError(f"Unknown chart mode: {mode}")
-    step_click_page_object(context, element_name, "dashboard.timeline")
+    
+    # Use framework's generic step to click the toggle
+    element_name = f"timeline_{element_name}"
+    step_click_page_object(context, element_name, "dashboard")
 
 
 @then('the system status should be valid')
@@ -82,7 +88,7 @@ def step_verify_system_status_valid(context):
     # Get the status text using framework element
     from qa_framework.steps.gui_steps import get_element_from_page_object
     
-    element = get_element_from_page_object(context, "system_status", "dashboard.status_ticker")
+    element = get_element_from_page_object(context, "status_ticker_system_status", "dashboard")
     text = element.get_text()
     
     valid_statuses = [
@@ -98,7 +104,7 @@ def step_verify_system_status_valid(context):
 @when('I export the report')
 def step_export_report(context):
     """Click the export button in dashboard actions"""
-    step_click_page_object(context, "export_button", "dashboard.actions")
+    step_click_page_object(context, "actions_export_button", "dashboard")
 
 
 @then('I take a screenshot of the "{element_description}" named "{screenshot_name}"')

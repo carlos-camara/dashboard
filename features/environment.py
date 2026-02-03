@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.options import Options
 import base64
 from datetime import datetime
 from qa_framework.core.language_handler import LanguageHandler
+from qa_framework.core.variable_handler import VariableHandler
 
 def before_all(context):
     """
@@ -16,10 +17,19 @@ def before_all(context):
     from qa_framework.utils.driver import get_driver
     context.driver = get_driver(headless=headless)
     
-    # Initialize I18n System
+    # Initialize I18n and Variable Systems
     lang_dir = os.path.join(os.path.dirname(__file__), "language")
     default_lang = os.getenv("LANG", "en")
     context.i18n = LanguageHandler(lang_dir, default_lang=default_lang)
+    
+    # Dataset config for random data generation (country/lang)
+    dataset_config = {
+        "dataset": {
+            "language": default_lang.split('_')[0],
+            "country": "US" # Default
+        }
+    }
+    context.variables = VariableHandler(config=dataset_config)
     
     # Initialize screenshots list and run timestamp
     context.screenshots = []
