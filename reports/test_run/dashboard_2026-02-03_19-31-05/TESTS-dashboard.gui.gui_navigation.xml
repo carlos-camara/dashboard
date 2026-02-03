@@ -1,0 +1,43 @@
+<testsuite name="dashboard.gui.gui_navigation.Application Navigation Validation" tests="2" errors="0" failures="0" skipped="0" time="11.632811" timestamp="2026-02-03T19:29:29.630464" hostname="runnervmkj6or"><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Navigate to all main sections" status="passed" time="8.45432"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Navigate to all main sections
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.288s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.344s
+    And I wait for 2 seconds ... passed in 2.000s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.119s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the "title" in "test_runs" should contain the text "EXECUTION ARCHIVES" ... passed in 0.032s
+    Then I take a screenshot named "nav_test_runs" ... passed in 0.298s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.122s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the "title" in "endpoints_view" should contain the text "ENDPOINT CATALOG" ... passed in 0.026s
+    Then I take a screenshot named "nav_endpoints" ... passed in 0.260s
+    When I click on the "incidents_link" in the sidebar ... passed in 0.124s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the "title" in "incidents.header" should contain the text "INCIDENT TAXONOMY" ... passed in 0.023s
+    Then I take a screenshot named "nav_incidents" ... passed in 0.307s
+    When I click on the "dashboard_link" in the sidebar ... passed in 0.143s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the "subtitle" in "dashboard.header" should contain the text "DASHBOARD CLUSTER" ... passed in 0.030s
+    Then I take a screenshot named "nav_dashboard_return" ... passed in 0.338s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Sidebar navigation persistence" status="passed" time="3.178491"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Sidebar navigation persistence
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.269s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.446s
+    And I wait for 1 seconds ... passed in 1.000s
+    When I click on the "dashboard_link" in the sidebar ... passed in 0.119s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the "subtitle" in "dashboard.header" should contain the text "DASHBOARD CLUSTER" ... passed in 0.026s
+    Then I take a screenshot named "nav_sidebar_persistence" ... passed in 0.318s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

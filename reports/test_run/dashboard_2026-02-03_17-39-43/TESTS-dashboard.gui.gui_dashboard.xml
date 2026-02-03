@@ -1,0 +1,448 @@
+<testsuite name="dashboard.gui.gui_dashboard.Dashboard View Validation" tests="8" errors="3" failures="3" skipped="0" time="64.427108" timestamp="2026-02-03T17:41:41.855926" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Header and Status Ticker" status="passed" time="3.478436"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Header and Status Ticker
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.328s
+    When I wait for 2 seconds ... passed in 2.002s
+    Then the page title should be "QA Hub - Execution Dashboard" ... passed in 0.022s
+    And the "subtitle" in "dashboard.header" should contain the text "DASHBOARD CLUSTER" ... passed in 0.238s
+    And the system status should be valid ... passed in 0.062s
+    Then I take a screenshot named "dashboard_header_status" ... passed in 0.827s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Statistics Cards" status="failed" time="13.899474"><error type="NoSuchElementException" message="Message: Element 'passed_card' not found with locator ('xpath', &quot;//*[contains(normalize-space(.), 'SYSTEM HEALTH')]&quot;); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception&#10;">
+<![CDATA[
+Failing step: Then the "passed_card" in "dashboard.stats" should contain the text "SYSTEM HEALTH" ... failed in 11.147s
+Location: features/dashboard/gui/gui_dashboard.feature:15
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\core\elements\base_element.py", line 36, in _find_element
+    return WebDriverWait(self.driver, timeout).until(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        EC.presence_of_element_located(self.locator)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff66aeba535
+	0x7ff66aeba590
+	0x7ff66ac610bd
+	0x7ff66acbc48e
+	0x7ff66acbc79c
+	0x7ff66ad0d3a7
+	0x7ff66ad09ef5
+	0x7ff66acacc9c
+	0x7ff66acadbe3
+	0x7ff66b197b60
+	0x7ff66b191f5d
+	0x7ff66b1b311a
+	0x7ff66aed60a5
+	0x7ff66aede73c
+	0x7ff66aec3844
+	0x7ff66aec39f6
+	0x7ff66aea9a07
+	0x7ffd54ed7374
+	0x7ffd56adcc91
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\steps\gui_steps.py", line 170, in step_element_should_contain_text
+    element_text = element.get_text()
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\core\elements\text.py", line 16, in get_text
+    element = self._find_element()
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\core\elements\base_element.py", line 40, in _find_element
+    raise NoSuchElementException(
+        f"Element '{self.name}' not found with locator {self.locator}"
+    )
+selenium.common.exceptions.NoSuchElementException: Message: Element 'passed_card' not found with locator ('xpath', "//*[contains(normalize-space(.), 'SYSTEM HEALTH')]"); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Statistics Cards
+   Failed Step: the "passed_card" in "dashboard.stats" should contain the text "SYSTEM HEALTH"
+   Location: features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Statistics_Cards_the_"passed_card"_in_"dashboar.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Statistics_Cards_the_"passed_card"_in_"dashboar.png' width='800' alt='Failure Screenshot' />]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Statistics Cards
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.752s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then the "passed_card" in "dashboard.stats" should contain the text "SYSTEM HEALTH" ... failed in 11.147s
+    And the "total_runs" in "dashboard.stats" should contain the text "TOTAL EXECUTIONS" ... skipped in 0.000s
+    And the "pass_rate" in "dashboard.stats" should contain the text "PASS RATE" ... skipped in 0.000s
+    And the "avg_duration" in "dashboard.stats" should contain the text "AVG LATENCY" ... skipped in 0.000s
+    Then I take a screenshot of the "stats grid" named "dashboard_stats_grid" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Statistics Cards
+   Failed Step: the "passed_card" in "dashboard.stats" should contain the text "SYSTEM HEALTH"
+   Location: features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Statistics_Cards_the_"passed_card"_in_"dashboar.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Statistics_Cards_the_"passed_card"_in_"dashboar.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Timeline Controls" status="failed" time="2.729723"><failure type="AssertionError" message="Element 'heading' in 'dashboard.timeline' does not contain text 'SIGNAL VELOCITY'. Found: 'Q&#10;QA Hub&#10;EXECUTION ENGINE&#10;Dashboard&#10;Test Runs&#10;Incident Taxonomy&#10;Endpoints&#10;New Run&#10;SYSTEM ACTIVE&#10;SYSTEM OPTIMAL&#10;RUN RUN :: dashboard ::&#10;21/21 PASS&#10;RUN RUN :: dashboard ::&#10;21/21 PASS&#10;RUN RUN :: dashboard ::&#10;21/21 PASS&#10;DASHBOARD CLUSTER&#10;COMMAND&#10;CENTER&#10;7 Days&#10;30 Days&#10;SYSTEM HEALTH&#10;77%&#10;TOTAL EXECUTIONS&#10;65&#10;PASS RATE&#10;94.9%&#10;AVG LATENCY&#10;2m 0sms&#10;Signal Velocity&#10;STABILITY&#10;VOLUME&#10;1 feb&#10;2 feb&#10;3 feb&#10;30 ene&#10;29 ene&#10;28 ene&#10;0&#10;150&#10;300&#10;450&#10;600&#10;Sector Integrity&#10;DASHBOARD&#10;95%&#10;INCIDENT TAXONOMY&#10;dashboard: Logic Verification Failed&#10;66&#10;LATENCY ANOMALIES&#10;POST /api/sync&#10;376ms&#10;GET /api/runs&#10;45ms&#10;GET /api/endpoints&#10;13ms&#10;GET /api/health&#10;7ms'">
+<![CDATA[
+Failing step: Then the "heading" in "dashboard.timeline" should contain the text "SIGNAL VELOCITY" ... failed in 0.391s
+Location: features/dashboard/gui/gui_dashboard.feature:22
+Assertion Failed: Element 'heading' in 'dashboard.timeline' does not contain text 'SIGNAL VELOCITY'. Found: 'Q
+QA Hub
+EXECUTION ENGINE
+Dashboard
+Test Runs
+Incident Taxonomy
+Endpoints
+New Run
+SYSTEM ACTIVE
+SYSTEM OPTIMAL
+RUN RUN :: dashboard ::
+21/21 PASS
+RUN RUN :: dashboard ::
+21/21 PASS
+RUN RUN :: dashboard ::
+21/21 PASS
+DASHBOARD CLUSTER
+COMMAND
+CENTER
+7 Days
+30 Days
+SYSTEM HEALTH
+77%
+TOTAL EXECUTIONS
+65
+PASS RATE
+94.9%
+AVG LATENCY
+2m 0sms
+Signal Velocity
+STABILITY
+VOLUME
+1 feb
+2 feb
+3 feb
+30 ene
+29 ene
+28 ene
+0
+150
+300
+450
+600
+Sector Integrity
+DASHBOARD
+95%
+INCIDENT TAXONOMY
+dashboard: Logic Verification Failed
+66
+LATENCY ANOMALIES
+POST /api/sync
+376ms
+GET /api/runs
+45ms
+GET /api/endpoints
+13ms
+GET /api/health
+7ms'
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Timeline Controls
+   Failed Step: the "heading" in "dashboard.timeline" should contain the text "SIGNAL VELOCITY"
+   Location: features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Timeline_Controls_the_"heading"_in_"dashboard.ti.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Timeline_Controls_the_"heading"_in_"dashboard.ti.png' width='800' alt='Failure Screenshot' />]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Timeline Controls
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.337s
+    When I wait for 2 seconds ... passed in 2.002s
+    Then the "heading" in "dashboard.timeline" should contain the text "SIGNAL VELOCITY" ... failed in 0.391s
+    And I should see at least 1 elements with selector "chart" in "dashboard.timeline" ... undefined in 0.000s
+    When I switch the chart view to "Volume" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I take a screenshot of the "chart" named "dashboard_chart_volume" ... skipped in 0.000s
+    When I switch the chart view to "Success" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I take a screenshot of the "chart" named "dashboard_chart_success" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Timeline Controls
+   Failed Step: the "heading" in "dashboard.timeline" should contain the text "SIGNAL VELOCITY"
+   Location: features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Timeline_Controls_the_"heading"_in_"dashboard.ti.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Timeline_Controls_the_"heading"_in_"dashboard.ti.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Incident and Sector Lists" status="failed" time="13.663783"><error type="NoSuchElementException" message="Message: Element 'heading' not found with locator ('xpath', &quot;//*[contains(normalize-space(.), 'SECTOR INTEGRITY')]&quot;); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception&#10;">
+<![CDATA[
+Failing step: Then the "heading" in "dashboard.recent_runs" should contain the text "Sector Integrity" ... failed in 11.106s
+Location: features/dashboard/gui/gui_dashboard.feature:32
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\core\elements\base_element.py", line 36, in _find_element
+    return WebDriverWait(self.driver, timeout).until(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        EC.presence_of_element_located(self.locator)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff66aeba535
+	0x7ff66aeba590
+	0x7ff66ac610bd
+	0x7ff66acbc48e
+	0x7ff66acbc79c
+	0x7ff66ad0d3a7
+	0x7ff66ad09ef5
+	0x7ff66acacc9c
+	0x7ff66acadbe3
+	0x7ff66b197b60
+	0x7ff66b191f5d
+	0x7ff66b1b311a
+	0x7ff66aed60a5
+	0x7ff66aede73c
+	0x7ff66aec3844
+	0x7ff66aec39f6
+	0x7ff66aea9a07
+	0x7ffd54ed7374
+	0x7ffd56adcc91
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\steps\gui_steps.py", line 170, in step_element_should_contain_text
+    element_text = element.get_text()
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\core\elements\text.py", line 16, in get_text
+    element = self._find_element()
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\core\elements\base_element.py", line 40, in _find_element
+    raise NoSuchElementException(
+        f"Element '{self.name}' not found with locator {self.locator}"
+    )
+selenium.common.exceptions.NoSuchElementException: Message: Element 'heading' not found with locator ('xpath', "//*[contains(normalize-space(.), 'SECTOR INTEGRITY')]"); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Incident and Sector Lists
+   Failed Step: the "heading" in "dashboard.recent_runs" should contain the text "Sector Integrity"
+   Location: features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Incident_and_Sector_Lists_the_"heading"_in_"dashboard.re.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Incident_and_Sector_Lists_the_"heading"_in_"dashboard.re.png' width='800' alt='Failure Screenshot' />]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Incident and Sector Lists
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.557s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then the "heading" in "dashboard.recent_runs" should contain the text "Sector Integrity" ... failed in 11.106s
+    And I should see at least 1 elements with class "bg-slate-950/40" ... skipped in 0.000s
+    Then the "heading" in "dashboard.incidents" should contain the text "Incident Taxonomy" ... skipped in 0.000s
+    Then I take a screenshot of the "lists panel" named "dashboard_lists_panels" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Incident and Sector Lists
+   Failed Step: the "heading" in "dashboard.recent_runs" should contain the text "Sector Integrity"
+   Location: features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Incident_and_Sector_Lists_the_"heading"_in_"dashboard.re.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Incident_and_Sector_Lists_the_"heading"_in_"dashboard.re.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Endpoints Catalog and Scroll" status="failed" time="14.168935"><error type="NoSuchElementException" message="Message: Element 'heading' not found with locator ('xpath', &quot;//*[contains(normalize-space(.), 'LATENCY ANOMALIES')]&quot;); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception&#10;">
+<![CDATA[
+Failing step: Then the "heading" in "dashboard.endpoints" should contain the text "LATENCY ANOMALIES" ... failed in 11.138s
+Location: features/dashboard/gui/gui_dashboard.feature:39
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\core\elements\base_element.py", line 36, in _find_element
+    return WebDriverWait(self.driver, timeout).until(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        EC.presence_of_element_located(self.locator)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff66aeba535
+	0x7ff66aeba590
+	0x7ff66ac610bd
+	0x7ff66acbc48e
+	0x7ff66acbc79c
+	0x7ff66ad0d3a7
+	0x7ff66ad09ef5
+	0x7ff66acacc9c
+	0x7ff66acadbe3
+	0x7ff66b197b60
+	0x7ff66b191f5d
+	0x7ff66b1b311a
+	0x7ff66aed60a5
+	0x7ff66aede73c
+	0x7ff66aec3844
+	0x7ff66aec39f6
+	0x7ff66aea9a07
+	0x7ffd54ed7374
+	0x7ffd56adcc91
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\steps\gui_steps.py", line 170, in step_element_should_contain_text
+    element_text = element.get_text()
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\core\elements\text.py", line 16, in get_text
+    element = self._find_element()
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\core\elements\base_element.py", line 40, in _find_element
+    raise NoSuchElementException(
+        f"Element '{self.name}' not found with locator {self.locator}"
+    )
+selenium.common.exceptions.NoSuchElementException: Message: Element 'heading' not found with locator ('xpath', "//*[contains(normalize-space(.), 'LATENCY ANOMALIES')]"); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Endpoints Catalog and Scroll
+   Failed Step: the "heading" in "dashboard.endpoints" should contain the text "LATENCY ANOMALIES"
+   Location: features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Endpoints_Catalog_and_Scroll_the_"heading"_in_"dashboard.en.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Endpoints_Catalog_and_Scroll_the_"heading"_in_"dashboard.en.png' width='800' alt='Failure Screenshot' />]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Endpoints Catalog and Scroll
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.520s
+    When I wait for 2 seconds ... passed in 2.002s
+    When I scroll to the bottom of the page ... passed in 0.510s
+    Then the "heading" in "dashboard.endpoints" should contain the text "LATENCY ANOMALIES" ... failed in 11.138s
+    Then I take a screenshot named "dashboard_bottom_fullpage" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Endpoints Catalog and Scroll
+   Failed Step: the "heading" in "dashboard.endpoints" should contain the text "LATENCY ANOMALIES"
+   Location: features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Endpoints_Catalog_and_Scroll_the_"heading"_in_"dashboard.en.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Endpoints_Catalog_and_Scroll_the_"heading"_in_"dashboard.en.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Global Actions and Filters" status="passed" time="11.328482"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Global Actions and Filters
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.558s
+    When I wait for 2 seconds ... passed in 2.002s
+    When I apply the "7 Days" time filter ... passed in 0.181s
+    And I wait for 1 seconds ... passed in 1.001s
+    When I apply the "30 Days" time filter ... passed in 0.294s
+    And I wait for 1 seconds ... passed in 1.002s
+    When I export the report ... passed in 1.244s
+    And I wait for 1 seconds ... passed in 1.001s
+    Then I take a screenshot named "dashboard_actions_log" ... passed in 4.046s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Mobile Viewport Layout" status="failed" time="2.714509"><failure type="AssertionError" message="Element 'subtitle' in 'dashboard.header' does not contain text 'Dashboard Cluster'. Found: 'DASHBOARD CLUSTER'">
+<![CDATA[
+Failing step: Then the "subtitle" in "dashboard.header" should contain the text "Dashboard Cluster" ... failed in 0.071s
+Location: features/dashboard/gui/gui_dashboard.feature:53
+Assertion Failed: Element 'subtitle' in 'dashboard.header' does not contain text 'Dashboard Cluster'. Found: 'DASHBOARD CLUSTER'
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Mobile Viewport Layout
+   Failed Step: the "subtitle" in "dashboard.header" should contain the text "Dashboard Cluster"
+   Location: features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Mobile_Viewport_Layout_the_"subtitle"_in_"dashboard.h.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Mobile_Viewport_Layout_the_"subtitle"_in_"dashboard.h.png' width='800' alt='Failure Screenshot' />]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @responsive @mobile
+  Scenario: Verify Mobile Viewport Layout
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.643s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then the "subtitle" in "dashboard.header" should contain the text "Dashboard Cluster" ... failed in 0.071s
+    Then I take a screenshot named "dashboard_responsiveness" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Mobile Viewport Layout
+   Failed Step: the "subtitle" in "dashboard.header" should contain the text "Dashboard Cluster"
+   Location: features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Mobile_Viewport_Layout_the_"subtitle"_in_"dashboard.h.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_17-40-34\FAILED_Verify_Mobile_Viewport_Layout_the_"subtitle"_in_"dashboard.h.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Navigation to Incident Taxonomy" status="failed" time="2.443765"><failure type="NoneType" message="None">
+<![CDATA[
+Failing step: When I click on the "incidents_link" in the sidebar ... undefined in 0.000s
+Location: features/dashboard/gui/gui_dashboard.feature:57
+None]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Navigation to Incident Taxonomy
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.443s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I click on the "incidents_link" in the sidebar ... undefined in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then the "title" in "incidents.header" should contain the text "INCIDENT" ... skipped in 0.000s
+    And the "subtitle" in "incidents.header" should contain the text "TAXONOMY" ... skipped in 0.000s
+    And the "scope_dropdown" in "incidents.filters" should contain the text "Global Scope" ... skipped in 0.000s
+    Then I take a screenshot named "incident_taxonomy_page" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

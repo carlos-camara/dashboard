@@ -1,16 +1,20 @@
 endpoints_view:
   title:
     by: xpath
-    value: "//*[contains(text(), 'Endpoint Catalog')]"
+    value: "//main//*[self::h1 or self::h2][contains(@class, 'font-black')]"
   search_input:
+    type: input
     by: xpath
     value: "//input[@placeholder='Search by URL, project, or host...']"
   method_filter:
+    type: input
     by: xpath
     value: "//select"
   advanced_filters_toggle:
+    type: button
     by: xpath
     value: "//button[contains(., 'Filters')]"
   endpoint_item:
+    type: button
     by: xpath
     value: "//div[contains(@class, 'group flex flex-col md:flex-row')]"

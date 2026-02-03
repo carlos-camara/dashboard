@@ -1,100 +1,128 @@
 dashboard:
   header:
     title:
-      by: xpath
-      value: "//h1" # "Command Center"
+      type: text
+      by: css
+      value: "h1.font-black" # "COMMAND\nCENTER"
     subtitle:
+      type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'Dashboard Cluster')]"
+      value: "//div[contains(@class, 'text-indigo-400')]//span[contains(., 'Dashboard Cluster')]"
     qa_hub_text:
-        by: xpath
-        value: "//*[contains(normalize-space(.), 'Command Center')]"
+      type: text
+      by: css
+      value: "header div.text-indigo-400 span"
   
   stats:
     pass_rate:
+      type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'Pass Rate')]"
+      value: "//p[contains(text(), 'Pass Rate')]/ancestor::div[contains(@class, 'glass-panel')]"
     total_runs:
+      type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'Total Executions')]"
+      value: "//p[contains(text(), 'Total Executions')]/ancestor::div[contains(@class, 'glass-panel')]"
     avg_duration:
+      type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'Avg Latency')]"
+      value: "//p[contains(text(), 'Avg Latency')]/ancestor::div[contains(@class, 'glass-panel')]"
     passed_card:
-        by: xpath
-        value: "//*[contains(normalize-space(.), 'System Health')]"
+      type: text
+      by: xpath
+      value: "//p[contains(text(), 'System Health')]/ancestor::div[contains(@class, 'glass-panel')]"
     failed_card:
-        by: xpath
-        value: "//*[contains(normalize-space(.), 'Incident Taxonomy')]"
+      type: text
+      by: xpath
+      value: "//p[contains(text(), 'Incident Taxonomy')]/ancestor::div[contains(@class, 'glass-panel')]"
 
   status_ticker:
     bar:
+      type: webelement
       by: css
       value: "div.animate-marquee"
     system_status:
+      type: text
       by: xpath
       value: "//span[contains(@class, 'tracking-[0.2em]')]" # Matches specifically the status span
 
   timeline:
     heading:
+      type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'Signal Velocity')]"
+      value: "//div[contains(@class, 'glass-panel')]//h3[contains(., 'Signal Velocity')]"
     chart:
+      type: webelement
       by: css
       value: ".recharts-wrapper"
     toggle_success:
-       by: xpath
-       value: "//button[contains(normalize-space(.), 'Stability')]"
+      type: button
+      by: xpath
+      value: "//button[contains(normalize-space(.), 'Stability')]"
     toggle_volume:
-       by: xpath
-       value: "//button[contains(normalize-space(.), 'Volume')]"
+      type: button
+      by: xpath
+      value: "//button[contains(normalize-space(.), 'Volume')]"
 
   recent_runs:
     heading:
+      type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'Sector Integrity')]"
+      value: "//h3[contains(., 'Sector Integrity')]"
     section:
-        by: xpath
-        value: "//div[contains(., 'Sector Integrity')]"
+      type: webelement
+      by: xpath
+      value: "//div[contains(., 'Sector Integrity')]"
     list_item:
-        by: xpath
-        value: "//div[contains(., 'Sector Integrity')]/..//div[contains(@class, 'bg-slate-950/40')]"
+      type: webelement
+      by: xpath
+      value: "//div[contains(., 'Sector Integrity')]/..//div[contains(@class, 'bg-slate-950/40')]"
     project_item:
-        by: xpath
-        value: "//h3[contains(., 'Sector Integrity')]/ancestor::div[contains(@class, 'glass-panel')]//div[contains(@class, 'cursor-pointer')][1]"
+      type: button
+      by: xpath
+      value: "//h3[contains(., 'Sector Integrity')]/ancestor::div[contains(@class, 'glass-panel')]//div[contains(@class, 'cursor-pointer')][1]"
 
   incidents:
     heading:
-       by: xpath
-       value: "//*[contains(normalize-space(.), 'Incident Taxonomy')]"
+      type: text
+      by: xpath
+      value: "//h3[contains(., 'Incident Taxonomy')]"
     list_item:
-       by: xpath
-       value: "//h3[contains(., 'Incident Taxonomy')]/ancestor::div[contains(@class, 'glass-panel')]//div[contains(@class, 'border-l-4')]"
+      type: webelement
+      by: xpath
+      value: "//h3[contains(., 'Incident Taxonomy')]/ancestor::div[contains(@class, 'glass-panel')]//div[contains(@class, 'border-l-4')]"
 
   endpoints:
     heading:
+      type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'Latency Anomalies')]"
+      value: "//h3[contains(., 'Latency Anomalies')]"
     catalog:
+      type: webelement
       by: xpath
       value: "//h3[contains(., 'Latency Anomalies')]/ancestor::div[contains(@class, 'glass-panel')]"
     anomaly_item:
+      type: button
       by: xpath
       value: "//h3[contains(., 'Latency Anomalies')]/ancestor::div[contains(@class, 'glass-panel')]//div[contains(@class, 'cursor-pointer')][1]"
 
   actions:
     sync_button:
+      type: button
       by: xpath
       value: "//button[@title='Synchronize Data']"
     filter_7_days:
+      type: button
       by: xpath
       value: "//button[contains(normalize-space(.), '7 Days')]"
     filter_30_days:
+      type: button
       by: xpath
       value: "//button[contains(normalize-space(.), '30 Days')]"
     filter_all_time:
+      type: button
       by: xpath
       value: "//button[@title='Generate Report']"
     export_button:
+      type: button
       by: xpath
       value: "//button[@title='Generate Report']"

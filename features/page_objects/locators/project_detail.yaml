@@ -1,37 +1,49 @@
 project_detail:
   projectName:
+    type: text
     by: xpath
-    value: "//h1"
+    value: "//main//h1[contains(@class, 'font-black')]"
   runCount:
+    type: text
     by: xpath
-    value: "//*[contains(text(), 'Runs Detected')]"
+    value: "//*[contains(., 'Runs Detected')]"
   stability_score:
+    type: text
     by: xpath
     value: "//*[contains(text(), 'Stability Score')]"
   velocity_trend:
+    type: webelement
     by: xpath
     value: "//*[contains(text(), 'Execution Velocity')]/following-sibling::div//div[contains(@class, 'recharts-responsive-container')]"
   stability_comparison:
+    type: webelement
     by: xpath
     value: "//*[contains(text(), 'Layer Stability')]/ancestor::div[contains(@class, 'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]"
   stability_chart:
+    type: webelement
     by: xpath
     value: "//*[contains(text(), 'Layer Stability')]/ancestor::div[contains(@class, 'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]"
   latency_comparison:
+    type: webelement
     by: xpath
-    value: "//*[contains(text(), 'Layer Latency')]/ancestor::div[contains(@class, 'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]"
-  back_button:
-    by: xpath
-    value: "//button[./*[local-name()='svg' and contains(@class, 'lucide-chevron-left')]]"
-  download_button:
-    by: xpath
-    value: "//button[@title='Download Dossier']"
-  delete_button:
-    by: xpath
-    value: "//button[./*[local-name()='svg' and contains(@class, 'lucide-trash-2')]]"
+    value: "//*[contains(., 'Layer Latency')]/ancestor::div[contains(@class, 'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]"
   item:
+    type: webelement
     by: xpath
     value: "//div[contains(@id, 'run-item-')]"
   run_list:
+    type: webelement
     by: xpath
     value: "//h3[contains(text(), 'Execution History')]/following-sibling::div"
+  back_button:
+    type: button
+    by: xpath
+    value: "//button[./*[local-name()='svg' and contains(@class, 'lucide-chevron-left')]]"
+  download_button:
+    type: button
+    by: xpath
+    value: "//button[@title='Download Dossier']"
+  delete_button:
+    type: button
+    by: xpath
+    value: "//button[./*[local-name()='svg' and contains(@class, 'lucide-trash-2')]]"

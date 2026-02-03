@@ -1,32 +1,41 @@
 incidents:
   header:
     title:
-      by: xpath
-      value: "//*[normalize-space(text())='INCIDENT']"
+      type: text
+      by: css
+      value: "main h1.font-black" # "INCIDENT\nTAXONOMY"
     subtitle:
-      by: xpath
-      value: "//*[normalize-space(text())='TAXONOMY']"
+      type: text
+      by: css
+      value: "main h1.font-black" # "INCIDENT\nTAXONOMY"
   stats:
     total_sign:
-        by: xpath
-        value: "//*[contains(normalize-space(.), 'Total Incidents')]"
+      type: text
+      by: xpath
+      value: "//*[contains(normalize-space(.), 'Total Incidents')]"
     sectors_sign:
-        by: xpath
-        value: "//*[contains(normalize-space(.), 'Affected Sectors')]"
+      type: text
+      by: xpath
+      value: "//*[contains(normalize-space(.), 'Affected Sectors')]"
   filters:
     scope_dropdown:
-        by: xpath
-        value: "//button[contains(., 'Global Scope')]"
+      type: button
+      by: xpath
+      value: "//button[contains(., 'Global Scope')]"
     project_item:
-         by: xpath
-         value: "//div[contains(@class, 'absolute')]//div[contains(@class, 'cursor-pointer')]"
+      type: button
+      by: xpath
+      value: "//div[contains(@class, 'absolute')]//div[contains(@class, 'cursor-pointer')]"
   list:
     item:
-        by: xpath
-        value: "//div[contains(@class, 'glass-panel') and .//div[contains(@class, 'cursor-pointer')]]"
+      type: webelement
+      by: xpath
+      value: "//div[contains(@class, 'glass-panel') and .//div[contains(@class, 'cursor-pointer')]]"
     expand_button:
-        by: xpath
-        value: "//div[contains(@class, 'glass-panel')]//div[contains(@class, 'cursor-pointer')][1]"
+      type: button
+      by: xpath
+      value: "//div[contains(@class, 'glass-panel')]//div[contains(@class, 'cursor-pointer')][1]"
     details_context:
-        by: xpath
-        value: "//*[contains(normalize-space(.), 'Stack Trace Context')]"
+      type: text
+      by: xpath
+      value: "//*[contains(normalize-space(.), 'Stack Trace Context')]"

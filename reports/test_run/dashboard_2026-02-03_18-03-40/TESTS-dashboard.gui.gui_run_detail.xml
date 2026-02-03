@@ -1,0 +1,55 @@
+<testsuite name="dashboard.gui.gui_run_detail.Run Detail View Validation" tests="1" errors="1" failures="0" skipped="0" time="8.735905" timestamp="2026-02-03T18:11:10.906902" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_run_detail.Run Detail View Validation" name="Explore Run Detail View" status="failed" time="8.735905"><error type="AttributeError" message="'WebElement' object has no attribute 'click'">
+<![CDATA[
+Failing step: When I click on the "item" in "project_detail" ... failed in 0.019s
+Location: features/dashboard/gui/gui_run_detail.feature:13
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\steps\gui_steps.py", line 143, in step_click_page_object
+    element.click()
+    ^^^^^^^^^^^^^
+AttributeError: 'WebElement' object has no attribute 'click'
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Explore Run Detail View
+   Failed Step: I click on the "item" in "project_detail"
+   Location: features\resources\screenshots\2026-02-03_18-07-32\FAILED_Explore_Run_Detail_View_I_click_on_the_"item"_in_"proj.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_18-07-32\FAILED_Explore_Run_Detail_View_I_click_on_the_"item"_in_"proj.png' width='800' alt='Failure Screenshot' />]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Explore Run Detail View
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.597s
+    When I wait for 2 seconds ... passed in 2.008s
+    When I click on the "test_runs_link" in the sidebar ... passed in 1.128s
+    And I wait for 1 seconds ... passed in 1.009s
+    When I click on the "project_card" in "test_runs" ... passed in 1.975s
+    And I wait for 1 seconds ... passed in 1.001s
+    When I click on the "item" in "project_detail" ... failed in 0.019s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then the "back_button" in "run_detail" should contain the text "RETURN TO BASE" ... skipped in 0.000s
+    And I should see the text "Success" ... skipped in 0.000s
+    Then I take a screenshot named "run_detail_full_view" ... skipped in 0.000s
+    When I click on the "filter_failed" in "run_detail" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I take a screenshot named "run_detail_filtered_failed" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Explore Run Detail View
+   Failed Step: I click on the "item" in "project_detail"
+   Location: features\resources\screenshots\2026-02-03_18-07-32\FAILED_Explore_Run_Detail_View_I_click_on_the_"item"_in_"proj.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_18-07-32\FAILED_Explore_Run_Detail_View_I_click_on_the_"item"_in_"proj.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase></testsuite>

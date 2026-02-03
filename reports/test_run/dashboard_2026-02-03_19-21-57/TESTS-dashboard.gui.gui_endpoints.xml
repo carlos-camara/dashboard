@@ -1,0 +1,102 @@
+<testsuite name="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" tests="1" errors="1" failures="0" skipped="0" time="21.994205" timestamp="2026-02-03T19:23:26.084263" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" name="Deep Dive into Endpoint Detail" status="failed" time="21.994205"><error type="TimeoutException" message="Message: Element 'title' did not become visible within 10 seconds&#10;">
+<![CDATA[
+Failing step: Then the "title" in "endpoints_view" should contain the text "ENDPOINT CATALOG" ... failed in 11.165s
+Location: features/dashboard/gui/gui_endpoints.feature:24
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\core\elements\base_element.py", line 93, in wait_until_visible
+    WebDriverWait(self.driver, timeout).until(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        EC.visibility_of_element_located(self.locator)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff66aeba535
+	0x7ff66aeba590
+	0x7ff66ac610bd
+	0x7ff66acbc48e
+	0x7ff66acbc79c
+	0x7ff66ad0d3a7
+	0x7ff66ad09ef5
+	0x7ff66acacc9c
+	0x7ff66acadbe3
+	0x7ff66b197b60
+	0x7ff66b191f5d
+	0x7ff66b1b311a
+	0x7ff66aed60a5
+	0x7ff66aede73c
+	0x7ff66aec3844
+	0x7ff66aec39f6
+	0x7ff66aea9a07
+	0x7ffd54ed7374
+	0x7ffd56adcc91
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 174, in step_element_should_contain_text
+    element_text = element.get_text()
+  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\core\elements\base_element.py", line 86, in get_text
+    self.wait_until_visible(timeout)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\core\elements\base_element.py", line 97, in wait_until_visible
+    raise TimeoutException(
+        f"Element '{self.name}' did not become visible within {timeout} seconds"
+    )
+selenium.common.exceptions.TimeoutException: Message: Element 'title' did not become visible within 10 seconds
+
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Deep Dive into Endpoint Detail
+   Failed Step: the "title" in "endpoints_view" should contain the text "ENDPOINT CATALOG"
+   Location: features\resources\screenshots\2026-02-03_19-22-17\FAILED_Deep_Dive_into_Endpoint_Detail_the_"title"_in_"endpoints_view.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_19-22-17\FAILED_Deep_Dive_into_Endpoint_Detail_the_"title"_in_"endpoints_view.png' width='800' alt='Failure Screenshot' />]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Deep Dive into Endpoint Detail
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.697s
+    When I wait for 2 seconds ... passed in 2.002s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.314s
+    And I wait for 1 seconds ... passed in 1.001s
+    When I type "health" into the "search_input" in "endpoints_view" ... passed in 0.469s
+    And I wait for 2 seconds ... passed in 2.001s
+    When I click on the "endpoint_item" in "endpoints_view" ... passed in 0.311s
+    And I wait for 1 seconds ... passed in 1.001s
+    Then the "back_button" in "endpoint_detail" should contain the text "Back to Catalog" ... passed in 0.048s
+    And I should see the text "Success Rate" ... passed in 0.167s
+    And I should see the text "Avg Latency" ... passed in 0.156s
+    And I should see the "performance_card" in "endpoint_detail" ... passed in 0.076s
+    And I should see the text "Performance Insights" ... passed in 0.147s
+    And I should see the text "Live Discovery Data" ... passed in 0.165s
+    Then I take a screenshot named "endpoints_deep_detail" ... passed in 0.743s
+    When I click on the "back_button" in "endpoint_detail" ... passed in 0.527s
+    And I wait for 1 seconds ... passed in 1.001s
+    Then the "title" in "endpoints_view" should contain the text "ENDPOINT CATALOG" ... failed in 11.165s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Deep Dive into Endpoint Detail
+   Failed Step: the "title" in "endpoints_view" should contain the text "ENDPOINT CATALOG"
+   Location: features\resources\screenshots\2026-02-03_19-22-17\FAILED_Deep_Dive_into_Endpoint_Detail_the_"title"_in_"endpoints_view.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_19-22-17\FAILED_Deep_Dive_into_Endpoint_Detail_the_"title"_in_"endpoints_view.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase></testsuite>

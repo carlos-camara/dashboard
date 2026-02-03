@@ -1,0 +1,143 @@
+<testsuite name="dashboard.gui.gui_dashboard.Dashboard View Validation" tests="8" errors="0" failures="1" skipped="0" time="50.443632" timestamp="2026-02-03T18:00:08.088219" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Header and Status Ticker" status="passed" time="4.192545"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Header and Status Ticker
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.360s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then the page title should be "QA Hub - Execution Dashboard" ... passed in 0.934s
+    And the "subtitle" in "dashboard.header" should contain the text "DASHBOARD CLUSTER" ... passed in 0.149s
+    And the system status should be valid ... passed in 0.064s
+    Then I take a screenshot named "dashboard_header_status" ... passed in 0.684s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Statistics Cards" status="passed" time="4.202798"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Statistics Cards
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.832s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then the "passed_card" in "dashboard.stats" should contain the text "SYSTEM HEALTH" ... passed in 0.078s
+    And the "total_runs" in "dashboard.stats" should contain the text "TOTAL EXECUTIONS" ... passed in 0.079s
+    And the "pass_rate" in "dashboard.stats" should contain the text "PASS RATE" ... passed in 0.076s
+    And the "avg_duration" in "dashboard.stats" should contain the text "AVG LATENCY" ... passed in 0.088s
+    Then I take a screenshot of the "stats grid" named "dashboard_stats_grid" ... passed in 1.049s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Timeline Controls" status="passed" time="7.975951"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Timeline Controls
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.072s
+    When I wait for 2 seconds ... passed in 2.001s
+    Then the "heading" in "dashboard.timeline" should contain the text "Signal Velocity" ... passed in 0.102s
+    And I should see at least 1 elements with selector "chart" in "dashboard.timeline" ... passed in 0.055s
+    When I switch the chart view to "Volume" ... passed in 0.500s
+    And I wait for 1 seconds ... passed in 1.006s
+    Then I take a screenshot of the "chart" named "dashboard_chart_volume" ... passed in 0.972s
+    When I switch the chart view to "Success" ... passed in 0.455s
+    And I wait for 1 seconds ... passed in 1.001s
+    Then I take a screenshot of the "chart" named "dashboard_chart_success" ... passed in 0.811s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Incident and Sector Lists" status="passed" time="4.559357"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Incident and Sector Lists
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.484s
+    When I wait for 2 seconds ... passed in 2.005s
+    Then the "heading" in "dashboard.recent_runs" should contain the text "Sector Integrity" ... passed in 0.091s
+    And I should see at least 1 elements with class "bg-slate-950/40" ... passed in 0.031s
+    Then the "heading" in "dashboard.incidents" should contain the text "INCIDENT TAXONOMY" ... passed in 0.076s
+    Then I take a screenshot of the "lists panel" named "dashboard_lists_panels" ... passed in 0.872s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Endpoints Catalog and Scroll" status="passed" time="4.656081"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Endpoints Catalog and Scroll
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.004s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I scroll to the bottom of the page ... passed in 0.511s
+    Then the "heading" in "dashboard.endpoints" should contain the text "LATENCY ANOMALIES" ... passed in 0.077s
+    Then I take a screenshot named "dashboard_bottom_fullpage" ... passed in 1.063s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Global Actions and Filters" status="passed" time="15.195557"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Global Actions and Filters
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.100s
+    When I wait for 2 seconds ... passed in 2.003s
+    When I apply the "7 Days" time filter ... passed in 0.697s
+    And I wait for 1 seconds ... passed in 1.041s
+    When I apply the "30 Days" time filter ... passed in 0.667s
+    And I wait for 1 seconds ... passed in 1.002s
+    When I export the report ... passed in 2.230s
+    And I wait for 1 seconds ... passed in 1.001s
+    Then I take a screenshot named "dashboard_actions_log" ... passed in 5.453s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Mobile Viewport Layout" status="passed" time="4.843631"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @responsive @mobile
+  Scenario: Verify Mobile Viewport Layout
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.802s
+    When I wait for 2 seconds ... passed in 2.002s
+    Then the "subtitle" in "dashboard.header" should contain the text "DASHBOARD CLUSTER" ... passed in 0.134s
+    Then I take a screenshot named "dashboard_responsiveness" ... passed in 0.905s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Navigation to Incident Taxonomy" status="failed" time="4.817713"><failure type="AssertionError" message="Element 'scope_dropdown' in 'incidents.filters' does not contain text 'Global Scope'. Found: 'GLOBAL SCOPE'">
+<![CDATA[
+Failing step: And the "scope_dropdown" in "incidents.filters" should contain the text "Global Scope" ... failed in 0.108s
+Location: features/dashboard/gui/gui_dashboard.feature:61
+Assertion Failed: Element 'scope_dropdown' in 'incidents.filters' does not contain text 'Global Scope'. Found: 'GLOBAL SCOPE'
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Navigation to Incident Taxonomy
+   Failed Step: the "scope_dropdown" in "incidents.filters" should contain the text "Global Scope"
+   Location: features\resources\screenshots\2026-02-03_17-59-15\FAILED_Verify_Navigation_to_Incident_Taxonomy_the_"scope_dropdown"_in_"incid.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_17-59-15\FAILED_Verify_Navigation_to_Incident_Taxonomy_the_"scope_dropdown"_in_"incid.png' width='800' alt='Failure Screenshot' />]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Navigation to Incident Taxonomy
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.825s
+    When I wait for 2 seconds ... passed in 2.003s
+    When I click on the "incidents_link" in the sidebar ... passed in 0.666s
+    And I wait for 1 seconds ... passed in 1.002s
+    Then the "title" in "incidents.header" should contain the text "INCIDENT" ... passed in 0.144s
+    And the "subtitle" in "incidents.header" should contain the text "TAXONOMY" ... passed in 0.069s
+    And the "scope_dropdown" in "incidents.filters" should contain the text "Global Scope" ... failed in 0.108s
+    Then I take a screenshot named "incident_taxonomy_page" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Navigation to Incident Taxonomy
+   Failed Step: the "scope_dropdown" in "incidents.filters" should contain the text "Global Scope"
+   Location: features\resources\screenshots\2026-02-03_17-59-15\FAILED_Verify_Navigation_to_Incident_Taxonomy_the_"scope_dropdown"_in_"incid.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_17-59-15\FAILED_Verify_Navigation_to_Incident_Taxonomy_the_"scope_dropdown"_in_"incid.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase></testsuite>

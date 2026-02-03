@@ -10,19 +10,19 @@ Feature: Incident Taxonomy View Validation
   @smoke
   Scenario: Verify Incident Page Structure
     Then the page title should be "QA Hub - Execution Dashboard"
-    And I should see the text "INCIDENT"
-    And I should see the text "TAXONOMY"
+    And the "title" in "incidents.header" should contain the text "INCIDENT"
+    And the "subtitle" in "incidents.header" should contain the text "TAXONOMY"
     And I should see the text "Anomaly Detection"
     Then I take a screenshot named "incident_page_structure"
 
   Scenario: Verify Incident Statistics
-    Then I should see the text "Total Incidents"
-    And I should see the text "Affected Sectors"
+    Then the "total_sign" in "incidents.stats" should contain the text "TOTAL INCIDENTS"
+    And the "sectors_sign" in "incidents.stats" should contain the text "AFFECTED SECTORS"
     And I should see the text "Unique Signatures"
     Then I take a screenshot of the "stats" named "incident_stats_cards"
 
   Scenario: Verify Project Filtering
-    Then I should see the text "Global Scope"
+    Then the "scope_dropdown" in "incidents.filters" should contain the text "Global Scope"
     When I click on the button with text "Global Scope"
     And I wait for 1 seconds
     Then I take a screenshot named "incident_project_dropdown"
@@ -33,7 +33,7 @@ Feature: Incident Taxonomy View Validation
     Then I should see at least 1 elements with class "glass-panel"
     When I click on the element with class "cursor-pointer"
     And I wait for 1 seconds
-    Then I should see the text "Stack Trace Context"
+    Then the "details_context" in "incidents.list" should contain the text "STACK TRACE CONTEXT"
     And I should see the text "AI Root Cause Analysis"
     And I should see the text "Affecting Projects"
     Then I take a screenshot named "incident_expanded_details"

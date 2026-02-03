@@ -1,16 +1,21 @@
 sidebar:
   dashboard_link:
+    type: button
     by: xpath
     value: "//button[contains(., 'Dashboard')]"
   test_runs_link:
+    type: button
     by: xpath
     value: "//button[contains(., 'Test Runs')]"
   endpoints_link:
+    type: button
     by: xpath
     value: "//button[contains(., 'Endpoints')]"
   incidents_link:
+    type: button
     by: xpath
     value: "//button[contains(., 'Incident Taxonomy')]"
   new_run_button:
+    type: button
     by: xpath
     value: "//button[contains(., 'New Run')]"
