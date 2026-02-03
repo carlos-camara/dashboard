@@ -16,8 +16,8 @@ Feature: Incident Taxonomy View Validation
     Then I take a screenshot named "incident_page_structure"
 
   Scenario: Verify Incident Statistics
-    Then the "total_sign" in "incidents.stats" should contain the text "Total Incidents"
-    And the "sectors_sign" in "incidents.stats" should contain the text "Affected Sectors"
+    Then the "total_sign" in "incidents.stats" should contain the text "TOTAL INCIDENTS"
+    And the "sectors_sign" in "incidents.stats" should contain the text "AFFECTED SECTORS"
     And I should see the text "Unique Signatures"
     Then I take a screenshot of the "stats" named "incident_stats_cards"
 
@@ -33,7 +33,7 @@ Feature: Incident Taxonomy View Validation
     Then I should see at least 1 elements with class "glass-panel"
     When I click on the element with class "cursor-pointer"
     And I wait for 1 seconds
-    Then the "details_context" in "incidents.list" should contain the text "Stack Trace Context"
+    Then the "details_context" in "incidents.list" should contain the text "STACK TRACE CONTEXT"
     And I should see the text "AI Root Cause Analysis"
     And I should see the text "Affecting Projects"
     Then I take a screenshot named "incident_expanded_details"

@@ -7,15 +7,15 @@ Feature: Dashboard View Validation
 
   Scenario: Verify Header and Status Ticker
     Then the page title should be "QA Hub - Execution Dashboard"
-    And the "subtitle" in "dashboard.header" should contain the text "Dashboard Cluster"
+    And the "subtitle" in "dashboard.header" should contain the text "DASHBOARD CLUSTER"
     And the system status should be valid
     Then I take a screenshot named "dashboard_header_status"
 
   Scenario: Verify Statistics Cards
-    Then the "passed_card" in "dashboard.stats" should contain the text "System Health"
-    And the "total_runs" in "dashboard.stats" should contain the text "Total Executions"
-    And the "pass_rate" in "dashboard.stats" should contain the text "Pass Rate"
-    And the "avg_duration" in "dashboard.stats" should contain the text "Avg Latency"
+    Then the "passed_card" in "dashboard.stats" should contain the text "SYSTEM HEALTH"
+    And the "total_runs" in "dashboard.stats" should contain the text "TOTAL EXECUTIONS"
+    And the "pass_rate" in "dashboard.stats" should contain the text "PASS RATE"
+    And the "avg_duration" in "dashboard.stats" should contain the text "AVG LATENCY"
     Then I take a screenshot of the "stats grid" named "dashboard_stats_grid"
 
   Scenario: Verify Timeline Controls
@@ -31,12 +31,12 @@ Feature: Dashboard View Validation
   Scenario: Verify Incident and Sector Lists
     Then the "heading" in "dashboard.recent_runs" should contain the text "Sector Integrity"
     And I should see at least 1 elements with class "bg-slate-950/40"
-    Then the "heading" in "dashboard.incidents" should contain the text "Incident Taxonomy"
+    Then the "heading" in "dashboard.incidents" should contain the text "INCIDENT TAXONOMY"
     Then I take a screenshot of the "lists panel" named "dashboard_lists_panels"
 
   Scenario: Verify Endpoints Catalog and Scroll
     When I scroll to the bottom of the page
-    Then the "heading" in "dashboard.endpoints" should contain the text "Latency Anomalies"
+    Then the "heading" in "dashboard.endpoints" should contain the text "LATENCY ANOMALIES"
     Then I take a screenshot named "dashboard_bottom_fullpage"
 
   Scenario: Verify Global Actions and Filters
@@ -50,7 +50,7 @@ Feature: Dashboard View Validation
 
   @responsive @mobile
   Scenario: Verify Mobile Viewport Layout
-    Then the "subtitle" in "dashboard.header" should contain the text "Dashboard Cluster"
+    Then the "subtitle" in "dashboard.header" should contain the text "DASHBOARD CLUSTER"
     Then I take a screenshot named "dashboard_responsiveness"
 
   Scenario: Verify Navigation to Incident Taxonomy

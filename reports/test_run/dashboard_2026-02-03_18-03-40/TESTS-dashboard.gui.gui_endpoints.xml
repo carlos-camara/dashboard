@@ -1,0 +1,101 @@
+<testsuite name="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" tests="1" errors="1" failures="0" skipped="0" time="20.410397" timestamp="2026-02-03T18:12:00.697022" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" name="Deep Dive into Endpoint Detail" status="failed" time="20.410397"><error type="NoSuchElementException" message="Message: Element 'back_button' not found with locator ('xpath', &quot;//button[contains(., 'BACK TO CATALOG')]&quot;); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception&#10;">
+<![CDATA[
+Failing step: Then the "back_button" in "endpoint_detail" should contain the text "BACK TO CATALOG" ... failed in 11.164s
+Location: features/dashboard/gui/gui_endpoints.feature:15
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\core\elements\base_element.py", line 36, in _find_element
+    return WebDriverWait(self.driver, timeout).until(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        EC.presence_of_element_located(self.locator)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff66aeba535
+	0x7ff66aeba590
+	0x7ff66ac610bd
+	0x7ff66acbc48e
+	0x7ff66acbc79c
+	0x7ff66ad0d3a7
+	0x7ff66ad09ef5
+	0x7ff66acacc9c
+	0x7ff66acadbe3
+	0x7ff66b197b60
+	0x7ff66b191f5d
+	0x7ff66b1b311a
+	0x7ff66aed60a5
+	0x7ff66aede73c
+	0x7ff66aec3844
+	0x7ff66aec39f6
+	0x7ff66aea9a07
+	0x7ffd54ed7374
+	0x7ffd56adcc91
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\steps\gui_steps.py", line 170, in step_element_should_contain_text
+    element_text = element.get_text()
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\core\elements\button.py", line 39, in get_text
+    element = self._find_element()
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\core\elements\base_element.py", line 40, in _find_element
+    raise NoSuchElementException(
+        f"Element '{self.name}' not found with locator {self.locator}"
+    )
+selenium.common.exceptions.NoSuchElementException: Message: Element 'back_button' not found with locator ('xpath', "//button[contains(., 'BACK TO CATALOG')]"); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Deep Dive into Endpoint Detail
+   Failed Step: the "back_button" in "endpoint_detail" should contain the text "BACK TO CATALOG"
+   Location: features\resources\screenshots\2026-02-03_18-10-44\FAILED_Deep_Dive_into_Endpoint_Detail_the_"back_button"_in_"endpoint.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_18-10-44\FAILED_Deep_Dive_into_Endpoint_Detail_the_"back_button"_in_"endpoint.png' width='800' alt='Failure Screenshot' />]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Deep Dive into Endpoint Detail
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.081s
+    When I wait for 2 seconds ... passed in 2.002s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.901s
+    And I wait for 1 seconds ... passed in 1.002s
+    When I type "health" into the "search_input" in "endpoints_view" ... passed in 0.706s
+    And I wait for 2 seconds ... passed in 2.003s
+    When I click on the "endpoint_item" in "endpoints_view" ... passed in 0.551s
+    And I wait for 1 seconds ... passed in 1.001s
+    Then the "back_button" in "endpoint_detail" should contain the text "BACK TO CATALOG" ... failed in 11.164s
+    And I should see the text "Success Rate" ... skipped in 0.000s
+    And I should see the text "Avg Latency" ... skipped in 0.000s
+    And I should see the "performance_card" in "endpoint_detail" ... skipped in 0.000s
+    And I should see the text "Performance Insights" ... skipped in 0.000s
+    And I should see the text "Live Discovery Data" ... skipped in 0.000s
+    Then I take a screenshot named "endpoints_deep_detail" ... skipped in 0.000s
+    When I click on the "back_button" in "endpoint_detail" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then the "title" in "endpoints_view" should contain the text "ENDPOINT CATALOG" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Deep Dive into Endpoint Detail
+   Failed Step: the "back_button" in "endpoint_detail" should contain the text "BACK TO CATALOG"
+   Location: features\resources\screenshots\2026-02-03_18-10-44\FAILED_Deep_Dive_into_Endpoint_Detail_the_"back_button"_in_"endpoint.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_18-10-44\FAILED_Deep_Dive_into_Endpoint_Detail_the_"back_button"_in_"endpoint.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase></testsuite>

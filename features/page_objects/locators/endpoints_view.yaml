@@ -1,8 +1,7 @@
 endpoints_view:
   title:
-    type: text
     by: xpath
-    value: "//*[contains(text(), 'Endpoint Catalog')]"
+    value: "//main//*[self::h1 or self::h2][contains(@class, 'font-black')]"
   search_input:
     type: input
     by: xpath

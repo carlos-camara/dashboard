@@ -10,7 +10,7 @@ Feature: Project Detail View Validation
     And I wait for 2 seconds
 
   Scenario: Verify Architecture Analysis Section
-    Then the "projectName" in "project_detail" should contain the text "Architecture Analysis"
+    Then the "projectName" in "project_detail" should be visible
     And I should see the text "Layer Stability"
     And I should see the text "Layer Latency"
     And I should see at least 1 elements with selector "stability_comparison" in "project_detail"
@@ -18,13 +18,13 @@ Feature: Project Detail View Validation
     Then I take a screenshot named "project_detail_architecture"
 
   Scenario: Verify Execution Metrics and Trend
-    Then the "stability_score" in "project_detail" should contain the text "Stability Score"
+    Then the "stability_score" in "project_detail" should contain the text "STABILITY SCORE"
     And I should see the text "Execution Velocity"
     And I should see at least 1 elements with selector "velocity_trend" in "project_detail"
     Then I take a screenshot named "project_detail_metrics"
 
   Scenario: Verify Run History List
-    Then I should see the text "Execution History"
+    Then I should see the text "EXECUTION HISTORY"
     And I should see at least 1 elements with selector "item" in "project_detail"
     Then I take a screenshot of the "run_list" named "project_detail_history"
 

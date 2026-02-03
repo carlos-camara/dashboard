@@ -2,11 +2,11 @@ project_detail:
   projectName:
     type: text
     by: xpath
-    value: "//h1"
+    value: "//main//h1[contains(@class, 'font-black')]"
   runCount:
     type: text
     by: xpath
-    value: "//*[contains(text(), 'Runs Detected')]"
+    value: "//*[contains(., 'Runs Detected')]"
   stability_score:
     type: text
     by: xpath
@@ -26,7 +26,7 @@ project_detail:
   latency_comparison:
     type: webelement
     by: xpath
-    value: "//*[contains(text(), 'Layer Latency')]/ancestor::div[contains(@class, 'rounded-[2rem)')]//div[contains(@class, 'recharts-responsive-container')]"
+    value: "//*[contains(., 'Layer Latency')]/ancestor::div[contains(@class, 'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]"
   item:
     type: webelement
     by: xpath

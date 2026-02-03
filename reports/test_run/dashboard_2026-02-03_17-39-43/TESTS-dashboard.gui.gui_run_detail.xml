@@ -1,0 +1,28 @@
+<testsuite name="dashboard.gui.gui_run_detail.Run Detail View Validation" tests="1" errors="0" failures="1" skipped="0" time="2.462631" timestamp="2026-02-03T17:42:47.034619" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_run_detail.Run Detail View Validation" name="Explore Run Detail View" status="failed" time="2.462631"><failure type="NoneType" message="None">
+<![CDATA[
+Failing step: When I click on the "test_runs_link" in the sidebar ... undefined in 0.000s
+Location: features/dashboard/gui/gui_run_detail.feature:9
+None]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Explore Run Detail View
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.461s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I click on the "test_runs_link" in the sidebar ... undefined in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    When I click on the "project_card" in "test_runs" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    When I click on the "item" in "project_detail" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then the "back_button" in "run_detail" should contain the text "Return to Base" ... skipped in 0.000s
+    And I should see the text "Success" ... skipped in 0.000s
+    Then I take a screenshot named "run_detail_full_view" ... skipped in 0.000s
+    When I click on the "filter_failed" in "run_detail" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I take a screenshot named "run_detail_filtered_failed" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

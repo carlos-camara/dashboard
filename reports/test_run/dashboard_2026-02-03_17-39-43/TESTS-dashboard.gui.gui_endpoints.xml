@@ -1,0 +1,32 @@
+<testsuite name="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" tests="1" errors="0" failures="1" skipped="0" time="2.526231" timestamp="2026-02-03T17:41:44.405050" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" name="Deep Dive into Endpoint Detail" status="failed" time="2.526231"><failure type="NoneType" message="None">
+<![CDATA[
+Failing step: When I click on the "endpoints_link" in the sidebar ... undefined in 0.000s
+Location: features/dashboard/gui/gui_endpoints.feature:9
+None]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Deep Dive into Endpoint Detail
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.525s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I click on the "endpoints_link" in the sidebar ... undefined in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    When I type "health" into the "search_input" in "endpoints_view" ... skipped in 0.000s
+    And I wait for 2 seconds ... skipped in 0.000s
+    When I click on the "endpoint_item" in "endpoints_view" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then the "back_button" in "endpoint_detail" should contain the text "Back to Catalog" ... skipped in 0.000s
+    And I should see the text "Success Rate" ... skipped in 0.000s
+    And I should see the text "Avg Latency" ... skipped in 0.000s
+    And I should see the "performance_card" in "endpoint_detail" ... skipped in 0.000s
+    And I should see the text "Performance Insights" ... skipped in 0.000s
+    And I should see the text "Live Discovery Data" ... skipped in 0.000s
+    Then I take a screenshot named "endpoints_deep_detail" ... skipped in 0.000s
+    When I click on the "back_button" in "endpoint_detail" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then the "title" in "endpoints_view" should contain the text "Endpoint Catalog" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

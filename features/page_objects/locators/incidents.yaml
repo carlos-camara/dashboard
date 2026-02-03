@@ -2,12 +2,12 @@ incidents:
   header:
     title:
       type: text
-      by: xpath
-      value: "//*[normalize-space(text())='INCIDENT']"
+      by: css
+      value: "main h1.font-black" # "INCIDENT\nTAXONOMY"
     subtitle:
       type: text
-      by: xpath
-      value: "//*[normalize-space(text())='TAXONOMY']"
+      by: css
+      value: "main h1.font-black" # "INCIDENT\nTAXONOMY"
   stats:
     total_sign:
       type: text

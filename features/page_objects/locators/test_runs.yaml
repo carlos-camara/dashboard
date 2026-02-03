@@ -1,8 +1,7 @@
 test_runs:
   title:
-    type: text
     by: xpath
-    value: "//*[contains(text(), 'Execution Archives')]"
+    value: "//main//*[self::h1 or self::h2][contains(@class, 'font-black')]"
   project_title:
     type: text
     by: xpath
@@ -22,4 +21,4 @@ test_runs:
   view_analytics_button:
     type: button
     by: xpath
-    value: "//*[contains(text(), 'View Analytics')]"
+    value: "//*[contains(text(), 'VIEW ANALYTICS')]"

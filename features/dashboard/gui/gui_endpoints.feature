@@ -21,4 +21,4 @@ Feature: Endpoints Catalog Validation
     Then I take a screenshot named "endpoints_deep_detail"
     When I click on the "back_button" in "endpoint_detail"
     And I wait for 1 seconds
-    Then the "title" in "endpoints_view" should contain the text "Endpoint Catalog"
+    Then the "title" in "endpoints_view" should contain the text "ENDPOINT CATALOG"
