@@ -2,16 +2,16 @@ dashboard:
   header:
     title:
       type: text
-      by: xpath
-      value: "//h1[contains(., 'COMMAND')]" # "COMMAND\nCENTER"
+      by: css selector
+      value: "h1" # "COMMAND\nCENTER"
     subtitle:
       type: text
-      by: xpath
-      value: "//span[contains(., 'DASHBOARD CLUSTER')]"
+      by: css selector
+      value: "header span.tracking-\\[0\\.2em\\]"
     qa_hub_text:
       type: text
-      by: xpath
-      value: "//span[contains(., 'QA Hub')]"
+      by: css selector
+      value: "header div.text-indigo-400 span"
   
   stats:
     pass_rate:
