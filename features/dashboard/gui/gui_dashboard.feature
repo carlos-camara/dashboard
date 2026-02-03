@@ -7,19 +7,19 @@ Feature: Dashboard View Validation
 
   Scenario: Verify Header and Status Ticker
     Then the page title should be "QA Hub - Execution Dashboard"
-    And I should see the text "Dashboard Cluster"
+    And the "subtitle" in "dashboard.header" should contain the text "Dashboard Cluster"
     And the system status should be valid
     Then I take a screenshot named "dashboard_header_status"
 
   Scenario: Verify Statistics Cards
-    Then I should see the text "System Health"
-    And I should see the text "Total Executions"
-    And I should see the text "Pass Rate"
-    And I should see the text "Avg Latency"
+    Then the "passed_card" in "dashboard.stats" should contain the text "System Health"
+    And the "total_runs" in "dashboard.stats" should contain the text "Total Executions"
+    And the "pass_rate" in "dashboard.stats" should contain the text "Pass Rate"
+    And the "avg_duration" in "dashboard.stats" should contain the text "Avg Latency"
     Then I take a screenshot of the "stats grid" named "dashboard_stats_grid"
 
   Scenario: Verify Timeline Controls
-    Then I should see the text "Signal Velocity"
+    Then the "heading" in "dashboard.timeline" should contain the text "Signal Velocity"
     And I should see at least 1 elements with selector "chart" in "dashboard.timeline"
     When I switch the chart view to "Volume"
     And I wait for 1 seconds
@@ -29,14 +29,14 @@ Feature: Dashboard View Validation
     Then I take a screenshot of the "chart" named "dashboard_chart_success"
 
   Scenario: Verify Incident and Sector Lists
-    Then I should see the text "Sector Integrity"
+    Then the "heading" in "dashboard.recent_runs" should contain the text "Sector Integrity"
     And I should see at least 1 elements with class "bg-slate-950/40"
-    Then I should see the text "Incident Taxonomy"
+    Then the "heading" in "dashboard.incidents" should contain the text "Incident Taxonomy"
     Then I take a screenshot of the "lists panel" named "dashboard_lists_panels"
 
   Scenario: Verify Endpoints Catalog and Scroll
     When I scroll to the bottom of the page
-    Then I should see the text "Latency Anomalies"
+    Then the "heading" in "dashboard.endpoints" should contain the text "Latency Anomalies"
     Then I take a screenshot named "dashboard_bottom_fullpage"
 
   Scenario: Verify Global Actions and Filters
@@ -50,13 +50,13 @@ Feature: Dashboard View Validation
 
   @responsive @mobile
   Scenario: Verify Mobile Viewport Layout
-    Then I should see the text "Dashboard Cluster"
+    Then the "subtitle" in "dashboard.header" should contain the text "Dashboard Cluster"
     Then I take a screenshot named "dashboard_responsiveness"
 
   Scenario: Verify Navigation to Incident Taxonomy
     When I click on the "incidents_link" in the sidebar
     And I wait for 1 seconds
-    Then I should see the text "INCIDENT"
-    And I should see the text "TAXONOMY"
-    And I should see the text "Global Scope"
+    Then the "title" in "incidents.header" should contain the text "INCIDENT"
+    And the "subtitle" in "incidents.header" should contain the text "TAXONOMY"
+    And the "scope_dropdown" in "incidents.filters" should contain the text "Global Scope"
     Then I take a screenshot named "incident_taxonomy_page"

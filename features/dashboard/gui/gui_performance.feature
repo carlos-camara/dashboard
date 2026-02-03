@@ -16,8 +16,8 @@ Feature: Ultra-Professional Performance Dashboard Validation
     When I click on the "open_report_button" in "endpoint_detail"
     And I wait for 10 seconds
     Then I should see the "audit_title" in "performance_report_view"
-    And I should see the text "Performance"
-    And I should see the text "Dossier"
+    And the "audit_title" in "performance_report_view" should contain the text "Performance"
+    And the "export_button" in "performance_report_view" should contain the text "Dossier"
     And I should see the text "Integrity"
     And I should see the "rps_image" in "performance_report_view"
     And I should see the "latency_image" in "performance_report_view"
