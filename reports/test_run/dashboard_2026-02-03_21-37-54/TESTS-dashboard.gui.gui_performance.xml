@@ -1,0 +1,28 @@
+<testsuite name="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" tests="1" errors="0" failures="0" skipped="0" time="22.465531" timestamp="2026-02-03T21:36:41.603258" hostname="runnervmkj6or"><testcase classname="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" name="Validate High-Density Performance Audit Dossier" status="passed" time="22.465531"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Validate High-Density Performance Audit Dossier
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.274s
+    And I wait for 5 seconds ... passed in 5.000s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.152s
+    And I wait for 2 seconds ... passed in 2.000s
+    When I type "runs" into the "search_input" in "endpoints_view" ... passed in 0.185s
+    And I wait for 2 seconds ... passed in 2.000s
+    When I click on the "endpoint_item" in "endpoints_view" ... passed in 0.147s
+    And I wait for 2 seconds ... passed in 2.000s
+    Then I should see the "performance_card" in "endpoint_detail" ... passed in 0.029s
+    When I click on the "open_report_button" in "endpoint_detail" ... passed in 0.123s
+    And I wait for 10 seconds ... passed in 10.000s
+    Then I should see the "audit_title" in "performance_report_view" ... passed in 0.036s
+    And the "audit_title" in "performance_report_view" should contain the text "i18n:performance.audit_title" ... passed in 0.019s
+    And the "export_button" in "performance_report_view" should contain the text "i18n:performance.dossier" ... passed in 0.021s
+    And I should see the text "i18n:performance.integrity" ... passed in 0.070s
+    And I should see the "rps_image" in "performance_report_view" ... passed in 0.032s
+    And I should see the "latency_image" in "performance_report_view" ... passed in 0.029s
+    And I should see the "original_report_link" in "performance_report_view" ... passed in 0.029s
+    Then I take a screenshot named "final_performance_dashboard_verification" ... passed in 0.318s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
