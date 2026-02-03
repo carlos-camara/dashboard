@@ -1,0 +1,44 @@
+<testsuite name="dashboard.gui.gui_run_detail.Run Detail View Validation" tests="1" errors="0" failures="1" skipped="0" time="7.311398" timestamp="2026-02-03T20:49:38.145047" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_run_detail.Run Detail View Validation" name="Explore Run Detail View" status="failed" time="7.311398"><failure type="AssertionError" message="Element 'back_button' in 'run_detail' does not contain text 'i18n:run_detail.return_to_base' (case-insensitive normalized). Found: 'RETURN TO BASE'">
+<![CDATA[
+Failing step: Then the "back_button" in "run_detail" should contain the text "i18n:run_detail.return_to_base" ... failed in 0.049s
+Location: features/dashboard/gui/gui_run_detail.feature:15
+Assertion Failed: Element 'back_button' in 'run_detail' does not contain text 'i18n:run_detail.return_to_base' (case-insensitive normalized). Found: 'RETURN TO BASE'
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Explore Run Detail View
+   Failed Step: the "back_button" in "run_detail" should contain the text "i18n:run_detail.return_to_base"
+   Location: features\resources\screenshots\2026-02-03_20-46-42\FAILED_Explore_Run_Detail_View_the_"back_button"_in_"run_deta.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_20-46-42\FAILED_Explore_Run_Detail_View_the_"back_button"_in_"run_deta.png' width='800' alt='Failure Screenshot' />]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Explore Run Detail View
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.807s
+    When I wait for 2 seconds ... passed in 2.001s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.240s
+    And I wait for 1 seconds ... passed in 1.002s
+    When I click on the "project_card" in "test_runs" ... passed in 0.888s
+    And I wait for 1 seconds ... passed in 1.001s
+    When I click on the "item" in "project_detail" ... passed in 0.322s
+    And I wait for 1 seconds ... passed in 1.001s
+    Then the "back_button" in "run_detail" should contain the text "i18n:run_detail.return_to_base" ... failed in 0.049s
+    And I should see the text "i18n:run_detail.success" ... skipped in 0.000s
+    Then I take a screenshot named "run_detail_full_view" ... skipped in 0.000s
+    When I click on the "filter_failed" in "run_detail" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I take a screenshot named "run_detail_filtered_failed" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Explore Run Detail View
+   Failed Step: the "back_button" in "run_detail" should contain the text "i18n:run_detail.return_to_base"
+   Location: features\resources\screenshots\2026-02-03_20-46-42\FAILED_Explore_Run_Detail_View_the_"back_button"_in_"run_deta.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_20-46-42\FAILED_Explore_Run_Detail_View_the_"back_button"_in_"run_deta.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase></testsuite>

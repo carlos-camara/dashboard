@@ -1,0 +1,48 @@
+<testsuite name="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" tests="1" errors="0" failures="1" skipped="0" time="7.970515" timestamp="2026-02-03T20:47:36.360924" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" name="Deep Dive into Endpoint Detail" status="failed" time="7.970515"><failure type="AssertionError" message="Element 'back_button' in 'endpoint_detail' does not contain text 'i18n:endpoints.detail.back_button' (case-insensitive normalized). Found: 'BACK TO CATALOG'">
+<![CDATA[
+Failing step: Then the "back_button" in "endpoint_detail" should contain the text "i18n:endpoints.detail.back_button" ... failed in 0.040s
+Location: features/dashboard/gui/gui_endpoints.feature:15
+Assertion Failed: Element 'back_button' in 'endpoint_detail' does not contain text 'i18n:endpoints.detail.back_button' (case-insensitive normalized). Found: 'BACK TO CATALOG'
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Deep Dive into Endpoint Detail
+   Failed Step: the "back_button" in "endpoint_detail" should contain the text "i18n:endpoints.detail.back_button"
+   Location: features\resources\screenshots\2026-02-03_20-46-42\FAILED_Deep_Dive_into_Endpoint_Detail_the_"back_button"_in_"endpoint.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_20-46-42\FAILED_Deep_Dive_into_Endpoint_Detail_the_"back_button"_in_"endpoint.png' width='800' alt='Failure Screenshot' />]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Deep Dive into Endpoint Detail
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.743s
+    When I wait for 2 seconds ... passed in 2.002s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.388s
+    And I wait for 1 seconds ... passed in 1.002s
+    When I type "health" into the "search_input" in "endpoints_view" ... passed in 0.491s
+    And I wait for 2 seconds ... passed in 2.002s
+    When I click on the "endpoint_item" in "endpoints_view" ... passed in 0.301s
+    And I wait for 1 seconds ... passed in 1.002s
+    Then the "back_button" in "endpoint_detail" should contain the text "i18n:endpoints.detail.back_button" ... failed in 0.040s
+    And I should see the text "i18n:endpoints.detail.success_rate" ... skipped in 0.000s
+    And I should see the text "i18n:endpoints.detail.avg_latency" ... skipped in 0.000s
+    And I should see the "performance_card" in "endpoint_detail" ... skipped in 0.000s
+    And I should see the text "i18n:endpoints.detail.performance_insights" ... skipped in 0.000s
+    And I should see the text "i18n:endpoints.detail.live_discovery" ... skipped in 0.000s
+    Then I take a screenshot named "endpoints_deep_detail" ... skipped in 0.000s
+    When I click on the "back_button" in "endpoint_detail" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then the "title" in "endpoints_view" should contain the text "i18n:endpoints.view.title" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Deep Dive into Endpoint Detail
+   Failed Step: the "back_button" in "endpoint_detail" should contain the text "i18n:endpoints.detail.back_button"
+   Location: features\resources\screenshots\2026-02-03_20-46-42\FAILED_Deep_Dive_into_Endpoint_Detail_the_"back_button"_in_"endpoint.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_20-46-42\FAILED_Deep_Dive_into_Endpoint_Detail_the_"back_button"_in_"endpoint.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase></testsuite>

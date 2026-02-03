@@ -2,11 +2,12 @@ from behave import given, when, then, step
 import os
 import time
 
-# Import ALL generic steps from framework to make them available to Behave
+# Import ALL generic steps from framework
 from qa_framework.steps.common_steps import *
 from qa_framework.steps.gui_steps import *
 from qa_framework.steps.api_steps import *
 from qa_framework.steps.pdf_steps import *
+from qa_framework.steps.gui_steps import resolve_i18n
 
 # Project-specific Screenshot directory
 SCREENSHOTS_DIR = os.path.join("features", "resources", "screenshots")
@@ -25,9 +26,12 @@ def ensure_screenshots_dir():
 def step_apply_time_filter(context, filter_name):
     """Apply time filter using dashboard actions"""
     filter_mapping = {
+        "i18n:dashboard.filters.seven_days": "filter_7_days",
+        "i18n:dashboard.filters.thirty_days": "filter_30_days",
+        "i18n:dashboard.filters.all_time": "filter_all_time",
+        # Backward compatibility
         "7 Days": "filter_7_days",
-        "30 Days": "filter_30_days",
-        "All Time": "filter_all_time"
+        "30 Days": "filter_30_days"
     }
     
     if filter_name not in filter_mapping:
@@ -41,7 +45,10 @@ def step_apply_time_filter(context, filter_name):
 @when('I switch the chart view to "{mode}"')
 def step_switch_chart_mode(context, mode):
     """Switch chart visualization mode"""
+    # Mapping based on i18n keys or lowercase literals
     mode_mapping = {
+        "i18n:dashboard.timeline.volume": "toggle_volume",
+        "i18n:dashboard.timeline.success": "toggle_success",
         "volume": "toggle_volume",
         "success": "toggle_success",
         "activity": "toggle_success"

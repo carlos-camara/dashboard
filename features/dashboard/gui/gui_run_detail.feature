@@ -12,8 +12,8 @@ Feature: Run Detail View Validation
     And I wait for 1 seconds
     When I click on the "item" in "project_detail"
     And I wait for 1 seconds
-    Then the "back_button" in "run_detail" should contain the text "RETURN TO BASE"
-    And I should see the text "Success"
+    Then the "back_button" in "run_detail" should contain the text "i18n:run_detail.return_to_base"
+    And I should see the text "i18n:run_detail.success"
     Then I take a screenshot named "run_detail_full_view"
     When I click on the "filter_failed" in "run_detail"
     And I wait for 1 seconds

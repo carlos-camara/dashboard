@@ -1,0 +1,55 @@
+<testsuite name="dashboard.gui.gui_incidents.Incident Taxonomy View Validation" tests="1" errors="1" failures="0" skipped="0" time="14.978259" timestamp="2026-02-03T20:47:51.910221" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_incidents.Incident Taxonomy View Validation" name="Verify Incident Page Structure" status="failed" time="14.978259"><error type="TimeoutException" message="Message: &#10;">
+<![CDATA[
+Failing step: Then the page title should be "i18n:common.page_title" ... failed in 10.256s
+Location: features/dashboard/gui/gui_incidents.feature:12
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\steps\gui_steps.py", line 22, in step_verify_page_title
+    WebDriverWait(context.driver, 10).until(EC.title_is(resolved_title))
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Incident Page Structure
+   Failed Step: the page title should be "i18n:common.page_title"
+   Location: features\resources\screenshots\2026-02-03_20-46-42\FAILED_Verify_Incident_Page_Structure_the_page_title_should_be_"i18n.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_20-46-42\FAILED_Verify_Incident_Page_Structure_the_page_title_should_be_"i18n.png' width='800' alt='Failure Screenshot' />]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke
+  Scenario: Verify Incident Page Structure
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.416s
+    And I wait for 2 seconds ... passed in 2.002s
+    When I click on the "incidents_link" in the sidebar ... passed in 0.303s
+    And I wait for 1 seconds ... passed in 1.001s
+    Then the page title should be "i18n:common.page_title" ... failed in 10.256s
+    And the "title" in "incidents.header" should contain the text "i18n:incidents.header.title" ... skipped in 0.000s
+    And the "subtitle" in "incidents.header" should contain the text "i18n:incidents.header.subtitle" ... skipped in 0.000s
+    And I should see the text "i18n:incidents.stats.unique" ... skipped in 0.000s
+    Then I take a screenshot named "incident_page_structure" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Incident Page Structure
+   Failed Step: the page title should be "i18n:common.page_title"
+   Location: features\resources\screenshots\2026-02-03_20-46-42\FAILED_Verify_Incident_Page_Structure_the_page_title_should_be_"i18n.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_20-46-42\FAILED_Verify_Incident_Page_Structure_the_page_title_should_be_"i18n.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase></testsuite>
