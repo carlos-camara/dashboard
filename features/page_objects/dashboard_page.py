@@ -5,6 +5,8 @@ Contains all locators and methods for the main dashboard page.
 import time
 from selenium.webdriver.common.by import By
 from .base_page import BasePage
+# Ensuring we use the local base page that will inherit from framework
+
 
 
 class DashboardPage(BasePage):

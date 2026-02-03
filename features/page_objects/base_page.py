@@ -7,10 +7,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 
+from qa_framework.core.base_page import BasePage as FrameworkBasePage
+
 import yaml
 import os
 
-class BasePage:
+class BasePage(FrameworkBasePage):
     """Base class for all page objects"""
     
     # Cache for locators to avoid reading file multiple times
