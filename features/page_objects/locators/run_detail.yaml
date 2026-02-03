@@ -2,24 +2,30 @@ run_detail:
   back_button:
     type: button
     by: xpath
-    value: "//button[contains(., 'Return to Base')]"
+    value: //button[contains(., 'Return to Base')]
+    wait_load: true
   export_pdf:
     type: button
     by: xpath
-    value: "//button[contains(., 'Export PDF Dossier')]"
+    value: //button[contains(., 'Export PDF Dossier')]
+    wait_load: false
   filter_failed:
     type: button
     by: xpath
-    value: "//button[contains(., 'FAILED')]"
+    value: //button[contains(., 'FAILED')]
+    wait_load: false
   project_label:
     type: text
     by: xpath
-    value: "//span[contains(@class, 'text-indigo-500')]/.."
+    value: //span[contains(@class, 'text-indigo-500')]/..
+    wait_load: false
   score_percentage:
     type: text
     by: xpath
-    value: "//span[contains(@class, 'text-3xl font-black')]"
+    value: //span[contains(@class, 'text-3xl font-black')]
+    wait_load: false
   scenario_card:
     type: webelement
     by: xpath
-    value: "//div[contains(@class, 'group bg-slate-900/40')]"
+    value: //div[contains(@class, 'group bg-slate-900/40')]
+    wait_load: false

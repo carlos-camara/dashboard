@@ -33,7 +33,7 @@ Feature: Incident Taxonomy View Validation
 
   Scenario: Verify Incident Expansion and Details
     Then I should see at least 1 elements with class "glass-panel"
-    When I click on the element with class "cursor-pointer"
+    When I click on the "list_expand_button"
     And I wait for 1 seconds
     Then the "list_details_context" should contain the text "[LANG:incidents.list.stack_trace]"
     And I should see the text "[LANG:incidents.list.root_cause]"

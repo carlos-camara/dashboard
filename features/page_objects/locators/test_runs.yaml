@@ -1,24 +1,30 @@
 test_runs:
   title:
     by: xpath
-    value: "//main//*[self::h1 or self::h2][contains(@class, 'font-black')]"
+    value: //main//*[self::h1 or self::h2][contains(@class, 'font-black')]
+    wait_load: true
   project_title:
     type: text
     by: xpath
-    value: "//h3[contains(@class, 'text-2xl font-black')]"
+    value: //h3[contains(@class, 'text-2xl font-black')]
+    wait_load: false
   search_input:
     type: input
     by: xpath
-    value: "//input[@placeholder='Search by project identifier, run ID, or tags...']"
+    value: //input[@placeholder='Search by project identifier, run ID, or tags...']
+    wait_load: false
   project_card:
     type: button
     by: xpath
-    value: "//*[@data-testid='project-card']"
+    value: //*[@data-testid='project-card']
+    wait_load: false
   delete_project_button:
     type: button
     by: xpath
-    value: "//button[contains(., 'Delete Project')]"
+    value: //button[contains(., 'Delete Project')]
+    wait_load: false
   view_analytics_button:
     type: button
     by: xpath
-    value: "//*[contains(text(), 'VIEW ANALYTICS')]"
+    value: //*[contains(text(), 'VIEW ANALYTICS')]
+    wait_load: false
