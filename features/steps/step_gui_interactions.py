@@ -73,3 +73,17 @@ def step_verify_system_status_valid(context):
     
     assert any(status in text for status in valid_statuses), \
         f"Invalid system status: '{text}'. Expected one of {valid_statuses}"
+
+
+@when('I export the report')
+def step_export_report(context):
+    """Click the export button in dashboard actions"""
+    step_click_page_object(context, "export_button", "dashboard.actions")
+
+
+@then('I take a screenshot of the "{element_description}" named "{screenshot_name}"')
+def step_take_element_screenshot(context, element_description, screenshot_name):
+    """Take a screenshot - for now just take a full page screenshot"""
+    # This is a simplified version - could be enhanced to screenshot specific elements
+    ensure_screenshots_dir()
+    step_take_screenshot(context, screenshot_name)

@@ -3,37 +3,37 @@ dashboard:
     title:
       type: text
       by: xpath
-      value: "//h1" # "Command Center"
+      value: "//h1[contains(., 'COMMAND')]" # "COMMAND\nCENTER"
     subtitle:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'Dashboard Cluster')]"
+      value: "//span[contains(., 'DASHBOARD CLUSTER')]"
     qa_hub_text:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'Command Center')]"
+      value: "//span[contains(., 'QA Hub')]"
   
   stats:
     pass_rate:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'Pass Rate')]"
+      value: "//*[contains(normalize-space(.), 'PASS RATE')]"
     total_runs:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'Total Executions')]"
+      value: "//*[contains(normalize-space(.), 'TOTAL EXECUTIONS')]"
     avg_duration:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'Avg Latency')]"
+      value: "//*[contains(normalize-space(.), 'AVG LATENCY')]"
     passed_card:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'System Health')]"
+      value: "//*[contains(normalize-space(.), 'SYSTEM HEALTH')]"
     failed_card:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'Incident Taxonomy')]"
+      value: "//*[contains(normalize-space(.), 'INCIDENT TAXONOMY')]"
 
   status_ticker:
     bar:
@@ -49,7 +49,7 @@ dashboard:
     heading:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'Signal Velocity')]"
+      value: "//*[contains(normalize-space(.), 'SIGNAL VELOCITY')]"
     chart:
       type: webelement
       by: css
@@ -67,7 +67,7 @@ dashboard:
     heading:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'Sector Integrity')]"
+      value: "//*[contains(normalize-space(.), 'SECTOR INTEGRITY')]"
     section:
       type: webelement
       by: xpath
@@ -85,7 +85,7 @@ dashboard:
     heading:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'Incident Taxonomy')]"
+      value: "//*[contains(normalize-space(.), 'INCIDENT TAXONOMY')]"
     list_item:
       type: webelement
       by: xpath
@@ -95,7 +95,7 @@ dashboard:
     heading:
       type: text
       by: xpath
-      value: "//*[contains(normalize-space(.), 'Latency Anomalies')]"
+      value: "//*[contains(normalize-space(.), 'LATENCY ANOMALIES')]"
     catalog:
       type: webelement
       by: xpath
