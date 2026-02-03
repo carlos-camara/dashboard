@@ -1,0 +1,28 @@
+<testsuite name="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" tests="1" errors="0" failures="0" skipped="0" time="22.422591" timestamp="2026-02-03T14:28:54.260968" hostname="runnervmkj6or"><testcase classname="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" name="Validate High-Density Performance Audit Dossier" status="passed" time="22.422591"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Validate High-Density Performance Audit Dossier
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.288s
+    And I wait for 5 seconds ... passed in 5.000s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.130s
+    And I wait for 2 seconds ... passed in 2.000s
+    When I type "runs" into the "search_input" in "endpoints_view" ... passed in 0.162s
+    And I wait for 2 seconds ... passed in 2.000s
+    When I click on the "endpoint_item" in "endpoints_view" ... passed in 0.197s
+    And I wait for 2 seconds ... passed in 2.000s
+    Then I should see the "performance_card" in "endpoint_detail" ... passed in 0.023s
+    When I click on the "open_report_button" in "endpoint_detail" ... passed in 0.118s
+    And I wait for 10 seconds ... passed in 10.000s
+    Then I should see the "audit_title" in "performance_report_view" ... passed in 0.027s
+    And I should see the text "Performance" ... passed in 0.015s
+    And I should see the text "Dossier" ... passed in 0.013s
+    And I should see the text "Integrity" ... passed in 0.013s
+    And I should see the "rps_image" in "performance_report_view" ... passed in 0.022s
+    And I should see the "latency_image" in "performance_report_view" ... passed in 0.023s
+    And I should see the "original_report_link" in "performance_report_view" ... passed in 0.022s
+    Then I take a screenshot named "final_performance_dashboard_verification" ... passed in 0.370s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
