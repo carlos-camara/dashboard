@@ -1,43 +1,53 @@
 performance_report_view:
-  texts:
-    audit_title:
-      by: xpath
-      value: "//*[@data-testid='performance-audit-title']"
-    rps_section:
-      by: xpath
-      value: "//h3[contains(., 'Requests per Second')]"
-    latency_section:
-      by: xpath
-      value: "//h3[contains(., 'Response Times')]"
-    rps_image:
-      by: xpath
-      value: "//h3[contains(., 'Traffic') and contains(., 'Velocity')]"
-    latency_image:
-      by: xpath
-      value: "//h3[contains(., 'Spectral') and contains(., 'Latency')]"
-    audit_matrix:
-      by: xpath
-      value: "//h3[contains(., 'Audit')]"
-    summary_efficiency:
-      by: xpath
-      value: "//*[@data-testid='summary-efficiency']"
-    summary_velocity:
-      by: xpath
-      value: "//*[@data-testid='summary-velocity']"
-    summary_integrity:
-      by: xpath
-      value: "//*[@data-testid='summary-integrity']"
-    summary_saturation:
-      by: xpath
-      value: "//*[@data-testid='summary-saturation']"
-  
-  buttons:
-    back_button:
-      by: xpath
-      value: "//button[./*[local-name()='svg' and contains(@class, 'lucide-chevron-left')]]"
-    export_button:
-      by: xpath
-      value: "//button[contains(., 'Dossier')]"
-    original_report_link:
-      by: xpath
-      value: "//a[contains(., 'Raw Locust Report')]"
+  audit_title:
+    type: text
+    by: xpath
+    value: "//*[@data-testid='performance-audit-title']"
+  rps_section:
+    type: text
+    by: xpath
+    value: "//h3[contains(., 'Requests per Second')]"
+  latency_section:
+    type: text
+    by: xpath
+    value: "//h3[contains(., 'Response Times')]"
+  rps_image:
+    type: text
+    by: xpath
+    value: "//h3[contains(., 'Traffic') and contains(., 'Velocity')]"
+  latency_image:
+    type: text
+    by: xpath
+    value: "//h3[contains(., 'Spectral') and contains(., 'Latency')]"
+  audit_matrix:
+    type: text
+    by: xpath
+    value: "//h3[contains(., 'Audit')]"
+  summary_efficiency:
+    type: text
+    by: xpath
+    value: "//*[@data-testid='summary-efficiency']"
+  summary_velocity:
+    type: text
+    by: xpath
+    value: "//*[@data-testid='summary-velocity']"
+  summary_integrity:
+    type: text
+    by: xpath
+    value: "//*[@data-testid='summary-integrity']"
+  summary_saturation:
+    type: text
+    by: xpath
+    value: "//*[@data-testid='summary-saturation']"
+  back_button:
+    type: button
+    by: xpath
+    value: "//button[./*[local-name()='svg' and contains(@class, 'lucide-chevron-left')]]"
+  export_button:
+    type: button
+    by: xpath
+    value: "//button[contains(., 'Dossier')]"
+  original_report_link:
+    type: button
+    by: xpath
+    value: "//a[contains(., 'Raw Locust Report')]"
