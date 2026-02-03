@@ -1,37 +1,42 @@
 project_detail:
-  projectName:
-    by: xpath
-    value: "//h1"
-  runCount:
-    by: xpath
-    value: "//*[contains(text(), 'Runs Detected')]"
-  stability_score:
-    by: xpath
-    value: "//*[contains(text(), 'Stability Score')]"
-  velocity_trend:
-    by: xpath
-    value: "//*[contains(text(), 'Execution Velocity')]/following-sibling::div//div[contains(@class, 'recharts-responsive-container')]"
-  stability_comparison:
-    by: xpath
-    value: "//*[contains(text(), 'Layer Stability')]/ancestor::div[contains(@class, 'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]"
-  stability_chart:
-    by: xpath
-    value: "//*[contains(text(), 'Layer Stability')]/ancestor::div[contains(@class, 'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]"
-  latency_comparison:
-    by: xpath
-    value: "//*[contains(text(), 'Layer Latency')]/ancestor::div[contains(@class, 'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]"
-  back_button:
-    by: xpath
-    value: "//button[./*[local-name()='svg' and contains(@class, 'lucide-chevron-left')]]"
-  download_button:
-    by: xpath
-    value: "//button[@title='Download Dossier']"
-  delete_button:
-    by: xpath
-    value: "//button[./*[local-name()='svg' and contains(@class, 'lucide-trash-2')]]"
-  item:
-    by: xpath
-    value: "//div[contains(@id, 'run-item-')]"
-  run_list:
-    by: xpath
-    value: "//h3[contains(text(), 'Execution History')]/following-sibling::div"
+  texts:
+    projectName:
+      by: xpath
+      value: "//h1"
+    runCount:
+      by: xpath
+      value: "//*[contains(text(), 'Runs Detected')]"
+    stability_score:
+      by: xpath
+      value: "//*[contains(text(), 'Stability Score')]"
+  
+  webelements:
+    velocity_trend:
+      by: xpath
+      value: "//*[contains(text(), 'Execution Velocity')]/following-sibling::div//div[contains(@class, 'recharts-responsive-container')]"
+    stability_comparison:
+      by: xpath
+      value: "//*[contains(text(), 'Layer Stability')]/ancestor::div[contains(@class, 'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]"
+    stability_chart:
+      by: xpath
+      value: "//*[contains(text(), 'Layer Stability')]/ancestor::div[contains(@class, 'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]"
+    latency_comparison:
+      by: xpath
+      value: "//*[contains(text(), 'Layer Latency')]/ancestor::div[contains(@class, 'rounded-[2rem)')]//div[contains(@class, 'recharts-responsive-container')]"
+    item:
+      by: xpath
+      value: "//div[contains(@id, 'run-item-')]"
+    run_list:
+      by: xpath
+      value: "//h3[contains(text(), 'Execution History')]/following-sibling::div"
+  
+  buttons:
+    back_button:
+      by: xpath
+      value: "//button[./*[local-name()='svg' and contains(@class, 'lucide-chevron-left')]]"
+    download_button:
+      by: xpath
+      value: "//button[@title='Download Dossier']"
+    delete_button:
+      by: xpath
+      value: "//button[./*[local-name()='svg' and contains(@class, 'lucide-trash-2')]]"

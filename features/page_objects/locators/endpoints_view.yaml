@@ -1,16 +1,21 @@
 endpoints_view:
-  title:
-    by: xpath
-    value: "//*[contains(text(), 'Endpoint Catalog')]"
-  search_input:
-    by: xpath
-    value: "//input[@placeholder='Search by URL, project, or host...']"
-  method_filter:
-    by: xpath
-    value: "//select"
-  advanced_filters_toggle:
-    by: xpath
-    value: "//button[contains(., 'Filters')]"
-  endpoint_item:
-    by: xpath
-    value: "//div[contains(@class, 'group flex flex-col md:flex-row')]"
+  texts:
+    title:
+      by: xpath
+      value: "//*[contains(text(), 'Endpoint Catalog')]"
+  
+  inputs:
+    search_input:
+      by: xpath
+      value: "//input[@placeholder='Search by URL, project, or host...']"
+    method_filter:
+      by: xpath
+      value: "//select"
+  
+  buttons:
+    advanced_filters_toggle:
+      by: xpath
+      value: "//button[contains(., 'Filters')]"
+    endpoint_item:
+      by: xpath
+      value: "//div[contains(@class, 'group flex flex-col md:flex-row')]"

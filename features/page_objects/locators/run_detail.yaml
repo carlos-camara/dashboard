@@ -1,19 +1,24 @@
 run_detail:
-  back_button:
-    by: xpath
-    value: "//button[contains(., 'Return to Base')]"
-  export_pdf:
-    by: xpath
-    value: "//button[contains(., 'Export PDF Dossier')]"
-  project_label:
-    by: xpath
-    value: "//span[contains(@class, 'text-indigo-500')]/.."
-  score_percentage:
-    by: xpath
-    value: "//span[contains(@class, 'text-3xl font-black')]"
-  filter_failed:
-    by: xpath
-    value: "//button[contains(., 'FAILED')]"
-  scenario_card:
-    by: xpath
-    value: "//div[contains(@class, 'group bg-slate-900/40')]"
+  buttons:
+    back_button:
+      by: xpath
+      value: "//button[contains(., 'Return to Base')]"
+    export_pdf:
+      by: xpath
+      value: "//button[contains(., 'Export PDF Dossier')]"
+    filter_failed:
+      by: xpath
+      value: "//button[contains(., 'FAILED')]"
+  
+  texts:
+    project_label:
+      by: xpath
+      value: "//span[contains(@class, 'text-indigo-500')]/.."
+    score_percentage:
+      by: xpath
+      value: "//span[contains(@class, 'text-3xl font-black')]"
+  
+  webelements:
+    scenario_card:
+      by: xpath
+      value: "//div[contains(@class, 'group bg-slate-900/40')]"

@@ -1,32 +1,41 @@
 incidents:
   header:
-    title:
-      by: xpath
-      value: "//*[normalize-space(text())='INCIDENT']"
-    subtitle:
-      by: xpath
-      value: "//*[normalize-space(text())='TAXONOMY']"
+    texts:
+      title:
+        by: xpath
+        value: "//*[normalize-space(text())='INCIDENT']"
+      subtitle:
+        by: xpath
+        value: "//*[normalize-space(text())='TAXONOMY']"
+  
   stats:
-    total_sign:
+    texts:
+      total_sign:
         by: xpath
         value: "//*[contains(normalize-space(.), 'Total Incidents')]"
-    sectors_sign:
+      sectors_sign:
         by: xpath
         value: "//*[contains(normalize-space(.), 'Affected Sectors')]"
+  
   filters:
-    scope_dropdown:
+    buttons:
+      scope_dropdown:
         by: xpath
         value: "//button[contains(., 'Global Scope')]"
-    project_item:
-         by: xpath
-         value: "//div[contains(@class, 'absolute')]//div[contains(@class, 'cursor-pointer')]"
+      project_item:
+        by: xpath
+        value: "//div[contains(@class, 'absolute')]//div[contains(@class, 'cursor-pointer')]"
+  
   list:
-    item:
+    webelements:
+      item:
         by: xpath
         value: "//div[contains(@class, 'glass-panel') and .//div[contains(@class, 'cursor-pointer')]]"
-    expand_button:
+    buttons:
+      expand_button:
         by: xpath
         value: "//div[contains(@class, 'glass-panel')]//div[contains(@class, 'cursor-pointer')][1]"
-    details_context:
+    texts:
+      details_context:
         by: xpath
         value: "//*[contains(normalize-space(.), 'Stack Trace Context')]"
