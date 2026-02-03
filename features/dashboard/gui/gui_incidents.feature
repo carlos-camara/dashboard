@@ -9,21 +9,21 @@ Feature: Incident Taxonomy View Validation
 
   @smoke
   Scenario: Verify Incident Page Structure
-    Then the page title should be "i18n:common.page_title"
-    And the "title" in "incidents.header" should contain the text "i18n:incidents.header.title"
-    And the "subtitle" in "incidents.header" should contain the text "i18n:incidents.header.subtitle"
-    And I should see the text "i18n:incidents.stats.unique"
+    Then the page title should be "[LANG:common.page_title]"
+    And the "title" in "incidents.header" should contain the text "[LANG:incidents.header.title]"
+    And the "subtitle" in "incidents.header" should contain the text "[LANG:incidents.header.subtitle]"
+    And I should see the text "[LANG:incidents.stats.unique]"
     Then I take a screenshot named "incident_page_structure"
 
   Scenario: Verify Incident Statistics
-    Then the "total_sign" in "incidents.stats" should contain the text "i18n:incidents.stats.total"
-    And the "sectors_sign" in "incidents.stats" should contain the text "i18n:incidents.stats.sectors"
-    And I should see the text "i18n:incidents.stats.unique"
+    Then the "total_sign" in "incidents.stats" should contain the text "[LANG:incidents.stats.total]"
+    And the "sectors_sign" in "incidents.stats" should contain the text "[LANG:incidents.stats.sectors]"
+    And I should see the text "[LANG:incidents.stats.unique]"
     Then I take a screenshot of the "stats" named "incident_stats_cards"
 
   Scenario: Verify Project Filtering
-    Then the "scope_dropdown" in "incidents.filters" should contain the text "i18n:incidents.filters.global_scope"
-    When I click on the button with text "i18n:incidents.filters.global_scope"
+    Then the "scope_dropdown" in "incidents.filters" should contain the text "[LANG:incidents.filters.global_scope]"
+    When I click on the button with text "[LANG:incidents.filters.global_scope]"
     And I wait for 1 seconds
     Then I take a screenshot named "incident_project_dropdown"
     # Note: Specific project names depend on dynamic data, so we verify the dropdown opens
@@ -33,7 +33,7 @@ Feature: Incident Taxonomy View Validation
     Then I should see at least 1 elements with class "glass-panel"
     When I click on the element with class "cursor-pointer"
     And I wait for 1 seconds
-    Then the "details_context" in "incidents.list" should contain the text "i18n:incidents.list.stack_trace"
-    And I should see the text "i18n:incidents.list.root_cause"
-    And I should see the text "i18n:incidents.list.affecting"
+    Then the "details_context" in "incidents.list" should contain the text "[LANG:incidents.list.stack_trace]"
+    And I should see the text "[LANG:incidents.list.root_cause]"
+    And I should see the text "[LANG:incidents.list.affecting]"
     Then I take a screenshot named "incident_expanded_details"

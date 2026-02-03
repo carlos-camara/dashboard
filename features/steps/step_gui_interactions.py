@@ -26,19 +26,28 @@ def ensure_screenshots_dir():
 def step_apply_time_filter(context, filter_name):
     """Apply time filter using dashboard actions"""
     filter_mapping = {
-        "i18n:dashboard.filters.seven_days": "filter_7_days",
-        "i18n:dashboard.filters.thirty_days": "filter_30_days",
-        "i18n:dashboard.filters.all_time": "filter_all_time",
+        "[LANG:dashboard.filters.seven_days]": "filter_7_days",
+        "[LANG:dashboard.filters.thirty_days]": "filter_30_days",
+        "[LANG:dashboard.filters.all_time]": "filter_all_time",
         # Backward compatibility
         "7 Days": "filter_7_days",
         "30 Days": "filter_30_days"
     }
     
     if filter_name not in filter_mapping:
-        raise ValueError(f"Unknown filter: {filter_name}")
-    
-    # Use framework's generic step to click the filter button
-    element_name = filter_mapping[filter_name]
+        # Check case-insensitive mapping if not found
+        filter_name_lower = filter_name.lower()
+        mapping_found = False
+        for k, v in filter_mapping.items():
+            if k.lower() == filter_name_lower:
+                element_name = v
+                mapping_found = True
+                break
+        
+        if not mapping_found:
+            raise ValueError(f"Unknown filter: {filter_name}")
+    else:
+        element_name = filter_mapping[filter_name]
     step_click_page_object(context, element_name, "dashboard.actions")
 
 
@@ -47,19 +56,23 @@ def step_switch_chart_mode(context, mode):
     """Switch chart visualization mode"""
     # Mapping based on i18n keys or lowercase literals
     mode_mapping = {
-        "i18n:dashboard.timeline.volume": "toggle_volume",
-        "i18n:dashboard.timeline.success": "toggle_success",
+        "[LANG:dashboard.timeline.volume]": "toggle_volume",
+        "[LANG:dashboard.timeline.success]": "toggle_success",
         "volume": "toggle_volume",
         "success": "toggle_success",
         "activity": "toggle_success"
     }
     
     mode_key = mode.lower()
-    if mode_key not in mode_mapping:
+    mapping_found = False
+    for k, v in mode_mapping.items():
+        if k.lower() == mode_key:
+            element_name = v
+            mapping_found = True
+            break
+            
+    if not mapping_found:
         raise ValueError(f"Unknown chart mode: {mode}")
-    
-    # Use framework's generic step to click the toggle
-    element_name = mode_mapping[mode_key]
     step_click_page_object(context, element_name, "dashboard.timeline")
 
 

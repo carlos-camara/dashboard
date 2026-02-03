@@ -11,20 +11,20 @@ Feature: Project Detail View Validation
 
   Scenario: Verify Architecture Analysis Section
     Then the "projectName" in "project_detail" should be visible
-    And I should see the text "i18n:project_detail.layer_stability"
-    And I should see the text "i18n:project_detail.layer_latency"
+    And I should see the text "[LANG:project_detail.layer_stability]"
+    And I should see the text "[LANG:project_detail.layer_latency]"
     And I should see at least 1 elements with selector "stability_comparison" in "project_detail"
     And I should see at least 1 elements with selector "latency_comparison" in "project_detail"
     Then I take a screenshot named "project_detail_architecture"
 
   Scenario: Verify Execution Metrics and Trend
-    Then the "stability_score" in "project_detail" should contain the text "i18n:project_detail.stability_score"
-    And I should see the text "i18n:project_detail.execution_velocity"
+    Then the "stability_score" in "project_detail" should contain the text "[LANG:project_detail.stability_score]"
+    And I should see the text "[LANG:project_detail.execution_velocity]"
     And I should see at least 1 elements with selector "velocity_trend" in "project_detail"
     Then I take a screenshot named "project_detail_metrics"
 
   Scenario: Verify Run History List
-    Then I should see the text "i18n:project_detail.execution_history"
+    Then I should see the text "[LANG:project_detail.execution_history]"
     And I should see at least 1 elements with selector "item" in "project_detail"
     Then I take a screenshot of the "run_list" named "project_detail_history"
 

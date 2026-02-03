@@ -8,7 +8,7 @@ Feature: Test Runs View Validation
   Scenario: Search and Redirect to Project Analytics
     When I click on the "test_runs_link" in the sidebar
     And I wait for 2 seconds
-    Then the "title" in "test_runs" should contain the text "i18n:navigation.test_runs"
+    Then the "title" in "test_runs" should contain the text "[LANG:navigation.test_runs]"
     When I type "dashboard" into the "search_input" in "test_runs"
     And I wait for 3 seconds
     Then the "search_input" in "test_runs" should contain the text "dashboard"
@@ -25,8 +25,8 @@ Feature: Test Runs View Validation
     And I wait for 2 seconds
     When I click on the "project_card" in "test_runs"
     And I wait for 2 seconds
-    Then the "runCount" in "project_detail" should contain the text "i18n:project_detail.run_count"
+    Then the "runCount" in "project_detail" should contain the text "[LANG:project_detail.run_count]"
     # Go back to the registry
     When I click on the "back_button" in "project_detail"
     And I wait for 1 seconds
-    Then I should see the text "i18n:navigation.test_runs"
+    Then I should see the text "[LANG:navigation.test_runs]"

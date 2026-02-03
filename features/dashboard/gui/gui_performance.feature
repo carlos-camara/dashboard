@@ -16,9 +16,9 @@ Feature: Ultra-Professional Performance Dashboard Validation
     When I click on the "open_report_button" in "endpoint_detail"
     And I wait for 10 seconds
     Then I should see the "audit_title" in "performance_report_view"
-    And the "audit_title" in "performance_report_view" should contain the text "i18n:performance.audit_title"
-    And the "export_button" in "performance_report_view" should contain the text "i18n:performance.dossier"
-    And I should see the text "i18n:performance.integrity"
+    And the "audit_title" in "performance_report_view" should contain the text "[LANG:performance.audit_title]"
+    And the "export_button" in "performance_report_view" should contain the text "[LANG:performance.dossier]"
+    And I should see the text "[LANG:performance.integrity]"
     And I should see the "rps_image" in "performance_report_view"
     And I should see the "latency_image" in "performance_report_view"
     And I should see the "original_report_link" in "performance_report_view"
