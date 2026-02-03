@@ -2,15 +2,15 @@ dashboard:
   header:
     title:
       type: text
-      by: css selector
+      by: css
       value: "h1" # "COMMAND\nCENTER"
     subtitle:
       type: text
-      by: css selector
+      by: css
       value: "header span.tracking-\\[0\\.2em\\]"
     qa_hub_text:
       type: text
-      by: css selector
+      by: css
       value: "header div.text-indigo-400 span"
   
   stats:
