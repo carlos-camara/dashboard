@@ -12,10 +12,12 @@ Feature: Dashboard View Validation
     Then I take a screenshot named "dashboard_header_status"
 
   Scenario: Verify Statistics Cards
-    Then the "stats_passed_card" should contain the text "[LANG:dashboard.stats.system_health]"
-    And the "stats_total_runs" should contain the text "[LANG:dashboard.stats.total_executions]"
-    And the "stats_pass_rate" should contain the text "[LANG:dashboard.stats.pass_rate]"
-    And the "stats_avg_duration" should contain the text "[LANG:dashboard.stats.avg_latency]"
+    Then the following elements should contain these texts:
+      | element             | value                                     |
+      | stats_passed_card   | [LANG:dashboard.stats.system_health]      |
+      | stats_total_runs    | [LANG:dashboard.stats.total_executions]   |
+      | stats_pass_rate     | [LANG:dashboard.stats.pass_rate]          |
+      | stats_avg_duration  | [LANG:dashboard.stats.avg_latency]        |
     Then I take a screenshot of the "stats grid" named "dashboard_stats_grid"
 
   Scenario: Verify Timeline Controls

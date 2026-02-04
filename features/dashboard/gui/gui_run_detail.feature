@@ -12,7 +12,9 @@ Feature: Run Detail View Validation
     Then the "project_detail" page is displayed
     When I click on the "item"
     Then the "run_detail" page is displayed
-    Then the "back_button" should contain the text "[LANG:run_detail.return_to_base]"
+    Then the following elements should contain these texts:
+      | element     | value                          |
+      | back_button | [LANG:run_detail.return_to_base] |
     And I should see the text "[LANG:run_detail.success]"
     Then I take a screenshot named "run_detail_full_view"
     When I click on the "filter_failed"

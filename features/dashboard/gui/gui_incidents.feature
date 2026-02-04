@@ -10,14 +10,18 @@ Feature: Incident Taxonomy View Validation
   @smoke
   Scenario: Verify Incident Page Structure
     Then the page title should be "[LANG:common.page_title]"
-    And the "header_title" should contain the text "[LANG:incidents.header.title]"
-    And the "header_subtitle" should contain the text "[LANG:incidents.header.subtitle]"
+    Then the following elements should contain these texts:
+      | element         | value                            |
+      | header_title    | [LANG:incidents.header.title]    |
+      | header_subtitle | [LANG:incidents.header.subtitle] |
     And I should see the text "[LANG:incidents.stats.unique]"
     Then I take a screenshot named "incident_page_structure"
 
   Scenario: Verify Incident Statistics
-    Then the "stats_total_sign" should contain the text "[LANG:incidents.stats.total]"
-    And the "stats_sectors_sign" should contain the text "[LANG:incidents.stats.sectors]"
+    Then the following elements should contain these texts:
+      | element            | value                         |
+      | stats_total_sign   | [LANG:incidents.stats.total]   |
+      | stats_sectors_sign | [LANG:incidents.stats.sectors] |
     And I should see the text "[LANG:incidents.stats.unique]"
     Then I take a screenshot of the "stats" named "incident_stats_cards"
 

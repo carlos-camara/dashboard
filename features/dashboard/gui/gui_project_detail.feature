@@ -18,7 +18,9 @@ Feature: Project Detail View Validation
     Then I take a screenshot named "project_detail_architecture"
 
   Scenario: Verify Execution Metrics and Trend
-    Then the "stability_score" should contain the text "[LANG:project_detail.stability_score]"
+    Then the following elements should contain these texts:
+      | element         | value                               |
+      | stability_score | [LANG:project_detail.stability_score] |
     And I should see the text "[LANG:project_detail.execution_velocity]"
     And I should see at least 1 elements with selector "velocity_trend"
     Then I take a screenshot named "project_detail_metrics"

@@ -12,7 +12,9 @@ Feature: Endpoints Catalog Validation
     And I wait for 1 seconds
     When I click on the "endpoint_item"
     Then the "endpoint_detail" page is displayed
-    Then the "back_button" should contain the text "[LANG:endpoints.detail.back_button]"
+    Then the following elements should contain these texts:
+      | element     | value                             |
+      | back_button | [LANG:endpoints.detail.back_button] |
     And I should see the text "[LANG:endpoints.detail.success_rate]"
     And I should see the text "[LANG:endpoints.detail.avg_latency]"
     And I should see the "performance_card"
