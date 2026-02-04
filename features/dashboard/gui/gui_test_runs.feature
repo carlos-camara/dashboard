@@ -8,10 +8,14 @@ Feature: Test Runs View Validation
   Scenario: Search and Redirect to Project Analytics
     When I click on the "test_runs_link" in the sidebar
     Then the "test_runs" page is displayed
-    Then the "title" should contain the text "[LANG:navigation.test_runs]"
+    Then the following elements should contain these texts:
+      | element | value                      |
+      | title   | [LANG:navigation.test_runs] |
     When I type "dashboard" into the "search_input"
     And I wait for 1 seconds
-    Then the "search_input" should contain the text "dashboard"
+    Then the following elements should contain these texts:
+      | element      | value     |
+      | search_input | dashboard |
     # Select the project to go to detail view
     When I click on the "project_card"
     Then the "project_detail" page is displayed
@@ -25,7 +29,9 @@ Feature: Test Runs View Validation
     Then the "test_runs" page is displayed
     When I click on the "project_card"
     Then the "project_detail" page is displayed
-    Then the "runCount" should contain the text "[LANG:project_detail.run_count]"
+    Then the following elements should contain these texts:
+      | element  | value                          |
+      | runCount | [LANG:project_detail.run_count] |
     # Go back to the registry
     When I click on the "back_button"
     Then the "test_runs" page is displayed

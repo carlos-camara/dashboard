@@ -1,0 +1,25 @@
+<testsuite name="dashboard.gui.gui_run_detail.Run Detail View Validation" tests="1" errors="0" failures="0" skipped="0" time="6.570266" timestamp="2026-02-04T13:35:17.840252" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_run_detail.Run Detail View Validation" name="Explore Run Detail View" status="passed" time="6.570266"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Explore Run Detail View
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.882s
+    And the "dashboard" page is displayed ... passed in 0.585s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.281s
+    Then the "test_runs" page is displayed ... passed in 0.149s
+    When I click on the "project_card" ... passed in 1.110s
+    Then the "project_detail" page is displayed ... passed in 0.053s
+    When I click on the "item" ... passed in 0.396s
+    Then the "run_detail" page is displayed ... passed in 0.303s
+    Then the following elements should contain these texts ... passed in 0.065s
+      | element     | value                            |
+      | back_button | [LANG:run_detail.return_to_base] |
+    And I should see the text "[LANG:run_detail.success]" ... passed in 0.252s
+    Then I take a screenshot named "run_detail_full_view" ... passed in 0.631s
+    When I click on the "filter_failed" ... passed in 0.499s
+    And I wait for 1 seconds ... passed in 1.002s
+    Then I take a screenshot named "run_detail_filtered_failed" ... passed in 0.362s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

@@ -8,7 +8,9 @@ Feature: Variable Transformation Validation
   Scenario: Verify basic generation tokens
     When I click on the "test_runs_link" in the sidebar
     Then the "test_runs" page is displayed
-    Then the "search_input" should contain the text "[EMPTY]"
+    Then the following elements should contain these texts:
+      | element      | value   |
+      | search_input | [EMPTY] |
     When I type "[STRING_WITH_LENGTH_10]" into the "search_input"
     And I wait for 1 seconds
     Then I should see the "search_input"
@@ -29,14 +31,20 @@ Feature: Variable Transformation Validation
     # Just checking if NOW resolves and doesn't crash
     When I type "[NOW(%Y)]" into the "search_input"
     And I wait for 1 seconds
-    Then the "search_input" should contain the text "[NOW(%Y)]"
+    Then the following elements should contain these texts:
+      | element      | value     |
+      | search_input | [NOW(%Y)] |
     
   Scenario: Verify transformation functions
     When I click on the "test_runs_link" in the sidebar
     Then the "test_runs" page is displayed
     When I type "[UPPER:qa-hub]" into the "search_input"
     And I wait for 1 seconds
-    Then the "search_input" should contain the text "QA-HUB"
+    Then the following elements should contain these texts:
+      | element      | value  |
+      | search_input | QA-HUB |
     When I type "[STR:[INT:123]]" into the "search_input"
     And I wait for 1 seconds
-    Then the "search_input" should contain the text "123"
+    Then the following elements should contain these texts:
+      | element      | value |
+      | search_input | 123   |

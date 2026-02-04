@@ -1,2 +1,2 @@
 locust
--e git+https://github.com/carlos-camara/qa-hub-framework.git#egg=qa-automation-framework
+-e C:/Users/Carlos/Desktop/github/qa-hub-framework

@@ -23,12 +23,16 @@ Feature: Application Navigation Validation
 
     When I click on the "dashboard_link" in the sidebar
     Then the "dashboard" page is displayed
-    Then the "header_subtitle" should contain the text "[LANG:dashboard.header.subtitle]"
+    Then the following elements should contain these texts:
+      | element         | value                            |
+      | header_subtitle | [LANG:dashboard.header.subtitle] |
     Then I take a screenshot named "nav_dashboard_return"
 
   Scenario: Sidebar navigation persistence
     When I click on the "test_runs_link" in the sidebar
     When I click on the "dashboard_link" in the sidebar
     Then the "dashboard" page is displayed
-    Then the "header_subtitle" should contain the text "[LANG:dashboard.header.subtitle]"
+    Then the following elements should contain these texts:
+      | element         | value                            |
+      | header_subtitle | [LANG:dashboard.header.subtitle] |
     Then I take a screenshot named "nav_sidebar_persistence"
