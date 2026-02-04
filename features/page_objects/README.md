@@ -10,54 +10,46 @@ We use a **YAML-driven Locator System** to ensure our tests are resilient to UI 
 > - **Unified Language**: Feature files can use descriptive aliases that map directly to technical locators.
 > - **Multi-Targeting**: Easily switch between ID, XPath, and CSS without changing the step definitions.
 
-## 🛠 Usage in Python
-
-The Page Object class automatically loads the YAML file. You access locators using their logical keys.
-
-```python
-# features/page_objects/dashboard_page.py
-
-class DashboardPage(BasePage):
-    def click_sync_button(self):
-        # 'sync_button' is a key defined in locators.yaml
-        self.click_element("sync_button")
-```
-
----
-
 ## 📂 System Structure
 
 ```text
 features/
 ├── page_objects/
-│   ├── locators.yaml         # 🚩 The Single Source of Truth
-│   ├── base_page.py          # Core Selenium wrapper methods
-│   └── dashboard_page.py     # Screen-specific logical actions
+│   ├── locators/               # 🚩 The Single Source of Truth
+│   │   ├── dashboard.yaml      # Dashboard page locators
+│   │   ├── incidents.yaml      # Incidents page locators 
+│   │   ├── endpoints_view.yaml # Endpoints catalog locators
+│   │   └── ...                 # One YAML per page/view
+│   └── README.md               # This file
+├── config/
+│   └── properties.cfg          # Driver and framework configuration
+├── language/
+│   ├── en.yaml                 # English i18n strings
+│   └── es.yaml                 # Spanish i18n strings
 └── steps/
-    └── step_gui_interactions.py
+    └── step_gui_interactions.py  # Project-specific steps only
 ```
-
----
 
 ## 📝 Adding New Locators
 
 1. **Identify the element** using Chrome DevTools.
-2. **Open** `features/page_objects/locators.yaml`.
-3. **Add** the entry under the appropriate section:
+2. **Open** the appropriate YAML file in `locators/` (e.g., `dashboard.yaml`).
+3. **Add** the entry using flattened naming:
    ```yaml
-   dashboard:
-     new_feature_btn: "xpath://button[contains(@class, 'new-feat')]"
+   stats_passed_card: "xpath://div[@data-testid='stat-passed']"
+   stats_total_runs: "#total-runs-card"
    ```
-4. **Use it** in your Page Object or directly in a generic step.
-
----
+4. **Use it** in your feature file:
+   ```gherkin
+   Then the "stats_passed_card" should be visible
+   ```
 
 ## ✅ Best Practices
 
-- **Naming**: Use `snake_case` for locator keys (e.g., `login_error_msg`).
+- **Naming**: Use `snake_case` with component prefixes (e.g., `timeline_toggle_volume`).
 - **Specificity**: Prefer **IDs** or **data-testid** attributes over long, fragile XPaths.
-- **Grouping**: Keep locators organized by screen or component within the YAML file.
-- **Uniqueness**: Ensure each key is unique to avoid collision during lookups.
+- **One YAML per page**: Keep locators organized by screen/view.
+- **No Python page classes needed**: The framework handles everything via YAML lookups.
 
 > [!IMPORTANT]
-> If a developer changes a CSS class name, ONLY `locators.yaml` needs to be updated. Your tests will remain green without a single line of Python code changing.
+> If a developer changes a CSS class name, ONLY the YAML file needs to be updated. Your tests will remain green without a single line of Python code changing.

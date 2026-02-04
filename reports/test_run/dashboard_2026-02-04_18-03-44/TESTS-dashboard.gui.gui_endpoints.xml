@@ -1,0 +1,33 @@
+<testsuite name="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" tests="1" errors="0" failures="0" skipped="0" time="5.65839" timestamp="2026-02-04T18:01:12.189150" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" name="Deep Dive into Endpoint Detail" status="passed" time="5.65839"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Deep Dive into Endpoint Detail
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.617s
+    And the "dashboard" page is displayed ... passed in 0.620s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.300s
+    Then the "endpoints_view" page is displayed ... passed in 0.121s
+    When I type "health" into the "search_input" ... passed in 0.452s
+    And I wait for 1 seconds ... passed in 1.001s
+    When I click on the "endpoint_item" ... passed in 0.244s
+    Then the "endpoint_detail" page is displayed ... passed in 0.167s
+    Then the following elements should contain these texts ... passed in 0.042s
+      | element     | value                               |
+      | back_button | [LANG:endpoints.detail.back_button] |
+    And I should see the text "[LANG:endpoints.detail.success_rate]" ... passed in 0.144s
+    And I should see the text "[LANG:endpoints.detail.avg_latency]" ... passed in 0.121s
+    And I should see the "performance_card" ... passed in 0.050s
+    And I should see the text "[LANG:endpoints.detail.performance_insights]" ... passed in 0.093s
+    And I should see the text "[LANG:endpoints.detail.live_discovery]" ... passed in 0.116s
+    Then the "endpoint detail" page should visually match the baseline image "endpoints_deep_detail" with a 5.0% tolerance ... passed in 0.324s
+    When I click on the "back_button" ... passed in 0.159s
+    Then the "endpoints_view" page is displayed ... passed in 0.036s
+    Then the "title" should contain the text "[LANG:endpoints.view.title]" ... passed in 0.052s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[Visual] Seeding baseline: C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\baselines\chrome_endpoints_deep_detail.png
+
+]]>
+</system-out></testcase></testsuite>

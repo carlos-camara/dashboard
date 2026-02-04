@@ -1,0 +1,57 @@
+<testsuite name="dashboard.gui.gui_navigation.Application Navigation Validation" tests="2" errors="0" failures="0" skipped="0" time="12.511" timestamp="2026-02-04T18:01:55.714568" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Navigate to all main sections" status="passed" time="8.582693"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Navigate to all main sections
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.759s
+    And the "dashboard" page is displayed ... passed in 1.242s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.440s
+    Then the "test_runs" page is displayed ... passed in 0.145s
+    Then the "title" should contain the text "[LANG:navigation.test_runs]" ... passed in 0.063s
+    Then the "test runs section" page should visually match the baseline image "nav_test_runs" with a 5.0% tolerance ... passed in 0.621s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.253s
+    Then the "endpoints_view" page is displayed ... passed in 0.082s
+    Then the "title" should contain the text "[LANG:navigation.endpoints]" ... passed in 0.056s
+    Then the "endpoints section" page should visually match the baseline image "nav_endpoints" with a 5.0% tolerance ... passed in 0.557s
+    When I click on the "incidents_link" in the sidebar ... passed in 0.847s
+    Then the "incidents" page is displayed ... passed in 0.309s
+    Then the "header_title" should contain the text "[LANG:navigation.incidents]" ... passed in 0.079s
+    Then the "incidents section" page should visually match the baseline image "nav_incidents" with a 5.0% tolerance ... passed in 0.571s
+    When I click on the "dashboard_link" in the sidebar ... passed in 0.618s
+    Then the "dashboard" page is displayed ... passed in 0.385s
+    Then the following elements should contain these texts ... passed in 0.055s
+      | element         | value                            |
+      | header_subtitle | [LANG:dashboard.header.subtitle] |
+    Then the "dashboard return" page should visually match the baseline image "nav_dashboard_return" with a 5.0% tolerance ... passed in 0.500s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[Visual] Seeding baseline: C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\baselines\chrome_nav_test_runs.png
+[Visual] Seeding baseline: C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\baselines\chrome_nav_endpoints.png
+[Visual] Seeding baseline: C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\baselines\chrome_nav_incidents.png
+[Visual] Seeding baseline: C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\baselines\chrome_nav_dashboard_return.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Sidebar navigation persistence" status="passed" time="3.928307"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Sidebar navigation persistence
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.708s
+    And the "dashboard" page is displayed ... passed in 0.764s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.219s
+    When I click on the "dashboard_link" in the sidebar ... passed in 0.292s
+    Then the "dashboard" page is displayed ... passed in 0.381s
+    Then the following elements should contain these texts ... passed in 0.065s
+      | element         | value                            |
+      | header_subtitle | [LANG:dashboard.header.subtitle] |
+    Then the "sidebar persistence" page should visually match the baseline image "nav_sidebar_persistence" with a 5.0% tolerance ... passed in 0.499s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[Visual] Seeding baseline: C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\baselines\chrome_nav_sidebar_persistence.png
+
+]]>
+</system-out></testcase></testsuite>
