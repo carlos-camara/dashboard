@@ -8,12 +8,12 @@ Feature: Test Runs View Validation
   Scenario: Search and Redirect to Project Analytics
     When I click on the "test_runs_link" in the sidebar
     Then the "test_runs" page is displayed
-    Then the following elements should contain these texts:
+    Then the following elements should contain these texts
       | element | value                      |
       | title   | [LANG:navigation.test_runs] |
     When I type "dashboard" into the "search_input"
     And I wait for 1 seconds
-    Then the following elements should contain these texts:
+    Then the following elements should contain these texts
       | element      | value     |
       | search_input | dashboard |
     When I click on the "project_card"
@@ -27,7 +27,7 @@ Feature: Test Runs View Validation
     Then the "test_runs" page is displayed
     When I click on the "project_card"
     Then the "project_detail" page is displayed
-    Then the following elements should contain these texts:
+    Then the following elements should contain these texts
       | element  | value                          |
       | runCount | [LANG:project_detail.run_count] |
     When I click on the "back_button"

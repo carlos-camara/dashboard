@@ -10,7 +10,7 @@ Feature: Incident Taxonomy View Validation
   @smoke
   Scenario: Verify Incident Page Structure
     Then the page title should be "[LANG:common.page_title]"
-    Then the following elements should contain these texts:
+    Then the following elements should contain these texts
       | element         | value                            |
       | header_title    | [LANG:incidents.header.title]    |
       | header_subtitle | [LANG:incidents.header.subtitle] |
@@ -18,7 +18,7 @@ Feature: Incident Taxonomy View Validation
     Then the "incident page structure" page should visually match the baseline image "incident_page_structure" with a 5.0% tolerance
 
   Scenario: Verify Incident Statistics
-    Then the following elements should contain these texts:
+    Then the following elements should contain these texts
       | element            | value                         |
       | stats_total_sign   | [LANG:incidents.stats.total]   |
       | stats_sectors_sign | [LANG:incidents.stats.sectors] |

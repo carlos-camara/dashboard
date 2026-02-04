@@ -15,7 +15,7 @@ Feature: Ultra-Professional Performance Dashboard Validation
     Then I should see the "performance_card"
     When I click on the "open_report_button"
     Then the "performance_report_view" page is displayed
-    Then the following elements should contain these texts:
+    Then the following elements should contain these texts
       | element       | value                          |
       | audit_title   | [LANG:performance.audit_title] |
       | export_button | [LANG:performance.dossier]     |

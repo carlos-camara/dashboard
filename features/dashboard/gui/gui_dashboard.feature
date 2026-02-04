@@ -7,14 +7,14 @@ Feature: Dashboard View Validation
 
   Scenario: Verify Header and Status Ticker
     Then the page title should be "[LANG:common.page_title]"
-    Then the following elements should contain these texts:
+    Then the following elements should contain these texts
       | element         | value                            |
       | header_subtitle | [LANG:dashboard.header.subtitle] |
     And the system status should be valid
     Then the "header status" page should visually match the baseline image "dashboard_header_status" with a 5.0% tolerance
 
   Scenario: Verify Statistics Cards
-    Then the following elements should contain these texts:
+    Then the following elements should contain these texts
       | element             | value                                     |
       | stats_passed_card   | [LANG:dashboard.stats.system_health]      |
       | stats_total_runs    | [LANG:dashboard.stats.total_executions]   |
@@ -23,7 +23,7 @@ Feature: Dashboard View Validation
     Then the "stats grid" element should visually match the baseline image "dashboard_stats_grid" with a 5.0% tolerance
 
   Scenario: Verify Timeline Controls
-    Then the following elements should contain these texts:
+    Then the following elements should contain these texts
       | element          | value                             |
       | timeline_heading | [LANG:dashboard.timeline.heading] |
     And I should see at least 1 elements with selector "timeline_chart"
@@ -35,7 +35,7 @@ Feature: Dashboard View Validation
     Then the "chart success" element should visually match the baseline image "dashboard_chart_success" with a 8.0% tolerance
 
   Scenario: Verify Incident and Sector Lists
-    Then the following elements should contain these texts:
+    Then the following elements should contain these texts
       | element             | value                                |
       | recent_runs_heading | [LANG:dashboard.recent_runs.heading] |
       | incidents_heading   | [LANG:dashboard.incidents.heading]   |
@@ -43,7 +43,7 @@ Feature: Dashboard View Validation
 
   Scenario: Verify Endpoints Catalog and Scroll
     When I scroll to the bottom of the page
-    Then the following elements should contain these texts:
+    Then the following elements should contain these texts
       | element           | value                               |
       | endpoints_heading | [LANG:dashboard.endpoints.heading] |
     Then the "endpoints catalog" page should visually match the baseline image "dashboard_bottom_fullpage" with a 5.0% tolerance
@@ -59,7 +59,7 @@ Feature: Dashboard View Validation
 
   @responsive @mobile
   Scenario: Verify Mobile Viewport Layout
-    Then the following elements should contain these texts:
+    Then the following elements should contain these texts
       | element         | value                            |
       | header_subtitle | [LANG:dashboard.header.subtitle] |
     Then the "mobile layout" page should visually match the baseline image "dashboard_responsiveness" with a 5.0% tolerance
@@ -67,7 +67,7 @@ Feature: Dashboard View Validation
   Scenario: Verify Navigation to Incident Taxonomy
     When I click on the "incidents_link" in the sidebar
     Then the "incidents" page is displayed
-    Then the following elements should contain these texts:
+    Then the following elements should contain these texts
       | element                | value                                  |
       | header_title           | [LANG:incidents.header.title]          |
       | header_subtitle        | [LANG:incidents.header.subtitle]       |

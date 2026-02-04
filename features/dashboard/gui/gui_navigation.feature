@@ -23,7 +23,7 @@ Feature: Application Navigation Validation
 
     When I click on the "dashboard_link" in the sidebar
     Then the "dashboard" page is displayed
-    Then the following elements should contain these texts:
+    Then the following elements should contain these texts
       | element         | value                            |
       | header_subtitle | [LANG:dashboard.header.subtitle] |
     Then the "dashboard return" page should visually match the baseline image "nav_dashboard_return" with a 5.0% tolerance
@@ -32,7 +32,7 @@ Feature: Application Navigation Validation
     When I click on the "test_runs_link" in the sidebar
     When I click on the "dashboard_link" in the sidebar
     Then the "dashboard" page is displayed
-    Then the following elements should contain these texts:
+    Then the following elements should contain these texts
       | element         | value                            |
       | header_subtitle | [LANG:dashboard.header.subtitle] |
     Then the "sidebar persistence" page should visually match the baseline image "nav_sidebar_persistence" with a 5.0% tolerance

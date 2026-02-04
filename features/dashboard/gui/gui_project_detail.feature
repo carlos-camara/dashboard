@@ -18,7 +18,7 @@ Feature: Project Detail View Validation
     Then the "project architecture" page should visually match the baseline image "project_detail_architecture" with a 5.0% tolerance
 
   Scenario: Verify Execution Metrics and Trend
-    Then the following elements should contain these texts:
+    Then the following elements should contain these texts
       | element         | value                               |
       | stability_score | [LANG:project_detail.stability_score] |
     And I should see the text "[LANG:project_detail.execution_velocity]"

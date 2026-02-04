@@ -6,7 +6,7 @@ Feature: Dashboard Cross-Navigation Interactivity
     And the "dashboard" page is displayed
 
   Scenario: Redirect from Sector Integrity to Project Detail
-    Then the following elements should contain these texts:
+    Then the following elements should contain these texts
       | element             | value            |
       | recent_runs_heading | Sector Integrity |
     When I click on the "recent_runs_project_item"
@@ -17,12 +17,12 @@ Feature: Dashboard Cross-Navigation Interactivity
 
   Scenario: Redirect from Latency Anomalies to Endpoint Detail
     When I scroll to the bottom of the page
-    Then the following elements should contain these texts:
+    Then the following elements should contain these texts
       | element           | value             |
       | endpoints_heading | LATENCY ANOMALIES |
     When I click on the "endpoints_anomaly_item"
     Then the "endpoint_detail" page is displayed
-    Then the following elements should contain these texts:
+    Then the following elements should contain these texts
       | element     | value           |
       | back_button | Back to Catalog |
     And I should see the text "Success Rate"
