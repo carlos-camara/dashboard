@@ -12,6 +12,5 @@ endpoint_detail:
   performance_card:
     type: webelement
     by: xpath
-    value: //h3[contains(., 'Performance Insights')]/ancestor::div[contains(@class,
-      'border-indigo-500/30')]
-    wait_load: true
+    value: "//h3[contains(., 'Performance Insights')]/ancestor::div[contains(@class, 'border-indigo-500/30')]"
+    wait_load: false
