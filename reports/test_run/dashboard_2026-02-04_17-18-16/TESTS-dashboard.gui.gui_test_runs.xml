@@ -1,0 +1,50 @@
+<testsuite name="dashboard.gui.gui_test_runs.Test Runs View Validation" tests="2" errors="0" failures="0" skipped="0" time="16.960028" timestamp="2026-02-04T17:17:43.184571" hostname="runnervmkj6or"><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Search and Redirect to Project Analytics" status="passed" time="8.595971"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Search and Redirect to Project Analytics
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.939s
+    And the "dashboard" page is displayed ... passed in 1.376s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.303s
+    Then the "test_runs" page is displayed ... passed in 0.282s
+    Then the following elements should contain these texts ... passed in 0.113s
+      | element | value                       |
+      | title   | [LANG:navigation.test_runs] |
+    When I type "dashboard" into the "search_input" ... passed in 0.538s
+    And I wait for 1 seconds ... passed in 1.003s
+    Then the following elements should contain these texts ... passed in 0.054s
+      | element      | value     |
+      | search_input | dashboard |
+    When I click on the "project_card" ... passed in 1.641s
+    Then the "project_detail" page is displayed ... passed in 0.072s
+    Then the "projectName" should be visible ... passed in 0.059s
+    And I should see at least 1 elements with selector "stability_chart" ... passed in 0.079s
+    Then the "test runs redirection" page should visually match the baseline image "test_runs_project_redirection" with a 5.0% tolerance ... passed in 1.137s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/chrome_test_runs_project_redirection.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Verify Project List and Back Navigation" status="passed" time="8.364057"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Project List and Back Navigation
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.032s
+    And the "dashboard" page is displayed ... passed in 1.455s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.547s
+    Then the "test_runs" page is displayed ... passed in 0.349s
+    When I click on the "project_card" ... passed in 2.078s
+    Then the "project_detail" page is displayed ... passed in 0.093s
+    Then the following elements should contain these texts ... passed in 0.749s
+      | element  | value                           |
+      | runCount | [LANG:project_detail.run_count] |
+    When I click on the "back_button" ... passed in 0.772s
+    Then the "test_runs" page is displayed ... passed in 0.148s
+    Then I should see the text "[LANG:navigation.test_runs]" ... passed in 0.140s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

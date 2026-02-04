@@ -1,0 +1,33 @@
+<testsuite name="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" tests="1" errors="0" failures="0" skipped="0" time="11.048681" timestamp="2026-02-04T17:16:42.593773" hostname="runnervmkj6or"><testcase classname="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" name="Validate High-Density Performance Audit Dossier" status="passed" time="11.048681"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Validate High-Density Performance Audit Dossier
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.929s
+    And the "dashboard" page is displayed ... passed in 1.203s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.355s
+    Then the "endpoints_view" page is displayed ... passed in 0.078s
+    When I type "runs" into the "search_input" ... passed in 0.542s
+    And I wait for 1 seconds ... passed in 1.004s
+    When I click on the "endpoint_item" ... passed in 0.526s
+    Then the "endpoint_detail" page is displayed ... passed in 0.373s
+    Then I should see the "performance_card" ... passed in 0.103s
+    When I click on the "open_report_button" ... passed in 0.404s
+    Then the "performance_report_view" page is displayed ... passed in 2.451s
+    Then the following elements should contain these texts ... passed in 0.288s
+      | element       | value                          |
+      | audit_title   | [LANG:performance.audit_title] |
+      | export_button | [LANG:performance.dossier]     |
+    And I should see the text "[LANG:performance.integrity]" ... passed in 0.360s
+    And I should see the "rps_image" ... passed in 0.092s
+    And I should see the "latency_image" ... passed in 0.074s
+    And I should see the "original_report_link" ... passed in 0.090s
+    Then the "performance dashboard" page should visually match the baseline image "final_performance_dashboard_verification" with a 5.0% tolerance ... passed in 1.177s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/chrome_final_performance_dashboard_verification.png
+
+]]>
+</system-out></testcase></testsuite>
