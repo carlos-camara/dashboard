@@ -1,0 +1,31 @@
+<testsuite name="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" tests="1" errors="0" failures="0" skipped="0" time="8.477842" timestamp="2026-02-03T23:13:23.966952" hostname="runnervmkj6or"><testcase classname="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" name="Deep Dive into Endpoint Detail" status="passed" time="8.477842"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Deep Dive into Endpoint Detail
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.288s
+    And the "dashboard" page is displayed ... passed in 0.000s
+    When I wait for 2 seconds ... passed in 2.000s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.169s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the "endpoints_view" page is displayed ... passed in 0.000s
+    When I type "health" into the "search_input" ... passed in 0.214s
+    And I wait for 2 seconds ... passed in 2.000s
+    When I click on the "endpoint_item" ... passed in 0.144s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the "endpoint_detail" page is displayed ... passed in 0.000s
+    Then the "back_button" should contain the text "[LANG:endpoints.detail.back_button]" ... passed in 0.019s
+    And I should see the text "[LANG:endpoints.detail.success_rate]" ... passed in 0.054s
+    And I should see the text "[LANG:endpoints.detail.avg_latency]" ... passed in 0.052s
+    And I should see the "performance_card" ... passed in 0.026s
+    And I should see the text "[LANG:endpoints.detail.performance_insights]" ... passed in 0.048s
+    And I should see the text "[LANG:endpoints.detail.live_discovery]" ... passed in 0.048s
+    Then I take a screenshot named "endpoints_deep_detail" ... passed in 0.295s
+    When I click on the "back_button" ... passed in 0.087s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the "endpoints_view" page is displayed ... passed in 0.000s
+    Then the "title" should contain the text "[LANG:endpoints.view.title]" ... passed in 0.032s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

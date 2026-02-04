@@ -1,0 +1,18 @@
+layer_stability:
+  en: "Layer Stability"
+  es: "Estabilidad de Capa"
+layer_latency:
+  en: "Layer Latency"
+  es: "Latencia de Capa"
+stability_score:
+  en: "STABILITY SCORE"
+  es: "PUNTUACIÓN DE ESTABILIDAD"
+execution_velocity:
+  en: "Execution Velocity"
+  es: "Velocidad de Ejecución"
+execution_history:
+  en: "EXECUTION HISTORY"
+  es: "HISTORIAL DE EJECUCIÓN"
+run_count:
+  en: "RUNS DETECTED"
+  es: "EJECUCIONES DETECTADAS"

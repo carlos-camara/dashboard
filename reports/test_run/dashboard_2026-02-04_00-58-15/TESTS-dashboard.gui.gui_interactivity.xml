@@ -1,0 +1,35 @@
+<testsuite name="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" tests="2" errors="0" failures="0" skipped="0" time="3.441961" timestamp="2026-02-04T00:57:42.747167" hostname="runnervmkj6or"><testcase classname="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" name="Redirect from Sector Integrity to Project Detail" status="passed" time="1.616416"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Redirect from Sector Integrity to Project Detail
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.282s
+    And the "dashboard" page is displayed ... passed in 0.348s
+    Then the "recent_runs_heading" should contain the text "Sector Integrity" ... passed in 0.031s
+    When I click on the "recent_runs_project_item" ... passed in 0.122s
+    Then the "project_detail" page is displayed ... passed in 0.415s
+    Then the "projectName" should be visible ... passed in 0.032s
+    And I should see at least 1 elements with selector "stability_comparison" ... passed in 0.025s
+    Then I take a screenshot named "interactivity_sector_redirect" ... passed in 0.362s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" name="Redirect from Latency Anomalies to Endpoint Detail" status="passed" time="1.825545"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Redirect from Latency Anomalies to Endpoint Detail
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.260s
+    And the "dashboard" page is displayed ... passed in 0.323s
+    When I scroll to the bottom of the page ... passed in 0.505s
+    Then the "endpoints_heading" should contain the text "LATENCY ANOMALIES" ... passed in 0.027s
+    When I click on the "endpoints_anomaly_item" ... passed in 0.183s
+    Then the "endpoint_detail" page is displayed ... passed in 0.091s
+    Then the "back_button" should contain the text "Back to Catalog" ... passed in 0.017s
+    And I should see the text "Success Rate" ... passed in 0.059s
+    And I should see the text "Avg Latency" ... passed in 0.062s
+    Then I take a screenshot named "interactivity_anomaly_redirect" ... passed in 0.300s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

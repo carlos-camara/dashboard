@@ -1,0 +1,49 @@
+<testsuite name="dashboard.gui.gui_navigation.Application Navigation Validation" tests="2" errors="0" failures="0" skipped="0" time="11.795689" timestamp="2026-02-04T00:13:30.865820" hostname="runnervmkj6or"><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Navigate to all main sections" status="passed" time="8.521147"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Navigate to all main sections
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.261s
+    And the "dashboard" page is displayed ... passed in 0.342s
+    And I wait for 2 seconds ... passed in 2.000s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.133s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the "test_runs" page is displayed ... passed in 0.019s
+    Then the "title" should contain the text "[LANG:navigation.test_runs]" ... passed in 0.026s
+    Then I take a screenshot named "nav_test_runs" ... passed in 0.265s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.129s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the "endpoints_view" page is displayed ... passed in 0.017s
+    Then the "title" should contain the text "[LANG:navigation.endpoints]" ... passed in 0.026s
+    Then I take a screenshot named "nav_endpoints" ... passed in 0.279s
+    When I click on the "incidents_link" in the sidebar ... passed in 0.124s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the "incidents" page is displayed ... passed in 0.021s
+    Then the "header_title" should contain the text "[LANG:navigation.incidents]" ... passed in 0.017s
+    Then I take a screenshot named "nav_incidents" ... passed in 0.302s
+    When I click on the "dashboard_link" in the sidebar ... passed in 0.134s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the "dashboard" page is displayed ... passed in 0.058s
+    Then the "header_subtitle" should contain the text "[LANG:dashboard.header.subtitle]" ... passed in 0.031s
+    Then I take a screenshot named "nav_dashboard_return" ... passed in 0.336s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Sidebar navigation persistence" status="passed" time="3.274542"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Sidebar navigation persistence
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.276s
+    And the "dashboard" page is displayed ... passed in 0.360s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.111s
+    And I wait for 1 seconds ... passed in 1.000s
+    When I click on the "dashboard_link" in the sidebar ... passed in 0.123s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the "dashboard" page is displayed ... passed in 0.057s
+    Then the "header_subtitle" should contain the text "[LANG:dashboard.header.subtitle]" ... passed in 0.027s
+    Then I take a screenshot named "nav_sidebar_persistence" ... passed in 0.321s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

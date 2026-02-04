@@ -1,0 +1,194 @@
+<testsuite name="dashboard.gui.gui_test_runs.Test Runs View Validation" tests="2" errors="0" failures="2" skipped="0" time="19.036768" timestamp="2026-02-03T20:49:58.466313" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Search and Redirect to Project Analytics" status="failed" time="7.886354"><failure type="AssertionError" message="Element 'title' in 'test_runs' does not contain text 'i18n:navigation.test_runs' (case-insensitive normalized). Found: 'Execution Archives'">
+<![CDATA[
+Failing step: Then the "title" in "test_runs" should contain the text "i18n:navigation.test_runs" ... failed in 0.073s
+Location: features/dashboard/gui/gui_test_runs.feature:11
+Assertion Failed: Element 'title' in 'test_runs' does not contain text 'i18n:navigation.test_runs' (case-insensitive normalized). Found: 'Execution Archives'
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Search and Redirect to Project Analytics
+   Failed Step: the "title" in "test_runs" should contain the text "i18n:navigation.test_runs"
+   Location: features\resources\screenshots\2026-02-03_20-46-42\FAILED_Search_and_Redirect_to_Project_Analytics_the_"title"_in_"test_runs"_sho.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_20-46-42\FAILED_Search_and_Redirect_to_Project_Analytics_the_"title"_in_"test_runs"_sho.png' width='800' alt='Failure Screenshot' />]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Search and Redirect to Project Analytics
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.607s
+    When I wait for 5 seconds ... passed in 5.001s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.204s
+    And I wait for 2 seconds ... passed in 2.001s
+    Then the "title" in "test_runs" should contain the text "i18n:navigation.test_runs" ... failed in 0.073s
+    When I type "dashboard" into the "search_input" in "test_runs" ... skipped in 0.000s
+    And I wait for 3 seconds ... skipped in 0.000s
+    Then the "search_input" in "test_runs" should contain the text "dashboard" ... skipped in 0.000s
+    When I click on the "project_card" in "test_runs" ... skipped in 0.000s
+    And I wait for 2 seconds ... skipped in 0.000s
+    Then the "projectName" in "project_detail" should be visible ... skipped in 0.000s
+    And I should see at least 1 elements with selector "stability_chart" in "project_detail" ... skipped in 0.000s
+    Then I take a screenshot named "test_runs_project_redirection" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Search and Redirect to Project Analytics
+   Failed Step: the "title" in "test_runs" should contain the text "i18n:navigation.test_runs"
+   Location: features\resources\screenshots\2026-02-03_20-46-42\FAILED_Search_and_Redirect_to_Project_Analytics_the_"title"_in_"test_runs"_sho.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_20-46-42\FAILED_Search_and_Redirect_to_Project_Analytics_the_"title"_in_"test_runs"_sho.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Verify Project List and Back Navigation" status="failed" time="11.150414"><failure type="AssertionError" message="Element 'runCount' in 'project_detail' does not contain text 'i18n:project_detail.run_count' (case-insensitive normalized). Found: 'Q&#10;QA Hub&#10;EXECUTION ENGINE&#10;Dashboard&#10;Test Runs&#10;Incident Taxonomy&#10;Endpoints&#10;New Run&#10;SYSTEM ACTIVE&#10;PROJECT&#10;65 RUNS DETECTED&#10;dashboard&#10;STABILITY SCORE&#10;77%&#10;AVG PASS RATE&#10;94.9%&#10;AVG DURATION&#10;120.1s&#10;TOTAL FLIGHTS&#10;65&#10;Execution Velocity&#10;28 ene&#10;30 ene&#10;30 ene&#10;2 feb&#10;2 feb&#10;3 feb&#10;0&#10;100&#10;200&#10;300&#10;400&#10;Test Composition&#10;API TestsGUI Tests&#10;TOTAL&#10;65&#10;ARCHITECTURE ANALYSIS&#10;Layer Stability (Pass Rate)&#10;API Layer&#10;GUI Layer&#10;Layer Latency (Duration)&#10;API Layer&#10;GUI Layer&#10;Execution History&#10;dashboard_2026-02-03_14-30-05&#10;3 feb 2026&#10;14:27&#10;DURATION&#10;159.87s&#10;Progress&#10;21/21&#10;100%&#10;dashboard_2026-02-03_11-05-01&#10;3 feb 2026&#10;11:02&#10;DURATION&#10;198.83s&#10;Progress&#10;21/21&#10;100%&#10;dashboard_2026-02-02_18-23-34&#10;2 feb 2026&#10;18:21&#10;DURATION&#10;177.44s&#10;Progress&#10;21/21&#10;100%&#10;dashboard_2026-02-02_17-28-59&#10;2 feb 2026&#10;17:26&#10;DURATION&#10;177.99s&#10;Progress&#10;21/21&#10;100%&#10;dashboard_2026-02-02_13-52-45&#10;2 feb 2026&#10;13:50&#10;DURATION&#10;178.56s&#10;Progress&#10;21/21&#10;100%&#10;dashboard_2026-02-02_13-42-47&#10;2 feb 2026&#10;13:40&#10;DURATION&#10;179.41s&#10;Progress&#10;30/30&#10;100%&#10;dashboard_2026-02-02_13-21-13&#10;2 feb 2026&#10;13:18&#10;DURATION&#10;180.07s&#10;Progress&#10;30/30&#10;100%&#10;dashboard_2026-02-02_13-06-36&#10;2 feb 2026&#10;13:04&#10;DURATION&#10;178.49s&#10;Progress&#10;30/30&#10;100%&#10;1&#10;2&#10;3&#10;4&#10;9'">
+<![CDATA[
+Failing step: Then the "runCount" in "project_detail" should contain the text "i18n:project_detail.run_count" ... failed in 0.410s
+Location: features/dashboard/gui/gui_test_runs.feature:28
+Assertion Failed: Element 'runCount' in 'project_detail' does not contain text 'i18n:project_detail.run_count' (case-insensitive normalized). Found: 'Q
+QA Hub
+EXECUTION ENGINE
+Dashboard
+Test Runs
+Incident Taxonomy
+Endpoints
+New Run
+SYSTEM ACTIVE
+PROJECT
+65 RUNS DETECTED
+dashboard
+STABILITY SCORE
+77%
+AVG PASS RATE
+94.9%
+AVG DURATION
+120.1s
+TOTAL FLIGHTS
+65
+Execution Velocity
+28 ene
+30 ene
+30 ene
+2 feb
+2 feb
+3 feb
+0
+100
+200
+300
+400
+Test Composition
+API TestsGUI Tests
+TOTAL
+65
+ARCHITECTURE ANALYSIS
+Layer Stability (Pass Rate)
+API Layer
+GUI Layer
+Layer Latency (Duration)
+API Layer
+GUI Layer
+Execution History
+dashboard_2026-02-03_14-30-05
+3 feb 2026
+14:27
+DURATION
+159.87s
+Progress
+21/21
+100%
+dashboard_2026-02-03_11-05-01
+3 feb 2026
+11:02
+DURATION
+198.83s
+Progress
+21/21
+100%
+dashboard_2026-02-02_18-23-34
+2 feb 2026
+18:21
+DURATION
+177.44s
+Progress
+21/21
+100%
+dashboard_2026-02-02_17-28-59
+2 feb 2026
+17:26
+DURATION
+177.99s
+Progress
+21/21
+100%
+dashboard_2026-02-02_13-52-45
+2 feb 2026
+13:50
+DURATION
+178.56s
+Progress
+21/21
+100%
+dashboard_2026-02-02_13-42-47
+2 feb 2026
+13:40
+DURATION
+179.41s
+Progress
+30/30
+100%
+dashboard_2026-02-02_13-21-13
+2 feb 2026
+13:18
+DURATION
+180.07s
+Progress
+30/30
+100%
+dashboard_2026-02-02_13-06-36
+2 feb 2026
+13:04
+DURATION
+178.49s
+Progress
+30/30
+100%
+1
+2
+3
+4
+9'
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Project List and Back Navigation
+   Failed Step: the "runCount" in "project_detail" should contain the text "i18n:project_detail.run_count"
+   Location: features\resources\screenshots\2026-02-03_20-46-42\FAILED_Verify_Project_List_and_Back_Navigation_the_"runCount"_in_"project_det.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_20-46-42\FAILED_Verify_Project_List_and_Back_Navigation_the_"runCount"_in_"project_det.png' width='800' alt='Failure Screenshot' />]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Project List and Back Navigation
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.628s
+    When I wait for 5 seconds ... passed in 5.002s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.225s
+    And I wait for 2 seconds ... passed in 2.001s
+    When I click on the "project_card" in "test_runs" ... passed in 0.884s
+    And I wait for 2 seconds ... passed in 2.001s
+    Then the "runCount" in "project_detail" should contain the text "i18n:project_detail.run_count" ... failed in 0.410s
+    When I click on the "back_button" in "project_detail" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I should see the text "i18n:navigation.test_runs" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Project List and Back Navigation
+   Failed Step: the "runCount" in "project_detail" should contain the text "i18n:project_detail.run_count"
+   Location: features\resources\screenshots\2026-02-03_20-46-42\FAILED_Verify_Project_List_and_Back_Navigation_the_"runCount"_in_"project_det.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_20-46-42\FAILED_Verify_Project_List_and_Back_Navigation_the_"runCount"_in_"project_det.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase></testsuite>

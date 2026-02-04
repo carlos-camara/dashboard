@@ -2,20 +2,25 @@ sidebar:
   dashboard_link:
     type: button
     by: xpath
-    value: "//button[contains(., 'Dashboard')]"
+    value: //button[contains(., 'Dashboard')]
+    wait_load: false
   test_runs_link:
     type: button
     by: xpath
-    value: "//button[contains(., 'Test Runs')]"
+    value: //button[contains(., 'Test Runs')]
+    wait_load: false
   endpoints_link:
     type: button
     by: xpath
-    value: "//button[contains(., 'Endpoints')]"
+    value: //button[contains(., 'Endpoints')]
+    wait_load: false
   incidents_link:
     type: button
     by: xpath
-    value: "//button[contains(., 'Incident Taxonomy')]"
+    value: //button[contains(., 'Incident Taxonomy')]
+    wait_load: false
   new_run_button:
     type: button
     by: xpath
-    value: "//button[contains(., 'New Run')]"
+    value: //button[contains(., 'New Run')]
+    wait_load: false

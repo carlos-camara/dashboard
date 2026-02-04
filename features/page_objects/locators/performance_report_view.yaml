@@ -2,52 +2,65 @@ performance_report_view:
   audit_title:
     type: text
     by: xpath
-    value: "//*[@data-testid='performance-audit-title']"
+    value: //*[@data-testid='performance-audit-title']
+    wait_load: true
   rps_section:
     type: text
     by: xpath
-    value: "//h3[contains(., 'Requests per Second')]"
+    value: //h3[contains(., 'Requests per Second')]
+    wait_load: false
   latency_section:
     type: text
     by: xpath
-    value: "//h3[contains(., 'Response Times')]"
+    value: //h3[contains(., 'Response Times')]
+    wait_load: false
   rps_image:
     type: text
     by: xpath
-    value: "//h3[contains(., 'Traffic') and contains(., 'Velocity')]"
+    value: //h3[contains(., 'Traffic') and contains(., 'Velocity')]
+    wait_load: false
   latency_image:
     type: text
     by: xpath
-    value: "//h3[contains(., 'Spectral') and contains(., 'Latency')]"
+    value: //h3[contains(., 'Spectral') and contains(., 'Latency')]
+    wait_load: false
   audit_matrix:
     type: text
     by: xpath
-    value: "//h3[contains(., 'Audit')]"
+    value: //h3[contains(., 'Audit')]
+    wait_load: false
   summary_efficiency:
     type: text
     by: xpath
-    value: "//*[@data-testid='summary-efficiency']"
+    value: //*[@data-testid='summary-efficiency']
+    wait_load: false
   summary_velocity:
     type: text
     by: xpath
-    value: "//*[@data-testid='summary-velocity']"
+    value: //*[@data-testid='summary-velocity']
+    wait_load: false
   summary_integrity:
     type: text
     by: xpath
-    value: "//*[@data-testid='summary-integrity']"
+    value: //*[@data-testid='summary-integrity']
+    wait_load: false
   summary_saturation:
     type: text
     by: xpath
-    value: "//*[@data-testid='summary-saturation']"
+    value: //*[@data-testid='summary-saturation']
+    wait_load: false
   back_button:
     type: button
     by: xpath
-    value: "//button[./*[local-name()='svg' and contains(@class, 'lucide-chevron-left')]]"
+    value: //button[./*[local-name()='svg' and contains(@class, 'lucide-chevron-left')]]
+    wait_load: false
   export_button:
     type: button
     by: xpath
-    value: "//button[contains(., 'Dossier')]"
+    value: //button[contains(., 'Dossier')]
+    wait_load: false
   original_report_link:
     type: button
     by: xpath
-    value: "//a[contains(., 'Raw Locust Report')]"
+    value: //a[contains(., 'Raw Locust Report')]
+    wait_load: false
