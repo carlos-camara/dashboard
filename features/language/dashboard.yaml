@@ -1,0 +1,49 @@
+header:
+  subtitle:
+    en: "DASHBOARD CLUSTER"
+    es: "NÚCLEO DEL PANEL"
+stats:
+  system_health:
+    en: "SYSTEM HEALTH"
+    es: "SALUD DEL SISTEMA"
+  total_executions:
+    en: "TOTAL EXECUTIONS"
+    es: "EJECUCIONES TOTALES"
+  pass_rate:
+    en: "PASS RATE"
+    es: "TASA DE ÉXITO"
+  avg_latency:
+    en: "AVG LATENCY"
+    es: "LATENCIA MEDIA"
+timeline:
+  heading:
+    en: "Signal Velocity"
+    es: "Velocidad de Señal"
+  volume:
+    en: "Volume"
+    es: "Volumen"
+  success:
+    en: "Success"
+    es: "Éxito"
+recent_runs:
+  heading:
+    en: "Sector Integrity"
+    es: "Integridad del Sector"
+incidents:
+  heading:
+    en: "INCIDENT TAXONOMY"
+    es: "TAXONOMÍA DE INCIDENTES"
+endpoints:
+  heading:
+    en: "LATENCY ANOMALIES"
+    es: "ANOMALÍAS DE LATENCIA"
+filters:
+  seven_days:
+    en: "7 Days"
+    es: "7 Días"
+  thirty_days:
+    en: "30 Days"
+    es: "30 Días"
+  all_time:
+    en: "All Time"
+    es: "Todo el tiempo"

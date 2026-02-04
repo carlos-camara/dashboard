@@ -1,0 +1,47 @@
+<testsuite name="dashboard.gui.gui_test_runs.Test Runs View Validation" tests="2" errors="0" failures="0" skipped="0" time="23.982219" timestamp="2026-02-01T21:35:56.462710" hostname="runnervmkj6or"><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Search and Redirect to Project Analytics" status="passed" time="13.161853"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Search and Redirect to Project Analytics
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.222s
+    When I wait for 5 seconds ... passed in 5.000s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.100s
+    And I wait for 2 seconds ... passed in 2.000s
+    Then I should see the text "Execution Archives" ... passed in 0.023s
+    When I type "dashboard" into the "search_input" in "test_runs" ... passed in 0.165s
+    And I wait for 3 seconds ... passed in 3.000s
+    Then I should see the text "dashboard" ... passed in 0.022s
+    When I click on the "project_card" in "test_runs" ... passed in 0.362s
+    And I wait for 2 seconds ... passed in 2.000s
+    Then I should see the text "Architecture Analysis" ... passed in 0.024s
+    And I should see at least 1 elements with selector "stability_chart" in "project_detail" ... passed in 0.010s
+    Then I take a screenshot named "test_runs_project_redirection" ... passed in 0.232s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[SCREENSHOT] test_runs_project_redirection
+   Location: features/resources/screenshots/test_runs_project_redirection.png
+   <img src='file:///features/resources/screenshots/test_runs_project_redirection.png' width='800' alt='test_runs_project_redirection' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Verify Project List and Back Navigation" status="passed" time="10.820366"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Project List and Back Navigation
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.240s
+    When I wait for 5 seconds ... passed in 5.000s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.100s
+    And I wait for 2 seconds ... passed in 2.000s
+    When I click on the "project_card" in "test_runs" ... passed in 0.351s
+    And I wait for 2 seconds ... passed in 2.000s
+    Then I should see the text "Runs Detected" ... passed in 0.024s
+    When I click on the "back_button" in "project_detail" ... passed in 0.082s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then I should see the text "Execution Archives" ... passed in 0.023s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

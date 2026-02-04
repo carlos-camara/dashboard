@@ -1,0 +1,28 @@
+<testsuite name="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" tests="1" errors="0" failures="0" skipped="0" time="25.238487" timestamp="2026-02-03T19:24:38.536984" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" name="Validate High-Density Performance Audit Dossier" status="passed" time="25.238487"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Validate High-Density Performance Audit Dossier
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.678s
+    And I wait for 5 seconds ... passed in 5.002s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.390s
+    And I wait for 2 seconds ... passed in 2.002s
+    When I type "runs" into the "search_input" in "endpoints_view" ... passed in 0.389s
+    And I wait for 2 seconds ... passed in 2.002s
+    When I click on the "endpoint_item" in "endpoints_view" ... passed in 0.269s
+    And I wait for 2 seconds ... passed in 2.002s
+    Then I should see the "performance_card" in "endpoint_detail" ... passed in 0.143s
+    When I click on the "open_report_button" in "endpoint_detail" ... passed in 0.309s
+    And I wait for 10 seconds ... passed in 10.003s
+    Then I should see the "audit_title" in "performance_report_view" ... passed in 0.236s
+    And the "audit_title" in "performance_report_view" should contain the text "Performance" ... passed in 0.089s
+    And the "export_button" in "performance_report_view" should contain the text "Dossier" ... passed in 0.075s
+    And I should see the text "Integrity" ... passed in 0.229s
+    And I should see the "rps_image" in "performance_report_view" ... passed in 0.140s
+    And I should see the "latency_image" in "performance_report_view" ... passed in 0.147s
+    And I should see the "original_report_link" in "performance_report_view" ... passed in 0.086s
+    Then I take a screenshot named "final_performance_dashboard_verification" ... passed in 1.048s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

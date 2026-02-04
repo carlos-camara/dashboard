@@ -1,176 +1,158 @@
-# QA COMMAND CENTER
+# <div align="center">🛡️ QA COMMAND CENTER</div>
 
-> [!IMPORTANT]
-> **NEXT-GEN TEST ORCHESTRATION & INTELLIGENCE PLATFORM**
->
-> A complete visualization layer that bridges the gap between technical execution logs and executive decision-making.
+<div align="center">
+  <h3>Next-Gen Orchestration & Engineering Intelligence</h3>
+  <p><i>A high-performance, ultra-premium observation layer bridging technical execution and executive decision-making.</i></p>
+</div>
+
+<div align="center">
 
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-0F172A?style=for-the-badge&logo=python&logoColor=38bdf8)](https://www.python.org/)
-[![React 18](https://img.shields.io/badge/React-18-0F172A?style=for-the-badge&logo=react&logoColor=61dafb)](https://react.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-Ultramodern-0F172A?style=for-the-badge&logo=tailwindcss&logoColor=38bdf8)](https://tailwindcss.com/)
+[![React 19](https://img.shields.io/badge/React-19-0F172A?style=for-the-badge&logo=react&logoColor=61dafb)](https://react.dev/)
+[![Tailwind CSS 4](https://img.shields.io/badge/Tailwind_CSS_4-Ultramodern-0F172A?style=for-the-badge&logo=tailwindcss&logoColor=38bdf8)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-0F172A?style=for-the-badge&logo=open-source-initiative&logoColor=white)](LICENSE)
+
 [![Lint Status](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml)
 [![Test Suite Status](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml)
 
+</div>
+
 <br/>
 
-![Hero Dashboard](features/resources/screenshots/dashboard_complete_view_fullpage.png)
+![Main Dashboard View](features/resources/screenshots/dashboard_complete_view_fullpage.png)
+
+---
 
 ## 🌟 Executive Overview
 
-This is a **high-performance, ultra-premium QA ecosystem** designed for modern engineering teams. Built with a state-of-the-art **Glassmorphism UI**, it provides real-time insights into your multi-project quality landscape, moving beyond simple test pass/fail metrics.
+This is more than a dashboard; it is a **mission-critical ecosystem** for modern engineering teams. Engineered with a **Glassmorphism UI**, it provides surgical-grade insights into your multi-project quality landscape, transforming chaotic logs into actionable intelligence.
 
-### 🚀 Key Pillars
-- **Unified Vision**: One dashboard for API (Behave) and GUI (Selenium) test suites across all your repositories.
-- **Smart Diagnostics**: Identifies failure patterns and provides immersive visual proof (screenshots) for every step.
-- **Micro-Services Ready**: Professional-grade assertion engine for complex REST flows and contract validation.
-- **Enterprise Aesthetics**: Immersive dark mode, fluid transitions, and a mobile-responsive interface.
-
----
-
-## 🌐 Live Demonstration
-
-Experience the future of test reporting. The dashboard is live and accessible globally:
-
-> **[View Live Dashboard](https://carlos-camara.github.io/dashboard/)**
+### 🚀 The Four Pillars
+- **Unified Vision**: Aggregated reporting for API (Behave) and GUI (Selenium) test suites in a single pane.
+- **Smart Diagnostics**: Automated failure pattern recognition with immersive visual evidence.
+- **Performance Digital Twin**: Real-time signal analysis and regression detection using Recharts analytics.
+- **Enterprise-Grade CI**: Fully automated lifecycle from linting to report archival in AWS S3.
 
 ---
 
-## 📸 Visual Core
+## 🌐 Live Experience
 
-The dashboard is structured into specialized views designed for different engineering needs.
+The future of test reporting is already online. Experience the ultra-premium interface here:
 
-<table border="0">
-  <tr>
-    <td width="33%" align="center">
-      <h3>📈 Main Insights</h3>
-      <img src="features/resources/screenshots/dashboard_stats_grid.png" alt="Stats Grid" />
-      <p><i>Real-time KPIs and system health metrics at a glance.</i></p>
-    </td>
-    <td width="33%" align="center">
-      <h3>📂 Execution Archives</h3>
-      <img src="features/resources/screenshots/test_runs_search_results.png" alt="Archives" />
-      <p><i>Historical data exploration with project-based grouping.</i></p>
-    </td>
-    <td width="33%" align="center">
-      <h3>📡 Endpoint Catalog</h3>
-      <img src="features/resources/screenshots/endpoints_deep_detail.png" alt="Endpoints" />
-      <p><i>Technical registry of all infrastructure endpoints and their status.</i></p>
-    </td>
-  </tr>
-</table>
-
-### 🔍 Surgical Diagnostics
-When a test fails, the **Run Detail View** allows you to drill down into specific failures, viewing headers, bodies, and visual proof simultaneously.
-
-![Run Detail](features/resources/screenshots/run_detail_full_view.png)
+> **[🚀 Access Live Dashboard](https://carlos-camara.github.io/dashboard/)**
 
 ---
 
-## ☁️ Deployment Strategy
+## ✨ Cutting-Edge Features
 
-Our infrastructure leverages a decoupled architecture for maximum performance and reliability.
+### 📊 Performance Digital Twin
+Go beyond binary pass/fail results. Our **Performance Analytics Engine** establishes a technical baseline for your system's health.
+- **Signal Velocity**: Interactive time-series charts visualizing throughput trends.
+- **Throughput Chronology**: Surgical detection of regression spikes and latency drifts.
+- **Spectral Latency Audit**: A heat-map of system responsiveness and SLA adherence.
 
-### **Frontend: GitHub Pages**
-The React-based dashboard interface is statically generated and hosted on **GitHub Pages**. This ensures:
-- **Global Edge Delivery**: Lightning-fast load times worldwide.
-- **Zero-Downtime Updates**: Atomic deployments triggered automatically by our CI pipelines.
-- **Security**: Hardened static assets with no server-side attack surface.
+![Performance View](features/resources/screenshots/ultra_professional_performance_dashboard.png)
 
-### **Backend: Render**
-The reporting API and data aggregation layer run on **Render Cloud**. This provides:
-- **Scalable Compute**: Automatically adjusts resources based on test suite load.
-- **Persistent Data**: SQlite/PostgreSQL integrations for long-term historical analysis.
-- **Health Checks**: Automated liveness probes to ensure reporting availability.
+### 🤖 PR Intelligence
+Maximize developer focus with an automated pull request management system:
+- **Auto-Labeler**: Precise categorization (`DevOps`, `QA`, `Frontend`, `Backend`) based on modified file paths.
+- **Auto-Assigner**: Automatic ownership assignment to ensure rapid review cycles.
+- **Smart Formatting**: Enforced markdown standards for clean, readable documentation.
+
+### 📑 Intelligent PDF Dossiers
+Export executive-ready artifacts with a single click. These **Intelligent Dossiers** include:
+- **Executive KPI Grid**: High-level success metrics.
+- **Visual Evidence Engine**: Embedded high-resolution screenshots for every failure.
+- **SLA Violation Logs**: Detailed breakdown of performance threshold breaches.
 
 ---
 
-## 🏗 System Architecture
+## 🏗️ Architecture & Decoupled Stack
 
-We utilize a modern stack to ensure scalability and developer comfort.
+We leverage a modern, decoupled architecture designed for scale and zero-downtime reliability.
 
 ```mermaid
 graph TD
-    A["GitHub Actions CI"] -->|Triggers| B("Python Behave")
-    A -->|Triggers| C("Selenium GUI")
-    B -->|Logs| D["REST API Validation"]
-    C -->|Captures| E["Visual Evidence (Screenshots)"]
-    D & E -->|Generate| F["JUnit XML & JSON Reports"]
-    F -->|Ingested by| G["Render Backend API"]
-    G -->|Served to| H["GitHub Pages Frontend"]
-    H -->|Presents| I{"Executive Insights"}
+    subgraph "Local / Runner"
+        A["GitHub Actions CI"] -->|Triggers| B("Behave API Test")
+        A -->|Triggers| C("Selenium GUI Test")
+        A -->|Triggers| L["Locust Load Test"]
+    end
+
+    subgraph "Shared Action Hub"
+        D["QA Hub Shared Actions"] -->|Standardizes| A
+    end
+
+    subgraph "Data Storage"
+        B & C & L -->|Artifacts| E["JUnit XML / JSON"]
+        E -->|Aggregated by| S3["AWS S3 History"]
+        E -->|Committed to| DB["SQLite Result DB"]
+    end
+
+    subgraph "Cloud Presentation"
+        DB -->|Served by| G["Render Backend API"]
+        G -->|Consumes| H["Vite React Dashboard"]
+        H -->|Hosted on| P["GitHub Pages (Global CDN)"]
+    end
     
     style G fill:#6d28d9,color:#fff
-    style H fill:#2563eb,color:#fff
-    style I fill:#059669,color:#fff
+    style P fill:#2563eb,color:#fff
+    style D fill:#f59e0b,color:#000
 ```
 
 ---
 
-## 🛠 Feature Showcase
+## 🛠️ Unified CI/CD Ecosystem
 
-### 🔍 Technical API Validation
-- **Contract & Schema**: Automatic validation of response structures against YAML definitions.
-- **SLA Monitoring**: Integrated performance benchmarking for response times.
-- **Traceability**: Comprehensive logging of headers and payloads for every request.
+Our pipelines are powered by the **[QA Hub Actions](https://github.com/carlos-camara/qa-hub-actions)** library, ensuring global standards across all repositories.
 
-### 🌐 Advanced GUI Automation
-- **YAML Locator Engine**: Maintainable tests with descriptive element references.
-- **Smart Waits**: Industrial-grade synchronization for dynamic modern web apps.
-- **Evidence Collection**: High-resolution screenshots on every interaction and failure.
+| Status | Pipeline | Core Responsibility |
+| :---: | :--- | :--- |
+| `🧹` | **Lint Codebase** | Super-Linter enforcement for zero-debt documentation and code. |
+| `🛡️` | **Unified Suite** | Parallel execution of API, GUI, and Performance layers. |
+| `📦` | **Upload Results** | Automated merging and committing of timestamped reports. |
+| `☁️` | **AWS S3 Archive** | Long-term persistence for historical quality analysis. |
+| `🏷️` | **PR Intelligence** | Dynamic labeling and contributor assignment. |
 
 ---
 
-## 🚦 Getting Started
+## 🚦 Quick Start
 
-### 📋 Prerequisites
-- **Python 3.11+**
-- **Node.js 20+**
-- **Chrome / Chromedriver** (for local GUI tests)
+### 📋 Environment Requirements
+- **Python 3.11+** | **Node.js 20+** | **Chrome/Chromedriver**
 
-### 💻 Local Setup
+### 💻 Local Deployment
 
-1. **Clone & Browse**:
+1. **Clone & Explore**:
    ```bash
    git clone https://github.com/carlos-camara/dashboard.git
    cd dashboard
    ```
 
-2. **Backend & Test Logic**:
+2. **Core Services & UI**:
+   ```bash
+   npm install
+   npm run start-backend  # Terminal 1
+   npm run dev            # Terminal 2
+   ```
+
+3. **Automation Engine**:
    ```bash
    python -m venv .venv
-   source .venv/bin/activate  # Windows: .venv\Scripts\activate
+   .venv\Scripts\activate
    pip install -r requirements.txt
    ```
 
-3. **Frontend Dashboard**:
-   ```bash
-   npm install
-   ```
-
 ---
 
-## 🏃 Execution Commands
+## 🛡️ Support & Security
 
-| Mode | Command | Description |
-| :--- | :--- | :--- |
-| **Development** | `npm run dev` | Spins up the dashboard UI locally |
-| **API Smoke** | `./run_api_smoke_reports.ps1` | Rapid validation of core endpoints |
-| **GUI Smoke** | `./run_gui_smoke_reports.ps1` | Visual verification of critical paths |
-| **Backend** | `npm run start-backend` | Starts the mock API and database services |
+We maintain the highest standards for our engineering tools.
+- **Security Policy**: Read our [Security Procedures](SECURITY.md).
+- **Contributing**: Check our [Engineering Standards](CONTRIBUTING.md).
+- **Changelog**: Follow our evolution in the [Changelog](CHANGELOG.md).
 
 ---
-
-## 🛡️ CI/CD Workflow
-Our **GitHub Actions** pipeline orchestrates the entire lifecycle:
-1. **Linting**: Enforces strict code quality standards for Python and TypeScript.
-2. **Unified Suite**: Runs API and GUI tests in parallel within a headless environment.
-3. **Auto-Publishing**: Merges artifacts and deploys the frontend to GitHub Pages.
-
-> [!TIP]
-> Use the `workflow_dispatch` event to manually trigger a full suite validation from the GitHub UI.
-
-<!-- -->
-
-> **Designed & Engineered by [Carlos Camara](https://github.com/carlos-camara)**
-> *Quality is not an act, it is a habit.*
+<div align="center">
+  <i>Designed & Engineered by <b>[Carlos Cámara](https://github.com/carlos-camara)</b></i>
+</div>

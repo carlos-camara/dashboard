@@ -1,0 +1,20 @@
+view:
+  title:
+    en: "ENDPOINT CATALOG"
+    es: "CATÁLOGO DE ENDPOINTS"
+detail:
+  back_button:
+    en: "Back to Catalog"
+    es: "Volver al Catálogo"
+  success_rate:
+    en: "Success Rate"
+    es: "Tasa de Éxito"
+  avg_latency:
+    en: "Avg Latency"
+    es: "Latencia Media"
+  performance_insights:
+    en: "Performance Insights"
+    es: "Información de Rendimiento"
+  live_discovery:
+    en: "Live Discovery Data"
+    es: "Datos de Descubrimiento en Vivo"

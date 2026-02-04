@@ -1,0 +1,6 @@
+return_to_base:
+  en: "RETURN TO BASE"
+  es: "VOLVER A LA BASE"
+success:
+  en: "Success"
+  es: "Éxito"

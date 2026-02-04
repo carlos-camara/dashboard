@@ -3,30 +3,30 @@ Feature: Test Runs View Validation
 
   Background:
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
-    When I wait for 5 seconds
+    And the "dashboard" page is displayed
 
-  @navigation @runs @search
-  Scenario: Search and Grouping in Test Runs
+  Scenario: Search and Redirect to Project Analytics
     When I click on the "test_runs_link" in the sidebar
-    And I wait for 2 seconds
-    Then I should see the text "Execution Archives"
-    When I type "dashboard" into the "search_input" in "test_runs"
-    And I wait for 3 seconds
-    Then I should see the text "dashboard"
-    # Project cards should be visible
-    And I should see at least 1 elements with selector "project_card" in "test_runs"
-    When I click on the "project_card" in "test_runs"
+    Then the "test_runs" page is displayed
+    Then the "title" should contain the text "[LANG:navigation.test_runs]"
+    When I type "dashboard" into the "search_input"
     And I wait for 1 seconds
-    # Should see historical runs
-    And I should see at least 1 elements with selector "latest_badge" in "test_runs"
-    Then I take a screenshot named "test_runs_search_results"
+    Then the "search_input" should contain the text "dashboard"
+    # Select the project to go to detail view
+    When I click on the "project_card"
+    Then the "project_detail" page is displayed
+    # Now in ProjectDetailView
+    Then the "projectName" should be visible
+    And I should see at least 1 elements with selector "stability_chart"
+    Then I take a screenshot named "test_runs_project_redirection"
 
-  @navigation @runs @pagination
-  Scenario: Verify Pagination in Project History
+  Scenario: Verify Project List and Back Navigation
     When I click on the "test_runs_link" in the sidebar
-    And I wait for 1 seconds
-    When I click on the "project_card" in "test_runs"
-    And I wait for 1 seconds
-    Then I should see the text "Recent Executions"
-    # If there are many runs, pagination should appear (or we just verify the area)
-    Then I take a screenshot of the "project_card" named "test_runs_pagination_area"
+    Then the "test_runs" page is displayed
+    When I click on the "project_card"
+    Then the "project_detail" page is displayed
+    Then the "runCount" should contain the text "[LANG:project_detail.run_count]"
+    # Go back to the registry
+    When I click on the "back_button"
+    Then the "test_runs" page is displayed
+    Then I should see the text "[LANG:navigation.test_runs]"

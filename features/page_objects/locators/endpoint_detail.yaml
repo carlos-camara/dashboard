@@ -1,11 +1,16 @@
 endpoint_detail:
   back_button:
+    type: button
     by: xpath
-    value: "//button[contains(., 'Back to Catalog')]"
+    value: //button[contains(., 'Back to Catalog')]
+    wait_load: true
+  open_report_button:
+    type: button
+    by: xpath
+    value: //button[contains(., 'Open Full Report')]
+    wait_load: false
   performance_card:
+    type: webelement
     by: xpath
     value: "//h3[contains(., 'Performance Insights')]/ancestor::div[contains(@class, 'border-indigo-500/30')]"
-  open_report_button:
-    by: xpath
-    value: "//button[contains(., 'Open Full Report')]"
-
+    wait_load: false

@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../services/api';
 import { ExecutionRun } from '../types';
-import { Folder, Trash2, Calendar, ChevronRight, Package, ChevronDown, Activity, History, Tag, Search, ChevronLeft } from 'lucide-react';
+import { Folder, Trash2, Calendar, ChevronRight, Package, ChevronDown, Activity, History, Tag, Search, ChevronLeft, TrendingUp } from 'lucide-react';
 import RunDetailView from './RunDetailView';
+import Pagination from './Pagination';
 
 interface ProjectGroup {
   projectName: string;
@@ -17,22 +18,20 @@ interface ProjectGroup {
 interface TestRunsViewProps {
   refreshKey?: number;
   initialProject?: string | null;
+  onNavigate?: (tab: string, state?: any) => void;
 }
 
-const TestRunsView: React.FC<TestRunsViewProps> = ({ refreshKey, initialProject }) => {
+const TestRunsView: React.FC<TestRunsViewProps> = ({ refreshKey, initialProject, onNavigate }) => {
   const [runs, setRuns] = useState<ExecutionRun[]>([]);
   const [loading, setLoading] = useState(true);
-  const [expandedProjects, setExpandedProjects] = useState<Set<string>>(new Set(initialProject ? [initialProject] : []));
-  const [selectedRun, setSelectedRun] = useState<ExecutionRun | null>(null);
+
   const [searchQuery, setSearchQuery] = useState(initialProject || '');
 
   useEffect(() => {
     if (initialProject) {
       setSearchQuery(initialProject);
-      setExpandedProjects(new Set([initialProject]));
     }
   }, [initialProject]);
-  const [projectPages, setProjectPages] = useState<Record<string, number>>({});
   const RUNS_PER_PAGE = 5;
 
   const fetchRuns = async () => {
@@ -49,17 +48,21 @@ const TestRunsView: React.FC<TestRunsViewProps> = ({ refreshKey, initialProject 
   // 1. Define projectsList FIRST so it's available for rendering
   const projectsList: ProjectGroup[] = Object.values(
     runs.reduce<Record<string, ProjectGroup>>((acc, run) => {
+      // Use project name, or source_folder, or 'Unknown Project' as key
+      const projectName = run.project?.trim() ||
+        (run.source_folder && run.source_folder !== 'UPLOAD' ? run.source_folder : 'Unknown Project');
+
       const query = searchQuery.toLowerCase();
 
-      // GRANULAR FILTERING: Apply filters per individual run
+      // Filter applies to the project name or individual run attributes
       const matchesSearch = !searchQuery ||
-        run.name.toLowerCase().includes(query) ||
-        run.project.toLowerCase().includes(query);
+        projectName.toLowerCase().includes(query) ||
+        run.name.toLowerCase().includes(query);
 
       if (matchesSearch) {
-        if (!acc[run.project]) {
-          acc[run.project] = {
-            projectName: run.project,
+        if (!acc[projectName]) {
+          acc[projectName] = {
+            projectName: projectName,
             runs: [],
             lastActivity: run.timestamp,
             totalScenarios: 0,
@@ -67,13 +70,14 @@ const TestRunsView: React.FC<TestRunsViewProps> = ({ refreshKey, initialProject 
             allTags: new Set<string>(),
           };
         }
-        acc[run.project].runs.push(run);
-        acc[run.project].totalScenarios += run.totalCount;
+        const group = acc[projectName];
+        group.runs.push(run);
+        group.totalScenarios += run.totalCount;
         if (run.tags) {
-          run.tags.forEach(tag => acc[run.project].allTags.add(tag));
+          run.tags.forEach(tag => group.allTags.add(tag));
         }
-        if (new Date(run.timestamp) > new Date(acc[run.project].lastActivity)) {
-          acc[run.project].lastActivity = run.timestamp;
+        if (new Date(run.timestamp) > new Date(group.lastActivity)) {
+          group.lastActivity = run.timestamp;
         }
       }
       return acc;
@@ -86,23 +90,7 @@ const TestRunsView: React.FC<TestRunsViewProps> = ({ refreshKey, initialProject 
     return group;
   });
 
-  const toggleProject = (projectName: string) => {
-    const next = new Set(expandedProjects);
-    if (next.has(projectName)) next.delete(projectName);
-    else next.add(projectName);
-    setExpandedProjects(next);
 
-    // Reset page on toggle
-    if (!next.has(projectName)) {
-      const nextPages = { ...projectPages };
-      delete nextPages[projectName];
-      setProjectPages(nextPages);
-    }
-  };
-
-  const changePage = (projectName: string, newPage: number) => {
-    setProjectPages(prev => ({ ...prev, [projectName]: newPage }));
-  };
 
   const handleDelete = async (id: string) => {
     if (confirm('¿Estás seguro de que deseas eliminar este registro de ejecución?')) {
@@ -118,9 +106,7 @@ const TestRunsView: React.FC<TestRunsViewProps> = ({ refreshKey, initialProject 
     }
   };
 
-  if (selectedRun) {
-    return <RunDetailView run={selectedRun} onBack={() => setSelectedRun(null)} />;
-  }
+
 
   if (loading && runs.length === 0) return <div className="animate-pulse space-y-4 pt-10"><div className="h-40 bg-slate-900 rounded-2xl w-full"></div></div>;
 
@@ -183,14 +169,13 @@ const TestRunsView: React.FC<TestRunsViewProps> = ({ refreshKey, initialProject 
           {projectsList.map((group) => (
             <div
               key={group.projectName}
-              className={`relative overflow-hidden rounded-3xl border transition-all duration-500 ${expandedProjects.has(group.projectName)
-                ? 'bg-slate-900/80 border-blue-500/30 shadow-[0_0_50px_-12px_rgba(59,130,246,0.1)]'
-                : 'bg-slate-900/40 border-slate-800/60 hover:border-slate-700 hover:bg-slate-900/60'
-                }`}
+              id={`project-card-${group.projectName}`}
+              data-testid="project-card"
+              onClick={() => onNavigate && onNavigate('project-report', { project: group.projectName, runs: group.runs })}
+              className="project-card relative overflow-hidden rounded-3xl border border-slate-800/60 bg-slate-900/40 hover:bg-slate-900/60 hover:border-blue-500/30 hover:shadow-[0_0_50px_-12px_rgba(59,130,246,0.1)] transition-all duration-300 cursor-pointer group"
             >
               <div
-                onClick={() => toggleProject(group.projectName)}
-                className="p-6 sm:p-8 cursor-pointer relative z-10"
+                className="p-6 sm:p-8 relative z-10"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                   {/* Project Info */}
@@ -248,112 +233,17 @@ const TestRunsView: React.FC<TestRunsViewProps> = ({ refreshKey, initialProject 
 
                     <div className="h-10 w-[1px] bg-slate-800 hidden sm:block"></div>
 
-                    <div className={`p-3 rounded-full border border-slate-700/50 bg-slate-800/30 text-slate-400 transition-all duration-300 ${expandedProjects.has(group.projectName) ? 'rotate-180 bg-blue-600 border-blue-500 text-white' : 'hover:bg-slate-800'}`}>
-                      <ChevronDown size={20} />
+                    <div className="flex items-center space-x-2">
+
+                      <div className={`p-3 rounded-full border border-slate-700/50 bg-slate-800/30 text-slate-400 transition-all duration-300 group-hover:bg-blue-600 group-hover:border-blue-500 group-hover:text-white`}>
+                        <ChevronRight size={20} />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Expanded Content with Pagination */}
-              {expandedProjects.has(group.projectName) && (
-                <div className="border-t border-slate-800/60 bg-slate-950/50">
-                  <div className="flex items-center justify-between px-8 py-3 bg-slate-900/30 border-b border-slate-800/50">
-                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] flex items-center">
-                      <History size={12} className="mr-2" /> Recent Executions
-                    </span>
-                    <button
-                      onClick={(e) => { e.stopPropagation(); handleDeleteProject(group.projectName); }}
-                      className="text-[10px] font-bold text-rose-500 hover:text-rose-400 uppercase tracking-wider flex items-center px-3 py-1 bg-rose-500/5 hover:bg-rose-500/10 rounded-lg border border-rose-500/10 transition-colors"
-                    >
-                      <Trash2 size={12} className="mr-1.5" /> Delete Project
-                    </button>
-                  </div>
 
-                  <div className="p-4 space-y-2">
-                    {(() => {
-                      const page = projectPages[group.projectName] || 1;
-                      const startIndex = (page - 1) * RUNS_PER_PAGE;
-                      const totalPages = Math.ceil(group.runs.length / RUNS_PER_PAGE);
-                      const currentRuns = group.runs.slice(startIndex, startIndex + RUNS_PER_PAGE);
-
-                      return (
-                        <>
-                          {currentRuns.map((run, idx) => (
-                            <div
-                              key={run.id}
-                              onClick={() => setSelectedRun(run)}
-                              className="group relative flex items-center justify-between p-4 rounded-xl border border-transparent hover:border-slate-700 hover:bg-slate-800/40 cursor-pointer transition-all duration-200"
-                            >
-                              <div className="flex items-center space-x-4 relative z-10">
-                                <div className="flex flex-col items-center">
-                                  <div className="h-6 w-[1px] bg-slate-800 mb-1"></div>
-                                  <div className={`w-3 h-3 rounded-full ${run.failedCount > 0 ? 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.5)]' : 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]'}`}></div>
-                                  <div className="h-6 w-[1px] bg-slate-800 mt-1"></div>
-                                </div>
-                                <div>
-                                  <div className="flex items-center space-x-3">
-                                    <h4 className="text-sm font-bold text-slate-200 group-hover:text-blue-400 transition-colors tracking-tight">
-                                      {run.name}
-                                      {startIndex === 0 && idx === 0 && <span className="ml-2 px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[9px] rounded uppercase font-black tracking-wider">Latest</span>}
-                                    </h4>
-                                  </div>
-                                  <span className="text-[11px] font-mono text-slate-500">{new Date(run.timestamp).toLocaleString()}</span>
-                                </div>
-                              </div>
-
-                              <div className="flex items-center space-x-8 relative z-10 opacity-70 group-hover:opacity-100 transition-opacity">
-                                <div className="flex space-x-6 text-[10px] uppercase font-bold tracking-wider">
-                                  <div className="flex flex-col items-center">
-                                    <span className="text-slate-500 mb-1">Passed</span>
-                                    <span className="text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded">{run.passedCount}</span>
-                                  </div>
-                                  <div className="flex flex-col items-center">
-                                    <span className="text-slate-500 mb-1">Failed</span>
-                                    <span className={`${run.failedCount > 0 ? 'text-rose-500 bg-rose-500/10' : 'text-slate-600 bg-slate-800'} px-2 py-0.5 rounded`}>{run.failedCount}</span>
-                                  </div>
-                                </div>
-
-                                <div className="flex items-center space-x-2 pl-4 border-l border-slate-800">
-                                  <button
-                                    onClick={(e) => { e.stopPropagation(); handleDelete(run.id); }}
-                                    className="p-2 text-slate-600 hover:text-rose-500 hover:bg-rose-500/10 rounded-lg transition-colors"
-                                  >
-                                    <Trash2 size={14} />
-                                  </button>
-                                  <ChevronRight size={16} className="text-slate-600 group-hover:text-blue-500 transition-colors" />
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-
-                          {totalPages > 1 && (
-                            <div className="flex items-center justify-between px-4 py-2 mt-2 border-t border-slate-800/50">
-                              <button
-                                disabled={page === 1}
-                                onClick={(e) => { e.stopPropagation(); changePage(group.projectName, page - 1); }}
-                                className="text-[10px] font-bold uppercase text-slate-500 disabled:opacity-30 hover:text-white transition-colors flex items-center"
-                              >
-                                <ChevronLeft size={14} className="mr-1" /> Previous
-                              </button>
-                              <span className="text-[10px] font-mono text-slate-600">
-                                Page {page} of {totalPages}
-                              </span>
-                              <button
-                                disabled={page === totalPages}
-                                onClick={(e) => { e.stopPropagation(); changePage(group.projectName, page + 1); }}
-                                className="text-[10px] font-bold uppercase text-slate-500 disabled:opacity-30 hover:text-white transition-colors flex items-center"
-                              >
-                                Next <ChevronRight size={14} className="ml-1" />
-                              </button>
-                            </div>
-                          )}
-                        </>
-                      );
-                    })()}
-                  </div>
-                </div>
-              )}
             </div>
           ))}
         </div>

@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { api } from '../services/api';
+import { generatePerformanceDossier } from '../services/reportGenerator';
+import html2canvas from 'html2canvas';
 import {
     AreaChart,
     Area,
@@ -28,7 +31,8 @@ import {
     History,
     Users,
     Cpu,
-    Gauge
+    Gauge,
+    Loader2
 } from 'lucide-react';
 
 interface PerformanceReportViewProps {
@@ -113,18 +117,17 @@ const StatCard = ({ icon: Icon, label, value, sublabel, color, delay }: any) => 
 const PerformanceReportView: React.FC<PerformanceReportViewProps> = ({ reportUrl, onBack, timestamp, selectedEndpoint }) => {
     const [data, setData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+    const [isExporting, setIsExporting] = useState(false);
+
+    const velocityRef = useRef<HTMLDivElement>(null);
+    const latencyRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         setLoading(true);
         const fetchData = () => {
-            // If a specific report was clicked, we ideally want THAT report's data.
-            // However, our API currently only supports 'latest' efficiently via JSON parsing of CSV.
-            // For now, we fetch 'latest' but in a real scenario we'd pass an ID to the API.
-            // We'll stick to 'latest' to uphold the current architecture but ensure consistent UI.
-            fetch('http://localhost:3001/api/performance/latest')
-                .then(res => res.json())
+            api.getLatestPerformanceStats()
                 .then(res => {
-                    if (res.found) setData(res);
+                    if (res.found) setData({ ...res, reportUrl: api.getAssetUrl(res.reportUrl) });
                     setLoading(false);
                 })
                 .catch(err => {
@@ -132,10 +135,46 @@ const PerformanceReportView: React.FC<PerformanceReportViewProps> = ({ reportUrl
                     setLoading(false);
                 });
         };
-
-        // Artificial delay for smooth entrance animation
         setTimeout(fetchData, 800);
     }, []);
+
+    const handleExport = async () => {
+        if (isExporting || !data) return;
+        setIsExporting(true);
+
+        // Allow UI to settle and animations to finish
+        await new Promise(r => setTimeout(r, 1000));
+
+        const captureOptions = {
+            backgroundColor: '#0f172a',
+            scale: 2,
+            logging: false,
+            useCORS: true
+        };
+
+        try {
+            let velocityImg = undefined;
+            let latencyImg = undefined;
+
+            if (velocityRef.current) {
+                const canvas = await html2canvas(velocityRef.current, captureOptions);
+                velocityImg = canvas.toDataURL('image/png');
+            }
+
+            if (latencyRef.current) {
+                const canvas = await html2canvas(latencyRef.current, captureOptions);
+                latencyImg = canvas.toDataURL('image/png');
+            }
+
+            generatePerformanceDossier(data, { velocity: velocityImg, latency: latencyImg });
+
+        } catch (e) {
+            console.error("Export failed", e);
+            alert("Failed to generate dossier");
+        } finally {
+            setIsExporting(false);
+        }
+    };
 
     if (loading) {
         return (
@@ -199,13 +238,11 @@ const PerformanceReportView: React.FC<PerformanceReportViewProps> = ({ reportUrl
                 }
             `}</style>
 
-            {/* Background Ambience */}
             <div className="fixed inset-0 pointer-events-none z-[-1]">
                 <div className="absolute top-0 left-0 w-[1000px] h-[1000px] bg-indigo-600/5 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 mix-blend-screen"></div>
-                <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-emerald-600/5 rounded-full blur-[100px] translate-x-1/3 translate-y-1/3 mix-blend-screen"></div>
+                <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-emerald-600/5 rounded-full blur-[100px] translate-x-1/3 -translate-y-1/3 mix-blend-screen"></div>
             </div>
 
-            {/* HEADER */}
             <div className="flex flex-col lg:flex-row items-center justify-between gap-8 pt-6 animate-in fade-in slide-in-from-top-4 duration-700">
                 <div className="flex items-center self-start lg:self-auto space-x-8 w-full lg:w-auto">
                     <button
@@ -237,14 +274,16 @@ const PerformanceReportView: React.FC<PerformanceReportViewProps> = ({ reportUrl
                         </div>
                     </div>
                     <button
-                        onClick={() => window.print()}
-                        className="w-full md:w-auto bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white px-8 py-5 rounded-[1.5rem] font-black text-[11px] uppercase tracking-[0.2em] shadow-[0_10px_40px_-10px_rgba(79,70,229,0.5)] transition-all hover:scale-105 active:scale-95 flex items-center justify-center space-x-3 group"
+                        onClick={handleExport}
+                        disabled={isExporting}
+                        className="w-full md:w-auto bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white px-8 py-5 rounded-[1.5rem] font-black text-[11px] uppercase tracking-[0.2em] shadow-[0_10px_40px_-10px_rgba(79,70,229,0.5)] transition-all hover:scale-105 active:scale-95 flex items-center justify-center space-x-3 group disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        <Download size={18} className="group-hover:animate-bounce" />
-                        <span>Export Encrypted PDF</span>
+                        {isExporting ? <Loader2 size={18} className="animate-spin" /> : <Download size={18} className="group-hover:animate-bounce" />}
+                        <span>{isExporting ? 'Generating Audit...' : 'Download Audit Dossier'}</span>
                     </button>
                 </div>
             </div>
+
 
             {/* KEY METRIC GRID */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -289,7 +328,7 @@ const PerformanceReportView: React.FC<PerformanceReportViewProps> = ({ reportUrl
             <div className="grid grid-cols-1 gap-12">
 
                 {/* Throughput Chart */}
-                <div className="bg-slate-900/40 border border-slate-800/60 p-1.5 rounded-[3.5rem] backdrop-blur-3xl shadow-2xl animate-in fade-in slide-in-from-bottom-12 duration-1000 fill-mode-backwards delay-500">
+                <div ref={velocityRef} className="bg-slate-900/40 border border-slate-800/60 p-1.5 rounded-[3.5rem] backdrop-blur-3xl shadow-2xl animate-in fade-in slide-in-from-bottom-12 duration-1000 fill-mode-backwards delay-500">
                     <div className="bg-gradient-to-b from-slate-900 to-slate-950 p-8 md:p-12 rounded-[3.2rem] overflow-hidden relative group">
 
                         <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity duration-700">
@@ -366,7 +405,7 @@ const PerformanceReportView: React.FC<PerformanceReportViewProps> = ({ reportUrl
                                         fill="url(#rpsColor)"
                                         filter="url(#glow)"
                                         name="Requests/s"
-                                        animationDuration={2000}
+                                        animationDuration={1000}
                                         animationEasing="ease-out"
                                     />
                                     <Area
@@ -385,7 +424,7 @@ const PerformanceReportView: React.FC<PerformanceReportViewProps> = ({ reportUrl
                 </div>
 
                 {/* Latency Chart */}
-                <div className="bg-slate-900/40 border border-slate-800/60 p-1.5 rounded-[3.5rem] backdrop-blur-3xl shadow-2xl animate-in fade-in slide-in-from-bottom-12 duration-1000 fill-mode-backwards delay-700">
+                <div ref={latencyRef} className="bg-slate-900/40 border border-slate-800/60 p-1.5 rounded-[3.5rem] backdrop-blur-3xl shadow-2xl animate-in fade-in slide-in-from-bottom-12 duration-1000 fill-mode-backwards delay-700">
                     <div className="bg-gradient-to-b from-slate-900 to-slate-950 p-8 md:p-12 rounded-[3.2rem] overflow-hidden relative group">
 
                         <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity duration-700">
@@ -483,8 +522,8 @@ const PerformanceReportView: React.FC<PerformanceReportViewProps> = ({ reportUrl
                                             <td className="py-6 px-4 first:pl-0">
                                                 <div className="flex items-center space-x-4">
                                                     <span className={`text-[9px] font-black px-2.5 py-1.5 rounded-lg border shadow-lg ${row.method === 'GET' ? 'bg-blue-500/10 border-blue-500/20 text-blue-400 shadow-blue-500/10' :
-                                                            row.method === 'POST' ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400 shadow-emerald-500/10' :
-                                                                'bg-slate-500/10 border-slate-500/20 text-slate-400'
+                                                        row.method === 'POST' ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400 shadow-emerald-500/10' :
+                                                            'bg-slate-500/10 border-slate-500/20 text-slate-400'
                                                         }`}>{row.method}</span>
                                                     <span className="text-xs font-mono font-bold text-slate-300 group-hover:text-white transition-colors tracking-tight">{row.name}</span>
                                                 </div>
@@ -529,7 +568,7 @@ const PerformanceReportView: React.FC<PerformanceReportViewProps> = ({ reportUrl
                     <span>Generated by QA Hub Core v2.4.0</span>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

@@ -1,0 +1,65 @@
+project_detail:
+  projectName:
+    type: text
+    by: xpath
+    value: //main//h1[contains(@class, 'font-black')]
+    wait_load: true
+  runCount:
+    type: text
+    by: xpath
+    value: //*[contains(., 'Runs Detected')]
+    wait_load: false
+  stability_score:
+    type: text
+    by: xpath
+    value: //*[contains(text(), 'Stability Score')]
+    wait_load: false
+  velocity_trend:
+    type: webelement
+    by: xpath
+    value: //*[contains(text(), 'Execution Velocity')]/following-sibling::div//div[contains(@class,
+      'recharts-responsive-container')]
+    wait_load: false
+  stability_comparison:
+    type: webelement
+    by: xpath
+    value: //*[contains(text(), 'Layer Stability')]/ancestor::div[contains(@class,
+      'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]
+    wait_load: false
+  stability_chart:
+    type: webelement
+    by: xpath
+    value: //*[contains(text(), 'Layer Stability')]/ancestor::div[contains(@class,
+      'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]
+    wait_load: false
+  latency_comparison:
+    type: webelement
+    by: xpath
+    value: //*[contains(., 'Layer Latency')]/ancestor::div[contains(@class, 'rounded-[2rem]')]//div[contains(@class,
+      'recharts-responsive-container')]
+    wait_load: false
+  item:
+    type: webelement
+    by: xpath
+    value: //div[contains(@id, 'run-item-')]
+    wait_load: false
+  run_list:
+    type: webelement
+    by: xpath
+    value: //h3[contains(text(), 'Execution History')]/following-sibling::div
+    wait_load: false
+  back_button:
+    type: button
+    by: xpath
+    value: //button[./*[local-name()='svg' and contains(@class, 'lucide-chevron-left')]]
+    wait_load: false
+  download_button:
+    type: button
+    by: xpath
+    value: //button[@title='Download Dossier']
+    wait_load: false
+  delete_button:
+    type: button
+    by: xpath
+    value: //button[./*[local-name()='svg' and contains(@class, 'lucide-trash-2')]]
+    wait_load: false

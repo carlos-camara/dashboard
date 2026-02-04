@@ -1,16 +1,27 @@
 # Logs
 logs
-
 *.log
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
+pretty.output
 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.venv
+.venv
+.env
+.pytest_cache/
+
+# Dependencies
 node_modules
+.venv
 dist
 dist-ssr
+# Environment variables
+.env
 *.local
 
 # Editor directories and files
@@ -18,11 +29,15 @@ dist-ssr
 !.vscode/extensions.json
 .idea
 .DS_Store
+Thumbs.db
 *.suo
-*.ntvs*
-*.njsproj
 *.sln
 *.sw?
 
 # Database
 qa_hub.db*
+database.db
+
+# Reports and Uploads
+uploads/*
+!uploads/.gitkeep

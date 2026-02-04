@@ -1,0 +1,40 @@
+<testsuite name="dashboard.gui.gui_test_runs.Test Runs View Validation" tests="2" errors="0" failures="0" skipped="0" time="34.734512" timestamp="2026-02-03T19:53:06.645024" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Search and Redirect to Project Analytics" status="passed" time="20.850157"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Search and Redirect to Project Analytics
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.134s
+    When I wait for 5 seconds ... passed in 5.003s
+    When I click on the "test_runs_link" in the sidebar ... passed in 2.489s
+    And I wait for 2 seconds ... passed in 2.002s
+    Then the "title" in "test_runs" should contain the text "EXECUTION ARCHIVES" ... passed in 0.204s
+    When I type "dashboard" into the "search_input" in "test_runs" ... passed in 2.767s
+    And I wait for 3 seconds ... passed in 3.001s
+    Then the "search_input" in "test_runs" should contain the text "dashboard" ... passed in 0.345s
+    When I click on the "project_card" in "test_runs" ... passed in 1.783s
+    And I wait for 2 seconds ... passed in 2.001s
+    Then the "projectName" in "project_detail" should be visible ... passed in 0.209s
+    And I should see at least 1 elements with selector "stability_chart" in "project_detail" ... passed in 0.084s
+    Then I take a screenshot named "test_runs_project_redirection" ... passed in 0.828s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Verify Project List and Back Navigation" status="passed" time="13.884355"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Project List and Back Navigation
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.105s
+    When I wait for 5 seconds ... passed in 5.002s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.801s
+    And I wait for 2 seconds ... passed in 2.002s
+    When I click on the "project_card" in "test_runs" ... passed in 0.768s
+    And I wait for 2 seconds ... passed in 2.002s
+    Then the "runCount" in "project_detail" should contain the text "RUNS DETECTED" ... passed in 0.639s
+    When I click on the "back_button" in "project_detail" ... passed in 0.604s
+    And I wait for 1 seconds ... passed in 1.002s
+    Then I should see the text "EXECUTION ARCHIVES" ... passed in 0.960s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

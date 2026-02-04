@@ -1,0 +1,113 @@
+<testsuite name="dashboard.gui.gui_project_detail.Project Detail View Validation" tests="4" errors="0" failures="2" skipped="0" time="47.921907" timestamp="2026-02-03T18:11:01.019625" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Architecture Analysis Section" status="failed" time="11.865592"><failure type="AssertionError" message="Element 'projectName' in 'project_detail' does not contain text 'ARCHITECTURE ANALYSIS'. Found: 'dashboard'">
+<![CDATA[
+Failing step: Then the "projectName" in "project_detail" should contain the text "ARCHITECTURE ANALYSIS" ... failed in 0.120s
+Location: features/dashboard/gui/gui_project_detail.feature:13
+Assertion Failed: Element 'projectName' in 'project_detail' does not contain text 'ARCHITECTURE ANALYSIS'. Found: 'dashboard'
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Architecture Analysis Section
+   Failed Step: the "projectName" in "project_detail" should contain the text "ARCHITECTURE ANALYSIS"
+   Location: features\resources\screenshots\2026-02-03_18-07-32\FAILED_Verify_Architecture_Analysis_Section_the_"projectName"_in_"project_.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_18-07-32\FAILED_Verify_Architecture_Analysis_Section_the_"projectName"_in_"project_.png' width='800' alt='Failure Screenshot' />]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Architecture Analysis Section
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.354s
+    When I wait for 5 seconds ... passed in 5.001s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.243s
+    And I wait for 2 seconds ... passed in 2.002s
+    When I click on the "project_card" in "test_runs" ... passed in 1.144s
+    And I wait for 2 seconds ... passed in 2.002s
+    Then the "projectName" in "project_detail" should contain the text "ARCHITECTURE ANALYSIS" ... failed in 0.120s
+    And I should see the text "Layer Stability" ... skipped in 0.000s
+    And I should see the text "Layer Latency" ... skipped in 0.000s
+    And I should see at least 1 elements with selector "stability_comparison" in "project_detail" ... skipped in 0.000s
+    And I should see at least 1 elements with selector "latency_comparison" in "project_detail" ... skipped in 0.000s
+    Then I take a screenshot named "project_detail_architecture" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Architecture Analysis Section
+   Failed Step: the "projectName" in "project_detail" should contain the text "ARCHITECTURE ANALYSIS"
+   Location: features\resources\screenshots\2026-02-03_18-07-32\FAILED_Verify_Architecture_Analysis_Section_the_"projectName"_in_"project_.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_18-07-32\FAILED_Verify_Architecture_Analysis_Section_the_"projectName"_in_"project_.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Execution Metrics and Trend" status="passed" time="12.169953"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Execution Metrics and Trend
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.862s
+    When I wait for 5 seconds ... passed in 5.001s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.251s
+    And I wait for 2 seconds ... passed in 2.001s
+    When I click on the "project_card" in "test_runs" ... passed in 1.358s
+    And I wait for 2 seconds ... passed in 2.002s
+    Then the "stability_score" in "project_detail" should contain the text "STABILITY SCORE" ... passed in 0.059s
+    And I should see the text "Execution Velocity" ... passed in 0.035s
+    And I should see at least 1 elements with selector "velocity_trend" in "project_detail" ... passed in 0.041s
+    Then I take a screenshot named "project_detail_metrics" ... passed in 0.559s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Run History List" status="failed" time="11.300744"><failure type="AssertionError" message="Text 'EXECUTION HISTORY' not found.">
+<![CDATA[
+Failing step: Then I should see the text "EXECUTION HISTORY" ... failed in 0.039s
+Location: features/dashboard/gui/gui_project_detail.feature:27
+Assertion Failed: Text 'EXECUTION HISTORY' not found.
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Run History List
+   Failed Step: I should see the text "EXECUTION HISTORY"
+   Location: features\resources\screenshots\2026-02-03_18-07-32\FAILED_Verify_Run_History_List_I_should_see_the_text_"EXECUTI.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_18-07-32\FAILED_Verify_Run_History_List_I_should_see_the_text_"EXECUTI.png' width='800' alt='Failure Screenshot' />]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Run History List
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.672s
+    When I wait for 5 seconds ... passed in 5.002s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.326s
+    And I wait for 2 seconds ... passed in 2.002s
+    When I click on the "project_card" in "test_runs" ... passed in 1.257s
+    And I wait for 2 seconds ... passed in 2.002s
+    Then I should see the text "EXECUTION HISTORY" ... failed in 0.039s
+    And I should see at least 1 elements with selector "item" in "project_detail" ... skipped in 0.000s
+    Then I take a screenshot of the "run_list" named "project_detail_history" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FAILURE] Screenshot captured
+   Scenario: Verify Run History List
+   Failed Step: I should see the text "EXECUTION HISTORY"
+   Location: features\resources\screenshots\2026-02-03_18-07-32\FAILED_Verify_Run_History_List_I_should_see_the_text_"EXECUTI.png
+   <img src='file:///C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\2026-02-03_18-07-32\FAILED_Verify_Run_History_List_I_should_see_the_text_"EXECUTI.png' width='800' alt='Failure Screenshot' />
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Dossier Download Button" status="passed" time="12.585618"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Dossier Download Button
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.065s
+    When I wait for 5 seconds ... passed in 5.001s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.807s
+    And I wait for 2 seconds ... passed in 2.001s
+    When I click on the "project_card" in "test_runs" ... passed in 1.668s
+    And I wait for 2 seconds ... passed in 2.002s
+    Then I should see at least 1 elements with selector "download_button" in "project_detail" ... passed in 0.042s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

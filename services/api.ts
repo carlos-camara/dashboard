@@ -77,10 +77,13 @@ export const api = {
       const date = new Date(run.timestamp);
       if (days !== 0 && (now.getTime() - date.getTime()) / (1000 * 3600 * 24) > days) return;
       const dayLabel = date.toLocaleDateString([], { month: 'short', day: 'numeric' });
-      if (!timeline[dayLabel]) timeline[dayLabel] = { day: dayLabel, pass: 0, fail: 0, skip: 0 };
+      // Initialize with total: 0
+      if (!timeline[dayLabel]) timeline[dayLabel] = { day: dayLabel, pass: 0, fail: 0, skip: 0, total: 0 };
       timeline[dayLabel].pass += run.passedCount;
       timeline[dayLabel].fail += run.failedCount;
       timeline[dayLabel].skip += run.skippedCount;
+      // Update total
+      timeline[dayLabel].total += (run.passedCount + run.failedCount + run.skippedCount);
     });
     return Object.values(timeline).sort((a, b) => new Date(a.day).getTime() - new Date(b.day).getTime());
   },
@@ -216,6 +219,25 @@ export const api = {
   getScreenshotUrl: (filename: string): string => {
     // BASE_URL is something like http://localhost:3001/api or https://app.onrender.com/api
     return BASE_URL.replace(/\/api$/, '') + `/screenshots/${filename}`;
+  },
+
+  getAssetUrl: (relativePath: string): string => {
+    // Helper to generate full URLs for assets served by the backend
+    // Ensures they point to the correct backend host (localhost or deployed)
+    // relativePath should start with / (e.g. /reports/...)
+    const baseUrl = BASE_URL.replace(/\/api$/, '');
+    const pathToUse = relativePath.startsWith('/') ? relativePath : `/${relativePath}`;
+    return `${baseUrl}${pathToUse}`;
+  },
+
+  getLatestPerformanceStats: async (): Promise<any> => {
+    try {
+      const response = await fetch(`${BASE_URL}/performance/latest`);
+      if (response.ok) return await response.json();
+    } catch (e) {
+      console.error('Error fetching performance stats:', e);
+    }
+    return { found: false, stats: [], history: [], failures: [] };
   }
 };
 
