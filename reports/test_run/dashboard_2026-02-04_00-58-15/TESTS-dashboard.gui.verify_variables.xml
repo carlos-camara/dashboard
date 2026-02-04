@@ -1,0 +1,67 @@
+<testsuite name="dashboard.gui.verify_variables.Variable Transformation Validation" tests="4" errors="0" failures="0" skipped="0" time="10.401871" timestamp="2026-02-04T00:58:15.686848" hostname="runnervmkj6or"><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify basic generation tokens" status="passed" time="2.047222"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify basic generation tokens
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.266s
+    And the "dashboard" page is displayed ... passed in 0.348s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.117s
+    Then the "test_runs" page is displayed ... passed in 0.071s
+    Then the "search_input" should contain the text "[EMPTY]" ... passed in 0.014s
+    When I type "[STRING_WITH_LENGTH_10]" into the "search_input" ... passed in 0.204s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then I should see the "search_input" ... passed in 0.027s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify unique and random tokens" status="passed" time="3.262675"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify unique and random tokens
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.290s
+    And the "dashboard" page is displayed ... passed in 0.333s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.116s
+    Then the "test_runs" page is displayed ... passed in 0.075s
+    When I type "[UUID]" into the "search_input" ... passed in 0.316s
+    And I wait for 1 seconds ... passed in 1.000s
+    When I type "[RANDOM]" into the "search_input" ... passed in 0.132s
+    And I wait for 1 seconds ... passed in 1.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify temporal tokens" status="passed" time="1.994866"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify temporal tokens
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.307s
+    And the "dashboard" page is displayed ... passed in 0.312s
+    Then the page title should be "QA Hub - Execution Dashboard" ... passed in 0.008s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.117s
+    Then the "test_runs" page is displayed ... passed in 0.078s
+    When I type "[NOW(%Y)]" into the "search_input" ... passed in 0.157s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the "search_input" should contain the text "[NOW(%Y)]" ... passed in 0.015s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify transformation functions" status="passed" time="3.097109"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify transformation functions
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.261s
+    And the "dashboard" page is displayed ... passed in 0.341s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.110s
+    Then the "test_runs" page is displayed ... passed in 0.067s
+    When I type "[UPPER:qa-hub]" into the "search_input" ... passed in 0.171s
+    And I wait for 1 seconds ... passed in 1.001s
+    Then the "search_input" should contain the text "QA-HUB" ... passed in 0.015s
+    When I type "[STR:[INT:123]]" into the "search_input" ... passed in 0.117s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the "search_input" should contain the text "123" ... passed in 0.014s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
