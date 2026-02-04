@@ -1,0 +1,40 @@
+<testsuite name="dashboard.gui.gui_incidents.Incident Taxonomy View Validation" tests="1" errors="1" failures="0" skipped="0" time="0.002992" timestamp="2026-02-04T17:44:00.869386" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_incidents.Incident Taxonomy View Validation" name="Verify Incident Page Structure" status="failed" time="0.002992"><error type="AttributeError" message="'Context' object has no attribute 'driver'">
+<![CDATA[
+Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 0.003s
+Location: features/dashboard/gui/gui_incidents.feature:5
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\steps\gui_steps.py", line 219, in step_navigate_to_dashboard
+    context.driver.get(url)
+    ^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\runner.py", line 321, in __getattr__
+    raise AttributeError(msg)
+AttributeError: 'Context' object has no attribute 'driver'
+]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke
+  Scenario: Verify Incident Page Structure
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 0.003s
+    And the "dashboard" page is displayed ... skipped in 0.000s
+    When I click on the "incidents_link" in the sidebar ... skipped in 0.000s
+    Then the "incidents" page is displayed ... skipped in 0.000s
+    Then the page title should be "[LANG:common.page_title]" ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element         | value                            |
+      | header_title    | [LANG:incidents.header.title]    |
+      | header_subtitle | [LANG:incidents.header.subtitle] |
+    And I should see the text "[LANG:incidents.stats.unique]" ... skipped in 0.000s
+    Then I take a screenshot named "incident_page_structure" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

@@ -1,0 +1,56 @@
+<testsuite name="dashboard.api.api_health.Health Endpoint Validations" tests="4" errors="0" failures="0" skipped="0" time="0.0" timestamp="2026-02-04T11:12:21.673783" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="Health check returns 200 OK" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke
+  Scenario: Health check returns 200 OK
+    Given the API base URL is "http://localhost:3001" ... untested in 0.000s
+    When I send a "GET" request to "/api/health" ... untested in 0.000s
+    Then the response status code should be 200 ... untested in 0.000s
+    And the response JSON path "status" should be "ok" ... untested in 0.000s
+    And the response header "Content-Type" should contain "application/json" ... untested in 0.000s
+    And the response time should be less than 500 ms ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="METHOD NOT ALLOWED (POST)" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke @negative
+  Scenario: METHOD NOT ALLOWED (POST)
+    Given the API base URL is "http://localhost:3001" ... untested in 0.000s
+    When I send a "POST" request to "/api/health" ... untested in 0.000s
+    Then the response status code should be 404 ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="METHOD NOT ALLOWED (PUT)" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @negative
+  Scenario: METHOD NOT ALLOWED (PUT)
+    Given the API base URL is "http://localhost:3001" ... untested in 0.000s
+    When I send a "PUT" request to "/api/health" ... untested in 0.000s
+    Then the response status code should be 404 ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="METHOD NOT ALLOWED (DELETE)" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @negative
+  Scenario: METHOD NOT ALLOWED (DELETE)
+    Given the API base URL is "http://localhost:3001" ... untested in 0.000s
+    When I send a "DELETE" request to "/api/health" ... untested in 0.000s
+    Then the response status code should be 404 ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

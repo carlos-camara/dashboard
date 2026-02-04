@@ -15,11 +15,12 @@ Feature: Ultra-Professional Performance Dashboard Validation
     Then I should see the "performance_card"
     When I click on the "open_report_button"
     Then the "performance_report_view" page is displayed
-    Then I should see the "audit_title"
-    And the "audit_title" should contain the text "[LANG:performance.audit_title]"
-    And the "export_button" should contain the text "[LANG:performance.dossier]"
+    Then the following elements should contain these texts
+      | element       | value                          |
+      | audit_title   | [LANG:performance.audit_title] |
+      | export_button | [LANG:performance.dossier]     |
     And I should see the text "[LANG:performance.integrity]"
     And I should see the "rps_image"
     And I should see the "latency_image"
     And I should see the "original_report_link"
-    Then I take a screenshot named "final_performance_dashboard_verification"
+    Then the "performance dashboard" page should visually match the baseline image "final_performance_dashboard_verification" with a 5.0% tolerance

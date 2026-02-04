@@ -1,0 +1,29 @@
+<testsuite name="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" tests="1" errors="0" failures="0" skipped="0" time="3.070737" timestamp="2026-02-04T13:45:47.081336" hostname="runnervmkj6or"><testcase classname="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" name="Deep Dive into Endpoint Detail" status="passed" time="3.070737"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Deep Dive into Endpoint Detail
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.341s
+    And the "dashboard" page is displayed ... passed in 0.324s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.158s
+    Then the "endpoints_view" page is displayed ... passed in 0.066s
+    When I type "health" into the "search_input" ... passed in 0.257s
+    And I wait for 1 seconds ... passed in 1.000s
+    When I click on the "endpoint_item" ... passed in 0.161s
+    Then the "endpoint_detail" page is displayed ... passed in 0.099s
+    Then the following elements should contain these texts ... passed in 0.014s
+      | element     | value                               |
+      | back_button | [LANG:endpoints.detail.back_button] |
+    And I should see the text "[LANG:endpoints.detail.success_rate]" ... passed in 0.064s
+    And I should see the text "[LANG:endpoints.detail.avg_latency]" ... passed in 0.052s
+    And I should see the "performance_card" ... passed in 0.026s
+    And I should see the text "[LANG:endpoints.detail.performance_insights]" ... passed in 0.052s
+    And I should see the text "[LANG:endpoints.detail.live_discovery]" ... passed in 0.061s
+    Then I take a screenshot named "endpoints_deep_detail" ... passed in 0.234s
+    When I click on the "back_button" ... passed in 0.111s
+    Then the "endpoints_view" page is displayed ... passed in 0.020s
+    Then the "title" should contain the text "[LANG:endpoints.view.title]" ... passed in 0.031s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

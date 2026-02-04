@@ -1,0 +1,79 @@
+<testsuite name="dashboard.api.api_runs.Runs Endpoint Validations" tests="5" errors="0" failures="0" skipped="0" time="0.0" timestamp="2026-02-04T11:12:21.676461" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.api.api_runs.Runs Endpoint Validations" name="Upload, Verify, and Explore a Run" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke
+  Scenario: Upload, Verify, and Explore a Run
+    Given the API base URL is "http://localhost:3001" ... untested in 0.000s
+    When I upload the file "test_run_sample.xml" to "/api/upload" ... untested in 0.000s
+    Then the response status code should be 200 ... untested in 0.000s
+    And the response JSON path "success" should be true ... untested in 0.000s
+    And the response JSON path "totalCount" should be 1 ... untested in 0.000s
+    And I store the response JSON path "runId" as "uploaded_run_id" ... untested in 0.000s
+    When I send a "GET" request to "/api/runs" ... untested in 0.000s
+    Then the response status code should be 200 ... untested in 0.000s
+    And the response JSON path "0.id" should equal stored variable "uploaded_run_id" ... untested in 0.000s
+    And the response JSON path "0.totalCount" should be 1 ... untested in 0.000s
+    When I send a "GET" request to "/api/runs/${uploaded_run_id}/scenarios" ... untested in 0.000s
+    Then the response status code should be 200 ... untested in 0.000s
+    And the response JSON should not be empty ... untested in 0.000s
+    And the response JSON path "0.name" should be a "str" ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.api.api_runs.Runs Endpoint Validations" name="Delete the uploaded run" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Delete the uploaded run
+    Given the API base URL is "http://localhost:3001" ... untested in 0.000s
+    When I send a "GET" request to "/api/runs" ... untested in 0.000s
+    Then I store the response JSON path "0.id" as "run_to_delete" ... untested in 0.000s
+    When I send a "DELETE" request to "/api/runs" with query parameters ... untested in 0.000s
+      | id | ${run_to_delete} |
+    Then the response status code should be 200 ... untested in 0.000s
+    Then the response JSON path "success" should be true ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.api.api_runs.Runs Endpoint Validations" name="Get non-existent run" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke @negative
+  Scenario: Get non-existent run
+    Given the API base URL is "http://localhost:3001" ... untested in 0.000s
+    When I send a "GET" request to "/api/runs/INVALID_RUN_ID" ... untested in 0.000s
+    Then the response status code should be 404 ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.api.api_runs.Runs Endpoint Validations" name="Verify Method Not Allowed (PUT)" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @negative
+  Scenario: Verify Method Not Allowed (PUT)
+    Given the API base URL is "http://localhost:3001" ... untested in 0.000s
+    When I send a "PUT" request to "/api/runs" ... untested in 0.000s
+    Then the response status code should be 404 ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.api.api_runs.Runs Endpoint Validations" name="Verify Method Not Allowed (PATCH)" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @negative
+  Scenario: Verify Method Not Allowed (PATCH)
+    Given the API base URL is "http://localhost:3001" ... untested in 0.000s
+    When I send a "PATCH" request to "/api/runs" ... untested in 0.000s
+    Then the response status code should be 404 ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

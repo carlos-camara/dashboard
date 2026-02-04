@@ -1,0 +1,76 @@
+<testsuite name="dashboard.gui.gui_incidents.Incident Taxonomy View Validation" tests="4" errors="0" failures="0" skipped="0" time="0.0" timestamp="2026-02-04T11:12:21.692012" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_incidents.Incident Taxonomy View Validation" name="Verify Incident Page Structure" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke
+  Scenario: Verify Incident Page Structure
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... untested in 0.000s
+    And the "dashboard" page is displayed ... untested in 0.000s
+    When I click on the "incidents_link" in the sidebar ... untested in 0.000s
+    Then the "incidents" page is displayed ... untested in 0.000s
+    Then the page title should be "[LANG:common.page_title]" ... untested in 0.000s
+    Then the following elements should contain these texts ... untested in 0.000s
+      | element         | value                            |
+      | header_title    | [LANG:incidents.header.title]    |
+      | header_subtitle | [LANG:incidents.header.subtitle] |
+    And I should see the text "[LANG:incidents.stats.unique]" ... untested in 0.000s
+    Then I take a screenshot named "incident_page_structure" ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_incidents.Incident Taxonomy View Validation" name="Verify Incident Statistics" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Incident Statistics
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... untested in 0.000s
+    And the "dashboard" page is displayed ... untested in 0.000s
+    When I click on the "incidents_link" in the sidebar ... untested in 0.000s
+    Then the "incidents" page is displayed ... untested in 0.000s
+    Then the following elements should contain these texts ... untested in 0.000s
+      | element            | value                          |
+      | stats_total_sign   | [LANG:incidents.stats.total]   |
+      | stats_sectors_sign | [LANG:incidents.stats.sectors] |
+    And I should see the text "[LANG:incidents.stats.unique]" ... untested in 0.000s
+    Then I take a screenshot of the "stats" named "incident_stats_cards" ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_incidents.Incident Taxonomy View Validation" name="Verify Project Filtering" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Project Filtering
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... untested in 0.000s
+    And the "dashboard" page is displayed ... untested in 0.000s
+    When I click on the "incidents_link" in the sidebar ... untested in 0.000s
+    Then the "incidents" page is displayed ... untested in 0.000s
+    Then the "filters_scope_dropdown" should contain the text "[LANG:incidents.filters.global_scope]" ... untested in 0.000s
+    When I click on the button with text "[LANG:incidents.filters.global_scope]" ... untested in 0.000s
+    And I wait for 0.5 seconds ... untested in 0.000s
+    Then I take a screenshot named "incident_project_dropdown" ... untested in 0.000s
+    And I should see at least 1 elements with class "absolute" ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_incidents.Incident Taxonomy View Validation" name="Verify Incident Expansion and Details" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Incident Expansion and Details
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... untested in 0.000s
+    And the "dashboard" page is displayed ... untested in 0.000s
+    When I click on the "incidents_link" in the sidebar ... untested in 0.000s
+    Then the "incidents" page is displayed ... untested in 0.000s
+    Then I should see at least 1 elements with class "glass-panel" ... untested in 0.000s
+    When I click on the "list_expand_button" ... untested in 0.000s
+    And I wait for 0.5 seconds ... untested in 0.000s
+    Then the "list_details_context" should contain the text "[LANG:incidents.list.stack_trace]" ... untested in 0.000s
+    And I should see the text "[LANG:incidents.list.root_cause]" ... untested in 0.000s
+    And I should see the text "[LANG:incidents.list.affecting]" ... untested in 0.000s
+    Then I take a screenshot named "incident_expanded_details" ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

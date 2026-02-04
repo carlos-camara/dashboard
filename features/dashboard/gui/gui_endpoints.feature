@@ -12,13 +12,15 @@ Feature: Endpoints Catalog Validation
     And I wait for 1 seconds
     When I click on the "endpoint_item"
     Then the "endpoint_detail" page is displayed
-    Then the "back_button" should contain the text "[LANG:endpoints.detail.back_button]"
+    Then the following elements should contain these texts
+      | element     | value                             |
+      | back_button | [LANG:endpoints.detail.back_button] |
     And I should see the text "[LANG:endpoints.detail.success_rate]"
     And I should see the text "[LANG:endpoints.detail.avg_latency]"
     And I should see the "performance_card"
     And I should see the text "[LANG:endpoints.detail.performance_insights]"
     And I should see the text "[LANG:endpoints.detail.live_discovery]"
-    Then I take a screenshot named "endpoints_deep_detail"
+    Then the "endpoint detail" page should visually match the baseline image "endpoints_deep_detail" with a 5.0% tolerance
     When I click on the "back_button"
     Then the "endpoints_view" page is displayed
     Then the "title" should contain the text "[LANG:endpoints.view.title]"

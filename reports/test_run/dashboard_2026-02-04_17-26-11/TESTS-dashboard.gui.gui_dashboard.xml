@@ -1,0 +1,168 @@
+<testsuite name="dashboard.gui.gui_dashboard.Dashboard View Validation" tests="8" errors="0" failures="0" skipped="0" time="30.411281" timestamp="2026-02-04T17:23:37.637489" hostname="runnervmkj6or"><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Header and Status Ticker" status="passed" time="1.332967"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Header and Status Ticker
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.662s
+    And the "dashboard" page is displayed ... passed in 0.386s
+    Then the page title should be "[LANG:common.page_title]" ... passed in 0.008s
+    Then the following elements should contain these texts ... passed in 0.039s
+      | element         | value                            |
+      | header_subtitle | [LANG:dashboard.header.subtitle] |
+    And the system status should be valid ... passed in 0.030s
+    Then the "header status" page should visually match the baseline image "dashboard_header_status" with a 5.0% tolerance ... passed in 0.209s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/chrome_dashboard_header_status.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Statistics Cards" status="passed" time="1.915635"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Statistics Cards
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.815s
+    And the "dashboard" page is displayed ... passed in 0.615s
+    Then the following elements should contain these texts ... passed in 0.177s
+      | element            | value                                   |
+      | stats_passed_card  | [LANG:dashboard.stats.system_health]    |
+      | stats_total_runs   | [LANG:dashboard.stats.total_executions] |
+      | stats_pass_rate    | [LANG:dashboard.stats.pass_rate]        |
+      | stats_avg_duration | [LANG:dashboard.stats.avg_latency]      |
+    Then the "stats grid" element should visually match the baseline image "dashboard_stats_grid" with a 5.0% tolerance ... passed in 0.308s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/chrome_dashboard_stats_grid.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Timeline Controls" status="passed" time="5.063042"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Timeline Controls
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.110s
+    And the "dashboard" page is displayed ... passed in 0.665s
+    Then the following elements should contain these texts ... passed in 0.111s
+      | element          | value                             |
+      | timeline_heading | [LANG:dashboard.timeline.heading] |
+    And I should see at least 1 elements with selector "timeline_chart" ... passed in 0.036s
+    When I switch the chart view to "[LANG:dashboard.timeline.volume]" ... passed in 0.236s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the "chart volume" element should visually match the baseline image "dashboard_chart_volume" with a 8.0% tolerance ... passed in 0.343s
+    When I switch the chart view to "[LANG:dashboard.timeline.success]" ... passed in 0.215s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the "chart success" element should visually match the baseline image "dashboard_chart_success" with a 8.0% tolerance ... passed in 0.346s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/chrome_dashboard_chart_volume.png
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/chrome_dashboard_chart_success.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Incident and Sector Lists" status="passed" time="2.452916"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Incident and Sector Lists
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.141s
+    And the "dashboard" page is displayed ... passed in 0.742s
+    Then the following elements should contain these texts ... passed in 0.166s
+      | element             | value                                |
+      | recent_runs_heading | [LANG:dashboard.recent_runs.heading] |
+      | incidents_heading   | [LANG:dashboard.incidents.heading]   |
+    Then the "lists panel" element should visually match the baseline image "dashboard_lists_panels" with a 5.0% tolerance ... passed in 0.404s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/chrome_dashboard_lists_panels.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Endpoints Catalog and Scroll" status="passed" time="3.357593"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Endpoints Catalog and Scroll
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.514s
+    And the "dashboard" page is displayed ... passed in 0.855s
+    When I scroll to the bottom of the page ... passed in 0.507s
+    Then the following elements should contain these texts ... passed in 0.132s
+      | element           | value                              |
+      | endpoints_heading | [LANG:dashboard.endpoints.heading] |
+    Then the "endpoints catalog" page should visually match the baseline image "dashboard_bottom_fullpage" with a 5.0% tolerance ... passed in 0.349s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/chrome_dashboard_bottom_fullpage.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Global Actions and Filters" status="passed" time="9.192997"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Global Actions and Filters
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.229s
+    And the "dashboard" page is displayed ... passed in 0.620s
+    When I apply the "[LANG:dashboard.filters.seven_days]" time filter ... passed in 0.239s
+    And I wait for 1 seconds ... passed in 1.000s
+    When I apply the "[LANG:dashboard.filters.thirty_days]" time filter ... passed in 0.433s
+    And I wait for 1 seconds ... passed in 1.003s
+    When I export the report ... passed in 1.018s
+    And I wait for 1 seconds ... passed in 1.003s
+    Then the "actions log" element should visually match the baseline image "dashboard_actions_log" with a 10.0% tolerance ... passed in 2.647s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/chrome_dashboard_actions_log.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Mobile Viewport Layout" status="passed" time="3.076619"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @responsive @mobile
+  Scenario: Verify Mobile Viewport Layout
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.344s
+    And the "dashboard" page is displayed ... passed in 1.029s
+    Then the following elements should contain these texts ... passed in 0.086s
+      | element         | value                            |
+      | header_subtitle | [LANG:dashboard.header.subtitle] |
+    Then the "mobile layout" page should visually match the baseline image "dashboard_responsiveness" with a 5.0% tolerance ... passed in 0.618s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/chrome_dashboard_responsiveness.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Navigation to Incident Taxonomy" status="passed" time="4.019512"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Navigation to Incident Taxonomy
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.866s
+    And the "dashboard" page is displayed ... passed in 1.018s
+    When I click on the "incidents_link" in the sidebar ... passed in 0.388s
+    Then the "incidents" page is displayed ... passed in 0.215s
+    Then the following elements should contain these texts ... passed in 0.133s
+      | element                | value                                 |
+      | header_title           | [LANG:incidents.header.title]         |
+      | header_subtitle        | [LANG:incidents.header.subtitle]      |
+      | filters_scope_dropdown | [LANG:incidents.filters.global_scope] |
+    Then the "incidents taxonomy" page should visually match the baseline image "incident_taxonomy_page" with a 5.0% tolerance ... passed in 0.399s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/chrome_incident_taxonomy_page.png
+
+]]>
+</system-out></testcase></testsuite>

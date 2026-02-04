@@ -1,0 +1,145 @@
+<testsuite name="dashboard.gui.gui_project_detail.Project Detail View Validation" tests="4" errors="4" failures="0" skipped="0" time="0.009033" timestamp="2026-02-04T17:44:00.994802" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Architecture Analysis Section" status="failed" time="0.001878"><error type="AttributeError" message="'Context' object has no attribute 'driver'">
+<![CDATA[
+Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 0.002s
+Location: features/dashboard/gui/gui_project_detail.feature:5
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\steps\gui_steps.py", line 219, in step_navigate_to_dashboard
+    context.driver.get(url)
+    ^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\runner.py", line 321, in __getattr__
+    raise AttributeError(msg)
+AttributeError: 'Context' object has no attribute 'driver'
+]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Architecture Analysis Section
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 0.002s
+    And the "dashboard" page is displayed ... skipped in 0.000s
+    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
+    Then the "test_runs" page is displayed ... skipped in 0.000s
+    When I click on the "project_card" ... skipped in 0.000s
+    Then the "project_detail" page is displayed ... skipped in 0.000s
+    Then the "projectName" should be visible ... skipped in 0.000s
+    And I should see the text "[LANG:project_detail.layer_stability]" ... skipped in 0.000s
+    And I should see the text "[LANG:project_detail.layer_latency]" ... skipped in 0.000s
+    And I should see at least 1 elements with selector "stability_comparison" ... skipped in 0.000s
+    And I should see at least 1 elements with selector "latency_comparison" ... skipped in 0.000s
+    Then I take a screenshot named "project_detail_architecture" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Execution Metrics and Trend" status="failed" time="0.001804"><error type="AttributeError" message="'Context' object has no attribute 'driver'">
+<![CDATA[
+Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 0.002s
+Location: features/dashboard/gui/gui_project_detail.feature:5
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\steps\gui_steps.py", line 219, in step_navigate_to_dashboard
+    context.driver.get(url)
+    ^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\runner.py", line 321, in __getattr__
+    raise AttributeError(msg)
+AttributeError: 'Context' object has no attribute 'driver'
+]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Execution Metrics and Trend
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 0.002s
+    And the "dashboard" page is displayed ... skipped in 0.000s
+    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
+    Then the "test_runs" page is displayed ... skipped in 0.000s
+    When I click on the "project_card" ... skipped in 0.000s
+    Then the "project_detail" page is displayed ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element         | value                                 |
+      | stability_score | [LANG:project_detail.stability_score] |
+    And I should see the text "[LANG:project_detail.execution_velocity]" ... skipped in 0.000s
+    And I should see at least 1 elements with selector "velocity_trend" ... skipped in 0.000s
+    Then I take a screenshot named "project_detail_metrics" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Run History List" status="failed" time="0.002553"><error type="AttributeError" message="'Context' object has no attribute 'driver'">
+<![CDATA[
+Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 0.003s
+Location: features/dashboard/gui/gui_project_detail.feature:5
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\steps\gui_steps.py", line 219, in step_navigate_to_dashboard
+    context.driver.get(url)
+    ^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\runner.py", line 321, in __getattr__
+    raise AttributeError(msg)
+AttributeError: 'Context' object has no attribute 'driver'
+]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Run History List
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 0.003s
+    And the "dashboard" page is displayed ... skipped in 0.000s
+    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
+    Then the "test_runs" page is displayed ... skipped in 0.000s
+    When I click on the "project_card" ... skipped in 0.000s
+    Then the "project_detail" page is displayed ... skipped in 0.000s
+    Then I should see the text "[LANG:project_detail.execution_history]" ... skipped in 0.000s
+    And I should see at least 1 elements with selector "item" ... skipped in 0.000s
+    Then I take a screenshot of the "run_list" named "project_detail_history" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Dossier Download Button" status="failed" time="0.002799"><error type="AttributeError" message="'Context' object has no attribute 'driver'">
+<![CDATA[
+Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 0.003s
+Location: features/dashboard/gui/gui_project_detail.feature:5
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\src\qa-automation-framework\qa_framework\steps\gui_steps.py", line 219, in step_navigate_to_dashboard
+    context.driver.get(url)
+    ^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\runner.py", line 321, in __getattr__
+    raise AttributeError(msg)
+AttributeError: 'Context' object has no attribute 'driver'
+]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Dossier Download Button
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 0.003s
+    And the "dashboard" page is displayed ... skipped in 0.000s
+    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
+    Then the "test_runs" page is displayed ... skipped in 0.000s
+    When I click on the "project_card" ... skipped in 0.000s
+    Then the "project_detail" page is displayed ... skipped in 0.000s
+    Then I should see at least 1 elements with selector "download_button" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
