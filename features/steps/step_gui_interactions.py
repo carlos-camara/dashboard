@@ -107,9 +107,3 @@ def step_export_report(context):
     step_click_page_object(context, "actions_export_button", "dashboard")
 
 
-@then('I take a screenshot of the "{element_description}" named "{screenshot_name}"')
-def step_take_element_screenshot(context, element_description, screenshot_name):
-    """Take a screenshot - for now just take a full page screenshot"""
-    # This is a simplified version - could be enhanced to screenshot specific elements
-    ensure_screenshots_dir()
-    step_take_screenshot(context, screenshot_name)
