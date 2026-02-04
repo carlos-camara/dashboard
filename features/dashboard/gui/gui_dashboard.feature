@@ -4,7 +4,6 @@ Feature: Dashboard View Validation
   Background:
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     And the "dashboard" page is displayed
-    When I wait for 2 seconds
 
   Scenario: Verify Header and Status Ticker
     Then the page title should be "[LANG:common.page_title]"
@@ -56,7 +55,6 @@ Feature: Dashboard View Validation
 
   Scenario: Verify Navigation to Incident Taxonomy
     When I click on the "incidents_link" in the sidebar
-    And I wait for 1 seconds
     Then the "incidents" page is displayed
     Then the "header_title" should contain the text "[LANG:incidents.header.title]"
     And the "header_subtitle" should contain the text "[LANG:incidents.header.subtitle]"

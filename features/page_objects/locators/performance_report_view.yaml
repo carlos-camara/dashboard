@@ -3,7 +3,7 @@ performance_report_view:
     type: text
     by: xpath
     value: //*[@data-testid='performance-audit-title']
-    wait_load: false
+    wait_load: true
   rps_section:
     type: text
     by: xpath

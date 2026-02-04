@@ -4,19 +4,16 @@ Feature: Test Runs View Validation
   Background:
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     And the "dashboard" page is displayed
-    When I wait for 5 seconds
 
   Scenario: Search and Redirect to Project Analytics
     When I click on the "test_runs_link" in the sidebar
-    And I wait for 2 seconds
     Then the "test_runs" page is displayed
     Then the "title" should contain the text "[LANG:navigation.test_runs]"
     When I type "dashboard" into the "search_input"
-    And I wait for 3 seconds
+    And I wait for 1 seconds
     Then the "search_input" should contain the text "dashboard"
     # Select the project to go to detail view
     When I click on the "project_card"
-    And I wait for 2 seconds
     Then the "project_detail" page is displayed
     # Now in ProjectDetailView
     Then the "projectName" should be visible
@@ -25,14 +22,11 @@ Feature: Test Runs View Validation
 
   Scenario: Verify Project List and Back Navigation
     When I click on the "test_runs_link" in the sidebar
-    And I wait for 2 seconds
     Then the "test_runs" page is displayed
     When I click on the "project_card"
-    And I wait for 2 seconds
     Then the "project_detail" page is displayed
     Then the "runCount" should contain the text "[LANG:project_detail.run_count]"
     # Go back to the registry
     When I click on the "back_button"
-    And I wait for 1 seconds
     Then the "test_runs" page is displayed
     Then I should see the text "[LANG:navigation.test_runs]"

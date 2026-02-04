@@ -4,20 +4,16 @@ Feature: Ultra-Professional Performance Dashboard Validation
   Background:
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     And the "dashboard" page is displayed
-    And I wait for 5 seconds
 
   Scenario: Validate High-Density Performance Audit Dossier
     When I click on the "endpoints_link" in the sidebar
-    And I wait for 2 seconds
     Then the "endpoints_view" page is displayed
     When I type "runs" into the "search_input"
-    And I wait for 2 seconds
+    And I wait for 1 seconds
     When I click on the "endpoint_item"
-    And I wait for 2 seconds
     Then the "endpoint_detail" page is displayed
     Then I should see the "performance_card"
     When I click on the "open_report_button"
-    And I wait for 10 seconds
     Then the "performance_report_view" page is displayed
     Then I should see the "audit_title"
     And the "audit_title" should contain the text "[LANG:performance.audit_title]"
