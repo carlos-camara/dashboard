@@ -1,0 +1,75 @@
+<testsuite name="dashboard.gui.verify_variables.Variable Transformation Validation" tests="4" errors="0" failures="0" skipped="0" time="28.222715" timestamp="2026-02-04T17:26:10.525665" hostname="runnervmkj6or"><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify basic generation tokens" status="passed" time="6.122268"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify basic generation tokens
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.057s
+    And the "dashboard" page is displayed ... passed in 1.236s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.442s
+    Then the "test_runs" page is displayed ... passed in 0.238s
+    Then the following elements should contain these texts ... passed in 0.076s
+      | element      | value   |
+      | search_input | [EMPTY] |
+    When I type "[STRING_WITH_LENGTH_10]" into the "search_input" ... passed in 0.932s
+    And I wait for 1 seconds ... passed in 1.004s
+    Then I should see the "search_input" ... passed in 0.137s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify unique and random tokens" status="passed" time="7.92202"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify unique and random tokens
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.433s
+    And the "dashboard" page is displayed ... passed in 1.347s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.519s
+    Then the "test_runs" page is displayed ... passed in 0.286s
+    When I type "[UUID]" into the "search_input" ... passed in 0.906s
+    And I wait for 1 seconds ... passed in 1.000s
+    When I type "[RANDOM]" into the "search_input" ... passed in 0.429s
+    And I wait for 1 seconds ... passed in 1.002s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify temporal tokens" status="passed" time="6.566682"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify temporal tokens
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.029s
+    And the "dashboard" page is displayed ... passed in 1.862s
+    Then the page title should be "QA Hub - Execution Dashboard" ... passed in 0.055s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.517s
+    Then the "test_runs" page is displayed ... passed in 0.342s
+    When I type "[NOW(%Y)]" into the "search_input" ... passed in 0.707s
+    And I wait for 1 seconds ... passed in 1.004s
+    Then the following elements should contain these texts ... passed in 0.051s
+      | element      | value     |
+      | search_input | [NOW(%Y)] |
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify transformation functions" status="passed" time="7.611744"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify transformation functions
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.075s
+    And the "dashboard" page is displayed ... passed in 1.428s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.475s
+    Then the "test_runs" page is displayed ... passed in 0.312s
+    When I type "[UPPER:qa-hub]" into the "search_input" ... passed in 0.703s
+    And I wait for 1 seconds ... passed in 1.002s
+    Then the following elements should contain these texts ... passed in 0.063s
+      | element      | value  |
+      | search_input | QA-HUB |
+    When I type "[STR:[INT:123]]" into the "search_input" ... passed in 0.520s
+    And I wait for 1 seconds ... passed in 1.003s
+    Then the following elements should contain these texts ... passed in 0.030s
+      | element      | value |
+      | search_input | 123   |
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
