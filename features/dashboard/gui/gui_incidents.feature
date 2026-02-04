@@ -15,7 +15,7 @@ Feature: Incident Taxonomy View Validation
       | header_title    | [LANG:incidents.header.title]    |
       | header_subtitle | [LANG:incidents.header.subtitle] |
     And I should see the text "[LANG:incidents.stats.unique]"
-    Then I take a screenshot named "incident_page_structure"
+    Then the "incident page structure" page should visually match the baseline image "incident_page_structure" with a 5.0% tolerance
 
   Scenario: Verify Incident Statistics
     Then the following elements should contain these texts:
@@ -23,14 +23,13 @@ Feature: Incident Taxonomy View Validation
       | stats_total_sign   | [LANG:incidents.stats.total]   |
       | stats_sectors_sign | [LANG:incidents.stats.sectors] |
     And I should see the text "[LANG:incidents.stats.unique]"
-    Then I take a screenshot of the "stats" named "incident_stats_cards"
+    Then the "incident stats" element should visually match the baseline image "incident_stats_cards" with a 5.0% tolerance
 
   Scenario: Verify Project Filtering
     Then the "filters_scope_dropdown" should contain the text "[LANG:incidents.filters.global_scope]"
     When I click on the button with text "[LANG:incidents.filters.global_scope]"
     And I wait for 0.5 seconds
-    Then I take a screenshot named "incident_project_dropdown"
-    # Note: Specific project names depend on dynamic data, so we verify the dropdown opens
+    Then the "project dropdown" element should visually match the baseline image "incident_project_dropdown" with a 8.0% tolerance
     And I should see at least 1 elements with class "absolute"
 
   Scenario: Verify Incident Expansion and Details
@@ -40,4 +39,4 @@ Feature: Incident Taxonomy View Validation
     Then the "list_details_context" should contain the text "[LANG:incidents.list.stack_trace]"
     And I should see the text "[LANG:incidents.list.root_cause]"
     And I should see the text "[LANG:incidents.list.affecting]"
-    Then I take a screenshot named "incident_expanded_details"
+    Then the "incident expanded" element should visually match the baseline image "incident_expanded_details" with a 5.0% tolerance

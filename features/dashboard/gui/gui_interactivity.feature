@@ -13,7 +13,7 @@ Feature: Dashboard Cross-Navigation Interactivity
     Then the "project_detail" page is displayed
     Then the "projectName" should be visible
     And I should see at least 1 elements with selector "stability_comparison"
-    Then I take a screenshot named "interactivity_sector_redirect"
+    Then the "sector redirect" page should visually match the baseline image "interactivity_sector_redirect" with a 5.0% tolerance
 
   Scenario: Redirect from Latency Anomalies to Endpoint Detail
     When I scroll to the bottom of the page
@@ -27,4 +27,4 @@ Feature: Dashboard Cross-Navigation Interactivity
       | back_button | Back to Catalog |
     And I should see the text "Success Rate"
     And I should see the text "Avg Latency"
-    Then I take a screenshot named "interactivity_anomaly_redirect"
+    Then the "anomaly redirect" page should visually match the baseline image "interactivity_anomaly_redirect" with a 5.0% tolerance

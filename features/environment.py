@@ -40,7 +40,8 @@ def before_all(context):
         f.write('"GET","/api/endpoints",200,0,60,65,20,180,1200,10.0,0.0,60,65,70,75,80,90,100,110,140\n')
 
 def before_scenario(context, scenario):
-     pass
+     """Initialize driver using framework lifecycle logic."""
+     FrameworkHooks.before_scenario(context, scenario)
 
 def after_step(context, step):
     """Capture screenshots on failure using framework utility."""

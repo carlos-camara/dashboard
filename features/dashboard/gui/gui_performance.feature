@@ -23,4 +23,4 @@ Feature: Ultra-Professional Performance Dashboard Validation
     And I should see the "rps_image"
     And I should see the "latency_image"
     And I should see the "original_report_link"
-    Then I take a screenshot named "final_performance_dashboard_verification"
+    Then the "performance dashboard" page should visually match the baseline image "final_performance_dashboard_verification" with a 5.0% tolerance

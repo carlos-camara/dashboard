@@ -16,7 +16,7 @@ Feature: Run Detail View Validation
       | element     | value                          |
       | back_button | [LANG:run_detail.return_to_base] |
     And I should see the text "[LANG:run_detail.success]"
-    Then I take a screenshot named "run_detail_full_view"
+    Then the "run detail" page should visually match the baseline image "run_detail_full_view" with a 5.0% tolerance
     When I click on the "filter_failed"
     And I wait for 1 seconds
-    Then I take a screenshot named "run_detail_filtered_failed"
+    Then the "run detail filtered" page should visually match the baseline image "run_detail_filtered_failed" with a 5.0% tolerance
