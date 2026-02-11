@@ -1,63 +1,65 @@
-<testsuite name="dashboard.gui.gui_dashboard.Dashboard View Validation" tests="8" errors="8" failures="0" skipped="0" time="34.75786" timestamp="2026-02-11T16:40:30.779465" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Header and Status Ticker" status="error" time="3.209101"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff615fdf3d5&#10;&#09;0x7ff615fdf430&#10;&#09;0x7ff615d810bd&#10;&#09;0x7ff615d7dbe4&#10;&#09;0x7ff615d6e071&#10;&#09;0x7ff615d6ff5f&#10;&#09;0x7ff615d6e611&#10;&#09;0x7ff615d6dddb&#10;&#09;0x7ff615d6da91&#10;&#09;0x7ff615d6b6c1&#10;&#09;0x7ff615d6be22&#10;&#09;0x7ff615d85366&#10;&#09;0x7ff615e2ab34&#10;&#09;0x7ff615e0589a&#10;&#09;0x7ff615e29d08&#10;&#09;0x7ff615dccb0c&#10;&#09;0x7ff615dcda53&#10;&#09;0x7ff6162bb470&#10;&#09;0x7ff6162b586d&#10;&#09;0x7ff6162d621a&#10;&#09;0x7ff615ffb235&#10;&#09;0x7ff616003a5c&#10;&#09;0x7ff615fe8844&#10;&#09;0x7ff615fe89f6&#10;&#09;0x7ff615fceb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91">
+<testsuite name="dashboard.gui.gui_dashboard.Dashboard View Validation" tests="8" errors="8" failures="0" skipped="0" time="39.968921" timestamp="2026-02-11T17:31:27.021281" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Header and Status Ticker" status="failed" time="3.099705"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
 <![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 3.209s
+Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 3.100s
 Location: features/dashboard/gui/gui_dashboard.feature:5
 Traceback (most recent call last):
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1991, in run
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
     match.run(runner.context)
     ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 105, in run
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
     self.func(context, *args, **kwargs)
     ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
     context.driver.get(url)
     ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 452, in get
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
     self.execute(Command.GET, {"url": url})
     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 432, in execute
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
     self.error_handler.check_response(response)
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
     raise exception_class(message, screen, stacktrace)
 selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
   (Session info: chrome=144.0.7559.133)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
-	0x7ff615fdf3d5
-	0x7ff615fdf430
-	0x7ff615d810bd
-	0x7ff615d7dbe4
-	0x7ff615d6e071
-	0x7ff615d6ff5f
-	0x7ff615d6e611
-	0x7ff615d6dddb
-	0x7ff615d6da91
-	0x7ff615d6b6c1
-	0x7ff615d6be22
-	0x7ff615d85366
-	0x7ff615e2ab34
-	0x7ff615e0589a
-	0x7ff615e29d08
-	0x7ff615dccb0c
-	0x7ff615dcda53
-	0x7ff6162bb470
-	0x7ff6162b586d
-	0x7ff6162d621a
-	0x7ff615ffb235
-	0x7ff616003a5c
-	0x7ff615fe8844
-	0x7ff615fe89f6
-	0x7ff615fceb87
+	0x7ff623cbf3d5
+	0x7ff623cbf430
+	0x7ff623a610bd
+	0x7ff623a5dbe4
+	0x7ff623a4e071
+	0x7ff623a4ff5f
+	0x7ff623a4e611
+	0x7ff623a4dddb
+	0x7ff623a4da91
+	0x7ff623a4b6c1
+	0x7ff623a4be22
+	0x7ff623a65366
+	0x7ff623b0ab34
+	0x7ff623ae589a
+	0x7ff623b09d08
+	0x7ff623aacb0c
+	0x7ff623aada53
+	0x7ff623f9b470
+	0x7ff623f9586d
+	0x7ff623fb621a
+	0x7ff623cdb235
+	0x7ff623ce3a5c
+	0x7ff623cc8844
+	0x7ff623cc89f6
+	0x7ff623caeb87
 	0x7ffd91817374
 	0x7ffd9271cc91
 
-]]>
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Header_and_Status_Ticker_I_navigate_to_the_dashboard_at.png]]>
 </error><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Verify Header and Status Ticker
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 3.209s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 3.100s
     And the "dashboard" page is displayed ... skipped in 0.000s
     Then the page title should be "[LANG:common.page_title]" ... skipped in 0.000s
     Then the following elements should contain these texts ... skipped in 0.000s
@@ -68,67 +70,73 @@ Symbols not available. Dumping unresolved backtrace:
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Header_and_Status_Ticker_I_navigate_to_the_dashboard_at.png
+
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Statistics Cards" status="error" time="2.916502"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff615fdf3d5&#10;&#09;0x7ff615fdf430&#10;&#09;0x7ff615d810bd&#10;&#09;0x7ff615d7dbe4&#10;&#09;0x7ff615d6e071&#10;&#09;0x7ff615d6ff5f&#10;&#09;0x7ff615d6e611&#10;&#09;0x7ff615d6dddb&#10;&#09;0x7ff615d6da91&#10;&#09;0x7ff615d6b6c1&#10;&#09;0x7ff615d6be22&#10;&#09;0x7ff615d85366&#10;&#09;0x7ff615e2ab34&#10;&#09;0x7ff615e0589a&#10;&#09;0x7ff615e29d08&#10;&#09;0x7ff615dccb0c&#10;&#09;0x7ff615dcda53&#10;&#09;0x7ff6162bb470&#10;&#09;0x7ff6162b586d&#10;&#09;0x7ff6162d621a&#10;&#09;0x7ff615ffb235&#10;&#09;0x7ff616003a5c&#10;&#09;0x7ff615fe8844&#10;&#09;0x7ff615fe89f6&#10;&#09;0x7ff615fceb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91">
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Statistics Cards" status="failed" time="2.981027"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
 <![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 2.917s
+Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 2.981s
 Location: features/dashboard/gui/gui_dashboard.feature:5
 Traceback (most recent call last):
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1991, in run
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
     match.run(runner.context)
     ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 105, in run
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
     self.func(context, *args, **kwargs)
     ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
     context.driver.get(url)
     ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 452, in get
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
     self.execute(Command.GET, {"url": url})
     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 432, in execute
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
     self.error_handler.check_response(response)
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
     raise exception_class(message, screen, stacktrace)
 selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
   (Session info: chrome=144.0.7559.133)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
-	0x7ff615fdf3d5
-	0x7ff615fdf430
-	0x7ff615d810bd
-	0x7ff615d7dbe4
-	0x7ff615d6e071
-	0x7ff615d6ff5f
-	0x7ff615d6e611
-	0x7ff615d6dddb
-	0x7ff615d6da91
-	0x7ff615d6b6c1
-	0x7ff615d6be22
-	0x7ff615d85366
-	0x7ff615e2ab34
-	0x7ff615e0589a
-	0x7ff615e29d08
-	0x7ff615dccb0c
-	0x7ff615dcda53
-	0x7ff6162bb470
-	0x7ff6162b586d
-	0x7ff6162d621a
-	0x7ff615ffb235
-	0x7ff616003a5c
-	0x7ff615fe8844
-	0x7ff615fe89f6
-	0x7ff615fceb87
+	0x7ff623cbf3d5
+	0x7ff623cbf430
+	0x7ff623a610bd
+	0x7ff623a5dbe4
+	0x7ff623a4e071
+	0x7ff623a4ff5f
+	0x7ff623a4e611
+	0x7ff623a4dddb
+	0x7ff623a4da91
+	0x7ff623a4b6c1
+	0x7ff623a4be22
+	0x7ff623a65366
+	0x7ff623b0ab34
+	0x7ff623ae589a
+	0x7ff623b09d08
+	0x7ff623aacb0c
+	0x7ff623aada53
+	0x7ff623f9b470
+	0x7ff623f9586d
+	0x7ff623fb621a
+	0x7ff623cdb235
+	0x7ff623ce3a5c
+	0x7ff623cc8844
+	0x7ff623cc89f6
+	0x7ff623caeb87
 	0x7ffd91817374
 	0x7ffd9271cc91
 
-]]>
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Statistics_Cards_I_navigate_to_the_dashboard_at.png]]>
 </error><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Verify Statistics Cards
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 2.917s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 2.981s
     And the "dashboard" page is displayed ... skipped in 0.000s
     Then the following elements should contain these texts ... skipped in 0.000s
       | element            | value                                   |
@@ -140,67 +148,73 @@ Symbols not available. Dumping unresolved backtrace:
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Statistics_Cards_I_navigate_to_the_dashboard_at.png
+
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Timeline Controls" status="error" time="5.410649"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff615fdf3d5&#10;&#09;0x7ff615fdf430&#10;&#09;0x7ff615d810bd&#10;&#09;0x7ff615d7dbe4&#10;&#09;0x7ff615d6e071&#10;&#09;0x7ff615d6ff5f&#10;&#09;0x7ff615d6e611&#10;&#09;0x7ff615d6dddb&#10;&#09;0x7ff615d6da91&#10;&#09;0x7ff615d6b6c1&#10;&#09;0x7ff615d6be22&#10;&#09;0x7ff615d85366&#10;&#09;0x7ff615e2ab34&#10;&#09;0x7ff615e0589a&#10;&#09;0x7ff615e29d08&#10;&#09;0x7ff615dccb0c&#10;&#09;0x7ff615dcda53&#10;&#09;0x7ff6162bb470&#10;&#09;0x7ff6162b586d&#10;&#09;0x7ff6162d621a&#10;&#09;0x7ff615ffb235&#10;&#09;0x7ff616003a5c&#10;&#09;0x7ff615fe8844&#10;&#09;0x7ff615fe89f6&#10;&#09;0x7ff615fceb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91">
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Timeline Controls" status="failed" time="3.948745"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
 <![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 5.411s
+Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 3.949s
 Location: features/dashboard/gui/gui_dashboard.feature:5
 Traceback (most recent call last):
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1991, in run
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
     match.run(runner.context)
     ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 105, in run
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
     self.func(context, *args, **kwargs)
     ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
     context.driver.get(url)
     ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 452, in get
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
     self.execute(Command.GET, {"url": url})
     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 432, in execute
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
     self.error_handler.check_response(response)
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
     raise exception_class(message, screen, stacktrace)
 selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
   (Session info: chrome=144.0.7559.133)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
-	0x7ff615fdf3d5
-	0x7ff615fdf430
-	0x7ff615d810bd
-	0x7ff615d7dbe4
-	0x7ff615d6e071
-	0x7ff615d6ff5f
-	0x7ff615d6e611
-	0x7ff615d6dddb
-	0x7ff615d6da91
-	0x7ff615d6b6c1
-	0x7ff615d6be22
-	0x7ff615d85366
-	0x7ff615e2ab34
-	0x7ff615e0589a
-	0x7ff615e29d08
-	0x7ff615dccb0c
-	0x7ff615dcda53
-	0x7ff6162bb470
-	0x7ff6162b586d
-	0x7ff6162d621a
-	0x7ff615ffb235
-	0x7ff616003a5c
-	0x7ff615fe8844
-	0x7ff615fe89f6
-	0x7ff615fceb87
+	0x7ff623cbf3d5
+	0x7ff623cbf430
+	0x7ff623a610bd
+	0x7ff623a5dbe4
+	0x7ff623a4e071
+	0x7ff623a4ff5f
+	0x7ff623a4e611
+	0x7ff623a4dddb
+	0x7ff623a4da91
+	0x7ff623a4b6c1
+	0x7ff623a4be22
+	0x7ff623a65366
+	0x7ff623b0ab34
+	0x7ff623ae589a
+	0x7ff623b09d08
+	0x7ff623aacb0c
+	0x7ff623aada53
+	0x7ff623f9b470
+	0x7ff623f9586d
+	0x7ff623fb621a
+	0x7ff623cdb235
+	0x7ff623ce3a5c
+	0x7ff623cc8844
+	0x7ff623cc89f6
+	0x7ff623caeb87
 	0x7ffd91817374
 	0x7ffd9271cc91
 
-]]>
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Timeline_Controls_I_navigate_to_the_dashboard_at.png]]>
 </error><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Verify Timeline Controls
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 5.411s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 3.949s
     And the "dashboard" page is displayed ... skipped in 0.000s
     Then the following elements should contain these texts ... skipped in 0.000s
       | element          | value                             |
@@ -215,67 +229,73 @@ Symbols not available. Dumping unresolved backtrace:
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Timeline_Controls_I_navigate_to_the_dashboard_at.png
+
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Incident and Sector Lists" status="error" time="5.402922"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff615fdf3d5&#10;&#09;0x7ff615fdf430&#10;&#09;0x7ff615d810bd&#10;&#09;0x7ff615d7dbe4&#10;&#09;0x7ff615d6e071&#10;&#09;0x7ff615d6ff5f&#10;&#09;0x7ff615d6e611&#10;&#09;0x7ff615d6dddb&#10;&#09;0x7ff615d6da91&#10;&#09;0x7ff615d6b6c1&#10;&#09;0x7ff615d6be22&#10;&#09;0x7ff615d85366&#10;&#09;0x7ff615e2ab34&#10;&#09;0x7ff615e0589a&#10;&#09;0x7ff615e29d08&#10;&#09;0x7ff615dccb0c&#10;&#09;0x7ff615dcda53&#10;&#09;0x7ff6162bb470&#10;&#09;0x7ff6162b586d&#10;&#09;0x7ff6162d621a&#10;&#09;0x7ff615ffb235&#10;&#09;0x7ff616003a5c&#10;&#09;0x7ff615fe8844&#10;&#09;0x7ff615fe89f6&#10;&#09;0x7ff615fceb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91">
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Incident and Sector Lists" status="failed" time="7.248557"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
 <![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 5.403s
+Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 7.249s
 Location: features/dashboard/gui/gui_dashboard.feature:5
 Traceback (most recent call last):
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1991, in run
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
     match.run(runner.context)
     ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 105, in run
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
     self.func(context, *args, **kwargs)
     ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
     context.driver.get(url)
     ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 452, in get
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
     self.execute(Command.GET, {"url": url})
     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 432, in execute
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
     self.error_handler.check_response(response)
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
     raise exception_class(message, screen, stacktrace)
 selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
   (Session info: chrome=144.0.7559.133)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
-	0x7ff615fdf3d5
-	0x7ff615fdf430
-	0x7ff615d810bd
-	0x7ff615d7dbe4
-	0x7ff615d6e071
-	0x7ff615d6ff5f
-	0x7ff615d6e611
-	0x7ff615d6dddb
-	0x7ff615d6da91
-	0x7ff615d6b6c1
-	0x7ff615d6be22
-	0x7ff615d85366
-	0x7ff615e2ab34
-	0x7ff615e0589a
-	0x7ff615e29d08
-	0x7ff615dccb0c
-	0x7ff615dcda53
-	0x7ff6162bb470
-	0x7ff6162b586d
-	0x7ff6162d621a
-	0x7ff615ffb235
-	0x7ff616003a5c
-	0x7ff615fe8844
-	0x7ff615fe89f6
-	0x7ff615fceb87
+	0x7ff623cbf3d5
+	0x7ff623cbf430
+	0x7ff623a610bd
+	0x7ff623a5dbe4
+	0x7ff623a4e071
+	0x7ff623a4ff5f
+	0x7ff623a4e611
+	0x7ff623a4dddb
+	0x7ff623a4da91
+	0x7ff623a4b6c1
+	0x7ff623a4be22
+	0x7ff623a65366
+	0x7ff623b0ab34
+	0x7ff623ae589a
+	0x7ff623b09d08
+	0x7ff623aacb0c
+	0x7ff623aada53
+	0x7ff623f9b470
+	0x7ff623f9586d
+	0x7ff623fb621a
+	0x7ff623cdb235
+	0x7ff623ce3a5c
+	0x7ff623cc8844
+	0x7ff623cc89f6
+	0x7ff623caeb87
 	0x7ffd91817374
 	0x7ffd9271cc91
 
-]]>
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Incident_and_Sector_Lists_I_navigate_to_the_dashboard_at.png]]>
 </error><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Verify Incident and Sector Lists
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 5.403s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 7.249s
     And the "dashboard" page is displayed ... skipped in 0.000s
     Then the following elements should contain these texts ... skipped in 0.000s
       | element             | value                                |
@@ -285,67 +305,73 @@ Symbols not available. Dumping unresolved backtrace:
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Incident_and_Sector_Lists_I_navigate_to_the_dashboard_at.png
+
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Endpoints Catalog and Scroll" status="error" time="2.965601"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff615fdf3d5&#10;&#09;0x7ff615fdf430&#10;&#09;0x7ff615d810bd&#10;&#09;0x7ff615d7dbe4&#10;&#09;0x7ff615d6e071&#10;&#09;0x7ff615d6ff5f&#10;&#09;0x7ff615d6e611&#10;&#09;0x7ff615d6dddb&#10;&#09;0x7ff615d6da91&#10;&#09;0x7ff615d6b6c1&#10;&#09;0x7ff615d6be22&#10;&#09;0x7ff615d85366&#10;&#09;0x7ff615e2ab34&#10;&#09;0x7ff615e0589a&#10;&#09;0x7ff615e29d08&#10;&#09;0x7ff615dccb0c&#10;&#09;0x7ff615dcda53&#10;&#09;0x7ff6162bb470&#10;&#09;0x7ff6162b586d&#10;&#09;0x7ff6162d621a&#10;&#09;0x7ff615ffb235&#10;&#09;0x7ff616003a5c&#10;&#09;0x7ff615fe8844&#10;&#09;0x7ff615fe89f6&#10;&#09;0x7ff615fceb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91">
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Endpoints Catalog and Scroll" status="failed" time="7.861403"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
 <![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 2.966s
+Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 7.861s
 Location: features/dashboard/gui/gui_dashboard.feature:5
 Traceback (most recent call last):
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1991, in run
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
     match.run(runner.context)
     ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 105, in run
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
     self.func(context, *args, **kwargs)
     ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
     context.driver.get(url)
     ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 452, in get
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
     self.execute(Command.GET, {"url": url})
     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 432, in execute
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
     self.error_handler.check_response(response)
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
     raise exception_class(message, screen, stacktrace)
 selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
   (Session info: chrome=144.0.7559.133)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
-	0x7ff615fdf3d5
-	0x7ff615fdf430
-	0x7ff615d810bd
-	0x7ff615d7dbe4
-	0x7ff615d6e071
-	0x7ff615d6ff5f
-	0x7ff615d6e611
-	0x7ff615d6dddb
-	0x7ff615d6da91
-	0x7ff615d6b6c1
-	0x7ff615d6be22
-	0x7ff615d85366
-	0x7ff615e2ab34
-	0x7ff615e0589a
-	0x7ff615e29d08
-	0x7ff615dccb0c
-	0x7ff615dcda53
-	0x7ff6162bb470
-	0x7ff6162b586d
-	0x7ff6162d621a
-	0x7ff615ffb235
-	0x7ff616003a5c
-	0x7ff615fe8844
-	0x7ff615fe89f6
-	0x7ff615fceb87
+	0x7ff623cbf3d5
+	0x7ff623cbf430
+	0x7ff623a610bd
+	0x7ff623a5dbe4
+	0x7ff623a4e071
+	0x7ff623a4ff5f
+	0x7ff623a4e611
+	0x7ff623a4dddb
+	0x7ff623a4da91
+	0x7ff623a4b6c1
+	0x7ff623a4be22
+	0x7ff623a65366
+	0x7ff623b0ab34
+	0x7ff623ae589a
+	0x7ff623b09d08
+	0x7ff623aacb0c
+	0x7ff623aada53
+	0x7ff623f9b470
+	0x7ff623f9586d
+	0x7ff623fb621a
+	0x7ff623cdb235
+	0x7ff623ce3a5c
+	0x7ff623cc8844
+	0x7ff623cc89f6
+	0x7ff623caeb87
 	0x7ffd91817374
 	0x7ffd9271cc91
 
-]]>
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Endpoints_Catalog_and_Scroll_I_navigate_to_the_dashboard_at.png]]>
 </error><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Verify Endpoints Catalog and Scroll
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 2.966s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 7.861s
     And the "dashboard" page is displayed ... skipped in 0.000s
     When I scroll to the bottom of the page ... skipped in 0.000s
     Then the following elements should contain these texts ... skipped in 0.000s
@@ -355,67 +381,73 @@ Symbols not available. Dumping unresolved backtrace:
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Endpoints_Catalog_and_Scroll_I_navigate_to_the_dashboard_at.png
+
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Global Actions and Filters" status="error" time="6.961017"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff615fdf3d5&#10;&#09;0x7ff615fdf430&#10;&#09;0x7ff615d810bd&#10;&#09;0x7ff615d7dbe4&#10;&#09;0x7ff615d6e071&#10;&#09;0x7ff615d6ff5f&#10;&#09;0x7ff615d6e611&#10;&#09;0x7ff615d6dddb&#10;&#09;0x7ff615d6da91&#10;&#09;0x7ff615d6b6c1&#10;&#09;0x7ff615d6be22&#10;&#09;0x7ff615d85366&#10;&#09;0x7ff615e2ab34&#10;&#09;0x7ff615e0589a&#10;&#09;0x7ff615e29d08&#10;&#09;0x7ff615dccb0c&#10;&#09;0x7ff615dcda53&#10;&#09;0x7ff6162bb470&#10;&#09;0x7ff6162b586d&#10;&#09;0x7ff6162d621a&#10;&#09;0x7ff615ffb235&#10;&#09;0x7ff616003a5c&#10;&#09;0x7ff615fe8844&#10;&#09;0x7ff615fe89f6&#10;&#09;0x7ff615fceb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91">
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Global Actions and Filters" status="failed" time="6.605121"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
 <![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 6.961s
+Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 6.605s
 Location: features/dashboard/gui/gui_dashboard.feature:5
 Traceback (most recent call last):
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1991, in run
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
     match.run(runner.context)
     ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 105, in run
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
     self.func(context, *args, **kwargs)
     ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
     context.driver.get(url)
     ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 452, in get
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
     self.execute(Command.GET, {"url": url})
     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 432, in execute
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
     self.error_handler.check_response(response)
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
     raise exception_class(message, screen, stacktrace)
 selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
   (Session info: chrome=144.0.7559.133)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
-	0x7ff615fdf3d5
-	0x7ff615fdf430
-	0x7ff615d810bd
-	0x7ff615d7dbe4
-	0x7ff615d6e071
-	0x7ff615d6ff5f
-	0x7ff615d6e611
-	0x7ff615d6dddb
-	0x7ff615d6da91
-	0x7ff615d6b6c1
-	0x7ff615d6be22
-	0x7ff615d85366
-	0x7ff615e2ab34
-	0x7ff615e0589a
-	0x7ff615e29d08
-	0x7ff615dccb0c
-	0x7ff615dcda53
-	0x7ff6162bb470
-	0x7ff6162b586d
-	0x7ff6162d621a
-	0x7ff615ffb235
-	0x7ff616003a5c
-	0x7ff615fe8844
-	0x7ff615fe89f6
-	0x7ff615fceb87
+	0x7ff623cbf3d5
+	0x7ff623cbf430
+	0x7ff623a610bd
+	0x7ff623a5dbe4
+	0x7ff623a4e071
+	0x7ff623a4ff5f
+	0x7ff623a4e611
+	0x7ff623a4dddb
+	0x7ff623a4da91
+	0x7ff623a4b6c1
+	0x7ff623a4be22
+	0x7ff623a65366
+	0x7ff623b0ab34
+	0x7ff623ae589a
+	0x7ff623b09d08
+	0x7ff623aacb0c
+	0x7ff623aada53
+	0x7ff623f9b470
+	0x7ff623f9586d
+	0x7ff623fb621a
+	0x7ff623cdb235
+	0x7ff623ce3a5c
+	0x7ff623cc8844
+	0x7ff623cc89f6
+	0x7ff623caeb87
 	0x7ffd91817374
 	0x7ffd9271cc91
 
-]]>
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Global_Actions_and_Filters_I_navigate_to_the_dashboard_at.png]]>
 </error><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Verify Global Actions and Filters
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 6.961s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 6.605s
     And the "dashboard" page is displayed ... skipped in 0.000s
     When I apply the "[LANG:dashboard.filters.seven_days]" time filter ... skipped in 0.000s
     And I wait for 1 seconds ... skipped in 0.000s
@@ -427,69 +459,75 @@ Symbols not available. Dumping unresolved backtrace:
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Global_Actions_and_Filters_I_navigate_to_the_dashboard_at.png
+
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Mobile Viewport Layout" status="error" time="5.364856"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff615fdf3d5&#10;&#09;0x7ff615fdf430&#10;&#09;0x7ff615d810bd&#10;&#09;0x7ff615d7dbe4&#10;&#09;0x7ff615d6e071&#10;&#09;0x7ff615d6ff5f&#10;&#09;0x7ff615d6e611&#10;&#09;0x7ff615d6dddb&#10;&#09;0x7ff615d6da91&#10;&#09;0x7ff615d6b6c1&#10;&#09;0x7ff615d6be22&#10;&#09;0x7ff615d85366&#10;&#09;0x7ff615e2ab34&#10;&#09;0x7ff615e0589a&#10;&#09;0x7ff615e29d08&#10;&#09;0x7ff615dccb0c&#10;&#09;0x7ff615dcda53&#10;&#09;0x7ff6162bb470&#10;&#09;0x7ff6162b586d&#10;&#09;0x7ff6162d621a&#10;&#09;0x7ff615ffb235&#10;&#09;0x7ff616003a5c&#10;&#09;0x7ff615fe8844&#10;&#09;0x7ff615fe89f6&#10;&#09;0x7ff615fceb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91">
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Mobile Viewport Layout" status="failed" time="5.309959"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
 <![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 5.365s
+Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 5.310s
 Location: features/dashboard/gui/gui_dashboard.feature:5
 Traceback (most recent call last):
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1991, in run
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
     match.run(runner.context)
     ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 105, in run
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
     self.func(context, *args, **kwargs)
     ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
     context.driver.get(url)
     ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 452, in get
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
     self.execute(Command.GET, {"url": url})
     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 432, in execute
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
     self.error_handler.check_response(response)
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
     raise exception_class(message, screen, stacktrace)
 selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
   (Session info: chrome=144.0.7559.133)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
-	0x7ff615fdf3d5
-	0x7ff615fdf430
-	0x7ff615d810bd
-	0x7ff615d7dbe4
-	0x7ff615d6e071
-	0x7ff615d6ff5f
-	0x7ff615d6e611
-	0x7ff615d6dddb
-	0x7ff615d6da91
-	0x7ff615d6b6c1
-	0x7ff615d6be22
-	0x7ff615d85366
-	0x7ff615e2ab34
-	0x7ff615e0589a
-	0x7ff615e29d08
-	0x7ff615dccb0c
-	0x7ff615dcda53
-	0x7ff6162bb470
-	0x7ff6162b586d
-	0x7ff6162d621a
-	0x7ff615ffb235
-	0x7ff616003a5c
-	0x7ff615fe8844
-	0x7ff615fe89f6
-	0x7ff615fceb87
+	0x7ff623cbf3d5
+	0x7ff623cbf430
+	0x7ff623a610bd
+	0x7ff623a5dbe4
+	0x7ff623a4e071
+	0x7ff623a4ff5f
+	0x7ff623a4e611
+	0x7ff623a4dddb
+	0x7ff623a4da91
+	0x7ff623a4b6c1
+	0x7ff623a4be22
+	0x7ff623a65366
+	0x7ff623b0ab34
+	0x7ff623ae589a
+	0x7ff623b09d08
+	0x7ff623aacb0c
+	0x7ff623aada53
+	0x7ff623f9b470
+	0x7ff623f9586d
+	0x7ff623fb621a
+	0x7ff623cdb235
+	0x7ff623ce3a5c
+	0x7ff623cc8844
+	0x7ff623cc89f6
+	0x7ff623caeb87
 	0x7ffd91817374
 	0x7ffd9271cc91
 
-]]>
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Mobile_Viewport_Layout_I_navigate_to_the_dashboard_at.png]]>
 </error><system-out>
 <![CDATA[
 @scenario.begin
 
   @responsive @mobile
   Scenario: Verify Mobile Viewport Layout
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 5.365s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 5.310s
     And the "dashboard" page is displayed ... skipped in 0.000s
     Then the following elements should contain these texts ... skipped in 0.000s
       | element         | value                            |
@@ -498,67 +536,73 @@ Symbols not available. Dumping unresolved backtrace:
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Mobile_Viewport_Layout_I_navigate_to_the_dashboard_at.png
+
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Navigation to Incident Taxonomy" status="error" time="2.527212"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff615fdf3d5&#10;&#09;0x7ff615fdf430&#10;&#09;0x7ff615d810bd&#10;&#09;0x7ff615d7dbe4&#10;&#09;0x7ff615d6e071&#10;&#09;0x7ff615d6ff5f&#10;&#09;0x7ff615d6e611&#10;&#09;0x7ff615d6dddb&#10;&#09;0x7ff615d6da91&#10;&#09;0x7ff615d6b6c1&#10;&#09;0x7ff615d6be22&#10;&#09;0x7ff615d85366&#10;&#09;0x7ff615e2ab34&#10;&#09;0x7ff615e0589a&#10;&#09;0x7ff615e29d08&#10;&#09;0x7ff615dccb0c&#10;&#09;0x7ff615dcda53&#10;&#09;0x7ff6162bb470&#10;&#09;0x7ff6162b586d&#10;&#09;0x7ff6162d621a&#10;&#09;0x7ff615ffb235&#10;&#09;0x7ff616003a5c&#10;&#09;0x7ff615fe8844&#10;&#09;0x7ff615fe89f6&#10;&#09;0x7ff615fceb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91">
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Navigation to Incident Taxonomy" status="failed" time="2.914404"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
 <![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 2.527s
+Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 2.914s
 Location: features/dashboard/gui/gui_dashboard.feature:5
 Traceback (most recent call last):
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1991, in run
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
     match.run(runner.context)
     ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 105, in run
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
     self.func(context, *args, **kwargs)
     ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
     context.driver.get(url)
     ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 452, in get
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
     self.execute(Command.GET, {"url": url})
     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 432, in execute
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
     self.error_handler.check_response(response)
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
     raise exception_class(message, screen, stacktrace)
 selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
   (Session info: chrome=144.0.7559.133)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
-	0x7ff615fdf3d5
-	0x7ff615fdf430
-	0x7ff615d810bd
-	0x7ff615d7dbe4
-	0x7ff615d6e071
-	0x7ff615d6ff5f
-	0x7ff615d6e611
-	0x7ff615d6dddb
-	0x7ff615d6da91
-	0x7ff615d6b6c1
-	0x7ff615d6be22
-	0x7ff615d85366
-	0x7ff615e2ab34
-	0x7ff615e0589a
-	0x7ff615e29d08
-	0x7ff615dccb0c
-	0x7ff615dcda53
-	0x7ff6162bb470
-	0x7ff6162b586d
-	0x7ff6162d621a
-	0x7ff615ffb235
-	0x7ff616003a5c
-	0x7ff615fe8844
-	0x7ff615fe89f6
-	0x7ff615fceb87
+	0x7ff623cbf3d5
+	0x7ff623cbf430
+	0x7ff623a610bd
+	0x7ff623a5dbe4
+	0x7ff623a4e071
+	0x7ff623a4ff5f
+	0x7ff623a4e611
+	0x7ff623a4dddb
+	0x7ff623a4da91
+	0x7ff623a4b6c1
+	0x7ff623a4be22
+	0x7ff623a65366
+	0x7ff623b0ab34
+	0x7ff623ae589a
+	0x7ff623b09d08
+	0x7ff623aacb0c
+	0x7ff623aada53
+	0x7ff623f9b470
+	0x7ff623f9586d
+	0x7ff623fb621a
+	0x7ff623cdb235
+	0x7ff623ce3a5c
+	0x7ff623cc8844
+	0x7ff623cc89f6
+	0x7ff623caeb87
 	0x7ffd91817374
 	0x7ffd9271cc91
 
-]]>
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Navigation_to_Incident_Taxonomy_I_navigate_to_the_dashboard_at.png]]>
 </error><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Verify Navigation to Incident Taxonomy
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 2.527s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 2.914s
     And the "dashboard" page is displayed ... skipped in 0.000s
     When I click on the "incidents_link" in the sidebar ... skipped in 0.000s
     Then the "incidents" page is displayed ... skipped in 0.000s
@@ -571,5 +615,9 @@ Symbols not available. Dumping unresolved backtrace:
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Navigation_to_Incident_Taxonomy_I_navigate_to_the_dashboard_at.png
+
 ]]>
 </system-out></testcase></testsuite>

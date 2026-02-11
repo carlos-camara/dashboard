@@ -1,63 +1,65 @@
-<testsuite name="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" tests="1" errors="1" failures="0" skipped="0" time="6.832544" timestamp="2026-02-11T16:41:54.958198" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" name="Validate High-Density Performance Audit Dossier" status="error" time="6.832544"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff615fdf3d5&#10;&#09;0x7ff615fdf430&#10;&#09;0x7ff615d810bd&#10;&#09;0x7ff615d7dbe4&#10;&#09;0x7ff615d6e071&#10;&#09;0x7ff615d6ff5f&#10;&#09;0x7ff615d6e611&#10;&#09;0x7ff615d6dddb&#10;&#09;0x7ff615d6da91&#10;&#09;0x7ff615d6b6c1&#10;&#09;0x7ff615d6be22&#10;&#09;0x7ff615d85366&#10;&#09;0x7ff615e2ab34&#10;&#09;0x7ff615e0589a&#10;&#09;0x7ff615e29d08&#10;&#09;0x7ff615dccb0c&#10;&#09;0x7ff615dcda53&#10;&#09;0x7ff6162bb470&#10;&#09;0x7ff6162b586d&#10;&#09;0x7ff6162d621a&#10;&#09;0x7ff615ffb235&#10;&#09;0x7ff616003a5c&#10;&#09;0x7ff615fe8844&#10;&#09;0x7ff615fe89f6&#10;&#09;0x7ff615fceb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91">
+<testsuite name="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" tests="1" errors="1" failures="0" skipped="0" time="4.486148" timestamp="2026-02-11T17:32:14.622037" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" name="Validate High-Density Performance Audit Dossier" status="failed" time="4.486148"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
 <![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 6.833s
+Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 4.486s
 Location: features/dashboard/gui/gui_performance.feature:5
 Traceback (most recent call last):
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1991, in run
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
     match.run(runner.context)
     ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 105, in run
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
     self.func(context, *args, **kwargs)
     ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
     context.driver.get(url)
     ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 452, in get
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
     self.execute(Command.GET, {"url": url})
     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 432, in execute
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
     self.error_handler.check_response(response)
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
     raise exception_class(message, screen, stacktrace)
 selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
   (Session info: chrome=144.0.7559.133)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
-	0x7ff615fdf3d5
-	0x7ff615fdf430
-	0x7ff615d810bd
-	0x7ff615d7dbe4
-	0x7ff615d6e071
-	0x7ff615d6ff5f
-	0x7ff615d6e611
-	0x7ff615d6dddb
-	0x7ff615d6da91
-	0x7ff615d6b6c1
-	0x7ff615d6be22
-	0x7ff615d85366
-	0x7ff615e2ab34
-	0x7ff615e0589a
-	0x7ff615e29d08
-	0x7ff615dccb0c
-	0x7ff615dcda53
-	0x7ff6162bb470
-	0x7ff6162b586d
-	0x7ff6162d621a
-	0x7ff615ffb235
-	0x7ff616003a5c
-	0x7ff615fe8844
-	0x7ff615fe89f6
-	0x7ff615fceb87
+	0x7ff623cbf3d5
+	0x7ff623cbf430
+	0x7ff623a610bd
+	0x7ff623a5dbe4
+	0x7ff623a4e071
+	0x7ff623a4ff5f
+	0x7ff623a4e611
+	0x7ff623a4dddb
+	0x7ff623a4da91
+	0x7ff623a4b6c1
+	0x7ff623a4be22
+	0x7ff623a65366
+	0x7ff623b0ab34
+	0x7ff623ae589a
+	0x7ff623b09d08
+	0x7ff623aacb0c
+	0x7ff623aada53
+	0x7ff623f9b470
+	0x7ff623f9586d
+	0x7ff623fb621a
+	0x7ff623cdb235
+	0x7ff623ce3a5c
+	0x7ff623cc8844
+	0x7ff623cc89f6
+	0x7ff623caeb87
 	0x7ffd91817374
 	0x7ffd9271cc91
 
-]]>
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Validate_High-Density_Performance_Audit_Dossier_I_navigate_to_the_dashboard_at.png]]>
 </error><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Validate High-Density Performance Audit Dossier
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 6.833s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 4.486s
     And the "dashboard" page is displayed ... skipped in 0.000s
     When I click on the "endpoints_link" in the sidebar ... skipped in 0.000s
     Then the "endpoints_view" page is displayed ... skipped in 0.000s
@@ -80,5 +82,9 @@ Symbols not available. Dumping unresolved backtrace:
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Validate_High-Density_Performance_Audit_Dossier_I_navigate_to_the_dashboard_at.png
+
 ]]>
 </system-out></testcase></testsuite>
