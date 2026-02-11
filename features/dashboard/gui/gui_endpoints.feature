@@ -1,4 +1,4 @@
-@gui @endpoints @smoke
+@gui @endpoints
 Feature: Endpoints Catalog & Insights
 
   Background:

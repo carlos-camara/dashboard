@@ -1,4 +1,4 @@
-@gui @interactivity @smoke
+@gui @interactivity
 Feature: Dashboard Cross-Navigation Interactivity
 
   Background:

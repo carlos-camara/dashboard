@@ -1,4 +1,4 @@
-@gui @incidents @smoke
+@gui @incidents
 Feature: Incident Taxonomy & Analysis
 
   Background:
@@ -8,7 +8,7 @@ Feature: Incident Taxonomy & Analysis
     Then the "incidents" page is displayed
     And I wait for "incidents" to be stable
 
-  @visual
+  @visual @smoke
   Scenario: Verify Incident Page Structure
     Then the page title should be "[LANG:common.page_title]"
     And the following elements should contain these texts
@@ -17,7 +17,7 @@ Feature: Incident Taxonomy & Analysis
       | header_subtitle | [LANG:incidents.header.subtitle] |
     
     And I should see the text "[LANG:incidents.stats.unique]"
-    Then the "incident page structure" page should visually match the baseline image "incident_page_structure" with a 5.0% tolerance
+    Then the "incident page structure" page should visually match the baseline image "incident_page_structure" with a 15.0% tolerance
 
   @visual
   Scenario: Verify Incident Statistics

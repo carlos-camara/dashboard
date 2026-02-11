@@ -1,4 +1,4 @@
-@gui @performance @smoke
+@gui @performance
 Feature: Ultra-Professional Performance Dashboard Validation
 
   Background:

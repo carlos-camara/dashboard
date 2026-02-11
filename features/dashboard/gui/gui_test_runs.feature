@@ -1,10 +1,11 @@
-@gui @test_runs @smoke
+@gui @test_runs
 Feature: Test Runs View Validation
 
   Background:
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     And the "dashboard" page is displayed
 
+  @smoke
   Scenario: Search and Redirect to Project Analytics
     When I click on the "test_runs_link" in the sidebar
     Then the "test_runs" page is displayed

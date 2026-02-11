@@ -137,7 +137,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
 
       const captureOptions = {
         backgroundColor: '#020617',
-        scale: 2,
+        scale: 1,
         logging: false
       };
 

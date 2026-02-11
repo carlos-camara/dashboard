@@ -1,4 +1,4 @@
-@gui @dashboard @smoke
+@gui @dashboard
 Feature: Dashboard Overview & Visual Integrity
 
   Background:
@@ -6,14 +6,14 @@ Feature: Dashboard Overview & Visual Integrity
     And the "dashboard" page is displayed
     And I wait for "dashboard" to be stable
 
-  @visual
+  @visual @smoke
   Scenario: Validate Header and System Status
     Then the page title should be "[LANG:common.page_title]"
     And the "header_subtitle" element should contain text "[LANG:dashboard.header.subtitle]"
     And the system status should be valid
     And the "header status" page should visually match the baseline image "dashboard_header_status" with a 15.0% tolerance
 
-  @visual @critical
+  @visual @critical @smoke
   Scenario: Validate Statistics Key Metrics
     Then the following elements should contain these texts
       | element             | value                                     |

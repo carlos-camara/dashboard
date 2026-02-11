@@ -1,4 +1,4 @@
-@gui @project_detail @smoke
+@gui @project_detail
 Feature: Project Detail View Validation
 
   Background:
@@ -9,6 +9,7 @@ Feature: Project Detail View Validation
     When I click on the "project_card"
     Then the "project_detail" page is displayed
 
+  @smoke
   Scenario: Verify Architecture Analysis Section
     Then the "projectName" should be visible
     And I should see the text "[LANG:project_detail.layer_stability]"

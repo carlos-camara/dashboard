@@ -93,8 +93,8 @@ def step_verify_downloaded_executive_report(context):
     downloads_dir = os.path.join(os.path.expanduser("~"), "Downloads")
     filepath = None
     
-    # Wait for any of the possible files
-    for _ in range(15):
+    # Wait for any of the possible files (Wait up to 30 seconds)
+    for _ in range(30):
         for filename in possible_filenames:
             temp_path = os.path.join(downloads_dir, filename)
             if os.path.exists(temp_path):

@@ -59,14 +59,20 @@ def before_all(context):
         
     xml_path = os.path.join(seed_run_dir, "results.xml")
     if not os.path.exists(xml_path):
-        # Create a basic JUnit XML with passing tests to populate the dashboard
+        # Create a JUnit XML with one failure to test incident expansion
         timestamp = datetime.now().isoformat()
         xml_content = f'''<?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="dashboard.gui" tests="5" failures="0" errors="0" skipped="0" time="10.5" timestamp="{timestamp}">
+  <testsuite name="dashboard.gui" tests="6" failures="1" errors="0" skipped="0" time="12.5" timestamp="{timestamp}">
     <testcase classname="dashboard.gui.login" name="Successful Login" time="2.5"/>
     <testcase classname="dashboard.gui.navigation" name="Navigate to Settings" time="1.2"/>
     <testcase classname="dashboard.gui.project" name="View Project Details" time="3.0"/>
+    <testcase classname="dashboard.gui.incidents" name="Verify Incident Expansion" time="2.0">
+      <failure message="Logic Verification Failed in dashboard">
+        AssertionError: User context missing during verification
+        at IncidentView.verifyTransaction (IncidentView.tsx:75)
+      </failure>
+    </testcase>
     <testcase classname="dashboard.api.users" name="Get User List" time="0.5"/>
     <testcase classname="dashboard.api.auth" name="Login API" time="0.8"/>
   </testsuite>
