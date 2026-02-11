@@ -56,5 +56,7 @@ All GUI tests automatically capture evidence:
 
 ## 🧪 Step Registry
 GUI-specific steps are modularized for reusability:
+- [gui_custom_steps.py](../../../steps/gui_custom_steps.py): Project-specific GUI and PDF validation steps.
+- [api_steps.py](../../../steps/api_steps.py): JSON path and API result assertions.
 - [step_gui_validation.py](../../../steps/step_gui_validation.py): Basic assertions (title, presence, text).
 - [step_gui_interactions.py](../../../steps/step_gui_interactions.py): Clicks, hovers, scroll actions, and screenshot logic.

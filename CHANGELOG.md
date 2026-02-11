@@ -22,6 +22,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed redundant API calls in `server.js`.
 - Resolved path resolution issues for uploaded artifacts.
 - Corrected absolute paths in various README files.
+- **Testing**: Fixed `BAD_FORMAT=html` error by registering the HTML formatter in `behave.ini`.
+- **Testing**: Resolved "undefined step" errors by implementing missing GUI and PDF verification steps.
+- **Testing**: Fixed Locust performance test failure by adding the missing `--host` argument.
+- **Testing**: Improved local test reliability by automating XML report seeding in `environment.py`.
+- **Visuals**: Updated visual regression baselines to match the current UI version.
+- **GUI**: Corrected `actions_export_button` selector and implemented dynamic date handling for report exports.
 
 ---
 

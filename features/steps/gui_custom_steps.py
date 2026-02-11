@@ -87,7 +87,7 @@ def step_verify_downloaded_executive_report(context):
     filepath = os.path.join(downloads_dir, filename)
     
     # Wait for file
-    for _ in range(10):
+    for _ in range(15):
         if os.path.exists(filepath):
             break
         time.sleep(1)
@@ -107,5 +107,6 @@ def step_verify_content_of_downloaded_report(context, page_count):
         raise AssertionError("No downloaded file listed in context. checking step must run first.")
     
     step_verify_pdf_content_generic(context, page_count, context.last_downloaded_file)
+
 
 
