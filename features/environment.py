@@ -31,13 +31,22 @@ def before_all(context):
         os.makedirs(dummy_path)
     
     # Create dummy _stats.csv with ALL required endpoints for tests
-    csv_path = os.path.join(dummy_path, "dummy_stats.csv")
+    csv_path = os.path.join(dummy_path, "seed_stats.csv")
     with open(csv_path, "w") as f:
         f.write('"Type","Name","Request Count","Failure Count","Median Response Time","Average Response Time","Min Response Time","Max Response Time","Average Content Size","Requests/s","Failures/s","50%","66%","75%","80%","90%","95%","98%","99%","100%"\n')
         f.write('"GET","/api/test",1000,0,50,55,10,200,500,50.0,0.0,50,60,70,80,90,100,120,150,200\n')
         f.write('"GET","/api/health",500,0,20,25,5,100,150,25.0,0.0,20,25,30,35,40,50,60,80,100\n')
         f.write('"GET","/api/runs",200,0,40,45,15,150,800,10.0,0.0,40,45,50,55,60,70,80,90,120\n')
         f.write('"GET","/api/endpoints",200,0,60,65,20,180,1200,10.0,0.0,60,65,70,75,80,90,100,110,140\n')
+
+    # Also need _stats_history.csv for the server to consider it valid
+    history_path = os.path.join(dummy_path, "seed_stats_history.csv")
+    with open(history_path, "w") as f:
+        f.write('"Timestamp","User Count","Type","Name","Requests/s","Failures/s","50%","66%","75%","80%","90%","95%","98%","99%","100%","Total Request Count","Total Failure Count","Total Median Response Time","Total Average Response Time","Total Min Response Time","Total Max Response Time"\n')
+        now_ts = int(datetime.now().timestamp())
+        for i in range(10):
+            ts = now_ts - (i * 10)
+            f.write(f'{ts},10,"GET","Total",50.0,0.0,50,60,70,80,90,100,110,120,130,1000,0,50,55,10,200\n')
 
     # PROJECT-SPECIFIC SEEDING: Ensure XML test run reports exist
     reports_run_dir = os.path.join("reports", "test_run")
@@ -70,8 +79,19 @@ def before_all(context):
 
 
 def before_scenario(context, scenario):
-     """Initialize driver using framework lifecycle logic."""
+     """Initialize driver using framework lifecycle logic and configure headless downloads."""
      FrameworkHooks.before_scenario(context, scenario)
+     
+     # Configure headless downloads for Chrome if using Selenium
+     if hasattr(context, 'driver') and context.driver.name == 'chrome':
+         downloads_dir = os.path.join(os.path.expanduser("~"), "Downloads")
+         if not os.path.exists(downloads_dir):
+             os.makedirs(downloads_dir)
+             
+         context.driver.execute_cdp_cmd('Page.setDownloadBehavior', {
+             'behavior': 'allow',
+             'downloadPath': downloads_dir
+         })
 
 def after_step(context, step):
     """Capture screenshots on failure using framework utility."""

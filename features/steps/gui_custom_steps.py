@@ -79,20 +79,33 @@ def step_verify_downloaded_executive_report(context):
     from datetime import datetime
     import os
     
-    today_str = datetime.now().strftime("%Y-%m-%d")
-    filename = f"SENTINEL_EXECUTIVE_REPORT_{today_str}.pdf"
+    from datetime import datetime, timedelta
+    import os
     
-    # Reuse the generic generic verification logic or just check existence
+    local_today = datetime.now().strftime("%Y-%m-%d")
+    utc_today = datetime.utcnow().strftime("%Y-%m-%d")
+    
+    possible_filenames = [
+        f"SENTINEL_EXECUTIVE_REPORT_{local_today}.pdf",
+        f"SENTINEL_EXECUTIVE_REPORT_{utc_today}.pdf"
+    ]
+    
     downloads_dir = os.path.join(os.path.expanduser("~"), "Downloads")
-    filepath = os.path.join(downloads_dir, filename)
+    filepath = None
     
-    # Wait for file
+    # Wait for any of the possible files
     for _ in range(15):
-        if os.path.exists(filepath):
+        for filename in possible_filenames:
+            temp_path = os.path.join(downloads_dir, filename)
+            if os.path.exists(temp_path):
+                filepath = temp_path
+                context.last_downloaded_file = filename
+                break
+        if filepath:
             break
         time.sleep(1)
         
-    assert os.path.exists(filepath), f"Executive report {filename} not found in {downloads_dir}"
+    assert filepath, f"Executive report (tried {possible_filenames}) not found in {downloads_dir}"
     
     # Store filename in context for subsequent steps if needed
     context.last_downloaded_file = filename
