@@ -1,11 +1,11 @@
-<testsuite name="dashboard.api.api_health.Health Endpoint Validations" tests="4" errors="0" failures="0" skipped="0" time="0.052653" timestamp="2026-02-11T16:39:04.567076" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="Health check returns 200 OK" status="passed" time="0.015243"><system-out>
+<testsuite name="dashboard.api.api_health.Health Endpoint Validations" tests="4" errors="0" failures="0" skipped="0" time="0.060854" timestamp="2026-02-11T17:28:55.441010" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="Health check returns 200 OK" status="passed" time="0.015848"><system-out>
 <![CDATA[
 @scenario.begin
 
   @smoke
   Scenario: Health check returns 200 OK
     Given the API base URL is "http://localhost:3001" ... passed in 0.002s
-    When I send a "GET" request to "/api/health" ... passed in 0.009s
+    When I send a "GET" request to "/api/health" ... passed in 0.010s
     Then the response status code should be 200 ... passed in 0.001s
     And the response JSON path "status" should be "ok" ... passed in 0.001s
     And the response header "Content-Type" should contain "application/json" ... passed in 0.001s
@@ -15,58 +15,58 @@
 --------------------------------------------------------------------------------
 
 Captured stdout:
-16:38:58 [Health Endpoint Validations | Health check returns 200 OK] INFO: Sending GET request to: http://localhost:3001/api/health
+17:28:28 [Health Endpoint Validations | Health check returns 200 OK] INFO: Sending GET request to: http://localhost:3001/api/health
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="METHOD NOT ALLOWED (POST)" status="passed" time="0.012767"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="METHOD NOT ALLOWED (POST)" status="passed" time="0.019768"><system-out>
 <![CDATA[
 @scenario.begin
 
   @smoke @negative
   Scenario: METHOD NOT ALLOWED (POST)
     Given the API base URL is "http://localhost:3001" ... passed in 0.002s
-    When I send a "POST" request to "/api/health" ... passed in 0.009s
+    When I send a "POST" request to "/api/health" ... passed in 0.017s
     Then the response status code should be 404 ... passed in 0.001s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-16:39:01 [Health Endpoint Validations | METHOD NOT ALLOWED (POST)] INFO: Sending POST request to: http://localhost:3001/api/health
+17:28:34 [Health Endpoint Validations | METHOD NOT ALLOWED (POST)] INFO: Sending POST request to: http://localhost:3001/api/health
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="METHOD NOT ALLOWED (PUT)" status="passed" time="0.011019"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="METHOD NOT ALLOWED (PUT)" status="passed" time="0.012724"><system-out>
 <![CDATA[
 @scenario.begin
 
   @negative
   Scenario: METHOD NOT ALLOWED (PUT)
     Given the API base URL is "http://localhost:3001" ... passed in 0.002s
-    When I send a "PUT" request to "/api/health" ... passed in 0.008s
+    When I send a "PUT" request to "/api/health" ... passed in 0.010s
     Then the response status code should be 404 ... passed in 0.001s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-16:39:02 [Health Endpoint Validations | METHOD NOT ALLOWED (PUT)] INFO: Sending PUT request to: http://localhost:3001/api/health
+17:28:43 [Health Endpoint Validations | METHOD NOT ALLOWED (PUT)] INFO: Sending PUT request to: http://localhost:3001/api/health
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="METHOD NOT ALLOWED (DELETE)" status="passed" time="0.013624"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_health.Health Endpoint Validations" name="METHOD NOT ALLOWED (DELETE)" status="passed" time="0.012515"><system-out>
 <![CDATA[
 @scenario.begin
 
   @negative
   Scenario: METHOD NOT ALLOWED (DELETE)
     Given the API base URL is "http://localhost:3001" ... passed in 0.002s
-    When I send a "DELETE" request to "/api/health" ... passed in 0.011s
+    When I send a "DELETE" request to "/api/health" ... passed in 0.010s
     Then the response status code should be 404 ... passed in 0.001s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-16:39:04 [Health Endpoint Validations | METHOD NOT ALLOWED (DELETE)] INFO: Sending DELETE request to: http://localhost:3001/api/health
+17:28:51 [Health Endpoint Validations | METHOD NOT ALLOWED (DELETE)] INFO: Sending DELETE request to: http://localhost:3001/api/health
 
 ]]>
 </system-out></testcase></testsuite>
