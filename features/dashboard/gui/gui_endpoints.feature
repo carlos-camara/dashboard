@@ -1,8 +1,5 @@
 @gui @endpoints @smoke
 Feature: Endpoints Catalog & Insights
-  As a Developer
-  I want to explore details of specific API endpoints
-  So that I can optimize performance and debug failures.
 
   Background:
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/"

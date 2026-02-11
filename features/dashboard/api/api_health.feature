@@ -1,9 +1,6 @@
 @api @dashboard @health
 Feature: System Health Monitoring
-  As a Monitor System
-  I want to check the API health status
-  So that I can ensure the backend services are operational.
-
+  
   Background:
     Given the API base URL is "http://localhost:3001"
 

@@ -1,8 +1,5 @@
 @gui @dashboard @smoke
 Feature: Dashboard Overview & Visual Integrity
-  As a Product Manager
-  I want to ensure the dashboard displays key metrics and status correctly
-  So that users can trust the system health data at a glance.
 
   Background:
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/"

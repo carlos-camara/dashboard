@@ -8,8 +8,8 @@ Feature: Export Functionality Validation
 
   @critical
   Scenario: Download and Verify Executive Report
-    When I click on the "export_button"
+    When I click on the "actions_export_button"
     And I wait for 5 seconds for the download to complete
-    Then the downloaded file "SENTINEL_EXECUTIVE_REPORT_2026-01-29.pdf" should exist
-    And the PDF "SENTINEL_EXECUTIVE_REPORT_2026-01-29.pdf" should have at least 2 pages
-    And I verify the content of the first 2 pages of "SENTINEL_EXECUTIVE_REPORT_2026-01-29.pdf"
+
+    Then the downloaded executive report for today should exist
+    And I verify the content of the first 2 pages of the downloaded executive report

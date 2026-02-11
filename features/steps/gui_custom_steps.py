@@ -69,3 +69,43 @@ def step_verify_pdf_content_generic(context, page_count, filename):
         page_text = reader.pages[i].extract_text()
         assert page_text.strip(), f"Page {i+1} of {filename} is empty or could not be read."
 
+
+@step('the downloaded executive report for today should exist')
+def step_verify_downloaded_executive_report(context):
+    """
+    Verify that the executive report for the current date exists.
+    Filename format: SENTINEL_EXECUTIVE_REPORT_YYYY-MM-DD.pdf
+    """
+    from datetime import datetime
+    import os
+    
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    filename = f"SENTINEL_EXECUTIVE_REPORT_{today_str}.pdf"
+    
+    # Reuse the generic generic verification logic or just check existence
+    downloads_dir = os.path.join(os.path.expanduser("~"), "Downloads")
+    filepath = os.path.join(downloads_dir, filename)
+    
+    # Wait for file
+    for _ in range(10):
+        if os.path.exists(filepath):
+            break
+        time.sleep(1)
+        
+    assert os.path.exists(filepath), f"Executive report {filename} not found in {downloads_dir}"
+    
+    # Store filename in context for subsequent steps if needed
+    context.last_downloaded_file = filename
+
+
+@step('I verify the content of the first {page_count:d} pages of the downloaded executive report')
+def step_verify_content_of_downloaded_report(context, page_count):
+    """
+    Verify content of the report identified in previous step.
+    """
+    if not hasattr(context, 'last_downloaded_file'):
+        raise AssertionError("No downloaded file listed in context. checking step must run first.")
+    
+    step_verify_pdf_content_generic(context, page_count, context.last_downloaded_file)
+
+

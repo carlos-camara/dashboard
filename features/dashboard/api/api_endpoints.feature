@@ -1,8 +1,5 @@
 @api @dashboard @endpoints
 Feature: System Endpoints Discovery
-  As a QA Engineer
-  I want to verify that the dashboard correctly lists available API endpoints
-  So that I can ensure the monitoring system is functioning and self-aware.
 
   Background:
     Given the API base URL is "http://localhost:3001"

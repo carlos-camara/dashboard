@@ -39,6 +39,36 @@ def before_all(context):
         f.write('"GET","/api/runs",200,0,40,45,15,150,800,10.0,0.0,40,45,50,55,60,70,80,90,120\n')
         f.write('"GET","/api/endpoints",200,0,60,65,20,180,1200,10.0,0.0,60,65,70,75,80,90,100,110,140\n')
 
+    # PROJECT-SPECIFIC SEEDING: Ensure XML test run reports exist
+    reports_run_dir = os.path.join("reports", "test_run")
+    if not os.path.exists(reports_run_dir):
+        os.makedirs(reports_run_dir)
+    
+    seed_run_dir = os.path.join(reports_run_dir, "seed_dashboard_run")
+    if not os.path.exists(seed_run_dir):
+        os.makedirs(seed_run_dir)
+        
+    xml_path = os.path.join(seed_run_dir, "results.xml")
+    if not os.path.exists(xml_path):
+        # Create a basic JUnit XML with passing tests to populate the dashboard
+        timestamp = datetime.now().isoformat()
+        xml_content = f'''<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="dashboard.gui" tests="5" failures="0" errors="0" skipped="0" time="10.5" timestamp="{timestamp}">
+    <testcase classname="dashboard.gui.login" name="Successful Login" time="2.5"/>
+    <testcase classname="dashboard.gui.navigation" name="Navigate to Settings" time="1.2"/>
+    <testcase classname="dashboard.gui.project" name="View Project Details" time="3.0"/>
+    <testcase classname="dashboard.api.users" name="Get User List" time="0.5"/>
+    <testcase classname="dashboard.api.auth" name="Login API" time="0.8"/>
+  </testsuite>
+</testsuites>
+'''
+        with open(xml_path, "w") as f:
+            f.write(xml_content)
+    
+    print(f"[SETUP] Seeded XML report at {xml_path}")
+
+
 def before_scenario(context, scenario):
      """Initialize driver using framework lifecycle logic."""
      FrameworkHooks.before_scenario(context, scenario)

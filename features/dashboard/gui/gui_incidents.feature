@@ -1,8 +1,5 @@
 @gui @incidents @smoke
 Feature: Incident Taxonomy & Analysis
-  As a Reliability Engineer
-  I want to review system incidents and stack traces
-  So that I can identify root causes and improve system stability.
 
   Background:
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
