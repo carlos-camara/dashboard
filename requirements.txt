@@ -1,2 +1,3 @@
 locust
+behave-html-formatter
 -e git+https://github.com/carlos-camara/qa-hub-framework.git#egg=qa-automation-framework
