@@ -1,0 +1,293 @@
+<testsuite name="dashboard.gui.gui_project_detail.Project Detail View Validation" tests="4" errors="4" failures="0" skipped="0" time="24.552225" timestamp="2026-02-11T16:42:45.964665" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Architecture Analysis Section" status="error" time="7.629489"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff615fdf3d5&#10;&#09;0x7ff615fdf430&#10;&#09;0x7ff615d810bd&#10;&#09;0x7ff615d7dbe4&#10;&#09;0x7ff615d6e071&#10;&#09;0x7ff615d6ff5f&#10;&#09;0x7ff615d6e611&#10;&#09;0x7ff615d6dddb&#10;&#09;0x7ff615d6da91&#10;&#09;0x7ff615d6b6c1&#10;&#09;0x7ff615d6be22&#10;&#09;0x7ff615d85366&#10;&#09;0x7ff615e2ab34&#10;&#09;0x7ff615e0589a&#10;&#09;0x7ff615e29d08&#10;&#09;0x7ff615dccb0c&#10;&#09;0x7ff615dcda53&#10;&#09;0x7ff6162bb470&#10;&#09;0x7ff6162b586d&#10;&#09;0x7ff6162d621a&#10;&#09;0x7ff615ffb235&#10;&#09;0x7ff616003a5c&#10;&#09;0x7ff615fe8844&#10;&#09;0x7ff615fe89f6&#10;&#09;0x7ff615fceb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91">
+<![CDATA[
+Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 7.629s
+Location: features/dashboard/gui/gui_project_detail.feature:5
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1991, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 105, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
+    context.driver.get(url)
+    ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 452, in get
+    self.execute(Command.GET, {"url": url})
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 432, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=144.0.7559.133)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff615fdf3d5
+	0x7ff615fdf430
+	0x7ff615d810bd
+	0x7ff615d7dbe4
+	0x7ff615d6e071
+	0x7ff615d6ff5f
+	0x7ff615d6e611
+	0x7ff615d6dddb
+	0x7ff615d6da91
+	0x7ff615d6b6c1
+	0x7ff615d6be22
+	0x7ff615d85366
+	0x7ff615e2ab34
+	0x7ff615e0589a
+	0x7ff615e29d08
+	0x7ff615dccb0c
+	0x7ff615dcda53
+	0x7ff6162bb470
+	0x7ff6162b586d
+	0x7ff6162d621a
+	0x7ff615ffb235
+	0x7ff616003a5c
+	0x7ff615fe8844
+	0x7ff615fe89f6
+	0x7ff615fceb87
+	0x7ffd91817374
+	0x7ffd9271cc91
+
+]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Architecture Analysis Section
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 7.629s
+    And the "dashboard" page is displayed ... skipped in 0.000s
+    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
+    Then the "test_runs" page is displayed ... skipped in 0.000s
+    When I click on the "project_card" ... skipped in 0.000s
+    Then the "project_detail" page is displayed ... skipped in 0.000s
+    Then the "projectName" should be visible ... skipped in 0.000s
+    And I should see the text "[LANG:project_detail.layer_stability]" ... skipped in 0.000s
+    And I should see the text "[LANG:project_detail.layer_latency]" ... skipped in 0.000s
+    And I should see at least 1 elements with selector "stability_comparison" ... skipped in 0.000s
+    And I should see at least 1 elements with selector "latency_comparison" ... skipped in 0.000s
+    Then the "project architecture" page should visually match the baseline image "project_detail_architecture" with a 15.0% tolerance ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Execution Metrics and Trend" status="error" time="10.026681"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff615fdf3d5&#10;&#09;0x7ff615fdf430&#10;&#09;0x7ff615d810bd&#10;&#09;0x7ff615d7dbe4&#10;&#09;0x7ff615d6e071&#10;&#09;0x7ff615d6ff5f&#10;&#09;0x7ff615d6e611&#10;&#09;0x7ff615d6dddb&#10;&#09;0x7ff615d6da91&#10;&#09;0x7ff615d6b6c1&#10;&#09;0x7ff615d6be22&#10;&#09;0x7ff615d85366&#10;&#09;0x7ff615e2ab34&#10;&#09;0x7ff615e0589a&#10;&#09;0x7ff615e29d08&#10;&#09;0x7ff615dccb0c&#10;&#09;0x7ff615dcda53&#10;&#09;0x7ff6162bb470&#10;&#09;0x7ff6162b586d&#10;&#09;0x7ff6162d621a&#10;&#09;0x7ff615ffb235&#10;&#09;0x7ff616003a5c&#10;&#09;0x7ff615fe8844&#10;&#09;0x7ff615fe89f6&#10;&#09;0x7ff615fceb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91">
+<![CDATA[
+Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 10.027s
+Location: features/dashboard/gui/gui_project_detail.feature:5
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1991, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 105, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
+    context.driver.get(url)
+    ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 452, in get
+    self.execute(Command.GET, {"url": url})
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 432, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=144.0.7559.133)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff615fdf3d5
+	0x7ff615fdf430
+	0x7ff615d810bd
+	0x7ff615d7dbe4
+	0x7ff615d6e071
+	0x7ff615d6ff5f
+	0x7ff615d6e611
+	0x7ff615d6dddb
+	0x7ff615d6da91
+	0x7ff615d6b6c1
+	0x7ff615d6be22
+	0x7ff615d85366
+	0x7ff615e2ab34
+	0x7ff615e0589a
+	0x7ff615e29d08
+	0x7ff615dccb0c
+	0x7ff615dcda53
+	0x7ff6162bb470
+	0x7ff6162b586d
+	0x7ff6162d621a
+	0x7ff615ffb235
+	0x7ff616003a5c
+	0x7ff615fe8844
+	0x7ff615fe89f6
+	0x7ff615fceb87
+	0x7ffd91817374
+	0x7ffd9271cc91
+
+]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Execution Metrics and Trend
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 10.027s
+    And the "dashboard" page is displayed ... skipped in 0.000s
+    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
+    Then the "test_runs" page is displayed ... skipped in 0.000s
+    When I click on the "project_card" ... skipped in 0.000s
+    Then the "project_detail" page is displayed ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element         | value                                 |
+      | stability_score | [LANG:project_detail.stability_score] |
+    And I should see the text "[LANG:project_detail.execution_velocity]" ... skipped in 0.000s
+    And I should see at least 1 elements with selector "velocity_trend" ... skipped in 0.000s
+    Then the "project metrics" page should visually match the baseline image "project_detail_metrics" with a 15.0% tolerance ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Run History List" status="error" time="3.218701"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff615fdf3d5&#10;&#09;0x7ff615fdf430&#10;&#09;0x7ff615d810bd&#10;&#09;0x7ff615d7dbe4&#10;&#09;0x7ff615d6e071&#10;&#09;0x7ff615d6ff5f&#10;&#09;0x7ff615d6e611&#10;&#09;0x7ff615d6dddb&#10;&#09;0x7ff615d6da91&#10;&#09;0x7ff615d6b6c1&#10;&#09;0x7ff615d6be22&#10;&#09;0x7ff615d85366&#10;&#09;0x7ff615e2ab34&#10;&#09;0x7ff615e0589a&#10;&#09;0x7ff615e29d08&#10;&#09;0x7ff615dccb0c&#10;&#09;0x7ff615dcda53&#10;&#09;0x7ff6162bb470&#10;&#09;0x7ff6162b586d&#10;&#09;0x7ff6162d621a&#10;&#09;0x7ff615ffb235&#10;&#09;0x7ff616003a5c&#10;&#09;0x7ff615fe8844&#10;&#09;0x7ff615fe89f6&#10;&#09;0x7ff615fceb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91">
+<![CDATA[
+Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 3.219s
+Location: features/dashboard/gui/gui_project_detail.feature:5
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1991, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 105, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
+    context.driver.get(url)
+    ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 452, in get
+    self.execute(Command.GET, {"url": url})
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 432, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=144.0.7559.133)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff615fdf3d5
+	0x7ff615fdf430
+	0x7ff615d810bd
+	0x7ff615d7dbe4
+	0x7ff615d6e071
+	0x7ff615d6ff5f
+	0x7ff615d6e611
+	0x7ff615d6dddb
+	0x7ff615d6da91
+	0x7ff615d6b6c1
+	0x7ff615d6be22
+	0x7ff615d85366
+	0x7ff615e2ab34
+	0x7ff615e0589a
+	0x7ff615e29d08
+	0x7ff615dccb0c
+	0x7ff615dcda53
+	0x7ff6162bb470
+	0x7ff6162b586d
+	0x7ff6162d621a
+	0x7ff615ffb235
+	0x7ff616003a5c
+	0x7ff615fe8844
+	0x7ff615fe89f6
+	0x7ff615fceb87
+	0x7ffd91817374
+	0x7ffd9271cc91
+
+]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Run History List
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 3.219s
+    And the "dashboard" page is displayed ... skipped in 0.000s
+    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
+    Then the "test_runs" page is displayed ... skipped in 0.000s
+    When I click on the "project_card" ... skipped in 0.000s
+    Then the "project_detail" page is displayed ... skipped in 0.000s
+    Then I should see the text "[LANG:project_detail.execution_history]" ... skipped in 0.000s
+    And I should see at least 1 elements with selector "item" ... skipped in 0.000s
+    Then the "run history" element should visually match the baseline image "project_detail_history" with a 15.0% tolerance ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Dossier Download Button" status="error" time="3.677354"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff615fdf3d5&#10;&#09;0x7ff615fdf430&#10;&#09;0x7ff615d810bd&#10;&#09;0x7ff615d7dbe4&#10;&#09;0x7ff615d6e071&#10;&#09;0x7ff615d6ff5f&#10;&#09;0x7ff615d6e611&#10;&#09;0x7ff615d6dddb&#10;&#09;0x7ff615d6da91&#10;&#09;0x7ff615d6b6c1&#10;&#09;0x7ff615d6be22&#10;&#09;0x7ff615d85366&#10;&#09;0x7ff615e2ab34&#10;&#09;0x7ff615e0589a&#10;&#09;0x7ff615e29d08&#10;&#09;0x7ff615dccb0c&#10;&#09;0x7ff615dcda53&#10;&#09;0x7ff6162bb470&#10;&#09;0x7ff6162b586d&#10;&#09;0x7ff6162d621a&#10;&#09;0x7ff615ffb235&#10;&#09;0x7ff616003a5c&#10;&#09;0x7ff615fe8844&#10;&#09;0x7ff615fe89f6&#10;&#09;0x7ff615fceb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91">
+<![CDATA[
+Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 3.677s
+Location: features/dashboard/gui/gui_project_detail.feature:5
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1991, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 105, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
+    context.driver.get(url)
+    ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 452, in get
+    self.execute(Command.GET, {"url": url})
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 432, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=144.0.7559.133)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff615fdf3d5
+	0x7ff615fdf430
+	0x7ff615d810bd
+	0x7ff615d7dbe4
+	0x7ff615d6e071
+	0x7ff615d6ff5f
+	0x7ff615d6e611
+	0x7ff615d6dddb
+	0x7ff615d6da91
+	0x7ff615d6b6c1
+	0x7ff615d6be22
+	0x7ff615d85366
+	0x7ff615e2ab34
+	0x7ff615e0589a
+	0x7ff615e29d08
+	0x7ff615dccb0c
+	0x7ff615dcda53
+	0x7ff6162bb470
+	0x7ff6162b586d
+	0x7ff6162d621a
+	0x7ff615ffb235
+	0x7ff616003a5c
+	0x7ff615fe8844
+	0x7ff615fe89f6
+	0x7ff615fceb87
+	0x7ffd91817374
+	0x7ffd9271cc91
+
+]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Dossier Download Button
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... error in 3.677s
+    And the "dashboard" page is displayed ... skipped in 0.000s
+    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
+    Then the "test_runs" page is displayed ... skipped in 0.000s
+    When I click on the "project_card" ... skipped in 0.000s
+    Then the "project_detail" page is displayed ... skipped in 0.000s
+    Then I should see at least 1 elements with selector "download_button" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
