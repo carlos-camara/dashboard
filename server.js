@@ -198,6 +198,24 @@ function initDb() {
     try { db.exec("ALTER TABLE scenarios ADD COLUMN feature_name TEXT"); } catch (e) { }
     try { db.exec("ALTER TABLE scenarios ADD COLUMN hostname TEXT"); } catch (e) { }
     try { db.exec("ALTER TABLE scenarios ADD COLUMN source_file TEXT"); } catch (e) { }
+
+    // SEED: System Endpoints (Self-Discovery)
+    const systemEndpoints = [
+        { method: 'GET', path: '/api/health', service: 'dashboard-system' },
+        { method: 'GET', path: '/api/runs', service: 'dashboard-system' },
+        { method: 'GET', path: '/api/endpoints', service: 'dashboard-system' },
+        { method: 'POST', path: '/api/upload', service: 'dashboard-system' }
+    ];
+
+    const insertEp = db.prepare(`
+        INSERT OR IGNORE INTO endpoints (id, method, path, normalized_path, service, last_seen, pass_count) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    `);
+
+    systemEndpoints.forEach(ep => {
+        const id = `system-${ep.method}-${ep.path}`;
+        insertEp.run(id, ep.method, ep.path, ep.path, ep.service, new Date().toISOString(), 1);
+    });
 }
 
 initDb();
