@@ -55,9 +55,9 @@ Go beyond binary pass/fail results. Our **Performance Analytics Engine** establi
 
 ### 🤖 PR Intelligence
 Maximize developer focus with an automated pull request management system:
+- **Aesthetic Technical Summaries**: High-fidelity, structural PR overviews with deep technical insights (API, Locators, BDD).
 - **Auto-Labeler**: Precise categorization (`DevOps`, `QA`, `Frontend`, `Backend`) based on modified file paths.
 - **Auto-Assigner**: Automatic ownership assignment to ensure rapid review cycles.
-- **Smart Formatting**: Enforced markdown standards for clean, readable documentation.
 
 ### 📑 Intelligent PDF Dossiers
 Export executive-ready artifacts with a single click. These **Intelligent Dossiers** include:
@@ -116,7 +116,7 @@ Our pipelines are powered by the **[QA Hub Actions](https://github.com/carlos-ca
 | :---: | :--- | :--- |
 | `🧹` | **Lint Codebase** | Super-Linter enforcement for zero-debt documentation and code. |
 | `🛡️` | **Unified Suite** | Parallel execution of API, GUI, and Performance layers. |
-| `📦` | **Upload Results** | Automated merging and committing of timestamped reports. |
+| `📦` | **Upload Results** | Automated merging and committing of timestamped, project-specific reports. |
 | `☁️` | **AWS S3 Archive** | Long-term persistence for historical quality analysis. |
 | `🏷️` | **PR Intelligence** | Dynamic labeling and contributor assignment. |
 

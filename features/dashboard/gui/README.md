@@ -15,7 +15,12 @@ Our GUI tests follow the **Page Object Model (POM)** pattern. Locators are decou
 
 ## 🏃 Execution Guide
 
-### Run all GUI tests
+### Run all GUI tests using the Automation Engine
+```bash
+qa-hub run --env staging --tags gui --junit-dir reports/test_run/dashboard_$(date +%s)
+```
+
+### Run using Behave natively
 ```bash
 behave features/dashboard --tags=@gui
 ```

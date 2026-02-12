@@ -24,7 +24,7 @@ Our API testing strategy is powered by the **[QA Hub Framework](https://github.c
 
 Run the full API suite with surgical precision:
 ```bash
-qa-hub run --env staging --tags api
+qa-hub run --env staging --tags api --junit-dir reports/test_run/dashboard_$(date +%s)
 ```
 
 ### Targeted Execution
