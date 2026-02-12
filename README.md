@@ -79,6 +79,12 @@ graph TD
         A -->|Triggers| L["Locust Load Test"]
     end
 
+    subgraph "Testing Architecture"
+        B -->|Defined in| B_PATH["features/dashboard/api/"]
+        C -->|Defined in| C_PATH["features/dashboard/gui/"]
+        L -->|Defined in| L_PATH["features/dashboard/performance/"]
+    end
+
     subgraph "Shared Action Hub"
         D["QA Hub Shared Actions"] -->|Standardizes| A
     end

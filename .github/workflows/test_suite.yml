@@ -38,7 +38,7 @@ jobs:
         uses: carlos-camara/qa-hub-actions/run-tests@main
         with:
           test-command-api: "qa-hub run --env staging --tags api"
-          test-command-performance: "locust -f performance/locustfile.py --headless -u 10 -r 2 -t 1m --host http://localhost:3001"
+          test-command-performance: "locust -f features/dashboard/performance/locustfile.py --headless -u 10 -r 2 -t 1m --host http://localhost:3001"
           test-command-gui: "qa-hub run --env staging --tags gui"
           headless: "true"
 
