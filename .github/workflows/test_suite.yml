@@ -22,6 +22,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Auto Milestone PR
+        if: github.event_name == 'pull_request'
+        uses: carlos-camara/qa-hub-actions/pr-milestoner@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Setup Environment
         uses: carlos-camara/qa-hub-actions/setup-environment@main
         with:

@@ -126,37 +126,48 @@ router.get("/performance/latest", (req, res) => {
     if (!latestDir) return res.json({ found: false, stats: [], history: [] });
 
     try {
-        const statsPath = path.join(latestDir, "seed_stats.csv");
-        const historyPath = path.join(latestDir, "seed_stats_history.csv");
+        // Support both seeding and real data
+        let statsPath = path.join(latestDir, "seed_stats.csv");
+        if (!fs.existsSync(statsPath)) {
+            const files = fs.readdirSync(latestDir);
+            const statsFile = files.find(f => f.endsWith("_stats.csv"));
+            if (statsFile) statsPath = path.join(latestDir, statsFile);
+        }
 
         let stats = [];
         if (fs.existsSync(statsPath)) {
             const content = fs.readFileSync(statsPath, 'utf8');
             const lines = content.split('\n').filter(l => l.trim());
-            const headers = lines[0].split(',').map(h => h.replace(/"/g, ''));
+            const headers = lines[0].split(',').map(h => h.replace(/"/g, '').trim());
 
             stats = lines.slice(1).map(line => {
-                const values = line.split(',').map(v => v.replace(/"/g, ''));
+                const values = line.split(',').map(v => v.replace(/"/g, '').trim());
                 return {
                     method: values[0],
                     name: values[1],
-                    requests: parseInt(values[2]),
-                    failures: parseInt(values[3]),
-                    median: parseFloat(values[4]),
-                    avg: parseFloat(values[5]),
-                    min: parseFloat(values[6]),
-                    max: parseFloat(values[7]),
-                    contentSize: parseFloat(values[8]),
-                    rps: parseFloat(values[9]),
-                    failPerSec: parseFloat(values[10]),
-                    p50: parseFloat(values[11]),
-                    p95: parseFloat(values[16])
+                    requests: parseInt(values[2] || 0),
+                    failures: parseInt(values[3] || 0),
+                    median: parseFloat(values[4] || 0),
+                    avg: parseFloat(values[5] || 0),
+                    min: parseFloat(values[6] || 0),
+                    max: parseFloat(values[7] || 0),
+                    contentSize: parseFloat(values[8] || 0),
+                    rps: parseFloat(values[9] || 0),
+                    failPerSec: parseFloat(values[10] || 0),
+                    p50: parseFloat(values[11] || 0),
+                    p95: parseFloat(values[16] || 0)
                 };
             });
         }
 
-        const timestampStr = path.basename(latestDir).replace('performance_', '').replace(/_/g, 'T').replace(/-/g, ':');
-        const reportUrl = `/reports/performance_run/${path.basename(latestDir)}/index.html`;
+        // Fix timestamp parsing: performance_2026-02-12_14-06-13
+        // Result should be 2026-02-12T14:06:13
+        const folderName = path.basename(latestDir);
+        const rawTime = folderName.replace('performance_', '');
+        const [datePart, timePart] = rawTime.split('_');
+        const timestampStr = `${datePart}T${timePart?.replace(/-/g, ':') || '00:00:00'}`;
+
+        const reportUrl = `/reports/performance_run/${folderName}/index.html`;
 
         res.json({
             found: true,

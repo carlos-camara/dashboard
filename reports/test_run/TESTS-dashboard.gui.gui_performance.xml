@@ -1,35 +1,96 @@
-<testsuite name="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" tests="1" errors="0" failures="0" skipped="0" time="7.210619" timestamp="2026-02-12T11:49:02.194800" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" name="Validate High-Density Performance Audit Dossier" status="passed" time="7.210619"><system-out>
+<testsuite name="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" tests="1" errors="1" failures="0" skipped="0" time="20.637859" timestamp="2026-02-12T12:40:26.228651" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" name="Validate High-Density Performance Audit Dossier" status="error" time="20.637859"><error type="TimeoutException" message="Message: Element 'endpoint_item' did not become clickable within 10 seconds">
+<![CDATA[
+Failing step: When I click on the "endpoint_item" ... error in 10.626s
+Location: features/dashboard/gui/gui_performance.feature:13
+Traceback (most recent call last):
+  File "c:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\core\elements\base_element.py", line 116, in wait_until_clickable
+    WebDriverWait(self.driver, timeout).until(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        EC.element_to_be_clickable(self.locator)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 121, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff763dcf3d5
+	0x7ff763dcf430
+	0x7ff763b710bd
+	0x7ff763bcc2fe
+	0x7ff763bcc60c
+	0x7ff763c1d187
+	0x7ff763c19d08
+	0x7ff763bbcb0c
+	0x7ff763bbda53
+	0x7ff7640ab470
+	0x7ff7640a586d
+	0x7ff7640c621a
+	0x7ff763deb235
+	0x7ff763df3a5c
+	0x7ff763dd8844
+	0x7ff763dd89f6
+	0x7ff763dbeb87
+	0x7ffe26397374
+	0x7ffe27abcc91
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1991, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 105, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 651, in step_click_current_page_object
+    step_click_page_object(context, element_name, page_name)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 475, in step_click_page_object
+    element.click()
+    ~~~~~~~~~~~~~^^
+  File "c:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\core\elements\button.py", line 21, in click
+    self.wait_until_clickable(timeout)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\core\elements\base_element.py", line 120, in wait_until_clickable
+    raise TimeoutException(
+        f"Element '{self.name}' did not become clickable within {timeout} seconds"
+    )
+selenium.common.exceptions.TimeoutException: Message: Element 'endpoint_item' did not become clickable within 10 seconds
+
+]]>
+</error><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Validate High-Density Performance Audit Dossier
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.430s
-    And the "dashboard" page is displayed ... passed in 0.980s
-    When I click on the "endpoints_link" in the sidebar ... passed in 0.207s
-    Then the "endpoints_view" page is displayed ... passed in 0.071s
-    When I type "runs" into the "search_input" ... passed in 0.290s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.343s
+    And the "dashboard" page is displayed ... passed in 8.089s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.318s
+    Then the "endpoints_view" page is displayed ... passed in 0.038s
+    When I type "runs" into the "search_input" ... passed in 0.224s
     And I wait for 1 seconds ... passed in 1.001s
-    When I click on the "endpoint_item" ... passed in 0.208s
-    Then the "endpoint_detail" page is displayed ... passed in 0.156s
-    Then I should see the "performance_card" ... passed in 0.051s
-    When I click on the "open_report_button" ... passed in 0.193s
-    Then the "performance_report_view" page is displayed ... passed in 1.591s
-    Then the following elements should contain these texts ... passed in 0.093s
+    When I click on the "endpoint_item" ... error in 10.626s
+    Then the "endpoint_detail" page is displayed ... skipped in 0.000s
+    Then I should see the "performance_card" ... skipped in 0.000s
+    When I click on the "open_report_button" ... skipped in 0.000s
+    Then the "performance_report_view" page is displayed ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
       | element       | value                          |
       | audit_title   | [LANG:performance.audit_title] |
       | export_button | [LANG:performance.dossier]     |
-    And I should see the text "[LANG:performance.integrity]" ... passed in 0.170s
-    And I should see the "rps_image" ... passed in 0.053s
-    And I should see the "latency_image" ... passed in 0.055s
-    And I should see the "original_report_link" ... passed in 0.063s
-    Then the "performance dashboard" page should visually match the baseline image "final_performance_dashboard_verification" with a 10.0% tolerance ... passed in 0.600s
+    And I should see the text "[LANG:performance.integrity]" ... skipped in 0.000s
+    And I should see the "rps_image" ... skipped in 0.000s
+    And I should see the "latency_image" ... skipped in 0.000s
+    And I should see the "original_report_link" ... skipped in 0.000s
+    Then the "performance dashboard" page should visually match the baseline image "final_performance_dashboard_verification" with a 10.0% tolerance ... skipped in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-11:48:55 [Ultra-Professional Performance Dashboard Validation | Validate High-Density Performance Audit Dossier] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
-11:48:59 [Ultra-Professional Performance Dashboard Validation | Validate High-Density Performance Audit Dossier] INFO: Capturing visual snapshot: final_performance_dashboard_verification
-[Visual] ✅ Match for 'final_performance_dashboard_verification': Similarity=93.02%
+12:40:14 [Ultra-Professional Performance Dashboard Validation | Validate High-Density Performance Audit Dossier] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
 
 ]]>
 </system-out></testcase></testsuite>
