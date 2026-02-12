@@ -1,0 +1,21 @@
+# Global owners
+* @carlos-camara
+
+# DevOps & CI/CD
+.github/workflows/ @carlos-camara
+
+# Backend & Services
+server.js @carlos-camara
+routes/ @carlos-camara
+services/ @carlos-camara
+swaggers/ @carlos-camara
+
+# Frontend & Aesthetics
+components/ @carlos-camara
+App.tsx @carlos-camara
+index.css @carlos-camara
+
+# QA & Framework
+features/ @carlos-camara
+requirements.txt @carlos-camara
+behave.ini @carlos-camara
