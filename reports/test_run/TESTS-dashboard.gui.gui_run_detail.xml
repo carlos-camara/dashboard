@@ -1,32 +1,32 @@
-<testsuite name="dashboard.gui.gui_run_detail.Run Detail View Validation" tests="1" errors="0" failures="0" skipped="0" time="10.014526" timestamp="2026-02-12T00:53:31.324637" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_run_detail.Run Detail View Validation" name="Explore Run Detail View" status="passed" time="10.014526"><system-out>
+<testsuite name="dashboard.gui.gui_run_detail.Run Detail View Validation" tests="1" errors="0" failures="0" skipped="0" time="10.263577" timestamp="2026-02-12T01:15:04.369895" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_run_detail.Run Detail View Validation" name="Explore Run Detail View" status="passed" time="10.263577"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Explore Run Detail View
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.215s
-    And the "dashboard" page is displayed ... passed in 1.256s
-    When I click on the "test_runs_link" in the sidebar ... passed in 0.381s
-    Then the "test_runs" page is displayed ... passed in 0.292s
-    When I click on the "project_card" ... passed in 1.392s
-    Then the "project_detail" page is displayed ... passed in 0.127s
-    When I click on the "item" ... passed in 0.816s
-    Then the "run_detail" page is displayed ... passed in 0.085s
-    Then the following elements should contain these texts ... passed in 0.062s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.127s
+    And the "dashboard" page is displayed ... passed in 1.206s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.522s
+    Then the "test_runs" page is displayed ... passed in 0.272s
+    When I click on the "project_card" ... passed in 1.739s
+    Then the "project_detail" page is displayed ... passed in 0.075s
+    When I click on the "item" ... passed in 0.465s
+    Then the "run_detail" page is displayed ... passed in 0.443s
+    Then the following elements should contain these texts ... passed in 0.081s
       | element     | value                            |
       | back_button | [LANG:run_detail.return_to_base] |
-    And I should see the text "[LANG:run_detail.success]" ... passed in 0.210s
-    Then the "run detail" page should visually match the baseline image "run_detail_full_view" with a 5.0% tolerance ... passed in 0.852s
-    When I click on the "filter_failed" ... passed in 0.404s
-    And I wait for 1 seconds ... passed in 1.008s
+    And I should see the text "[LANG:run_detail.success]" ... passed in 0.248s
+    Then the "run detail" page should visually match the baseline image "run_detail_full_view" with a 5.0% tolerance ... passed in 0.815s
+    When I click on the "filter_failed" ... passed in 0.351s
+    And I wait for 1 seconds ... passed in 1.000s
     Then the "run detail filtered" page should visually match the baseline image "run_detail_filtered_failed" with a 5.0% tolerance ... passed in 0.918s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-00:53:28 [Run Detail View Validation | Explore Run Detail View] INFO: Capturing visual snapshot: run_detail_full_view
+01:15:01 [Run Detail View Validation | Explore Run Detail View] INFO: Capturing visual snapshot: run_detail_full_view
 [Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_run_detail_full_view.png
-00:53:29 [Run Detail View Validation | Explore Run Detail View] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
-00:53:30 [Run Detail View Validation | Explore Run Detail View] INFO: Capturing visual snapshot: run_detail_filtered_failed
+01:15:02 [Run Detail View Validation | Explore Run Detail View] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
+01:15:03 [Run Detail View Validation | Explore Run Detail View] INFO: Capturing visual snapshot: run_detail_filtered_failed
 [Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_run_detail_filtered_failed.png
 
 ]]>
