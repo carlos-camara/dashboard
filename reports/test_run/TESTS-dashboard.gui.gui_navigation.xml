@@ -1,63 +1,63 @@
-<testsuite name="dashboard.gui.gui_navigation.Application Navigation Validation" tests="2" errors="0" failures="0" skipped="0" time="16.760229" timestamp="2026-02-12T01:14:07.041567" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Navigate to all main sections" status="passed" time="10.673249"><system-out>
+<testsuite name="dashboard.gui.gui_navigation.Application Navigation Validation" tests="2" errors="0" failures="0" skipped="0" time="17.844139" timestamp="2026-02-12T01:31:49.541799" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Navigate to all main sections" status="passed" time="11.459241"><system-out>
 <![CDATA[
 @scenario.begin
 
   @smoke
   Scenario: Navigate to all main sections
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.884s
-    And the "dashboard" page is displayed ... passed in 1.075s
-    When I click on the "test_runs_link" in the sidebar ... passed in 0.346s
-    Then the "test_runs" page is displayed ... passed in 0.270s
-    Then the "title" should contain the text "[LANG:navigation.test_runs]" ... passed in 0.129s
-    Then the "test runs section" page should visually match the baseline image "nav_test_runs" with a 15.0% tolerance ... passed in 1.115s
-    When I click on the "endpoints_link" in the sidebar ... passed in 0.499s
-    Then the "endpoints_view" page is displayed ... passed in 0.183s
-    Then the "title" should contain the text "[LANG:navigation.endpoints]" ... passed in 0.118s
-    Then the "endpoints section" page should visually match the baseline image "nav_endpoints" with a 15.0% tolerance ... passed in 1.259s
-    When I click on the "incidents_link" in the sidebar ... passed in 0.462s
-    Then the "incidents" page is displayed ... passed in 0.299s
-    Then the "header_title" should contain the text "[LANG:navigation.incidents]" ... passed in 0.040s
-    Then the "incidents section" page should visually match the baseline image "nav_incidents" with a 15.0% tolerance ... passed in 1.103s
-    When I click on the "dashboard_link" in the sidebar ... passed in 0.390s
-    Then the "dashboard" page is displayed ... passed in 0.444s
-    Then the following elements should contain these texts ... passed in 0.098s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.043s
+    And the "dashboard" page is displayed ... passed in 1.394s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.522s
+    Then the "test_runs" page is displayed ... passed in 0.471s
+    Then the "title" should contain the text "[LANG:navigation.test_runs]" ... passed in 0.147s
+    Then the "test runs section" page should visually match the baseline image "nav_test_runs" with a 15.0% tolerance ... passed in 1.383s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.408s
+    Then the "endpoints_view" page is displayed ... passed in 0.170s
+    Then the "title" should contain the text "[LANG:navigation.endpoints]" ... passed in 0.077s
+    Then the "endpoints section" page should visually match the baseline image "nav_endpoints" with a 15.0% tolerance ... passed in 0.838s
+    When I click on the "incidents_link" in the sidebar ... passed in 0.450s
+    Then the "incidents" page is displayed ... passed in 0.202s
+    Then the "header_title" should contain the text "[LANG:navigation.incidents]" ... passed in 0.061s
+    Then the "incidents section" page should visually match the baseline image "nav_incidents" with a 15.0% tolerance ... passed in 1.162s
+    When I click on the "dashboard_link" in the sidebar ... passed in 0.492s
+    Then the "dashboard" page is displayed ... passed in 0.421s
+    Then the following elements should contain these texts ... passed in 0.089s
       | element         | value                            |
       | header_subtitle | [LANG:dashboard.header.subtitle] |
-    Then the "dashboard return" page should visually match the baseline image "nav_dashboard_return" with a 15.0% tolerance ... passed in 0.959s
+    Then the "dashboard return" page should visually match the baseline image "nav_dashboard_return" with a 15.0% tolerance ... passed in 1.133s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-01:13:53 [Application Navigation Validation | Navigate to all main sections] INFO: Capturing visual snapshot: nav_test_runs
+01:31:35 [Application Navigation Validation | Navigate to all main sections] INFO: Capturing visual snapshot: nav_test_runs
 [Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_nav_test_runs.png
-01:13:55 [Application Navigation Validation | Navigate to all main sections] INFO: Capturing visual snapshot: nav_endpoints
+01:31:37 [Application Navigation Validation | Navigate to all main sections] INFO: Capturing visual snapshot: nav_endpoints
 [Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_nav_endpoints.png
-01:13:57 [Application Navigation Validation | Navigate to all main sections] INFO: Capturing visual snapshot: nav_incidents
+01:31:38 [Application Navigation Validation | Navigate to all main sections] INFO: Capturing visual snapshot: nav_incidents
 [Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_nav_incidents.png
-01:13:59 [Application Navigation Validation | Navigate to all main sections] INFO: Capturing visual snapshot: nav_dashboard_return
+01:31:41 [Application Navigation Validation | Navigate to all main sections] INFO: Capturing visual snapshot: nav_dashboard_return
 [Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_nav_dashboard_return.png
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Sidebar navigation persistence" status="passed" time="6.086981"><system-out>
+</system-out></testcase><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Sidebar navigation persistence" status="passed" time="6.384898"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Sidebar navigation persistence
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.954s
-    And the "dashboard" page is displayed ... passed in 1.153s
-    When I click on the "test_runs_link" in the sidebar ... passed in 0.381s
-    When I click on the "dashboard_link" in the sidebar ... passed in 0.841s
-    Then the "dashboard" page is displayed ... passed in 0.687s
-    Then the following elements should contain these texts ... passed in 0.118s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.178s
+    And the "dashboard" page is displayed ... passed in 1.245s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.490s
+    When I click on the "dashboard_link" in the sidebar ... passed in 0.688s
+    Then the "dashboard" page is displayed ... passed in 0.594s
+    Then the following elements should contain these texts ... passed in 0.143s
       | element         | value                            |
       | header_subtitle | [LANG:dashboard.header.subtitle] |
-    Then the "sidebar persistence" page should visually match the baseline image "nav_sidebar_persistence" with a 5.0% tolerance ... passed in 0.954s
+    Then the "sidebar persistence" page should visually match the baseline image "nav_sidebar_persistence" with a 5.0% tolerance ... passed in 1.048s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-01:14:06 [Application Navigation Validation | Sidebar navigation persistence] INFO: Capturing visual snapshot: nav_sidebar_persistence
+01:31:48 [Application Navigation Validation | Sidebar navigation persistence] INFO: Capturing visual snapshot: nav_sidebar_persistence
 [Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_nav_sidebar_persistence.png
 
 ]]>

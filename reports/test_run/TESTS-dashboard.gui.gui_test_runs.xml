@@ -1,52 +1,52 @@
-<testsuite name="dashboard.gui.gui_test_runs.Test Runs View Validation" tests="2" errors="0" failures="0" skipped="0" time="20.157583" timestamp="2026-02-12T01:15:26.369843" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Search and Redirect to Project Analytics" status="passed" time="10.720494"><system-out>
+<testsuite name="dashboard.gui.gui_test_runs.Test Runs View Validation" tests="2" errors="0" failures="0" skipped="0" time="19.572283" timestamp="2026-02-12T01:33:14.947637" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Search and Redirect to Project Analytics" status="passed" time="10.549035"><system-out>
 <![CDATA[
 @scenario.begin
 
   @smoke
   Scenario: Search and Redirect to Project Analytics
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.512s
-    And the "dashboard" page is displayed ... passed in 1.921s
-    When I click on the "test_runs_link" in the sidebar ... passed in 0.589s
-    Then the "test_runs" page is displayed ... passed in 0.318s
-    Then the following elements should contain these texts ... passed in 0.120s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.654s
+    And the "dashboard" page is displayed ... passed in 1.630s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.572s
+    Then the "test_runs" page is displayed ... passed in 0.281s
+    Then the following elements should contain these texts ... passed in 0.151s
       | element | value                       |
       | title   | [LANG:navigation.test_runs] |
-    When I type "dashboard" into the "search_input" ... passed in 0.687s
-    And I wait for 1 seconds ... passed in 1.005s
-    Then the following elements should contain these texts ... passed in 0.047s
+    When I type "dashboard" into the "search_input" ... passed in 0.684s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the following elements should contain these texts ... passed in 0.051s
       | element      | value     |
       | search_input | dashboard |
-    When I click on the "project_card" ... passed in 1.864s
-    Then the "project_detail" page is displayed ... passed in 0.107s
-    Then the "projectName" should be visible ... passed in 0.124s
-    And I should see at least 1 elements with selector "stability_chart" ... passed in 0.123s
-    Then the "test runs redirection" page should visually match the baseline image "test_runs_project_redirection" with a 5.0% tolerance ... passed in 1.302s
+    When I click on the "project_card" ... passed in 1.904s
+    Then the "project_detail" page is displayed ... passed in 0.091s
+    Then the "projectName" should be visible ... passed in 0.156s
+    And I should see at least 1 elements with selector "stability_chart" ... passed in 0.140s
+    Then the "test runs redirection" page should visually match the baseline image "test_runs_project_redirection" with a 5.0% tolerance ... passed in 1.235s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-01:15:11 [Test Runs View Validation | Search and Redirect to Project Analytics] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
-01:15:14 [Test Runs View Validation | Search and Redirect to Project Analytics] INFO: Capturing visual snapshot: test_runs_project_redirection
+01:33:00 [Test Runs View Validation | Search and Redirect to Project Analytics] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
+01:33:03 [Test Runs View Validation | Search and Redirect to Project Analytics] INFO: Capturing visual snapshot: test_runs_project_redirection
 [Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_test_runs_project_redirection.png
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Verify Project List and Back Navigation" status="passed" time="9.437089"><system-out>
+</system-out></testcase><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Verify Project List and Back Navigation" status="passed" time="9.023248"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Verify Project List and Back Navigation
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.582s
-    And the "dashboard" page is displayed ... passed in 1.951s
-    When I click on the "test_runs_link" in the sidebar ... passed in 0.734s
-    Then the "test_runs" page is displayed ... passed in 0.365s
-    When I click on the "project_card" ... passed in 2.232s
-    Then the "project_detail" page is displayed ... passed in 0.135s
-    Then the following elements should contain these texts ... passed in 0.525s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.725s
+    And the "dashboard" page is displayed ... passed in 1.867s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.583s
+    Then the "test_runs" page is displayed ... passed in 0.277s
+    When I click on the "project_card" ... passed in 1.897s
+    Then the "project_detail" page is displayed ... passed in 0.114s
+    Then the following elements should contain these texts ... passed in 0.469s
       | element  | value                           |
       | runCount | [LANG:project_detail.run_count] |
-    When I click on the "back_button" ... passed in 0.502s
-    Then the "test_runs" page is displayed ... passed in 0.211s
-    Then I should see the text "[LANG:navigation.test_runs]" ... passed in 0.200s
+    When I click on the "back_button" ... passed in 0.823s
+    Then the "test_runs" page is displayed ... passed in 0.104s
+    Then I should see the text "[LANG:navigation.test_runs]" ... passed in 0.164s
 
 @scenario.end
 --------------------------------------------------------------------------------
