@@ -1,50 +1,50 @@
-<testsuite name="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" tests="2" errors="0" failures="0" skipped="0" time="12.161118" timestamp="2026-02-12T01:13:48.681400" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" name="Redirect from Sector Integrity to Project Detail" status="passed" time="6.380382"><system-out>
+<testsuite name="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" tests="2" errors="0" failures="0" skipped="0" time="13.510818" timestamp="2026-02-12T01:31:30.055156" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" name="Redirect from Sector Integrity to Project Detail" status="passed" time="6.438354"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Redirect from Sector Integrity to Project Detail
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.156s
-    And the "dashboard" page is displayed ... passed in 1.717s
-    Then the following elements should contain these texts ... passed in 0.137s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.032s
+    And the "dashboard" page is displayed ... passed in 1.711s
+    Then the following elements should contain these texts ... passed in 0.150s
       | element             | value            |
       | recent_runs_heading | Sector Integrity |
-    When I click on the "recent_runs_project_item" ... passed in 0.406s
-    Then the "project_detail" page is displayed ... passed in 1.097s
+    When I click on the "recent_runs_project_item" ... passed in 0.357s
+    Then the "project_detail" page is displayed ... passed in 1.192s
     Then the "projectName" should be visible ... passed in 0.067s
-    And I should see at least 1 elements with selector "stability_comparison" ... passed in 0.057s
-    Then the "sector redirect" page should visually match the baseline image "interactivity_sector_redirect" with a 5.0% tolerance ... passed in 0.744s
+    And I should see at least 1 elements with selector "stability_comparison" ... passed in 0.080s
+    Then the "sector redirect" page should visually match the baseline image "interactivity_sector_redirect" with a 5.0% tolerance ... passed in 0.849s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-01:13:41 [Dashboard Cross-Navigation Interactivity | Redirect from Sector Integrity to Project Detail] INFO: Capturing visual snapshot: interactivity_sector_redirect
+01:31:21 [Dashboard Cross-Navigation Interactivity | Redirect from Sector Integrity to Project Detail] INFO: Capturing visual snapshot: interactivity_sector_redirect
 [Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_interactivity_sector_redirect.png
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" name="Redirect from Latency Anomalies to Endpoint Detail" status="passed" time="5.780736"><system-out>
+</system-out></testcase><testcase classname="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" name="Redirect from Latency Anomalies to Endpoint Detail" status="passed" time="7.072464"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Redirect from Latency Anomalies to Endpoint Detail
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.745s
-    And the "dashboard" page is displayed ... passed in 1.068s
-    When I scroll to the bottom of the page ... passed in 0.511s
-    Then the following elements should contain these texts ... passed in 0.089s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.557s
+    And the "dashboard" page is displayed ... passed in 1.114s
+    When I scroll to the bottom of the page ... passed in 0.516s
+    Then the following elements should contain these texts ... passed in 0.129s
       | element           | value             |
       | endpoints_heading | LATENCY ANOMALIES |
-    When I click on the "endpoints_anomaly_item" ... passed in 0.517s
-    Then the "endpoint_detail" page is displayed ... passed in 0.324s
-    Then the following elements should contain these texts ... passed in 0.040s
+    When I click on the "endpoints_anomaly_item" ... passed in 0.893s
+    Then the "endpoint_detail" page is displayed ... passed in 0.323s
+    Then the following elements should contain these texts ... passed in 0.037s
       | element     | value           |
       | back_button | Back to Catalog |
-    And I should see the text "Success Rate" ... passed in 0.102s
-    And I should see the text "Avg Latency" ... passed in 0.094s
-    Then the "anomaly redirect" page should visually match the baseline image "interactivity_anomaly_redirect" with a 5.0% tolerance ... passed in 1.292s
+    And I should see the text "Success Rate" ... passed in 0.125s
+    And I should see the text "Avg Latency" ... passed in 0.142s
+    Then the "anomaly redirect" page should visually match the baseline image "interactivity_anomaly_redirect" with a 5.0% tolerance ... passed in 1.236s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-01:13:47 [Dashboard Cross-Navigation Interactivity | Redirect from Latency Anomalies to Endpoint Detail] INFO: Capturing visual snapshot: interactivity_anomaly_redirect
+01:31:28 [Dashboard Cross-Navigation Interactivity | Redirect from Latency Anomalies to Endpoint Detail] INFO: Capturing visual snapshot: interactivity_anomaly_redirect
 [Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_interactivity_anomaly_redirect.png
 
 ]]>
