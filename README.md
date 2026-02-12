@@ -28,10 +28,10 @@
 This is more than a dashboard; it is a **mission-critical ecosystem** for modern engineering teams. Engineered with a **Modular Backend** and a **Glassmorphism UI**, it provides surgical-grade insights into your multi-project quality landscape, transforming chaotic logs into actionable intelligence.
 
 ### 🚀 The Four Pillars
--   **Unified Vision**: Aggregated reporting for API (Behave) and GUI (Selenium) test suites in a single pane.
--   **High-Fidelity Animations**: Smooth transitions powered by Framer Motion for a premium user experience.
--   **Modular Architecture**: Clean separation of concerns between DB, S3 Sync, and XML Parsing.
--   **Enterprise-Grade CI**: Fully automated lifecycle from linting to report archival in AWS S3.
+- **Unified Vision**: Aggregated reporting for API (Behave) and GUI (Selenium) test suites in a single pane.
+- **High-Fidelity Animations**: Smooth transitions powered by Framer Motion for a premium user experience.
+- **Modular Architecture**: Clean separation of concerns between DB, S3 Sync, and XML Parsing.
+- **Enterprise-Grade CI**: Fully automated lifecycle from linting to report archival in AWS S3.
 
 ---
 
