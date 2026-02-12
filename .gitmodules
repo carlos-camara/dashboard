@@ -1,3 +1,0 @@
-[submodule "src/qa-automation-framework"]
-	path = src/qa-automation-framework
-	url = https://github.com/carlos-camara/qa-hub-framework.git
