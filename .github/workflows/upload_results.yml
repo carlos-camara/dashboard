@@ -1,3 +1,4 @@
+---
 name: Upload Test Results
 
 on:
@@ -16,9 +17,10 @@ jobs:
   upload-results:
     name: Merge and Commit Reports
     runs-on: ubuntu-latest
-    if: |
+    if: >
       github.event_name == 'workflow_dispatch' || 
-      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+      (github.event_name == 'workflow_run' && 
+      github.event.workflow_run.conclusion == 'success')
     permissions:
       contents: write
       checks: write
@@ -27,13 +29,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_branch || github.ref_name }}
+          ref: >-
+            ${{ github.event.workflow_run.head_branch || 
+            github.ref_name }}
 
       - name: Merge and Commit Results
         uses: carlos-camara/qa-hub-actions/upload-results@main
         with:
-          run-id: ${{ github.event.workflow_run.id || github.event.inputs.run_id }}
-          branch: ${{ github.event.workflow_run.head_branch || github.ref_name }}
+          run-id: >-
+            ${{ github.event.workflow_run.id || 
+            github.event.inputs.run_id }}
+          branch: >-
+            ${{ github.event.workflow_run.head_branch || 
+            github.ref_name }}
           upload-reports: 'true'
           upload-perf: 'true'
 
@@ -43,7 +51,9 @@ jobs:
           name: test-reports
           path: temp_junit
           github-token: ${{ github.token }}
-          run-id: ${{ github.event.workflow_run.id || github.event.inputs.run_id }}
+          run-id: >-
+            ${{ github.event.workflow_run.id || 
+            github.event.inputs.run_id }}
 
       - name: Publish Test Summary
         uses: carlos-camara/qa-hub-actions/collect-and-publish@main
