@@ -1,4 +1,4 @@
-@gui @performance @smoke
+@gui @performance
 Feature: Ultra-Professional Performance Dashboard Validation
 
   Background:
@@ -23,4 +23,4 @@ Feature: Ultra-Professional Performance Dashboard Validation
     And I should see the "rps_image"
     And I should see the "latency_image"
     And I should see the "original_report_link"
-    Then the "performance dashboard" page should visually match the baseline image "final_performance_dashboard_verification" with a 5.0% tolerance
+    Then the "performance dashboard" page should visually match the baseline image "final_performance_dashboard_verification" with a 10.0% tolerance

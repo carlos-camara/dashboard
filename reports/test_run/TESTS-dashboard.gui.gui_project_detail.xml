@@ -1,0 +1,90 @@
+<testsuite name="dashboard.gui.gui_project_detail.Project Detail View Validation" tests="4" errors="0" failures="0" skipped="0" time="34.556709" timestamp="2026-02-12T01:32:40.828885" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Architecture Analysis Section" status="passed" time="8.013244"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke
+  Scenario: Verify Architecture Analysis Section
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.040s
+    And the "dashboard" page is displayed ... passed in 1.244s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.537s
+    Then the "test_runs" page is displayed ... passed in 0.291s
+    When I click on the "project_card" ... passed in 1.660s
+    Then the "project_detail" page is displayed ... passed in 0.096s
+    Then the "projectName" should be visible ... passed in 0.128s
+    And I should see the text "[LANG:project_detail.layer_stability]" ... passed in 0.374s
+    And I should see the text "[LANG:project_detail.layer_latency]" ... passed in 0.477s
+    And I should see at least 1 elements with selector "stability_comparison" ... passed in 0.090s
+    And I should see at least 1 elements with selector "latency_comparison" ... passed in 0.124s
+    Then the "project architecture" page should visually match the baseline image "project_detail_architecture" with a 15.0% tolerance ... passed in 0.951s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+01:32:10 [Project Detail View Validation | Verify Architecture Analysis Section] INFO: Capturing visual snapshot: project_detail_architecture
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_project_detail_architecture.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Execution Metrics and Trend" status="passed" time="8.431785"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Execution Metrics and Trend
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.155s
+    And the "dashboard" page is displayed ... passed in 1.395s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.579s
+    Then the "test_runs" page is displayed ... passed in 0.538s
+    When I click on the "project_card" ... passed in 1.861s
+    Then the "project_detail" page is displayed ... passed in 0.105s
+    Then the following elements should contain these texts ... passed in 0.113s
+      | element         | value                                 |
+      | stability_score | [LANG:project_detail.stability_score] |
+    And I should see the text "[LANG:project_detail.execution_velocity]" ... passed in 0.492s
+    And I should see at least 1 elements with selector "velocity_trend" ... passed in 0.150s
+    Then the "project metrics" page should visually match the baseline image "project_detail_metrics" with a 15.0% tolerance ... passed in 1.045s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+01:32:19 [Project Detail View Validation | Verify Execution Metrics and Trend] INFO: Capturing visual snapshot: project_detail_metrics
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_project_detail_metrics.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Run History List" status="passed" time="9.118097"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Run History List
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.621s
+    And the "dashboard" page is displayed ... passed in 1.519s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.550s
+    Then the "test_runs" page is displayed ... passed in 0.357s
+    When I click on the "project_card" ... passed in 2.092s
+    Then the "project_detail" page is displayed ... passed in 0.102s
+    Then I should see the text "[LANG:project_detail.execution_history]" ... passed in 0.512s
+    And I should see at least 1 elements with selector "item" ... passed in 0.135s
+    Then the "run history" element should visually match the baseline image "project_detail_history" with a 15.0% tolerance ... passed in 1.232s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+01:32:29 [Project Detail View Validation | Verify Run History List] INFO: Capturing visual snapshot: project_detail_history
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_project_detail_history.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Dossier Download Button" status="passed" time="8.993582"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Dossier Download Button
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 5.009s
+    And the "dashboard" page is displayed ... passed in 1.557s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.560s
+    Then the "test_runs" page is displayed ... passed in 0.319s
+    When I click on the "project_card" ... passed in 1.371s
+    Then the "project_detail" page is displayed ... passed in 0.090s
+    Then I should see at least 1 elements with selector "download_button" ... passed in 0.088s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

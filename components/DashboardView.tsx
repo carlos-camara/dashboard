@@ -137,7 +137,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
 
       const captureOptions = {
         backgroundColor: '#020617',
-        scale: 2,
+        scale: 1,
         logging: false
       };
 
@@ -478,8 +478,8 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
         .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
       `}</style>
 
-      {/* Hidden Print Stage (Off-screen but rendered for high-res capture) */}
-      <div className="fixed -left-[9999px] top-0 w-[1200px] h-[400px] pointer-events-none">
+      {/* Hidden Print Stage (Rendered but invisible for high-res capture) */}
+      <div className="opacity-0 pointer-events-none fixed top-0 left-0 w-[1200px] h-[400px] z-[-1] overflow-hidden">
         {/* Stability Print Chart */}
         <div ref={printStabilityRef} className="w-full h-full bg-slate-950 p-8">
           <div className="flex items-center gap-3 mb-4 text-white">

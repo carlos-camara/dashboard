@@ -8,20 +8,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### 🚀 Added
-- **Dashboard**: New React 19 Frontend with real-time analytics.
-- **Swagger Inspector**: "Beautiful" visualization for OpenAPI specs with Schema & Example viewer.
-- **Node Backend**: Express server with SQLite integration for persisting test results.
-- **SendGrid Mock**: High-fidelity local mock service for email testing.
-- **Documentation**: Premium READMEs and Contributing guide.
+- **Dashboard**: New React 19 Frontend with real-time analytics and Glassmorphism UI.
+- **Intelligence Actions**: Automated Release Notes, Visual Regression Manager, and Environment Health Check.
+- **Framework integration**: Decoupled core logic into `qa-hub-framework`.
+- **Visuals**: Enhanced Performance Drift Awareness with Mermaid visualization and threshold highlighting.
+- **Security**: Implemented visual masking for sensitive data in reports.
 
 ### 🛠️ Changed
-- **Architecture**: Migrated from simple XML reports to a database-driven reporting engine.
-- **Reporting**: API and GUI tests now feed directly into `qa_hub.db`.
+- **Architecture**: Migrated to a centralized Page Object system powered by YAML and the shared framework.
+- **Wait Logic**: Replaced fixed timing with refined stability wait steps across all GUI features.
 
 ### 🐛 Fixed
-- Fixed redundant API calls in `server.js`.
-- Resolved path resolution issues for uploaded artifacts.
-- Corrected absolute paths in various README files.
+- **Downloads**: Implemented self-healing download verification to resolve failures in restrictive environments.
+- **Refactoring**: Corrected various `NameError` and import issues during the framework migration phase.
 
 ---
 

@@ -1,0 +1,15 @@
+Driver:
+  headless: true
+  type: chrome
+  version: "144"
+  # window_width: 1920
+  # window_height: 1080
+  # gecko_driver_path: C:\Drivers\geckodriver.exe
+  # chrome_driver_path: C:\Drivers\chromedriver.exe
+  # edge_driver_path: C:\Drivers\msedgedriver.exe
+
+VisualTests:
+  enabled: true
+  fail: true
+  save: false
+  baseline_name: "{Driver_type}"

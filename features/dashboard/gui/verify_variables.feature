@@ -1,4 +1,4 @@
-@gui @variables @smoke
+@gui @variables
 Feature: Variable Transformation Validation
 
   Background:

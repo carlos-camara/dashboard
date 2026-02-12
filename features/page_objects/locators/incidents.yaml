@@ -31,13 +31,13 @@ incidents:
     wait_load: false
   list_item:
     type: webelement
-    by: xpath
-    value: //div[contains(@class, 'glass-panel') and .//div[contains(@class, 'cursor-pointer')]]
+    by: css
+    value: ".glass-panel:has(.cursor-pointer)"
     wait_load: false
   list_expand_button:
     type: button
-    by: xpath
-    value: //div[contains(@class, 'glass-panel')]//div[contains(@class, 'cursor-pointer')][1]
+    by: css
+    value: ".glass-panel .cursor-pointer"
     wait_load: false
   list_details_context:
     type: text

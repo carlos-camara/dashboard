@@ -1,0 +1,37 @@
+<testsuite name="dashboard.gui.gui_endpoints.Endpoints Catalog &amp; Insights" tests="1" errors="0" failures="0" skipped="0" time="8.7285" timestamp="2026-02-12T01:30:45.178804" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_endpoints.Endpoints Catalog &amp; Insights" name="Analyze Endpoint Details" status="passed" time="8.7285"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @interactive
+  Scenario: Analyze Endpoint Details
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.943s
+    And the "dashboard" page is displayed ... passed in 1.061s
+    And I wait for "dashboard" to be stable ... passed in 1.000s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.407s
+    Then the "endpoints_view" page is displayed ... passed in 0.189s
+    When I type "health" into the "search_input" ... passed in 0.626s
+    And I wait for "list" to update ... passed in 1.000s
+    When I click on the "endpoint_item" ... passed in 0.353s
+    Then the "endpoint_detail" page is displayed ... passed in 0.364s
+    Then the following elements should contain these texts ... passed in 0.027s
+      | element     | value                               |
+      | back_button | [LANG:endpoints.detail.back_button] |
+    And I should see the text "[LANG:endpoints.detail.success_rate]" ... passed in 0.076s
+    And I should see the text "[LANG:endpoints.detail.avg_latency]" ... passed in 0.099s
+    And I should see the "performance_card" ... passed in 0.064s
+    And I should see the text "[LANG:endpoints.detail.performance_insights]" ... passed in 0.098s
+    And I should see the text "[LANG:endpoints.detail.live_discovery]" ... passed in 0.099s
+    Then the "endpoint detail" page should visually match the baseline image "endpoints_deep_detail" with a 15.0% tolerance ... passed in 0.964s
+    When I click on the "back_button" ... passed in 0.252s
+    Then the "endpoints_view" page is displayed ... passed in 0.045s
+    And the "title" should contain the text "[LANG:endpoints.view.title]" ... passed in 0.060s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+01:30:43 [Endpoints Catalog & Insights | Analyze Endpoint Details] INFO: Capturing visual snapshot: endpoints_deep_detail
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_endpoints_deep_detail.png
+
+]]>
+</system-out></testcase></testsuite>

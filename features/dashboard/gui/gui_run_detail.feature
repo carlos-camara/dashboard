@@ -1,4 +1,4 @@
-@gui @run_detail @smoke
+@gui @run_detail
 Feature: Run Detail View Validation
 
   Background:

@@ -1,0 +1,10 @@
+Driver:
+  headless: true
+  type: chrome
+  version: "144"
+  window_width: 1920
+  window_height: 1080
+
+VisualTests:
+  enabled: true
+  fail: false # Don't fail on staging visual regressions yet

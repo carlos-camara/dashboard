@@ -29,14 +29,14 @@ npm run dev
 ```
 
 ### 2. Prepare the Automation Engine
-The test logic is powered by Python and Behave.
+The test logic is powered by Python and the **[QA Hub Framework](https://github.com/carlos-camara/qa-hub-framework)**.
 
 ```powershell
 # Create and activate virtual environment
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 
-# Install automation requirements
+# Install automation requirements (includes the framework)
 pip install -r requirements.txt
 ```
 
@@ -45,14 +45,16 @@ pip install -r requirements.txt
 ## 🎨 Engineering Standards
 
 ### TypeScript & React
-* **Styling**: Always use **TailwindCSS**. Avoid inline styles or custom CSS files unless strictly necessary.
-* **Icons**: Use **Lucide React** for consistency.
+* **Styling**: Always use **TailwindCSS 4**. Avoid inline styles or custom CSS files unless strictly necessary.
+* **Aesthetics**: Adhere to the **Glassmorphism** design system (+ vibrancy, + transparency).
+* **Icons**: Use **Lucide React**.
 * **Typing**: All components and functions must be strictly typed. No `any` allowed.
 
 ### Python & BDD (Behave)
-* **Feature Files**: Must follow clean **Gherkin** syntax. Use `Background` for common setup steps.
-* **Step Definitions**: Document all `context` variables within the step file.
-* **Locators**: Never hardcode selectors in Python. Use the YAML-driven locator system in `features/page_objects/locators.yaml`.
+* **Framework First**: Always check if a step or utility exists in the `qa-hub-framework` before implementing locally.
+* **Feature Files**: Follow clean **Gherkin** syntax. Use `Background` for common setup.
+* **Wait Logic**: Never use `time.sleep()`. Use the framework's stability wait steps (e.g., `And I wait for "dashboard" to be stable`).
+* **Locators**: Use the YAML-driven locator system. Never hardcode selectors.
 
 ---
 
@@ -85,4 +87,4 @@ When opening an issue, please provide:
 * **Environment**: OS, Node version, and Browser.
 
 ---
-> Happy coding! 🚀
+
