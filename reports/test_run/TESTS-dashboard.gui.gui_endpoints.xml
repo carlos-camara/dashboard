@@ -1,37 +1,100 @@
-<testsuite name="dashboard.gui.gui_endpoints.Endpoints Catalog &amp; Insights" tests="1" errors="0" failures="0" skipped="0" time="8.7285" timestamp="2026-02-12T01:30:45.178804" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_endpoints.Endpoints Catalog &amp; Insights" name="Analyze Endpoint Details" status="passed" time="8.7285"><system-out>
+<testsuite name="dashboard.gui.gui_endpoints.Endpoints Catalog &amp; Insights" tests="1" errors="1" failures="0" skipped="0" time="20.299873" timestamp="2026-02-12T12:40:04.687208" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_endpoints.Endpoints Catalog &amp; Insights" name="Analyze Endpoint Details" status="error" time="20.299873"><error type="TimeoutException" message="Message: Element 'endpoint_item' did not become clickable within 10 seconds">
+<![CDATA[
+Failing step: When I click on the "endpoint_item" ... error in 10.588s
+Location: features/dashboard/gui/gui_endpoints.feature:17
+Traceback (most recent call last):
+  File "c:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\core\elements\base_element.py", line 116, in wait_until_clickable
+    WebDriverWait(self.driver, timeout).until(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        EC.element_to_be_clickable(self.locator)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 121, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff763dcf3d5
+	0x7ff763dcf430
+	0x7ff763b710bd
+	0x7ff763bcc2fe
+	0x7ff763bcc60c
+	0x7ff763c1d187
+	0x7ff763c19d08
+	0x7ff763bbcb0c
+	0x7ff763bbda53
+	0x7ff7640ab470
+	0x7ff7640a586d
+	0x7ff7640c621a
+	0x7ff763deb235
+	0x7ff763df3a5c
+	0x7ff763dd8844
+	0x7ff763dd89f6
+	0x7ff763dbeb87
+	0x7ffe26397374
+	0x7ffe27abcc91
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\model.py", line 1991, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\dashboard\.venv\Lib\site-packages\behave\matchers.py", line 105, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 651, in step_click_current_page_object
+    step_click_page_object(context, element_name, page_name)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 475, in step_click_page_object
+    element.click()
+    ~~~~~~~~~~~~~^^
+  File "c:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\core\elements\button.py", line 21, in click
+    self.wait_until_clickable(timeout)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\core\elements\base_element.py", line 120, in wait_until_clickable
+    raise TimeoutException(
+        f"Element '{self.name}' did not become clickable within {timeout} seconds"
+    )
+selenium.common.exceptions.TimeoutException: Message: Element 'endpoint_item' did not become clickable within 10 seconds
+
+]]>
+</error><system-out>
 <![CDATA[
 @scenario.begin
 
   @interactive
   Scenario: Analyze Endpoint Details
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.943s
-    And the "dashboard" page is displayed ... passed in 1.061s
-    And I wait for "dashboard" to be stable ... passed in 1.000s
-    When I click on the "endpoints_link" in the sidebar ... passed in 0.407s
-    Then the "endpoints_view" page is displayed ... passed in 0.189s
-    When I type "health" into the "search_input" ... passed in 0.626s
-    And I wait for "list" to update ... passed in 1.000s
-    When I click on the "endpoint_item" ... passed in 0.353s
-    Then the "endpoint_detail" page is displayed ... passed in 0.364s
-    Then the following elements should contain these texts ... passed in 0.027s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.868s
+    And the "dashboard" page is displayed ... passed in 5.389s
+    And I wait for "dashboard" to be stable ... passed in 1.001s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.212s
+    Then the "endpoints_view" page is displayed ... passed in 0.040s
+    When I type "health" into the "search_input" ... passed in 0.202s
+    And I wait for "list" to update ... passed in 1.001s
+    When I click on the "endpoint_item" ... error in 10.588s
+    Then the "endpoint_detail" page is displayed ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
       | element     | value                               |
       | back_button | [LANG:endpoints.detail.back_button] |
-    And I should see the text "[LANG:endpoints.detail.success_rate]" ... passed in 0.076s
-    And I should see the text "[LANG:endpoints.detail.avg_latency]" ... passed in 0.099s
-    And I should see the "performance_card" ... passed in 0.064s
-    And I should see the text "[LANG:endpoints.detail.performance_insights]" ... passed in 0.098s
-    And I should see the text "[LANG:endpoints.detail.live_discovery]" ... passed in 0.099s
-    Then the "endpoint detail" page should visually match the baseline image "endpoints_deep_detail" with a 15.0% tolerance ... passed in 0.964s
-    When I click on the "back_button" ... passed in 0.252s
-    Then the "endpoints_view" page is displayed ... passed in 0.045s
-    And the "title" should contain the text "[LANG:endpoints.view.title]" ... passed in 0.060s
+    And I should see the text "[LANG:endpoints.detail.success_rate]" ... skipped in 0.000s
+    And I should see the text "[LANG:endpoints.detail.avg_latency]" ... skipped in 0.000s
+    And I should see the "performance_card" ... skipped in 0.000s
+    And I should see the text "[LANG:endpoints.detail.performance_insights]" ... skipped in 0.000s
+    And I should see the text "[LANG:endpoints.detail.live_discovery]" ... skipped in 0.000s
+    Then the "endpoint detail" page should visually match the baseline image "endpoints_deep_detail" with a 15.0% tolerance ... skipped in 0.000s
+    When I click on the "back_button" ... skipped in 0.000s
+    Then the "endpoints_view" page is displayed ... skipped in 0.000s
+    And the "title" should contain the text "[LANG:endpoints.view.title]" ... skipped in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-01:30:43 [Endpoints Catalog & Insights | Analyze Endpoint Details] INFO: Capturing visual snapshot: endpoints_deep_detail
-[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_endpoints_deep_detail.png
+12:39:51 [Endpoints Catalog & Insights | Analyze Endpoint Details] DEBUG: Waiting for 'dashboard' stability (1s wait)...
+12:39:53 [Endpoints Catalog & Insights | Analyze Endpoint Details] DEBUG: Waiting for 'list' stability (1s wait)...
 
 ]]>
 </system-out></testcase></testsuite>

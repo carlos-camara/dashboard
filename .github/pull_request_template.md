@@ -1,37 +1,20 @@
-<!--
-  ✨ Thanks for contributing!
-  
-  Please provide a clear and concise description of your changes.
-  Ensure your branch is up-to-date with the main branch before submitting.
--->
+# Description
+<!-- Provide a brief description of the changes you are proposing. -->
 
-# 📝 Pull Request
+## Type of Change
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+- [ ] Documentation update
 
-## 🌟 Type of Change
-<!-- Select the option that best fits your change -->
-- [ ] 🐛 **Bug Fix** (Non-breaking change which fixes an issue)
-- [ ] ✨ **New Feature** (Non-breaking change which adds functionality)
-- [ ] 💥 **Breaking Change** (Fix or feature that would cause existing functionality to not work as expected)
-- [ ] ♻️ **Refactor** (Code improvement without changing behavior)
-- [ ] 🎨 **Style/Design** (UI adjustments, CSS, assets)
-- [ ] 📚 **Documentation** (Updates to README, docs, or inline comments)
-- [ ] 🔧 **Configuration** (CI/CD, settings, scripts)
+## How Has This Been Tested?
+<!-- Please describe the tests that you ran to verify your changes. -->
 
-## 🎯 Objective
-<!-- What is the goal of this PR? Link to relevant issues if applicable. -->
->
-
-## 🛠️ Technical Details
-<!-- Briefly explain the technical approach or specific decisions made. -->
-
-
-## 🧪 Testing Plan
-<!-- How can reviewers verify your changes? Provide step-by-step instructions. -->
-
-
-## ✅ Checklist
-- [ ] 🏗️ I have performed a **self-review** of my code.
-- [ ] 🧹 I have **linted/formatted** the code locally.
-- [ ] 🧪 I have added/updated **tests** to cover my changes.
-- [ ] 📖 I have updated the **documentation** accordingly.
-- [ ] ⚠️ I have checked for **breaking changes** and documented them.
+## Checklist
+- [ ] My code follows the style guidelines of this project
+- [ ] I have performed a self-review of my own code
+- [ ] I have commented my code, particularly in hard-to-understand areas
+- [ ] I have made corresponding changes to the documentation
+- [ ] My changes generate no new warnings
+- [ ] I have added tests that prove my fix is effective or that my feature works
+- [ ] New and existing unit tests pass locally with my changes

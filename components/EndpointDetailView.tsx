@@ -187,28 +187,30 @@ const EndpointDetailView: React.FC<EndpointDetailViewProps> = ({ endpoint, onBac
                     // Match endpoint simple logic: Method + Path
                     // Note: Locust usually logs path like "/api/runs (List)" or just "/api/runs"
                     // We need to find the best match
-                    const normalize = (p: string) => p.replace(/\/$/, '').toLowerCase();
+                    const normalize = (p: string) => p.replace(/\/$/, '').trim().toLowerCase();
                     const epPath = normalize(endpoint.path);
+                    const epMethod = endpoint.method.toUpperCase();
 
                     const match = data.stats.find((s: any) => {
-                        if (s.method !== endpoint.method) return false;
+                        const sMethod = s.method.toUpperCase();
+                        if (sMethod !== epMethod) return false;
 
-                        const statName = normalize(s.name.split(' ')[0]); // Handle "Path (Name)" format
+                        const statName = normalize(s.name.split(' ')[0]);
 
                         // exact match
                         if (statName === epPath) return true;
 
-                        // partial match if one is subset of other (handles IDs vs Placeholders)
-                        // e.g. /api/users/123 vs /api/users/{id}
+                        // fuzzy match for path parameters
                         if (statName.includes(epPath) || epPath.includes(statName)) return true;
 
                         return false;
                     });
 
                     if (match) {
-                        // Ensure reportUrl is absolute using api.getAssetUrl
                         const fullReportUrl = api.getAssetUrl(data.reportUrl);
                         setPerfStats({ ...match, reportUrl: fullReportUrl, timestamp: data.timestamp });
+                    } else {
+                        console.warn(`No performance match found for ${epMethod} ${epPath}. Available in report:`, data.stats.map((s: any) => `${s.method} ${s.name}`));
                     }
                 }
             })

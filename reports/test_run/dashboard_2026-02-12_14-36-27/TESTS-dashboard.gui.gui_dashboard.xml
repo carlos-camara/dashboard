@@ -1,0 +1,202 @@
+<testsuite name="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" tests="8" errors="0" failures="0" skipped="0" time="42.552822" timestamp="2026-02-12T14:38:32.459323" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Validate Header and System Status" status="passed" time="3.489541"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @visual @smoke
+  Scenario: Validate Header and System Status
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.113s
+    And the "dashboard" page is displayed ... passed in 0.996s
+    And I wait for "dashboard" to be stable ... passed in 1.000s
+    Then the page title should be "[LANG:common.page_title]" ... passed in 0.008s
+    And the "header_subtitle" element should contain text "[LANG:dashboard.header.subtitle]" ... passed in 0.037s
+    And the system status should be valid ... passed in 0.025s
+    And the "header status" page should visually match the baseline image "dashboard_header_status" with a 15.0% tolerance ... passed in 0.310s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+14:37:48 [Dashboard Overview & Visual Integrity | Validate Header and System Status] DEBUG: Waiting for 'dashboard' stability (1s wait)...
+14:37:49 [Dashboard Overview & Visual Integrity | Validate Header and System Status] INFO: Capturing visual snapshot: dashboard_header_status
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_dashboard_header_status.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Validate Statistics Key Metrics" status="passed" time="3.475304"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @visual @critical @smoke
+  Scenario: Validate Statistics Key Metrics
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.852s
+    And the "dashboard" page is displayed ... passed in 1.009s
+    And I wait for "dashboard" to be stable ... passed in 1.001s
+    Then the following elements should contain these texts ... passed in 0.163s
+      | element            | value                                   |
+      | stats_passed_card  | [LANG:dashboard.stats.system_health]    |
+      | stats_total_runs   | [LANG:dashboard.stats.total_executions] |
+      | stats_pass_rate    | [LANG:dashboard.stats.pass_rate]        |
+      | stats_avg_duration | [LANG:dashboard.stats.avg_latency]      |
+    And the "stats grid" element should visually match the baseline image "dashboard_stats_grid" with a 15.0% tolerance ... passed in 0.449s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+14:37:51 [Dashboard Overview & Visual Integrity | Validate Statistics Key Metrics] DEBUG: Waiting for 'dashboard' stability (1s wait)...
+14:37:53 [Dashboard Overview & Visual Integrity | Validate Statistics Key Metrics] INFO: Capturing visual snapshot: dashboard_stats_grid
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_dashboard_stats_grid.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Validate Timeline Chart Interactions" status="passed" time="7.223344"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @interactive
+  Scenario: Validate Timeline Chart Interactions
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.101s
+    And the "dashboard" page is displayed ... passed in 1.223s
+    And I wait for "dashboard" to be stable ... passed in 1.002s
+    Then the "timeline_heading" element should contain text "[LANG:dashboard.timeline.heading]" ... passed in 0.066s
+    And I should see at least 1 elements with selector "timeline_chart" ... passed in 0.060s
+    When I switch the chart view to "[LANG:dashboard.timeline.volume]" ... passed in 0.290s
+    And I wait for "chart" to update ... passed in 1.000s
+    Then the "chart volume" element should visually match the baseline image "dashboard_chart_volume" with a 15.0% tolerance ... passed in 0.580s
+    When I switch the chart view to "[LANG:dashboard.timeline.success]" ... passed in 0.397s
+    And I wait for "chart" to update ... passed in 1.000s
+    Then the "chart success" element should visually match the baseline image "dashboard_chart_success" with a 15.0% tolerance ... passed in 0.504s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+14:37:56 [Dashboard Overview & Visual Integrity | Validate Timeline Chart Interactions] DEBUG: Waiting for 'dashboard' stability (1s wait)...
+14:37:57 [Dashboard Overview & Visual Integrity | Validate Timeline Chart Interactions] DEBUG: Waiting for 'chart' stability (1s wait)...
+14:37:58 [Dashboard Overview & Visual Integrity | Validate Timeline Chart Interactions] INFO: Capturing visual snapshot: dashboard_chart_volume
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_dashboard_chart_volume.png
+14:37:59 [Dashboard Overview & Visual Integrity | Validate Timeline Chart Interactions] DEBUG: Waiting for 'chart' stability (1s wait)...
+14:38:00 [Dashboard Overview & Visual Integrity | Validate Timeline Chart Interactions] INFO: Capturing visual snapshot: dashboard_chart_success
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_dashboard_chart_success.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Validate Incident and Recent Runs Panels" status="passed" time="4.65927"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @visual
+  Scenario: Validate Incident and Recent Runs Panels
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.592s
+    And the "dashboard" page is displayed ... passed in 1.497s
+    And I wait for "dashboard" to be stable ... passed in 1.003s
+    Then the following elements should contain these texts ... passed in 0.206s
+      | element             | value                                |
+      | recent_runs_heading | [LANG:dashboard.recent_runs.heading] |
+      | incidents_heading   | [LANG:dashboard.incidents.heading]   |
+    And the "lists panel" element should visually match the baseline image "dashboard_lists_panels" with a 15.0% tolerance ... passed in 0.361s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+14:38:04 [Dashboard Overview & Visual Integrity | Validate Incident and Recent Runs Panels] DEBUG: Waiting for 'dashboard' stability (1s wait)...
+14:38:06 [Dashboard Overview & Visual Integrity | Validate Incident and Recent Runs Panels] INFO: Capturing visual snapshot: dashboard_lists_panels
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_dashboard_lists_panels.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Validate Endpoints Catalog" status="passed" time="4.395495"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @visual
+  Scenario: Validate Endpoints Catalog
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.062s
+    And the "dashboard" page is displayed ... passed in 1.172s
+    And I wait for "dashboard" to be stable ... passed in 1.000s
+    When I scroll to the bottom of the page ... passed in 0.520s
+    Then the "endpoints_heading" element should contain text "[LANG:dashboard.endpoints.heading]" ... passed in 0.077s
+    And the "endpoints catalog" page should visually match the baseline image "dashboard_bottom_fullpage" with a 15.0% tolerance ... passed in 0.564s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+14:38:09 [Dashboard Overview & Visual Integrity | Validate Endpoints Catalog] DEBUG: Waiting for 'dashboard' stability (1s wait)...
+14:38:10 [Dashboard Overview & Visual Integrity | Validate Endpoints Catalog] INFO: Capturing visual snapshot: dashboard_bottom_fullpage
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_dashboard_bottom_fullpage.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Verify Global Actions and Filters" status="passed" time="9.718659"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @interactive
+  Scenario: Verify Global Actions and Filters
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.236s
+    And the "dashboard" page is displayed ... passed in 1.560s
+    And I wait for "dashboard" to be stable ... passed in 1.002s
+    When I apply the "[LANG:dashboard.filters.seven_days]" time filter ... passed in 0.209s
+    And I wait for "dashboard" to update ... passed in 1.002s
+    When I apply the "[LANG:dashboard.filters.thirty_days]" time filter ... passed in 0.406s
+    And I wait for "dashboard" to update ... passed in 1.000s
+    When I export the report ... passed in 1.606s
+    Then the "actions log" element should visually match the baseline image "dashboard_actions_log" with a 15.0% tolerance ... passed in 1.697s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+14:38:14 [Dashboard Overview & Visual Integrity | Verify Global Actions and Filters] DEBUG: Waiting for 'dashboard' stability (1s wait)...
+14:38:15 [Dashboard Overview & Visual Integrity | Verify Global Actions and Filters] DEBUG: Waiting for 'dashboard' stability (1s wait)...
+14:38:17 [Dashboard Overview & Visual Integrity | Verify Global Actions and Filters] DEBUG: Waiting for 'dashboard' stability (1s wait)...
+14:38:19 [Dashboard Overview & Visual Integrity | Verify Global Actions and Filters] INFO: Capturing visual snapshot: dashboard_actions_log
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_dashboard_actions_log.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Verify Mobile Viewport Layout" status="passed" time="4.632737"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @responsive @mobile
+  Scenario: Verify Mobile Viewport Layout
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.582s
+    And the "dashboard" page is displayed ... passed in 1.538s
+    And I wait for "dashboard" to be stable ... passed in 1.002s
+    Then the "header_subtitle" element should contain text "[LANG:dashboard.header.subtitle]" ... passed in 0.081s
+    And the "mobile layout" page should visually match the baseline image "dashboard_responsiveness" with a 15.0% tolerance ... passed in 0.430s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+14:38:25 [Dashboard Overview & Visual Integrity | Verify Mobile Viewport Layout] DEBUG: Waiting for 'dashboard' stability (1s wait)...
+14:38:26 [Dashboard Overview & Visual Integrity | Verify Mobile Viewport Layout] INFO: Capturing visual snapshot: dashboard_responsiveness
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_dashboard_responsiveness.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Navigate to Incident Taxonomy" status="passed" time="4.958472"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @navigation
+  Scenario: Navigate to Incident Taxonomy
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.330s
+    And the "dashboard" page is displayed ... passed in 1.315s
+    And I wait for "dashboard" to be stable ... passed in 1.000s
+    When I click on the "incidents_link" in the sidebar ... passed in 0.353s
+    Then the "incidents" page is displayed ... passed in 0.290s
+    And the following elements should contain these texts ... passed in 0.142s
+      | element                | value                                 |
+      | header_title           | [LANG:incidents.header.title]         |
+      | header_subtitle        | [LANG:incidents.header.subtitle]      |
+      | filters_scope_dropdown | [LANG:incidents.filters.global_scope] |
+    And the "incidents taxonomy" page should visually match the baseline image "incident_taxonomy_page" with a 15.0% tolerance ... passed in 0.527s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+14:38:30 [Dashboard Overview & Visual Integrity | Navigate to Incident Taxonomy] DEBUG: Waiting for 'dashboard' stability (1s wait)...
+14:38:31 [Dashboard Overview & Visual Integrity | Navigate to Incident Taxonomy] INFO: Capturing visual snapshot: incident_taxonomy_page
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_incident_taxonomy_page.png
+
+]]>
+</system-out></testcase></testsuite>
