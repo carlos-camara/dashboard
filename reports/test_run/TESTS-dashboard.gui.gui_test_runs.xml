@@ -1,168 +1,54 @@
-<testsuite name="dashboard.gui.gui_test_runs.Test Runs View Validation" tests="2" errors="2" failures="0" skipped="0" time="8.052612" timestamp="2026-02-11T17:33:01.060461" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Search and Redirect to Project Analytics" status="failed" time="2.832517"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 2.833s
-Location: features/dashboard/gui/gui_test_runs.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Search_and_Redirect_to_Project_Analytics_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+<testsuite name="dashboard.gui.gui_test_runs.Test Runs View Validation" tests="2" errors="0" failures="0" skipped="0" time="19.507254" timestamp="2026-02-12T00:53:53.072644" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Search and Redirect to Project Analytics" status="passed" time="11.138466"><system-out>
 <![CDATA[
 @scenario.begin
+
+  @smoke
   Scenario: Search and Redirect to Project Analytics
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 2.833s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
-    Then the "test_runs" page is displayed ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.777s
+    And the "dashboard" page is displayed ... passed in 1.806s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.500s
+    Then the "test_runs" page is displayed ... passed in 0.297s
+    Then the following elements should contain these texts ... passed in 0.113s
       | element | value                       |
       | title   | [LANG:navigation.test_runs] |
-    When I type "dashboard" into the "search_input" ... skipped in 0.000s
-    And I wait for 1 seconds ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
+    When I type "dashboard" into the "search_input" ... passed in 0.613s
+    And I wait for 1 seconds ... passed in 1.002s
+    Then the following elements should contain these texts ... passed in 0.077s
       | element      | value     |
       | search_input | dashboard |
-    When I click on the "project_card" ... skipped in 0.000s
-    Then the "project_detail" page is displayed ... skipped in 0.000s
-    Then the "projectName" should be visible ... skipped in 0.000s
-    And I should see at least 1 elements with selector "stability_chart" ... skipped in 0.000s
-    Then the "test runs redirection" page should visually match the baseline image "test_runs_project_redirection" with a 5.0% tolerance ... skipped in 0.000s
+    When I click on the "project_card" ... passed in 2.134s
+    Then the "project_detail" page is displayed ... passed in 0.091s
+    Then the "projectName" should be visible ... passed in 0.170s
+    And I should see at least 1 elements with selector "stability_chart" ... passed in 0.123s
+    Then the "test runs redirection" page should visually match the baseline image "test_runs_project_redirection" with a 5.0% tolerance ... passed in 1.435s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Search_and_Redirect_to_Project_Analytics_I_navigate_to_the_dashboard_at.png
+00:53:38 [Test Runs View Validation | Search and Redirect to Project Analytics] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
+00:53:42 [Test Runs View Validation | Search and Redirect to Project Analytics] INFO: Capturing visual snapshot: test_runs_project_redirection
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_test_runs_project_redirection.png
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Verify Project List and Back Navigation" status="failed" time="5.220096"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 5.220s
-Location: features/dashboard/gui/gui_test_runs.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Project_List_and_Back_Navigation_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+</system-out></testcase><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Verify Project List and Back Navigation" status="passed" time="8.368788"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Verify Project List and Back Navigation
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 5.220s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
-    Then the "test_runs" page is displayed ... skipped in 0.000s
-    When I click on the "project_card" ... skipped in 0.000s
-    Then the "project_detail" page is displayed ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.211s
+    And the "dashboard" page is displayed ... passed in 1.568s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.540s
+    Then the "test_runs" page is displayed ... passed in 0.364s
+    When I click on the "project_card" ... passed in 1.999s
+    Then the "project_detail" page is displayed ... passed in 0.091s
+    Then the following elements should contain these texts ... passed in 0.664s
       | element  | value                           |
       | runCount | [LANG:project_detail.run_count] |
-    When I click on the "back_button" ... skipped in 0.000s
-    Then the "test_runs" page is displayed ... skipped in 0.000s
-    Then I should see the text "[LANG:navigation.test_runs]" ... skipped in 0.000s
+    When I click on the "back_button" ... passed in 0.493s
+    Then the "test_runs" page is displayed ... passed in 0.244s
+    Then I should see the text "[LANG:navigation.test_runs]" ... passed in 0.195s
 
 @scenario.end
 --------------------------------------------------------------------------------
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Project_List_and_Back_Navigation_I_navigate_to_the_dashboard_at.png
-
 ]]>
 </system-out></testcase></testsuite>

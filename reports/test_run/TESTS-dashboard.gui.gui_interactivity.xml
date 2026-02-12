@@ -1,163 +1,51 @@
-<testsuite name="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" tests="2" errors="2" failures="0" skipped="0" time="5.403888" timestamp="2026-02-11T17:31:52.452327" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" name="Redirect from Sector Integrity to Project Detail" status="failed" time="2.911227"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 2.911s
-Location: features/dashboard/gui/gui_interactivity.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Redirect_from_Sector_Integrity_to_Project_Detail_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+<testsuite name="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" tests="2" errors="0" failures="0" skipped="0" time="12.651145" timestamp="2026-02-12T00:52:14.799831" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" name="Redirect from Sector Integrity to Project Detail" status="passed" time="6.513514"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Redirect from Sector Integrity to Project Detail
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 2.911s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.082s
+    And the "dashboard" page is displayed ... passed in 1.949s
+    Then the following elements should contain these texts ... passed in 0.124s
       | element             | value            |
       | recent_runs_heading | Sector Integrity |
-    When I click on the "recent_runs_project_item" ... skipped in 0.000s
-    Then the "project_detail" page is displayed ... skipped in 0.000s
-    Then the "projectName" should be visible ... skipped in 0.000s
-    And I should see at least 1 elements with selector "stability_comparison" ... skipped in 0.000s
-    Then the "sector redirect" page should visually match the baseline image "interactivity_sector_redirect" with a 5.0% tolerance ... skipped in 0.000s
+    When I click on the "recent_runs_project_item" ... passed in 0.301s
+    Then the "project_detail" page is displayed ... passed in 1.113s
+    Then the "projectName" should be visible ... passed in 0.079s
+    And I should see at least 1 elements with selector "stability_comparison" ... passed in 0.072s
+    Then the "sector redirect" page should visually match the baseline image "interactivity_sector_redirect" with a 5.0% tolerance ... passed in 0.794s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Redirect_from_Sector_Integrity_to_Project_Detail_I_navigate_to_the_dashboard_at.png
+00:52:07 [Dashboard Cross-Navigation Interactivity | Redirect from Sector Integrity to Project Detail] INFO: Capturing visual snapshot: interactivity_sector_redirect
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_interactivity_sector_redirect.png
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" name="Redirect from Latency Anomalies to Endpoint Detail" status="failed" time="2.49266"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 2.493s
-Location: features/dashboard/gui/gui_interactivity.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Redirect_from_Latency_Anomalies_to_Endpoint_Detail_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+</system-out></testcase><testcase classname="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" name="Redirect from Latency Anomalies to Endpoint Detail" status="passed" time="6.13763"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Redirect from Latency Anomalies to Endpoint Detail
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 2.493s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    When I scroll to the bottom of the page ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.054s
+    And the "dashboard" page is displayed ... passed in 2.787s
+    When I scroll to the bottom of the page ... passed in 0.517s
+    Then the following elements should contain these texts ... passed in 0.093s
       | element           | value             |
       | endpoints_heading | LATENCY ANOMALIES |
-    When I click on the "endpoints_anomaly_item" ... skipped in 0.000s
-    Then the "endpoint_detail" page is displayed ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
+    When I click on the "endpoints_anomaly_item" ... passed in 0.494s
+    Then the "endpoint_detail" page is displayed ... passed in 0.343s
+    Then the following elements should contain these texts ... passed in 0.028s
       | element     | value           |
       | back_button | Back to Catalog |
-    And I should see the text "Success Rate" ... skipped in 0.000s
-    And I should see the text "Avg Latency" ... skipped in 0.000s
-    Then the "anomaly redirect" page should visually match the baseline image "interactivity_anomaly_redirect" with a 5.0% tolerance ... skipped in 0.000s
+    And I should see the text "Success Rate" ... passed in 0.158s
+    And I should see the text "Avg Latency" ... passed in 0.153s
+    Then the "anomaly redirect" page should visually match the baseline image "interactivity_anomaly_redirect" with a 5.0% tolerance ... passed in 1.510s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Redirect_from_Latency_Anomalies_to_Endpoint_Detail_I_navigate_to_the_dashboard_at.png
+00:52:13 [Dashboard Cross-Navigation Interactivity | Redirect from Latency Anomalies to Endpoint Detail] INFO: Capturing visual snapshot: interactivity_anomaly_redirect
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_interactivity_anomaly_redirect.png
 
 ]]>
 </system-out></testcase></testsuite>

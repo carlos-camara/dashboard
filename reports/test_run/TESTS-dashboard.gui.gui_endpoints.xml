@@ -1,90 +1,37 @@
-<testsuite name="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" tests="1" errors="1" failures="0" skipped="0" time="5.293598" timestamp="2026-02-11T17:31:34.921426" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_endpoints.Endpoints Catalog Validation" name="Deep Dive into Endpoint Detail" status="failed" time="5.293598"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 5.294s
-Location: features/dashboard/gui/gui_endpoints.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Deep_Dive_into_Endpoint_Detail_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+<testsuite name="dashboard.gui.gui_endpoints.Endpoints Catalog &amp; Insights" tests="1" errors="0" failures="0" skipped="0" time="7.940227" timestamp="2026-02-12T00:51:30.893332" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_endpoints.Endpoints Catalog &amp; Insights" name="Analyze Endpoint Details" status="passed" time="7.940227"><system-out>
 <![CDATA[
 @scenario.begin
-  Scenario: Deep Dive into Endpoint Detail
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 5.294s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    When I click on the "endpoints_link" in the sidebar ... skipped in 0.000s
-    Then the "endpoints_view" page is displayed ... skipped in 0.000s
-    When I type "health" into the "search_input" ... skipped in 0.000s
-    And I wait for 1 seconds ... skipped in 0.000s
-    When I click on the "endpoint_item" ... skipped in 0.000s
-    Then the "endpoint_detail" page is displayed ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
+
+  @interactive
+  Scenario: Analyze Endpoint Details
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.528s
+    And the "dashboard" page is displayed ... passed in 0.994s
+    And I wait for "dashboard" to be stable ... passed in 1.000s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.392s
+    Then the "endpoints_view" page is displayed ... passed in 0.149s
+    When I type "health" into the "search_input" ... passed in 0.491s
+    And I wait for "list" to update ... passed in 1.003s
+    When I click on the "endpoint_item" ... passed in 0.371s
+    Then the "endpoint_detail" page is displayed ... passed in 0.286s
+    Then the following elements should contain these texts ... passed in 0.053s
       | element     | value                               |
       | back_button | [LANG:endpoints.detail.back_button] |
-    And I should see the text "[LANG:endpoints.detail.success_rate]" ... skipped in 0.000s
-    And I should see the text "[LANG:endpoints.detail.avg_latency]" ... skipped in 0.000s
-    And I should see the "performance_card" ... skipped in 0.000s
-    And I should see the text "[LANG:endpoints.detail.performance_insights]" ... skipped in 0.000s
-    And I should see the text "[LANG:endpoints.detail.live_discovery]" ... skipped in 0.000s
-    Then the "endpoint detail" page should visually match the baseline image "endpoints_deep_detail" with a 15.0% tolerance ... skipped in 0.000s
-    When I click on the "back_button" ... skipped in 0.000s
-    Then the "endpoints_view" page is displayed ... skipped in 0.000s
-    Then the "title" should contain the text "[LANG:endpoints.view.title]" ... skipped in 0.000s
+    And I should see the text "[LANG:endpoints.detail.success_rate]" ... passed in 0.126s
+    And I should see the text "[LANG:endpoints.detail.avg_latency]" ... passed in 0.125s
+    And I should see the "performance_card" ... passed in 0.079s
+    And I should see the text "[LANG:endpoints.detail.performance_insights]" ... passed in 0.106s
+    And I should see the text "[LANG:endpoints.detail.live_discovery]" ... passed in 0.137s
+    Then the "endpoint detail" page should visually match the baseline image "endpoints_deep_detail" with a 15.0% tolerance ... passed in 0.739s
+    When I click on the "back_button" ... passed in 0.210s
+    Then the "endpoints_view" page is displayed ... passed in 0.082s
+    And the "title" should contain the text "[LANG:endpoints.view.title]" ... passed in 0.068s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Deep_Dive_into_Endpoint_Detail_I_navigate_to_the_dashboard_at.png
+00:51:29 [Endpoints Catalog & Insights | Analyze Endpoint Details] INFO: Capturing visual snapshot: endpoints_deep_detail
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_endpoints_deep_detail.png
 
 ]]>
 </system-out></testcase></testsuite>
