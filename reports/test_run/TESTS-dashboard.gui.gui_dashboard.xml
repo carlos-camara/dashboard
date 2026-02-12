@@ -1,623 +1,190 @@
-<testsuite name="dashboard.gui.gui_dashboard.Dashboard View Validation" tests="8" errors="8" failures="0" skipped="0" time="39.968921" timestamp="2026-02-11T17:31:27.021281" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Header and Status Ticker" status="failed" time="3.099705"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 3.100s
-Location: features/dashboard/gui/gui_dashboard.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Header_and_Status_Ticker_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+<testsuite name="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" tests="8" errors="0" failures="0" skipped="0" time="39.55537" timestamp="2026-02-12T00:51:22.259942" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Validate Header and System Status" status="passed" time="4.530717"><system-out>
 <![CDATA[
 @scenario.begin
-  Scenario: Verify Header and Status Ticker
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 3.100s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    Then the page title should be "[LANG:common.page_title]" ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
-      | element         | value                            |
-      | header_subtitle | [LANG:dashboard.header.subtitle] |
-    And the system status should be valid ... skipped in 0.000s
-    Then the "header status" page should visually match the baseline image "dashboard_header_status" with a 15.0% tolerance ... skipped in 0.000s
+
+  @visual @smoke
+  Scenario: Validate Header and System Status
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.456s
+    And the "dashboard" page is displayed ... passed in 0.696s
+    And I wait for "dashboard" to be stable ... passed in 1.000s
+    Then the page title should be "[LANG:common.page_title]" ... passed in 0.009s
+    And the "header_subtitle" element should contain text "[LANG:dashboard.header.subtitle]" ... passed in 0.033s
+    And the system status should be valid ... passed in 0.024s
+    And the "header status" page should visually match the baseline image "dashboard_header_status" with a 15.0% tolerance ... passed in 0.313s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Header_and_Status_Ticker_I_navigate_to_the_dashboard_at.png
+00:50:43 [Dashboard Overview & Visual Integrity | Validate Header and System Status] INFO: Capturing visual snapshot: dashboard_header_status
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_dashboard_header_status.png
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Statistics Cards" status="failed" time="2.981027"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 2.981s
-Location: features/dashboard/gui/gui_dashboard.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Statistics_Cards_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Validate Statistics Key Metrics" status="passed" time="2.534624"><system-out>
 <![CDATA[
 @scenario.begin
-  Scenario: Verify Statistics Cards
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 2.981s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
+
+  @visual @critical @smoke
+  Scenario: Validate Statistics Key Metrics
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.725s
+    And the "dashboard" page is displayed ... passed in 0.363s
+    And I wait for "dashboard" to be stable ... passed in 1.000s
+    Then the following elements should contain these texts ... passed in 0.148s
       | element            | value                                   |
       | stats_passed_card  | [LANG:dashboard.stats.system_health]    |
       | stats_total_runs   | [LANG:dashboard.stats.total_executions] |
       | stats_pass_rate    | [LANG:dashboard.stats.pass_rate]        |
       | stats_avg_duration | [LANG:dashboard.stats.avg_latency]      |
-    Then the "stats grid" element should visually match the baseline image "dashboard_stats_grid" with a 15.0% tolerance ... skipped in 0.000s
+    And the "stats grid" element should visually match the baseline image "dashboard_stats_grid" with a 15.0% tolerance ... passed in 0.298s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Statistics_Cards_I_navigate_to_the_dashboard_at.png
+00:50:46 [Dashboard Overview & Visual Integrity | Validate Statistics Key Metrics] INFO: Capturing visual snapshot: dashboard_stats_grid
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_dashboard_stats_grid.png
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Timeline Controls" status="failed" time="3.948745"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 3.949s
-Location: features/dashboard/gui/gui_dashboard.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Timeline_Controls_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Validate Timeline Chart Interactions" status="passed" time="6.201476"><system-out>
 <![CDATA[
 @scenario.begin
-  Scenario: Verify Timeline Controls
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 3.949s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
-      | element          | value                             |
-      | timeline_heading | [LANG:dashboard.timeline.heading] |
-    And I should see at least 1 elements with selector "timeline_chart" ... skipped in 0.000s
-    When I switch the chart view to "[LANG:dashboard.timeline.volume]" ... skipped in 0.000s
-    And I wait for 1 seconds ... skipped in 0.000s
-    Then the "chart volume" element should visually match the baseline image "dashboard_chart_volume" with a 15.0% tolerance ... skipped in 0.000s
-    When I switch the chart view to "[LANG:dashboard.timeline.success]" ... skipped in 0.000s
-    And I wait for 1 seconds ... skipped in 0.000s
-    Then the "chart success" element should visually match the baseline image "dashboard_chart_success" with a 15.0% tolerance ... skipped in 0.000s
+
+  @interactive
+  Scenario: Validate Timeline Chart Interactions
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.832s
+    And the "dashboard" page is displayed ... passed in 0.527s
+    And I wait for "dashboard" to be stable ... passed in 1.001s
+    Then the "timeline_heading" element should contain text "[LANG:dashboard.timeline.heading]" ... passed in 0.044s
+    And I should see at least 1 elements with selector "timeline_chart" ... passed in 0.048s
+    When I switch the chart view to "[LANG:dashboard.timeline.volume]" ... passed in 0.313s
+    And I wait for "chart" to update ... passed in 1.000s
+    Then the "chart volume" element should visually match the baseline image "dashboard_chart_volume" with a 15.0% tolerance ... passed in 0.505s
+    When I switch the chart view to "[LANG:dashboard.timeline.success]" ... passed in 0.360s
+    And I wait for "chart" to update ... passed in 1.000s
+    Then the "chart success" element should visually match the baseline image "dashboard_chart_success" with a 15.0% tolerance ... passed in 0.572s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Timeline_Controls_I_navigate_to_the_dashboard_at.png
+00:50:50 [Dashboard Overview & Visual Integrity | Validate Timeline Chart Interactions] INFO: Capturing visual snapshot: dashboard_chart_volume
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_dashboard_chart_volume.png
+00:50:52 [Dashboard Overview & Visual Integrity | Validate Timeline Chart Interactions] INFO: Capturing visual snapshot: dashboard_chart_success
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_dashboard_chart_success.png
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Incident and Sector Lists" status="failed" time="7.248557"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 7.249s
-Location: features/dashboard/gui/gui_dashboard.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Incident_and_Sector_Lists_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Validate Incident and Recent Runs Panels" status="passed" time="3.932303"><system-out>
 <![CDATA[
 @scenario.begin
-  Scenario: Verify Incident and Sector Lists
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 7.249s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
+
+  @visual
+  Scenario: Validate Incident and Recent Runs Panels
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.266s
+    And the "dashboard" page is displayed ... passed in 0.755s
+    And I wait for "dashboard" to be stable ... passed in 1.003s
+    Then the following elements should contain these texts ... passed in 0.262s
       | element             | value                                |
       | recent_runs_heading | [LANG:dashboard.recent_runs.heading] |
       | incidents_heading   | [LANG:dashboard.incidents.heading]   |
-    Then the "lists panel" element should visually match the baseline image "dashboard_lists_panels" with a 15.0% tolerance ... skipped in 0.000s
+    And the "lists panel" element should visually match the baseline image "dashboard_lists_panels" with a 15.0% tolerance ... passed in 0.646s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Incident_and_Sector_Lists_I_navigate_to_the_dashboard_at.png
+00:50:56 [Dashboard Overview & Visual Integrity | Validate Incident and Recent Runs Panels] INFO: Capturing visual snapshot: dashboard_lists_panels
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_dashboard_lists_panels.png
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Endpoints Catalog and Scroll" status="failed" time="7.861403"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 7.861s
-Location: features/dashboard/gui/gui_dashboard.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Endpoints_Catalog_and_Scroll_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Validate Endpoints Catalog" status="passed" time="4.102268"><system-out>
 <![CDATA[
 @scenario.begin
-  Scenario: Verify Endpoints Catalog and Scroll
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 7.861s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    When I scroll to the bottom of the page ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
-      | element           | value                              |
-      | endpoints_heading | [LANG:dashboard.endpoints.heading] |
-    Then the "endpoints catalog" page should visually match the baseline image "dashboard_bottom_fullpage" with a 15.0% tolerance ... skipped in 0.000s
+
+  @visual
+  Scenario: Validate Endpoints Catalog
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.160s
+    And the "dashboard" page is displayed ... passed in 0.809s
+    And I wait for "dashboard" to be stable ... passed in 1.000s
+    When I scroll to the bottom of the page ... passed in 0.518s
+    Then the "endpoints_heading" element should contain text "[LANG:dashboard.endpoints.heading]" ... passed in 0.080s
+    And the "endpoints catalog" page should visually match the baseline image "dashboard_bottom_fullpage" with a 15.0% tolerance ... passed in 0.535s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Endpoints_Catalog_and_Scroll_I_navigate_to_the_dashboard_at.png
+00:51:01 [Dashboard Overview & Visual Integrity | Validate Endpoints Catalog] INFO: Capturing visual snapshot: dashboard_bottom_fullpage
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_dashboard_bottom_fullpage.png
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Global Actions and Filters" status="failed" time="6.605121"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 6.605s
-Location: features/dashboard/gui/gui_dashboard.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Global_Actions_and_Filters_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Verify Global Actions and Filters" status="passed" time="9.541251"><system-out>
 <![CDATA[
 @scenario.begin
+
+  @interactive
   Scenario: Verify Global Actions and Filters
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 6.605s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    When I apply the "[LANG:dashboard.filters.seven_days]" time filter ... skipped in 0.000s
-    And I wait for 1 seconds ... skipped in 0.000s
-    When I apply the "[LANG:dashboard.filters.thirty_days]" time filter ... skipped in 0.000s
-    And I wait for 1 seconds ... skipped in 0.000s
-    When I export the report ... skipped in 0.000s
-    And I wait for 1 seconds ... skipped in 0.000s
-    Then the "actions log" element should visually match the baseline image "dashboard_actions_log" with a 15.0% tolerance ... skipped in 0.000s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.313s
+    And the "dashboard" page is displayed ... passed in 0.831s
+    And I wait for "dashboard" to be stable ... passed in 1.003s
+    When I apply the "[LANG:dashboard.filters.seven_days]" time filter ... passed in 0.340s
+    And I wait for "dashboard" to update ... passed in 1.000s
+    When I apply the "[LANG:dashboard.filters.thirty_days]" time filter ... passed in 0.474s
+    And I wait for "dashboard" to update ... passed in 1.000s
+    When I export the report ... passed in 1.474s
+    Then the "actions log" element should visually match the baseline image "dashboard_actions_log" with a 15.0% tolerance ... passed in 2.105s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Global_Actions_and_Filters_I_navigate_to_the_dashboard_at.png
+00:51:10 [Dashboard Overview & Visual Integrity | Verify Global Actions and Filters] INFO: Capturing visual snapshot: dashboard_actions_log
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_dashboard_actions_log.png
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Mobile Viewport Layout" status="failed" time="5.309959"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 5.310s
-Location: features/dashboard/gui/gui_dashboard.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Mobile_Viewport_Layout_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Verify Mobile Viewport Layout" status="passed" time="3.896124"><system-out>
 <![CDATA[
 @scenario.begin
 
   @responsive @mobile
   Scenario: Verify Mobile Viewport Layout
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 5.310s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
-      | element         | value                            |
-      | header_subtitle | [LANG:dashboard.header.subtitle] |
-    Then the "mobile layout" page should visually match the baseline image "dashboard_responsiveness" with a 15.0% tolerance ... skipped in 0.000s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.512s
+    And the "dashboard" page is displayed ... passed in 0.751s
+    And I wait for "dashboard" to be stable ... passed in 1.000s
+    Then the "header_subtitle" element should contain text "[LANG:dashboard.header.subtitle]" ... passed in 0.081s
+    And the "mobile layout" page should visually match the baseline image "dashboard_responsiveness" with a 15.0% tolerance ... passed in 0.552s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Mobile_Viewport_Layout_I_navigate_to_the_dashboard_at.png
+00:51:16 [Dashboard Overview & Visual Integrity | Verify Mobile Viewport Layout] INFO: Capturing visual snapshot: dashboard_responsiveness
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_dashboard_responsiveness.png
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard View Validation" name="Verify Navigation to Incident Taxonomy" status="failed" time="2.914404"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 2.914s
-Location: features/dashboard/gui/gui_dashboard.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Navigation_to_Incident_Taxonomy_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+</system-out></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Navigate to Incident Taxonomy" status="passed" time="4.816608"><system-out>
 <![CDATA[
 @scenario.begin
-  Scenario: Verify Navigation to Incident Taxonomy
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 2.914s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    When I click on the "incidents_link" in the sidebar ... skipped in 0.000s
-    Then the "incidents" page is displayed ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
+
+  @navigation
+  Scenario: Navigate to Incident Taxonomy
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.029s
+    And the "dashboard" page is displayed ... passed in 2.420s
+    And I wait for "dashboard" to be stable ... passed in 1.000s
+    When I click on the "incidents_link" in the sidebar ... passed in 0.353s
+    Then the "incidents" page is displayed ... passed in 0.266s
+    And the following elements should contain these texts ... passed in 0.147s
       | element                | value                                 |
       | header_title           | [LANG:incidents.header.title]         |
       | header_subtitle        | [LANG:incidents.header.subtitle]      |
       | filters_scope_dropdown | [LANG:incidents.filters.global_scope] |
-    Then the "incidents taxonomy" page should visually match the baseline image "incident_taxonomy_page" with a 15.0% tolerance ... skipped in 0.000s
+    And the "incidents taxonomy" page should visually match the baseline image "incident_taxonomy_page" with a 15.0% tolerance ... passed in 0.601s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_Navigation_to_Incident_Taxonomy_I_navigate_to_the_dashboard_at.png
+00:51:21 [Dashboard Overview & Visual Integrity | Navigate to Incident Taxonomy] INFO: Capturing visual snapshot: incident_taxonomy_page
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_incident_taxonomy_page.png
 
 ]]>
 </system-out></testcase></testsuite>

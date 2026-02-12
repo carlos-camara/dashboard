@@ -1,86 +1,33 @@
-<testsuite name="dashboard.gui.gui_run_detail.Run Detail View Validation" tests="1" errors="1" failures="0" skipped="0" time="2.556271" timestamp="2026-02-11T17:32:49.137127" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_run_detail.Run Detail View Validation" name="Explore Run Detail View" status="failed" time="2.556271"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 2.556s
-Location: features/dashboard/gui/gui_run_detail.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Explore_Run_Detail_View_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+<testsuite name="dashboard.gui.gui_run_detail.Run Detail View Validation" tests="1" errors="0" failures="0" skipped="0" time="10.014526" timestamp="2026-02-12T00:53:31.324637" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_run_detail.Run Detail View Validation" name="Explore Run Detail View" status="passed" time="10.014526"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Explore Run Detail View
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 2.556s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
-    Then the "test_runs" page is displayed ... skipped in 0.000s
-    When I click on the "project_card" ... skipped in 0.000s
-    Then the "project_detail" page is displayed ... skipped in 0.000s
-    When I click on the "item" ... skipped in 0.000s
-    Then the "run_detail" page is displayed ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.215s
+    And the "dashboard" page is displayed ... passed in 1.256s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.381s
+    Then the "test_runs" page is displayed ... passed in 0.292s
+    When I click on the "project_card" ... passed in 1.392s
+    Then the "project_detail" page is displayed ... passed in 0.127s
+    When I click on the "item" ... passed in 0.816s
+    Then the "run_detail" page is displayed ... passed in 0.085s
+    Then the following elements should contain these texts ... passed in 0.062s
       | element     | value                            |
       | back_button | [LANG:run_detail.return_to_base] |
-    And I should see the text "[LANG:run_detail.success]" ... skipped in 0.000s
-    Then the "run detail" page should visually match the baseline image "run_detail_full_view" with a 5.0% tolerance ... skipped in 0.000s
-    When I click on the "filter_failed" ... skipped in 0.000s
-    And I wait for 1 seconds ... skipped in 0.000s
-    Then the "run detail filtered" page should visually match the baseline image "run_detail_filtered_failed" with a 5.0% tolerance ... skipped in 0.000s
+    And I should see the text "[LANG:run_detail.success]" ... passed in 0.210s
+    Then the "run detail" page should visually match the baseline image "run_detail_full_view" with a 5.0% tolerance ... passed in 0.852s
+    When I click on the "filter_failed" ... passed in 0.404s
+    And I wait for 1 seconds ... passed in 1.008s
+    Then the "run detail filtered" page should visually match the baseline image "run_detail_filtered_failed" with a 5.0% tolerance ... passed in 0.918s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Explore_Run_Detail_View_I_navigate_to_the_dashboard_at.png
+00:53:28 [Run Detail View Validation | Explore Run Detail View] INFO: Capturing visual snapshot: run_detail_full_view
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_run_detail_full_view.png
+00:53:29 [Run Detail View Validation | Explore Run Detail View] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
+00:53:30 [Run Detail View Validation | Explore Run Detail View] INFO: Capturing visual snapshot: run_detail_filtered_failed
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_run_detail_filtered_failed.png
 
 ]]>
 </system-out></testcase></testsuite>

@@ -1,168 +1,64 @@
-<testsuite name="dashboard.gui.gui_navigation.Application Navigation Validation" tests="2" errors="2" failures="0" skipped="0" time="9.541944" timestamp="2026-02-11T17:32:06.210551" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Navigate to all main sections" status="failed" time="6.3048"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 6.305s
-Location: features/dashboard/gui/gui_navigation.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Navigate_to_all_main_sections_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+<testsuite name="dashboard.gui.gui_navigation.Application Navigation Validation" tests="2" errors="0" failures="0" skipped="0" time="17.441049" timestamp="2026-02-12T00:52:33.737262" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Navigate to all main sections" status="passed" time="10.776371"><system-out>
 <![CDATA[
 @scenario.begin
+
+  @smoke
   Scenario: Navigate to all main sections
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 6.305s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
-    Then the "test_runs" page is displayed ... skipped in 0.000s
-    Then the "title" should contain the text "[LANG:navigation.test_runs]" ... skipped in 0.000s
-    Then the "test runs section" page should visually match the baseline image "nav_test_runs" with a 5.0% tolerance ... skipped in 0.000s
-    When I click on the "endpoints_link" in the sidebar ... skipped in 0.000s
-    Then the "endpoints_view" page is displayed ... skipped in 0.000s
-    Then the "title" should contain the text "[LANG:navigation.endpoints]" ... skipped in 0.000s
-    Then the "endpoints section" page should visually match the baseline image "nav_endpoints" with a 5.0% tolerance ... skipped in 0.000s
-    When I click on the "incidents_link" in the sidebar ... skipped in 0.000s
-    Then the "incidents" page is displayed ... skipped in 0.000s
-    Then the "header_title" should contain the text "[LANG:navigation.incidents]" ... skipped in 0.000s
-    Then the "incidents section" page should visually match the baseline image "nav_incidents" with a 5.0% tolerance ... skipped in 0.000s
-    When I click on the "dashboard_link" in the sidebar ... skipped in 0.000s
-    Then the "dashboard" page is displayed ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.905s
+    And the "dashboard" page is displayed ... passed in 1.161s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.426s
+    Then the "test_runs" page is displayed ... passed in 0.338s
+    Then the "title" should contain the text "[LANG:navigation.test_runs]" ... passed in 0.122s
+    Then the "test runs section" page should visually match the baseline image "nav_test_runs" with a 15.0% tolerance ... passed in 1.208s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.477s
+    Then the "endpoints_view" page is displayed ... passed in 0.187s
+    Then the "title" should contain the text "[LANG:navigation.endpoints]" ... passed in 0.111s
+    Then the "endpoints section" page should visually match the baseline image "nav_endpoints" with a 15.0% tolerance ... passed in 1.089s
+    When I click on the "incidents_link" in the sidebar ... passed in 0.414s
+    Then the "incidents" page is displayed ... passed in 0.295s
+    Then the "header_title" should contain the text "[LANG:navigation.incidents]" ... passed in 0.055s
+    Then the "incidents section" page should visually match the baseline image "nav_incidents" with a 15.0% tolerance ... passed in 1.071s
+    When I click on the "dashboard_link" in the sidebar ... passed in 0.425s
+    Then the "dashboard" page is displayed ... passed in 0.527s
+    Then the following elements should contain these texts ... passed in 0.084s
       | element         | value                            |
       | header_subtitle | [LANG:dashboard.header.subtitle] |
-    Then the "dashboard return" page should visually match the baseline image "nav_dashboard_return" with a 5.0% tolerance ... skipped in 0.000s
+    Then the "dashboard return" page should visually match the baseline image "nav_dashboard_return" with a 15.0% tolerance ... passed in 0.881s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Navigate_to_all_main_sections_I_navigate_to_the_dashboard_at.png
+00:52:19 [Application Navigation Validation | Navigate to all main sections] INFO: Capturing visual snapshot: nav_test_runs
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_nav_test_runs.png
+00:52:21 [Application Navigation Validation | Navigate to all main sections] INFO: Capturing visual snapshot: nav_endpoints
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_nav_endpoints.png
+00:52:23 [Application Navigation Validation | Navigate to all main sections] INFO: Capturing visual snapshot: nav_incidents
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_nav_incidents.png
+00:52:25 [Application Navigation Validation | Navigate to all main sections] INFO: Capturing visual snapshot: nav_dashboard_return
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_nav_dashboard_return.png
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Sidebar navigation persistence" status="failed" time="3.237144"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 3.237s
-Location: features/dashboard/gui/gui_navigation.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Sidebar_navigation_persistence_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+</system-out></testcase><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Sidebar navigation persistence" status="passed" time="6.664678"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Sidebar navigation persistence
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 3.237s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
-    When I click on the "dashboard_link" in the sidebar ... skipped in 0.000s
-    Then the "dashboard" page is displayed ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.141s
+    And the "dashboard" page is displayed ... passed in 1.399s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.476s
+    When I click on the "dashboard_link" in the sidebar ... passed in 0.792s
+    Then the "dashboard" page is displayed ... passed in 0.649s
+    Then the following elements should contain these texts ... passed in 0.110s
       | element         | value                            |
       | header_subtitle | [LANG:dashboard.header.subtitle] |
-    Then the "sidebar persistence" page should visually match the baseline image "nav_sidebar_persistence" with a 5.0% tolerance ... skipped in 0.000s
+    Then the "sidebar persistence" page should visually match the baseline image "nav_sidebar_persistence" with a 5.0% tolerance ... passed in 1.098s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Sidebar_navigation_persistence_I_navigate_to_the_dashboard_at.png
+00:52:32 [Application Navigation Validation | Sidebar navigation persistence] INFO: Capturing visual snapshot: nav_sidebar_persistence
+[Visual] Seeding baseline: /home/runner/work/dashboard/dashboard/features/resources/screenshots/baselines/{Driver_type}_nav_sidebar_persistence.png
 
 ]]>
 </system-out></testcase></testsuite>

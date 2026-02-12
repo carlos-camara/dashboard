@@ -1,228 +1,58 @@
-<testsuite name="dashboard.gui.verify_variables.Variable Transformation Validation" tests="4" errors="4" failures="0" skipped="0" time="24.606438" timestamp="2026-02-11T17:33:34.982699" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify basic generation tokens" status="failed" time="5.337892"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 5.338s
-Location: features/dashboard/gui/verify_variables.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_basic_generation_tokens_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+<testsuite name="dashboard.gui.verify_variables.Variable Transformation Validation" tests="4" errors="0" failures="0" skipped="0" time="30.940489" timestamp="2026-02-12T00:54:28.247601" hostname="runnervmwffz4"><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify basic generation tokens" status="passed" time="7.090542"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Verify basic generation tokens
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 5.338s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
-    Then the "test_runs" page is displayed ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.479s
+    And the "dashboard" page is displayed ... passed in 1.808s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.505s
+    Then the "test_runs" page is displayed ... passed in 0.352s
+    Then the following elements should contain these texts ... passed in 0.061s
       | element      | value   |
       | search_input | [EMPTY] |
-    When I type "[STRING_WITH_LENGTH_10]" into the "search_input" ... skipped in 0.000s
-    And I wait for 1 seconds ... skipped in 0.000s
-    Then I should see the "search_input" ... skipped in 0.000s
+    When I type "[STRING_WITH_LENGTH_10]" into the "search_input" ... passed in 0.778s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then I should see the "search_input" ... passed in 0.107s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_basic_generation_tokens_I_navigate_to_the_dashboard_at.png
+00:54:00 [Variable Transformation Validation | Verify basic generation tokens] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify unique and random tokens" status="failed" time="8.773072"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 8.773s
-Location: features/dashboard/gui/verify_variables.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_unique_and_random_tokens_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+</system-out></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify unique and random tokens" status="passed" time="8.531342"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Verify unique and random tokens
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 8.773s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
-    Then the "test_runs" page is displayed ... skipped in 0.000s
-    When I type "[UUID]" into the "search_input" ... skipped in 0.000s
-    And I wait for 1 seconds ... skipped in 0.000s
-    When I type "[RANDOM]" into the "search_input" ... skipped in 0.000s
-    And I wait for 1 seconds ... skipped in 0.000s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.126s
+    And the "dashboard" page is displayed ... passed in 1.473s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.793s
+    Then the "test_runs" page is displayed ... passed in 0.438s
+    When I type "[UUID]" into the "search_input" ... passed in 1.299s
+    And I wait for 1 seconds ... passed in 1.003s
+    When I type "[RANDOM]" into the "search_input" ... passed in 0.395s
+    And I wait for 1 seconds ... passed in 1.004s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_unique_and_random_tokens_I_navigate_to_the_dashboard_at.png
+00:54:08 [Variable Transformation Validation | Verify unique and random tokens] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
+00:54:09 [Variable Transformation Validation | Verify unique and random tokens] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify temporal tokens" status="failed" time="5.339709"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 5.340s
-Location: features/dashboard/gui/verify_variables.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_temporal_tokens_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+</system-out></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify temporal tokens" status="passed" time="7.678967"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Verify temporal tokens
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 5.340s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    Then the page title should be "QA Hub - Execution Dashboard" ... skipped in 0.000s
-    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
-    Then the "test_runs" page is displayed ... skipped in 0.000s
-    When I type "[NOW(%Y)]" into the "search_input" ... skipped in 0.000s
-    And I wait for 1 seconds ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 3.227s
+    And the "dashboard" page is displayed ... passed in 1.755s
+    Then the page title should be "QA Hub - Execution Dashboard" ... passed in 0.054s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.554s
+    Then the "test_runs" page is displayed ... passed in 0.287s
+    When I type "[NOW(%Y)]" into the "search_input" ... passed in 0.742s
+    And I wait for 1 seconds ... passed in 1.002s
+    Then the following elements should contain these texts ... passed in 0.058s
       | element      | value     |
       | search_input | [NOW(%Y)] |
 
@@ -230,82 +60,25 @@ Captured stdout:
 --------------------------------------------------------------------------------
 
 Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_temporal_tokens_I_navigate_to_the_dashboard_at.png
+00:54:18 [Variable Transformation Validation | Verify temporal tokens] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify transformation functions" status="failed" time="5.155766"><error type="WebDriverException" message="Message: unknown error: net::ERR_CONNECTION_REFUSED&#10;  (Session info: chrome=144.0.7559.133)&#10;Stacktrace:&#10;Symbols not available. Dumping unresolved backtrace:&#10;&#09;0x7ff623cbf3d5&#10;&#09;0x7ff623cbf430&#10;&#09;0x7ff623a610bd&#10;&#09;0x7ff623a5dbe4&#10;&#09;0x7ff623a4e071&#10;&#09;0x7ff623a4ff5f&#10;&#09;0x7ff623a4e611&#10;&#09;0x7ff623a4dddb&#10;&#09;0x7ff623a4da91&#10;&#09;0x7ff623a4b6c1&#10;&#09;0x7ff623a4be22&#10;&#09;0x7ff623a65366&#10;&#09;0x7ff623b0ab34&#10;&#09;0x7ff623ae589a&#10;&#09;0x7ff623b09d08&#10;&#09;0x7ff623aacb0c&#10;&#09;0x7ff623aada53&#10;&#09;0x7ff623f9b470&#10;&#09;0x7ff623f9586d&#10;&#09;0x7ff623fb621a&#10;&#09;0x7ff623cdb235&#10;&#09;0x7ff623ce3a5c&#10;&#09;0x7ff623cc8844&#10;&#09;0x7ff623cc89f6&#10;&#09;0x7ff623caeb87&#10;&#09;0x7ffd91817374&#10;&#09;0x7ffd9271cc91&#10;">
-<![CDATA[
-Failing step: Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 5.156s
-Location: features/dashboard/gui/verify_variables.feature:5
-Traceback (most recent call last):
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
-    match.run(runner.context)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
-    self.func(context, *args, **kwargs)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 463, in step_navigate_to_dashboard
-    context.driver.get(url)
-    ~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
-    self.execute(Command.GET, {"url": url})
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
-    self.error_handler.check_response(response)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=144.0.7559.133)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff623cbf3d5
-	0x7ff623cbf430
-	0x7ff623a610bd
-	0x7ff623a5dbe4
-	0x7ff623a4e071
-	0x7ff623a4ff5f
-	0x7ff623a4e611
-	0x7ff623a4dddb
-	0x7ff623a4da91
-	0x7ff623a4b6c1
-	0x7ff623a4be22
-	0x7ff623a65366
-	0x7ff623b0ab34
-	0x7ff623ae589a
-	0x7ff623b09d08
-	0x7ff623aacb0c
-	0x7ff623aada53
-	0x7ff623f9b470
-	0x7ff623f9586d
-	0x7ff623fb621a
-	0x7ff623cdb235
-	0x7ff623ce3a5c
-	0x7ff623cc8844
-	0x7ff623cc89f6
-	0x7ff623caeb87
-	0x7ffd91817374
-	0x7ffd9271cc91
-
-
-Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_transformation_functions_I_navigate_to_the_dashboard_at.png]]>
-</error><system-out>
+</system-out></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify transformation functions" status="passed" time="7.639638"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Verify transformation functions
-    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... failed in 5.156s
-    And the "dashboard" page is displayed ... skipped in 0.000s
-    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
-    Then the "test_runs" page is displayed ... skipped in 0.000s
-    When I type "[UPPER:qa-hub]" into the "search_input" ... skipped in 0.000s
-    And I wait for 1 seconds ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 2.611s
+    And the "dashboard" page is displayed ... passed in 1.138s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.300s
+    Then the "test_runs" page is displayed ... passed in 0.303s
+    When I type "[UPPER:qa-hub]" into the "search_input" ... passed in 0.622s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the following elements should contain these texts ... passed in 0.077s
       | element      | value  |
       | search_input | QA-HUB |
-    When I type "[STR:[INT:123]]" into the "search_input" ... skipped in 0.000s
-    And I wait for 1 seconds ... skipped in 0.000s
-    Then the following elements should contain these texts ... skipped in 0.000s
+    When I type "[STR:[INT:123]]" into the "search_input" ... passed in 0.518s
+    And I wait for 1 seconds ... passed in 1.005s
+    Then the following elements should contain these texts ... passed in 0.066s
       | element      | value |
       | search_input | 123   |
 
@@ -313,7 +86,8 @@ Captured stdout:
 --------------------------------------------------------------------------------
 
 Captured stdout:
-[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-11_17-27-47/FAILED_Verify_transformation_functions_I_navigate_to_the_dashboard_at.png
+00:54:25 [Variable Transformation Validation | Verify transformation functions] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
+00:54:27 [Variable Transformation Validation | Verify transformation functions] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
 
 ]]>
 </system-out></testcase></testsuite>
