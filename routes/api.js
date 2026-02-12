@@ -15,6 +15,19 @@ const SWAGGERS_DIR = path.join(__dirname, "..", "swaggers");
 
 const router = express.Router();
 
+// Helper to find latest performance run
+const getLatestPerfFolder = () => {
+    const perfDir = path.join(__dirname, "..", "reports", "performance_run");
+    if (!fs.existsSync(perfDir)) return null;
+
+    const folders = fs.readdirSync(perfDir)
+        .filter(f => f.startsWith('performance_') && fs.statSync(path.join(perfDir, f)).isDirectory())
+        .sort()
+        .reverse();
+
+    return folders.length > 0 ? path.join(perfDir, folders[0]) : null;
+};
+
 router.get("/health", (req, res) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
@@ -94,6 +107,96 @@ router.delete("/runs", (req, res) => {
     } catch (e) {
         res.status(500).json({ error: e.message });
     }
+});
+
+router.delete("/endpoints", (req, res) => {
+    try {
+        const { id } = req.query;
+        if (!id) return res.status(400).json({ error: "Missing id parameter" });
+        db.prepare("DELETE FROM endpoints WHERE id = ?").run(id);
+        res.json({ success: true, message: `Endpoint ${id} deleted.` });
+    } catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+});
+
+router.get("/performance/latest", (req, res) => {
+    const latestDir = getLatestPerfFolder();
+    if (!latestDir) return res.json({ found: false, stats: [], history: [] });
+
+    try {
+        const statsPath = path.join(latestDir, "seed_stats.csv");
+        const historyPath = path.join(latestDir, "seed_stats_history.csv");
+
+        let stats = [];
+        if (fs.existsSync(statsPath)) {
+            const content = fs.readFileSync(statsPath, 'utf8');
+            const lines = content.split('\n').filter(l => l.trim());
+            const headers = lines[0].split(',').map(h => h.replace(/"/g, ''));
+
+            stats = lines.slice(1).map(line => {
+                const values = line.split(',').map(v => v.replace(/"/g, ''));
+                return {
+                    method: values[0],
+                    name: values[1],
+                    requests: parseInt(values[2]),
+                    failures: parseInt(values[3]),
+                    median: parseFloat(values[4]),
+                    avg: parseFloat(values[5]),
+                    min: parseFloat(values[6]),
+                    max: parseFloat(values[7]),
+                    contentSize: parseFloat(values[8]),
+                    rps: parseFloat(values[9]),
+                    failPerSec: parseFloat(values[10]),
+                    p50: parseFloat(values[11]),
+                    p95: parseFloat(values[16])
+                };
+            });
+        }
+
+        const timestampStr = path.basename(latestDir).replace('performance_', '').replace(/_/g, 'T').replace(/-/g, ':');
+        const reportUrl = `/reports/performance_run/${path.basename(latestDir)}/index.html`;
+
+        res.json({
+            found: true,
+            stats,
+            reportUrl,
+            timestamp: new Date(timestampStr).toISOString()
+        });
+    } catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+});
+
+router.get("/spec", (req, res) => {
+    const { method, path: epPath } = req.query;
+    if (!method || !epPath) return res.status(400).json({ error: "Missing method or path" });
+
+    const filename = `${method.toLowerCase()}-${epPath.replace(/\//g, '-').replace(/^-/, '')}.json`;
+    const fullPath = path.join(SWAGGERS_DIR, filename);
+
+    if (fs.existsSync(fullPath)) {
+        try {
+            const content = JSON.parse(fs.readFileSync(fullPath, 'utf8'));
+            return res.json({ found: true, content });
+        } catch (e) {
+            return res.status(500).json({ error: "Failed to parse spec" });
+        }
+    }
+    res.json({ found: false });
+});
+
+router.post("/spec", multer({ dest: 'uploads/' }).single('file'), (req, res) => {
+    const { method, path: epPath } = req.body;
+    if (!req.file || !method || !epPath) return res.status(400).json({ error: "Missing file, method or path" });
+
+    const filename = `${method.toLowerCase()}-${epPath.replace(/\//g, '-').replace(/^-/, '')}.json`;
+    const targetPath = path.join(SWAGGERS_DIR, filename);
+
+    if (!fs.existsSync(SWAGGERS_DIR)) fs.mkdirSync(SWAGGERS_DIR);
+
+    fs.renameSync(req.file.path, targetPath);
+    res.json({ success: true });
 });
 
 router.get("/spec/project/:projectName", (req, res) => {
