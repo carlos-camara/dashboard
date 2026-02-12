@@ -13,6 +13,8 @@ import {
 } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import { generateExecutiveReport } from '../services/reportGenerator';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Skeleton, DashboardSkeleton } from './Skeleton';
 
 interface DashboardViewProps {
   refreshKey?: number;
@@ -269,12 +271,14 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
         </header>
 
         {(!stats && !systemStatus.includes("OFFLINE")) ? (
-          <div className="flex flex-col items-center justify-center py-20 text-slate-500">
-            <Loader2 size={48} className="animate-spin mb-4 text-indigo-500" />
-            <p className="font-mono text-xs tracking-[0.2em] animate-pulse">ESTABLISHING DATA UPLINK...</p>
-          </div>
+          <DashboardSkeleton />
         ) : (
-          <>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="space-y-6 md:space-y-8"
+          >
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {[
@@ -283,7 +287,13 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
                 { label: 'Pass Rate', value: `${safeStats.passRate}%`, icon: ShieldCheck, color: 'cyan' },
                 { label: 'Avg Latency', value: `${safeStats.avgDuration}ms`, icon: Clock, color: 'indigo' }
               ].map((stat, i) => (
-                <div key={i} className="group relative glass-panel p-4 md:p-6 rounded-3xl overflow-hidden hover:bg-slate-900/60 transition-all hover:scale-[1.02] hover:shadow-2xl hover:shadow-indigo-500/10 hover:border-indigo-500/30">
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="group relative glass-panel p-4 md:p-6 rounded-3xl overflow-hidden hover:bg-slate-900/60 transition-all hover:scale-[1.02] hover:shadow-2xl hover:shadow-indigo-500/10 hover:border-indigo-500/30"
+                >
                   <div className={`absolute -right-4 -top-4 w-32 h-32 bg-${stat.color}-500/10 rounded-full blur-3xl group-hover:bg-${stat.color}-500/20 transition-all`}></div>
                   <div className="relative z-10">
                     <div className="flex justify-between items-start mb-4">
@@ -292,13 +302,18 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
                     </div>
                     <h3 className="text-3xl md:text-4xl font-black text-white tracking-tight">{stat.value}</h3>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
 
             {/* Main Chart Area */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
-              <div className="lg:col-span-2 glass-panel p-4 md:p-8 rounded-[2rem] md:rounded-[2.5rem] relative overflow-hidden">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.4 }}
+                className="lg:col-span-2 glass-panel p-4 md:p-8 rounded-[2rem] md:rounded-[2.5rem] relative overflow-hidden"
+              >
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-8 gap-4">
                   <div>
                     <h3 className="text-xl md:text-2xl font-black text-white flex items-center gap-3">
@@ -386,7 +401,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Sector Integrity */}
               <div className="glass-panel p-4 md:p-8 rounded-[2rem] md:rounded-[2.5rem] flex flex-col h-full">
@@ -466,7 +481,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
                 </div>
               </div>
             </div>
-          </>
+          </motion.div>
         )}
       </div>
 
