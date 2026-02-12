@@ -12,22 +12,18 @@ We use a **YAML-driven Locator System** to ensure our tests are resilient to UI 
 
 ## 📂 System Structure
 
+The locator registry is consumed by the **QA Hub Framework** to provide dynamic element resolution:
+
 ```text
 features/
 ├── page_objects/
 │   ├── locators/               # 🚩 The Single Source of Truth
 │   │   ├── dashboard.yaml      # Dashboard page locators
 │   │   ├── incidents.yaml      # Incidents page locators 
-│   │   ├── endpoints_view.yaml # Endpoints catalog locators
 │   │   └── ...                 # One YAML per page/view
 │   └── README.md               # This file
-├── config/
-│   └── properties.cfg          # Driver and framework configuration
-├── language/
-│   ├── en.yaml                 # English i18n strings
-│   └── es.yaml                 # Spanish i18n strings
-└── steps/
-    └── step_gui_interactions.py  # Project-specific steps only
+├── steps/
+│   └── gui_custom_steps.py     # Custom project logic
 ```
 
 ## 📝 Adding New Locators

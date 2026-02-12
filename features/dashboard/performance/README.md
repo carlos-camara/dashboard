@@ -31,9 +31,11 @@ locust -f features/dashboard/performance/locustfile.py --host http://localhost:3
 
 ---
 
-## 📈 Metric Collection
+## 📊 Metric Collection & Intelligence
 
-The performance results are automatically captured by our Unified CI Suite:
+The performance results are automatically captured and analyzed:
+- **Drift Awareness**: Automatic detection of performance degradation vs. technical baselines.
+- **Mermaid Visualization**: Dynamic generation of latency trend diagrams in reports.
 - **Location**: `reports/performance_run/`
 - **Output**: JSON distribution data and aggregate statistics.
 - **Reporting**: Performance trends are embedded into the **QA Command Center** dashboard for historical analysis.
@@ -48,6 +50,4 @@ Modify `locustfile.py` to adjust:
 - **Tasks**: Weighting of specific endpoint interactions.
 
 ---
-<div align="center">
-  <i>Ensuring Zero-Latency Engineering Excellence</i>
-</div>
+

@@ -55,8 +55,9 @@ All GUI tests automatically capture evidence:
 ---
 
 ## 🧪 Step Registry
-GUI-specific steps are modularized for reusability:
-- [gui_custom_steps.py](../../../steps/gui_custom_steps.py): Project-specific GUI and PDF validation steps.
-- [api_steps.py](../../../steps/api_steps.py): JSON path and API result assertions.
-- [step_gui_validation.py](../../../steps/step_gui_validation.py): Basic assertions (title, presence, text).
-- [step_gui_interactions.py](../../../steps/step_gui_interactions.py): Clicks, hovers, scroll actions, and screenshot logic.
+
+GUI-specific steps are powered by the **QA Hub Framework** core:
+- **Core Navigation**: `qa_framework.steps.gui_steps`
+- **Visual Validation**: `qa_framework.steps.visual_steps`
+- **PDF Intelligence**: `qa_framework.steps.pdf_steps` (now feature-rich with self-healing downloads).
+- **Custom Logic**: [gui_custom_steps.py](../../../steps/gui_custom_steps.py) (project-specific overrides).

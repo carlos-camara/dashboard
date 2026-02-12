@@ -1,5 +1,8 @@
 # Contributor Covenant Code of Conduct
 
+> [!NOTE]
+> We value our community and are committed to maintaining a professional, welcoming, and inclusive environment for everyone.
+
 ## Our Pledge
 
 We as members, contributors, and leaders pledge to make participation in our

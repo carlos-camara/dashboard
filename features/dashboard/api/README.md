@@ -4,10 +4,10 @@ The **Automation Engineering Intelligence** layer for API validation. We utilize
 
 ## 🏛 Architecture
 
-Our API testing strategy is built on **decoupled assertions** and **semantic feature definitions**:
+Our API testing strategy is powered by the **[QA Hub Framework](https://github.com/carlos-camara/qa-hub-framework)** and built on **decoupled assertions**:
 - **Behavior Driven**: Scenarios described in Gherkin for transparency across stakeholders.
-- **Modular Steps**: Shared step registry for rapid test development.
-- **Environment Aware**: Dynamic configuration management across staging and production.
+- **Framework Core**: Utilizes standard framework steps for JSON validation and system health.
+- **Modular Extensions**: Project-specific steps for complex business logic.
 
 ---
 

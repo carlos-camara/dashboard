@@ -28,11 +28,14 @@ jobs:
           python-version: "3.11"
           node-version: "20"
 
-      - name: Setup Services
-        uses: carlos-camara/qa-hub-actions/setup-services@main
+      - name: Prep Infrastructure
+        uses: carlos-camara/qa-hub-actions/environment-health-check@main
         with:
+          task: 'setup'
           start-services-command: "npm run start-backend > backend.log 2>&1 & npm run dev > frontend.log 2>&1 &"
           health-check-urls: "http://localhost:3000 http://localhost:3001/api/health"
+          db-path: "data/database.sqlite"
+          ports-to-clean: "3000 3001"
 
       - name: Execute Test Suite
         uses: carlos-camara/qa-hub-actions/run-tests@main
@@ -51,4 +54,11 @@ jobs:
           performance-reports-path: "reports/performance_run/"
           upload-artifacts: true
           publish-results: true
+
+      - name: Environment Teardown
+        if: always()
+        uses: carlos-camara/qa-hub-actions/environment-health-check@main
+        with:
+          task: 'teardown'
+          ports-to-clean: "3000 3001"
 

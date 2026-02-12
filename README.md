@@ -65,45 +65,45 @@ Export executive-ready artifacts with a single click. These **Intelligent Dossie
 - **Visual Evidence Engine**: Embedded high-resolution screenshots for every failure.
 - **SLA Violation Logs**: Detailed breakdown of performance threshold breaches.
 
+### 🧠 Tactical Intelligence Actions
+Automated workflows that extend the capabilities of the core dashboard:
+- **Environment Guardian**: Automated health checks, DB integrity audits, and safe teardowns.
+- **Visual Sentinel**: Automated regression detection with visual masking and artifact promotion.
+- **Release Oracle**: Automated discovery and publishing of QA release notes based on BDD coverage.
+
 ---
 
-## 🏗️ Architecture & Decoupled Stack
+## 🏗️ Decoupled Architecture & Shared Core
 
-We leverage a modern, decoupled architecture designed for scale and zero-downtime reliability.
+We leverage a modern, **decoupled architecture** designed for high-availability engineering teams. The core automation logic is powered by the **[QA Hub Framework](https://github.com/carlos-camara/qa-hub-framework)**, a centralized Python package.
 
 ```mermaid
 graph TD
-    subgraph "Local / Runner"
+    subgraph "Local / CI Runner"
         A["GitHub Actions CI"] -->|Triggers| B("Behave API Test")
         A -->|Triggers| C("Selenium GUI Test")
         A -->|Triggers| L["Locust Load Test"]
     end
 
-    subgraph "Testing Architecture"
+    subgraph "Core Framework"
+        FW["QA Hub Framework (pip)"] -->|Provides| B & C & L
+    end
+
+    subgraph "Dashboard Architecture"
         B -->|Defined in| B_PATH["features/dashboard/api/"]
         C -->|Defined in| C_PATH["features/dashboard/gui/"]
         L -->|Defined in| L_PATH["features/dashboard/performance/"]
     end
 
-    subgraph "Shared Action Hub"
-        D["QA Hub Shared Actions"] -->|Standardizes| A
-    end
-
-    subgraph "Data Storage"
-        B & C & L -->|Artifacts| E["JUnit XML / JSON"]
-        E -->|Aggregated by| S3["AWS S3 History"]
-        E -->|Committed to| DB["SQLite Result DB"]
-    end
-
-    subgraph "Cloud Presentation"
-        DB -->|Served by| G["Render Backend API"]
-        G -->|Consumes| H["Vite React Dashboard"]
+    subgraph "Engineering Presentation"
+        DB["SQLite Result DB"] -->|Served by| G["Express Backend"]
+        G -->|Consumes| H["Vite + React 19 UI"]
         H -->|Hosted on| P["GitHub Pages (Global CDN)"]
     end
     
     style G fill:#6d28d9,color:#fff
     style P fill:#2563eb,color:#fff
-    style D fill:#f59e0b,color:#000
+    style FW fill:#38bdf8,color:#000
 ```
 
 ---
