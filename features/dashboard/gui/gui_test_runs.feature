@@ -21,11 +21,23 @@ Feature: Test Runs View Validation
     Then the "project_detail" page is displayed
     Then the "projectName" should be visible
     And I should see at least 1 elements with selector "stability_chart"
-    Then the "test runs redirection" page should visually match the baseline image "test_runs_project_redirection" with a 5.0% tolerance
+    Then the "test runs redirection" page should visually match the baseline image "test_runs_project_redirection" without elements and with a 5.0% tolerance
+      | element               |
+      | stability_chart       |
+      | stability_score_value |
+      | velocity_trend        |
 
+  @visual
   Scenario: Verify Project List and Back Navigation
     When I click on the "test_runs_link" in the sidebar
     Then the "test_runs" page is displayed
+    Then the "test runs list" page should visually match the baseline image "nav_test_runs" without elements and with a 5.0% tolerance
+      | element               |
+      | active_projects_count |
+      | project_flights_count |
+      | project_last_activity |
+      | project_pass_rate     |
+    
     When I click on the "project_card"
     Then the "project_detail" page is displayed
     Then the following elements should contain these texts

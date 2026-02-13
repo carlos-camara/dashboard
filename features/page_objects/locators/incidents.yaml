@@ -14,10 +14,25 @@ incidents:
     by: xpath
     value: //*[contains(normalize-space(.), 'Total Incidents')]
     wait_load: false
+  stats_total_value:
+    type: text
+    by: xpath
+    value: //p[contains(normalize-space(.), 'Total Incidents')]/following-sibling::p
+    wait_load: false
   stats_sectors_sign:
     type: text
     by: xpath
     value: //*[contains(normalize-space(.), 'Affected Sectors')]
+    wait_load: false
+  stats_sectors_value:
+    type: text
+    by: xpath
+    value: //p[contains(normalize-space(.), 'Affected Sectors')]/following-sibling::p
+    wait_load: false
+  stats_unique_value:
+    type: text
+    by: xpath
+    value: //p[contains(normalize-space(.), 'Unique Signatures')]/following-sibling::p
     wait_load: false
   filters_scope_dropdown:
     type: button
@@ -32,15 +47,50 @@ incidents:
   list_item:
     type: webelement
     by: css
-    value: ".glass-panel:has(.cursor-pointer)"
+    value: "div.glass-panel:not(:has(h1))"
     wait_load: false
-  list_expand_button:
-    type: button
+  list_incident_timestamp:
+    type: text
+    by: xpath
+    value: //span[contains(text(), 'Last seen:')]
+    wait_load: false
+  list_incident_frequency:
+    type: text
+    by: xpath
+    value: //p[contains(@class, 'text-2xl') and contains(@class, 'text-rose-400')]
+    wait_load: false
+  list_incident_message:
+    type: text
+    by: xpath
+    value: //h3[contains(@class, 'text-lg') and contains(@class, 'font-bold')]
+    wait_load: false
+  list_incident_summary:
+    type: webelement
+    by: xpath
+    value: //div[contains(@class, 'glass-panel')]//div[contains(@class, 'cursor-pointer') and contains(@class, 'justify-between')]
+    wait_load: false
+  list_incident_trend:
+    type: webelement
     by: css
-    value: ".glass-panel .cursor-pointer"
+    value: ".recharts-responsive-container"
     wait_load: false
   list_details_context:
     type: text
     by: xpath
     value: //*[contains(normalize-space(.), 'Stack Trace Context')]
+    wait_load: false
+  ai_analysis_text:
+    type: text
+    by: xpath
+    value: //*[contains(normalize-space(.), 'AI Root Cause Analysis')]/parent::div//p
+    wait_load: false
+  ai_confidence_value:
+    type: text
+    by: xpath
+    value: //span[contains(text(), 'CONFIDENCE:')]
+    wait_load: false
+  incident_expanded:
+    type: webelement
+    by: xpath
+    value: //div[contains(@class, 'glass-panel') and .//div[contains(., 'Stack Trace Context')]]
     wait_load: false

@@ -29,7 +29,11 @@ Feature: Endpoints Catalog & Insights
     And I should see the text "[LANG:endpoints.detail.performance_insights]"
     And I should see the text "[LANG:endpoints.detail.live_discovery]"
     
-    Then the "endpoint detail" page should visually match the baseline image "endpoints_deep_detail" with a 15.0% tolerance
+    Then the "endpoint detail" page should visually match the baseline image "endpoints_deep_detail" without elements and with a 15.0% tolerance
+      | element            |
+      | success_rate_value |
+      | avg_latency_value  |
+      | performance_card   |
     
     When I click on the "back_button"
     Then the "endpoints_view" page is displayed

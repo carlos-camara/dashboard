@@ -14,3 +14,13 @@ endpoint_detail:
     by: xpath
     value: "//h3[contains(., 'Performance Insights')]/ancestor::div[contains(@class, 'border-indigo-500/30')]"
     wait_load: false
+  success_rate_value:
+    type: text
+    by: xpath
+    value: //h3[contains(., 'Success Rate')]/ancestor::div[contains(@class, 'glass-panel')]//h3[contains(@class, 'text-3xl')]
+    wait_load: false
+  avg_latency_value:
+    type: text
+    by: xpath
+    value: //h3[contains(., 'Avg Latency')]/ancestor::div[contains(@class, 'glass-panel')]//h3[contains(@class, 'text-3xl')]
+    wait_load: false

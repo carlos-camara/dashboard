@@ -16,7 +16,27 @@ Feature: Run Detail View Validation
       | element     | value                          |
       | back_button | [LANG:run_detail.return_to_base] |
     And I should see the text "[LANG:run_detail.success]"
-    Then the "run detail" page should visually match the baseline image "run_detail_full_view" with a 5.0% tolerance
+    Then the "run detail" page should visually match the baseline image "run_detail_full_view" without elements and with a 5.0% tolerance
+      | element              |
+      | score_percentage     |
+      | metrics_duration     |
+      | metrics_avg_duration |
+      | metrics_steps        |
+      | metrics_timestamp    |
+      | passed_count         |
+      | failed_count         |
+      | scenario_card        |
+
     When I click on the "filter_failed"
     And I wait for 1 seconds
-    Then the "run detail filtered" page should visually match the baseline image "run_detail_filtered_failed" with a 5.0% tolerance
+    Then the "run detail filtered" page should visually match the baseline image "run_detail_filtered_failed" without elements and with a 5.0% tolerance
+      | element               |
+      | score_percentage      |
+      | metrics_duration      |
+      | metrics_avg_duration  |
+      | metrics_steps         |
+      | metrics_timestamp     |
+      | passed_count          |
+      | failed_count          |
+      | failure_analysis_log  |
+      | scenario_card         |
