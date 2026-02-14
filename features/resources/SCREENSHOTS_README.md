@@ -17,6 +17,12 @@ Then I take a full page screenshot named "dashboard_complete"
 > - **Filename**: `FAILED_{scenario_name}_{timestamp}.png`
 > - **Visibility**: The screenshot path is printed directly in the test log for immediate discovery.
 
+### 3. Visual Regression Masking
+For stability, we implement **Granular Element Masking** to block dynamic content (timestamps, random charts, etc.) from visual comparisons.
+- **Mechanism**: Black rectangles are drawn over specific elements before comparison.
+- **Config**: Controlled via `without elements` in Gherkin steps.
+- **Baselines**: Stored in `features/resources/screenshots/baselines/`.
+
 ---
 
 ## 📂 Storage Architecture

@@ -65,4 +65,4 @@ GUI-specific steps are powered by the **QA Hub Framework** core:
 - **Core Navigation**: `qa_framework.steps.gui_steps`
 - **Visual Validation**: `qa_framework.steps.visual_steps`
 - **PDF Intelligence**: `qa_framework.steps.pdf_steps` (now feature-rich with self-healing downloads).
-- **Custom Logic**: [gui_custom_steps.py](../../../steps/gui_custom_steps.py) (project-specific overrides).
+- **Project Specifics**: `features/steps/step_gui_interactions.py` (Business logic overrides).

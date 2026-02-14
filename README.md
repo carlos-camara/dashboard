@@ -31,6 +31,7 @@ This is more than a dashboard; it is a **mission-critical ecosystem** for modern
 - **Unified Vision**: Aggregated reporting for API (Behave) and GUI (Selenium) test suites in a single pane.
 - **High-Fidelity Animations**: Smooth transitions powered by Framer Motion for a premium user experience.
 - **Modular Architecture**: Clean separation of concerns between DB, S3 Sync, and XML Parsing.
+- **Visual Intelligence**: Advanced visual regression testing with dynamic element masking (Charts, Timestamps, Random Data).
 - **Governed Maintenance**: Automated dependency updates via Dependabot and clear ownership via CODEOWNERS.
 - **Enterprise-Grade CI**: Fully automated lifecycle from linting to report archival in AWS S3.
 

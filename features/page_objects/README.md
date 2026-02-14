@@ -23,7 +23,7 @@ features/
 │   │   └── ...                 # One YAML per page/view
 │   └── README.md               # This file
 ├── steps/
-│   └── gui_custom_steps.py     # Custom project logic
+│   └── step_gui_interactions.py # Project-specific interaction logic
 ```
 
 ## 📝 Adding New Locators
