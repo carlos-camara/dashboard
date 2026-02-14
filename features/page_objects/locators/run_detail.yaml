@@ -1,5 +1,10 @@
 ---
 run_detail:
+  run_detail_view:
+    type: webelement
+    by: xpath
+    value: //div[contains(@class, 'selection:bg-indigo-500/30')]
+    wait_load: true
   back_button:
     type: button
     by: xpath
