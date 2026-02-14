@@ -1,3 +1,4 @@
+---
 incidents:
   header_title:
     type: text
@@ -17,7 +18,8 @@ incidents:
   stats_total_value:
     type: text
     by: xpath
-    value: //p[contains(normalize-space(.), 'Total Incidents')]/following-sibling::p
+    value: >-
+      //p[contains(normalize-space(.), 'Total Incidents')]/following-sibling::p
     wait_load: false
   stats_sectors_sign:
     type: text
@@ -27,12 +29,14 @@ incidents:
   stats_sectors_value:
     type: text
     by: xpath
-    value: //p[contains(normalize-space(.), 'Affected Sectors')]/following-sibling::p
+    value: >-
+      //p[contains(normalize-space(.), 'Affected Sectors')]/following-sibling::p
     wait_load: false
   stats_unique_value:
     type: text
     by: xpath
-    value: //p[contains(normalize-space(.), 'Unique Signatures')]/following-sibling::p
+    value: >-
+      //p[contains(normalize-space(.), 'Unique Signatures')]/following-sibling::p
     wait_load: false
   filters_scope_dropdown:
     type: button
@@ -42,7 +46,8 @@ incidents:
   filters_project_item:
     type: button
     by: xpath
-    value: //div[contains(@class, 'absolute')]//div[contains(@class, 'cursor-pointer')]
+    value: >-
+      //div[contains(@class, 'absolute')]//div[contains(@class, 'cursor-pointer')]
     wait_load: false
   list_incident_summary:
     type: button
@@ -62,7 +67,8 @@ incidents:
   list_incident_frequency:
     type: text
     by: xpath
-    value: "//p[contains(@class, 'text-rose-400') and preceding-sibling::p[contains(., 'Frequency')]]"
+    value: >-
+      //p[contains(@class, 'text-rose-400') and preceding-sibling::p[contains(., 'Frequency')]]
     wait_load: false
   list_incident_trend:
     type: webelement
@@ -72,7 +78,8 @@ incidents:
   list_incident_projects:
     type: text
     by: xpath
-    value: "//h4[contains(., 'Affecting Projects')]/following-sibling::div//span"
+    value: >-
+      //h4[contains(., 'Affecting Projects')]/following-sibling::div//span
     wait_load: false
   list_details_context:
     type: text
@@ -82,7 +89,8 @@ incidents:
   ai_analysis_text:
     type: text
     by: xpath
-    value: "//*[contains(normalize-space(.), 'AI Root Cause Analysis')]/parent::div//p"
+    value: >-
+      //*[contains(normalize-space(.), 'AI Root Cause Analysis')]/parent::div//p
     wait_load: false
   ai_confidence_value:
     type: text
@@ -92,7 +100,8 @@ incidents:
   incident_expanded:
     type: webelement
     by: xpath
-    value: "//div[contains(@class, 'glass-panel')]//div[contains(@class, 'slide-in-from-top')]"
+    value: >-
+      //div[contains(@class, 'glass-panel')]//div[contains(@class, 'slide-in-from-top')]
     wait_load: false
   incident_page_structure:
     type: webelement
@@ -102,12 +111,14 @@ incidents:
   incident_stats:
     type: webelement
     by: xpath
-    value: "//div[contains(@class, 'grid') and .//p[contains(text(), 'Total Incidents')]]"
+    value: >-
+      //div[contains(@class, 'grid') and .//p[contains(text(), 'Total Incidents')]]
     wait_load: true
   project_dropdown:
     type: webelement
     by: xpath
-    value: "//div[contains(@class, 'absolute') and .//button[contains(., 'Scope') or contains(., 'Global')]]"
+    value: >-
+      //div[contains(@class, 'absolute') and .//button[contains(., 'Scope') or contains(., 'Global')]]
     wait_load: false
   incident_list_container:
     type: webelement

@@ -1,3 +1,4 @@
+---
 dashboard:
   header_title:
     type: text
@@ -12,8 +13,8 @@ dashboard:
     wait_load: true
   mobile_layout:
     type: webelement
-    by: css
-    value: div.max-w-7xl
+    by: xpath
+    value: //div[contains(@class, 'selection:bg-indigo-500/30')]
     wait_load: true
   header_subtitle:
     type: text
@@ -54,7 +55,7 @@ dashboard:
   stats_pass_rate_value:
     type: text
     by: xpath
-    value: //p[contains(text(), 'Pass Rate')]/ancestor::div[contains(@class, 'glass-panel')]//h3
+    value: //p[contains(text(), 'Pass Rate')]/ancestor::div[contains(@class, 'glass-panel')]//h3/span
     wait_load: false
   stats_total_runs:
     type: text
@@ -65,7 +66,7 @@ dashboard:
   stats_total_runs_value:
     type: text
     by: xpath
-    value: //p[contains(text(), 'Total Executions')]/ancestor::div[contains(@class, 'glass-panel')]//h3
+    value: //p[contains(text(), 'Total Executions')]/ancestor::div[contains(@class, 'glass-panel')]//h3/span
     wait_load: false
   stats_avg_duration:
     type: text
@@ -75,7 +76,7 @@ dashboard:
   stats_avg_duration_value:
     type: text
     by: xpath
-    value: //p[contains(text(), 'Avg Latency')]/ancestor::div[contains(@class, 'glass-panel')]//h3
+    value: //p[contains(text(), 'Avg Latency')]/ancestor::div[contains(@class, 'glass-panel')]//h3/span
     wait_load: false
   stats_passed_card:
     type: text
@@ -85,7 +86,7 @@ dashboard:
   stats_health_value:
     type: text
     by: xpath
-    value: //p[contains(text(), 'System Health')]/ancestor::div[contains(@class, 'glass-panel')]//h3
+    value: //p[contains(text(), 'System Health')]/ancestor::div[contains(@class, 'glass-panel')]//h3/span
     wait_load: false
   stats_failed_card:
     type: text
@@ -112,11 +113,6 @@ dashboard:
     type: webelement
     by: xpath
     value: //div[contains(@class, 'animate-marquee')]/parent::div
-    wait_load: false
-  status_ticker_marquee:
-    type: webelement
-    by: css
-    value: div.animate-marquee
     wait_load: false
   timeline_heading:
     type: text
@@ -152,11 +148,6 @@ dashboard:
     type: webelement
     by: xpath
     value: //h3[contains(., 'Sector Integrity')]/ancestor::div[contains(@class, 'glass-panel')]//div[contains(@class, 'bg-slate-950/40')]
-    wait_load: false
-  recent_runs_list_container:
-    type: webelement
-    by: xpath
-    value: //h3[contains(., 'Sector Integrity')]/parent::div/following-sibling::div[contains(@class, 'overflow-y-auto')]
     wait_load: false
   recent_runs_rate:
     type: text

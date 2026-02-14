@@ -1,3 +1,4 @@
+---
 run_detail:
   back_button:
     type: button
@@ -72,7 +73,8 @@ run_detail:
   scenario_duration:
     type: text
     by: xpath
-    value: //span[contains(@class, 'font-mono font-bold') and contains(text(), 's')]
+    value: >-
+      //span[contains(@class, 'font-mono font-bold') and contains(text(), 's')]
     wait_load: false
   execution_log:
     type: webelement

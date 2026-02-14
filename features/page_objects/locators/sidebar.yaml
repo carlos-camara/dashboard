@@ -1,3 +1,4 @@
+---
 sidebar:
   dashboard_link:
     type: button
@@ -29,3 +30,4 @@ sidebar:
     by: xpath
     value: "//aside[contains(@class, 'z-40') and contains(@class, 'w-64')]"
     wait_load: true
+

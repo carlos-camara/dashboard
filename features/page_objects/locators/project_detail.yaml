@@ -1,3 +1,4 @@
+---
 project_detail:
   projectName:
     type: text
@@ -37,37 +38,38 @@ project_detail:
   velocity_trend:
     type: webelement
     by: xpath
-    value: //*[contains(text(), 'Execution Velocity')]/following-sibling::div//div[contains(@class,
-      'recharts-responsive-container')]
+    value: >-
+      //*[contains(text(), 'Execution Velocity')]/following-sibling::div//div[contains(@class, 'recharts-responsive-container')]
     wait_load: false
   distribution_chart:
     type: webelement
     by: xpath
-    value: //*[contains(text(), 'Test Composition')]/following-sibling::div//div[contains(@class,
-      'recharts-responsive-container')]
+    value: >-
+      //*[contains(text(), 'Test Composition')]/following-sibling::div//div[contains(@class, 'recharts-responsive-container')]
     wait_load: false
   distribution_total_value:
     type: text
     by: xpath
-    value: //*[contains(text(), 'Test Composition')]/following-sibling::div//p[contains(@class, 'text-7xl')]
+    value: >-
+      //*[contains(text(), 'Test Composition')]/following-sibling::div//p[contains(@class, 'text-7xl')]
     wait_load: false
   stability_comparison:
     type: webelement
     by: xpath
-    value: //*[contains(text(), 'Layer Stability')]/ancestor::div[contains(@class,
-      'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]
+    value: >-
+      //*[contains(text(), 'Layer Stability')]/ancestor::div[contains(@class, 'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]
     wait_load: false
   stability_chart:
     type: webelement
     by: xpath
-    value: //*[contains(text(), 'Layer Stability')]/ancestor::div[contains(@class,
-      'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]
+    value: >-
+      //*[contains(text(), 'Layer Stability')]/ancestor::div[contains(@class, 'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]
     wait_load: false
   latency_comparison:
     type: webelement
     by: xpath
-    value: //*[contains(., 'Layer Latency')]/ancestor::div[contains(@class, 'rounded-[2rem]')]//div[contains(@class,
-      'recharts-responsive-container')]
+    value: >-
+      //*[contains(., 'Layer Latency')]/ancestor::div[contains(@class, 'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]
     wait_load: false
   item:
     type: webelement
@@ -82,7 +84,8 @@ project_detail:
   back_button:
     type: button
     by: xpath
-    value: //button[./*[local-name()='svg' and contains(@class, 'lucide-chevron-left')]]
+    value: >-
+      //button[./*[local-name()='svg' and contains(@class, 'lucide-chevron-left')]]
     wait_load: false
   download_button:
     type: button
@@ -92,5 +95,6 @@ project_detail:
   delete_button:
     type: button
     by: xpath
-    value: //button[./*[local-name()='svg' and contains(@class, 'lucide-trash-2')]]
+    value: >-
+      //button[./*[local-name()='svg' and contains(@class, 'lucide-trash-2')]]
     wait_load: false

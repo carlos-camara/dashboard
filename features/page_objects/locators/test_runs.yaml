@@ -1,3 +1,4 @@
+---
 test_runs:
   title:
     by: xpath
@@ -11,7 +12,8 @@ test_runs:
   search_input:
     type: input
     by: xpath
-    value: //input[@placeholder='Search by project identifier, run ID, or tags...']
+    value: >-
+      //input[@placeholder='Search by project identifier, run ID, or tags...']
     wait_load: false
   project_card:
     type: button

@@ -1,4 +1,4 @@
-@gui @dashboard @test
+@gui @dashboard
 Feature: Dashboard Overview & Visual Integrity
 
   Background:
@@ -45,14 +45,15 @@ Feature: Dashboard Overview & Visual Integrity
 
   @responsive @mobile
   Scenario: Verify Mobile Viewport Layout
+    Given I set the viewport to "375" x "812"
     Then the "header_subtitle" element should contain text "[LANG:dashboard.header.subtitle]"
-    And the "mobile layout" page should visually match the baseline image "dashboard_responsiveness" without elements and with a 15.0% tolerance
+    And the "mobile_layout" page should visually match the baseline image "dashboard_responsiveness" without elements and with a 15.0% tolerance
         | element                  |
         | stats_health_value       |
         | stats_pass_rate_value    |
         | stats_total_runs_value   |
         | stats_avg_duration_value |
-        | status_ticker_marquee    |
+        | status_ticker_container  |
         | timeline_chart           |
 
   @navigation
