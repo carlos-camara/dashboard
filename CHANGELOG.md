@@ -29,8 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Visual Regression Masking**: Implemented granular element masking (Charts, Timestamps, Dynamic Lists) for 100% stability in visual tests.
 - **Mobile Verification**: Added explicit viewport testing for responsive layouts (iPhone X, etc.).
 - **Generic Steps**: Refactored logic to `qa-hub-framework` for:
-    - Text validation against lists.
-    - Dynamic file download verification (timestamped reports).
+  - Text validation against lists.
+  - Dynamic file download verification (timestamped reports).
 
 ### 🛠️ Maintenance
 - **Repository Cleanup**: Removed unused drivers, temporary reports, and obsolete custom steps.
