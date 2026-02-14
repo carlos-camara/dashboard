@@ -27,7 +27,7 @@ performance_report_view:
   audit_timestamp_value:
     type: text
     by: xpath
-    value: //div[contains(text(), 'Timestamp Reference')]/following-sibling::div
+    value: //span[contains(text(), 'Timestamp Reference')]/following-sibling::div
     wait_load: false
   endpoint_matrix:
     type: webelement
@@ -62,22 +62,22 @@ performance_report_view:
   efficiency_score:
     type: text
     by: xpath
-    value: //*[contains(normalize-space(.), 'Throughput')]/ancestor::div[contains(@class, 'p-6')]//div[contains(@class, 'text-4xl')]
+    value: //span[contains(normalize-space(.), 'Throughput')]/ancestor::div[contains(@class, 'p-6')]//div[contains(@class, 'text-4xl')]
     wait_load: false
   velocity_score:
     type: text
     by: xpath
-    value: //*[contains(normalize-space(.), 'Latency Mean')]/ancestor::div[contains(@class, 'p-6')]//div[contains(@class, 'text-4xl')]
+    value: //span[contains(normalize-space(.), 'Latency Mean')]/ancestor::div[contains(@class, 'p-6')]//div[contains(@class, 'text-4xl')]
     wait_load: false
   integrity_score:
     type: text
     by: xpath
-    value: //*[contains(normalize-space(.), 'Integrity')]/ancestor::div[contains(@class, 'p-6')]//div[contains(@class, 'text-4xl')]
+    value: //span[contains(normalize-space(.), 'Integrity')]/ancestor::div[contains(@class, 'p-6')]//div[contains(@class, 'text-4xl')]
     wait_load: false
   saturation_score:
     type: text
     by: xpath
-    value: //*[contains(normalize-space(.), 'Concurrency')]/ancestor::div[contains(@class, 'p-6')]//div[contains(@class, 'text-4xl')]
+    value: //span[contains(normalize-space(.), 'Concurrency')]/ancestor::div[contains(@class, 'p-6')]//div[contains(@class, 'text-4xl')]
     wait_load: false
   back_button:
     type: button

@@ -24,6 +24,11 @@ run_detail:
     by: xpath
     value: //span[contains(@class, 'text-3xl font-black')]
     wait_load: false
+  success_chart:
+    type: webelement
+    by: xpath
+    value: //span[contains(@class, 'text-3xl font-black')]/../../..
+    wait_load: false
   scenario_card:
     type: webelement
     by: xpath

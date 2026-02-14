@@ -44,53 +44,73 @@ incidents:
     by: xpath
     value: //div[contains(@class, 'absolute')]//div[contains(@class, 'cursor-pointer')]
     wait_load: false
-  list_item:
-    type: webelement
+  list_incident_summary:
+    type: button
     by: css
-    value: "div.glass-panel:not(:has(h1))"
+    value: "div.glass-panel div.cursor-pointer"
     wait_load: false
   list_incident_timestamp:
     type: text
     by: xpath
-    value: //span[contains(text(), 'Last seen:')]
+    value: "//span[contains(@class, 'font-mono') and contains(., 'Last seen:')]"
+    wait_load: false
+  list_incident_message:
+    type: text
+    by: css
+    value: "h3.text-lg.font-bold"
     wait_load: false
   list_incident_frequency:
     type: text
     by: xpath
-    value: //p[contains(@class, 'text-2xl') and contains(@class, 'text-rose-400')]
-    wait_load: false
-  list_incident_message:
-    type: text
-    by: xpath
-    value: //h3[contains(@class, 'text-lg') and contains(@class, 'font-bold')]
-    wait_load: false
-  list_incident_summary:
-    type: webelement
-    by: xpath
-    value: //div[contains(@class, 'glass-panel')]//div[contains(@class, 'cursor-pointer') and contains(@class, 'justify-between')]
+    value: "//p[contains(@class, 'text-rose-400') and preceding-sibling::p[contains(., 'Frequency')]]"
     wait_load: false
   list_incident_trend:
     type: webelement
     by: css
-    value: ".recharts-responsive-container"
+    value: "div.w-32.h-12"
+    wait_load: false
+  list_incident_projects:
+    type: text
+    by: xpath
+    value: "//h4[contains(., 'Affecting Projects')]/following-sibling::div//span"
     wait_load: false
   list_details_context:
     type: text
     by: xpath
-    value: //*[contains(normalize-space(.), 'Stack Trace Context')]
+    value: "//h4[contains(., 'Stack Trace Context')]"
     wait_load: false
   ai_analysis_text:
     type: text
     by: xpath
-    value: //*[contains(normalize-space(.), 'AI Root Cause Analysis')]/parent::div//p
+    value: "//*[contains(normalize-space(.), 'AI Root Cause Analysis')]/parent::div//p"
     wait_load: false
   ai_confidence_value:
     type: text
     by: xpath
-    value: //span[contains(text(), 'CONFIDENCE:')]
+    value: "//span[contains(text(), 'CONFIDENCE:')]"
     wait_load: false
   incident_expanded:
     type: webelement
     by: xpath
-    value: //div[contains(@class, 'glass-panel') and .//div[contains(., 'Stack Trace Context')]]
+    value: "//div[contains(@class, 'glass-panel')]//div[contains(@class, 'slide-in-from-top')]"
+    wait_load: false
+  incident_page_structure:
+    type: webelement
+    by: css
+    value: "main > div.max-w-7xl"
+    wait_load: true
+  incident_stats:
+    type: webelement
+    by: xpath
+    value: "//div[contains(@class, 'grid') and .//p[contains(text(), 'Total Incidents')]]"
+    wait_load: true
+  project_dropdown:
+    type: webelement
+    by: xpath
+    value: "//div[contains(@class, 'absolute') and .//button[contains(., 'Scope') or contains(., 'Global')]]"
+    wait_load: false
+  incident_list_container:
+    type: webelement
+    by: css
+    value: "div.space-y-4"
     wait_load: false

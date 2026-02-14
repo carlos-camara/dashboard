@@ -28,9 +28,8 @@ Feature: Runs Endpoint Validations
   Scenario: Delete the uploaded run
     When I send a "GET" request to "/api/runs"
     Then I store the response JSON path "0.id" as "run_to_delete"
-    
     When I send a "DELETE" request to "/api/runs" with query parameters
-      | id | ${run_to_delete} |
+         | id | ${run_to_delete} |
     Then the response status code should be 200
     Then the response JSON path "success" should be true
 
