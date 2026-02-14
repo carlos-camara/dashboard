@@ -14,4 +14,3 @@ VisualTests:
   fail: true
   save: false
   baseline_name: "chrome"
-

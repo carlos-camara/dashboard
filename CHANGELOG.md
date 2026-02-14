@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 ## [0.3.0] - 2026-02-14
-### 🚀 Features
+### 🚀 Features (v0.3.0)
 - **Visual Regression Masking**: Implemented granular element masking (Charts, Timestamps, Dynamic Lists) for 100% stability in visual tests.
 - **Mobile Verification**: Added explicit viewport testing for responsive layouts (iPhone X, etc.).
 - **Generic Steps**: Refactored logic to `qa-hub-framework` for:
