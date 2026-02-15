@@ -45,6 +45,7 @@ Feature: Incident Taxonomy & Analysis
   Scenario: Verify Incident Expansion and Details
     Then I should see at least 1 elements with class "glass-panel"
     When I click on the "list_incident_summary"
+    And I wait for 2 seconds
     Then the "incident_expanded" should be visible
     Then the "list_details_context" should contain the text "[LANG:incidents.list.stack_trace]"
     And I should see the text "[LANG:incidents.list.root_cause]"

@@ -1,21 +1,24 @@
-# Global owners
-* @carlos-camara
+# This is a config file for defining code ownership.
+# It allows you to define who is responsible for specific parts of the codebase.
+#
+# Syntax:
+# pattern owner(s)
+
+# Global Owner (You own everything by default)
+*       @carlos-camara
+
+# Explicit overrides for clarity (optional, but good for documentation)
+# QA Framework & Tests
+features/       @carlos-camara
+qa_framework/   @carlos-camara
+
+# Frontend
+components/     @carlos-camara
+pages/          @carlos-camara
+
+# Backend
+services/       @carlos-camara
+routes/         @carlos-camara
 
 # DevOps & CI/CD
-.github/workflows/ @carlos-camara
-
-# Backend & Services
-server.js @carlos-camara
-routes/ @carlos-camara
-services/ @carlos-camara
-swaggers/ @carlos-camara
-
-# Frontend & Aesthetics
-components/ @carlos-camara
-App.tsx @carlos-camara
-index.css @carlos-camara
-
-# QA & Framework
-features/ @carlos-camara
-requirements.txt @carlos-camara
-behave.ini @carlos-camara
+.github/        @carlos-camara

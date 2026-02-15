@@ -48,7 +48,7 @@ incidents:
   list_incident_summary:
     type: webelement
     by: xpath
-    value: //div[contains(@class, 'glass-panel')]
+    value: //div[contains(@class, 'glass-panel')]//div[contains(@class, 'cursor-pointer')]
     wait_load: false
   list_incident_timestamp:
     type: text
@@ -93,7 +93,7 @@ incidents:
   incident_expanded:
     type: webelement
     by: xpath
-    value: //div[contains(@class, 'border-red-500/30')]
+    value: //div[contains(@class, 'border-rose-500/40')]
     wait_load: false
   incident page structure:
     type: webelement
