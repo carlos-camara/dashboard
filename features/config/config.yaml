@@ -1,3 +1,4 @@
+---
 Driver:
   headless: true
   type: chrome
@@ -12,4 +13,4 @@ VisualTests:
   enabled: true
   fail: true
   save: false
-  baseline_name: "{Driver_type}"
+  baseline_name: "chrome"

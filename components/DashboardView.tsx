@@ -300,7 +300,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
                       <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">{stat.label}</p>
                       <stat.icon size={20} className={`text-${stat.color}-500 drop-shadow-[0_0_8px_rgba(var(--${stat.color}-500-rgb),0.5)]`} />
                     </div>
-                    <h3 className="text-3xl md:text-4xl font-black text-white tracking-tight">{stat.value}</h3>
+                    <h3 className="text-3xl md:text-4xl font-black text-white tracking-tight"><span>{stat.value}</span></h3>
                   </div>
                 </motion.div>
               ))}

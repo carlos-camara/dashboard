@@ -24,6 +24,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.3.0] - 2026-02-14
+### 🚀 Features (v0.3.0)
+- **Visual Regression Masking**: Implemented granular element masking (Charts, Timestamps, Dynamic Lists) for 100% stability in visual tests.
+- **Mobile Verification**: Added explicit viewport testing for responsive layouts (iPhone X, etc.).
+- **Generic Steps**: Refactored logic to `qa-hub-framework` for:
+  - Text validation against lists.
+  - Dynamic file download verification (timestamped reports).
+
+### 🛠️ Maintenance
+- **Repository Cleanup**: Removed unused drivers, temporary reports, and obsolete custom steps.
+- **Framework Integration**: Strengthened `sys.path` resolution for local development.
+
+---
+
 ## [0.2.0] - 2026-02-02
 ### 🚀 Features
 - **CI/CD Intelligence**: Integrated PR Auto-Labeler and Auto-Assigner for better workflow management.

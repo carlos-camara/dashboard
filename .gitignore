@@ -43,13 +43,8 @@ uploads/*
 !uploads/.gitkeep
 
 # Temporary test outputs (screenshots go to features/resources/screenshots/baselines/)
-screenshots/
 temp_junit_gui/
 temp_junit_api/
-
-# Visual testing outputs (only baselines are tracked)
-# Visual testing outputs (only baselines are tracked)
-features/resources/screenshots/*_latest.png
 
 # Drivers (managed by framework)
 features/drivers/

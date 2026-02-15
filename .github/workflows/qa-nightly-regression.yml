@@ -1,0 +1,35 @@
+name: 'QA - Nightly Regression'
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Run at midnight UTC
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  full-regression:
+    name: 'Full Regression Suite'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout Code'
+        uses: actions/checkout@v4
+
+      - name: 'Run Full Test Suite'
+        uses: carlos-camara/qa-hub-actions/run-tests@main
+        with:
+          test-command-api: 'python -m behave features/dashboard/api'
+          test-command-gui: 'python -m behave features/dashboard/gui'
+          headless: 'true'
+
+      - name: 'Deploy Reports to S3'
+        uses: carlos-camara/qa-hub-actions/deploy-reports-s3@main
+        with:
+          bucket-name: 'qa-hub-reports-prd'
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: 'Slack Notification'
+        uses: carlos-camara/qa-hub-actions/slack-notify@main
+        if: always()
+        with:
+          slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          status: ${{ job.status }}

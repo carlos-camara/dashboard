@@ -1,4 +1,10 @@
+---
 run_detail:
+  run_detail_view:
+    type: webelement
+    by: xpath
+    value: //div[contains(@class, 'selection:bg-indigo-500/30')]
+    wait_load: true
   back_button:
     type: button
     by: xpath
@@ -24,8 +30,59 @@ run_detail:
     by: xpath
     value: //span[contains(@class, 'text-3xl font-black')]
     wait_load: false
+  success_chart:
+    type: webelement
+    by: xpath
+    value: //span[contains(@class, 'text-3xl font-black')]/../../..
+    wait_load: false
   scenario_card:
     type: webelement
     by: xpath
     value: //div[contains(@class, 'group bg-slate-900/40')]
+    wait_load: false
+  metrics_duration:
+    type: text
+    by: xpath
+    value: //p[contains(text(), 'Total Duration')]/following-sibling::p
+    wait_load: false
+  metrics_avg_duration:
+    type: text
+    by: xpath
+    value: //p[contains(text(), 'Avg / Scenario')]/following-sibling::p
+    wait_load: false
+  metrics_steps:
+    type: text
+    by: xpath
+    value: //p[contains(text(), 'Executed Steps')]/following-sibling::p
+    wait_load: false
+  metrics_timestamp:
+    type: text
+    by: xpath
+    value: //p[contains(text(), 'Timestamp')]/following-sibling::p
+    wait_load: false
+  passed_count:
+    type: text
+    by: xpath
+    value: //p[contains(text(), 'Passed Scenarios')]/preceding-sibling::div/span
+    wait_load: false
+  failed_count:
+    type: text
+    by: xpath
+    value: //p[contains(text(), 'Failed Scenarios')]/preceding-sibling::div/span
+    wait_load: false
+  failure_analysis_log:
+    type: text
+    by: xpath
+    value: //code[contains(@class, 'text-rose-300')]
+    wait_load: false
+  scenario_duration:
+    type: text
+    by: xpath
+    value: >-
+      //span[contains(@class, 'font-mono font-bold') and contains(text(), 's')]
+    wait_load: false
+  execution_log:
+    type: webelement
+    by: xpath
+    value: //div[contains(@class, 'bg-[#0d1117]')]
     wait_load: false

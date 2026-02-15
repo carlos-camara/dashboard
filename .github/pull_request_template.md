@@ -1,20 +1,27 @@
-# Description
-<!-- Provide a brief description of the changes you are proposing. -->
+# 📝 Descripcin del Cambio
+<!-- ¿Qué hace este PR? ¿Qué problema resuelve? -->
 
-## Type of Change
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to change)
-- [ ] Documentation update
+## 🔗 Ticket Relacionado
+<!-- Link al ticket de Jira/Issue de GitHub -->
 
-## How Has This Been Tested?
-<!-- Please describe the tests that you ran to verify your changes. -->
+## 🛠️ Tipo de Cambio
+- [ ] 🐛 Bug fix (corrección de error)
+- [ ] ✨ New feature (nueva funcionalidad)
+- [ ] 💄 UI/UX improvement (mejora visual)
+- [ ] ♻️ Refactor (mejora de código sin cambios funcionales)
+- [ ] 📝 Documentation (actualización de documentación)
 
-## Checklist
-- [ ] My code follows the style guidelines of this project
-- [ ] I have performed a self-review of my own code
-- [ ] I have commented my code, particularly in hard-to-understand areas
-- [ ] I have made corresponding changes to the documentation
-- [ ] My changes generate no new warnings
-- [ ] I have added tests that prove my fix is effective or that my feature works
-- [ ] New and existing unit tests pass locally with my changes
+## 🧪 Pruebas Realizadas
+<!-- Describe cómo probaste tus cambios -->
+- [ ] Unit Tests
+- [ ] Smoke Tests (`make smoke`)
+- [ ] Visual Validation (`make visual-check`)
+- [ ] Manual Testing
+
+## 📸 Screenshots / Videos (Opcional)
+<!-- Si hay cambios visuales, adjunta evidencia aquí -->
+
+## ✅ Checklist
+- [ ] El código sigue las guías de estilo del proyecto
+- [ ] He actualizado la documentación necesaria
+- [ ] He verificado que no introduzco nuevos warnings

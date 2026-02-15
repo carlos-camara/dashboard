@@ -1,3 +1,4 @@
+---
 project_detail:
   projectName:
     type: text
@@ -14,29 +15,61 @@ project_detail:
     by: xpath
     value: //*[contains(text(), 'Stability Score')]
     wait_load: false
+  stability_score_value:
+    type: text
+    by: xpath
+    value: //*[contains(text(), 'Stability Score')]/following-sibling::div/h3
+    wait_load: false
+  pass_rate_value:
+    type: text
+    by: xpath
+    value: //*[contains(text(), 'Avg Pass Rate')]/following-sibling::h3
+    wait_load: false
+  avg_duration_value:
+    type: text
+    by: xpath
+    value: //*[contains(text(), 'Avg Duration')]/following-sibling::h3
+    wait_load: false
+  total_flights_value:
+    type: text
+    by: xpath
+    value: //*[contains(text(), 'Total Flights')]/following-sibling::h3
+    wait_load: false
   velocity_trend:
     type: webelement
     by: xpath
-    value: //*[contains(text(), 'Execution Velocity')]/following-sibling::div//div[contains(@class,
-      'recharts-responsive-container')]
+    value: >-
+      //*[contains(text(), 'Execution Velocity')]/following-sibling::div//div[contains(@class, 'recharts-responsive-container')]
+    wait_load: false
+  distribution_chart:
+    type: webelement
+    by: xpath
+    value: >-
+      //*[contains(text(), 'Test Composition')]/following-sibling::div//div[contains(@class, 'recharts-responsive-container')]
+    wait_load: false
+  distribution_total_value:
+    type: text
+    by: xpath
+    value: >-
+      //*[contains(text(), 'Test Composition')]/following-sibling::div//p[contains(@class, 'text-7xl')]
     wait_load: false
   stability_comparison:
     type: webelement
     by: xpath
-    value: //*[contains(text(), 'Layer Stability')]/ancestor::div[contains(@class,
-      'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]
+    value: >-
+      //*[contains(text(), 'Layer Stability')]/ancestor::div[contains(@class, 'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]
     wait_load: false
   stability_chart:
     type: webelement
     by: xpath
-    value: //*[contains(text(), 'Layer Stability')]/ancestor::div[contains(@class,
-      'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]
+    value: >-
+      //*[contains(text(), 'Layer Stability')]/ancestor::div[contains(@class, 'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]
     wait_load: false
   latency_comparison:
     type: webelement
     by: xpath
-    value: //*[contains(., 'Layer Latency')]/ancestor::div[contains(@class, 'rounded-[2rem]')]//div[contains(@class,
-      'recharts-responsive-container')]
+    value: >-
+      //*[contains(., 'Layer Latency')]/ancestor::div[contains(@class, 'rounded-[2rem]')]//div[contains(@class, 'recharts-responsive-container')]
     wait_load: false
   item:
     type: webelement
@@ -51,7 +84,8 @@ project_detail:
   back_button:
     type: button
     by: xpath
-    value: //button[./*[local-name()='svg' and contains(@class, 'lucide-chevron-left')]]
+    value: >-
+      //button[./*[local-name()='svg' and contains(@class, 'lucide-chevron-left')]]
     wait_load: false
   download_button:
     type: button
@@ -61,5 +95,11 @@ project_detail:
   delete_button:
     type: button
     by: xpath
-    value: //button[./*[local-name()='svg' and contains(@class, 'lucide-trash-2')]]
+    value: >-
+      //button[./*[local-name()='svg' and contains(@class, 'lucide-trash-2')]]
+    wait_load: false
+  project_metrics:
+    type: webelement
+    by: xpath
+    value: //main
     wait_load: false

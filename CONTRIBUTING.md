@@ -51,7 +51,8 @@ pip install -r requirements.txt
 * **Typing**: All components and functions must be strictly typed. No `any` allowed.
 
 ### Python & BDD (Behave)
-* **Framework First**: Always check if a step or utility exists in the `qa-hub-framework` before implementing locally.
+* **Framework First**: Always check if a step or utility exists in the **[QA Hub Framework](https://github.com/carlos-camara/qa-hub-framework)** before implementing locally.
+* **Generic Steps**: We have migrated common logic (Text Validation, File Downloads, Visual Matching) to the core framework. Avoid creating custom steps unless absolutely necessary.
 * **Feature Files**: Follow clean **Gherkin** syntax. Use `Background` for common setup.
 * **Wait Logic**: Never use `time.sleep()`. Use the framework's stability wait steps (e.g., `And I wait for "dashboard" to be stable`).
 * **Locators**: Use the YAML-driven locator system. Never hardcode selectors.

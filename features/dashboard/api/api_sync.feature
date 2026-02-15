@@ -10,8 +10,8 @@ Feature: Sync Endpoint Validations
     Then the response status code should be 200
     And the response time should be less than 2000 ms
     And the response JSON should contain keys
-      | new_runs_discovered |
-      | scanned_path        |
+        | new_runs_discovered |
+        | scanned_path        |
     And the response JSON path "new_runs_discovered" should be a "int"
     And the response JSON path "scanned_path" should be a "str"
     And the response JSON path "scanned_path" should contain "reports"

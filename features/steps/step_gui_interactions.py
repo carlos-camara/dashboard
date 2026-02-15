@@ -82,23 +82,6 @@ def step_switch_chart_mode(context, mode):
     step_click_page_object(context, element_name, "dashboard")
 
 
-@then('the system status should be valid')
-def step_verify_system_status_valid(context):
-    """Verify system status ticker shows valid status"""
-    # Get the status text using framework element
-    from qa_framework.steps.gui_steps import get_element_from_page_object
-    
-    element = get_element_from_page_object(context, "status_ticker_system_status", "dashboard")
-    text = element.get_text()
-    
-    valid_statuses = [
-        "SYSTEM OPTIMAL", "ALL SYSTEMS OPERATIONAL", 
-        "PARTIAL SERVICE DEGRADATION", "MINOR ANOMALIES DETECTED",
-        "CRITICAL INSTABILITY DETECTED", "CONNECTION SEVERED"
-    ]
-    
-    assert any(status in text for status in valid_statuses), \
-        f"Invalid system status: '{text}'. Expected one of {valid_statuses}"
 
 
 @when('I export the report')

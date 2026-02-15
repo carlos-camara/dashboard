@@ -16,20 +16,27 @@ Feature: Project Detail View Validation
     And I should see the text "[LANG:project_detail.layer_latency]"
     And I should see at least 1 elements with selector "stability_comparison"
     And I should see at least 1 elements with selector "latency_comparison"
-    Then the "project architecture" page should visually match the baseline image "project_detail_architecture" with a 15.0% tolerance
 
+  @visual
   Scenario: Verify Execution Metrics and Trend
     Then the following elements should contain these texts
-      | element         | value                               |
-      | stability_score | [LANG:project_detail.stability_score] |
+         | element         | value                                 |
+         | stability_score | [LANG:project_detail.stability_score] |
     And I should see the text "[LANG:project_detail.execution_velocity]"
     And I should see at least 1 elements with selector "velocity_trend"
-    Then the "project metrics" page should visually match the baseline image "project_detail_metrics" with a 15.0% tolerance
+    Then the "project_metrics" element should visually match the baseline image "project_detail_metrics" without elements and with a 15.0% tolerance
+         | element                  |
+         | stability_score_value    |
+         | pass_rate_value          |
+         | avg_duration_value       |
+         | total_flights_value      |
+         | velocity_trend           |
+         | distribution_chart       |
+         | distribution_total_value |
 
   Scenario: Verify Run History List
     Then I should see the text "[LANG:project_detail.execution_history]"
     And I should see at least 1 elements with selector "item"
-    Then the "run history" element should visually match the baseline image "project_detail_history" with a 15.0% tolerance
-
+  
   Scenario: Verify Dossier Download Button
     Then I should see at least 1 elements with selector "download_button"

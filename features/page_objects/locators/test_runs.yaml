@@ -1,3 +1,4 @@
+---
 test_runs:
   title:
     by: xpath
@@ -11,13 +12,14 @@ test_runs:
   search_input:
     type: input
     by: xpath
-    value: //input[@placeholder='Search by project identifier, run ID, or tags...']
+    value: >-
+      //input[@placeholder='Search by project identifier, run ID, or tags...']
     wait_load: false
   project_card:
     type: button
     by: xpath
     value: //*[@data-testid='project-card']
-    wait_load: false
+    wait_load: true
   delete_project_button:
     type: button
     by: xpath
@@ -27,4 +29,24 @@ test_runs:
     type: button
     by: xpath
     value: //*[contains(text(), 'VIEW ANALYTICS')]
+    wait_load: false
+  active_projects_count:
+    type: text
+    by: xpath
+    value: //p[contains(text(), 'Active Projects')]/following-sibling::p
+    wait_load: true
+  project_flights_count:
+    type: text
+    by: xpath
+    value: //span[contains(., 'Flights')]/span
+    wait_load: false
+  project_last_activity:
+    type: text
+    by: xpath
+    value: //span[contains(., 'Last:')]/span
+    wait_load: false
+  project_pass_rate:
+    type: text
+    by: xpath
+    value: //span[contains(text(), 'Pass Rate')]/preceding-sibling::span
     wait_load: false
