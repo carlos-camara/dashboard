@@ -76,3 +76,12 @@ def seed_test_run_data(context):
             f.write(xml_content)
     
     print(f"[SETUP] Seeded XML report at {xml_path}")
+    
+    # Trigger Backend Sync
+    try:
+        import urllib.request
+        req = urllib.request.Request("http://localhost:3001/api/sync", method="POST")
+        with urllib.request.urlopen(req) as response:
+            print(f"[SETUP] Backend Sync Triggered: {response.status}")
+    except Exception as e:
+        print(f"[SETUP] Backend Sync Failed: {e}")

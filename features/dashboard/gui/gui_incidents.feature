@@ -17,15 +17,15 @@ Feature: Incident Taxonomy & Analysis
         | header_title    | [LANG:incidents.header.title]    |
         | header_subtitle | [LANG:incidents.header.subtitle] |
     Then the "incident page structure" page should visually match the baseline image "incident_page_structure" without elements and with a 15.0% tolerance
-         | element                 |
-         | stats_total_value       |
-         | stats_sectors_value     |
-         | stats_unique_value      |
-         | list_incident_timestamp |
-         | list_incident_message   |
-         | list_incident_frequency |
-         | list_incident_trend     |
-         | incident_list_container |
+      | element                 |
+      | stats_total_value       |
+      | stats_sectors_value     |
+      | stats_unique_value      |
+      | list_incident_timestamp |
+      | list_incident_message   |
+      | list_incident_frequency |
+      | list_incident_trend     |
+      | incident_list_container |
 
   Scenario: Verify Incident Statistics
     Then the following elements should contain these texts

@@ -18,13 +18,13 @@ Feature: Run Detail View Validation
          | back_button | [LANG:run_detail.return_to_base] |
     And I should see the text "[LANG:run_detail.success]"
     Then the "run_detail_view" page should visually match the baseline image "run_detail_full_view" without elements and with a 5.0% tolerance
-         | element              |
-         | success_chart        |
-         | score_percentage     |
-         | metrics_duration     |
-         | metrics_avg_duration |
-         | metrics_steps        |
-         | metrics_timestamp    |
-         | passed_count         |
-         | failed_count         |
-         | scenario_card        |
+      | element              |
+      | success_chart        |
+      | score_percentage     |
+      | metrics_duration     |
+      | metrics_avg_duration |
+      | metrics_steps        |
+      | metrics_timestamp    |
+      | passed_count         |
+      | failed_count         |
+      | scenario_card        |

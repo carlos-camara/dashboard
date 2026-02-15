@@ -3,12 +3,12 @@ incidents:
   header_title:
     type: text
     by: xpath
-    value: //h1[contains(text(), 'Incident Taxonomy')]
+    value: //h1[contains(., 'INCIDENT')]
     wait_load: true
   header_subtitle:
     type: text
     by: xpath
-    value: //p[contains(text(), 'Live Root Cause Analysis')]
+    value: //*[contains(text(), 'Anomaly Detection')]
     wait_load: false
   stats_total_sign:
     type: text
@@ -18,7 +18,7 @@ incidents:
   stats_total_value:
     type: text
     by: xpath
-    value: //p[contains(text(), 'Total Incidents')]/following-sibling::h3
+    value: //p[contains(text(), 'Total Incidents')]/following-sibling::p
     wait_load: false
   stats_sectors_sign:
     type: text
@@ -28,12 +28,12 @@ incidents:
   stats_sectors_value:
     type: text
     by: xpath
-    value: //p[contains(text(), 'Affected Sectors')]/following-sibling::h3
+    value: //p[contains(text(), 'Affected Sectors')]/following-sibling::p
     wait_load: false
   stats_unique_value:
     type: text
     by: xpath
-    value: //p[contains(text(), 'Unique Patterns')]/following-sibling::h3
+    value: //p[contains(text(), 'Unique Signatures')]/following-sibling::p
     wait_load: false
   filters_scope_dropdown:
     type: button

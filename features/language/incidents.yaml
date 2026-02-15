@@ -3,8 +3,8 @@ header:
     en: "INCIDENT"
     es: "INCIDENTE"
   subtitle:
-    en: "TAXONOMY"
-    es: "TAXONOMÍA"
+    en: "Anomaly Detection"
+    es: "Detección de Anomalías"
 stats:
   total:
     en: "TOTAL INCIDENTS"

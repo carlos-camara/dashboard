@@ -12,7 +12,7 @@ Feature: Dashboard Overview & Visual Integrity
     And the "header_subtitle" element should contain text "[LANG:dashboard.header.subtitle]"
     And the "status_ticker_system_status" text should be one of "SYSTEM OPTIMAL, ALL SYSTEMS OPERATIONAL, PARTIAL SERVICE DEGRADATION, MINOR ANOMALIES DETECTED, CRITICAL INSTABILITY DETECTED, CONNECTION SEVERED"
     And I wait for "2" seconds
-    And the "dashboard" page should visually match the baseline image "dashboard_full_view_masked" without elements and with a 15.0% tolerance
+    Then the "dashboard" page should visually match the baseline image "dashboard_full_view_masked" without elements and with a 15.0% tolerance
         | element                     |
         | status_ticker_system_status |
         | status_ticker_container     |
