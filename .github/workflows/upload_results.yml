@@ -46,7 +46,7 @@ jobs:
           upload-perf: 'true'
 
       - name: Download Artifacts for Summary
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: test-reports
           path: temp_junit
