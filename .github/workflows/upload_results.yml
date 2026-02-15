@@ -27,7 +27,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: >-
             ${{ github.event.workflow_run.head_branch || 
@@ -46,7 +46,7 @@ jobs:
           upload-perf: 'true'
 
       - name: Download Artifacts for Summary
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: test-reports
           path: temp_junit
