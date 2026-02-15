@@ -23,7 +23,7 @@
     "lucide-react": "^0.563.0",
     "multer": "^2.0.2",
     "pdf-lib": "^1.17.1",
-    "react": "^19.2.3",
+    "react": "^19.2.4",
     "react-dom": "^19.2.3",
     "recharts": "^3.7.0",
     "xml2js": "^0.6.2"
