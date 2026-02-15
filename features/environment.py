@@ -1,8 +1,3 @@
-from features.support.paths import add_framework_to_path
-
-# 1. Path Setup (Must be first to import framework)
-add_framework_to_path()
-
 import os
 from qa_framework.utils.hooks import FrameworkHooks
 from features.support.seeding import seed_performance_data, seed_test_run_data
@@ -36,6 +31,16 @@ def before_scenario(context, scenario):
 def after_step(context, step):
     """Capture screenshots on failure using framework utility."""
     FrameworkHooks.handle_step_failure(context, step, context.failure_screenshots_dir)
+
+
+def after_scenario(context, scenario):
+    """Teardown driver or reset state after scenario."""
+    FrameworkHooks.after_scenario(context, scenario)
+
+
+def after_feature(context, feature):
+    """Teardown driver if reused across feature."""
+    FrameworkHooks.after_feature(context, feature)
 
 
 def after_all(context):
