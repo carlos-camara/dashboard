@@ -60,3 +60,8 @@ endpoint_detail:
     value: >-
       //div[contains(., 'Failure Rate')]/following-sibling::div[contains(@class, 'text-3xl')]
     wait_load: false
+  endpoint detail:
+    type: webelement
+    by: css
+    value: body
+    wait_load: true

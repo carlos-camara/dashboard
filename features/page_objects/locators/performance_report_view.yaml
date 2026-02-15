@@ -104,3 +104,8 @@ performance_report_view:
     by: xpath
     value: //a[contains(., 'Raw Locust Report')]
     wait_load: false
+  performance dashboard:
+    type: webelement
+    by: xpath
+    value: //main
+    wait_load: false

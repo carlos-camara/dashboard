@@ -2,126 +2,116 @@
 incidents:
   header_title:
     type: text
-    by: css
-    value: main h1.font-black
+    by: xpath
+    value: //h1[contains(text(), 'Incident Taxonomy')]
     wait_load: true
   header_subtitle:
     type: text
-    by: css
-    value: main h1.font-black
+    by: xpath
+    value: //p[contains(text(), 'Live Root Cause Analysis')]
     wait_load: false
   stats_total_sign:
     type: text
     by: xpath
-    value: //*[contains(normalize-space(.), 'Total Incidents')]
+    value: //p[contains(text(), 'Total Incidents')]
     wait_load: false
   stats_total_value:
     type: text
     by: xpath
-    value: >-
-      //p[contains(normalize-space(.), 'Total Incidents')]/following-sibling::p
+    value: //p[contains(text(), 'Total Incidents')]/following-sibling::h3
     wait_load: false
   stats_sectors_sign:
     type: text
     by: xpath
-    value: //*[contains(normalize-space(.), 'Affected Sectors')]
+    value: //p[contains(text(), 'Affected Sectors')]
     wait_load: false
   stats_sectors_value:
     type: text
     by: xpath
-    value: >-
-      //p[contains(normalize-space(.), 'Affected Sectors')]/following-sibling::p
+    value: //p[contains(text(), 'Affected Sectors')]/following-sibling::h3
     wait_load: false
   stats_unique_value:
     type: text
     by: xpath
-    value: >-
-      //p[contains(normalize-space(.), 'Unique Signatures')]/following-sibling::p
+    value: //p[contains(text(), 'Unique Patterns')]/following-sibling::h3
     wait_load: false
   filters_scope_dropdown:
     type: button
     by: xpath
-    value: //button[contains(., 'Global Scope')]
+    value: //button[contains(text(), 'Global Scope')]
     wait_load: false
   filters_project_item:
     type: button
     by: xpath
-    value: >-
-      //div[contains(@class, 'absolute')]//div[contains(@class, 'cursor-pointer')]
+    value: //div[@role='menuitem']
     wait_load: false
   list_incident_summary:
-    type: button
-    by: css
-    value: "div.glass-panel div.cursor-pointer"
+    type: webelement
+    by: xpath
+    value: //div[contains(@class, 'glass-panel')]
     wait_load: false
   list_incident_timestamp:
     type: text
     by: xpath
-    value: "//span[contains(@class, 'font-mono') and contains(., 'Last seen:')]"
+    value: //time
     wait_load: false
   list_incident_message:
     type: text
-    by: css
-    value: "h3.text-lg.font-bold"
+    by: xpath
+    value: //div[contains(@class, 'font-mono')]
     wait_load: false
   list_incident_frequency:
     type: text
     by: xpath
-    value: >-
-      //p[contains(@class, 'text-rose-400') and preceding-sibling::p[contains(., 'Frequency')]]
+    value: //span[contains(text(), 'freq:')]
     wait_load: false
   list_incident_trend:
-    type: webelement
-    by: css
-    value: "div.w-32.h-12"
+    type: text
+    by: xpath
+    value: //span[contains(text(), 'trend:')]
     wait_load: false
   list_incident_projects:
     type: text
     by: xpath
-    value: >-
-      //h4[contains(., 'Affecting Projects')]/following-sibling::div//span
+    value: //div[contains(@class, 'flex gap-2')]
     wait_load: false
   list_details_context:
     type: text
     by: xpath
-    value: "//h4[contains(., 'Stack Trace Context')]"
+    value: //div[contains(@class, 'bg-slate-950')]
     wait_load: false
   ai_analysis_text:
     type: text
     by: xpath
-    value: >-
-      //*[contains(normalize-space(.), 'AI Root Cause Analysis')]/parent::div//p
+    value: //p[contains(@class, 'text-slate-300')]
     wait_load: false
   ai_confidence_value:
     type: text
     by: xpath
-    value: "//span[contains(text(), 'CONFIDENCE:')]"
+    value: //span[contains(text(), 'Confidence')]
     wait_load: false
   incident_expanded:
     type: webelement
     by: xpath
-    value: >-
-      //div[contains(@class, 'glass-panel')]//div[contains(@class, 'slide-in-from-top')]
+    value: //div[contains(@class, 'border-red-500/30')]
     wait_load: false
-  incident_page_structure:
+  incident page structure:
     type: webelement
     by: css
-    value: "main > div.max-w-7xl"
+    value: body
     wait_load: true
   incident_stats:
     type: webelement
     by: xpath
-    value: >-
-      //div[contains(@class, 'grid') and .//p[contains(text(), 'Total Incidents')]]
-    wait_load: true
+    value: //div[contains(@class, 'grid-cols-3')]
+    wait_load: false
   project_dropdown:
     type: webelement
     by: xpath
-    value: >-
-      //div[contains(@class, 'absolute') and .//button[contains(., 'Scope') or contains(., 'Global')]]
+    value: //button[contains(@class, 'w-[200px]')]
     wait_load: false
   incident_list_container:
     type: webelement
-    by: css
-    value: "div.space-y-4"
+    by: xpath
+    value: //div[contains(@class, 'space-y-4')]
     wait_load: false

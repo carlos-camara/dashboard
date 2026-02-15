@@ -98,3 +98,8 @@ project_detail:
     value: >-
       //button[./*[local-name()='svg' and contains(@class, 'lucide-trash-2')]]
     wait_load: false
+  project_metrics:
+    type: webelement
+    by: xpath
+    value: //main
+    wait_load: false
