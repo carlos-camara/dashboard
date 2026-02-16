@@ -1,0 +1,48 @@
+<testsuite name="dashboard.gui.gui_run_detail.Run Detail View Validation" tests="1" errors="0" failures="0" skipped="0" time="4.179076" timestamp="2026-02-16T15:52:24.974357" hostname="runnervmjduv7"><testcase classname="dashboard.gui.gui_run_detail.Run Detail View Validation" name="Explore Run Detail View" status="passed" time="4.179076"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @visual
+  Scenario: Explore Run Detail View
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.617s
+    And the "dashboard" page is displayed ... passed in 0.947s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.149s
+    Then the "test_runs" page is displayed ... passed in 0.119s
+    When I click on the "project_card" ... passed in 0.453s
+    Then the "project_detail" page is displayed ... passed in 0.036s
+    When I click on the "item" ... passed in 0.231s
+    Then the "run_detail" page is displayed ... passed in 0.180s
+    Then the following elements should contain these texts ... passed in 0.031s
+      | element     | value                            |
+      | back_button | [LANG:run_detail.return_to_base] |
+    And I should see the text "[LANG:run_detail.success]" ... passed in 0.124s
+    Then the "run_detail_view" page should visually match the baseline image "run_detail_full_view" without elements and with a 5.0% tolerance ... passed in 1.293s
+      | element              |
+      | success_chart        |
+      | score_percentage     |
+      | metrics_duration     |
+      | metrics_avg_duration |
+      | metrics_steps        |
+      | metrics_timestamp    |
+      | passed_count         |
+      | failed_count         |
+      | scenario_card        |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+15:52:24 [Run Detail View Validation | Explore Run Detail View] INFO: Captured granular screenshot for masking: run_detail_full_view (Element: run_detail_view)
+15:52:24 [Run Detail View Validation | Explore Run Detail View] DEBUG: [DEBUG] Applying 27 mask regions.
+[Visual] 🐧 CI/Linux detected. Adjusting tolerance from 5.0% to 15.0%
+[Visual] ✅ Match for 'run_detail_full_view': Similarity=87.18%
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+]]>
+</system-err></testcase></testsuite>
