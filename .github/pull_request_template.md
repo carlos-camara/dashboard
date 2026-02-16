@@ -29,8 +29,7 @@
 ## 🧪 Verification & Quality
 <!-- How did you verify this change? -->
 - [ ] **Automated Tests**: Smoke/Regression suites passed.
-- [ ] **Visual Validation**: Verified aesthetics and responsive layout.
-- [ ] **Manual Testing**: Walkthrough performed on staging/local.
+- [ ] 🧹 **Linting**: Code meets the global "Gold Standard" for quality.
 
 ## 📸 Proof of Work
 <!-- Attach high-fidelity screenshots or videos demonstrating the change. -->
@@ -40,7 +39,6 @@
 
 ## ✅ Governance Checklist
 - [ ] 🏗️ **Self-Review**: I have analyzed my own logic for potential edge cases.
-- [ ] 🧹 **Linting**: Code meets the global "Gold Standard" for quality.
 - [ ] 📖 **Documentation**: Updated all relevant technical guides.
 - [ ] ⚠️ **Regressions**: Verified no impact on existing mission-critical flows.
 
