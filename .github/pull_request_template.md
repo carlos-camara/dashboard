@@ -28,7 +28,7 @@
 
 ## 🧪 Verification & Quality
 <!-- How did you verify this change? -->
-- [ ] **Automated Tests**: Smoke/Regression suites passed.
+- [ ] 🧪 **Automated Tests**: Smoke/Regression suites passed.
 - [ ] 🧹 **Linting**: Code meets the global "Gold Standard" for quality.
 
 
