@@ -48,7 +48,8 @@ dashboard:
   stats_grid:
     type: webelement
     by: xpath
-    value: //div[contains(@class, 'grid') and .//p[contains(text(), 'System Health')]]
+    value: >-
+      //div[contains(@class, 'grid') and .//p[contains(text(), 'System Health')]]
     wait_load: false
   stats_pass_rate:
     type: text
@@ -124,7 +125,8 @@ dashboard:
   status_ticker_pulse:
     type: webelement
     by: xpath
-    value: //div[contains(@class, 'h-10')]//div[contains(@class, 'animate-pulse')]
+    value: >-
+      //div[contains(@class, 'h-10')]//div[contains(@class, 'animate-pulse')]
     wait_load: false
   status_ticker_container:
     type: webelement
