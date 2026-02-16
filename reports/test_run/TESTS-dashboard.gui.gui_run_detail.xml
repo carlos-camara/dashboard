@@ -1,0 +1,66 @@
+<testsuite name="dashboard.gui.gui_run_detail.Run Detail View Validation" tests="1" errors="0" failures="1" skipped="0" time="10.245802" timestamp="2026-02-16T13:24:29.998717" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_run_detail.Run Detail View Validation" name="Explore Run Detail View" status="failed" time="10.245802"><failure type="AssertionError" message="Visual validation failed for 'run_detail_full_view' after masking. Similarity: 86.56%. Allowed threshold: 5.0%.">
+<![CDATA[
+Failing step: Then the "run_detail_view" page should visually match the baseline image "run_detail_full_view" without elements and with a 5.0% tolerance ... failed in 2.624s
+  | element              |
+  | success_chart        |
+  | score_percentage     |
+  | metrics_duration     |
+  | metrics_avg_duration |
+  | metrics_steps        |
+  | metrics_timestamp    |
+  | passed_count         |
+  | failed_count         |
+  | scenario_card        |
+Location: features/dashboard/gui/gui_run_detail.feature:20
+ASSERT FAILED: Visual validation failed for 'run_detail_full_view' after masking. Similarity: 86.56%. Allowed threshold: 5.0%.]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @visual
+  Scenario: Explore Run Detail View
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.746s
+    And the "dashboard" page is displayed ... passed in 1.662s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.220s
+    Then the "test_runs" page is displayed ... passed in 0.190s
+    When I click on the "project_card" ... passed in 0.583s
+    Then the "project_detail" page is displayed ... passed in 0.065s
+    When I click on the "item" ... passed in 0.873s
+    Then the "run_detail" page is displayed ... passed in 1.267s
+    Then the following elements should contain these texts ... passed in 0.346s
+      | element     | value                            |
+      | back_button | [LANG:run_detail.return_to_base] |
+    And I should see the text "[LANG:run_detail.success]" ... passed in 0.669s
+    Then the "run_detail_view" page should visually match the baseline image "run_detail_full_view" without elements and with a 5.0% tolerance ... failed in 2.624s
+      | element              |
+      | success_chart        |
+      | score_percentage     |
+      | metrics_duration     |
+      | metrics_avg_duration |
+      | metrics_steps        |
+      | metrics_timestamp    |
+      | passed_count         |
+      | failed_count         |
+      | scenario_card        |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FRAMEWORK] Scenario failed. Restarting driver for next test.
+
+13:24:25 [Run Detail View Validation | Explore Run Detail View] INFO: Captured granular screenshot for masking: run_detail_full_view (Element: run_detail_view)
+13:24:27 [Run Detail View Validation | Explore Run Detail View] DEBUG: [DEBUG] Applying 53 mask regions.
+[Visual] ❌ Visual mismatch for 'run_detail_full_view': Similarity=86.56%, Allowed Error=5.0%
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-16_13-21-25/FAILED_Explore_Run_Detail_View_the_"run_detail_view"_page_sho.png
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+
+]]>
+</system-err></testcase></testsuite>
