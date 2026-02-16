@@ -8,7 +8,7 @@ import {
 import {
   Zap, Clock, Target, ShieldCheck, Box, Activity,
   RefreshCw, TrendingUp, Layers, FileDown, Loader2,
-  Terminal, Radio, Signal, CheckCircle2, AlertTriangle, Monitor,
+  Terminal, Radio, Signal, CheckCircle2, Monitor,
   LayoutDashboard, ChevronRight
 } from 'lucide-react';
 import html2canvas from 'html2canvas';
@@ -432,29 +432,9 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
               </div>
             </div>
 
-            {/* Incidents & Endpoints */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 pb-20">
-              {/* Incidents */}
-              <div className="glass-panel p-4 md:p-8 rounded-[2rem] md:rounded-[2.5rem]">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em] flex items-center gap-2">
-                    <AlertTriangle size={16} className="text-rose-500" /> Incident Taxonomy
-                  </h3>
-                </div>
-                <div className="space-y-3">
-                  {topErrors.map((err, i) => (
-                    <div
-                      key={i}
-                      onClick={() => onNavigate('incidents', { project: err.project })}
-                      className="flex justify-between items-center p-4 bg-slate-950/30 rounded-2xl border border-white/5 border-l-4 border-l-rose-500/50 hover:bg-slate-950/50 transition-colors cursor-pointer group/item"
-                    >
-                      <span className="text-xs font-mono text-rose-300/80 w-3/4 truncate group-hover/item:text-rose-300 transition-colors">{err.msg}</span>
-                      <span className="px-3 py-1 bg-rose-500/10 text-rose-400 text-[10px] font-black rounded-full border border-rose-500/20">{err.count}</span>
-                    </div>
-                  ))}
-                  {topErrors.length === 0 && <p className="text-center text-slate-600 text-xs py-8">No anomalies detected.</p>}
-                </div>
-              </div>
+            {/* Endpoints */}
+            <div className="grid grid-cols-1 gap-4 md:gap-6 pb-20">
+
 
               {/* Endpoints */}
               <div className="glass-panel p-4 md:p-8 rounded-[2rem] md:rounded-[2.5rem]">

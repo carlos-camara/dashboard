@@ -88,11 +88,7 @@ dashboard:
     by: xpath
     value: //p[contains(text(), 'System Health')]/ancestor::div[contains(@class, 'glass-panel')]//h3/span
     wait_load: false
-  stats_failed_card:
-    type: text
-    by: xpath
-    value: //p[contains(text(), 'Incident Taxonomy')]/ancestor::div[contains(@class,
-      'glass-panel')]
+
     wait_load: false
   status_ticker_bar:
     type: webelement
@@ -160,20 +156,11 @@ dashboard:
     value: //h3[contains(., 'Sector Integrity')]/ancestor::div[contains(@class, 'glass-panel')]//div[contains(@class,
       'cursor-pointer')][1]
     wait_load: false
-  incidents_heading:
-    type: text
-    by: xpath
-    value: //h3[contains(., 'Incident Taxonomy')]
+
     wait_load: false
-  incidents_list_item:
-    type: webelement
-    by: xpath
-    value: //h3[contains(., 'Incident Taxonomy')]/ancestor::div[contains(@class, 'glass-panel')]//div[contains(@class, 'border-l-4')]
+
     wait_load: false
-  incidents_count:
-    type: text
-    by: xpath
-    value: //h3[contains(., 'Incident Taxonomy')]/ancestor::div[contains(@class, 'glass-panel')]//span[contains(@class, 'bg-rose-500/10')]
+
     wait_load: false
   endpoints_heading:
     type: text
