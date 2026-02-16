@@ -6,15 +6,15 @@ labels: "enhancement"
 assignees: ""
 ---
 
-# 🚀 Feature Request
+### 🚀 Feature Request
 
 ## 🌟 Vision
 <!-- What problem does this feature solve? What is the core idea? -->
-> 
+>
 
 ## 🛠️ Proposed Solution
 <!-- How do you imagine this working? Briefly describe the mechanics. -->
-- 
+-
 
 ## 💎 Value Proposition
 <!-- Why is this important? How does it improve the developer or QA experience? -->
@@ -24,7 +24,7 @@ assignees: ""
 
 ## 🎨 Mockups / Inspiration
 <!-- If applicable, link to designs or similar features in other tools. -->
-- 
+-
 
 ---
 _Innovating with 🛡️ for the future_

@@ -6,11 +6,11 @@ labels: "bug"
 assignees: ""
 ---
 
-# 🐛 Bug Report
+### 🐛 Bug Report
 
 ## 🌟 Overview
 <!-- Provide a clear and concise description of the issue. -->
-> 
+>
 
 ## 🏗️ Steps to Reproduce
 <!-- How can we see the bug in action? -->
