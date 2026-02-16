@@ -19,7 +19,6 @@ features/
 ├── page_objects/
 │   ├── locators/               # 🚩 The Single Source of Truth
 │   │   ├── dashboard.yaml      # Dashboard page locators
-│   │   ├── incidents.yaml      # Incidents page locators 
 │   │   └── ...                 # One YAML per page/view
 │   └── README.md               # This file
 ├── steps/
