@@ -19,7 +19,7 @@
 
 <br/>
 
-![Main Dashboard View](features/resources/screenshots/dashboard_complete_view_fullpage.png)
+![Main Dashboard View](features/resources/screenshots/baselines/chrome_dashboard_full_view_masked.png)
 
 ---
 
@@ -51,7 +51,7 @@ Go beyond binary pass/fail results. Our **Performance Analytics Engine** establi
 - **Throughput Chronology**: Surgical detection of regression spikes and latency drifts.
 - **Spectral Latency Audit**: A heat-map of system responsiveness and SLA adherence.
 
-![Performance View](features/resources/screenshots/ultra_professional_performance_dashboard.png)
+![Performance View](features/resources/screenshots/baselines/chrome_final_performance_dashboard_verification.png)
 
 ### 🤖 PR Intelligence
 Maximize developer focus with an automated pull request management system:
