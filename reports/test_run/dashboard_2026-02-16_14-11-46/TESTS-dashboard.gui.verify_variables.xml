@@ -1,0 +1,121 @@
+<testsuite name="dashboard.gui.verify_variables.Variable Transformation Validation" tests="4" errors="0" failures="0" skipped="0" time="14.649271" timestamp="2026-02-16T14:14:31.546348" hostname="runnervmjduv7"><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify basic generation tokens" status="passed" time="3.136715"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify basic generation tokens
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.601s
+    And the "dashboard" page is displayed ... passed in 0.988s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.151s
+    Then the "test_runs" page is displayed ... passed in 0.131s
+    Then the following elements should contain these texts ... passed in 0.024s
+      | element      | value   |
+      | search_input | [EMPTY] |
+    When I type "[STRING_WITH_LENGTH_10]" into the "search_input" ... passed in 0.209s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then I should see the "search_input" ... passed in 0.032s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+14:14:17 [Variable Transformation Validation | Verify basic generation tokens] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+]]>
+</system-err></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify unique and random tokens" status="passed" time="4.306906"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify unique and random tokens
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.608s
+    And the "dashboard" page is displayed ... passed in 1.015s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.152s
+    Then the "test_runs" page is displayed ... passed in 0.123s
+    When I type "[UUID]" into the "search_input" ... passed in 0.286s
+    And I wait for 1 seconds ... passed in 1.000s
+    When I type "[RANDOM]" into the "search_input" ... passed in 0.122s
+    And I wait for 1 seconds ... passed in 1.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+14:14:21 [Variable Transformation Validation | Verify unique and random tokens] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
+14:14:22 [Variable Transformation Validation | Verify unique and random tokens] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+]]>
+</system-err></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify temporal tokens" status="passed" time="2.982455"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify temporal tokens
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.592s
+    And the "dashboard" page is displayed ... passed in 0.948s
+    Then the page title should be "QA Hub - Execution Dashboard" ... passed in 0.008s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.144s
+    Then the "test_runs" page is displayed ... passed in 0.123s
+    When I type "[NOW(%Y)]" into the "search_input" ... passed in 0.150s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the following elements should contain these texts ... passed in 0.018s
+      | element      | value     |
+      | search_input | [NOW(%Y)] |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+14:14:25 [Variable Transformation Validation | Verify temporal tokens] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+]]>
+</system-err></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify transformation functions" status="passed" time="4.223195"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify transformation functions
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.626s
+    And the "dashboard" page is displayed ... passed in 0.983s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.146s
+    Then the "test_runs" page is displayed ... passed in 0.127s
+    When I type "[UPPER:qa-hub]" into the "search_input" ... passed in 0.187s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the following elements should contain these texts ... passed in 0.016s
+      | element      | value  |
+      | search_input | QA-HUB |
+    When I type "[STR:[INT:123]]" into the "search_input" ... passed in 0.123s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the following elements should contain these texts ... passed in 0.015s
+      | element      | value |
+      | search_input | 123   |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+14:14:29 [Variable Transformation Validation | Verify transformation functions] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
+14:14:30 [Variable Transformation Validation | Verify transformation functions] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+]]>
+</system-err></testcase></testsuite>
