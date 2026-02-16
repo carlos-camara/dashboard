@@ -61,6 +61,7 @@ jobs:
         with:
           reports-path: "junit-results"
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          target: "description"
 
       - name: Environment Teardown
         if: always()
