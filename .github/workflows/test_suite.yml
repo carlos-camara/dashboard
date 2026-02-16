@@ -55,6 +55,13 @@ jobs:
           upload-artifacts: true
           publish-results: true
 
+      - name: Publish PR Results
+        if: always()
+        uses: carlos-camara/qa-hub-actions/publish-test-results@main
+        with:
+          reports-path: "junit-results"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Environment Teardown
         if: always()
         uses: carlos-camara/qa-hub-actions/environment-health-check@main
