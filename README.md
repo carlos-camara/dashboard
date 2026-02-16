@@ -25,96 +25,134 @@
 
 ## 🌟 Executive Overview
 
-This is more than a dashboard; it is a **mission-critical ecosystem** for modern engineering teams. Engineered with a **Modular Backend** and a **Glassmorphism UI**, it provides surgical-grade insights into your multi-project quality landscape, transforming chaotic logs into actionable intelligence.
+This is more than a dashboard; it is a **mission-critical ecosystem** for modern engineering teams. Engineered with a **Glassmorphism UI**, it provides surgical-grade insights into your multi-project quality landscape, transforming chaotic logs into actionable intelligence.
 
 ### 🚀 The Four Pillars
 - **Unified Vision**: Aggregated reporting for API (Behave) and GUI (Selenium) test suites in a single pane.
-- **High-Fidelity Animations**: Smooth transitions powered by Framer Motion for a premium user experience.
-- **Modular Architecture**: Clean separation of concerns between DB, S3 Sync, and XML Parsing.
-- **Visual Intelligence**: Advanced visual regression testing with dynamic element masking (Charts, Timestamps, Random Data).
-- **Governed Maintenance**: Automated dependency updates via Dependabot and clear ownership via CODEOWNERS.
+- **Smart Diagnostics**: Automated failure pattern recognition with immersive visual evidence.
+- **Performance Digital Twin**: Real-time signal analysis and regression detection using Recharts analytics.
 - **Enterprise-Grade CI**: Fully automated lifecycle from linting to report archival in AWS S3.
 
 ---
 
-## 🏗️ Technical Architecture
+## 🌐 Live Experience
 
-The Command Center is built on a decoupled, service-oriented architecture designed for scalability and maintainability.
+The future of test reporting is already online. Experience the ultra-premium interface here:
 
-```mermaid
-graph TD
-    subgraph "Presentation Layer (Frontend)"
-        UI["React 19 + Vite"] -->|Framer Motion| ANIM["Fluid Transitions"]
-        UI -->|Tailwind CSS 4| GLASS["Glassmorphism UI"]
-    end
-
-    subgraph "Service Layer (Backend)"
-        API["Express Router"] --> S3["S3 Sync Service"]
-        API --> PARSE["XML Parser Service"]
-        API --> DB_SERV["Database Service"]
-    end
-
-    subgraph "Persistence & Data"
-        DB_SERV --> SQLITE[("SQLite (WAL Mode)")]
-        S3 --> AWS[("AWS S3 Archive")]
-    end
-
-    subgraph "External Ecosystem"
-        QA_HUB["QA Hub Framework"] -->|Produces| XML["JUnit XML Reports"]
-        XML -->|Captured by| API
-    end
-    
-    style API fill:#6d28d9,color:#fff
-    style UI fill:#2563eb,color:#fff
-    style SQLITE fill:#0f172a,color:#fff
-```
+> **[🚀 Access Live Dashboard](https://carlos-camara.github.io/dashboard/)**
 
 ---
 
-## 🚦 Quick Start
+## ✨ Cutting-Edge Features
 
-### 📋 Prerequisites
-- **Node.js 20+** (LTS Recommended)
-- **Python 3.11+**
-- **AWS Credentials** (Optional, for S3 sync)
+### 📊 Performance Digital Twin
+Go beyond binary pass/fail results. Our **Performance Analytics Engine** establishes a technical baseline for your system's health.
+- **Signal Velocity**: Interactive time-series charts visualizing throughput trends.
+- **Throughput Chronology**: Surgical detection of regression spikes and latency drifts.
+- **Spectral Latency Audit**: A heat-map of system responsiveness and SLA adherence.
 
-### 💻 Local Deployment
+![Performance View](features/resources/screenshots/ultra_professional_performance_dashboard.png)
 
-1. **Clone & Install**:
-   ```bash
-   git clone https://github.com/carlos-camara/dashboard.git
-   cd dashboard
-   npm install
-   ```
+### 🤖 PR Intelligence
+Maximize developer focus with an automated pull request management system:
+- **Auto-Labeler**: Precise categorization (`DevOps`, `QA`, `Frontend`, `Backend`) based on modified file paths.
+- **Auto-Assigner**: Automatic ownership assignment to ensure rapid review cycles.
+- **Smart Formatting**: Enforced markdown standards for clean, readable documentation.
 
-2. **Run Services**:
-   ```bash
-   npm run start-backend  # Launches modular Express server
-   npm run dev            # Launches Vite frontend with HMR
-   ```
+### 📑 Intelligent PDF Dossiers
+Export executive-ready artifacts with a single click. These **Intelligent Dossiers** include:
+- **Executive KPI Grid**: High-level success metrics.
+- **Visual Evidence Engine**: Embedded high-resolution screenshots for every failure.
+- **SLA Violation Logs**: Detailed breakdown of performance threshold breaches.
 
-3. **Automation Engine (Optional)**:
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate # or .venv\Scripts\activate on Windows
-   pip install -r requirements.txt
-   ```
+---
+
+## 🏗️ Architecture & Decoupled Stack
+
+We leverage a modern, decoupled architecture designed for scale and zero-downtime reliability.
+
+```mermaid
+graph TD
+    subgraph "Local / Runner"
+        A["GitHub Actions CI"] -->|Triggers| B("Behave API Test")
+        A -->|Triggers| C("Selenium GUI Test")
+        A -->|Triggers| L["Locust Load Test"]
+    end
+
+    subgraph "Shared Action Hub"
+        D["QA Hub Shared Actions"] -->|Standardizes| A
+    end
+
+    subgraph "Data Storage"
+        B & C & L -->|Artifacts| E["JUnit XML / JSON"]
+        E -->|Aggregated by| S3["AWS S3 History"]
+        E -->|Committed to| DB["SQLite Result DB"]
+    end
+
+    subgraph "Cloud Presentation"
+        DB -->|Served by| G["Render Backend API"]
+        G -->|Consumes| H["Vite React Dashboard"]
+        H -->|Hosted on| P["GitHub Pages (Global CDN)"]
+    end
+    
+    style G fill:#6d28d9,color:#fff
+    style P fill:#2563eb,color:#fff
+    style D fill:#f59e0b,color:#000
+```
 
 ---
 
 ## 🛠️ Unified CI/CD Ecosystem
 
-Our pipelines are powered by the **[QA Hub Actions](https://github.com/carlos-camara/qa-hub-actions)** library.
+Our pipelines are powered by the **[QA Hub Actions](https://github.com/carlos-camara/qa-hub-actions)** library, ensuring global standards across all repositories.
 
 | Status | Pipeline | Core Responsibility |
 | :---: | :--- | :--- |
 | `🧹` | **Lint Codebase** | Super-Linter enforcement for zero-debt documentation and code. |
 | `🛡️` | **Unified Suite** | Parallel execution of API, GUI, and Performance layers. |
-| `📦` | **Upload Results** | Automated merging and committing of reports. |
+| `📦` | **Upload Results** | Automated merging and committing of timestamped reports. |
+| `☁️` | **AWS S3 Archive** | Long-term persistence for historical quality analysis. |
 | `🏷️` | **PR Intelligence** | Dynamic labeling and contributor assignment. |
 
 ---
 
+## 🚦 Quick Start
+
+### 📋 Environment Requirements
+- **Python 3.11+** | **Node.js 20+** | **Chrome/Chromedriver**
+
+### 💻 Local Deployment
+
+1. **Clone & Explore**:
+   ```bash
+   git clone https://github.com/carlos-camara/dashboard.git
+   cd dashboard
+   ```
+
+2. **Core Services & UI**:
+   ```bash
+   npm install
+   npm run start-backend  # Terminal 1
+   npm run dev            # Terminal 2
+   ```
+
+3. **Automation Engine**:
+   ```bash
+   python -m venv .venv
+   .venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+
+---
+
+## 🛡️ Support & Security
+
+We maintain the highest standards for our engineering tools.
+- **Security Policy**: Read our [Security Procedures](SECURITY.md).
+- **Contributing**: Check our [Engineering Standards](CONTRIBUTING.md).
+- **Changelog**: Follow our evolution in the [Changelog](CHANGELOG.md).
+
+---
 <div align="center">
   <i>Designed & Engineered by <b>[Carlos Cámara](https://github.com/carlos-camara)</b></i>
 </div>

@@ -1,32 +1,38 @@
 ---
-name: Bug Report
-about: Create a report to help us improve
-title: "[BUG] "
-labels: bug
-assignees: ''
-
+name: "🛡️ Bug Report"
+about: "Report a technical anomaly or defect to the QA Hub Team"
+title: "bug: [Brief Description]"
+labels: "bug"
+assignees: ""
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+# 🐛 Bug Report
 
-**To Reproduce**
-Steps to reproduce the behavior:
+## 🌟 Overview
+<!-- Provide a clear and concise description of the issue. -->
+> 
+
+## 🏗️ Steps to Reproduce
+<!-- How can we see the bug in action? -->
 1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+2. Perform action '...'
+3. Observe behavior '...'
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+## 🎯 Expected vs. Actual
+| Perspective | Observation |
+| :--- | :--- |
+| **Expected** | _What should have happened_ |
+| **Actual** | _What actually happened (e.g., error logs, crash)_ |
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+## 📸 Evidence & Context
+<!-- Attach screenshots, videos, or raw logs. -->
+- **Environment**: [e.g. Chrome 120, Windows 11]
+- **Visuals**: _[Drop assets here]_
 
-**Environment (please complete the following information):**
-- OS: [e.g. Windows]
-- Browser: [e.g. chrome, safari]
-- Node Version: [e.g. 20.x]
+## ⚠️ Mission Impact
+- [ ] **Critical**: Blockers for core functionality.
+- [ ] **Major**: Significant impact on usability.
+- [ ] **Minor**: Aesthetic or low-priority edge cases.
 
-**Additional context**
-Add any other context about the problem here.
+---
+_Detected with 🛡️ for excellence_

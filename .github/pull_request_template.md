@@ -1,27 +1,48 @@
-# 📝 Descripcin del Cambio
-<!-- ¿Qué hace este PR? ¿Qué problema resuelve? -->
+<!-- 
+  🚀 Thank you for your contribution!
+  
+  Before submitting this PR, please ensure:
+  - Your code follows the project's architectural patterns.
+  - You have verified your changes locally.
+  - Integration tests pass successfully.
+-->
 
-## 🔗 Ticket Relacionado
-<!-- Link al ticket de Jira/Issue de GitHub -->
+# 📝 Pull Request: [Brief Title]
 
-## 🛠️ Tipo de Cambio
-- [ ] 🐛 Bug fix (corrección de error)
-- [ ] ✨ New feature (nueva funcionalidad)
-- [ ] 💄 UI/UX improvement (mejora visual)
-- [ ] ♻️ Refactor (mejora de código sin cambios funcionales)
-- [ ] 📝 Documentation (actualización de documentación)
+## 🌟 Executive Summary
+<!-- What is the purpose of this change? Describe the problem and your solution. -->
+> 
 
-## 🧪 Pruebas Realizadas
-<!-- Describe cómo probaste tus cambios -->
-- [ ] Unit Tests
-- [ ] Smoke Tests (`make smoke`)
-- [ ] Visual Validation (`make visual-check`)
-- [ ] Manual Testing
+## 🛠️ Type of Change
+- [ ] 🚀 **New Feature**: A non-breaking change that adds functionality.
+- [ ] 🐛 **Bug Fix**: A non-breaking change that fixes an issue.
+- [ ] ♻️ **Refactor**: Code improvement without functional changes.
+- [ ] 💄 **UI/UX**: Aesthetic enhancements or design system updates.
+- [ ] 🛡️ **Security**: Security audits or vulnerability patching.
+- [ ] 📚 **Documentation**: Updates to READMEs, docs, or comments.
+- [ ] 💥 **Breaking Change**: Core logic shift requiring migration.
 
-## 📸 Screenshots / Videos (Opcional)
-<!-- Si hay cambios visuales, adjunta evidencia aquí -->
+## 🎯 Technical Strategy
+<!-- Briefly describe the technical approach or specific design decisions. -->
+- 
 
-## ✅ Checklist
-- [ ] El código sigue las guías de estilo del proyecto
-- [ ] He actualizado la documentación necesaria
-- [ ] He verificado que no introduzco nuevos warnings
+## 🧪 Verification & Quality
+<!-- How did you verify this change? -->
+- [ ] **Automated Tests**: Smoke/Regression suites passed.
+- [ ] **Visual Validation**: Verified aesthetics and responsive layout.
+- [ ] **Manual Testing**: Walkthrough performed on staging/local.
+
+## 📸 Proof of Work
+<!-- Attach high-fidelity screenshots or videos demonstrating the change. -->
+| Feature Area | Visual Evidence |
+| :--- | :--- |
+| **Component Name** | _[Drop screenshot/video here]_ |
+
+## ✅ Governance Checklist
+- [ ] 🏗️ **Self-Review**: I have analyzed my own logic for potential edge cases.
+- [ ] 🧹 **Linting**: Code meets the global "Gold Standard" for quality.
+- [ ] 📖 **Documentation**: Updated all relevant technical guides.
+- [ ] ⚠️ **Regressions**: Verified no impact on existing mission-critical flows.
+
+---
+_Engineered with 🛡️ by the QA Hub Team_
