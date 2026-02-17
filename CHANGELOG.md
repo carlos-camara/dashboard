@@ -7,12 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-02-17
+### 🚀 Added (Intelligence & Automation)
+- **Enhanced Reviewer Intelligence**: Implemented grouped and collapsible file breakdown in PR summaries.
+- **Smart Checklists**: Automated PR task list completion triggered by CI status.
+- **Advanced Reporter**: Refined high-fidelity PR injection with native-looking integration and zero branding.
+
+### 🛠️ Fixed (CI Remediation)
+- **CI Stabilization**: Purged stale/tracked failure reports and updated `.gitignore` to prevent aggregation of ghost failures.
+- **Seeding Integrity**: Configured report collection to ignore demo/seed data to ensure 100% accurate PR summaries.
+- **SPA Routing**: Added `.nojekyll` and `404.html` support for robust GitHub Pages hosting.
+
+### 🛡️ Governance
+- **Permissions Alignment**: Standardized `checks: write` and `pull-requests: write` across all core workflows.
+- **Documentation Hygiene**: Global standardization of Markdown files for 100% linter compliance.
+
+---
+
+## [0.3.0] - 2026-02-14
+
 ### 🚀 Added
 - **Dashboard**: New React 19 Frontend with real-time analytics and Glassmorphism UI.
 - **Intelligence Actions**: Automated Release Notes, Visual Regression Manager, and Environment Health Check.
 - **Framework integration**: Decoupled core logic into `qa-hub-framework`.
 - **Visuals**: Enhanced Performance Drift Awareness with Mermaid visualization and threshold highlighting.
 - **Security**: Implemented visual masking for sensitive data in reports.
+- **Visual Regression Masking**: Implemented granular element masking (Charts, Timestamps, Dynamic Lists) for 100% stability.
+- **Mobile Verification**: Added explicit viewport testing for responsive layouts (iPhone X, etc.).
+- **Generic Steps Refactor**: Migrated logic to `qa-hub-framework` for visual matching and data validation.
 
 ### 🛠️ Changed
 - **Architecture**: Migrated to a centralized Page Object system powered by YAML and the shared framework.
@@ -21,16 +43,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 🐛 Fixed
 - **Downloads**: Implemented self-healing download verification to resolve failures in restrictive environments.
 - **Refactoring**: Corrected various `NameError` and import issues during the framework migration phase.
-
----
-
-## [0.3.0] - 2026-02-14
-### 🚀 Features (v0.3.0)
-- **Visual Regression Masking**: Implemented granular element masking (Charts, Timestamps, Dynamic Lists) for 100% stability in visual tests.
-- **Mobile Verification**: Added explicit viewport testing for responsive layouts (iPhone X, etc.).
-- **Generic Steps**: Refactored logic to `qa-hub-framework` for:
-  - Text validation against lists.
-  - Dynamic file download verification (timestamped reports).
 
 ### 🛠️ Maintenance
 - **Repository Cleanup**: Removed unused drivers, temporary reports, and obsolete custom steps.

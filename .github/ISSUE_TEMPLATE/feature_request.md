@@ -26,5 +26,4 @@ assignees: ""
 <!-- If applicable, link to designs or similar features in other tools. -->
 -
 
----
-_Innovating with 🛡️ for the future_
+
