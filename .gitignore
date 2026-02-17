@@ -39,7 +39,8 @@ qa_hub.db*
 database.db
 
 # Reports and Uploads
-uploads/*
+reports/
+uploads/
 !uploads/.gitkeep
 
 # Temporary test outputs (screenshots go to features/resources/screenshots/baselines/)
