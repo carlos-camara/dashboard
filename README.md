@@ -299,6 +299,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
   <i>Designed & Engineered by <b><a href="https://github.com/carlos-camara">Carlos Cámara</a></b></i>
-  <br/><br/>
-  <sub>Built with ❤️ using React, Tailwind CSS, and the QA Hub Framework</sub>
 </div>
