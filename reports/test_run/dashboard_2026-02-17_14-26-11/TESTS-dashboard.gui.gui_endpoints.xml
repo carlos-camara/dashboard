@@ -1,0 +1,56 @@
+<testsuite name="dashboard.gui.gui_endpoints.Endpoints Catalog &amp; Insights" tests="1" errors="0" failures="0" skipped="0" time="5.944092" timestamp="2026-02-17T14:27:49.919548" hostname="runnervmjduv7"><testcase classname="dashboard.gui.gui_endpoints.Endpoints Catalog &amp; Insights" name="Analyze Endpoint Details" status="passed" time="5.944092"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @visual
+  Scenario: Analyze Endpoint Details
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.719s
+    And the "dashboard" page is displayed ... passed in 0.993s
+    And I wait for "dashboard" to be stable ... passed in 1.000s
+    When I click on the "endpoints_link" in the sidebar ... passed in 0.159s
+    Then the "endpoints_view" page is displayed ... passed in 0.072s
+    When I type "health" into the "search_input" ... passed in 0.266s
+    And I wait for "list" to update ... passed in 1.000s
+    When I click on the "endpoint_item" ... passed in 0.130s
+    Then the "endpoint_detail" page is displayed ... passed in 0.117s
+    Then the following elements should contain these texts ... passed in 0.028s
+      | element     | value                               |
+      | back_button | [LANG:endpoints.detail.back_button] |
+    And I should see the text "[LANG:endpoints.detail.success_rate]" ... passed in 0.053s
+    And I should see the text "[LANG:endpoints.detail.avg_latency]" ... passed in 0.055s
+    And I should see the "performance_card" ... passed in 0.028s
+    And I should see the text "[LANG:endpoints.detail.performance_insights]" ... passed in 0.043s
+    And I should see the text "[LANG:endpoints.detail.live_discovery]" ... passed in 0.042s
+    Then the "endpoint detail" page should visually match the baseline image "endpoints_deep_detail" without elements and with a 15.0% tolerance ... passed in 1.110s
+      | element                      |
+      | success_rate_number          |
+      | avg_latency_number           |
+      | performance_report_timestamp |
+      | performance_total_requests   |
+      | performance_rps              |
+      | performance_p95_latency      |
+      | performance_failures         |
+    When I click on the "back_button" ... passed in 0.086s
+    Then the "endpoints_view" page is displayed ... passed in 0.016s
+    And the "title" should contain the text "[LANG:endpoints.view.title]" ... passed in 0.027s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+14:27:45 [Endpoints Catalog & Insights | Analyze Endpoint Details] DEBUG: Waiting for 'dashboard' stability (1s wait)...
+14:27:47 [Endpoints Catalog & Insights | Analyze Endpoint Details] DEBUG: Waiting for 'list' stability (1s wait)...
+14:27:49 [Endpoints Catalog & Insights | Analyze Endpoint Details] INFO: Captured granular screenshot for masking: endpoints_deep_detail (Element: endpoint detail)
+14:27:49 [Endpoints Catalog & Insights | Analyze Endpoint Details] DEBUG: [DEBUG] Applying 7 mask regions.
+[Visual] 🐧 CI/Linux detected. Adjusting tolerance from 15.0% to 30.0%
+[Visual] ✅ Match for 'endpoints_deep_detail': Similarity=89.33%
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+]]>
+</system-err></testcase></testsuite>
