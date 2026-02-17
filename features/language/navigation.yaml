@@ -4,6 +4,3 @@ test_runs:
 endpoints:
   en: "ENDPOINT CATALOG"
   es: "CATÁLOGO DE ENDPOINTS"
-incidents:
-  en: "INCIDENT TAXONOMY"
-  es: "TAXONOMÍA DE INCIDENTES"
