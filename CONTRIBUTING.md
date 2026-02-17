@@ -130,7 +130,7 @@ pip install -r requirements.txt
 
 ## 🔄 The Contribution Workflow
 
-1. **Find or Create an Issue**: 
+1. **Find or Create an Issue**:
    - Browse [existing issues](https://github.com/carlos-camara/dashboard/issues) or create one to discuss your proposed change.
    - Wait for maintainer feedback before starting significant work.
 
@@ -290,7 +290,7 @@ Use the [Bug Report template](.github/ISSUE_TEMPLATE/bug_report.md) and provide:
 - **Expected Behavior**: What you expected to happen.
 - **Actual Behavior**: What actually happened.
 - **Evidence**: Screenshots, console logs, or `server.log` snippets.
-- **Environment**: 
+- **Environment**:
   - OS (e.g., Windows 11, macOS 14, Ubuntu 22.04)
   - Node.js version (`node --version`)
   - Browser and version (for UI bugs)
