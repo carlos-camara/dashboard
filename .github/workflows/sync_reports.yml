@@ -1,0 +1,50 @@
+name: Sync Reports from S3
+
+on:
+  schedule:
+    - cron: '*/30 * * * *' # Every 30 minutes
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-s3:
+    name: Sync S3 Reports to Main
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Sync Reports
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+        run: node scripts/sync-s3.js
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "S3 Sync Bot"
+          git config --global user.email "qa-hub-bot@users.noreply.github.com"
+          git add reports/test_run/
+          git add qa_hub.db
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "chore: sync reports from s3 [skip ci]"
+            git push origin main
+          else
+            echo "No new reports to sync."
+          fi
