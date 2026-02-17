@@ -27,8 +27,8 @@ dashboard:
     type: webelement
     by: xpath
     value: >-
-      //h3[contains(., 'Sector Integrity')]/following-sibling::div[contains(@class,
-      'overflow-y-auto')]
+      //h3[contains(., 'Sector
+      Integrity')]/following-sibling::div[contains(@class, 'overflow-y-auto')]
     wait_load: false
   header_qa_hub_text:
     type: text

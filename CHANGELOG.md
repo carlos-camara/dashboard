@@ -32,6 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Framework integration**: Decoupled core logic into `qa-hub-framework`.
 - **Visuals**: Enhanced Performance Drift Awareness with Mermaid visualization and threshold highlighting.
 - **Security**: Implemented visual masking for sensitive data in reports.
+- **Visual Regression Masking**: Implemented granular element masking (Charts, Timestamps, Dynamic Lists) for 100% stability.
+- **Mobile Verification**: Added explicit viewport testing for responsive layouts (iPhone X, etc.).
+- **Generic Steps Refactor**: Migrated logic to `qa-hub-framework` for visual matching and data validation.
 
 ### 🛠️ Changed
 - **Architecture**: Migrated to a centralized Page Object system powered by YAML and the shared framework.
@@ -40,13 +43,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 🐛 Fixed
 - **Downloads**: Implemented self-healing download verification to resolve failures in restrictive environments.
 - **Refactoring**: Corrected various `NameError` and import issues during the framework migration phase.
-
----
-
-## [0.3.0] - 2026-02-14
-- **Visual Regression Masking**: Implemented granular element masking (Charts, Timestamps, Dynamic Lists) for 100% stability.
-- **Mobile Verification**: Added explicit viewport testing for responsive layouts (iPhone X, etc.).
-- **Generic Steps Refactor**: Migrated logic to `qa-hub-framework` for visual matching and data validation.
 
 ### 🛠️ Maintenance
 - **Repository Cleanup**: Removed unused drivers, temporary reports, and obsolete custom steps.
