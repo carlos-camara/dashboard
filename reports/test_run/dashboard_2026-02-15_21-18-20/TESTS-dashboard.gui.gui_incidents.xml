@@ -1,0 +1,148 @@
+<testsuite name="dashboard.gui.gui_incidents.Incident Taxonomy &amp; Analysis" tests="4" errors="0" failures="0" skipped="0" time="56.504179" timestamp="2026-02-15T21:21:03.361899" hostname="runnervmjduv7"><testcase classname="dashboard.gui.gui_incidents.Incident Taxonomy &amp; Analysis" name="Verify Incident Page Structure" status="passed" time="29.247206"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @visual @smoke
+  Scenario: Verify Incident Page Structure
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.659s
+    And the "dashboard" page is displayed ... passed in 0.955s
+    When I click on the "incidents_link" in the sidebar ... passed in 0.166s
+    Then the "incidents" page is displayed ... passed in 0.107s
+    And I wait for "incidents" to be stable ... passed in 1.000s
+    And I wait for 5 seconds ... passed in 5.000s
+    Then the page title should be "[LANG:common.page_title]" ... passed in 0.007s
+    And the following elements should contain these texts ... passed in 0.048s
+      | element         | value                            |
+      | header_title    | [LANG:incidents.header.title]    |
+      | header_subtitle | [LANG:incidents.header.subtitle] |
+    Then the "incident page structure" page should visually match the baseline image "incident_page_structure" without elements and with a 15.0% tolerance ... passed in 21.305s
+      | element                 |
+      | stats_total_value       |
+      | stats_sectors_value     |
+      | stats_unique_value      |
+      | list_incident_timestamp |
+      | list_incident_message   |
+      | list_incident_frequency |
+      | list_incident_trend     |
+      | incident_list_container |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+21:20:07 [Incident Taxonomy & Analysis | Verify Incident Page Structure] DEBUG: Waiting for 'incidents' stability (1s wait)...
+21:20:08 [Incident Taxonomy & Analysis | Verify Incident Page Structure] WARNING: Explicit wait for 5 seconds. Prefer using wait_until_* on elements.
+21:20:14 [Incident Taxonomy & Analysis | Verify Incident Page Structure] INFO: Captured granular screenshot for masking: incident_page_structure (Element: incident page structure)
+21:20:34 [Incident Taxonomy & Analysis | Verify Incident Page Structure] DEBUG: [DEBUG] Applying 4 mask regions.
+[Visual] 🐧 CI/Linux detected. Adjusting tolerance from 15.0% to 30.0%
+[Visual] ✅ Match for 'incident_page_structure': Similarity=89.25%
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+]]>
+</system-err></testcase><testcase classname="dashboard.gui.gui_incidents.Incident Taxonomy &amp; Analysis" name="Verify Incident Statistics" status="passed" time="7.974374"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Incident Statistics
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.657s
+    And the "dashboard" page is displayed ... passed in 0.957s
+    When I click on the "incidents_link" in the sidebar ... passed in 0.167s
+    Then the "incidents" page is displayed ... passed in 0.107s
+    And I wait for "incidents" to be stable ... passed in 1.000s
+    And I wait for 5 seconds ... passed in 5.000s
+    Then the following elements should contain these texts ... passed in 0.052s
+      | element            | value                          |
+      | stats_total_sign   | [LANG:incidents.stats.total]   |
+      | stats_sectors_sign | [LANG:incidents.stats.sectors] |
+    And I should see the text "[LANG:incidents.stats.unique]" ... passed in 0.034s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+21:20:36 [Incident Taxonomy & Analysis | Verify Incident Statistics] DEBUG: Waiting for 'incidents' stability (1s wait)...
+21:20:37 [Incident Taxonomy & Analysis | Verify Incident Statistics] WARNING: Explicit wait for 5 seconds. Prefer using wait_until_* on elements.
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+]]>
+</system-err></testcase><testcase classname="dashboard.gui.gui_incidents.Incident Taxonomy &amp; Analysis" name="Verify Project Filtering" status="passed" time="9.071173"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @interactive
+  Scenario: Verify Project Filtering
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.653s
+    And the "dashboard" page is displayed ... passed in 0.980s
+    When I click on the "incidents_link" in the sidebar ... passed in 0.165s
+    Then the "incidents" page is displayed ... passed in 0.103s
+    And I wait for "incidents" to be stable ... passed in 1.000s
+    And I wait for 5 seconds ... passed in 5.000s
+    Then the "filters_scope_dropdown" should contain the text "[LANG:incidents.filters.global_scope]" ... passed in 0.033s
+    When I click on the button with text "[LANG:incidents.filters.global_scope]" ... passed in 0.114s
+    And I wait for "dropdown" to update ... passed in 1.000s
+    Then I should see at least 1 elements with class "absolute" ... passed in 0.022s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+21:20:45 [Incident Taxonomy & Analysis | Verify Project Filtering] DEBUG: Waiting for 'incidents' stability (1s wait)...
+21:20:46 [Incident Taxonomy & Analysis | Verify Project Filtering] WARNING: Explicit wait for 5 seconds. Prefer using wait_until_* on elements.
+21:20:51 [Incident Taxonomy & Analysis | Verify Project Filtering] DEBUG: Waiting for 'dropdown' stability (1s wait)...
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+]]>
+</system-err></testcase><testcase classname="dashboard.gui.gui_incidents.Incident Taxonomy &amp; Analysis" name="Verify Incident Expansion and Details" status="passed" time="10.211427"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @interactive
+  Scenario: Verify Incident Expansion and Details
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.646s
+    And the "dashboard" page is displayed ... passed in 0.961s
+    When I click on the "incidents_link" in the sidebar ... passed in 0.172s
+    Then the "incidents" page is displayed ... passed in 0.114s
+    And I wait for "incidents" to be stable ... passed in 1.000s
+    And I wait for 5 seconds ... passed in 5.000s
+    Then I should see at least 1 elements with class "glass-panel" ... passed in 0.021s
+    When I click on the "list_incident_summary" ... passed in 0.136s
+    And I wait for 2 seconds ... passed in 2.000s
+    Then the "incident_expanded" should be visible ... passed in 0.036s
+    Then the "list_details_context" should contain the text "[LANG:incidents.list.stack_trace]" ... passed in 0.051s
+    And I should see the text "[LANG:incidents.list.root_cause]" ... passed in 0.039s
+    And I should see the text "[LANG:incidents.list.affecting]" ... passed in 0.034s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+21:20:54 [Incident Taxonomy & Analysis | Verify Incident Expansion and Details] DEBUG: Waiting for 'incidents' stability (1s wait)...
+21:20:55 [Incident Taxonomy & Analysis | Verify Incident Expansion and Details] WARNING: Explicit wait for 5 seconds. Prefer using wait_until_* on elements.
+21:21:01 [Incident Taxonomy & Analysis | Verify Incident Expansion and Details] WARNING: Explicit wait for 2 seconds. Prefer using wait_until_* on elements.
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+]]>
+</system-err></testcase></testsuite>
