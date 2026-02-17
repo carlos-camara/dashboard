@@ -42,7 +42,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🔄 Sync Reports from S3
-        uses: carlos-camara/qa-hub-actions/sync-from-s3@main
+        uses: carlos-camara/qa-hub-actions/sync-from-s3@v1.1.2
         with:
           project-name: "dashboard"
           s3-bucket: ${{ secrets.AWS_S3_BUCKET }}
