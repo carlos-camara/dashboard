@@ -1,6 +1,6 @@
 ---
 name: "🛡️ Bug Report"
-about: "Report a technical anomaly or defect to the QA Hub Team"
+about: "Report a technical anomaly or defect"
 title: "bug: [Brief Description]"
 labels: "bug"
 assignees: ""

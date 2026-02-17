@@ -3,9 +3,7 @@ import React, { useState } from 'react';
 import Layout from './components/Layout';
 import DashboardView from './components/DashboardView';
 import EndpointsView from './components/EndpointsView';
-import IngestModal from './components/IngestModal';
 import TestRunsView from './components/TestRunsView';
-import IncidentView from './components/IncidentView';
 import ProjectDetailView from './components/ProjectDetailView';
 
 import PerformanceReportView from './components/PerformanceReportView';
@@ -13,7 +11,6 @@ import PerformanceReportView from './components/PerformanceReportView';
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [navigationState, setNavigationState] = useState<any>(null);
-  const [isIngestModalOpen, setIsIngestModalOpen] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
 
   const handleNavigate = (tab: string, state: any = null) => {
@@ -36,11 +33,6 @@ const App: React.FC = () => {
           refreshKey={refreshKey}
           initialProject={navigationState?.project}
           onNavigate={handleNavigate}
-        />;
-      case 'incidents':
-        return <IncidentView
-          refreshKey={refreshKey}
-          initialProject={navigationState?.project}
         />;
       case 'project-report':
         return <ProjectDetailView
@@ -65,21 +57,9 @@ const App: React.FC = () => {
       <Layout
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        onNewRun={() => setIsIngestModalOpen(true)}
       >
         {renderContent()}
       </Layout>
-
-      {isIngestModalOpen && (
-        <IngestModal
-          onClose={() => setIsIngestModalOpen(false)}
-          onSuccess={() => {
-            setIsIngestModalOpen(false);
-            setRefreshKey(prev => prev + 1); // Dispara la actualización global
-            setActiveTab('runs');
-          }}
-        />
-      )}
     </>
   );
 };

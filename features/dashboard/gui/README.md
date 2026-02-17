@@ -7,9 +7,10 @@ Our GUI tests follow the **Page Object Model (POM)** pattern. Locators are decou
 
 ## 📂 Test Organization
 
-- **`dashboard_visual.feature`**: Focuses on HSL color accuracy, glassmorphism effects, and layout integrity across viewports.
+- **`gui_dashboard.feature`**: Focuses on HSL color accuracy, glassmorphism effects, and layout integrity across viewports.
 - **`gui_navigation.feature`**: Validates routing, button interactions, and user flow between screens.
-- **`gui_smoke.feature`**: Critical path validation to ensure the core dashboard is accessible and functional.
+- **`gui_test_runs.feature`**: Critical path validation for viewing and filtering historical test execution data.
+- **`gui_endpoints.feature`**: Verification of API endpoint telemetry and latency visualization.
 
 ---
 

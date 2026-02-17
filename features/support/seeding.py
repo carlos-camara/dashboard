@@ -61,10 +61,10 @@ def seed_test_run_data(context):
     <testcase classname="dashboard.gui.login" name="Successful Login" time="2.5"/>
     <testcase classname="dashboard.gui.navigation" name="Navigate to Settings" time="1.2"/>
     <testcase classname="dashboard.gui.project" name="View Project Details" time="3.0"/>
-    <testcase classname="dashboard.gui.incidents" name="Verify Incident Expansion" time="2.0">
+    <testcase classname="dashboard.gui.summary" name="Validate Dashboard Metrics" time="2.0">
       <failure message="Logic Verification Failed in dashboard">
-        AssertionError: User context missing during verification
-        at IncidentView.verifyTransaction (IncidentView.tsx:75)
+        AssertionError: Data mismatch in stats grid
+        at DashboardView.fetchData (DashboardView.tsx:58)
       </failure>
     </testcase>
     <testcase classname="dashboard.api.users" name="Get User List" time="0.5"/>
