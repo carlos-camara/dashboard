@@ -19,9 +19,12 @@ jobs:
   sync-s3:
     name: Sync S3 Reports to Branch
     runs-on: ubuntu-latest
+    # Skip syncing if the workflow ran on main branch
+    # Main reports are already in sync, and we can't push to protected main anyway
     if: >
-      github.event_name == 'workflow_dispatch' ||
-      github.event.workflow_run.conclusion == 'success'
+      github.event.workflow_run.head_branch != 'main' &&
+      (github.event_name == 'workflow_dispatch' ||
+       github.event.workflow_run.conclusion == 'success')
     
     steps:
       - name: 📍 Determine Target Branch
