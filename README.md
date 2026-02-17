@@ -14,12 +14,32 @@
 
 [![Lint Status](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml)
 [![Test Suite Status](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml)
+[![Deploy Frontend](https://github.com/carlos-camara/dashboard/actions/workflows/deploy_frontend.yml/badge.svg)](https://github.com/carlos-camara/dashboard/actions/workflows/deploy_frontend.yml)
 
 </div>
 
 <br/>
 
 ![Main Dashboard View](features/resources/screenshots/baselines/chrome_dashboard_full_view_masked.png)
+
+---
+
+## 📑 Table of Contents
+
+- [Executive Overview](#-executive-overview)
+- [Live Experience](#-live-experience)
+- [Features at a Glance](#-features-at-a-glance)
+- [Cutting-Edge Features](#-cutting-edge-features)
+  - [Performance Digital Twin](#-performance-digital-twin)
+  - [PR Intelligence](#-pr-intelligence)
+  - [Intelligent PDF Dossiers](#-intelligent-pdf-dossiers)
+- [Architecture](#%EF%B8%8F-architecture--decoupled-stack)
+- [CI/CD Ecosystem](#%EF%B8%8F-unified-cicd-ecosystem)
+- [Quick Start](#-quick-start)
+- [Testing](#-testing)
+- [Project Structure](#-project-structure)
+- [Contributing](#-contributing)
+- [Support & Security](#%EF%B8%8F-support--security)
 
 ---
 
@@ -43,6 +63,22 @@ The future of test reporting is already online. Experience the ultra-premium int
 
 ---
 
+## 📊 Features at a Glance
+
+| Feature | Description | Technology |
+|---------|-------------|------------|
+| **Test Aggregation** | Unified API & GUI test reporting | Behave, Selenium |
+| **Performance Analytics** | Time-series metrics & regression detection | Recharts, Custom algorithms |
+| **Visual Evidence** | Automatic screenshot capture & archival | html2canvas |
+| **PDF Export** | Executive-ready dossiers | jsPDF, Custom rendering |
+| **S3 Integration** | Automated report synchronization | AWS SDK |
+| **PR Automation** | Smart labeling, assignment, summarization | GitHub Actions, gh CLI |
+| **SPA Routing** | Client-side navigation support | React Router |
+| **Live Backend** | Real-time data API | Express.js, SQLite |
+| **CI/CD** | Full automation pipeline | GitHub Actions, QA Hub Actions |
+
+---
+
 ## ✨ Cutting-Edge Features
 
 ### 📊 Performance Digital Twin
@@ -61,6 +97,7 @@ Maximize developer focus with an automated pull request management system:
 - **High-Fidelity Reporting**: Full test results are injected directly into the PR description with a visual summary table, eliminating the need to dig through logs.
 - **SPA Deployment**: GitHub Pages deployment now supports Single Page Application routing via `.nojekyll` and `404.html` handling.
 - **Auto-Assigner**: Automatic ownership assignment to ensure rapid review cycles.
+- **Milestone Management**: Automatic assignment to latest active milestone.
 
 ### 📑 Intelligent PDF Dossiers
 Export executive-ready artifacts with a single click. These **Intelligent Dossiers** include:
@@ -103,6 +140,9 @@ graph TD
     style D fill:#f59e0b,color:#000
 ```
 
+> [!TIP]
+> The architecture separates concerns: test execution (GitHub Actions), data storage (S3 + SQLite), backend API (Render), and frontend (GitHub Pages). This enables independent scaling and zero-downtime deployments.
+
 ---
 
 ## 🛠️ Unified CI/CD Ecosystem
@@ -113,49 +153,150 @@ Our pipelines are powered by the **[QA Hub Actions](https://github.com/carlos-ca
 | :---: | :--- | :--- |
 | `🧹` | **Lint Codebase** | Super-Linter enforcement for zero-debt documentation and code. |
 | `🛡️` | **Unified Suite** | Parallel execution of API, GUI, and Performance layers. |
-| `📦` | **Upload Results** | Automated merging and committing of timestamped reports. |
-| `☁️` | **AWS S3 Archive** | Long-term persistence for historical quality analysis. |
-| `🏷️` | **PR Intelligence** | Dynamic labeling and contributor assignment. |
+| `☁️` | **Deploy to S3** | Upload test artifacts to AWS S3 for long-term persistence. |
+| `🔄` | **Sync from S3** | Automatic synchronization of S3 reports to repository. |
+| `🚀` | **Deploy Frontend** | Automated deployment to GitHub Pages with SPA support. |
+| `🏷️` | **PR Intelligence** | Dynamic labeling, assignment, and auto-summarization. |
 
 ---
 
 ## 🚦 Quick Start
 
-### 📋 Environment Requirements
-- **Python 3.11+** | **Node.js 20+** | **Chrome/Chromedriver**
+### 📋 Prerequisites
 
-### 💻 Local Deployment
+Ensure you have the following installed:
+- **Python 3.11+** - [Download](https://www.python.org/downloads/)
+- **Node.js 20+** - [Download](https://nodejs.org/)
+- **Chrome/Chromedriver** - Required for GUI tests
 
-1. **Clone & Explore**:
+### 💻 Installation & Setup
+
+1. **Clone the Repository**:
    ```bash
    git clone https://github.com/carlos-camara/dashboard.git
    cd dashboard
    ```
 
-2. **Core Services & UI**:
+2. **Install Dependencies**:
    ```bash
+   # Node.js dependencies (frontend + backend)
    npm install
-   npm run start-backend  # Terminal 1
-   npm run dev            # Terminal 2
-   ```
-
-3. **Automation Engine**:
-   ```bash
+   
+   # Python dependencies (test framework)
    python -m venv .venv
-   .venv\Scripts\activate
+   .venv\Scripts\activate  # Windows
+   source .venv/bin/activate  # Linux/Mac
    pip install -r requirements.txt
    ```
+
+3. **Environment Configuration**:
+   ```bash
+   # Create .env file with required variables
+   cp .env.example .env
+   # Edit .env with your configuration (API URL, AWS credentials, etc.)
+   ```
+
+4. **Start the Services**:
+   ```bash
+   # Terminal 1: Backend API
+   npm run start-backend
+   
+   # Terminal 2: Frontend Development Server
+   npm run dev
+   ```
+
+5. **Access the Dashboard**:
+   - Open <http://localhost:5173> in your browser
+   - Backend API runs on <http://localhost:3000>
+
+> [!IMPORTANT]
+> For AWS S3 integration, ensure `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_S3_BUCKET` are configured in your `.env` file.
+
+---
+
+## 🧪 Testing
+
+This project includes comprehensive test suites for API, GUI, and performance validation.
+
+### Running Tests Locally
+
+```bash
+# Activate Python virtual environment
+.venv\Scripts\activate  # Windows
+
+# Run API tests (Behave)
+behave features/dashboard/api --tags=@smoke
+
+# Run GUI tests (Selenium)
+behave features/dashboard/gui --tags=@smoke
+
+# Run performance tests
+behave features/dashboard/performance
+```
+
+### Test Configuration
+
+Tests are configured via:
+- `behave.ini` - Behave configuration
+- `features/config/config.yaml` - Environment-specific settings
+- `features/environment.py` - Test hooks and setup
+
+For more details, see the [Testing Guide](features/dashboard/README.md).
+
+---
+
+## 📁 Project Structure
+
+```text
+dashboard/
+├── .github/workflows/          # CI/CD pipelines
+├── components/                 # React UI components
+├── features/                   # BDD test suites
+│   ├── dashboard/             # Dashboard-specific tests
+│   │   ├── api/               # API test scenarios
+│   │   ├── gui/               # GUI test scenarios
+│   │   └── performance/       # Performance test scenarios
+│   ├── page_objects/          # Page Object Model
+│   ├── resources/             # Test resources & screenshots
+│   └── steps/                 # Step definitions
+├── reports/                    # Generated test reports
+├── scripts/                    # Automation scripts
+├── services/                   # Backend services (Express, SQLite, S3)
+├── server.js                   # Backend API entry point
+├── index.html                  # Frontend entry point
+└── vite.config.js             # Vite configuration
+```
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) to get started.
+
+**Quick Links:**
+- 📋 [Code of Conduct](CODE_OF_CONDUCT.md)
+- 🔒 [Security Policy](SECURITY.md)
+- 📝 [Changelog](CHANGELOG.md)
 
 ---
 
 ## 🛡️ Support & Security
 
 We maintain the highest standards for our engineering tools.
+
 - **Security Policy**: Read our [Security Procedures](SECURITY.md).
 - **Contributing**: Check our [Engineering Standards](CONTRIBUTING.md).
 - **Changelog**: Follow our evolution in the [Changelog](CHANGELOG.md).
+- **Issues**: Report bugs or request features via [GitHub Issues](https://github.com/carlos-camara/dashboard/issues).
 
 ---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
 <div align="center">
-  <i>Designed & Engineered by <b>[Carlos Cámara](https://github.com/carlos-camara)</b></i>
+  <i>Designed & Engineered by <b><a href="https://github.com/carlos-camara">Carlos Cámara</a></b></i>
 </div>

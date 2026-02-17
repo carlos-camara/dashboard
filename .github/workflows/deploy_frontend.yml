@@ -19,10 +19,10 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: 📥 Checkout Repository
         uses: actions/checkout@v6
 
-      - name: Deploy to GitHub Pages
+      - name: 🚀 Deploy to GitHub Pages
         uses: carlos-camara/qa-hub-actions/deploy-gh-pages@main
         with:
           install-command: 'npm install' # Workflow used 'npm install' not ci
