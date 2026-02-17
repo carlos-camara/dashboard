@@ -32,7 +32,7 @@ jobs:
           REPO: ${{ github.repository }}
 
       - name: Auto Milestone PR
-        uses: carlos-camara/qa-hub-actions/pr-milestoner@v1.1.0
+        uses: carlos-camara/qa-hub-actions/pr-milestoner@v1.1.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           strategy: 'latest_created'
