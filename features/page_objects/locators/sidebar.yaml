@@ -15,16 +15,8 @@ sidebar:
     by: xpath
     value: //button[contains(., 'Endpoints')]
     wait_load: false
-  incidents_link:
-    type: button
-    by: xpath
-    value: //button[contains(., 'Incident Taxonomy')]
-    wait_load: false
-  new_run_button:
-    type: button
-    by: xpath
-    value: //button[contains(., 'New Run')]
-    wait_load: false
+
+
   sidebar_container:
     type: webelement
     by: xpath
