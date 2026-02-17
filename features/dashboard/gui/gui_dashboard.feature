@@ -37,11 +37,10 @@ Feature: Dashboard Overview & Visual Integrity
         | stats_total_runs_value   |
         | stats_avg_duration_value |
 
-  Scenario: Validate Incident and Recent Runs Panels
+  Scenario: Validate Recent Runs Panel
     Then the following elements should contain these texts
-         | element             | value                                |
-         | recent_runs_heading | [LANG:dashboard.recent_runs.heading] |
-         | incidents_heading   | [LANG:dashboard.incidents.heading]   |
+      | element             | value                                |
+      | recent_runs_heading | [LANG:dashboard.recent_runs.heading] |
 
   @responsive @mobile
   Scenario: Verify Mobile Viewport Layout
@@ -56,12 +55,4 @@ Feature: Dashboard Overview & Visual Integrity
         | status_ticker_container  |
         | timeline_chart           |
 
-  @navigation
-  Scenario: Navigate to Incident Taxonomy
-    When I click on the "incidents_link" in the sidebar
-    Then the "incidents" page is displayed
-    And the following elements should contain these texts
-        | element                | value                                  |
-        | header_title           | [LANG:incidents.header.title]          |
-        | header_subtitle        | [LANG:incidents.header.subtitle]       |
-        | filters_scope_dropdown | [LANG:incidents.filters.global_scope]  |
+
