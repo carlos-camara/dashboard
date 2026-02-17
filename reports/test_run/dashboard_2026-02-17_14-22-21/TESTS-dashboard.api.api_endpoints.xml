@@ -1,0 +1,77 @@
+<testsuite name="dashboard.api.api_endpoints.System Endpoints Discovery" tests="4" errors="0" failures="0" skipped="0" time="0.020247" timestamp="2026-02-17T14:22:27.526572" hostname="runnervmjduv7"><testcase classname="dashboard.api.api_endpoints.System Endpoints Discovery" name="Retrieve System Endpoints List" status="passed" time="0.008631"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke @critical
+  Scenario: Retrieve System Endpoints List
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I send a "GET" request to "/api/endpoints" ... passed in 0.007s
+    Then the response status code should be 200 ... passed in 0.000s
+    And the response header "Content-Type" should contain "application/json" ... passed in 0.000s
+    And the response time should be less than 500 ms ... passed in 0.000s
+    And the response JSON should not be empty ... passed in 0.000s
+    And the response JSON path "0.id" should be a "str" ... passed in 0.000s
+    And the response JSON path "0.method" should be a "str" ... passed in 0.000s
+    And the response JSON path "0.path" should be a "str" ... passed in 0.000s
+    And the response JSON path "0.service" should be a "str" ... passed in 0.000s
+    And the response JSON path "0.service" should equal "dashboard-system" ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+14:22:27 [System Endpoints Discovery | Retrieve System Endpoints List] INFO: Sending GET request to: http://localhost:3001/api/endpoints
+
+]]>
+</system-out></testcase><testcase classname="dashboard.api.api_endpoints.System Endpoints Discovery" name="Verify Method Not Allowed (POST)" status="passed" time="0.005291"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @negative @security
+  Scenario: Verify Method Not Allowed (POST)
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I send a "POST" request to "/api/endpoints" ... passed in 0.005s
+    Then the response status code should be 404 ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+14:22:27 [System Endpoints Discovery | Verify Method Not Allowed (POST)] INFO: Sending POST request to: http://localhost:3001/api/endpoints
+
+]]>
+</system-out></testcase><testcase classname="dashboard.api.api_endpoints.System Endpoints Discovery" name="Verify Method Not Allowed (PUT)" status="passed" time="0.003351"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @negative @security
+  Scenario: Verify Method Not Allowed (PUT)
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I send a "PUT" request to "/api/endpoints" ... passed in 0.003s
+    Then the response status code should be 404 ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+14:22:27 [System Endpoints Discovery | Verify Method Not Allowed (PUT)] INFO: Sending PUT request to: http://localhost:3001/api/endpoints
+
+]]>
+</system-out></testcase><testcase classname="dashboard.api.api_endpoints.System Endpoints Discovery" name="Verify Method Not Allowed (PATCH)" status="passed" time="0.002974"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @negative @security
+  Scenario: Verify Method Not Allowed (PATCH)
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I send a "PATCH" request to "/api/endpoints" ... passed in 0.003s
+    Then the response status code should be 404 ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+14:22:27 [System Endpoints Discovery | Verify Method Not Allowed (PATCH)] INFO: Sending PATCH request to: http://localhost:3001/api/endpoints
+
+]]>
+</system-out></testcase></testsuite>
