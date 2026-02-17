@@ -1,3 +1,4 @@
+---
 name: Sync Reports from S3
 
 on:
@@ -19,7 +20,9 @@ jobs:
   sync-s3:
     name: Sync S3 Reports to Branch
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    if: >
+      ${{ github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success' }}
     
     steps:
       - name: Determine Target Branch
@@ -30,7 +33,7 @@ jobs:
           else
             BRANCH="${{ github.event.workflow_run.head_branch }}"
           fi
-          echo "target=${BRANCH}" >> $GITHUB_OUTPUT
+          echo "target=${BRANCH}" >> "$GITHUB_OUTPUT"
           echo "📍 Target branch: ${BRANCH}"
 
       - name: Checkout
