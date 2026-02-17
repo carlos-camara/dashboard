@@ -1,3 +1,4 @@
+---
 name: Deploy Reports to S3
 
 on:
@@ -11,38 +12,25 @@ on:
         description: 'Run ID of the Unified Test Suite to process'
         required: false
         type: string
-      upload_reports:
-        description: 'Upload test reports (consolidated)?'
-        required: false
-        default: 'true'
-        type: string
-      upload_screenshots:
-        description: 'Upload GUI screenshots?'
-        required: false
-        default: 'true'
-        type: string
-      upload_perf:
-        description: 'Upload Performance reports?'
-        required: false
-        default: 'true'
-        type: string
 
 jobs:
   deploy-s3:
-    name: Sync Reports to S3
+    name: Upload Test Artifacts to S3
     runs-on: ubuntu-latest
-    if: |
-      github.event_name == 'workflow_dispatch' || 
-      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_run' &&
+      github.event.workflow_run.conclusion == 'success')
     permissions:
       contents: read
-      id-token: write # Required for AWS OIDC if we ever upgrade, but good practice
+      actions: read
+      id-token: write
     
     steps:
-      - name: Checkout
+      - name: 📥 Checkout Repository
         uses: actions/checkout@v6
 
-      - name: Deploy QA Reports to S3
+      - name: ☁️ Deploy Reports to S3
         uses: carlos-camara/qa-hub-actions/deploy-reports-s3@main
         with:
           project-name: "dashboard"
@@ -50,7 +38,9 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-          run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
-          upload-reports: ${{ github.event.inputs.upload_reports || 'true' }}
-          upload-screenshots: ${{ github.event.inputs.upload_screenshots || 'true' }}
-          upload-perf: ${{ github.event.inputs.upload_perf || 'true' }}
+          run-id: >
+            ${{ github.event.inputs.run_id ||
+            github.event.workflow_run.id }}
+          upload-reports: 'true'
+          upload-screenshots: 'true'
+          upload-perf: 'true'
