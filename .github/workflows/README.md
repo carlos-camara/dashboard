@@ -13,36 +13,42 @@ graph TD
     %% Triggers
     Start([Push / Pull Request])
     Manual([Workflow Dispatch])
+    Schedule([Schedule / Automation])
     
     style Start fill:#f9f,stroke:#333,stroke-width:4px
     style Manual fill:#f9f,stroke:#333,stroke-width:4px
+    style Schedule fill:#fcf,stroke:#333,stroke-width:4px
 
     %% Main Workflows
     Lint["<b>🧹 Linting & Standards</b><br/>Super-Linter Cluster"]
     UTS["<b>🛡️ Unified Test Suite</b><br/>API, GUI & Performance"]
     
     %% Reactive Flows
-    UR["<b>📦 Result Harvesting</b><br/>Sync Reports to Repo"]
     DS3["<b>☁️ S3 Archival</b><br/>Long-term Persistence"]
+    RS["<b>🔄 Report Sync</b><br/>S3 to Repository Bridge"]
     DF["<b>🌐 Web Deployment</b><br/>GitHub Pages"]
 
     Start --> Lint
     Start --> UTS
     Manual --> Lint
     Manual --> UTS
+    Manual --> RS
     Manual --> DF
+    
+    Schedule --> RS
 
-    UTS -- "| on: Success |" --> UR
     UTS -- "| on: Success |" --> DS3
     
-    subgraph "Core Quality Cluster"
+    RS -- "| on: New Data |" --> DF
+    
+    subgraph "Quality Cluster"
         Lint
         UTS
     end
 
-    subgraph "Reactive Fulfillment"
-        UR
+    subgraph "Infrastructure & Sync"
         DS3
+        RS
     end
 ```
 
@@ -54,7 +60,7 @@ graph TD
 | :---: | :--- | :--- | :--- |
 | `🧹` | **[Lint Codebase](./lint.yml)** | Static analysis, YAML validation & formatting. | `qa-hub-actions/lint-codebase` |
 | `🛡️` | **[Unified Test Suite](./test_suite.yml)** | Multi-layer validation (API, Performance, GUI). | `qa-hub-actions` (Shared Suite) |
-| `📦` | **[Upload Results](./upload_results.yml)** | Aggregation of evidence and JUnit publishing. | `qa-hub-actions/collect-and-publish` |
+| `🔄` | **[Sync Reports from S3](./sync_reports.yml)** | Automated periodic report ingestion from AWS S3. | `services/s3.js` & `sync-s3.js` |
 | `🌐` | **[Deploy Frontend](./deploy_frontend.yml)** | Production delivery to GitHub Pages. | `qa-hub-actions/deploy-gh-pages` |
 | `☁️` | **[Deploy Reports S3](./deploy_reports_s3.yml)** | Data persistence in AWS S3 infra. | `qa-hub-actions/deploy-reports-s3` |
 | `👤` | **[Auto Assign PR](./auto_assign.yml)** | Automated ownership assignment for PRs. | Native `gh` CLI |
@@ -73,14 +79,12 @@ The flagship validation process. It spins up a temporary instance of the entire 
   - **Performance**: High-density audit dossiers.
   - **GUI**: Selenium-based interaction flows.
 
-### 📦 Upload Test Results
-A reactive pipeline that ensures all test evidence and JUnit data are aggregated and published as a unified suite summary.
-- **Mechanism**: Triggered by `workflow_run` completion.
-- **Evidence**: Fetches screenshots, JUnit XMLs, and performance reports.
-- **Persistence**: Publishes the "Unified Test Report" summary back to the pull request.
-
-> [!CAUTION]
-> **Infinite Loop Guard**: The Upload Pipeline uses specialized Git tokens. Ensure `[skip ci]` remains in the commit message template to prevent recursive workflow triggers.
+### 🔄 Sync Reports from S3
+A scheduled bridge that pulls the latest test results from S3 into the `main` branch. This decouples test execution from repository state updates.
+- **Trigger**: Runs every 30 minutes and manually via `workflow_dispatch`.
+- **Mechanism**: Executed via the `sync-s3.js` CLI script.
+- **Persistence**: Commits any new reports directly to the repository.
+- **Automatic Deployment**: Pushing to `main` via this workflow automatically triggers the **Web Deployment** to GitHub Pages.
 
 ### 🧹 Lint - Super-Linter
 Maintains the aesthetic and structural integrity of our code.
