@@ -20,16 +20,16 @@ jobs:
     name: Unified Test Execution
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: 📥 Checkout Repository
         uses: actions/checkout@v6
 
-      - name: Setup Environment
+      - name: 🔧 Setup Environment
         uses: carlos-camara/qa-hub-actions/setup-environment@main
         with:
           python-version: "3.11"
           node-version: "20"
 
-      - name: Prep Infrastructure
+      - name: ⚙️ Prep Infrastructure
         uses: carlos-camara/qa-hub-actions/environment-health-check@main
         with:
           task: 'setup'
@@ -42,7 +42,7 @@ jobs:
           db-path: "data/database.sqlite"
           ports-to-clean: "3000 3001"
 
-      - name: Execute Test Suite
+      - name: 🧪 Execute Test Suite
         uses: carlos-camara/qa-hub-actions/run-tests@main
         with:
           test-command-api: "qa-hub run --env staging --tags api"
@@ -52,7 +52,7 @@ jobs:
           test-command-gui: "qa-hub run --env staging --tags gui"
           headless: "true"
 
-      - name: Collect & Publish
+      - name: 📊 Collect & Publish Results
         if: always()
         uses: carlos-camara/qa-hub-actions/collect-and-publish@main
         with:
@@ -62,7 +62,7 @@ jobs:
           upload-artifacts: true
           publish-results: true
 
-      - name: Publish PR Results
+      - name: 📝 Publish PR Results
         if: always()
         uses: carlos-camara/qa-hub-actions/publish-test-results@main
         with:
@@ -70,7 +70,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           target: "description"
 
-      - name: Environment Teardown
+      - name: 🧽 Environment Teardown
         if: always()
         uses: carlos-camara/qa-hub-actions/environment-health-check@main
         with:

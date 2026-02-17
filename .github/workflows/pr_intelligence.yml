@@ -14,17 +14,17 @@ jobs:
     runs-on: ubuntu-latest
     if: github.actor == 'carlos-camara'
     steps:
-      - name: Checkout Repository
+      - name: 📥 Checkout Repository
         uses: actions/checkout@v6
         with:
           fetch-depth: 0 # Required for git diff analysis in pr-summarizer
 
-      - name: Auto Label PR
+      - name: 🏷️ Auto Label PR
         uses: carlos-camara/qa-hub-actions/pr-labeler@main
         with:
           sync-labels: true
 
-      - name: Auto Assign PR
+      - name: 👤 Auto Assign PR
         run: gh pr edit "$PR_NUMBER" --add-assignee "$ASSIGNEE" --repo "$REPO"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -32,13 +32,13 @@ jobs:
           ASSIGNEE: ${{ github.actor }}
           REPO: ${{ github.repository }}
 
-      - name: Auto Milestone PR
+      - name: 🎯 Auto Milestone PR
         uses: carlos-camara/qa-hub-actions/pr-milestoner@v1.1.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           strategy: 'latest_created'
 
-      - name: Generate PR Summary
+      - name: ✨ Generate PR Summary
         uses: carlos-camara/qa-hub-actions/pr-summarizer@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

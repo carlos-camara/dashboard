@@ -27,10 +27,10 @@ jobs:
       id-token: write
     
     steps:
-      - name: Checkout
+      - name: 📥 Checkout Repository
         uses: actions/checkout@v6
 
-      - name: Deploy Reports to S3
+      - name: ☁️ Deploy Reports to S3
         uses: carlos-camara/qa-hub-actions/deploy-reports-s3@main
         with:
           project-name: "dashboard"
