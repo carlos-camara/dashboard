@@ -40,6 +40,13 @@ jobs:
         with:
           ref: ${{ steps.branch.outputs.target }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0  # Fetch all history to enable branch tracking
+      
+      - name: 🔗 Setup Branch Tracking
+        run: |
+          BRANCH="${{ steps.branch.outputs.target }}"
+          git checkout -B "${BRANCH}" "origin/${BRANCH}"
+          echo "✅ Now on branch: $(git branch --show-current)"
 
       - name: 🔄 Sync Reports from S3
         uses: carlos-camara/qa-hub-actions/sync-from-s3@v1.1.3
