@@ -22,7 +22,6 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab, setActiveTab }) =>
   const menuItems = [
     { id: 'dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { id: 'runs', icon: FolderKanban, label: 'Test Runs' },
-    { id: 'endpoints', icon: TrendingUp, label: 'Endpoints' },
   ];
 
   const handleTabClick = (id: string) => {

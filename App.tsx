@@ -2,11 +2,8 @@
 import React, { useState } from 'react';
 import Layout from './components/Layout';
 import DashboardView from './components/DashboardView';
-import EndpointsView from './components/EndpointsView';
 import TestRunsView from './components/TestRunsView';
 import ProjectDetailView from './components/ProjectDetailView';
-
-import PerformanceReportView from './components/PerformanceReportView';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -22,12 +19,6 @@ const App: React.FC = () => {
     switch (activeTab) {
       case 'dashboard':
         return <DashboardView refreshKey={refreshKey} onNavigate={handleNavigate} />;
-      case 'endpoints':
-        return <EndpointsView
-          refreshKey={refreshKey}
-          initialEndpoint={navigationState?.endpoint}
-          onNavigate={handleNavigate}
-        />;
       case 'runs':
         return <TestRunsView
           refreshKey={refreshKey}
@@ -39,13 +30,6 @@ const App: React.FC = () => {
           projectName={navigationState?.project}
           initialRuns={navigationState?.runs}
           onBack={() => handleNavigate('runs', { project: navigationState?.project })}
-        />;
-      case 'performance-report':
-        return <PerformanceReportView
-          reportUrl={navigationState?.reportUrl}
-          timestamp={navigationState?.timestamp}
-          selectedEndpoint={navigationState?.endpoint}
-          onBack={() => handleNavigate('endpoints', { endpoint: navigationState?.endpoint })}
         />;
       default:
         return <DashboardView refreshKey={refreshKey} onNavigate={handleNavigate} />;

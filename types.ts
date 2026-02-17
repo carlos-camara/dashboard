@@ -5,20 +5,6 @@ export enum TestStatus {
   SKIPPED = 'SKIPPED'
 }
 
-export interface Endpoint {
-  id: string;
-  service: string;
-  method: string;
-  path: string;
-  normalizedPath: string;
-  lastFailureAt?: string;
-  lastSeen?: string;
-  projects: string[];
-  avgDuration: number;
-  passCount: number;
-  failCount: number;
-}
-
 export interface Defect {
   id: string;
   errorMessage: string;
@@ -31,7 +17,6 @@ export interface Defect {
 export interface Scenario {
   id: string;
   runId: string;
-  endpointId?: string;
   name: string;
   status: TestStatus;
   duration: number;

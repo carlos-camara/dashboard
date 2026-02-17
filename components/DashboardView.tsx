@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { api } from '../services/api';
-import { DashboardStats, TimelineData, ExecutionRun, Endpoint } from '../types';
+import { DashboardStats, TimelineData, ExecutionRun } from '../types';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
@@ -25,7 +25,6 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [timeline, setTimeline] = useState<TimelineData[]>([]);
   const [runs, setRuns] = useState<ExecutionRun[]>([]);
-  const [endpoints, setEndpoints] = useState<Endpoint[]>([]);
   const [dateRange, setDateRange] = useState<number>(7);
   const [isSyncing, setIsSyncing] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
@@ -39,16 +38,14 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
   const fetchData = async (silent = false) => {
     if (!silent) setStats(null);
     try {
-      const [s, t, r, e] = await Promise.all([
+      const [s, t, r] = await Promise.all([
         api.getStats(dateRange),
         api.getTimeline(dateRange),
-        api.getRecentRuns(),
-        api.getEndpoints()
+        api.getRecentRuns()
       ]);
       setStats(s);
       setTimeline(t);
       setRuns(r);
-      setEndpoints(e);
 
       const failingProjects = Object.values(processProjectHealth(r)).filter(p => p.rate < 80).length;
       if (failingProjects > 2) setSystemStatus("CRITICAL INSTABILITY DETECTED");
@@ -100,15 +97,10 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
       .slice(0, 5);
   }, [filteredRuns]);
 
-  const slowestEndpoints = useMemo(() => {
-    return [...endpoints].sort((a, b) => b.avgDuration - a.avgDuration).slice(0, 5);
-  }, [endpoints]);
-
   const qualityScore = useMemo(() => {
     if (!stats) return 0;
-    const coverageFactor = Math.min(1, endpoints.length / (runs.length || 1));
-    return Math.round((stats.passRate * 0.8) + (coverageFactor * 20));
-  }, [stats, endpoints, runs]);
+    return stats.passRate;
+  }, [stats]);
 
   const handleSync = async () => {
     setIsSyncing(true);
@@ -157,10 +149,10 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
       generateExecutiveReport(
         stats,
         filteredRuns,
-        endpoints,
+        [],
         projectHealthData,
         topErrors,
-        slowestEndpoints,
+        [],
         timeline,
         { velocity: velocityImage, volume: volumeImage }
       );
@@ -404,7 +396,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
               </motion.div>
 
               {/* Sector Integrity */}
-              <div className="glass-panel p-4 md:p-8 rounded-[2rem] md:rounded-[2.5rem] flex flex-col h-full">
+              <div className="glass-panel p-4 md:p-8 rounded-[2rem] md:rounded-[2.5rem] flex flex-col h-full mb-20">
                 <h3 className="text-xl font-black text-white mb-6 flex items-center gap-3">
                   <Box size={22} className="text-violet-500" /> Sector Integrity
                 </h3>
@@ -428,36 +420,6 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
                     </div>
                   ))}
                   {projectHealthData.length === 0 && <div className="text-center text-slate-600 text-xs py-10 font-mono">NO ACTIVE SECTORS</div>}
-                </div>
-              </div>
-            </div>
-
-            {/* Endpoints */}
-            <div className="grid grid-cols-1 gap-4 md:gap-6 pb-20">
-
-
-              {/* Endpoints */}
-              <div className="glass-panel p-4 md:p-8 rounded-[2rem] md:rounded-[2.5rem]">
-                <h3 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
-                  <Zap size={16} className="text-amber-500" /> Latency Anomalies
-                </h3>
-                <div className="space-y-4">
-                  {slowestEndpoints.map((ep, i) => (
-                    <div
-                      key={i}
-                      onClick={() => onNavigate('endpoints', { endpoint: ep })}
-                      className="group cursor-pointer p-2 rounded-xl hover:bg-slate-900/40 transition-all border border-transparent hover:border-white/5"
-                    >
-                      <div className="flex justify-between text-xs font-bold text-slate-500 mb-2 group-hover:text-amber-400 transition-colors">
-                        <span className="font-mono">{ep.method} {ep.path}</span>
-                        <span>{ep.avgDuration.toFixed(0)}ms</span>
-                      </div>
-                      <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
-                        <div className={`h-full rounded-full transition-all duration-1000 ${ep.avgDuration > 800 ? 'bg-rose-500 shadow-[0_0_10px_rgba(244,63,94,0.5)]' : 'bg-amber-500'}`} style={{ width: `${Math.min(100, (ep.avgDuration / 2000) * 100)}%` }}></div>
-                      </div>
-                    </div>
-                  ))}
-                  {slowestEndpoints.length === 0 && <p className="text-center text-slate-600 text-xs py-8">Latency nominal.</p>}
                 </div>
               </div>
             </div>

@@ -1,5 +1,5 @@
 
-import { ExecutionRun, Scenario, Endpoint, TestStatus, DashboardStats, TimelineData, Defect } from '../types';
+import { ExecutionRun, Scenario, TestStatus, DashboardStats, TimelineData, Defect } from '../types';
 
 const STORAGE_KEYS = {
   RUNS: 'qa_hub_runs',
@@ -110,17 +110,6 @@ export const api = {
     }
   },
 
-  getEndpoints: async (): Promise<Endpoint[]> => {
-    try {
-      const response = await fetch(`${BASE_URL}/endpoints`);
-      if (!response.ok) return [];
-      return await response.json();
-    } catch (e) {
-      console.error('Error fetching endpoints:', e);
-      return [];
-    }
-  },
-
   getDefects: async (): Promise<Defect[]> => {
     // Backend doesn't have defects implemented yet, returning empty
     return [];
@@ -143,15 +132,6 @@ export const api = {
       console.error('Error deleting project:', e);
     }
   },
-
-  deleteEndpoint: async (id: string) => {
-    try {
-      const response = await fetch(`${BASE_URL}/endpoints?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
-      if (!response.ok) throw new Error('Delete endpoint failed');
-    } catch (e) {
-      console.error('Error deleting endpoint:', e);
-    }
-  },
   processFiles: async (xmlFiles: File[]): Promise<{ projectName: string, endpointsFound: number, scenariosFound: number, isDuplicate: boolean }> => {
     try {
       const formData = new FormData();
@@ -167,7 +147,7 @@ export const api = {
 
       return {
         projectName: data.projectName,
-        endpointsFound: 0, // Backend handles this, frontend just needs a refresh
+        endpointsFound: 0,
         scenariosFound: data.totalCount,
         isDuplicate: false
       };
@@ -178,66 +158,15 @@ export const api = {
     }
   },
 
-  getSpec: async (method: string, path: string): Promise<any> => {
-    try {
-      const response = await fetch(`${BASE_URL}/spec?method=${encodeURIComponent(method)}&path=${encodeURIComponent(path)}`);
-      if (response.ok) return await response.json();
-    } catch (e) {
-      console.error('Error fetching spec:', e);
-    }
-    return { found: false };
-  },
-
-  getProjectSpec: async (projectName: string): Promise<any> => {
-    try {
-      const response = await fetch(`${BASE_URL}/spec/project/${encodeURIComponent(projectName)}`);
-      if (response.ok) return await response.json();
-    } catch (e) {
-      console.error('Error fetching project spec:', e);
-    }
-    return { found: false };
-  },
-
-  uploadSpec: async (method: string, path: string, file: File): Promise<boolean> => {
-    try {
-      const formData = new FormData();
-      formData.append('method', method);
-      formData.append('path', path);
-      formData.append('file', file);
-
-      const response = await fetch(`${BASE_URL}/spec`, {
-        method: 'POST',
-        body: formData
-      });
-      return response.ok;
-    } catch (e) {
-      console.error('Error uploading spec:', e);
-      return false;
-    }
-  },
-
   getScreenshotUrl: (filename: string): string => {
     // BASE_URL is something like http://localhost:3001/api or https://app.onrender.com/api
     return BASE_URL.replace(/\/api$/, '') + `/screenshots/${filename}`;
   },
 
   getAssetUrl: (relativePath: string): string => {
-    // Helper to generate full URLs for assets served by the backend
-    // Ensures they point to the correct backend host (localhost or deployed)
-    // relativePath should start with / (e.g. /reports/...)
     const baseUrl = BASE_URL.replace(/\/api$/, '');
     const pathToUse = relativePath.startsWith('/') ? relativePath : `/${relativePath}`;
     return `${baseUrl}${pathToUse}`;
-  },
-
-  getLatestPerformanceStats: async (): Promise<any> => {
-    try {
-      const response = await fetch(`${BASE_URL}/performance/latest`);
-      if (response.ok) return await response.json();
-    } catch (e) {
-      console.error('Error fetching performance stats:', e);
-    }
-    return { found: false, stats: [], history: [], failures: [] };
   }
 };
 
