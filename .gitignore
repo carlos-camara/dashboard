@@ -6,6 +6,13 @@ yarn-debug.log*
 pnpm-debug.log*
 pretty.output
 
+# Runtime logs (explicit)
+backend.log
+backend.err
+frontend.log
+frontend.err
+html.output
+
 # Python
 __pycache__/
 *.py[cod]
