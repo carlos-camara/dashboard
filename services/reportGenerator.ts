@@ -300,53 +300,6 @@ export const generateExecutiveReport = (
         }
     }
 
-    // --- PAGE 4: RISK ASSESSMENT ---
-    pdf.addPage();
-    addHeader('Risk Heatmap & Incident Taxonomy', 30);
-
-    let riskText = "The following anomalies have been detected and categorized by frequency. These events represent technical debt or environment instability that requires immediate engineering oversight.";
-    currentY = addBodyText(riskText, 45);
-
-    topErrors.forEach((err, i) => {
-        const interpretation = interpretError(err.msg);
-
-        pdf.setFillColor(241, 245, 249);
-        pdf.roundedRect(margin, currentY, pageWidth - (margin * 2), 35, 2, 2, 'F');
-
-        pdf.setFontSize(9);
-        pdf.setTextColor(244, 63, 94);
-        pdf.setFont('helvetica', 'bold');
-        pdf.text(`${err.count} ERRORS - ${interpretation.type}`, margin + 5, currentY + 7);
-
-        pdf.setTextColor(15, 23, 42);
-        const wrappedMsg = pdf.splitTextToSize(err.msg, 120);
-        pdf.text(wrappedMsg, margin + 5, currentY + 12);
-
-        const textY = currentY + 12 + (wrappedMsg.length * 4);
-
-        pdf.setFontSize(8);
-        pdf.setTextColor(71, 85, 105);
-        pdf.setFont('helvetica', 'italic');
-        pdf.text('Analysis:', margin + 5, textY);
-        pdf.setFont('helvetica', 'normal');
-        pdf.text(pdf.splitTextToSize(interpretation.explanation, 140), margin + margin, textY);
-
-        pdf.setTextColor(99, 102, 241);
-        pdf.setFont('helvetica', 'bold');
-        pdf.text('REMEDIATION:', margin + 5, textY + 6);
-        pdf.setFont('helvetica', 'normal');
-        pdf.setTextColor(15, 23, 42);
-        pdf.text(pdf.splitTextToSize(interpretation.suggested, 140), margin + 30, textY + 6);
-
-        currentY += 40;
-
-        // Simple page overflow check
-        if (currentY > pageHeight - 40) {
-            pdf.addPage();
-            currentY = margin + 10;
-        }
-    });
-
     addHeader('Infrastructure Performance Audit', currentY + 10, 14, [245, 158, 11]);
     currentY += 25;
 

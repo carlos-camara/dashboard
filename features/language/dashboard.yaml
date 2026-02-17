@@ -1,3 +1,4 @@
+---
 header:
   subtitle:
     en: "DASHBOARD CLUSTER"
@@ -29,10 +30,7 @@ recent_runs:
   heading:
     en: "Sector Integrity"
     es: "Integridad del Sector"
-incidents:
-  heading:
-    en: "INCIDENT TAXONOMY"
-    es: "TAXONOMÍA DE INCIDENTES"
+
 endpoints:
   heading:
     en: "LATENCY ANOMALIES"

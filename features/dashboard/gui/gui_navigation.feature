@@ -13,9 +13,7 @@ Feature: Application Navigation Validation
     When I click on the "endpoints_link" in the sidebar
     Then the "endpoints_view" page is displayed
     Then the "title" should contain the text "[LANG:navigation.endpoints]"
-    When I click on the "incidents_link" in the sidebar
-    Then the "incidents" page is displayed
-    Then the "header_title" should contain the text "[LANG:navigation.incidents]"
+
     When I click on the "dashboard_link" in the sidebar
     Then the "dashboard" page is displayed
     Then the following elements should contain these texts

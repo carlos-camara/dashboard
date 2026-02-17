@@ -1,15 +1,14 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { LayoutDashboard, FolderKanban, TrendingUp, Plus, Search, ChevronRight, Cpu, Menu, X, ShieldAlert } from 'lucide-react';
+import { LayoutDashboard, FolderKanban, TrendingUp, Search, ChevronRight, Cpu, Menu, X, ShieldAlert } from 'lucide-react';
 
 interface LayoutProps {
   children: React.ReactNode;
   activeTab: string;
   setActiveTab: (tab: string) => void;
-  onNewRun: () => void;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, activeTab, setActiveTab, onNewRun }) => {
+const Layout: React.FC<LayoutProps> = ({ children, activeTab, setActiveTab }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const mainRef = useRef<HTMLElement>(null);
 
@@ -23,7 +22,6 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab, setActiveTab, onNe
   const menuItems = [
     { id: 'dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { id: 'runs', icon: FolderKanban, label: 'Test Runs' },
-    { id: 'incidents', icon: ShieldAlert, label: 'Incident Taxonomy' },
     { id: 'endpoints', icon: TrendingUp, label: 'Endpoints' },
   ];
 
@@ -88,15 +86,7 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab, setActiveTab, onNe
           ))}
         </nav>
 
-        <div className="p-4 border-t border-slate-800">
-          <button
-            onClick={onNewRun}
-            className="w-full bg-blue-600 hover:bg-blue-500 text-white py-2.5 rounded-lg flex items-center justify-center space-x-2 transition-all font-medium text-sm shadow-lg shadow-blue-600/20"
-          >
-            <Plus size={18} />
-            <span>New Run</span>
-          </button>
-        </div>
+
       </aside>
 
       {/* Main Content Area */}

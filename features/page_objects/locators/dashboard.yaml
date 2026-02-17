@@ -7,7 +7,7 @@ dashboard:
     wait_load: true
   dashboard:
     type: webelement
-    # Target the root wrapper that contains both the sticky header and the content
+    # Target root wrapper containing sticky header and content
     by: xpath
     value: //div[contains(@class, 'selection:bg-indigo-500/30')]
     wait_load: true
@@ -19,13 +19,16 @@ dashboard:
   header_subtitle:
     type: text
     by: xpath
-    value: //div[contains(@class, 'text-indigo-400')]//span[contains(., 'Dashboard Cluster')]
+    value: >-
+      //div[contains(@class, 'text-indigo-400')]//span[contains(., 'Dashboard
+      Cluster')]
     wait_load: false
   recent_runs_list_container:
     type: webelement
     by: xpath
-    # Fix: h3 is sibling of the div, not child of sibling's parent
-    value: //h3[contains(., 'Sector Integrity')]/following-sibling::div[contains(@class, 'overflow-y-auto')]
+    value: >-
+      //h3[contains(., 'Sector
+      Integrity')]/following-sibling::div[contains(@class, 'overflow-y-auto')]
     wait_load: false
   header_qa_hub_text:
     type: text
@@ -45,69 +48,86 @@ dashboard:
   stats_grid:
     type: webelement
     by: xpath
-    value: //div[contains(@class, 'grid') and .//p[contains(text(), 'System Health')]]
+    value: >-
+      //div[contains(@class, 'grid') and .//p[contains(text(),
+      'System Health')]]
     wait_load: false
   stats_pass_rate:
     type: text
     by: xpath
-    value: //p[contains(text(), 'Pass Rate')]/ancestor::div[contains(@class, 'glass-panel')]
+    value: >-
+      //p[contains(text(), 'Pass Rate')]/ancestor::div[contains(@class,
+      'glass-panel')]
     wait_load: false
   stats_pass_rate_value:
     type: text
     by: xpath
-    value: //p[contains(text(), 'Pass Rate')]/ancestor::div[contains(@class, 'glass-panel')]//h3/span
+    value: >-
+      //p[contains(text(), 'Pass Rate')]/ancestor::div[contains(@class,
+      'glass-panel')]//h3/span
     wait_load: false
   stats_total_runs:
     type: text
     by: xpath
-    value: //p[contains(text(), 'Total Executions')]/ancestor::div[contains(@class,
+    value: >-
+      //p[contains(text(), 'Total Executions')]/ancestor::div[contains(@class,
       'glass-panel')]
     wait_load: false
   stats_total_runs_value:
     type: text
     by: xpath
-    value: //p[contains(text(), 'Total Executions')]/ancestor::div[contains(@class, 'glass-panel')]//h3/span
+    value: >-
+      //p[contains(text(), 'Total Executions')]/ancestor::div[contains(@class,
+      'glass-panel')]//h3/span
     wait_load: false
   stats_avg_duration:
     type: text
     by: xpath
-    value: //p[contains(text(), 'Avg Latency')]/ancestor::div[contains(@class, 'glass-panel')]
+    value: >-
+      //p[contains(text(), 'Avg Latency')]/ancestor::div[contains(@class,
+      'glass-panel')]
     wait_load: false
   stats_avg_duration_value:
     type: text
     by: xpath
-    value: //p[contains(text(), 'Avg Latency')]/ancestor::div[contains(@class, 'glass-panel')]//h3/span
+    value: >-
+      //p[contains(text(), 'Avg Latency')]/ancestor::div[contains(@class,
+      'glass-panel')]//h3/span
     wait_load: false
   stats_passed_card:
     type: text
     by: xpath
-    value: //p[contains(text(), 'System Health')]/ancestor::div[contains(@class, 'glass-panel')]
+    value: >-
+      //p[contains(text(), 'System Health')]/ancestor::div[contains(@class,
+      'glass-panel')]
     wait_load: false
   stats_health_value:
     type: text
     by: xpath
-    value: //p[contains(text(), 'System Health')]/ancestor::div[contains(@class, 'glass-panel')]//h3/span
+    value: >-
+      //p[contains(text(), 'System Health')]/ancestor::div[contains(@class,
+      'glass-panel')]//h3/span
     wait_load: false
-  stats_failed_card:
-    type: text
-    by: xpath
-    value: //p[contains(text(), 'Incident Taxonomy')]/ancestor::div[contains(@class,
-      'glass-panel')]
-    wait_load: false
+
   status_ticker_bar:
     type: webelement
     by: xpath
-    value: //div[contains(@class, 'sticky') and contains(@class, 'top-0') and contains(@class, 'z-50') and contains(@class, 'h-10')]
+    value: >-
+      //div[contains(@class, 'sticky') and contains(@class, 'top-0') and
+      contains(@class, 'z-50') and contains(@class, 'h-10')]
     wait_load: false
   status_ticker_system_status:
     type: text
     by: xpath
-    value: //div[contains(@class, 'text-cyan-400')]//span[contains(@class, 'tracking-[0.2em]')]
+    value: >-
+      //div[contains(@class, 'text-cyan-400')]//span[contains(@class,
+      'tracking-[0.2em]')]
     wait_load: false
   status_ticker_pulse:
     type: webelement
     by: xpath
-    value: //div[contains(@class, 'h-10')]//div[contains(@class, 'animate-pulse')]
+    value: >-
+      //div[contains(@class, 'h-10')]//div[contains(@class, 'animate-pulse')]
     wait_load: false
   status_ticker_container:
     type: webelement
@@ -117,7 +137,8 @@ dashboard:
   timeline_heading:
     type: text
     by: xpath
-    value: //div[contains(@class, 'glass-panel')]//h3[contains(., 'Signal Velocity')]
+    value: >-
+      //div[contains(@class, 'glass-panel')]//h3[contains(., 'Signal Velocity')]
     wait_load: false
   timeline_chart:
     type: webelement
@@ -147,33 +168,23 @@ dashboard:
   recent_runs_list_item:
     type: webelement
     by: xpath
-    value: //h3[contains(., 'Sector Integrity')]/ancestor::div[contains(@class, 'glass-panel')]//div[contains(@class, 'bg-slate-950/40')]
+    value: >-
+      //h3[contains(., 'Sector Integrity')]/ancestor::div[contains(@class,
+      'glass-panel')]//div[contains(@class, 'bg-slate-950/40')]
     wait_load: false
   recent_runs_rate:
     type: text
     by: xpath
-    value: //h3[contains(., 'Sector Integrity')]/ancestor::div[contains(@class, 'glass-panel')]//span[contains(@class, 'text-lg')]
+    value: >-
+      //h3[contains(., 'Sector Integrity')]/ancestor::div[contains(@class,
+      'glass-panel')]//span[contains(@class, 'text-lg')]
     wait_load: false
   recent_runs_project_item:
     type: button
     by: xpath
-    value: //h3[contains(., 'Sector Integrity')]/ancestor::div[contains(@class, 'glass-panel')]//div[contains(@class,
-      'cursor-pointer')][1]
-    wait_load: false
-  incidents_heading:
-    type: text
-    by: xpath
-    value: //h3[contains(., 'Incident Taxonomy')]
-    wait_load: false
-  incidents_list_item:
-    type: webelement
-    by: xpath
-    value: //h3[contains(., 'Incident Taxonomy')]/ancestor::div[contains(@class, 'glass-panel')]//div[contains(@class, 'border-l-4')]
-    wait_load: false
-  incidents_count:
-    type: text
-    by: xpath
-    value: //h3[contains(., 'Incident Taxonomy')]/ancestor::div[contains(@class, 'glass-panel')]//span[contains(@class, 'bg-rose-500/10')]
+    value: >-
+      //h3[contains(., 'Sector Integrity')]/ancestor::div[contains(@class,
+      'glass-panel')]//div[contains(@class, 'cursor-pointer')][1]
     wait_load: false
   endpoints_heading:
     type: text
@@ -183,17 +194,24 @@ dashboard:
   endpoints_catalog:
     type: webelement
     by: xpath
-    value: //h3[contains(., 'Latency Anomalies')]/ancestor::div[contains(@class, 'glass-panel')]
+    value: >-
+      //h3[contains(., 'Latency Anomalies')]/ancestor::div[contains(@class,
+      'glass-panel')]
     wait_load: false
   endpoints_anomaly_item:
     type: button
     by: xpath
-    value: //h3[contains(., 'Latency Anomalies')]/ancestor::div[contains(@class, 'glass-panel')]//div[contains(@class, 'group') and contains(@class, 'cursor-pointer')]
+    value: >-
+      //h3[contains(., 'Latency Anomalies')]/ancestor::div[contains(@class,
+      'glass-panel')]//div[contains(@class, 'group') and contains(@class,
+      'cursor-pointer')]
     wait_load: false
   endpoint_latency_value:
     type: text
     by: xpath
-    value: //h3[contains(., 'Latency Anomalies')]/ancestor::div[contains(@class, 'glass-panel')]//span[contains(text(), 'ms')]
+    value: >-
+      //h3[contains(., 'Latency Anomalies')]/ancestor::div[contains(@class,
+      'glass-panel')]//span[contains(text(), 'ms')]
     wait_load: false
   actions_sync_button:
     type: button
