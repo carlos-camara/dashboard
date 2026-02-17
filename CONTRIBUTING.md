@@ -50,7 +50,7 @@ Follow these steps to get your local environment ready for contribution.
 ### Prerequisites
 
 - **Node.js**: v20+ (LTS recommended)
-- **Python**: 3.11+ 
+- **Python**: 3.11+
 - **Git**: Latest version
 - **Chrome/Chromedriver**: For GUI automated tests
 
@@ -232,7 +232,7 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 
 ### Format
 
-```
+```text
 <type>(<scope>): <subject>
 
 <body>
@@ -298,7 +298,7 @@ Use the [Bug Report template](.github/ISSUE_TEMPLATE/bug_report.md) and provide:
 
 ---
 
-## 💡 Suggesting Enhancements
+## 💬 Suggesting Enhancements
 
 Have an idea for making the QA Hub Dashboard even better? We'd love to hear it!
 

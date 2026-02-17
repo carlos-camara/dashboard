@@ -247,7 +247,7 @@ For more details, see the [Testing Guide](features/dashboard/README.md).
 
 ## 📁 Project Structure
 
-```
+```text
 dashboard/
 ├── .github/workflows/          # CI/CD pipelines
 ├── components/                 # React UI components
