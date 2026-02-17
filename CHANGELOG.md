@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-02-17
+### 🚀 Added (Intelligence & Automation)
+- **Enhanced Reviewer Intelligence**: Implemented grouped and collapsible file breakdown in PR summaries.
+- **Smart Checklists**: Automated PR task list completion triggered by CI status.
+- **Advanced Reporter**: Refined high-fidelity PR injection with native-looking integration and zero branding.
+
+### 🛠️ Fixed (CI Remediation)
+- **CI Stabilization**: Purged stale/tracked failure reports and updated `.gitignore` to prevent aggregation of ghost failures.
+- **Seeding Integrity**: Configured report collection to ignore demo/seed data to ensure 100% accurate PR summaries.
+- **SPA Routing**: Added `.nojekyll` and `404.html` support for robust GitHub Pages hosting.
+
+### 🛡️ Governance
+- **Permissions Alignment**: Standardized `checks: write` and `pull-requests: write` across all core workflows.
+- **Documentation Hygiene**: Global standardization of Markdown files for 100% linter compliance.
+
+---
+
+## [0.3.0] - 2026-02-14
+
 ### 🚀 Added
 - **Dashboard**: New React 19 Frontend with real-time analytics and Glassmorphism UI.
 - **Intelligence Actions**: Automated Release Notes, Visual Regression Manager, and Environment Health Check.

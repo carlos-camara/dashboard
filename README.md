@@ -56,11 +56,11 @@ Go beyond binary pass/fail results. Our **Performance Analytics Engine** establi
 ### 🤖 PR Intelligence
 Maximize developer focus with an automated pull request management system:
 - **Auto-Labeler**: Precise categorization (`DevOps`, `QA`, `Frontend`, `Backend`) based on modified file paths.
-- **Smart Checklists**: "Automated Tests" and "Linting" checkboxes in PRs are automatically checked by CI upon success.
-- **High-Fidelity Reporting**: Test results are injected directly into the PR description with a visual summary table, identifying failures at a glance.
+- **Enhanced Reviewer Intelligence**: Changed files are automatically grouped by purpose (e.g., 🧪 BDD Scenarios, 🐍 Python Logic) and presented in **collapsible sections** for a cleaner, organized view.
+- **Smart Checklists**: "Automated Tests" and "Linting" checkboxes in PRs are automatically checked by CI upon success, providing instant feedback.
+- **High-Fidelity Reporting**: Full test results are injected directly into the PR description with a visual summary table, eliminating the need to dig through logs.
 - **SPA Deployment**: GitHub Pages deployment now supports Single Page Application routing via `.nojekyll` and `404.html` handling.
 - **Auto-Assigner**: Automatic ownership assignment to ensure rapid review cycles.
-- **Smart Formatting**: Enforced markdown standards for clean, readable documentation.
 
 ### 📑 Intelligent PDF Dossiers
 Export executive-ready artifacts with a single click. These **Intelligent Dossiers** include:

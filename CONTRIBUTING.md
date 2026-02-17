@@ -72,7 +72,10 @@ pip install -r requirements.txt
    - Target the `main` or `devel` branch as specified in the issue.
    - Include screenshots or recordings for UI changes.
    - Link the PR to the relevant issue.
-   - **Note**: PRs are automatically labeled based on the files changed (e.g., `QA` for features, `DevOps` for workflows, `documentation` for .md files).
+   - **Automated Lifecycle**:
+     - **Labeling**: PRs are automatically categorized (e.g., `DevOps`, `QA`, `Frontend`) based on file changes.
+     - **Summarization**: `Reviewer Intelligence` will automatically generate a grouped and collapsible summary of your changes.
+     - **Checklists**: CI will automatically check the `Automated Tests` and `Linting` boxes in your PR description upon success.
 
 ---
 
