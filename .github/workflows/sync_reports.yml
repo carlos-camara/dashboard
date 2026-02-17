@@ -19,9 +19,12 @@ jobs:
   sync-s3:
     name: Sync S3 Reports to Branch
     runs-on: ubuntu-latest
+    # Skip syncing if the workflow ran on main branch
+    # Main reports are already in sync, and we can't push to protected main anyway
     if: >
-      github.event_name == 'workflow_dispatch' ||
-      github.event.workflow_run.conclusion == 'success'
+      github.event.workflow_run.head_branch != 'main' &&
+      (github.event_name == 'workflow_dispatch' ||
+       github.event.workflow_run.conclusion == 'success')
     
     steps:
       - name: 📍 Determine Target Branch
@@ -40,6 +43,13 @@ jobs:
         with:
           ref: ${{ steps.branch.outputs.target }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0  # Fetch all history to enable branch tracking
+      
+      - name: 🔗 Setup Branch Tracking
+        run: |
+          BRANCH="${{ steps.branch.outputs.target }}"
+          git checkout -B "${BRANCH}" "origin/${BRANCH}"
+          echo "✅ Now on branch: $(git branch --show-current)"
 
       - name: 🔄 Sync Reports from S3
         uses: carlos-camara/qa-hub-actions/sync-from-s3@v1.1.3
