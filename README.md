@@ -56,8 +56,9 @@ Go beyond binary pass/fail results. Our **Performance Analytics Engine** establi
 ### 🤖 PR Intelligence
 Maximize developer focus with an automated pull request management system:
 - **Auto-Labeler**: Precise categorization (`DevOps`, `QA`, `Frontend`, `Backend`) based on modified file paths.
-- **Smart Checklists**: Bi-directional sync between CI pipelines and PR descriptions. Automatically checks "Linting" and "Automated Tests" boxes upon success.
-- **High-Fidelity Reporting**: Native integration of JUnit test results directly into the PR description, eliminating the need to dig through CI logs.
+- **Smart Checklists**: "Automated Tests" and "Linting" checkboxes in PRs are automatically checked by CI upon success.
+- **High-Fidelity Reporting**: Test results are injected directly into the PR description with a visual summary table, identifying failures at a glance.
+- **SPA Deployment**: GitHub Pages deployment now supports Single Page Application routing via `.nojekyll` and `404.html` handling.
 - **Auto-Assigner**: Automatic ownership assignment to ensure rapid review cycles.
 - **Smart Formatting**: Enforced markdown standards for clean, readable documentation.
 
