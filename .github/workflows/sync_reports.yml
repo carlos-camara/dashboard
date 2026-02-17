@@ -1,8 +1,10 @@
 name: Sync Reports from S3
 
 on:
-  schedule:
-    - cron: '*/30 * * * *' # Every 30 minutes
+  workflow_run:
+    workflows: ["Deploy Reports to S3"]
+    types:
+      - completed
   workflow_dispatch:
 
 permissions:
@@ -12,6 +14,7 @@ jobs:
   sync-s3:
     name: Sync S3 Reports to Main
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     
     steps:
       - name: Checkout
