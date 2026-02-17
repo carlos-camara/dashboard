@@ -14,7 +14,7 @@ jobs:
   sync-s3:
     name: Sync S3 Reports to Main
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     
     steps:
       - name: Checkout
@@ -22,32 +22,15 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Sync Reports from S3
+        uses: carlos-camara/qa-hub-actions/sync-from-s3@main
         with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Sync Reports
-        env:
-          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-        run: node scripts/sync-s3.js
-
-      - name: Commit and Push changes
-        run: |
-          git config --global user.name "S3 Sync Bot"
-          git config --global user.email "qa-hub-bot@users.noreply.github.com"
-          git add reports/test_run/
-          git add qa_hub.db
-          if [ -n "$(git status --porcelain)" ]; then
-            git commit -m "chore: sync reports from s3 [skip ci]"
-            git push origin main
-          else
-            echo "No new reports to sync."
-          fi
+          project-name: "dashboard"
+          s3-bucket: ${{ secrets.AWS_S3_BUCKET }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          target-path: "reports/test_run"
+          s3-path: "reports/test_run"
+          commit-message: "chore: sync reports from S3 [skip ci]"
+          branch: "main"
