@@ -1,4 +1,4 @@
-<testsuite name="dashboard.api.api_health.System Health Monitoring" tests="4" errors="0" failures="0" skipped="0" time="0.012207" timestamp="2026-02-17T14:26:15.902284" hostname="runnervmjduv7"><testcase classname="dashboard.api.api_health.System Health Monitoring" name="Verify System Health Check" status="passed" time="0.002916"><system-out>
+<testsuite name="dashboard.api.api_health.System Health Monitoring" tests="4" errors="0" failures="0" skipped="0" time="0.013792" timestamp="2026-02-17T15:39:01.944381" hostname="runnervmjduv7"><testcase classname="dashboard.api.api_health.System Health Monitoring" name="Verify System Health Check" status="passed" time="0.003134"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -16,10 +16,10 @@
 --------------------------------------------------------------------------------
 
 Captured stdout:
-14:26:15 [System Health Monitoring | Verify System Health Check] INFO: Sending GET request to: http://localhost:3001/api/health
+15:39:01 [System Health Monitoring | Verify System Health Check] INFO: Sending GET request to: http://localhost:3001/api/health
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_health.System Health Monitoring" name="Verify Method Not Allowed (POST)" status="passed" time="0.002778"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_health.System Health Monitoring" name="Verify Method Not Allowed (POST)" status="passed" time="0.003074"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -33,10 +33,10 @@ Captured stdout:
 --------------------------------------------------------------------------------
 
 Captured stdout:
-14:26:15 [System Health Monitoring | Verify Method Not Allowed (POST)] INFO: Sending POST request to: http://localhost:3001/api/health
+15:39:01 [System Health Monitoring | Verify Method Not Allowed (POST)] INFO: Sending POST request to: http://localhost:3001/api/health
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_health.System Health Monitoring" name="Verify Method Not Allowed (PUT)" status="passed" time="0.002771"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_health.System Health Monitoring" name="Verify Method Not Allowed (PUT)" status="passed" time="0.003103"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -50,10 +50,10 @@ Captured stdout:
 --------------------------------------------------------------------------------
 
 Captured stdout:
-14:26:15 [System Health Monitoring | Verify Method Not Allowed (PUT)] INFO: Sending PUT request to: http://localhost:3001/api/health
+15:39:01 [System Health Monitoring | Verify Method Not Allowed (PUT)] INFO: Sending PUT request to: http://localhost:3001/api/health
 
 ]]>
-</system-out></testcase><testcase classname="dashboard.api.api_health.System Health Monitoring" name="Verify Method Not Allowed (DELETE)" status="passed" time="0.003741"><system-out>
+</system-out></testcase><testcase classname="dashboard.api.api_health.System Health Monitoring" name="Verify Method Not Allowed (DELETE)" status="passed" time="0.004481"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -67,7 +67,7 @@ Captured stdout:
 --------------------------------------------------------------------------------
 
 Captured stdout:
-14:26:15 [System Health Monitoring | Verify Method Not Allowed (DELETE)] INFO: Sending DELETE request to: http://localhost:3001/api/health
+15:39:01 [System Health Monitoring | Verify Method Not Allowed (DELETE)] INFO: Sending DELETE request to: http://localhost:3001/api/health
 
 ]]>
 </system-out></testcase></testsuite>
