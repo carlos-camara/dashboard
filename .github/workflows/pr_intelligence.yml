@@ -33,6 +33,54 @@ jobs:
         with:
           sync-labels: true
 
+      - name: 📏 Label PR by Size
+        if: github.actor != 'dependabot[bot]'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          echo "📏 Calculating PR size..."
+          DIFF_LINES=$(git diff --shortstat origin/${{ github.base_ref }}...HEAD | awk '{print $4 + $6}')
+          
+          if [ -z "$DIFF_LINES" ]; then DIFF_LINES=0; fi
+          echo "Lines changed: $DIFF_LINES"
+          
+          if [ "$DIFF_LINES" -lt 50 ]; then
+            SIZE="size/S"
+            COLOR="0E8A16" # Green
+          elif [ "$DIFF_LINES" -lt 200 ]; then
+            SIZE="size/M"
+            COLOR="FBCA04" # Yellow
+          elif [ "$DIFF_LINES" -lt 500 ]; then
+            SIZE="size/L"
+            COLOR="EB6420" # Orange
+          else
+            SIZE="size/XL"
+            COLOR="D93F0B" # Red
+          fi
+          
+          echo "Target Label: $SIZE"
+          
+          # Create labels if they don't exist
+          gh label create "size/S" --color "0E8A16" --description "Quick review (< 50 lines)" --repo "$REPO" --force || true
+          gh label create "size/M" --color "FBCA04" --description "Standard review (50-200 lines)" --repo "$REPO" --force || true
+          gh label create "size/L" --color "EB6420" --description "Deep review (200-500 lines)" --repo "$REPO" --force || true
+          gh label create "size/XL" --color "D93F0B" --description "Significant change (> 500 lines)" --repo "$REPO" --force || true
+          
+          # Remove previous size labels to avoid duplication
+          EXISTING_LABELS=$(gh pr view "$PR_NUMBER" --json labels --template '{{range .labels}}{{.name}} {{end}}')
+          for L in $EXISTING_LABELS; do
+            if [[ $L == size/* ]]; then
+              gh pr edit "$PR_NUMBER" --remove-label "$L" --repo "$REPO"
+            fi
+          done
+          
+          # Add the new size label
+          gh pr edit "$PR_NUMBER" --add-label "$SIZE" --repo "$REPO"
+          echo "✅ Applied $SIZE label to PR #$PR_NUMBER"
+
       - name: 👤 Auto Assign PR
         if: github.actor != 'dependabot[bot]'
         run: gh pr edit "$PR_NUMBER" --add-assignee "$ASSIGNEE" --repo "$REPO"
