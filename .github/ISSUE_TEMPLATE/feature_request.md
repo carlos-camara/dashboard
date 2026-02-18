@@ -28,5 +28,3 @@ assignees: ""
 
 ---
 _Engineered for the future of verification 🚀_
-
-

@@ -1,28 +1,29 @@
+---
 DevOps:
   - changed-files:
-    - any-glob-to-any-file: 
-      - ".github/**/*"
-      - "*.json"
-      - "*.config.js"
-      - "*.config.ts"
-      - ".gitignore"
+    - any-glob-to-any-file:
+        - ".github/**/*"
+        - "*.json"
+        - "*.config.js"
+        - "*.config.ts"
+        - ".gitignore"
 
 Frontend:
   - changed-files:
-    - any-glob-to-any-file: 
-      - "components/**/*"
-      - "App.tsx"
-      - "index.tsx"
-      - "types.ts"
-      - "index.css"
+    - any-glob-to-any-file:
+        - "components/**/*"
+        - "App.tsx"
+        - "index.tsx"
+        - "types.ts"
+        - "index.css"
 
 Backend:
   - changed-files:
-    - any-glob-to-any-file: 
-      - "server.js"
-      - "services/**/*"
-      - "routes/**/*"
-      - "swaggers/**/*"
+    - any-glob-to-any-file:
+        - "server.js"
+        - "services/**/*"
+        - "routes/**/*"
+        - "swaggers/**/*"
 
 "QA: API":
   - changed-files:
@@ -38,17 +39,17 @@ Backend:
 
 "QA: Framework":
   - changed-files:
-    - any-glob-to-any-file: 
-      - "features/page_objects/**/*"
-      - "features/steps/**/*"
-      - "features/support/**/*"
-      - "features/environment.py"
-      - "behave.ini"
-      - "requirements.txt"
+    - any-glob-to-any-file:
+        - "features/page_objects/**/*"
+        - "features/steps/**/*"
+        - "features/support/**/*"
+        - "features/environment.py"
+        - "behave.ini"
+        - "requirements.txt"
 
 documentation:
   - changed-files:
-    - any-glob-to-any-file: 
-      - "**/*.md"
-      - "**/README*"
-      - "LICENSE"
+    - any-glob-to-any-file:
+        - "**/*.md"
+        - "**/README*"
+        - "LICENSE"

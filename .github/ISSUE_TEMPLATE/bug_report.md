@@ -9,7 +9,7 @@ assignees: ""
 ### 🐛 ANOMALY REPORT: DEVIATION DETECTED
 
 ## 🌟 Executive Overview
-<!-- Provide a surgical description of the defect. -->
+<!-- Define the technical objective and strategic impact of this delta. -->
 > 
 
 ## 🏗️ Reproduction Sequence
