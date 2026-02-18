@@ -1,60 +1,71 @@
-# Visual Evidence & Screenshot Engine
+# <div align="center">📸 VISUAL EVIDENCE ARCHITECTURE</div>
 
-We believe that **visual proof** is non-negotiable for high-quality GUI automation. Our framework captures high-definition evidence for every critical interaction.
+<div align="center">
+  <p><i>High-definition proof and surgical-grade surveillance for the Presentation Tier.</i></p>
+</div>
 
-## 📸 Automated Capture Modes
+---
 
-### 1. Programmatic Screenshots
-You can trigger a screenshot at any time in your feature files:
+We believe that **visual proof** is non-negotiable for high-fidelity engineering. Our framework orchestrates a high-definition evidence engine that captures critical interactions and anomalies across all verification layers.
+
+## 🚀 Evidence Orchestration Modes
+
+### 1. Programmatic Capture
+Inject surgical evidence capture at any point within the BDD scenarios:
 ```gherkin
-Then I take a screenshot named "user_profile_modal"
-Then I take a full page screenshot named "dashboard_complete"
+Then I take a high-fidelity screenshot named "user_profile_modal"
+Then I take a full-stack screenshot named "dashboard_complete"
 ```
 
 ### 2. Failure Auto-Surveillance
 > [!IMPORTANT]
-> **Safety Net**: If a test fails, the framework automatically captures the browser's state at the exact millisecond of the failure.
-> - **Filename**: `FAILED_{scenario_name}_{timestamp}.png`
-> - **Visibility**: The screenshot path is printed directly in the test log for immediate discovery.
+> **Orchestrated Safety Net**: If a verification step fails, the framework automatically triggers an immediate capture of the presentation state.
+> - **Registry Mapping**: Filenames are scenario-mapped and collision-resistant.
+> - **Telemetry Invisibility**: Capture occurs with surgical precision, including full DOM visibility.
 
-### 3. Visual Regression Masking
-For stability, we implement **Granular Element Masking** to block dynamic content (timestamps, random charts, etc.) from visual comparisons.
-- **Mechanism**: Black rectangles are drawn over specific elements before comparison.
-- **Config**: Controlled via `without elements` in Gherkin steps.
-- **Baselines**: Stored in `features/resources/screenshots/baselines/`.
+### 3. Visual Regression Intelligence
+To ensure 100% stability, we implement **Granular Asset Masking** to isolate dynamic signals (timestamps, stochastic charts, etc.) from visual comparisons.
+- **Protocol**: Masking occurs in-memory before the comparison algorithm executes.
+- **Registry**: Baselines are established at `features/resources/screenshots/baselines/`.
 
 ---
 
-## 📂 Storage Architecture
+## 🏛️ Storage Architecture
 
-All evidence is stored in a dedicated resource directory:
+All intelligence assets are synchronized within a dedicated resource hierarchy:
 ```text
 features/resources/screenshots/
-├── dashboard_home_20260128_163000.png
-├── FAILED_Navigation_Flow_20260128_163210.png
-└── ...
+├── dashboard_home_2026_02_18.png
+├── FAILED_Navigation_Flow_Anomaly.png
+└── baselines/                  # Technical Baselines
 ```
 
 ---
 
-## 📊 Integration with Dashboards
+## 📊 Dashboard Orchestration
 
-### Local HTML Reports
-Run tests with the HTML formatter to see screenshots embedded directly in the results:
+### High-Fidelity Reports
+Execute verification with the HTML formatter to manifest embedded screenshots:
 ```bash
-behave features/dashboard --tags=@gui -f html -o reports/gui_report.html
+behave features/dashboard --tags=@gui -f html -o reports/gui_report_html
 ```
 
-### GitHub Actions CI/CD
-Our pipelines manage visual evidence automatically:
-1. **Unified Test Suite**: Captures screenshots and uploads them as temporary artifacts.
-2. **Result Upload Pipeline**: Downloads the artifacts and **commits** them back to the repository under `features/resources/screenshots/`.
+### CI/CD Integration
+Our intelligence pipelines manage visual assets with zero manual intervention:
+1. **Verification Phase**: Captures and uploads assets as temporary artifacts.
+2. **Synchronization Phase**: Orchestrates the commit of evidence back to the repository registry.
 
 > [!TIP]
-> This ensures that after every successful merge, you can browse the repository to see the latest visual state of the application.
+> This ensures that after every successful merge, you can audit the high-fidelity visual state of the application directly from the repository.
 
 ---
 
-## 🛠 Troubleshooting
-- **Missing Screenshots**: Ensure the `features/resources/screenshots/` folder exists or the runner has write permissions.
-- **Blurry Images**: This usually happens if the browser is closed before the disk write completes. The framework uses a 500ms safety buffer to prevent this.
+## 🔧 Engineering Triage
+- **Registry Permissions**: Ensure the runner has write-access to the `features/resources/` hierarchy.
+- **Latency Buffering**: The framework utilizes a 500ms safety-gate to ensure the browser buffers are flushed before capture.
+
+<br/>
+
+<div align="center">
+  <i>Evidence. Transparency. Precision.</i>
+</div>

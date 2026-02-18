@@ -1,0 +1,107 @@
+---
+name: Post-Test Orchestration (S3 & Sync)
+
+on:
+  workflow_run:
+    workflows: ["Unified Test Suite"]
+    types:
+      - completed
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: 'Run ID of the Unified Test Suite to process'
+        required: false
+        type: string
+      branch:
+        description: 'Target branch to commit reports to'
+        required: false
+        default: 'main'
+
+jobs:
+  orchestrate:
+    name: S3 Deploy & Branch Sync
+    runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_run' &&
+      github.event.workflow_run.conclusion == 'success')
+    permissions:
+      contents: write
+      actions: read
+      id-token: write
+    
+    steps:
+      - name: 📍 Determine Target Branch
+        id: branch
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            BRANCH="${{ github.event.inputs.branch }}"
+          else
+            BRANCH="${{ github.event.workflow_run.head_branch }}"
+          fi
+          echo "target=${BRANCH}" >> "$GITHUB_OUTPUT"
+          echo "📍 Target branch: ${BRANCH}"
+
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ steps.branch.outputs.target }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: ☁️ Deploy Reports to S3
+        uses: carlos-camara/qa-hub-actions/deploy-reports-s3@main
+        with:
+          project-name: "dashboard"
+          s3-bucket: ${{ secrets.AWS_S3_BUCKET }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          run-id: >
+            ${{ github.event.inputs.run_id ||
+            github.event.workflow_run.id }}
+          upload-reports: 'true'
+          upload-screenshots: 'true'
+          upload-perf: 'true'
+
+      - name: 🔍 Validate PR Status
+        id: pr_check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH="${{ steps.branch.outputs.target }}"
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+            echo "✅ Manual dispatch: Proceeding with sync."
+          else
+            PR_COUNT=$(gh pr list --head "${BRANCH}" --base main \
+              --state open --json number --jq 'length')
+            if [ "$PR_COUNT" -gt 0 ]; then
+              echo "proceed=true" >> "$GITHUB_OUTPUT"
+              echo "✅ Open PR to main detected: Proceeding with sync."
+            else
+              echo "proceed=false" >> "$GITHUB_OUTPUT"
+              echo "⏭️ No open PR to main: Skipping sync."
+            fi
+          fi
+
+      - name: 🔗 Setup Branch Tracking
+        if: steps.pr_check.outputs.proceed == 'true'
+        run: |
+          BRANCH="${{ steps.branch.outputs.target }}"
+          git checkout -B "${BRANCH}" "origin/${BRANCH}"
+          echo "✅ Now on branch: $(git branch --show-current)"
+
+      - name: 🔄 Sync Reports from S3
+        if: steps.pr_check.outputs.proceed == 'true'
+        uses: carlos-camara/qa-hub-actions/sync-from-s3@v1.1.3
+        with:
+          project-name: "dashboard"
+          s3-bucket: ${{ secrets.AWS_S3_BUCKET }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          target-path: "reports/test_run"
+          s3-path: "reports/test_run"
+          commit-message: "chore: sync reports from S3 [skip ci]"
+          branch: ${{ steps.branch.outputs.target }}
