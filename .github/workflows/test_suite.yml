@@ -42,7 +42,6 @@ jobs:
       - name: 🧪 Execute Test Suite
         uses: carlos-camara/qa-hub-actions/run-tests@main
         with:
-          test-command-api: "qa-hub run --env staging --tags api"
           test-command-gui: "qa-hub run --env staging --tags gui"
           headless: "true"
 

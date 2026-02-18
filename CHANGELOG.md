@@ -8,8 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.5.0] - 2026-02-18
 ### 🚀 Refactored (Cloud-Native Architecture)
 - **Frontend-Only Transformation**: Migrated to a strictly decoupled SPA architecture. Removed local Express backend, SQLite database, and Render deployment logic.
-- **Zero-Footprint Purge**: Eliminated all residual "endpoint" and "performance" logic, including views, services, locators, and seeding scripts.
-- **Documentation Overhaul**: Modernized all README and meta-documentation with high-fidelity visuals and structured engineering guides.
+- **Zero-Footprint Purge**: Eliminated all residual "endpoint" and "performance" logic, including views, services, locators, seeding scripts, and **obsolete API BDD tests**.
+- **Documentation Overhaul**: Modernized all README and meta-documentation with high-fidelity visuals, structured engineering guides, and removal of dead API references.
 
 ### 🛡️ Governance
 - **S3 Data Synchronization**: Integrated direct state hydration from AWS S3, enabling a serverless presentation layer.

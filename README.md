@@ -49,7 +49,7 @@
 This is more than a dashboard; it is a **mission-critical ecosystem** for modern engineering teams. Engineered with an ultra-premium **Glassmorphism UI**, it provides surgical-grade insights into your multi-project quality landscape, transforming complex test logs into actionable intelligence.
 
 ### 🚀 The Four Pillars
-- **Unified Vision**: Aggregated reporting for API (Behave) and GUI (Selenium) test suites in a single, high-fidelity pane.
+- **Unified Vision**: High-fidelity GUI (Selenium) test reporting with exhaustive visual verification.
 - **Smart Diagnostics**: Automated failure pattern recognition with immersive visual evidence captured during execution.
 - **Decoupled Architecture**: High-performance Single Page Application (SPA) designed for zero-latency data visualization.
 - **Enterprise-Grade CI**: Fully automated lifecycle from linting to report archival in AWS S3 using QA Hub Actions.
@@ -68,7 +68,7 @@ The future of test reporting is already online. Experience the ultra-premium int
 
 | Feature | Description | Technology |
 |---------|-------------|------------|
-| **Test Aggregation** | Unified API & GUI test reporting | Behave, Selenium |
+| **Test Reporting** | Exhaustive GUI test reporting | Behave, Selenium |
 | **Visual Evidence** | Automatic screenshot capture & archival | html2canvas |
 | **PDF Export** | Executive-ready dossiers | jsPDF, Custom rendering |
 | **S3 Integration** | Automated report synchronization | AWS SDK |
@@ -103,8 +103,7 @@ We leverage a modern, decoupled architecture designed for high availability and 
 ```mermaid
 graph TD
     subgraph "Local / GitHub Runner"
-        A["GitHub Actions CI"] -->|Executes| B("Behave API Test")
-        A -->|Executes| C("Selenium GUI Test")
+        A["GitHub Actions CI"] -->|Executes| C("Selenium GUI Test")
     end
 
     subgraph "QA Hub Action Library"
@@ -112,7 +111,7 @@ graph TD
     end
 
     subgraph "Persistent Storage"
-        B & C -->|Artifacts| E["JUnit XML / JSON"]
+        C -->|Artifacts| E["JUnit XML / JSON"]
         E -->|Vaulted in| S3["AWS S3 History"]
     end
 
@@ -138,7 +137,7 @@ Our pipelines are powered by the **[QA Hub Actions](https://github.com/carlos-ca
 | Status | Pipeline | Core Responsibility |
 | :---: | :--- | :--- |
 | `🧹` | **Lint Codebase** | Super-Linter enforcement for zero-debt documentation and code. |
-| `🛡️` | **Unified Suite** | Parallel execution of API, GUI, and Performance layers. |
+| `🛡️` | **Unified Suite** | Parallel execution of GUI and Visual Regression layers. |
 | `☁️` | **Deploy to S3** | Upload test artifacts to AWS S3 for long-term persistence. |
 | `🔄` | **Sync from S3** | Automatic synchronization of S3 reports to repository. |
 | `🚀` | **Deploy Frontend** | Automated deployment to GitHub Pages with SPA support. |
@@ -201,9 +200,6 @@ This ecosystem features a multi-layered verification strategy powered by the **Q
 ```bash
 # Activate Python environment
 .venv\Scripts\activate
-
-# API Integrity (Behave)
-behave features/dashboard/api --tags=@smoke
 
 # UI Visual Integrity (Selenium)
 behave features/dashboard/gui --tags=@smoke
