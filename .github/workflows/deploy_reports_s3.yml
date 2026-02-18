@@ -43,4 +43,3 @@ jobs:
             github.event.workflow_run.id }}
           upload-reports: 'true'
           upload-screenshots: 'true'
-          upload-perf: 'true'

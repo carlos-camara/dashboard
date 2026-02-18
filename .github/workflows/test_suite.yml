@@ -52,7 +52,6 @@ jobs:
         with:
           reports-path: "reports/test_run"
           screenshots-path: "features/resources/screenshots/*.png"
-          performance-reports-path: "reports/performance_run/"
           upload-artifacts: true
           publish-results: true
 
