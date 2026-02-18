@@ -31,6 +31,8 @@ This is more than a dashboard; it is a **mission-critical ecosystem** for modern
 > [!IMPORTANT]
 > **Unified Intelligence**: Aggregated reporting for API (Behave) and GUI (Selenium) test suites in a single, high-fidelity pane.
 
+### 🚀 The Four Pillars
+- **Unified Vision**: Aggregated reporting for API (Behave) and GUI (Selenium) test suites in a single pane.
 - **Smart Diagnostics**: Automated failure pattern recognition with immersive visual evidence.
 - **Performance Digital Twin**: Real-time signal analysis and regression detection using Recharts analytics.
 - **Enterprise-Grade CI**: Fully automated lifecycle from linting to report archival in AWS S3.
@@ -41,30 +43,16 @@ This is more than a dashboard; it is a **mission-critical ecosystem** for modern
 
 - [Executive Overview](#-executive-overview)
 - [Live Experience](#-live-experience)
-- [Features at a Glance](#-features-at-a-glance)
+- [Features Matrix](#-features-matrix)
 - [Cutting-Edge Features](#-cutting-edge-features)
   - [Performance Digital Twin](#-performance-digital-twin)
   - [PR Intelligence](#-pr-intelligence)
-  - [Intelligent PDF Dossiers](#-intelligent-pdf-dossiers)
-- [Architecture](#%EF%B8%8F-architecture--decoupled-stack)
-- [CI/CD Ecosystem](#%EF%B8%8F-unified-cicd-ecosystem)
-- [Quick Start](#-quick-start)
-- [Testing](#-testing)
-- [Project Structure](#-project-structure)
-- [Contributing](#-contributing)
-- [Support & Security](#%EF%B8%8F-support--security)
-
----
-
-## 🌟 Executive Overview
-
-This is more than a dashboard; it is a **mission-critical ecosystem** for modern engineering teams. Engineered with a **Glassmorphism UI**, it provides surgical-grade insights into your multi-project quality landscape, transforming chaotic logs into actionable intelligence.
-
-### 🚀 The Four Pillars
-- **Unified Vision**: Aggregated reporting for API (Behave) and GUI (Selenium) test suites in a single pane.
-- **Smart Diagnostics**: Automated failure pattern recognition with immersive visual evidence.
-- **Performance Digital Twin**: Real-time signal analysis and regression detection using Recharts analytics.
-- **Enterprise-Grade CI**: Fully automated lifecycle from linting to report archival in AWS S3.
+- [Architecture](#️-architecture-decoupled-full-stack)
+- [CI/CD Ecosystem](#️-performance-driven-cicd)
+- [Navigation & Initialization](#-navigation--initialization)
+- [Verification Engine](#-verification-engine)
+- [Ecosystem Architecture](#-ecosystem-architecture)
+- [Collaboration & Support](#-collaboration--support)
 
 ---
 
