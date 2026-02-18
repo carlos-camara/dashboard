@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="dashboard.gui" tests="6" failures="1" errors="0" skipped="0" time="12.5" timestamp="2026-02-17T15:39:01.885204">
+    <testcase classname="dashboard.gui.login" name="Successful Login" time="2.5"/>
+    <testcase classname="dashboard.gui.navigation" name="Navigate to Settings" time="1.2"/>
+    <testcase classname="dashboard.gui.project" name="View Project Details" time="3.0"/>
+    <testcase classname="dashboard.gui.summary" name="Validate Dashboard Metrics" time="2.0">
+      <failure message="Logic Verification Failed in dashboard">
+        AssertionError: Data mismatch in stats grid
+        at DashboardView.fetchData (DashboardView.tsx:58)
+      </failure>
+    </testcase>
+    <testcase classname="dashboard.api.users" name="Get User List" time="0.5"/>
+    <testcase classname="dashboard.api.auth" name="Login API" time="0.8"/>
+  </testsuite>
+</testsuites>
