@@ -5,6 +5,10 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
   pull-requests: write
@@ -12,12 +16,16 @@ permissions:
 jobs:
   intelligence:
     runs-on: ubuntu-latest
-    if: github.actor == 'carlos-camara'
+    timeout-minutes: 10
+    if: >
+      github.actor == 'carlos-camara' ||
+      github.actor == 'dependabot[bot]'
+
     steps:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v6
         with:
-          fetch-depth: 0 # Required for git diff analysis in pr-summarizer
+          fetch-depth: 0
 
       - name: 🏷️ Auto Label PR
         uses: carlos-camara/qa-hub-actions/pr-labeler@main
@@ -25,6 +33,7 @@ jobs:
           sync-labels: true
 
       - name: 👤 Auto Assign PR
+        if: github.actor != 'dependabot[bot]'
         run: gh pr edit "$PR_NUMBER" --add-assignee "$ASSIGNEE" --repo "$REPO"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -33,13 +42,15 @@ jobs:
           REPO: ${{ github.repository }}
 
       - name: 🎯 Auto Milestone PR
+        if: github.actor != 'dependabot[bot]'
         uses: carlos-camara/qa-hub-actions/pr-milestoner@v1.1.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          strategy: 'latest_created'
+          strategy: "latest_created"
 
       - name: ✨ Generate PR Summary
+        if: github.actor != 'dependabot[bot]'
         uses: carlos-camara/qa-hub-actions/pr-summarizer@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          target: 'description'
+          target: "description"

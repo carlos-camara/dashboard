@@ -79,6 +79,7 @@ router.get("/endpoints", (req, res) => {
 
 router.post("/sync", async (req, res) => {
     try {
+        const force = req.query.force === 'true';
         await syncFromS3();
         const targetDir = REPORTS_DIR;
         if (!fs.existsSync(targetDir)) {
@@ -87,12 +88,18 @@ router.post("/sync", async (req, res) => {
         }
         const folders = fs.readdirSync(targetDir).filter(f => fs.statSync(path.join(targetDir, f)).isDirectory());
         let count = 0;
+        let total = folders.length;
         for (const folder of folders) {
-            if (await parseRunFolder(path.join(targetDir, folder))) {
+            if (await parseRunFolder(path.join(targetDir, folder), force)) {
                 count++;
             }
         }
-        res.json({ new_runs_discovered: count, scanned_path: targetDir });
+        res.json({
+            new_runs_discovered: count,
+            total_folders_scanned: total,
+            scanned_path: targetDir,
+            mode: force ? 'full' : 'incremental'
+        });
     } catch (e) {
         res.status(500).json({ error: e.message });
     }

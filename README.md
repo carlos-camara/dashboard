@@ -72,7 +72,7 @@ The future of test reporting is already online. Experience the ultra-premium int
 | **Performance Digital Twin** | Signal Velocity & Latency Audit | `Recharts`, `Custom Algorithms` |
 | **Visual Evidence** | Automated High-Res Evidence Capture | `html2canvas`, `AWS S3` |
 | **Intelligent Dossiers** | Executive-Ready PDF Artifacts | `jsPDF`, `Modular Rendering` |
-| **Enterprise Cloud** | Production-Grade S3 Synchronization | `AWS SDK`, `Express.js` |
+| **Incremental Cloud** | High-Performance S3 Synchronization | `AWS SDK`, `Incremental Sync` |
 | **PR Intelligence** | Dynamic Labeling & Smart Summaries | `GitHub Actions`, `gh CLI` |
 
 ---
@@ -143,7 +143,7 @@ Our pipelines are orchestrated via the **[QA Hub Actions](https://github.com/car
 | :---: | :--- | :--- |
 | `🧹` | **Lint Intelligence** | Super-Linter enforcement for zero-debt documentation and logic. |
 | `🛡️` | **Unified Suite** | Surgical execution of API, GUI, and Performance layers. |
-| `☁️` | **S3 Synchronization** | Multi-directional report archival and historical persistence. |
+| `☁️` | **Incremental Sync** | High-performance report archival with surgical delta detection. |
 | `🚀` | **SPA Deployment** | Automated production deployment with native routing support. |
 | `🏷️` | **PR Orchestration** | Dynamic labeling, intelligent summarization, and task tracking. |
 
