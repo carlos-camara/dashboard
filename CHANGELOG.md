@@ -5,9 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.5.0] - 2026-02-18
+### 🚀 Refactored (Cloud-Native Architecture)
+- **Frontend-Only Transformation**: Migrated to a strictly decoupled SPA architecture. Removed local Express backend, SQLite database, and Render deployment logic.
+- **Zero-Footprint Purge**: Eliminated all residual "endpoint" and "performance" logic, including views, services, locators, and seeding scripts.
+- **Documentation Overhaul**: Modernized all README and meta-documentation with high-fidelity visuals and structured engineering guides.
 
-## [0.4.0] - 2026-02-17
+### 🛡️ Governance
+- **S3 Data Synchronization**: Integrated direct state hydration from AWS S3, enabling a serverless presentation layer.
+- **Interface Abstraction**: Renamed technical endpoint identifiers to generic `affectedArea` for improved domain modeling.
 ### 🚀 Added (Intelligence & Automation)
 - **Enhanced Reviewer Intelligence**: Implemented grouped and collapsible file breakdown in PR summaries.
 - **Smart Checklists**: Automated PR task list completion triggered by CI status.

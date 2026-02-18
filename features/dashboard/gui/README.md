@@ -1,68 +1,73 @@
-# Dashboard GUI Testing Suite
+# 🖼️ GUI Verification Engine
 
-This directory contains the visual and functional validation tests for the QA Hub Dashboard, utilizing **Selenium WebDriver** and **Behave (BDD)**.
-
-## 🛠 Architecture
-Our GUI tests follow the **Page Object Model (POM)** pattern. Locators are decoupled from logic using a YAML configuration for maximum maintainability.
-
-## 📂 Test Organization
-
-- **`gui_dashboard.feature`**: Focuses on HSL color accuracy, glassmorphism effects, and layout integrity across viewports.
-- **`gui_navigation.feature`**: Validates routing, button interactions, and user flow between screens.
-- **`gui_test_runs.feature`**: Critical path validation for viewing and filtering historical test execution data.
+An ultra-premium verification layer designed to validate the **visual integrity**, **interactivity**, and **responsiveness** of the QA Hub Dashboard. Powered by **Selenium WebDriver** and the **QA Hub Framework**.
 
 ---
 
-## 🏃 Execution Guide
+## 🏛️ Architecture & POM
 
-### Run all GUI tests using the Automation Engine
-```bash
-qa-hub run --env staging --tags gui --junit-dir reports/test_run/dashboard_$(date +%s)
-```
+We utilize a strictly decoupled **Page Object Model (POM)** strategy:
+- **Logic**: Python classes encapsulated in `features/steps/`.
+- **Selectors**: Centralized YAML locators in `features/page_objects/locators/`.
+- **Hooks**: Strategic setup/teardown in `features/environment.py`.
 
-### Run using Behave natively
-```bash
-behave features/dashboard --tags=@gui
-```
+---
 
-### Run only smoke GUI tests
+## 📂 Feature Coverage
+
+| Feature | Scope | Key Validations |
+| :--- | :--- | :--- |
+| **`gui_dashboard.feature`** | Core Portal | HSL accuracy, glassmorphism UI, KPI grid. |
+| **`gui_navigation.feature`** | Routing | Inter-screen transitions, mobile menu, sidebar. |
+| **`gui_test_runs.feature`** | Archives | Run filtering, status indicators, detail expansion. |
+| **`gui_project_detail.feature`**| Projects | Project-specific stats, run history, back navigation. |
+| **`gui_run_detail.feature`** | Reports | Scenario logs, failure context, PDF generation. |
+
+---
+
+## 🏃 Execution Manual
+
+### 🛡️ Smoke Verification
+Quickly validate the critical path in the current environment:
 ```bash
 behave features/dashboard --tags="@gui and @smoke"
 ```
 
-### Visual Verification
-To run tests specifically focused on element visibility and aesthetic integrity:
+### 📸 Visual Integrity Audit
+Ensure CSS transitions and layout stability across viewports:
 ```bash
 behave features/dashboard --tags=@visual
 ```
 
----
-
-## 📸 Automated Evidence
-All GUI tests automatically capture evidence:
-- **Location**: `features/resources/screenshots/`
-- **Naming**: `{scenario_name}_{timestamp}.png`
-- **Failures**: Any failed step automatically triggers a `FAILED_...` screenshot for instant debugging.
+### ⚡ Full Tactical Sweep
+Execute the entire GUI suite with parallel reporting:
+```bash
+qa-hub run --env staging --tags gui --junit-dir reports/test_run/gui_audit
+```
 
 ---
 
-## 🔧 Debugging Tips
+## 📸 Evidence Ecosystem
 
-> [!TIP]
-> **Disable Headless Mode**: If a test is failing inexplicably, run it in headed mode to see what the browser is doing.
-> Set `HEADLESS=false` in your environment variables.
+The framework automatically harvests high-resolution evidence for every execution.
 
-### Common Issues
-1. **Element Not Found**: Check if the ID/XPath in `locators.yaml` matches the current UI build.
-2. **Timeout**: If the dashboard is slow, increase the `wait_time` in `environment.py`.
-3. **Chromedriver Version**: Ensure your local Chromedriver version matches your installed Chrome browser.
+- **Storage**: `features/resources/screenshots/`
+- **Baseline Masking**: Visual comparisons utilize masked baselines to ignore dynamic timestamps.
+- **Fail-Safe Capture**: Any failure automatically generates a `FAILED_...` trace for rapid root cause analysis.
 
 ---
 
-## 🧪 Step Registry
+## 🔧 Engineering Standards
 
-GUI-specific steps are powered by the **QA Hub Framework** core:
-- **Core Navigation**: `qa_framework.steps.gui_steps`
-- **Visual Validation**: `qa_framework.steps.visual_steps`
-- **PDF Intelligence**: `qa_framework.steps.pdf_steps` (now feature-rich with self-healing downloads).
-- **Project Specifics**: `features/steps/step_gui_interactions.py` (Business logic overrides).
+> [!IMPORTANT]
+> **Headless Execution**: CI runs in headless mode. Ensure local tests are debugged with `HEADLESS=false` in `.env` if visual anomalies are detected.
+
+### Common Troubleshooting
+1. **Synchronization**: Tests use **Fluent Waits**. If elements are missed, verify the `wait_load: true` flag in the YAML locator.
+2. **Viewport Scaling**: Tests are designed for 1920x1080. Responsive tests utilize specific `@mobile` tags to override the window size.
+
+---
+
+<div align="center">
+  <i>"Pixels are the pixels of truth."</i>
+</div>

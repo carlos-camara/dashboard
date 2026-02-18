@@ -1,50 +1,71 @@
-# Dashboard Page Objects - Locator Framework
+# 🎯 Engineering Precision: YAML-Driven POM
 
-We use a **YAML-driven Locator System** to ensure our tests are resilient to UI changes and easy to maintain by non-developers.
+We utilize a sophisticated **YAML-driven Locator System** to achieve absolute decoupling between test orchestration and DOM implementation. This ensures maximum resilience against UI iteration.
 
-## 🚀 Why YAML Locators?
+---
 
-> [!NOTE]
-> By separating the **"What"** (the selector) from the **"How"** (the Python logic), we achieve:
-> - **Zero Code Maintenance**: Fix broken tests by updating a single YAML file instead of hunting through Python scripts.
-> - **Unified Language**: Feature files can use descriptive aliases that map directly to technical locators.
-> - **Multi-Targeting**: Easily switch between ID, XPath, and CSS without changing the step definitions.
+## 🏛️ The Decoupled Stack
 
-## 📂 System Structure
-
-The locator registry is consumed by the **QA Hub Framework** to provide dynamic element resolution:
-
-```text
-features/
-├── page_objects/
-│   ├── locators/               # 🚩 The Single Source of Truth
-│   │   ├── dashboard.yaml      # Dashboard page locators
-│   │   └── ...                 # One YAML per page/view
-│   └── README.md               # This file
-├── steps/
-│   └── step_gui_interactions.py # Project-specific interaction logic
+```mermaid
+graph LR
+    A["Gherkin Scenarios"] -->|Uses Alias| B["Step Definitions"]
+    B -->|Queries Alias| C["QA Hub Registry"]
+    C -->|Maps to| D["YAML Locator"]
+    D -->|Resolves to| E["Web Element"]
 ```
 
-## 📝 Adding New Locators
+---
 
-1. **Identify the element** using Chrome DevTools.
-2. **Open** the appropriate YAML file in `locators/` (e.g., `dashboard.yaml`).
-3. **Add** the entry using flattened naming:
+## 💎 Strategic Advantages
+
+- **Zero-Code Maintenance**: Rectify broken tests by updating a single YAML entry—no Python refactoring required.
+- **Abstracted Selection**: Step definitions remain agnostic of the underlying selector type (XPath, CSS, ID).
+- **Ubiquitous Language**: Stakeholders can understand exactly which UI components are being validated through descriptive YAML keys.
+
+---
+
+## 📂 Registry Structure
+
+The registry is organized by view-port and logical component:
+
+```text
+features/page_objects/locators/
+├── dashboard.yaml      # Portal KPI metrics and timeline
+├── sidebar.yaml        # Navigation and identity orchestration
+├── execution_runs.yaml # Historical data and filtering
+└── project_detail.yaml # Project-specific health analytics
+```
+
+---
+
+## 📝 Additive Lifecycle
+
+To register a new high-fidelity element:
+
+1. **Locate**: Identify the most stable attribute (prefer `data-testid`).
+2. **Register**: Add the entry to the relevant YAML view.
    ```yaml
-   stats_passed_card: "xpath://div[@data-testid='stat-passed']"
-   stats_total_runs: "#total-runs-card"
+   kpi_pass_rate_value: "xpath://div[@id='pass-rate-display']"
+   timeline_zoom_btn: "#zoom-control"
    ```
-4. **Use it** in your feature file:
+3. **Orchestrate**: Reference the key in your Gherkin.
    ```gherkin
-   Then the "stats_passed_card" should be visible
+   Then the "kpi_pass_rate_value" should display "98.5%"
    ```
 
-## ✅ Best Practices
+---
 
-- **Naming**: Use `snake_case` with component prefixes (e.g., `timeline_toggle_volume`).
-- **Specificity**: Prefer **IDs** or **data-testid** attributes over long, fragile XPaths.
-- **One YAML per page**: Keep locators organized by screen/view.
-- **No Python page classes needed**: The framework handles everything via YAML lookups.
+## 🛡️ Best Practices
 
-> [!IMPORTANT]
-> If a developer changes a CSS class name, ONLY the YAML file needs to be updated. Your tests will remain green without a single line of Python code changing.
+> [!TIP]
+> **Static IDs Over Dynamic XPaths**: Avoid fragile absolute paths. If a `data-testid` is missing, collaborate with the frontend team to add it rather than hacking a complex XPath.
+
+- **Flattening**: Use descriptive, snake_case identifiers.
+- **Granularity**: Keep YAML files focused on single views to prevent registry bloat.
+- **Framework Native**: Leverage the framework's built-in `wait_load` and `wait_visibility` flags within the YAML registry.
+
+---
+
+<div align="center">
+  <i>"Code changes. Logic evolves. Locators remain stable."</i>
+</div>

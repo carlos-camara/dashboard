@@ -7,10 +7,12 @@
 
 <div align="center">
 
+<div align="center">
+
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-0F172A?style=for-the-badge&logo=python&logoColor=38bdf8)](https://www.python.org/)
 [![React 19](https://img.shields.io/badge/React-19-0F172A?style=for-the-badge&logo=react&logoColor=61dafb)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-6-0F172A?style=for-the-badge&logo=vite&logoColor=646CFF)](https://vitejs.dev/)
 [![Tailwind CSS 4](https://img.shields.io/badge/Tailwind_CSS_4-Ultramodern-0F172A?style=for-the-badge&logo=tailwindcss&logoColor=38bdf8)](https://tailwindcss.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-0F172A?style=for-the-badge&logo=open-source-initiative&logoColor=white)](LICENSE)
 
 [![Lint Status](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/lint.yml)
 [![Test Suite Status](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml/badge.svg?branch=devel)](https://github.com/carlos-camara/dashboard/actions/workflows/test_suite.yml)
@@ -30,10 +32,9 @@
 - [Live Experience](#-live-experience)
 - [Features at a Glance](#-features-at-a-glance)
 - [Cutting-Edge Features](#-cutting-edge-features)
-  - [Performance Digital Twin](#-performance-digital-twin)
   - [PR Intelligence](#-pr-intelligence)
   - [Intelligent PDF Dossiers](#-intelligent-pdf-dossiers)
-- [Architecture](#%EF%B8%8F-architecture--decoupled-stack)
+- [Architecture](#%EF%B8%8F-architecture--lightweight-spa)
 - [CI/CD Ecosystem](#%EF%B8%8F-unified-cicd-ecosystem)
 - [Quick Start](#-quick-start)
 - [Testing](#-testing)
@@ -45,13 +46,13 @@
 
 ## 🌟 Executive Overview
 
-This is more than a dashboard; it is a **mission-critical ecosystem** for modern engineering teams. Engineered with a **Glassmorphism UI**, it provides surgical-grade insights into your multi-project quality landscape, transforming chaotic logs into actionable intelligence.
+This is more than a dashboard; it is a **mission-critical ecosystem** for modern engineering teams. Engineered with an ultra-premium **Glassmorphism UI**, it provides surgical-grade insights into your multi-project quality landscape, transforming complex test logs into actionable intelligence.
 
 ### 🚀 The Four Pillars
-- **Unified Vision**: Aggregated reporting for API (Behave) and GUI (Selenium) test suites in a single pane.
-- **Smart Diagnostics**: Automated failure pattern recognition with immersive visual evidence.
-- **Performance Digital Twin**: Real-time signal analysis and regression detection using Recharts analytics.
-- **Enterprise-Grade CI**: Fully automated lifecycle from linting to report archival in AWS S3.
+- **Unified Vision**: Aggregated reporting for API (Behave) and GUI (Selenium) test suites in a single, high-fidelity pane.
+- **Smart Diagnostics**: Automated failure pattern recognition with immersive visual evidence captured during execution.
+- **Decoupled Architecture**: High-performance Single Page Application (SPA) designed for zero-latency data visualization.
+- **Enterprise-Grade CI**: Fully automated lifecycle from linting to report archival in AWS S3 using QA Hub Actions.
 
 ---
 
@@ -68,80 +69,65 @@ The future of test reporting is already online. Experience the ultra-premium int
 | Feature | Description | Technology |
 |---------|-------------|------------|
 | **Test Aggregation** | Unified API & GUI test reporting | Behave, Selenium |
-| **Performance Analytics** | Time-series metrics & regression detection | Recharts, Custom algorithms |
 | **Visual Evidence** | Automatic screenshot capture & archival | html2canvas |
 | **PDF Export** | Executive-ready dossiers | jsPDF, Custom rendering |
 | **S3 Integration** | Automated report synchronization | AWS SDK |
 | **PR Automation** | Smart labeling, assignment, summarization | GitHub Actions, gh CLI |
-| **SPA Routing** | Client-side navigation support | React Router |
-| **Live Backend** | Real-time data API | Express.js, SQLite |
+| **SPA Routing** | Client-side navigation with 404 handling | React Router |
 | **CI/CD** | Full automation pipeline | GitHub Actions, QA Hub Actions |
 
 ---
 
 ## ✨ Cutting-Edge Features
 
-### 📊 Performance Digital Twin
-Go beyond binary pass/fail results. Our **Performance Analytics Engine** establishes a technical baseline for your system's health.
-- **Signal Velocity**: Interactive time-series charts visualizing throughput trends.
-- **Throughput Chronology**: Surgical detection of regression spikes and latency drifts.
-- **Spectral Latency Audit**: A heat-map of system responsiveness and SLA adherence.
-
-![Performance View](features/resources/screenshots/baselines/chrome_final_performance_dashboard_verification.png)
-
 ### 🤖 PR Intelligence
 Maximize developer focus with an automated pull request management system:
-- **Auto-Labeler**: Precise categorization (`DevOps`, `QA`, `Frontend`, `Backend`) based on modified file paths.
-- **Enhanced Reviewer Intelligence**: Changed files are automatically grouped by purpose (e.g., 🧪 BDD Scenarios, 🐍 Python Logic) and presented in **collapsible sections** for a cleaner, organized view.
-- **Smart Checklists**: "Automated Tests" and "Linting" checkboxes in PRs are automatically checked by CI upon success, providing instant feedback.
-- **High-Fidelity Reporting**: Full test results are injected directly into the PR description with a visual summary table, eliminating the need to dig through logs.
-- **SPA Deployment**: GitHub Pages deployment now supports Single Page Application routing via `.nojekyll` and `404.html` handling.
-- **Auto-Assigner**: Automatic ownership assignment to ensure rapid review cycles.
-- **Milestone Management**: Automatic assignment to latest active milestone.
+- **Auto-Labeler**: Precise categorization (`DevOps`, `QA`, `Frontend`) based on modified file paths.
+- **Enhanced Reviewer Intelligence**: Changed files are automatically grouped by purpose (e.g., 🧪 BDD Scenarios, 🐍 Python Logic) and presented in **collapsible sections**.
+- **Smart Checklists**: "Automated Tests" and "Linting" checkboxes are automatically updated by CI upon success.
+- **High-Fidelity Reporting**: Full test results are injected directly into PR descriptions with a visual summary table.
+- **SPA Deployment**: GitHub Pages deployment supports Single Page Application routing via `.nojekyll` and `404.html`.
 
 ### 📑 Intelligent PDF Dossiers
-Export executive-ready artifacts with a single click. These **Intelligent Dossiers** include:
-- **Executive KPI Grid**: High-level success metrics.
-- **Visual Evidence Engine**: Embedded high-resolution screenshots for every failure.
-- **SLA Violation Logs**: Detailed breakdown of performance threshold breaches.
+Export executive-ready artifacts with a single click. These dossiers include:
+- **Executive KPI Grid**: High-level success metrics and project health.
+- **Visual Evidence Engine**: Embedded high-resolution screenshots for failures.
+- **Architecture Insights**: Technical summary of the audited system.
 
 ---
 
-## 🏗️ Architecture & Decoupled Stack
+## 🏗️ Architecture & Lightweight SPA
 
-We leverage a modern, decoupled architecture designed for scale and zero-downtime reliability.
+We leverage a modern, decoupled architecture designed for high availability and serverless distribution.
 
 ```mermaid
 graph TD
-    subgraph "Local / Runner"
-        A["GitHub Actions CI"] -->|Triggers| B("Behave API Test")
-        A -->|Triggers| C("Selenium GUI Test")
-        A -->|Triggers| L["Locust Load Test"]
+    subgraph "Local / GitHub Runner"
+        A["GitHub Actions CI"] -->|Executes| B("Behave API Test")
+        A -->|Executes| C("Selenium GUI Test")
     end
 
-    subgraph "Shared Action Hub"
+    subgraph "QA Hub Action Library"
         D["QA Hub Shared Actions"] -->|Standardizes| A
     end
 
-    subgraph "Data Storage"
-        B & C & L -->|Artifacts| E["JUnit XML / JSON"]
-        E -->|Aggregated by| S3["AWS S3 History"]
-        E -->|Committed to| DB["SQLite Result DB"]
+    subgraph "Persistent Storage"
+        B & C -->|Artifacts| E["JUnit XML / JSON"]
+        E -->|Vaulted in| S3["AWS S3 History"]
     end
 
-    subgraph "Cloud Presentation"
-        DB -->|Served by| G["Render Backend API"]
-        G -->|Consumes| H["Vite React Dashboard"]
-        H -->|Hosted on| P["GitHub Pages (Global CDN)"]
+    subgraph "High-Fidelity Presentation"
+        S3 -->|Synced to| H["Vite React Dashboard"]
+        H -->|Hosted on| P["GitHub Pages (CDN)"]
     end
     
-    style G fill:#6d28d9,color:#fff
-    style P fill:#2563eb,color:#fff
+    style H fill:#3b82f6,color:#fff
+    style P fill:#10b981,color:#fff
     style D fill:#f59e0b,color:#000
 ```
 
 > [!TIP]
-> The architecture separates concerns: test execution (GitHub Actions), data storage (S3 + SQLite), backend API (Render), and frontend (GitHub Pages). This enables independent scaling and zero-downtime deployments.
+> This architecture is strictly frontend-first. Data is synchronized directly from S3 artifacts into the dashboard's state, eliminating the need for a persistent backend server or database during presentation.
 
 ---
 
@@ -167,7 +153,7 @@ Our pipelines are powered by the **[QA Hub Actions](https://github.com/carlos-ca
 Ensure you have the following installed:
 - **Python 3.11+** - [Download](https://www.python.org/downloads/)
 - **Node.js 20+** - [Download](https://nodejs.org/)
-- **Chrome/Chromedriver** - Required for GUI tests
+- **Chrome/Chromedriver** - Required for GUI execution.
 
 ### 💻 Installation & Setup
 
@@ -177,71 +163,56 @@ Ensure you have the following installed:
    cd dashboard
    ```
 
-2. **Install Dependencies**:
+2. **Install Frontend Dependencies**:
    ```bash
-   # Node.js dependencies (frontend + backend)
    npm install
-   
-   # Python dependencies (test framework)
+   ```
+
+3. **Install Automation Framework**:
+   ```bash
    python -m venv .venv
    .venv\Scripts\activate  # Windows
-   source .venv/bin/activate  # Linux/Mac
    pip install -r requirements.txt
    ```
 
-3. **Environment Configuration**:
+4. **Environment Configuration**:
    ```bash
-   # Create .env file with required variables
+   # Create .env from template
    cp .env.example .env
-   # Edit .env with your configuration (API URL, AWS credentials, etc.)
+   # Configure your AWS_S3_BUCKET and VITE_API_URL (S3 Proxy or Mock)
    ```
 
-4. **Start the Services**:
+5. **Launch Development Environment**:
    ```bash
-   # Terminal 1: Backend API
-   npm run start-backend
-   
-   # Terminal 2: Frontend Development Server
    npm run dev
    ```
 
-5. **Access the Dashboard**:
-   - Open <http://localhost:5173> in your browser
-   - Backend API runs on <http://localhost:3000>
-
 > [!IMPORTANT]
-> For AWS S3 integration, ensure `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_S3_BUCKET` are configured in your `.env` file.
+> This project operates in a **Backend-less Mode** by default, synchronizing test results directly from **AWS S3**. Ensure your AWS credentials are properly configured in `.env` for data persistence.
 
 ---
 
 ## 🧪 Testing
 
-This project includes comprehensive test suites for API, GUI, and performance validation.
+This ecosystem features a multi-layered verification strategy powered by the **QA Hub Framework**.
 
-### Running Tests Locally
+### 🏃 Local Execution
 
 ```bash
-# Activate Python virtual environment
-.venv\Scripts\activate  # Windows
+# Activate Python environment
+.venv\Scripts\activate
 
-# Run API tests (Behave)
+# API Integrity (Behave)
 behave features/dashboard/api --tags=@smoke
 
-# Run GUI tests (Selenium)
+# UI Visual Integrity (Selenium)
 behave features/dashboard/gui --tags=@smoke
-
-# Run performance tests
-behave features/dashboard/performance
 ```
 
-### Test Configuration
-
-Tests are configured via:
-- `behave.ini` - Behave configuration
-- `features/config/config.yaml` - Environment-specific settings
-- `features/environment.py` - Test hooks and setup
-
-For more details, see the [Testing Guide](features/dashboard/README.md).
+### 📁 Test Configuration
+- `behave.ini`: Global test runner settings.
+- `features/config/config.yaml`: Environment and viewport orchestration.
+- `features/environment.py`: Strategic hook logic and data seeding.
 
 ---
 
@@ -249,54 +220,37 @@ For more details, see the [Testing Guide](features/dashboard/README.md).
 
 ```text
 dashboard/
-├── .github/workflows/          # CI/CD pipelines
-├── components/                 # React UI components
-├── features/                   # BDD test suites
-│   ├── dashboard/             # Dashboard-specific tests
-│   │   ├── api/               # API test scenarios
-│   │   ├── gui/               # GUI test scenarios
-│   │   └── performance/       # Performance test scenarios
-│   ├── page_objects/          # Page Object Model
-│   ├── resources/             # Test resources & screenshots
-│   └── steps/                 # Step definitions
-├── reports/                    # Generated test reports
-├── scripts/                    # Automation scripts
-├── services/                   # Backend services (Express, SQLite, S3)
-├── server.js                   # Backend API entry point
-├── index.html                  # Frontend entry point
-└── vite.config.js             # Vite configuration
+├── .github/workflows/   # CI/CD pipelines (QA Hub Standard)
+├── components/          # React SPA UI components (Tailwind + Framer)
+├── features/            # BDD Verification Layer
+│   ├── dashboard/       # Project-specific feature files
+│   ├── page_objects/    # Decoupled YAML Locators (POM)
+│   ├── resources/       # Visual Baselines & Screenshots
+│   └── steps/           # Python Step Definitions
+├── reports/             # Local test results & JUnit XML
+├── scripts/             # Infrastructure & Utility scripts
+├── services/            # Frontend services (S3 Sync, Report Parsers)
+├── index.html           # SPA Entry Point
+└── vite.config.js       # Vite Orchestration
 ```
 
 ---
 
-## 🤝 Contributing
+## 🤝 Community & Standards
 
-We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) to get started.
+We maintain an ultra-premium engineering standard. Contributions are welcome!
 
-**Quick Links:**
-- 📋 [Code of Conduct](CODE_OF_CONDUCT.md)
-- 🔒 [Security Policy](SECURITY.md)
-- 📝 [Changelog](CHANGELOG.md)
-
----
-
-## 🛡️ Support & Security
-
-We maintain the highest standards for our engineering tools.
-
-- **Security Policy**: Read our [Security Procedures](SECURITY.md).
-- **Contributing**: Check our [Engineering Standards](CONTRIBUTING.md).
-- **Changelog**: Follow our evolution in the [Changelog](CHANGELOG.md).
-- **Issues**: Report bugs or request features via [GitHub Issues](https://github.com/carlos-camara/dashboard/issues).
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+| Standard | Documentation |
+| :--- | :--- |
+| **Engineering Standards** | [Contributing Guidelines](CONTRIBUTING.md) |
+| **Security Protocol** | [Security Policy](SECURITY.md) |
+| **Evolution Tracking** | [Changelog](CHANGELOG.md) |
+| **Code of Conduct** | [Ethical Standards](CODE_OF_CONDUCT.md) |
 
 ---
 
 <div align="center">
-  <i>Designed & Engineered by <b><a href="https://github.com/carlos-camara">Carlos Cámara</a></b></i>
+  <br/>
+  <p><i>Orchestrated with precision by <b><a href="https://github.com/carlos-camara">Carlos Cámara</a></b></i></p>
+  <p>🚀 <b>Next-Gen Engineering Logic</b></p>
 </div>

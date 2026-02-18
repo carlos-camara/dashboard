@@ -1,60 +1,58 @@
-# Visual Evidence & Screenshot Engine
+# 📸 Visual Evidence Engine
 
-We believe that **visual proof** is non-negotiable for high-quality GUI automation. Our framework captures high-definition evidence for every critical interaction.
+We believe that **visual proof** is the ultimate source of truth in GUI automation. Our framework captures high-definition evidence for every critical interaction, ensuring total transparency during verification.
 
-## 📸 Automated Capture Modes
+---
 
-### 1. Programmatic Screenshots
-You can trigger a screenshot at any time in your feature files:
+## 🚀 Capture Orchestration
+
+### 1. Programmatic Snapshots
+Trigger high-resolution captures at strategic points within your BDD scenarios:
 ```gherkin
-Then I take a screenshot named "user_profile_modal"
-Then I take a full page screenshot named "dashboard_complete"
+Then I take a screenshot named "kpi_grid_verification"
+Then I take a full page screenshot named "portal_responsive_state"
 ```
 
 ### 2. Failure Auto-Surveillance
 > [!IMPORTANT]
-> **Safety Net**: If a test fails, the framework automatically captures the browser's state at the exact millisecond of the failure.
+> **Safety Net**: Upon step failure, the framework automatically triggers an instantaneous capture of the browser's DOM state.
 > - **Filename**: `FAILED_{scenario_name}_{timestamp}.png`
-> - **Visibility**: The screenshot path is printed directly in the test log for immediate discovery.
-
-### 3. Visual Regression Masking
-For stability, we implement **Granular Element Masking** to block dynamic content (timestamps, random charts, etc.) from visual comparisons.
-- **Mechanism**: Black rectangles are drawn over specific elements before comparison.
-- **Config**: Controlled via `without elements` in Gherkin steps.
-- **Baselines**: Stored in `features/resources/screenshots/baselines/`.
+> - **Traceability**: The absolute path is injected into the execution logs for rapid debugging.
 
 ---
 
-## 📂 Storage Architecture
+## 🕵️ Visual Regression Masking
 
-All evidence is stored in a dedicated resource directory:
+To maintain stability across environments, we implement **Granular Element Masking** to isolate dynamic UI fragments during comparisons.
+
+- **Objective**: Prevent false positives from fluctuating data (timestamps, chart animations).
+- **Control**: Managed via the `without elements` parameter in Gherkin steps.
+- **Archive**: Golden baselines are commit-protected in `features/resources/screenshots/baselines/`.
+
+---
+
+## 📂 Vault Structure
+
+All captured artifacts are organized in a dedicated resource vault:
+
 ```text
 features/resources/screenshots/
-├── dashboard_home_20260128_163000.png
-├── FAILED_Navigation_Flow_20260128_163210.png
-└── ...
+├── baselines/          # 🏆 Golden Master images for regression
+├── kpi_verification.png 
+├── FAILED_Login_Flow.png
+└── portal_state.png
 ```
 
 ---
 
-## 📊 Integration with Dashboards
+## ☁️ CI/CD Integration
 
-### Local HTML Reports
-Run tests with the HTML formatter to see screenshots embedded directly in the results:
-```bash
-behave features/dashboard --tags=@gui -f html -o reports/gui_report.html
-```
-
-### GitHub Actions CI/CD
-Our pipelines manage visual evidence automatically:
-1. **Unified Test Suite**: Captures screenshots and uploads them as temporary artifacts.
-2. **Result Upload Pipeline**: Downloads the artifacts and **commits** them back to the repository under `features/resources/screenshots/`.
-
-> [!TIP]
-> This ensures that after every successful merge, you can browse the repository to see the latest visual state of the application.
+Our **Unified Pipelines** manage the visual lifecycle automatically:
+1. **Harvest**: Captures are bundled during test execution.
+2. **Persistence**: Artifacts are uploaded to AWS S3 and conditionally committed back to the repository for historical tracking.
 
 ---
 
-## 🛠 Troubleshooting
-- **Missing Screenshots**: Ensure the `features/resources/screenshots/` folder exists or the runner has write permissions.
-- **Blurry Images**: This usually happens if the browser is closed before the disk write completes. The framework uses a 500ms safety buffer to prevent this.
+<div align="center">
+  <i>"Verifying the invisible. Capturing the truth."</i>
+</div>

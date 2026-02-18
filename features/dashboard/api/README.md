@@ -1,45 +1,53 @@
-# 🔌 Core API Testing Suite
+# 🔌 Core API Verification Logic
 
-The **Automation Engineering Intelligence** layer for API validation. We utilize **Behave (BDD)** to ensure our backend services adhere to strict contract requirements and business logic.
+The **Automation Engineering Intelligence** layer for backend validation. We utilize **Behave (BDD)** to ensure our services adhere to strict contract requirements and domain logic.
 
-## 🏛 Architecture
+---
+
+## 🏛️ Architecture
 
 Our API testing strategy is powered by the **[QA Hub Framework](https://github.com/carlos-camara/qa-hub-framework)** and built on **decoupled assertions**:
-- **Behavior Driven**: Scenarios described in Gherkin for transparency across stakeholders.
-- **Framework Core**: Utilizes standard framework steps for JSON validation and system health.
-- **Modular Extensions**: Project-specific steps for complex business logic.
+- **Behavior Driven**: Scenarios described in Gherkin for absolute transparency.
+- **Contract Enforcement**: Automated JSON schema validation and HTTP status code verification.
+- **Stateless Verification**: Scenarios are designed to be independent and idempotent.
 
 ---
 
 ## 📂 Feature Coverage
 
-- **[api_health.feature](api_health.feature)**: Service availability and system health checks.
-- **[api_sync.feature](api_sync.feature)**: Data synchronization logic and state persistence.
-- **[api_runs.feature](api_runs.feature)**: Execution history and result management logic.
+| Feature | Objective | Validations |
+| :--- | :--- | :--- |
+| **`api_health.feature`** | Reliability | Service availability, system health response. |
+| **`api_sync.feature`** | Data Flow | S3 synchronization logic, state persistence. |
+| **`api_runs.feature`** | Inventory | Execution history, project aggregation. |
 
 ---
 
 ## 🏃 Execution Guide
 
-Run the full API suite with surgical precision:
+### 🛡️ Smoke Sweep
+Quickly validate service availability in a target environment:
 ```bash
-qa-hub run --env staging --tags api --junit-dir reports/test_run/dashboard_$(date +%s)
+behave features/dashboard/api --tags=@smoke
 ```
 
-### Targeted Execution
+### ⚡ Full Contract Audit
+Execute the entire suite with detailed JUnit XML export:
 ```bash
-behave features/dashboard/api --tags=@critical
+qa-hub run --env staging --tags api --junit-dir reports/test_run/api_audit
 ```
 
 ---
 
 ## 📊 Reporting & Visibility
 
-API test results are standardized into **JUnit XML** format for high-fidelity reporting.
-- **Aggregator**: Results are consumed by the **Unified Dashbord**.
-- **Evidence**: Detailed request/response logs are available for all failed scenarios.
+API test results are standardized for executive consumption.
+- **Aggregation**: Results are automatically synced to the **Unified Dashboard**.
+- **Traceability**: Detailed request/response logs are available for all failed scenarios in the BDD reports.
+- **SLA Tracking**: Execution duration is measured to identify latent performance regressions.
 
 ---
+
 <div align="center">
-  <i>Precision. Integrity. Stability.</i>
+  <i>"Precision in every transaction."</i>
 </div>

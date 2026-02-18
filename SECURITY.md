@@ -1,23 +1,41 @@
-# Security Policy
+# 🛡️ Security Protocol
 
-## Supported Versions
+We maintain the highest standards of security for our engineering intelligence tools. Use this guide to understand our support lifecycle and reporting procedures.
 
-The following versions of QA Hub are currently supported with security updates:
+---
 
-| Version | Supported          |
-| ------- | ------------------ |
-| v1.1.x  | :white_check_mark: |
-| v1.0.x  | :white_check_mark: |
-| < v1.0  | :x:                |
+## 📅 Supported Versions
 
-## Reporting a Vulnerability
+The following versions currently receive high-priority security patches:
 
-> [!IMPORTANT]
-> We take the security of our project seriously. If you believe you have found a security vulnerability, please report it to us immediately.
+| Version | Status |
+| :--- | :--- |
+| **v0.5.x** | 🛡️ Active Support |
+| **v0.4.x** | 🛡️ Active Support |
+| < v0.4.0 | 💀 End of Life |
 
-1. **GitHub Advisor**: Opening a confidential security advisory on GitHub.
-2. **Direct Contact**: Sending an encrypted email to **<carlos.camara@example.com>**.
+---
 
-Please provide a detailed description of the vulnerability, steps to reproduce it, and any potential impact. We will acknowledge your report within **24 hours** and provide a transparent timeline for a fix.
+## 🚨 Reporting a Vulnerability
 
-Thank you for helping keep the QA Hub ecosystem secure!
+> [!CAUTION]
+> **Confidentiality First**: Never report security vulnerabilities through public GitHub issues.
+
+If you identify a potential security exploit, please orchestrate your report through the following official channels:
+
+1. **GitHub Security Advisory**: Open a confidential advisory directly via the [GitHub Security Tab](https://github.com/carlos-camara/dashboard/security/advisories/new).
+2. **Direct Intelligence Line**: Send an encrypted report to **<carlos.camara@example.com>**.
+
+### Reporting Requirements
+To ensure a rapid remediation cycle, please include:
+- A technical summary of the vulnerability.
+- Proof-of-Concept (PoC) steps to reproduce.
+- Potential impact assessment on the automation lifecycle.
+
+We will acknowledge all credible reports within **24 hours**.
+
+---
+
+<div align="center">
+  <i>Thank you for helping us protect the integrity of the QA Hub ecosystem. 🛡️</i>
+</div>
