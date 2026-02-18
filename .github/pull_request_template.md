@@ -8,14 +8,15 @@
 -->
 - 
 
-## 🛠️ Taxonomy of Change
-| Type | Category | Priority |
-| :--- | :--- | :--- |
-| [ ] 🚀 | Next-Gen Feature | Standard |
-| [ ] 🐛 | Surgical Fix | Medium |
-| [ ] ♻️ | Architectural Refactor | Low |
-| [ ] 💄 | Design System Polish | Standard |
-| [ ] 💥 | Breaking Change | High |
+## 🛠️ Change Classification
+| Class | Category | Priority | Impact |
+| :--- | :--- | :---: | :---: |
+| [ ] 🚀 | **Next-Gen Feature** | Standard | High |
+| [ ] 🐛 | **Surgical Fix** | Medium | Low |
+| [ ] ♻️ | **Architectural Refactor** | Low | Med |
+| [ ] 💄 | **Design System Polish** | Standard | Low |
+| [ ] 💥 | **Breaking Change** | Critical | High |
+| [ ] 🔧 | **Maintenance / Chore** | Low | Low |
 
 ## ✅ Verification Evidence
 <!-- Document the verification tiers executed (API/GUI/Manual). -->
