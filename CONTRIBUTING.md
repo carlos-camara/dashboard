@@ -124,9 +124,6 @@ pip install -r requirements.txt
 Before submitting, ensure the critical path remains green:
 
 ```bash
-# API Verification
-behave features/dashboard/api --tags=@smoke
-
 # GUI Verification
 behave features/dashboard/gui --tags=@smoke
 ```
