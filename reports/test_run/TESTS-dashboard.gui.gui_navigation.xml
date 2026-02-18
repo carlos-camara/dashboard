@@ -1,0 +1,64 @@
+<testsuite name="dashboard.gui.gui_navigation.Application Navigation Validation" tests="2" errors="0" failures="1" skipped="0" time="59.989247" timestamp="2026-02-17T22:24:15.717225" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Navigate to all main sections" status="failed" time="43.886856"><failure type="AssertionError" message="Page Load Failed: Critical element 'project_card' not visible on 'test_runs'. Error: Message: Element 'project_card' did not become visible within 30 seconds&#10;">
+<![CDATA[
+Failing step: Then the "test_runs" page is displayed ... failed in 36.826s
+Location: features/dashboard/gui/gui_navigation.feature:11
+Assertion Failed: Page Load Failed: Critical element 'project_card' not visible on 'test_runs'. Error: Message: Element 'project_card' did not become visible within 30 seconds
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Navigate_to_all_main_sections_the_"test_runs"_page_is_displa.png]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke
+  Scenario: Navigate to all main sections
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.381s
+    And the "dashboard" page is displayed ... passed in 5.511s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.169s
+    Then the "test_runs" page is displayed ... failed in 36.826s
+    Then the "title" should contain the text "[LANG:navigation.test_runs]" ... skipped in 0.000s
+    When I click on the "endpoints_link" in the sidebar ... skipped in 0.000s
+    Then the "endpoints_view" page is displayed ... skipped in 0.000s
+    Then the "title" should contain the text "[LANG:navigation.endpoints]" ... skipped in 0.000s
+    When I click on the "dashboard_link" in the sidebar ... skipped in 0.000s
+    Then the "dashboard" page is displayed ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element         | value                            |
+      | header_subtitle | [LANG:dashboard.header.subtitle] |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Navigate_to_all_main_sections_the_"test_runs"_page_is_displa.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Sidebar navigation persistence" status="passed" time="16.102391"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @visual
+  Scenario: Sidebar navigation persistence
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.350s
+    And the "dashboard" page is displayed ... passed in 5.464s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.180s
+    When I click on the "dashboard_link" in the sidebar ... passed in 0.243s
+    Then the "dashboard" page is displayed ... passed in 8.595s
+    Then the following elements should contain these texts ... passed in 0.066s
+      | element         | value                            |
+      | header_subtitle | [LANG:dashboard.header.subtitle] |
+    Then the "sidebar.sidebar_container" element should visually match the baseline image "nav_sidebar_persistence" with a 5.0% tolerance ... passed in 0.205s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[DEBUG] ENTERING step_visual_match_with_threshold: desc=sidebar.sidebar_container, name=nav_sidebar_persistence
+
+22:24:08 [Application Navigation Validation | Sidebar navigation persistence] INFO: Capturing visual snapshot: nav_sidebar_persistence
+22:24:08 [Application Navigation Validation | Sidebar navigation persistence] INFO: Captured granular screenshot for element: sidebar_container in sidebar
+[Visual] Updating baseline: C:\Users\Carlos\Desktop\github\dashboard\features\resources\screenshots\baselines\chrome_nav_sidebar_persistence.png
+
+]]>
+</system-out></testcase></testsuite>

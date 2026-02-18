@@ -1,13 +1,11 @@
 import { jsPDF } from 'jspdf';
-import { DashboardStats, ExecutionRun, Endpoint, TimelineData } from '../types';
+import { DashboardStats, ExecutionRun, TimelineData } from '../types';
 
 export const generateExecutiveReport = (
     stats: DashboardStats,
     runs: ExecutionRun[],
-    endpoints: Endpoint[],
     projectHealth: any[],
     topErrors: any[],
-    slowestEndpoints: any[],
     timeline: TimelineData[] = [],
     charts: { velocity?: string, volume?: string } = {}
 ) => {
@@ -21,7 +19,7 @@ export const generateExecutiveReport = (
                 type: 'API Contract Violation',
                 impact: 'CRITICAL',
                 explanation: 'The backend responded with an unexpected success or failure code, indicating a mismatch between the documentation and the current implementation.',
-                suggested: 'Verify backend logs for 500 errors or check if the endpoint signature has changed recently.'
+                suggested: 'Verify backend availability or check for recent infrastructure changes.'
             };
         }
         if (lowerMsg.includes('timeout') || lowerMsg.includes('timed out')) {
@@ -299,20 +297,6 @@ export const generateExecutiveReport = (
             );
         }
     }
-
-    addHeader('Infrastructure Performance Audit', currentY + 10, 14, [245, 158, 11]);
-    currentY += 25;
-
-    slowestEndpoints.forEach((ep) => {
-        pdf.setFontSize(9);
-        pdf.setTextColor(71, 85, 105);
-        pdf.setFont('courier', 'bold');
-        pdf.text(`${ep.method} ${ep.path}`, margin, currentY);
-        pdf.setTextColor(15, 23, 42);
-        pdf.text(`${ep.avgDuration.toFixed(0)} ms`, margin + 140, currentY);
-
-        currentY += 8;
-    });
 
     // Footer on all pages (except cover)
     const pageCount = (pdf.internal as any).getNumberOfPages();
@@ -593,7 +577,7 @@ export const generateRunDossier = (
             return {
                 type: 'API Contract Violation',
                 explanation: 'Backend returned an unexpected status code, violating the defined API contract.',
-                suggested: 'Check backend logs for 500/400 errors or verifying endpoint signature.'
+                suggested: 'Check backend status or verify recent application deployments.'
             };
         }
         if (lowerMsg.includes('timeout') || lowerMsg.includes('timed out')) {
@@ -868,236 +852,4 @@ export const generateRunDossier = (
     pdf.save(`RUN_DOSSIER_${run.project}_${run.id.substring(0, 6)}.pdf`);
 };
 
-export const generatePerformanceDossier = (
-    data: any,
-    charts: { velocity?: string, latency?: string } = {}
-) => {
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
-    const margin = 20;
-    const endpoints = data.stats.filter((s: any) => s.name !== 'Aggregated');
-    const aggregated = data.stats.find((s: any) => s.name === "Aggregated") || {};
-    const history = data.history || [];
 
-    // --- Helpers ---
-    const addHeader = (text: string, y: number) => {
-        pdf.setFontSize(16);
-        pdf.setTextColor(15, 23, 42);
-        pdf.setFont('helvetica', 'bold');
-        pdf.text(text.toUpperCase(), margin, y);
-        pdf.setDrawColor(99, 102, 241);
-        pdf.setLineWidth(0.5);
-        pdf.line(margin, y + 2, pageWidth - margin, y + 2);
-    };
-
-    // --- COVER PAGE ---
-    pdf.setFillColor(15, 23, 42); // Slate 950
-    pdf.rect(0, 0, pageWidth, pageHeight, 'F');
-
-    pdf.setDrawColor(16, 185, 129); // Emerald 500
-    pdf.setLineWidth(1);
-    pdf.line(margin, 20, margin, pageHeight - 20);
-
-    pdf.setTextColor(148, 163, 184); // Slate 400
-    pdf.setFontSize(10);
-    pdf.setFont('courier', 'bold');
-    pdf.text(`AUDIT ID: PERF-${new Date().getTime().toString().substring(6)}`, margin + 10, 30);
-    pdf.text(`DATE: ${new Date().toISOString()}`, margin + 10, 36);
-
-    pdf.setTextColor(255, 255, 255);
-    pdf.setFontSize(42);
-    pdf.setFont('helvetica', 'bold');
-    pdf.text('HIGH-DENSITY\nPERFORMANCE\nAUDIT', margin + 10, 80);
-
-    // Cover Metrics
-    const addMetric = (label: string, value: string, y: number, color = [255, 255, 255]) => {
-        pdf.setFontSize(10);
-        pdf.setTextColor(148, 163, 184);
-        pdf.text(label, margin + 10, y);
-        pdf.setFontSize(24);
-        pdf.setTextColor(color[0], color[1], color[2]);
-        pdf.text(value, margin + 10, y + 10);
-    };
-
-    addMetric('MAX USERS', history.length > 0 ? history[history.length - 1].users.toString() : 'N/A', 140, [99, 102, 241]);
-    addMetric('PEAK THROUGHPUT', `${aggregated.rps?.toFixed(1) || 0} RPS`, 170, [6, 182, 212]); // Cyan
-    addMetric('AVG LATENCY', `${aggregated.avg?.toFixed(0) || 0} ms`, 200, aggregated.avg > 500 ? [244, 63, 94] : [16, 185, 129]);
-
-    // --- PAGE 2: EXECUTIVE INSIGHTS & ANALYSIS ---
-    pdf.addPage();
-    addHeader('Executive Performance Insights', 30);
-
-    // Analysis Logic
-    const p95Avg = endpoints.reduce((acc: number, curr: any) => acc + curr.p95, 0) / (endpoints.length || 1);
-    const successRate = aggregated.requests > 0 ? (1 - (aggregated.failures / aggregated.requests)) * 100 : 100;
-    const maxUsers = history.length > 0 ? history[history.length - 1].users : 0;
-
-    // Determine Health Grade
-    let grade = 'A';
-    let gradeColor = [16, 185, 129];
-    if (successRate < 95 || p95Avg > 1000) { grade = 'F'; gradeColor = [244, 63, 94]; }
-    else if (successRate < 99 || p95Avg > 500) { grade = 'C'; gradeColor = [245, 158, 11]; }
-    else if (p95Avg > 200) { grade = 'B'; gradeColor = [59, 130, 246]; }
-
-    // Draw Grade badge (Card)
-    pdf.setFillColor(248, 250, 252);
-    pdf.setDrawColor(226, 232, 240);
-    pdf.roundedRect(margin, 40, pageWidth - (margin * 2), 45, 2, 2, 'FD'); // h=45
-
-    // Vertical Divider
-    pdf.setDrawColor(203, 213, 225);
-    pdf.line(margin + 50, 45, margin + 50, 80);
-
-    // LEFT COL: Grade
-    pdf.setFontSize(9);
-    pdf.setTextColor(100, 116, 139);
-    pdf.setFont('helvetica', 'bold');
-    pdf.text("SYSTEM GRADE", margin + 25, 55, { align: 'center' });
-
-    pdf.setFontSize(42);
-    pdf.setTextColor(gradeColor[0], gradeColor[1], gradeColor[2]);
-    pdf.text(grade, margin + 25, 75, { align: 'center' });
-
-    // RIGHT COL: Narrative
-    pdf.setFontSize(10);
-    pdf.setTextColor(15, 23, 42);
-    pdf.setFont('helvetica', 'normal');
-
-    const summaryText = `The system demonstrated ${grade === 'A' ? 'exceptional' : grade === 'B' ? 'solid' : 'degraded'} resilience under a peak load of ${maxUsers} concurrent users. Global throughput stabilized at ${aggregated.rps?.toFixed(1) || 0} RPS with a success integrity of ${successRate.toFixed(2)}%. The average P95 latency across all endpoints was ${p95Avg.toFixed(0)}ms.`;
-    const splitSummary = pdf.splitTextToSize(summaryText, pageWidth - (margin * 2) - 65); // Width adjusted
-    pdf.text(splitSummary, margin + 60, 52);
-
-    // Critical Observations
-    let obsY = 100; // Pushed down
-    pdf.setFontSize(11);
-    pdf.setTextColor(15, 23, 42);
-    pdf.setFont('helvetica', 'bold');
-    pdf.text("Critical Observations", margin, obsY);
-    obsY += 10;
-
-    const observations = [];
-    if (successRate === 100) observations.push({ type: 'good', text: "Perfect Error Profile: 0% failure rate detected during audit." });
-    else observations.push({ type: 'bad', text: `Error Integrity Loss: ${aggregated.failures} failed transactions detected.` });
-
-    if (p95Avg < 200) observations.push({ type: 'good', text: "Low Latency: System is highly responsive (avg P95 < 200ms)." });
-    else if (p95Avg > 1000) observations.push({ type: 'bad', text: "Severe Latency: Average response time exceeds 1 second." });
-
-    const slowEndpoints = endpoints.filter((e: any) => e.p95 > 500);
-    if (slowEndpoints.length > 0) observations.push({ type: 'warn', text: `${slowEndpoints.length} endpoints flagged as performance bottlenecks (>500ms).` });
-
-    observations.forEach(obs => {
-        pdf.setFillColor(obs.type === 'good' ? 240 : obs.type === 'bad' ? 254 : 255, obs.type === 'good' ? 253 : obs.type === 'bad' ? 242 : 251, obs.type === 'good' ? 244 : obs.type === 'bad' ? 242 : 235);
-        pdf.setDrawColor(obs.type === 'good' ? 22 : obs.type === 'bad' ? 244 : 245, obs.type === 'good' ? 163 : obs.type === 'bad' ? 63 : 158, obs.type === 'good' ? 74 : obs.type === 'bad' ? 94 : 11);
-        pdf.rect(margin, obsY, 1.5, 8, 'F');
-
-        pdf.setFontSize(9);
-        pdf.setTextColor(15, 23, 42);
-        pdf.setFont('helvetica', 'normal');
-        pdf.text(obs.text, margin + 5, obsY + 6);
-
-        obsY += 12;
-    });
-
-    // --- PAGE 3: VISUAL TELEMETRY ---
-    if (charts.velocity || charts.latency) {
-        pdf.addPage();
-        addHeader('Visual Telemetry Capture', 30);
-        let chartY = 45;
-
-        const renderChart = (title: string, img: string | undefined) => {
-            if (!img) return;
-            try {
-                const imgProps = pdf.getImageProperties(img);
-                const pdfImgWidth = pageWidth - (margin * 2);
-                const pdfImgHeight = (imgProps.height * pdfImgWidth) / imgProps.width;
-
-                pdf.setFontSize(10);
-                pdf.setTextColor(100, 116, 139);
-                pdf.setFont('helvetica', 'bold');
-                pdf.text(title.toUpperCase(), margin, chartY);
-
-                pdf.addImage(img, 'PNG', margin, chartY + 5, pdfImgWidth, pdfImgHeight);
-                chartY += pdfImgHeight + 20;
-            } catch (e) { console.warn('Chart embed failed', e); }
-        };
-
-        if (charts.velocity) renderChart('Load Velocity Signature', charts.velocity);
-
-        if (charts.latency) {
-            if (chartY > pageHeight - 80) { pdf.addPage(); chartY = 30; }
-            renderChart('Spectral Latency Distribution', charts.latency);
-        }
-    }
-
-    // --- PAGE 4: ENDPOINT FORENSIC MATRIX ---
-    pdf.addPage();
-    addHeader('Endpoint Forensic Matrix', 30);
-    let currentY = 45;
-
-    // Header
-    pdf.setFillColor(241, 245, 249);
-    pdf.rect(margin, currentY, pageWidth - (margin * 2), 8, 'F');
-    pdf.setFontSize(8);
-    pdf.setTextColor(71, 85, 105);
-    pdf.setFont('helvetica', 'bold');
-    pdf.text('ENDPOINT', margin + 2, currentY + 5);
-    pdf.text('IMP', margin + 70, currentY + 5); // Impact Score
-    pdf.text('VOLUME', margin + 90, currentY + 5);
-    pdf.text('FAILURES', margin + 120, currentY + 5);
-    pdf.text('P95 LATENCY', margin + 150, currentY + 5);
-
-    currentY += 12;
-
-    endpoints.sort((a: any, b: any) => (b.requests * b.p95) - (a.requests * a.p95)); // Sort by Impact
-
-    endpoints.forEach((ep: any) => {
-        if (currentY > pageHeight - 20) {
-            pdf.addPage();
-            currentY = 30;
-        }
-
-        // Method Badge
-        const methodColor = ep.method === 'GET' ? [59, 130, 246] : ep.method === 'POST' ? [16, 185, 129] : [100, 116, 139];
-        pdf.setFillColor(methodColor[0], methodColor[1], methodColor[2]);
-        pdf.roundedRect(margin, currentY - 3, 12, 5, 1, 1, 'F');
-        pdf.setTextColor(255, 255, 255);
-        pdf.setFontSize(6);
-        pdf.setFont('helvetica', 'bold');
-        pdf.text(ep.method || 'REQ', margin + 2, currentY);
-
-        // Path
-        pdf.setTextColor(15, 23, 42);
-        pdf.setFontSize(9);
-        pdf.setFont('courier', 'normal');
-        const name = ep.name.length > 40 ? ep.name.substring(0, 40) + '...' : ep.name;
-        pdf.text(name, margin + 15, currentY);
-
-        // Impact Score (Volume * Latency / 1000)
-        const impact = (ep.requests * ep.p95) / 1000000;
-        pdf.setFont('helvetica', 'bold');
-        pdf.setTextColor(148, 163, 184);
-        pdf.text(impact.toFixed(2), margin + 70, currentY);
-
-        // Stats
-        pdf.setFont('helvetica', 'normal');
-        pdf.setTextColor(15, 23, 42);
-        pdf.text(ep.requests.toLocaleString(), margin + 90, currentY);
-
-        // Failures
-        if (ep.failures > 0) pdf.setTextColor(244, 63, 94); // Red
-        else pdf.setTextColor(16, 185, 129); // Green
-        pdf.text(ep.failures.toString(), margin + 120, currentY);
-
-        // Latency
-        const p95 = ep.p95;
-        if (p95 > 500) pdf.setTextColor(244, 63, 94);
-        else if (p95 > 200) pdf.setTextColor(245, 158, 11);
-        else pdf.setTextColor(15, 23, 42);
-        pdf.text(`${p95.toFixed(0)}ms`, margin + 150, currentY);
-
-        currentY += 8;
-    });
-
-    pdf.save(`PERFORMANCE_DOSSIER_${new Date().toISOString().split('T')[0]}.pdf`);
-};

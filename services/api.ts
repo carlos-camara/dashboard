@@ -3,7 +3,6 @@ import { ExecutionRun, Scenario, TestStatus, DashboardStats, TimelineData, Defec
 
 const STORAGE_KEYS = {
   RUNS: 'qa_hub_runs',
-  ENDPOINTS: 'qa_hub_endpoints',
   DEFECTS: 'qa_hub_defects',
   SCENARIOS: 'qa_hub_scenarios_db'
 };
@@ -132,7 +131,7 @@ export const api = {
       console.error('Error deleting project:', e);
     }
   },
-  processFiles: async (xmlFiles: File[]): Promise<{ projectName: string, endpointsFound: number, scenariosFound: number, isDuplicate: boolean }> => {
+  processFiles: async (xmlFiles: File[]): Promise<{ projectName: string, scenariosFound: number, isDuplicate: boolean }> => {
     try {
       const formData = new FormData();
       xmlFiles.forEach(file => formData.append('files', file));
@@ -147,14 +146,13 @@ export const api = {
 
       return {
         projectName: data.projectName,
-        endpointsFound: 0,
         scenariosFound: data.totalCount,
         isDuplicate: false
       };
     } catch (e: any) {
       console.error('Error processing files details:', e);
       const errorMessage = e.message || 'Unknown error';
-      return { projectName: `Error: ${errorMessage}`, endpointsFound: 0, scenariosFound: 0, isDuplicate: false };
+      return { projectName: `Error: ${errorMessage}`, scenariosFound: 0, isDuplicate: false };
     }
   },
 

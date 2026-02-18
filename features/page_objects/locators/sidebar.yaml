@@ -10,11 +10,6 @@ sidebar:
     by: xpath
     value: //button[contains(., 'Test Runs')]
     wait_load: false
-  endpoints_link:
-    type: button
-    by: xpath
-    value: //button[contains(., 'Endpoints')]
-    wait_load: false
 
 
   sidebar_container:

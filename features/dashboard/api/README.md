@@ -15,7 +15,6 @@ Our API testing strategy is powered by the **[QA Hub Framework](https://github.c
 
 - **[api_health.feature](api_health.feature)**: Service availability and system health checks.
 - **[api_sync.feature](api_sync.feature)**: Data synchronization logic and state persistence.
-- **[api_endpoints.feature](api_endpoints.feature)**: Contract validation for all high-traffic endpoints.
 - **[api_runs.feature](api_runs.feature)**: Execution history and result management logic.
 
 ---

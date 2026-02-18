@@ -1,0 +1,123 @@
+<testsuite name="dashboard.gui.verify_variables.Variable Transformation Validation" tests="4" errors="0" failures="4" skipped="0" time="176.008867" timestamp="2026-02-17T22:33:30.029693" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify basic generation tokens" status="failed" time="43.788702"><failure type="AssertionError" message="Page Load Failed: Critical element 'project_card' not visible on 'test_runs'. Error: Message: Element 'project_card' did not become visible within 30 seconds&#10;">
+<![CDATA[
+Failing step: Then the "test_runs" page is displayed ... failed in 36.896s
+Location: features/dashboard/gui/verify_variables.feature:10
+Assertion Failed: Page Load Failed: Critical element 'project_card' not visible on 'test_runs'. Error: Message: Element 'project_card' did not become visible within 30 seconds
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Verify_basic_generation_tokens_the_"test_runs"_page_is_displa.png]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify basic generation tokens
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.266s
+    And the "dashboard" page is displayed ... passed in 5.445s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.182s
+    Then the "test_runs" page is displayed ... failed in 36.896s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element      | value   |
+      | search_input | [EMPTY] |
+    When I type "[STRING_WITH_LENGTH_10]" into the "search_input" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I should see the "search_input" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Verify_basic_generation_tokens_the_"test_runs"_page_is_displa.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify unique and random tokens" status="failed" time="44.211041"><failure type="AssertionError" message="Page Load Failed: Critical element 'project_card' not visible on 'test_runs'. Error: Message: Element 'project_card' did not become visible within 30 seconds&#10;">
+<![CDATA[
+Failing step: Then the "test_runs" page is displayed ... failed in 37.029s
+Location: features/dashboard/gui/verify_variables.feature:20
+Assertion Failed: Page Load Failed: Critical element 'project_card' not visible on 'test_runs'. Error: Message: Element 'project_card' did not become visible within 30 seconds
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Verify_unique_and_random_tokens_the_"test_runs"_page_is_displa.png]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify unique and random tokens
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.788s
+    And the "dashboard" page is displayed ... passed in 5.187s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.206s
+    Then the "test_runs" page is displayed ... failed in 37.029s
+    When I type "[UUID]" into the "search_input" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    When I type "[RANDOM]" into the "search_input" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Verify_unique_and_random_tokens_the_"test_runs"_page_is_displa.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify temporal tokens" status="failed" time="43.819942"><failure type="AssertionError" message="Page Load Failed: Critical element 'project_card' not visible on 'test_runs'. Error: Message: Element 'project_card' did not become visible within 30 seconds&#10;">
+<![CDATA[
+Failing step: Then the "test_runs" page is displayed ... failed in 36.780s
+Location: features/dashboard/gui/verify_variables.feature:30
+Assertion Failed: Page Load Failed: Critical element 'project_card' not visible on 'test_runs'. Error: Message: Element 'project_card' did not become visible within 30 seconds
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Verify_temporal_tokens_the_"test_runs"_page_is_displa.png]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify temporal tokens
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.336s
+    And the "dashboard" page is displayed ... passed in 5.501s
+    Then the page title should be "QA Hub - Execution Dashboard" ... passed in 0.013s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.190s
+    Then the "test_runs" page is displayed ... failed in 36.780s
+    When I type "[NOW(%Y)]" into the "search_input" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element      | value     |
+      | search_input | [NOW(%Y)] |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Verify_temporal_tokens_the_"test_runs"_page_is_displa.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify transformation functions" status="failed" time="44.189183"><failure type="AssertionError" message="Page Load Failed: Critical element 'project_card' not visible on 'test_runs'. Error: Message: Element 'project_card' did not become visible within 30 seconds&#10;">
+<![CDATA[
+Failing step: Then the "test_runs" page is displayed ... failed in 37.339s
+Location: features/dashboard/gui/verify_variables.feature:40
+Assertion Failed: Page Load Failed: Critical element 'project_card' not visible on 'test_runs'. Error: Message: Element 'project_card' did not become visible within 30 seconds
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Verify_transformation_functions_the_"test_runs"_page_is_displa.png]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify transformation functions
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.231s
+    And the "dashboard" page is displayed ... passed in 5.413s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.207s
+    Then the "test_runs" page is displayed ... failed in 37.339s
+    When I type "[UPPER:qa-hub]" into the "search_input" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element      | value  |
+      | search_input | QA-HUB |
+    When I type "[STR:[INT:123]]" into the "search_input" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element      | value |
+      | search_input | 123   |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Verify_transformation_functions_the_"test_runs"_page_is_displa.png
+
+]]>
+</system-out></testcase></testsuite>

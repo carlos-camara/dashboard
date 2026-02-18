@@ -149,10 +149,8 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
       generateExecutiveReport(
         stats,
         filteredRuns,
-        [],
         projectHealthData,
         topErrors,
-        [],
         timeline,
         { velocity: velocityImage, volume: volumeImage }
       );

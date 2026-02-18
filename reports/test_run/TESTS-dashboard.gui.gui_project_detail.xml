@@ -1,0 +1,131 @@
+<testsuite name="dashboard.gui.gui_project_detail.Project Detail View Validation" tests="4" errors="0" failures="4" skipped="0" time="175.423903" timestamp="2026-02-17T22:27:33.944375" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Architecture Analysis Section" status="failed" time="43.724049"><failure type="AssertionError" message="Page Load Failed: Critical element 'project_card' not visible on 'test_runs'. Error: Message: Element 'project_card' did not become visible within 30 seconds&#10;">
+<![CDATA[
+Failing step: Then the "test_runs" page is displayed ... failed in 36.861s
+Location: features/dashboard/gui/gui_project_detail.feature:8
+Assertion Failed: Page Load Failed: Critical element 'project_card' not visible on 'test_runs'. Error: Message: Element 'project_card' did not become visible within 30 seconds
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Verify_Architecture_Analysis_Section_the_"test_runs"_page_is_displa.png]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke
+  Scenario: Verify Architecture Analysis Section
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.271s
+    And the "dashboard" page is displayed ... passed in 5.411s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.181s
+    Then the "test_runs" page is displayed ... failed in 36.861s
+    When I click on the "project_card" ... skipped in 0.000s
+    Then the "project_detail" page is displayed ... skipped in 0.000s
+    Then the "projectName" should be visible ... skipped in 0.000s
+    And I should see the text "[LANG:project_detail.layer_stability]" ... skipped in 0.000s
+    And I should see the text "[LANG:project_detail.layer_latency]" ... skipped in 0.000s
+    And I should see at least 1 elements with selector "stability_comparison" ... skipped in 0.000s
+    And I should see at least 1 elements with selector "latency_comparison" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Verify_Architecture_Analysis_Section_the_"test_runs"_page_is_displa.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Execution Metrics and Trend" status="failed" time="44.021967"><failure type="AssertionError" message="Page Load Failed: Critical element 'project_card' not visible on 'test_runs'. Error: Message: Element 'project_card' did not become visible within 30 seconds&#10;">
+<![CDATA[
+Failing step: Then the "test_runs" page is displayed ... failed in 37.072s
+Location: features/dashboard/gui/gui_project_detail.feature:8
+Assertion Failed: Page Load Failed: Critical element 'project_card' not visible on 'test_runs'. Error: Message: Element 'project_card' did not become visible within 30 seconds
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Verify_Execution_Metrics_and_Trend_the_"test_runs"_page_is_displa.png]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @visual
+  Scenario: Verify Execution Metrics and Trend
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.574s
+    And the "dashboard" page is displayed ... passed in 5.179s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.197s
+    Then the "test_runs" page is displayed ... failed in 37.072s
+    When I click on the "project_card" ... skipped in 0.000s
+    Then the "project_detail" page is displayed ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element         | value                                 |
+      | stability_score | [LANG:project_detail.stability_score] |
+    And I should see the text "[LANG:project_detail.execution_velocity]" ... skipped in 0.000s
+    And I should see at least 1 elements with selector "velocity_trend" ... skipped in 0.000s
+    Then the "project_metrics" element should visually match the baseline image "project_detail_metrics" without elements and with a 15.0% tolerance ... skipped in 0.000s
+      | element                  |
+      | stability_score_value    |
+      | pass_rate_value          |
+      | avg_duration_value       |
+      | total_flights_value      |
+      | velocity_trend           |
+      | distribution_chart       |
+      | distribution_total_value |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Verify_Execution_Metrics_and_Trend_the_"test_runs"_page_is_displa.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Run History List" status="failed" time="43.987356"><failure type="AssertionError" message="Page Load Failed: Critical element 'project_card' not visible on 'test_runs'. Error: Message: Element 'project_card' did not become visible within 30 seconds&#10;">
+<![CDATA[
+Failing step: Then the "test_runs" page is displayed ... failed in 36.821s
+Location: features/dashboard/gui/gui_project_detail.feature:8
+Assertion Failed: Page Load Failed: Critical element 'project_card' not visible on 'test_runs'. Error: Message: Element 'project_card' did not become visible within 30 seconds
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Verify_Run_History_List_the_"test_runs"_page_is_displa.png]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Run History List
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.489s
+    And the "dashboard" page is displayed ... passed in 5.474s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.204s
+    Then the "test_runs" page is displayed ... failed in 36.821s
+    When I click on the "project_card" ... skipped in 0.000s
+    Then the "project_detail" page is displayed ... skipped in 0.000s
+    Then I should see the text "[LANG:project_detail.execution_history]" ... skipped in 0.000s
+    And I should see at least 1 elements with selector "item" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Verify_Run_History_List_the_"test_runs"_page_is_displa.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Dossier Download Button" status="failed" time="43.690531"><failure type="AssertionError" message="Page Load Failed: Critical element 'project_card' not visible on 'test_runs'. Error: Message: Element 'project_card' did not become visible within 30 seconds&#10;">
+<![CDATA[
+Failing step: Then the "test_runs" page is displayed ... failed in 36.828s
+Location: features/dashboard/gui/gui_project_detail.feature:8
+Assertion Failed: Page Load Failed: Critical element 'project_card' not visible on 'test_runs'. Error: Message: Element 'project_card' did not become visible within 30 seconds
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Verify_Dossier_Download_Button_the_"test_runs"_page_is_displa.png]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify Dossier Download Button
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.238s
+    And the "dashboard" page is displayed ... passed in 5.459s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.166s
+    Then the "test_runs" page is displayed ... failed in 36.828s
+    When I click on the "project_card" ... skipped in 0.000s
+    Then the "project_detail" page is displayed ... skipped in 0.000s
+    Then I should see at least 1 elements with selector "download_button" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Verify_Dossier_Download_Button_the_"test_runs"_page_is_displa.png
+
+]]>
+</system-out></testcase></testsuite>

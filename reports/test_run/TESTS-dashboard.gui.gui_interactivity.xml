@@ -1,0 +1,189 @@
+<testsuite name="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" tests="2" errors="2" failures="0" skipped="0" time="36.582484" timestamp="2026-02-17T22:23:00.180621" hostname="INSPIRON-CARLOS"><testcase classname="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" name="Redirect from Sector Integrity to Project Detail" status="failed" time="17.970064"><error type="TimeoutException" message="Message: Element 'recent_runs_project_item' did not become clickable within 10 seconds&#10;">
+<![CDATA[
+Failing step: When I click on the "recent_runs_project_item" ... failed in 11.080s
+Location: features/dashboard/gui/gui_interactivity.feature:12
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\core\elements\base_element.py", line 116, in wait_until_clickable
+    WebDriverWait(self.driver, timeout).until(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        EC.element_to_be_clickable(self.locator)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x775093
+	0x7750d4
+	0x56b490
+	0x5b58da
+	0x5b5b7b
+	0x5f7b42
+	0x5d8204
+	0x5f5341
+	0x5d7f56
+	0x5a96c9
+	0x5aa484
+	0x9c7e34
+	0x9c30c9
+	0x9e0add
+	0x78db38
+	0x7958ad
+	0x77d848
+	0x77da12
+	0x7675fa
+	0x768bfcc9
+	0x779a82ae
+	0x779a827e
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 663, in step_click_current_page_object
+    step_click_page_object(context, element_name, page_name)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 487, in step_click_page_object
+    element.click()
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\core\elements\button.py", line 21, in click
+    self.wait_until_clickable(timeout)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\core\elements\base_element.py", line 120, in wait_until_clickable
+    raise TimeoutException(
+        f"Element '{self.name}' did not become clickable within {timeout} seconds"
+    )
+selenium.common.exceptions.TimeoutException: Message: Element 'recent_runs_project_item' did not become clickable within 10 seconds
+
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Redirect_from_Sector_Integrity_to_Project_Detail_I_click_on_the_"recent_runs_pr.png]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Redirect from Sector Integrity to Project Detail
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.705s
+    And the "dashboard" page is displayed ... passed in 5.117s
+    Then the following elements should contain these texts ... passed in 0.068s
+      | element             | value            |
+      | recent_runs_heading | Sector Integrity |
+    When I click on the "recent_runs_project_item" ... failed in 11.080s
+    Then the "project_detail" page is displayed ... skipped in 0.000s
+    Then the "projectName" should be visible ... skipped in 0.000s
+    And I should see at least 1 elements with selector "stability_comparison" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Redirect_from_Sector_Integrity_to_Project_Detail_I_click_on_the_"recent_runs_pr.png
+
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" name="Redirect from Latency Anomalies to Endpoint Detail" status="failed" time="18.61242"><error type="NoSuchElementException" message="Message: Element 'endpoints_heading' not found with locator ('xpath', &quot;//h3[contains(., 'Latency Anomalies')]&quot;); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception&#10;">
+<![CDATA[
+Failing step: Then the following elements should contain these texts ... failed in 11.136s
+  | element           | value             |
+  | endpoints_heading | LATENCY ANOMALIES |
+Location: features/dashboard/gui/gui_interactivity.feature:20
+Traceback (most recent call last):
+  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\core\elements\base_element.py", line 39, in _find_element
+    return WebDriverWait(self.driver, timeout).until(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        EC.presence_of_element_located(self.locator)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x775093
+	0x7750d4
+	0x56b490
+	0x5b58da
+	0x5b5b7b
+	0x5f7b42
+	0x5d8204
+	0x5f5341
+	0x5d7f56
+	0x5a96c9
+	0x5aa484
+	0x9c7e34
+	0x9c30c9
+	0x9e0add
+	0x78db38
+	0x7958ad
+	0x77d848
+	0x77da12
+	0x7675fa
+	0x768bfcc9
+	0x779a82ae
+	0x779a827e
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 718, in step_bulk_elements_should_contain_text
+    step_current_element_should_contain_text(context, element_name, expected_text)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 694, in step_current_element_should_contain_text
+    step_element_should_contain_text(context, element_name, page_name, text)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\steps\gui_steps.py", line 540, in step_element_should_contain_text
+    element_text = element.get_text() if hasattr(element, 'get_text') else element._find_element().text
+                   ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\core\elements\text.py", line 16, in get_text
+    element = self._find_element()
+  File "C:\Users\Carlos\Desktop\github\qa-hub-framework\qa_framework\core\elements\base_element.py", line 43, in _find_element
+    raise NoSuchElementException(
+        f"Element '{self.name}' not found with locator {self.locator}"
+    )
+selenium.common.exceptions.NoSuchElementException: Message: Element 'endpoints_heading' not found with locator ('xpath', "//h3[contains(., 'Latency Anomalies')]"); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Redirect_from_Latency_Anomalies_to_Endpoint_Detail_the_following_elements_should_.png]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+
+  @visual
+  Scenario: Redirect from Latency Anomalies to Endpoint Detail
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.477s
+    And the "dashboard" page is displayed ... passed in 5.490s
+    When I scroll to the bottom of the page ... passed in 0.509s
+    Then the following elements should contain these texts ... failed in 11.136s
+      | element           | value             |
+      | endpoints_heading | LATENCY ANOMALIES |
+    When I click on the "endpoints_anomaly_item" ... skipped in 0.000s
+    Then the "endpoint_detail" page is displayed ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element     | value           |
+      | back_button | Back to Catalog |
+    And I should see the text "Success Rate" ... skipped in 0.000s
+    And I should see the text "Avg Latency" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[FAILURE] Screenshot: file:///C:/Users/Carlos/Desktop/github/dashboard/features/resources/screenshots/2026-02-17_22-20-51/FAILED_Redirect_from_Latency_Anomalies_to_Endpoint_Detail_the_following_elements_should_.png
+
+]]>
+</system-out></testcase></testsuite>

@@ -8,7 +8,7 @@ export enum TestStatus {
 export interface Defect {
   id: string;
   errorMessage: string;
-  affectedEndpoint: string;
+  affectedArea: string;
   occurrences: number;
   lastSeen: string;
   status: 'Open' | 'Investigating' | 'Fixed';

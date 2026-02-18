@@ -186,33 +186,6 @@ dashboard:
       //h3[contains(., 'Sector Integrity')]/ancestor::div[contains(@class,
       'glass-panel')]//div[contains(@class, 'cursor-pointer')][1]
     wait_load: false
-  endpoints_heading:
-    type: text
-    by: xpath
-    value: //h3[contains(., 'Latency Anomalies')]
-    wait_load: false
-  endpoints_catalog:
-    type: webelement
-    by: xpath
-    value: >-
-      //h3[contains(., 'Latency Anomalies')]/ancestor::div[contains(@class,
-      'glass-panel')]
-    wait_load: false
-  endpoints_anomaly_item:
-    type: button
-    by: xpath
-    value: >-
-      //h3[contains(., 'Latency Anomalies')]/ancestor::div[contains(@class,
-      'glass-panel')]//div[contains(@class, 'group') and contains(@class,
-      'cursor-pointer')]
-    wait_load: false
-  endpoint_latency_value:
-    type: text
-    by: xpath
-    value: >-
-      //h3[contains(., 'Latency Anomalies')]/ancestor::div[contains(@class,
-      'glass-panel')]//span[contains(text(), 'ms')]
-    wait_load: false
   actions_sync_button:
     type: button
     by: xpath

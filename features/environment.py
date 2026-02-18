@@ -1,6 +1,6 @@
 import os
 from qa_framework.utils.hooks import FrameworkHooks
-from features.support.seeding import seed_performance_data, seed_test_run_data
+from features.support.seeding import seed_test_run_data
 
 # -----------------------------------------------------------------------------
 # HOOKS
@@ -19,7 +19,6 @@ def before_all(context):
     context.failure_screenshots_dir = os.path.join("features", "resources", "screenshots")
 
     # 3. Seed Data (Project Specific)
-    seed_performance_data(context)
     seed_test_run_data(context)
 
 

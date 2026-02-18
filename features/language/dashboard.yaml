@@ -31,10 +31,6 @@ recent_runs:
     en: "Sector Integrity"
     es: "Integridad del Sector"
 
-endpoints:
-  heading:
-    en: "LATENCY ANOMALIES"
-    es: "ANOMALÍAS DE LATENCIA"
 filters:
   seven_days:
     en: "7 Days"
