@@ -26,7 +26,6 @@ updates:
     labels:
       - "dependencies"
       - "DevOps"
-    versioning-strategy: increase
     groups:
       ci-actions:
         patterns:
