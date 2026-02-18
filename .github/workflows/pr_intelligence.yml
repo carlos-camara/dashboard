@@ -156,6 +156,61 @@ jobs:
             gh pr edit "$PR_NUMBER" --remove-label "high-risk" --repo "$REPO" || true
           fi
 
+      - name: 📉 Analyze Coverage & Churn
+        if: github.actor != 'dependabot[bot]'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          echo "📉 Analyzing code coverage and churn ratio..."
+          
+          # Calculate logic changes (services, routes, components, server)
+          LOGIC_STATS=$(git diff --numstat origin/${{ github.base_ref }}...HEAD | grep -E '^(services/|routes/|components/|App.tsx|server.js)' || echo "0 0")
+          LOGIC_ADD=$(echo "$LOGIC_STATS" | awk '{sum += $1} END {print sum + 0}')
+          LOGIC_DEL=$(echo "$LOGIC_STATS" | awk '{sum += $2} END {print sum + 0}')
+          
+          # Calculate test changes (features)
+          TEST_STATS=$(git diff --numstat origin/${{ github.base_ref }}...HEAD | grep '^features/' || echo "0 0")
+          TEST_ADD=$(echo "$TEST_STATS" | awk '{sum += $1} END {print sum + 0}')
+          TEST_DEL=$(echo "$TEST_STATS" | awk '{sum += $2} END {print sum + 0}')
+          
+          echo "Logic: +$LOGIC_ADD / -$LOGIC_DEL"
+          echo "Tests: +$TEST_ADD / -$TEST_DEL"
+          
+          DEBT_FOUND=false
+          DEBT_MSG=""
+          
+          # 1. Check for test deletions
+          if [ "$TEST_DEL" -gt "$((TEST_ADD + 5))" ]; then
+            DEBT_FOUND=true
+            DEBT_MSG="⚠️ **Significant Test Deletion**: More tests are being removed than added (-$((TEST_DEL - TEST_ADD)) lines)."
+          fi
+          
+          # 2. Check for logic churn without tests
+          if [ "$LOGIC_ADD" -gt 100 ] && [ "$TEST_ADD" -lt 5 ]; then
+            DEBT_FOUND=true
+            DEBT_MSG="⚠️ **Feature Churn**: Large logic change ($LOGIC_ADD+ lines) detected with minimal test updates ($TEST_ADD lines)."
+          fi
+          
+          if [ "$DEBT_FOUND" = true ]; then
+            echo "Classification: TEST DEBT DETECTED"
+            gh label create "quality/test-debt" --color "E99695" --description "Negative test/logic balance" --repo "$REPO" --force || true
+            gh pr edit "$PR_NUMBER" --add-label "quality/test-debt" --repo "$REPO"
+            
+            REPORT="> [!WARNING]\n> ### 📉 QUALITY METRICS ALERT\n> ${DEBT_MSG}\n>\n> | Component | Added | Deleted |\n> | :--- | :--- | :--- |\n> | ⚙️ Logic | $LOGIC_ADD | $LOGIC_DEL |\n> | 🧪 Tests | $TEST_ADD | $TEST_DEL |\n---\n"
+            
+            CURRENT_BODY=$(gh pr view "$PR_NUMBER" --json body --template '{{.body}}')
+            if [[ "$CURRENT_BODY" != *"QUALITY METRICS ALERT"* ]]; then
+              echo -e "$REPORT\n$CURRENT_BODY" > debt_body.md
+              gh pr edit "$PR_NUMBER" --body-file debt_body.md --repo "$REPO"
+            fi
+          else
+            echo "Classification: Healthy test/logic balance"
+            gh pr edit "$PR_NUMBER" --remove-label "quality/test-debt" --repo "$REPO" || true
+          fi
+
       - name: 👤 Auto Assign PR
         if: github.actor != 'dependabot[bot]'
         run: gh pr edit "$PR_NUMBER" --add-assignee "$ASSIGNEE" --repo "$REPO"
