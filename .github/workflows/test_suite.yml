@@ -4,6 +4,8 @@ name: Unified Test Suite
 on:
   pull_request:
     branches: ["main", "devel"]
+  push:
+    branches: ["main"]
   workflow_dispatch:
 
 concurrency:
@@ -19,9 +21,11 @@ jobs:
   tests:
     name: Unified Test Execution
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+
     steps:
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: 🔧 Setup Environment
         uses: carlos-camara/qa-hub-actions/setup-environment@main
@@ -32,7 +36,7 @@ jobs:
       - name: ⚙️ Prep Infrastructure
         uses: carlos-camara/qa-hub-actions/environment-health-check@main
         with:
-          task: 'setup'
+          task: "setup"
           start-services-command: >-
             npm run start-backend > backend.log 2>&1 &
             npm run dev > frontend.log 2>&1 &
@@ -74,5 +78,5 @@ jobs:
         if: always()
         uses: carlos-camara/qa-hub-actions/environment-health-check@main
         with:
-          task: 'teardown'
+          task: "teardown"
           ports-to-clean: "3000 3001"
