@@ -185,9 +185,16 @@ export async function parseXmlContent(content, runId, projectName, discoveredTag
     return { stats: { ...stats, duration: Math.max(suiteTime, stats.duration) }, inferredProject, timestamp: suiteTimestamp };
 }
 
-export async function parseRunFolder(folderPath) {
+export async function parseRunFolder(folderPath, force = false) {
     const folderName = path.basename(folderPath);
     const runId = `RUN-${folderName}`;
+
+    if (!force) {
+        const existing = db.prepare("SELECT id FROM runs WHERE id = ?").get(runId);
+        if (existing) {
+            return false; // Skip parsing
+        }
+    }
 
     db.prepare("DELETE FROM scenarios WHERE run_id = ?").run(runId);
     db.prepare("DELETE FROM runs WHERE id = ?").run(runId);

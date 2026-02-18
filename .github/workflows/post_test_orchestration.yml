@@ -17,10 +17,15 @@ on:
         required: false
         default: 'main'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.workflow_run.head_branch || github.ref }}
+  cancel-in-progress: false
+
 jobs:
   orchestrate:
     name: S3 Deploy & Branch Sync
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     if: >
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'workflow_run' &&
