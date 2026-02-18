@@ -81,6 +81,50 @@ jobs:
           gh pr edit "$PR_NUMBER" --add-label "$SIZE" --repo "$REPO"
           echo "✅ Applied $SIZE label to PR #$PR_NUMBER"
 
+      - name: 🤖 Perform Risk Analysis
+        if: github.actor != 'dependabot[bot]'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          echo "🤖 Analyzing risk..."
+          CRITICAL_PATTERNS=("server.js" "services/db.js" ".github/workflows/" "package.json" "package-lock.json")
+          RISK_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          
+          IS_HIGH_RISK=false
+          MATCHED_FILES=""
+          
+          for file in $RISK_FILES; do
+            for pattern in "${CRITICAL_PATTERNS[@]}"; do
+              if [[ $file == *"$pattern"* ]]; then
+                echo "⚠️ Critical file modified: $file"
+                IS_HIGH_RISK=true
+                MATCHED_FILES="${MATCHED_FILES}- \`$file\`\n"
+              fi
+            done
+          done
+          
+          if [ "$IS_HIGH_RISK" = true ]; then
+            echo "Classification: HIGH RISK"
+            gh label create "high-risk" --color "B60205" --description "Critical system files modified" --repo "$REPO" --force || true
+            gh pr edit "$PR_NUMBER" --add-label "high-risk" --repo "$REPO"
+            
+            # Prepare warning for PR summary
+            WARNING="> [!CAUTION]\n> ### ⚠️ HIGH RISK CHANGE DETECTED\n> This PR modifies critical system files:\n${MATCHED_FILES}\n---\n"
+            
+            CURRENT_BODY=$(gh pr view "$PR_NUMBER" --json body --template '{{.body}}')
+            # Inject at top if not already present
+            if [[ "$CURRENT_BODY" != *"!CAUTION"* ]]; then
+              echo -e "$WARNING\n$CURRENT_BODY" > new_body.md
+              gh pr edit "$PR_NUMBER" --body-file new_body.md --repo "$REPO"
+            fi
+          else
+            echo "Classification: Standard Risk"
+            gh pr edit "$PR_NUMBER" --remove-label "high-risk" --repo "$REPO" || true
+          fi
+
       - name: 👤 Auto Assign PR
         if: github.actor != 'dependabot[bot]'
         run: gh pr edit "$PR_NUMBER" --add-assignee "$ASSIGNEE" --repo "$REPO"
