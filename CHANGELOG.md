@@ -12,6 +12,17 @@ All notable changes to the **QA Hub Dashboard** are documented in this chronolog
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-02-18
+### 🚀 Added (Performance & Scalability)
+- **High-Performance Incremental Sync**: Revolutionized dashboard loading by implementing surgical skip logic for already indexed report folders.
+- **Surgical S3 Sync**: Enhanced the `sync-from-s3` action to skip existing local data, dramatically reducing network overhead.
+- **Enhanced UI Feedback**: Implemented granular status updates during synchronization, showing total scanned vs. new executions discovered.
+
+### 🛠️ Maintenance (CI/CD)
+- **Workflow Engine Modernization**: Updated all repository workflows to use `actions/checkout@v6` for enhanced reliability.
+- **Repository Cleanup**: Removed obsolete `qa-nightly-regression.yml` workflow to streamline the CI ecosystem.
+- **History Preservation**: Modified cloud synchronization to preserve local history by default (removal of `--delete` flag).
+
 ## [0.4.0] - 2026-02-17
 ### 🚀 Added (Intelligence & Automation)
 - **Enhanced Reviewer Intelligence**: Implemented grouped and collapsible file breakdown in PR summaries for surgical clarity.
