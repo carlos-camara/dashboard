@@ -23,6 +23,37 @@ jobs:
       github.actor == 'dependabot[bot]'
 
     steps:
+      - name: 📝 Validate PR Hygiene
+        if: github.actor != 'dependabot[bot]'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TITLE: ${{ github.event.pull_request.title }}
+          BODY: ${{ github.event.pull_request.body }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          echo "📝 Validating PR standards..."
+          
+          # 1. Validate Title (Conventional Commits)
+          REGEX="^(feat|fix|chore|docs|style|refactor|test|perf)(\(.*\))?!?: .+$"
+          if [[ ! "$TITLE" =~ $REGEX ]]; then
+            MSG="❌ **Invalid PR Title**: Please use [Conventional Commits](https://www.conventionalcommits.org/) (e.g., \`feat: add sync logic\`)."
+            echo "$MSG"
+            gh pr comment "$PR_NUMBER" --body "$MSG" --repo "$REPO"
+            exit 1
+          fi
+          
+          # 2. Validate Description
+          if [ -z "$BODY" ] || [ ${#BODY} -lt 15 ]; then
+            MSG="❌ **Incomplete Description**: Please provide a detailed description of your changes (>15 characters)."
+            echo "$MSG"
+            gh pr comment "$PR_NUMBER" --body "$MSG" --repo "$REPO"
+            exit 1
+          fi
+          
+          echo "✅ PR Hygiene standards met."
+
       - name: 📥 Checkout Repository
         uses: actions/checkout@v6
         with:
