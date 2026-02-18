@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: 🚀 Deploy to GitHub Pages
         uses: carlos-camara/qa-hub-actions/deploy-gh-pages@main
