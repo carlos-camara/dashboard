@@ -1,23 +1,36 @@
-# Security Policy
+# <div align="center">🛡️ ENGINEERING SECURITY PROTOCOL</div>
+
+<div align="center">
+  <p><i>Maintaining the integrity and stability of the QA Hub ecosystem.</i></p>
+</div>
+
+---
 
 ## Supported Versions
 
-The following versions of QA Hub are currently supported with security updates:
+The following production-tier versions of QA Hub Dashboard are currently supported with surgical security updates:
 
-| Version | Supported          |
-| ------- | ------------------ |
-| v1.1.x  | :white_check_mark: |
-| v1.0.x  | :white_check_mark: |
-| < v1.0  | :x:                |
+| Version | Status | Operational Readiness |
+| :--- | :--- | :--- |
+| **v1.1.x** | Supported | :white_check_mark: High-Fidelity |
+| **v1.0.x** | Supported | :white_check_mark: Stable |
+| **< v1.0** | End of Life | :x: Not Recommended |
 
-## Reporting a Vulnerability
+---
+
+## 🚩 Reporting a Technical Vulnerability
 
 > [!IMPORTANT]
-> We take the security of our project seriously. If you believe you have found a security vulnerability, please report it to us immediately.
+> **Mission-Critical Integrity**: We prioritize the security of our intelligence assets. If you detect a technical anomaly with security implications, report it with surgical precision immediately.
 
-1. **GitHub Advisor**: Opening a confidential security advisory on GitHub.
-2. **Direct Contact**: Sending an encrypted email to **<carlos.camara@example.com>**.
+1. **GitHub Intelligence**: Open a confidential security briefing on GitHub.
+2. **Standard Protocol**: Encrypt your report and transmit to **<carlos.camara@example.com>**.
 
-Please provide a detailed description of the vulnerability, steps to reproduce it, and any potential impact. We will acknowledge your report within **24 hours** and provide a transparent timeline for a fix.
+### Briefing Requirements
+Please provide a high-fidelity description of the vulnerability, exact orchestration steps to reproduce, and a surgical analysis of the potential impact. We will acknowledge your briefing within **24 hours** and establish a transparent remediation timeline.
 
-Thank you for helping keep the QA Hub ecosystem secure!
+<br/>
+
+<div align="center">
+  <i>Security. Integrity. Precision.</i>
+</div>

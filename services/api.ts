@@ -40,15 +40,18 @@ export const api = {
     }
   },
 
-  syncReports: async (): Promise<{ newRuns: number }> => {
+  syncReports: async (force: boolean = false): Promise<{ newRuns: number, totalFolders: number }> => {
     try {
-      const response = await fetch(`${BASE_URL}/sync`, { method: 'POST' });
+      const response = await fetch(`${BASE_URL}/sync${force ? '?force=true' : ''}`, { method: 'POST' });
       if (!response.ok) throw new Error('Sync failed');
       const data = await response.json();
-      return { newRuns: data.new_runs_discovered };
+      return {
+        newRuns: data.new_runs_discovered,
+        totalFolders: data.total_folders_scanned
+      };
     } catch (e) {
       console.error('Error syncing:', e);
-      return { newRuns: 0 };
+      return { newRuns: 0, totalFolders: 0 };
     }
   },
 

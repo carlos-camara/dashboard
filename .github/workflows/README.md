@@ -1,108 +1,103 @@
-# �️ Automation & CI/CD Hub
+# <div align="center">⚙️ AUTOMATION & ORCHESTRATION ARCHITECTURE</div>
 
-Welcome to the central nervous system of the **QA Hub Dashboard**. This directory houses the GitHub Actions workflows that ensure our software is resilient, consistent, and always ready for deployment.
+<div align="center">
+  <p><i>The central nervous system of the QA Hub ecosystem, ensuring surgical resilience and continuous delivery.</i></p>
+</div>
 
 ---
 
 ## 🏗️ Technical Architecture
 
-Our CI/CD pipeline is designed for high observability and rapid feedback. We leverage a reactive architecture where specialized pipelines respond to the outcome of the main test suite.
+Our CI/CD ecosystem is designed for **high-fidelity observability** and rapid feedback loops. We leverage a **Reactive Orchestration Tier** where specialized pipelines respond to the outcome of the primary verification layer.
 
 ```mermaid
 graph TD
     %% Triggers
     Start([Push / Pull Request])
     Manual([Workflow Dispatch])
-    Schedule([Schedule / Automation])
     
-    style Start fill:#f9f,stroke:#333,stroke-width:4px
-    style Manual fill:#f9f,stroke:#333,stroke-width:4px
-    style Schedule fill:#fcf,stroke:#333,stroke-width:4px
+    style Start fill:#2563eb,color:#fff,stroke:#333,stroke-width:2px
+    style Manual fill:#6d28d9,color:#fff,stroke:#333,stroke-width:2px
 
-    %% Main Workflows
-    Lint["<b>🧹 Linting & Standards</b><br/>Super-Linter Cluster"]
+    %% Quality Tier
+    Lint["<b>🧹 Lint Intelligence</b><br/>Super-Linter Cluster"]
     UTS["<b>🛡️ Unified Test Suite</b><br/>API, GUI & Performance"]
     
-    %% Reactive Flows
-    DS3["<b>☁️ S3 Archival</b><br/>Long-term Persistence"]
-    RS["<b>🔄 Report Sync</b><br/>S3 to Repository Bridge"]
-    DF["<b>🌐 Web Deployment</b><br/>GitHub Pages"]
+    %% Orchestration Tier
+    PTO["<b>⚙️ Post-Test Orchestration</b><br/>S3 Archival & Branch Sync"]
+    DF["<b>🌐 SPA Deployment</b><br/>GitHub Pages CDN"]
 
     Start --> Lint
     Start --> UTS
     Manual --> Lint
     Manual --> UTS
-    Manual --> RS
+    Manual --> PTO
     Manual --> DF
     
-    Schedule --> RS
-
-    UTS -- "| on: Success |" --> DS3
+    UTS -- "| on: Success |" --> PTO
+    PTO -- "| on: State Change |" --> DF
     
-    RS -- "| on: New Data |" --> DF
-    
-    subgraph "Quality Cluster"
+    subgraph "Verification Tier"
         Lint
         UTS
     end
 
-    subgraph "Infrastructure & Sync"
-        DS3
-        RS
+    subgraph "Orchestration & Presentation"
+        PTO
+        DF
     end
+    
+    style PTO fill:#f59e0b,color:#000
+    style UTS fill:#14b8a6,color:#fff
 ```
 
 ---
 
-## 📋 Workflow Directory
+## 📋 Operational Inventory
 
 | Status | Pipeline | Core Responsibility | External Dependency |
 | :---: | :--- | :--- | :--- |
-| `🧹` | **[Lint Codebase](./lint.yml)** | Static analysis, YAML validation & formatting. | `qa-hub-actions/lint-codebase` |
-| `🛡️` | **[Unified Test Suite](./test_suite.yml)** | Multi-layer validation (API, Performance, GUI). | `qa-hub-actions` (Shared Suite) |
-| `🔄` | **[Sync Reports from S3](./sync_reports.yml)** | Automated periodic report ingestion from AWS S3. | `services/s3.js` & `sync-s3.js` |
-| `🌐` | **[Deploy Frontend](./deploy_frontend.yml)** | Production delivery to GitHub Pages. | `qa-hub-actions/deploy-gh-pages` |
-| `☁️` | **[Deploy Reports S3](./deploy_reports_s3.yml)** | Data persistence in AWS S3 infra. | `qa-hub-actions/deploy-reports-s3` |
-| `👤` | **[Auto Assign PR](./auto_assign.yml)** | Automated ownership assignment for PRs. | Native `gh` CLI |
-| `🏷️` | **[PR Labeler](./pr_labeler.yml)** | Automatic categorization based on file paths. | `actions/labeler` |
+| `🧹` | **[Lint Intelligence](./lint.yml)** | Static analysis and zero-debt documentation enforcement. | `qa-hub-actions/lint-codebase` |
+| `🛡️` | **[Unified Test Suite](./test_suite.yml)** | Full-stack validation (API, GUI, Performance). | `qa-hub-actions/run-tests` |
+| `⚙️` | **[Post-Test Orchestration](./post_test_orchestration.yml)** | Unified S3 Archival and surgical Branch Synchronization. | `qa-hub-actions/sync-from-s3` |
+| `🌐` | **[SPA Deployment](./deploy_frontend.yml)** | Production-grade delivery to GitHub Pages CDN. | `qa-hub-actions/deploy-gh-pages` |
+| `🏷️` | **[PR Intelligence](./pr_intelligence.yml)** | Dynamic labeling and smart reviewer briefs. | `actions/labeler@v5` |
+| `👤` | **[Auto Assign](./auto_assign.yml)** | Automated ownership management for contributions. | Native `gh` CLI |
 
 ---
 
-## � Deep Dive: Core Pipelines
+## 🔍 Deep Dive: Core Orchestration
 
 ### 🛡️ Unified Test Suite
-The flagship validation process. It spins up a temporary instance of the entire dashboard ecosystem to run complex interactive scenarios.
-- **Environment**: Ubuntu Latest, Node.js 20, Python 3.11.
-- **Services**: Frontend (Vite) + Backend (Node/Express).
-- **Validation Layers**:
-  - **API**: Behave-driven smoke tests.
-  - **Performance**: High-density audit dossiers.
-  - **GUI**: Selenium-based interaction flows.
+The flagship verification layer. It materializes a temporary instance of the entire dashboard ecosystem to execute high-fidelity scenarios.
+- **Compute Cluster**: Ubuntu Latest, Node.js 20, Python 3.11.
+- **Tiers**: API (Behave), Performance (Locust), and GUI (Selenium/Chrome).
+- **Artifacts**: JUnit XML, High-Res Screenshots, and Performance Dossiers.
 
-### 🔄 Sync Reports from S3
-A scheduled bridge that pulls the latest test results from S3 into the `main` branch. This decouples test execution from repository state updates.
-- **Trigger**: Runs every 30 minutes and manually via `workflow_dispatch`.
-- **Mechanism**: Executed via the `sync-s3.js` CLI script.
-- **Persistence**: Commits any new reports directly to the repository.
-- **Automatic Deployment**: Pushing to `main` via this workflow automatically triggers the **Web Deployment** to GitHub Pages.
+### ⚙️ Post-Test Orchestration
+A reactive bridge that consolidates S3 archival and branch synchronization. It ensures the repository state reflects the latest verification results without manual intervention.
+- **Trigger**: Automatic execution upon `Unified Test Suite` success (targets `main` PRs).
+- **Archival**: Surgical synchronization with AWS S3 infrastructure.
+- **State Sync**: Pulls artifacts from S3 and commits them directly to the active feature branch.
+- **Impact**: Automatically triggers the **SPA Deployment** layer upon branch synchronization.
 
-### 🧹 Lint - Super-Linter
-Maintains the aesthetic and structural integrity of our code.
-- **Scope**: Python, YAML, Markdown, and GitHub Actions.
-- **Rule**: Enforced on every Pull Request. "Green" status is mandatory for merging.
+### 🧹 Lint Intelligence
+Maintains the aesthetic and structural "Gold Standard" of the codebase.
+- **Protocols**: Python (Pep8), YAML, Markdown (MDLint), and Actions.
+- **Gatekeeping**: Mandatory green status for all Pull Request manifestations.
 
 ---
 
-## 🛠️ Operational Guide
+## 🛠️ Mission-Control Guide
 
-To trigger any of these workflows manually:
-1. Navigate to the **[Actions](https://github.com/carlos-camara/dashboard/actions)** tab.
-2. Select your target pipeline from the sidebar.
-3. Click **Run workflow** and select your branch.
+To trigger any of these verification or orchestration layers manually:
+1. Navigate to the **[GitHub Actions Console](https://github.com/carlos-camara/dashboard/actions)**.
+2. Select your target pipeline from the high-fidelity registry.
+3. Pulse the **Run workflow** toggle and select your target deployment branch.
 
 ---
 > [!IMPORTANT]
-> **Action Migration**
-> All workflows have been migrated to use the centralized **[QA Hub Actions](https://github.com/carlos-camara/qa-hub-actions)** repository. This allows for global updates to our automation logic without individual repository modifications.
+> **Orchestration Migration**
+> All pipelines have been migrated to the centralized **[QA Hub Actions](https://github.com/carlos-camara/qa-hub-actions)** repository for standardized, global lifecycle management.
 
-*Maintained by Carlos Cámara*
+*Design & Engineering Oversight by Carlos Cámara*
