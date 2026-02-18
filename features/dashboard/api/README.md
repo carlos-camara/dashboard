@@ -1,46 +1,54 @@
-# 🔌 Core API Testing Suite
+# <div align="center">🔌 API ENGINEERING INTELLIGENCE</div>
 
-The **Automation Engineering Intelligence** layer for API validation. We utilize **Behave (BDD)** to ensure our backend services adhere to strict contract requirements and business logic.
-
-## 🏛 Architecture
-
-Our API testing strategy is powered by the **[QA Hub Framework](https://github.com/carlos-camara/qa-hub-framework)** and built on **decoupled assertions**:
-- **Behavior Driven**: Scenarios described in Gherkin for transparency across stakeholders.
-- **Framework Core**: Utilizes standard framework steps for JSON validation and system health.
-- **Modular Extensions**: Project-specific steps for complex business logic.
+<div align="center">
+  <p><i>Surgical-grade contract validation and service-tier orchestration.</i></p>
+</div>
 
 ---
 
-## 📂 Feature Coverage
+The **API Engineering Layer** serves as the mission-critical foundation for service tier integrity. We leverage the **[QA Hub Framework](https://github.com/carlos-camara/qa-hub-framework)** to orchestrate high-fidelity BDD scenarios ensuring 100% contract adherence.
 
-- **[api_health.feature](api_health.feature)**: Service availability and system health checks.
-- **[api_sync.feature](api_sync.feature)**: Data synchronization logic and state persistence.
-- **[api_endpoints.feature](api_endpoints.feature)**: Contract validation for all high-traffic endpoints.
-- **[api_runs.feature](api_runs.feature)**: Execution history and result management logic.
+## 🏗️ Technical Architecture
+
+Our strategy balances **BDD Transparency** with **Surgical Verification**:
+- **Behavior Driven**: Scenarios established in Gherkin for radical stakeholder transparency.
+- **Framework Core**: Standardized logic for JSON schema validation and environment health.
+- **Modular Logic**: Project-specific step extensions for complex business orchestration.
 
 ---
 
-## 🏃 Execution Guide
+## 📂 Intelligence Coverage
 
-Run the full API suite with surgical precision:
-```bash
-qa-hub run --env staging --tags api --junit-dir reports/test_run/dashboard_$(date +%s)
-```
+We maintain 100% vigilance across the following critical paths:
+- **[api_health.feature](api_health.feature)**: Real-time service availability and health telemetry.
+- **[api_sync.feature](api_sync.feature)**: Data synchronization logic and state persistence integrity.
+- **[api_endpoints.feature](api_endpoints.feature)**: Surgical contract validation for high-traffic assets.
+- **[api_runs.feature](api_runs.feature)**: Execution chronology and result management logic.
 
-### Targeted Execution
+---
+
+## 🏃 Execution Protocol
+
+Execute the full suite with surgical precision using the standard CLI orchestration:
+
 ```bash
+# Full Suite Baseline
+behave features/dashboard/api --tags=@smoke
+
+# Critical Path Validation
 behave features/dashboard/api --tags=@critical
 ```
 
 ---
 
-## 📊 Reporting & Visibility
+## 📊 Reporting & Transparency
 
-API test results are standardized into **JUnit XML** format for high-fidelity reporting.
-- **Aggregator**: Results are consumed by the **Unified Dashbord**.
-- **Evidence**: Detailed request/response logs are available for all failed scenarios.
+Every execution generates high-fidelity **JUnit XML** artifacts that are ingested by the **Unified Dashboard**.
+- **Aggregator**: Seamless integration into the Glassmorphism Presentation Tier.
+- **Diagnostics**: Detailed request/response payloads available for immediate failure analysis.
 
----
+<br/>
+
 <div align="center">
   <i>Precision. Integrity. Stability.</i>
 </div>

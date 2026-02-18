@@ -1,7 +1,10 @@
-# Contributor Covenant Code of Conduct
+# <div align="center">📜 ENGINEERING CODE OF CONDUCT</div>
 
-> [!NOTE]
-> We value our community and are committed to maintaining a professional, welcoming, and inclusive environment for everyone.
+<div align="center">
+  <p><i>Fostering a professional, inclusive, and high-fidelity collaborative environment.</i></p>
+</div>
+
+---
 
 ## Our Pledge
 

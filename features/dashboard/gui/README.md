@@ -1,69 +1,76 @@
-# Dashboard GUI Testing Suite
+# <div align="center">🎨 GUI VERIFICATION ECOSYSTEM</div>
 
-This directory contains the visual and functional validation tests for the QA Hub Dashboard, utilizing **Selenium WebDriver** and **Behave (BDD)**.
-
-## 🛠 Architecture
-Our GUI tests follow the **Page Object Model (POM)** pattern. Locators are decoupled from logic using a YAML configuration for maximum maintainability.
-
-## 📂 Test Organization
-
-- **`gui_dashboard.feature`**: Focuses on HSL color accuracy, glassmorphism effects, and layout integrity across viewports.
-- **`gui_navigation.feature`**: Validates routing, button interactions, and user flow between screens.
-- **`gui_test_runs.feature`**: Critical path validation for viewing and filtering historical test execution data.
-- **`gui_endpoints.feature`**: Verification of API endpoint telemetry and latency visualization.
+<div align="center">
+  <p><i>High-fidelity visual audit and functional presentation tier orchestration.</i></p>
+</div>
 
 ---
 
-## 🏃 Execution Guide
+The **GUI Engineering Layer** ensures the aesthetic and functional integrity of the QA Hub Dashboard. Utilizing **Selenium WebDriver** and **Behave (BDD)**, we orchestrate deep visual audits to maintain the premium Glassmorphism experience.
 
-### Run all GUI tests using the Automation Engine
-```bash
-qa-hub run --env staging --tags gui --junit-dir reports/test_run/dashboard_$(date +%s)
-```
+## 🏛️ Technical Architecture
 
-### Run using Behave natively
-```bash
-behave features/dashboard --tags=@gui
-```
+Our presentation verification follows the **Registry-Driven Page Object Model (POM)**:
+- **Decoupled Locators**: Element selectors are externalized in **YAML configuration** for maximum resiliency.
+- **Visual Baseline**: High-fidelity matching of HSL color accuracy and layout stability.
+- **Stability-First Hooks**: Intelligent wait logic ensures verification only occurs when the SPA is fully stable.
 
-### Run only smoke GUI tests
-```bash
-behave features/dashboard --tags="@gui and @smoke"
-```
+---
 
-### Visual Verification
-To run tests specifically focused on element visibility and aesthetic integrity:
+## 📂 Intelligence Coverage
+
+We maintain constant vigilance over the Presentation Tier:
+- **`gui_dashboard.feature`**: Validation of HSL accuracy, glassmorphism blurs, and responsive breakpoints.
+- **`gui_navigation.feature`**: Verification of SPA routing, button interactions, and user flow persistence.
+- **`gui_test_runs.feature`**: Critical path audit for historical data visualization and filtration.
+- **`gui_endpoints.feature`**: Verification of telemetry rendering and latency visualization assets.
+
+---
+
+## 🏃 Execution Protocol
+
+Deploy the verification engine across the presentation layer:
+
 ```bash
-behave features/dashboard --tags=@visual
+# Full GUI Presentation Audit
+behave features/dashboard/gui --tags=@smoke
+
+# Targeted Visual Integrity Check
+behave features/dashboard/gui --tags=@visual
 ```
 
 ---
 
-## 📸 Automated Evidence
-All GUI tests automatically capture evidence:
-- **Location**: `features/resources/screenshots/`
-- **Naming**: `{scenario_name}_{timestamp}.png`
-- **Failures**: Any failed step automatically triggers a `FAILED_...` screenshot for instant debugging.
+## 📸 Automated Evidence Engine
+
+The system maintains a high-fidelity audit trail for every execution:
+- **Asset Hub**: `features/resources/screenshots/`
+- **Chronology**: All artifacts are timestamped and scenario-mapped.
+- **Failure Isolation**: Automatic high-res capture on step failure for instant diagnostic triage.
 
 ---
 
-## 🔧 Debugging Tips
+## 🔧 Engineering Diagnostics
 
 > [!TIP]
-> **Disable Headless Mode**: If a test is failing inexplicably, run it in headed mode to see what the browser is doing.
-> Set `HEADLESS=false` in your environment variables.
+> **Orchestrating Visibility**: If a scenario demonstrates non-deterministic behavior, disable headless mode (`HEADLESS=false`) to perform a real-time visual audit.
 
-### Common Issues
-1. **Element Not Found**: Check if the ID/XPath in `locators.yaml` matches the current UI build.
-2. **Timeout**: If the dashboard is slow, increase the `wait_time` in `environment.py`.
-3. **Chromedriver Version**: Ensure your local Chromedriver version matches your installed Chrome browser.
+### 🚩 Critical Triage
+1. **Registry Desync**: Verify if selectors in `locators.yaml` align with the latest React build.
+2. **Environment Latency**: Adjust framework `wait_time` in `environment.py` for slower network conditions.
+3. **Driver Alignment**: Ensure Chromedriver versions match the current production browser build.
 
 ---
 
-## 🧪 Step Registry
+## 🧪 Step Registry Intelligence
 
-GUI-specific steps are powered by the **QA Hub Framework** core:
-- **Core Navigation**: `qa_framework.steps.gui_steps`
-- **Visual Validation**: `qa_framework.steps.visual_steps`
-- **PDF Intelligence**: `qa_framework.steps.pdf_steps` (now feature-rich with self-healing downloads).
-- **Project Specifics**: `features/steps/step_gui_interactions.py` (Business logic overrides).
+Precision presentation logic powered by the **QA Hub Framework**:
+- **Core Orchestration**: `qa_framework.steps.gui_steps`
+- **Aesthetic Audit**: `qa_framework.steps.visual_steps`
+- **Dossier Generation**: `qa_framework.steps.pdf_steps` (Intelligence-boosted export).
+
+<br/>
+
+<div align="center">
+  <i>Aesthetics. Precision. Integrity.</i>
+</div>
