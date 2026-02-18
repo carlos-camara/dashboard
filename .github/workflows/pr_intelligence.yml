@@ -100,17 +100,28 @@ jobs:
           gh label create "size/L" --color "EB6420" --description "Deep review (200-500 lines)" --repo "$REPO" --force || true
           gh label create "size/XL" --color "D93F0B" --description "Significant change (> 500 lines)" --repo "$REPO" --force || true
           
-          # Remove previous size labels to avoid duplication
-          EXISTING_LABELS=$(gh pr view "$PR_NUMBER" --json labels --template '{{range .labels}}{{.name}} {{end}}')
-          for L in $EXISTING_LABELS; do
-            if [[ $L == size/* ]]; then
+          # Check current labels
+          CURRENT_LABELS=$(gh pr view "$PR_NUMBER" --json labels --template '{{range .labels}}{{.name}} {{end}}')
+          
+          HAS_CORRECT_LABEL=false
+          if [[ $CURRENT_LABELS == *"$SIZE"* ]]; then
+            HAS_CORRECT_LABEL=true
+          fi
+          
+          # Remove OTHER size labels if present
+          for L in $CURRENT_LABELS; do
+            if [[ $L == size/* ]] && [[ $L != "$SIZE" ]]; then
               gh pr edit "$PR_NUMBER" --remove-label "$L" --repo "$REPO"
             fi
           done
           
-          # Add the new size label
-          gh pr edit "$PR_NUMBER" --add-label "$SIZE" --repo "$REPO"
-          echo "✅ Applied $SIZE label to PR #$PR_NUMBER"
+          # Add the new size label only if not already present
+          if [ "$HAS_CORRECT_LABEL" = false ]; then
+            gh pr edit "$PR_NUMBER" --add-label "$SIZE" --repo "$REPO"
+            echo "✅ Applied $SIZE label to PR #$PR_NUMBER"
+          else
+            echo "⏭️ $SIZE already present, skipping redundant add."
+          fi
 
       - name: 🤖 Perform Risk Analysis
         if: github.actor != 'dependabot[bot]'
@@ -137,10 +148,15 @@ jobs:
             done
           done
           
+          CURRENT_LABELS=$(gh pr view "$PR_NUMBER" --json labels --template '{{range .labels}}{{.name}} {{end}}')
+          
           if [ "$IS_HIGH_RISK" = true ]; then
             echo "Classification: HIGH RISK"
             gh label create "high-risk" --color "B60205" --description "Critical system files modified" --repo "$REPO" --force || true
-            gh pr edit "$PR_NUMBER" --add-label "high-risk" --repo "$REPO"
+            
+            if [[ $CURRENT_LABELS != *"high-risk"* ]]; then
+              gh pr edit "$PR_NUMBER" --add-label "high-risk" --repo "$REPO"
+            fi
             
             # Prepare warning for PR summary
             WARNING="> [!CAUTION]\n> ### ⚠️ HIGH RISK CHANGE DETECTED\n> This PR modifies critical system files:\n${MATCHED_FILES}\n---\n"
@@ -153,7 +169,9 @@ jobs:
             fi
           else
             echo "Classification: Standard Risk"
-            gh pr edit "$PR_NUMBER" --remove-label "high-risk" --repo "$REPO" || true
+            if [[ $CURRENT_LABELS == *"high-risk"* ]]; then
+              gh pr edit "$PR_NUMBER" --remove-label "high-risk" --repo "$REPO"
+            fi
           fi
 
       - name: 📉 Analyze Coverage & Churn
@@ -194,10 +212,15 @@ jobs:
             DEBT_MSG="⚠️ **Feature Churn**: Large logic change ($LOGIC_ADD+ lines) detected with minimal test updates ($TEST_ADD lines)."
           fi
           
+          CURRENT_LABELS=$(gh pr view "$PR_NUMBER" --json labels --template '{{range .labels}}{{.name}} {{end}}')
+          
           if [ "$DEBT_FOUND" = true ]; then
             echo "Classification: TEST DEBT DETECTED"
             gh label create "quality/test-debt" --color "E99695" --description "Negative test/logic balance" --repo "$REPO" --force || true
-            gh pr edit "$PR_NUMBER" --add-label "quality/test-debt" --repo "$REPO"
+            
+            if [[ $CURRENT_LABELS != *"quality/test-debt"* ]]; then
+              gh pr edit "$PR_NUMBER" --add-label "quality/test-debt" --repo "$REPO"
+            fi
             
             REPORT="> [!WARNING]\n> ### 📉 QUALITY METRICS ALERT\n> ${DEBT_MSG}\n>\n> | Component | Added | Deleted |\n> | :--- | :--- | :--- |\n> | ⚙️ Logic | $LOGIC_ADD | $LOGIC_DEL |\n> | 🧪 Tests | $TEST_ADD | $TEST_DEL |\n---\n"
             
@@ -208,7 +231,9 @@ jobs:
             fi
           else
             echo "Classification: Healthy test/logic balance"
-            gh pr edit "$PR_NUMBER" --remove-label "quality/test-debt" --repo "$REPO" || true
+            if [[ $CURRENT_LABELS == *"quality/test-debt"* ]]; then
+              gh pr edit "$PR_NUMBER" --remove-label "quality/test-debt" --repo "$REPO"
+            fi
           fi
 
       - name: 👤 Auto Assign PR
