@@ -1,38 +1,38 @@
 ---
 name: "🛡️ Bug Report"
-about: "Report a technical anomaly or defect"
+about: "Report a technical anomaly or defect in the ecosystem"
 title: "bug: [Brief Description]"
 labels: "bug"
 assignees: ""
 ---
 
-### 🐛 Bug Report
+### 🐛 ANOMALY REPORT: DEVIATION DETECTED
 
-## 🌟 Overview
-<!-- Provide a clear and concise description of the issue. -->
->
+## 🌟 Executive Overview
+<!-- Provide a surgical description of the defect. -->
+> 
 
-## 🏗️ Steps to Reproduce
-<!-- How can we see the bug in action? -->
-1. Go to '...'
-2. Perform action '...'
-3. Observe behavior '...'
+## 🏗️ Reproduction Sequence
+<!-- Document the precise steps to manifest the anomaly. -->
+1. Navigate to '...'
+2. Execute '...'
+3. Orchestrate '...'
 
-## 🎯 Expected vs. Actual
+## 🎯 Expected vs. Actual Manifestation
 | Perspective | Observation |
 | :--- | :--- |
-| **Expected** | _What should have happened_ |
-| **Actual** | _What actually happened (e.g., error logs, crash)_ |
+| **Expected Behavior** | _Technical baseline for successful execution._ |
+| **Actual Manifestation** | _Detected deviation (e.g., error logs, crash, layout drift)._ |
 
-## 📸 Evidence & Context
-<!-- Attach screenshots, videos, or raw logs. -->
-- **Environment**: [e.g. Chrome 120, Windows 11]
-- **Visuals**: _[Drop assets here]_
+## 📸 Technical Evidence & Context
+<!-- Attach high-resolution screenshots, recordings, or raw telemetry logs. -->
+- **Environment Stack**: [e.g. Chrome 130, Windows 11, Node 20]
+- **Visual Artifacts**: _[Drop assets here]_
 
-## ⚠️ Mission Impact
-- [ ] **Critical**: Blockers for core functionality.
-- [ ] **Major**: Significant impact on usability.
-- [ ] **Minor**: Aesthetic or low-priority edge cases.
+## ⚠️ Mission Criticality
+- [ ] **Critical**: Total blockage of core verification layers.
+- [ ] **Major**: Significant entropy in the presentation or intelligence tiers.
+- [ ] **Minor**: Aesthetic anomalies or low-priority edge cases.
 
 ---
-_Detected with 🛡️ for excellence_
+_Detected and documented for high-fidelity engineering excellence 🛡️_
