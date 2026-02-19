@@ -80,25 +80,25 @@ jobs:
           
           if [ "$DIFF_LINES" -lt 50 ]; then
             SIZE="size/S"
-            COLOR="0E8A16" # Green
           elif [ "$DIFF_LINES" -lt 200 ]; then
             SIZE="size/M"
-            COLOR="FBCA04" # Yellow
           elif [ "$DIFF_LINES" -lt 500 ]; then
             SIZE="size/L"
-            COLOR="EB6420" # Orange
           else
             SIZE="size/XL"
-            COLOR="D93F0B" # Red
           fi
           
           echo "Target Label: $SIZE"
           
           # Create labels if they don't exist
-          gh label create "size/S" --color "0E8A16" --description "Quick review (< 50 lines)" --repo "$REPO" --force || true
-          gh label create "size/M" --color "FBCA04" --description "Standard review (50-200 lines)" --repo "$REPO" --force || true
-          gh label create "size/L" --color "EB6420" --description "Deep review (200-500 lines)" --repo "$REPO" --force || true
-          gh label create "size/XL" --color "D93F0B" --description "Significant change (> 500 lines)" --repo "$REPO" --force || true
+          gh label create "size/S" --color "0E8A16" \
+            --description "Quick review (< 50 lines)" --repo "$REPO" --force || true
+          gh label create "size/M" --color "FBCA04" \
+            --description "Standard review (50-200 lines)" --repo "$REPO" --force || true
+          gh label create "size/L" --color "EB6420" \
+            --description "Deep review (200-500 lines)" --repo "$REPO" --force || true
+          gh label create "size/XL" --color "D93F0B" \
+            --description "Significant change (> 500 lines)" --repo "$REPO" --force || true
           
           # Check current labels
           CURRENT_LABELS=$(gh pr view "$PR_NUMBER" --json labels --template '{{range .labels}}{{.name}} {{end}}')
@@ -222,7 +222,9 @@ jobs:
               gh pr edit "$PR_NUMBER" --add-label "quality/test-debt" --repo "$REPO"
             fi
             
-            REPORT="> [!WARNING]\n> ### 📉 QUALITY METRICS ALERT\n> ${DEBT_MSG}\n>\n> | Component | Added | Deleted |\n> | :--- | :--- | :--- |\n> | ⚙️ Logic | $LOGIC_ADD | $LOGIC_DEL |\n> | 🧪 Tests | $TEST_ADD | $TEST_DEL |\n---\n"
+            REPORT="> [!WARNING]\n> ### 📉 QUALITY METRICS ALERT\n> ${DEBT_MSG}\n>\n"
+            REPORT+="> | Component | Added | Deleted |\n> | :--- | :--- | :--- |\n"
+            REPORT+="> | ⚙️ Logic | $LOGIC_ADD | $LOGIC_DEL |\n> | 🧪 Tests | $TEST_ADD | $TEST_DEL |\n---\n"
             
             CURRENT_BODY=$(gh pr view "$PR_NUMBER" --json body --template '{{.body}}')
             if [[ "$CURRENT_BODY" != *"QUALITY METRICS ALERT"* ]]; then

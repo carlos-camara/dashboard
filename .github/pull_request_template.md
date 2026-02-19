@@ -13,6 +13,6 @@
 
 ## ✅ Verification Evidence
 <!-- Document the verification tiers executed (API/GUI/Manual). -->
-- 
+-
 
 ---
