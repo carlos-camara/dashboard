@@ -38,7 +38,8 @@ jobs:
           # 1. Validate Title (Conventional Commits)
           REGEX="^(feat|fix|chore|docs|style|refactor|test|perf)(\(.*\))?!?: .+$"
           if [[ ! "$TITLE" =~ $REGEX ]]; then
-            MSG="❌ **Invalid PR Title**: Please use [Conventional Commits](https://www.conventionalcommits.org/) (e.g., \`feat: add sync logic\`)."
+            MSG="❌ **Invalid PR Title**: Please use [Conventional Commits]"
+            MSG="$MSG (https://www.conventionalcommits.org/)."
             echo "$MSG"
             gh pr comment "$PR_NUMBER" --body "$MSG" --repo "$REPO"
             exit 1
@@ -159,7 +160,8 @@ jobs:
             fi
             
             # Prepare warning for PR summary
-            WARNING="> [!CAUTION]\n> ### ⚠️ HIGH RISK CHANGE DETECTED\n> This PR modifies critical system files:\n${MATCHED_FILES}\n---\n"
+            WARNING="> [!CAUTION]\n> ### ⚠️ HIGH RISK CHANGE DETECTED\n"
+            WARNING="> This PR modifies critical system files:\n${MATCHED_FILES}\n---\n"
             
             CURRENT_BODY=$(gh pr view "$PR_NUMBER" --json body --template '{{.body}}')
             # Inject at top if not already present
@@ -185,7 +187,8 @@ jobs:
           echo "📉 Analyzing code coverage and churn ratio..."
           
           # Calculate logic changes (services, routes, components, server)
-          LOGIC_STATS=$(git diff --numstat origin/${{ github.base_ref }}...HEAD | grep -E '^(services/|routes/|components/|App.tsx|server.js)' || echo "0 0")
+          LOGIC_STATS=$(git diff --numstat origin/${{ github.base_ref }}...HEAD | \
+            grep -E '^(services/|routes/|components/|App.tsx|server.js)' || echo "0 0")
           LOGIC_ADD=$(echo "$LOGIC_STATS" | awk '{sum += $1} END {print sum + 0}')
           LOGIC_DEL=$(echo "$LOGIC_STATS" | awk '{sum += $2} END {print sum + 0}')
           
@@ -209,7 +212,8 @@ jobs:
           # 2. Check for logic churn without tests
           if [ "$LOGIC_ADD" -gt 100 ] && [ "$TEST_ADD" -lt 5 ]; then
             DEBT_FOUND=true
-            DEBT_MSG="⚠️ **Feature Churn**: Large logic change ($LOGIC_ADD+ lines) detected with minimal test updates ($TEST_ADD lines)."
+            DEBT_MSG="⚠️ **Feature Churn**: Large logic change ($LOGIC_ADD+ lines)"
+            DEBT_MSG="$DEBT_MSG detected with minimal test updates ($TEST_ADD lines)."
           fi
           
           CURRENT_LABELS=$(gh pr view "$PR_NUMBER" --json labels --template '{{range .labels}}{{.name}} {{end}}')
