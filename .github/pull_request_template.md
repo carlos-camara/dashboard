@@ -16,5 +16,3 @@
 - 
 
 ---
-> [!TIP]
-> _Please ensure the description provides sufficient context for high-fidelity review._
