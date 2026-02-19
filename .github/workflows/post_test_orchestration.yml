@@ -69,36 +69,31 @@ jobs:
           upload-screenshots: 'true'
           upload-perf: 'true'
 
-      - name: 🔍 Validate PR Status
+      - name: 🔍 Gate Check (Open PR)
         id: pr_check
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: github.event_name != 'workflow_dispatch'
+        uses: carlos-camara/qa-hub-actions/gate-check-pr@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          head-branch: ${{ steps.branch.outputs.target }}
+          base-branch: 'main'
+
+      - name: 🔍 Gate Check (Manual Dispatch)
+        if: github.event_name == 'workflow_dispatch'
         run: |
-          BRANCH="${{ steps.branch.outputs.target }}"
-          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            echo "proceed=true" >> "$GITHUB_OUTPUT"
-            echo "✅ Manual dispatch: Proceeding with sync."
-          else
-            PR_COUNT=$(gh pr list --head "${BRANCH}" --base main \
-              --state open --json number --jq 'length')
-            if [ "$PR_COUNT" -gt 0 ]; then
-              echo "proceed=true" >> "$GITHUB_OUTPUT"
-              echo "✅ Open PR to main detected: Proceeding with sync."
-            else
-              echo "proceed=false" >> "$GITHUB_OUTPUT"
-              echo "⏭️ No open PR to main: Skipping sync."
-            fi
-          fi
+          echo "proceed=true" >> "$GITHUB_OUTPUT"
+          echo "✅ Manual dispatch: Proceeding with sync."
+        id: manual_check
 
       - name: 🔗 Setup Branch Tracking
-        if: steps.pr_check.outputs.proceed == 'true'
+        if: steps.pr_check.outputs.pr-exists == 'true' || steps.manual_check.outputs.proceed == 'true'
         run: |
           BRANCH="${{ steps.branch.outputs.target }}"
           git checkout -B "${BRANCH}" "origin/${BRANCH}"
           echo "✅ Now on branch: $(git branch --show-current)"
 
       - name: 🔄 Sync Reports from S3 (Consolidated)
-        if: steps.pr_check.outputs.proceed == 'true'
+        if: steps.pr_check.outputs.pr-exists == 'true' || steps.manual_check.outputs.proceed == 'true'
         uses: carlos-camara/qa-hub-actions/sync-from-s3@main
         with:
           project-name: "dashboard,duckduckgo"
