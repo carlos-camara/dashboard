@@ -17,14 +17,20 @@ on:
         required: false
         default: 'main'
 
+concurrency:
+  group: >-
+    ${{ github.workflow }}-${{ github.event.workflow_run.head_branch || github.ref }}
+  cancel-in-progress: false
+
 jobs:
   orchestrate:
     name: S3 Deploy & Branch Sync
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     if: >
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'workflow_run' &&
-      github.event.workflow_run.conclusion == 'success')
+      github.event.workflow_run.conclusion != 'cancelled')
     permissions:
       contents: write
       actions: read
@@ -57,9 +63,8 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-          run-id: >
-            ${{ github.event.inputs.run_id ||
-            github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.inputs.run_id || github.event.workflow_run.id }}
           upload-reports: 'true'
           upload-screenshots: 'true'
           upload-perf: 'true'

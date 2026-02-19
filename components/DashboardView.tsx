@@ -118,9 +118,9 @@ const DashboardView: React.FC<DashboardViewProps> = ({ refreshKey, onNavigate })
       const result = await api.syncReports();
       if (result.newRuns > 0) {
         await fetchData(true);
-        setSystemStatus(`${result.newRuns} NEW EXECUTIONS DISCOVERED`);
+        setSystemStatus(`${result.newRuns} NEW EXECUTIONS DISCOVERED OF ${result.totalFolders}`);
       } else {
-        setSystemStatus("CLOUD DATA SYNCHRONIZED - NO NEW RUNS");
+        setSystemStatus(`SYNCED: ${result.totalFolders} REPORTS SCAN - NO NEW DATA`);
       }
     } catch (err) {
       setSystemStatus("S3 SYNCHRONIZATION ERROR - CHECK CREDENTIALS");
