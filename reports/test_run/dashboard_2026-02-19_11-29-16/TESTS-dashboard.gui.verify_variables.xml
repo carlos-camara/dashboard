@@ -1,0 +1,155 @@
+<testsuite name="dashboard.gui.verify_variables.Variable Transformation Validation" tests="4" errors="0" failures="4" skipped="0" time="132.095738" timestamp="2026-02-19T11:42:14.531117" hostname="runnervmjduv7"><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify basic generation tokens" status="failed" time="32.943198"><failure type="AssertionError" message="Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds">
+<![CDATA[
+Failing step: And the "dashboard" page is displayed ... failed in 32.662s
+Location: features/dashboard/gui/verify_variables.feature:6
+ASSERT FAILED: Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds
+]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify basic generation tokens
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.281s
+    And the "dashboard" page is displayed ... failed in 32.662s
+    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
+    Then the "test_runs" page is displayed ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element      | value   |
+      | search_input | [EMPTY] |
+    When I type "[STRING_WITH_LENGTH_10]" into the "search_input" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then I should see the "search_input" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FRAMEWORK] Scenario failed. Restarting driver for next test.
+
+[FAILURE] Screenshot: file:////home/runner/work/dashboard/dashboard/features/resources/screenshots/2026-02-19_11-30-22/FAILED_Verify_basic_generation_tokens_the_"dashboard"_page_is_displa.png
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+
+]]>
+</system-err></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify unique and random tokens" status="failed" time="33.147187"><failure type="AssertionError" message="Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds">
+<![CDATA[
+Failing step: And the "dashboard" page is displayed ... failed in 32.737s
+Location: features/dashboard/gui/verify_variables.feature:6
+ASSERT FAILED: Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds
+]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify unique and random tokens
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.410s
+    And the "dashboard" page is displayed ... failed in 32.737s
+    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
+    Then the "test_runs" page is displayed ... skipped in 0.000s
+    When I type "[UUID]" into the "search_input" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    When I type "[RANDOM]" into the "search_input" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FRAMEWORK] Scenario failed. Restarting driver for next test.
+
+[FAILURE] Screenshot: file:////home/runner/work/dashboard/dashboard/features/resources/screenshots/2026-02-19_11-30-22/FAILED_Verify_unique_and_random_tokens_the_"dashboard"_page_is_displa.png
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+
+]]>
+</system-err></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify temporal tokens" status="failed" time="32.98425"><failure type="AssertionError" message="Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds">
+<![CDATA[
+Failing step: And the "dashboard" page is displayed ... failed in 32.705s
+Location: features/dashboard/gui/verify_variables.feature:6
+ASSERT FAILED: Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds
+]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify temporal tokens
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.280s
+    And the "dashboard" page is displayed ... failed in 32.705s
+    Then the page title should be "QA Hub - Execution Dashboard" ... skipped in 0.000s
+    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
+    Then the "test_runs" page is displayed ... skipped in 0.000s
+    When I type "[NOW(%Y)]" into the "search_input" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element      | value     |
+      | search_input | [NOW(%Y)] |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FRAMEWORK] Scenario failed. Restarting driver for next test.
+
+[FAILURE] Screenshot: file:////home/runner/work/dashboard/dashboard/features/resources/screenshots/2026-02-19_11-30-22/FAILED_Verify_temporal_tokens_the_"dashboard"_page_is_displa.png
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+
+]]>
+</system-err></testcase><testcase classname="dashboard.gui.verify_variables.Variable Transformation Validation" name="Verify transformation functions" status="failed" time="33.021103"><failure type="AssertionError" message="Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds">
+<![CDATA[
+Failing step: And the "dashboard" page is displayed ... failed in 32.732s
+Location: features/dashboard/gui/verify_variables.feature:6
+ASSERT FAILED: Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds
+]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify transformation functions
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.289s
+    And the "dashboard" page is displayed ... failed in 32.732s
+    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
+    Then the "test_runs" page is displayed ... skipped in 0.000s
+    When I type "[UPPER:qa-hub]" into the "search_input" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element      | value  |
+      | search_input | QA-HUB |
+    When I type "[STR:[INT:123]]" into the "search_input" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element      | value |
+      | search_input | 123   |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FRAMEWORK] Scenario failed. Restarting driver for next test.
+
+[FAILURE] Screenshot: file:////home/runner/work/dashboard/dashboard/features/resources/screenshots/2026-02-19_11-30-22/FAILED_Verify_transformation_functions_the_"dashboard"_page_is_displa.png
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+
+]]>
+</system-err></testcase></testsuite>
