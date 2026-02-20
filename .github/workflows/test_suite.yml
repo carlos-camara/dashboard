@@ -47,6 +47,14 @@ jobs:
           db-path: "data/database.sqlite"
           ports-to-clean: "3000 3001"
 
+      - name: 🏷️ Auto-Tag Gherkin Scenarios with Jira IDs
+        uses: carlos-camara/qa-hub-actions/jira-auto-tagger@main
+        with:
+          jira-url: ${{ secrets.JIRA_URL }}
+          jira-user: ${{ secrets.JIRA_USER }}
+          jira-token: ${{ secrets.JIRA_API_TOKEN }}
+          jira-project-key: "CC"
+
       - name: 🧪 Execute Test Suite
         uses: carlos-camara/qa-hub-actions/run-tests@main
         with:
