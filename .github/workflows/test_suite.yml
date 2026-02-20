@@ -60,7 +60,7 @@ jobs:
           jira-url: ${{ secrets.JIRA_URL }}
           jira-user: ${{ secrets.JIRA_USER }}
           jira-token: ${{ secrets.JIRA_API_TOKEN }}
-          jira-project-key: "SCRUM"
+          jira-project-key: "CC"
 
       - name: 📊 Collect & Publish Results
         if: always()
