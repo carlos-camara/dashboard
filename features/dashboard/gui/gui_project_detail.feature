@@ -10,7 +10,7 @@ Feature: Project Detail View Validation
     Then the "project_detail" page is displayed
 
   @smoke
-  @CC-203
+  @CC-446
   Scenario: Verify Architecture Analysis Section
     Then the "projectName" should be visible
     And I should see the text "[LANG:project_detail.layer_stability]"
@@ -19,7 +19,7 @@ Feature: Project Detail View Validation
     And I should see at least 1 elements with selector "latency_comparison"
 
   @visual
-  @CC-204
+  @CC-447
   Scenario: Verify Execution Metrics and Trend
     Then the following elements should contain these texts
          | element         | value                                 |

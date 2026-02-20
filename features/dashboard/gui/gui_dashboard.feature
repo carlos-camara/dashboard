@@ -7,7 +7,7 @@ Feature: Dashboard Overview & Visual Integrity
     And I wait for "dashboard" to be stable
 
   @visual @smoke
-  @CC-196
+  @CC-440
   Scenario: Validate Header and System Status
     Then the page title should be "[LANG:common.page_title]"
     And the "header_subtitle" element should contain text "[LANG:dashboard.header.subtitle]"
@@ -24,7 +24,7 @@ Feature: Dashboard Overview & Visual Integrity
         | stats_avg_duration_value    |
 
   @visual @critical @smoke
-  @CC-197
+  @CC-441
   Scenario: Validate Statistics Key Metrics
     Then the following elements should contain these texts
          | element             | value                                     |
@@ -46,7 +46,7 @@ Feature: Dashboard Overview & Visual Integrity
       | recent_runs_heading | [LANG:dashboard.recent_runs.heading] |
 
   @responsive @mobile
-  @CC-199
+  @CC-442
   Scenario: Verify Mobile Viewport Layout
     Given I set the viewport to "375" x "812"
     Then the "header_subtitle" element should contain text "[LANG:dashboard.header.subtitle]"

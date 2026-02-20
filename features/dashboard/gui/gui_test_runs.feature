@@ -6,7 +6,7 @@ Feature: Test Runs View Validation
     And the "dashboard" page is displayed
 
   @smoke
-  @CC-190
+  @CC-439
   Scenario: Search and Redirect to Project Analytics
     When I click on the "test_runs_link" in the sidebar
     Then the "test_runs" page is displayed

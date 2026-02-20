@@ -6,7 +6,7 @@ Feature: Ultra-Professional Performance Dashboard Validation
     And the "dashboard" page is displayed
   
   @visual
-  @CC-207
+  @CC-448
   Scenario: Validate High-Density Performance Audit Dossier
     When I click on the "endpoints_link" in the sidebar
     Then the "endpoints_view" page is displayed

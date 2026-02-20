@@ -7,7 +7,7 @@ Feature: Endpoints Catalog & Insights
     And I wait for "dashboard" to be stable
 
   @visual
-  @CC-210
+  @CC-450
   Scenario: Analyze Endpoint Details
     When I click on the "endpoints_link" in the sidebar
     Then the "endpoints_view" page is displayed
