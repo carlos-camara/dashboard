@@ -1,0 +1,104 @@
+<testsuite name="dashboard.api.api_runs.Runs Endpoint Validations" tests="5" errors="0" failures="0" skipped="0" time="0.031211" timestamp="2026-02-20T22:35:28.910004" hostname="runnervmwffz4"><testcase classname="dashboard.api.api_runs.Runs Endpoint Validations" name="Upload, Verify, and Explore a Run" status="passed" time="0.017422"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke @CC-185
+  Scenario: Upload, Verify, and Explore a Run
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I upload the file "test_run_sample.xml" to "/api/upload" ... passed in 0.010s
+    Then the response status code should be 200 ... passed in 0.000s
+    And the response JSON path "success" should be true ... passed in 0.000s
+    And the response JSON path "totalCount" should be 1 ... passed in 0.000s
+    And I store the response JSON path "runId" as "uploaded_run_id" ... passed in 0.000s
+    When I send a "GET" request to "/api/runs" ... passed in 0.003s
+    Then the response status code should be 200 ... passed in 0.000s
+    And the response JSON path "0.id" should equal stored variable "uploaded_run_id" ... passed in 0.000s
+    And the response JSON path "0.totalCount" should be 1 ... passed in 0.000s
+    When I send a "GET" request to "/api/runs/${uploaded_run_id}/scenarios" ... passed in 0.003s
+    Then the response status code should be 200 ... passed in 0.000s
+    And the response JSON should not be empty ... passed in 0.000s
+    And the response JSON path "0.name" should be a "str" ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+22:35:28 [Runs Endpoint Validations | Upload, Verify, and Explore a Run] DEBUG: Stored JSON value from 'runId' as '${uploaded_run_id}': UPLOAD-1771626928877
+22:35:28 [Runs Endpoint Validations | Upload, Verify, and Explore a Run] INFO: Sending GET request to: http://localhost:3001/api/runs
+22:35:28 [Runs Endpoint Validations | Upload, Verify, and Explore a Run] INFO: Sending GET request to: http://localhost:3001/api/runs/UPLOAD-1771626928877/scenarios
+
+]]>
+</system-out></testcase><testcase classname="dashboard.api.api_runs.Runs Endpoint Validations" name="Delete the uploaded run" status="passed" time="0.004933"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-266
+  Scenario: Delete the uploaded run
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I send a "GET" request to "/api/runs" ... passed in 0.002s
+    Then I store the response JSON path "0.id" as "run_to_delete" ... passed in 0.000s
+    When I send a "DELETE" request to "/api/runs" with query parameters ... passed in 0.002s
+      | id | ${run_to_delete} |
+    Then the response status code should be 200 ... passed in 0.000s
+    Then the response JSON path "success" should be true ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+22:35:28 [Runs Endpoint Validations | Delete the uploaded run] INFO: Sending GET request to: http://localhost:3001/api/runs
+22:35:28 [Runs Endpoint Validations | Delete the uploaded run] DEBUG: Stored JSON value from '0.id' as '${run_to_delete}': UPLOAD-1771626928877
+
+]]>
+</system-out></testcase><testcase classname="dashboard.api.api_runs.Runs Endpoint Validations" name="Get non-existent run" status="passed" time="0.00244"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke @negative @CC-187
+  Scenario: Get non-existent run
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I send a "GET" request to "/api/runs/INVALID_RUN_ID" ... passed in 0.002s
+    Then the response status code should be 404 ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+22:35:28 [Runs Endpoint Validations | Get non-existent run] INFO: Sending GET request to: http://localhost:3001/api/runs/INVALID_RUN_ID
+
+]]>
+</system-out></testcase><testcase classname="dashboard.api.api_runs.Runs Endpoint Validations" name="Verify Method Not Allowed (PUT)" status="passed" time="0.002646"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @negative @CC-188
+  Scenario: Verify Method Not Allowed (PUT)
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I send a "PUT" request to "/api/runs" ... passed in 0.002s
+    Then the response status code should be 404 ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+22:35:28 [Runs Endpoint Validations | Verify Method Not Allowed (PUT)] INFO: Sending PUT request to: http://localhost:3001/api/runs
+
+]]>
+</system-out></testcase><testcase classname="dashboard.api.api_runs.Runs Endpoint Validations" name="Verify Method Not Allowed (PATCH)" status="passed" time="0.00377"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @negative @CC-189
+  Scenario: Verify Method Not Allowed (PATCH)
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I send a "PATCH" request to "/api/runs" ... passed in 0.004s
+    Then the response status code should be 404 ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+22:35:28 [Runs Endpoint Validations | Verify Method Not Allowed (PATCH)] INFO: Sending PATCH request to: http://localhost:3001/api/runs
+
+]]>
+</system-out></testcase></testsuite>

@@ -10,6 +10,7 @@ Feature: Project Detail View Validation
     Then the "project_detail" page is displayed
 
   @smoke
+  @CC-446
   Scenario: Verify Architecture Analysis Section
     Then the "projectName" should be visible
     And I should see the text "[LANG:project_detail.layer_stability]"
@@ -18,6 +19,7 @@ Feature: Project Detail View Validation
     And I should see at least 1 elements with selector "latency_comparison"
 
   @visual
+  @CC-447
   Scenario: Verify Execution Metrics and Trend
     Then the following elements should contain these texts
          | element         | value                                 |
@@ -34,9 +36,11 @@ Feature: Project Detail View Validation
          | distribution_chart       |
          | distribution_total_value |
 
+  @CC-285
   Scenario: Verify Run History List
     Then I should see the text "[LANG:project_detail.execution_history]"
     And I should see at least 1 elements with selector "item"
   
+  @CC-286
   Scenario: Verify Dossier Download Button
     Then I should see at least 1 elements with selector "download_button"

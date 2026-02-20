@@ -1,0 +1,101 @@
+<testsuite name="dashboard.gui.gui_project_detail.Project Detail View Validation" tests="4" errors="0" failures="0" skipped="0" time="16.098978" timestamp="2026-02-20T17:27:39.436443" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Architecture Analysis Section" status="passed" time="2.574782"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke @CC-203
+  Scenario: Verify Architecture Analysis Section
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.632s
+    And the "dashboard" page is displayed ... passed in 0.949s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.136s
+    Then the "test_runs" page is displayed ... passed in 0.122s
+    When I click on the "project_card" ... passed in 0.408s
+    Then the "project_detail" page is displayed ... passed in 0.031s
+    Then the "projectName" should be visible ... passed in 0.029s
+    And I should see the text "[LANG:project_detail.layer_stability]" ... passed in 0.104s
+    And I should see the text "[LANG:project_detail.layer_latency]" ... passed in 0.089s
+    And I should see at least 1 elements with selector "stability_comparison" ... passed in 0.043s
+    And I should see at least 1 elements with selector "latency_comparison" ... passed in 0.033s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Execution Metrics and Trend" status="passed" time="8.763299"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @visual @CC-204
+  Scenario: Verify Execution Metrics and Trend
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.632s
+    And the "dashboard" page is displayed ... passed in 0.933s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.134s
+    Then the "test_runs" page is displayed ... passed in 0.124s
+    When I click on the "project_card" ... passed in 0.409s
+    Then the "project_detail" page is displayed ... passed in 0.034s
+    Then the following elements should contain these texts ... passed in 0.032s
+      | element         | value                                 |
+      | stability_score | [LANG:project_detail.stability_score] |
+    And I should see the text "[LANG:project_detail.execution_velocity]" ... passed in 0.099s
+    And I should see at least 1 elements with selector "velocity_trend" ... passed in 0.034s
+    Then the "project_metrics" element should visually match the baseline image "project_detail_metrics" without elements and with a 15.0% tolerance ... passed in 6.332s
+      | element                  |
+      | stability_score_value    |
+      | pass_rate_value          |
+      | avg_duration_value       |
+      | total_flights_value      |
+      | velocity_trend           |
+      | distribution_chart       |
+      | distribution_total_value |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+17:27:28 [Project Detail View Validation | Verify Execution Metrics and Trend] INFO: Captured granular screenshot for masking: project_detail_metrics (Element: project_metrics)
+17:27:33 [Project Detail View Validation | Verify Execution Metrics and Trend] DEBUG: [DEBUG] Applying 6 mask regions.
+[Visual] 🐧 CI/Linux detected. Adjusting tolerance from 15.0% to 30.0%
+[Visual] ✅ Match for 'project_detail_metrics': Similarity=91.37%
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+]]>
+</system-err></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Run History List" status="passed" time="2.446605"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-205
+  Scenario: Verify Run History List
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.635s
+    And the "dashboard" page is displayed ... passed in 0.969s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.142s
+    Then the "test_runs" page is displayed ... passed in 0.133s
+    When I click on the "project_card" ... passed in 0.392s
+    Then the "project_detail" page is displayed ... passed in 0.029s
+    Then I should see the text "[LANG:project_detail.execution_history]" ... passed in 0.113s
+    And I should see at least 1 elements with selector "item" ... passed in 0.034s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_project_detail.Project Detail View Validation" name="Verify Dossier Download Button" status="passed" time="2.314291"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-206
+  Scenario: Verify Dossier Download Button
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.635s
+    And the "dashboard" page is displayed ... passed in 0.943s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.129s
+    Then the "test_runs" page is displayed ... passed in 0.121s
+    When I click on the "project_card" ... passed in 0.432s
+    Then the "project_detail" page is displayed ... passed in 0.031s
+    Then I should see at least 1 elements with selector "download_button" ... passed in 0.023s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
