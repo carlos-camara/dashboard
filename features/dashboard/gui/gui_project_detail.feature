@@ -36,11 +36,11 @@ Feature: Project Detail View Validation
          | distribution_chart       |
          | distribution_total_value |
 
-  @CC-205
+  @CC-285
   Scenario: Verify Run History List
     Then I should see the text "[LANG:project_detail.execution_history]"
     And I should see at least 1 elements with selector "item"
   
-  @CC-206
+  @CC-286
   Scenario: Verify Dossier Download Button
     Then I should see at least 1 elements with selector "download_button"

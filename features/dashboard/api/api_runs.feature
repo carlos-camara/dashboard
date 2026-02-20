@@ -26,7 +26,7 @@ Feature: Runs Endpoint Validations
     And the response JSON should not be empty
     And the response JSON path "0.name" should be a "str"
 
-  @CC-186
+  @CC-266
   Scenario: Delete the uploaded run
     When I send a "GET" request to "/api/runs"
     Then I store the response JSON path "0.id" as "run_to_delete"

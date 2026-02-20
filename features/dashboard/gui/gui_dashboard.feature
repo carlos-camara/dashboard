@@ -39,7 +39,7 @@ Feature: Dashboard Overview & Visual Integrity
         | stats_total_runs_value   |
         | stats_avg_duration_value |
 
-  @CC-198
+  @CC-278
   Scenario: Validate Recent Runs Panel
     Then the following elements should contain these texts
       | element             | value                                |

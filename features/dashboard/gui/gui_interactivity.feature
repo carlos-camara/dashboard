@@ -5,7 +5,7 @@ Feature: Dashboard Cross-Navigation Interactivity
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     And the "dashboard" page is displayed
 
-  @CC-208
+  @CC-288
   Scenario: Redirect from Sector Integrity to Project Detail
     Then the following elements should contain these texts
          | element             | value            |

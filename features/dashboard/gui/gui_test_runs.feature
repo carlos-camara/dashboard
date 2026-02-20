@@ -23,7 +23,7 @@ Feature: Test Runs View Validation
     Then the "projectName" should be visible
     And I should see at least 1 elements with selector "stability_chart"
 
-  @CC-191
+  @CC-271
   Scenario: Verify Project List and Back Navigation
     When I click on the "test_runs_link" in the sidebar
     Then the "test_runs" page is displayed
