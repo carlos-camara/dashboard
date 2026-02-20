@@ -1,0 +1,60 @@
+<testsuite name="dashboard.gui.gui_test_runs.Test Runs View Validation" tests="2" errors="0" failures="0" skipped="0" time="6.283071" timestamp="2026-02-20T21:12:31.918806" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Search and Redirect to Project Analytics" status="passed" time="3.614154"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke @CC-190
+  Scenario: Search and Redirect to Project Analytics
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.637s
+    And the "dashboard" page is displayed ... passed in 0.965s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.136s
+    Then the "test_runs" page is displayed ... passed in 0.135s
+    Then the following elements should contain these texts ... passed in 0.036s
+      | element | value                       |
+      | title   | [LANG:navigation.test_runs] |
+    When I type "dashboard" into the "search_input" ... passed in 0.212s
+    And I wait for 1 seconds ... passed in 1.000s
+    Then the following elements should contain these texts ... passed in 0.017s
+      | element      | value     |
+      | search_input | dashboard |
+    When I click on the "project_card" ... passed in 0.370s
+    Then the "project_detail" page is displayed ... passed in 0.035s
+    Then the "projectName" should be visible ... passed in 0.036s
+    And I should see at least 1 elements with selector "stability_chart" ... passed in 0.034s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+21:12:27 [Test Runs View Validation | Search and Redirect to Project Analytics] WARNING: Explicit wait for 1 seconds. Prefer using wait_until_* on elements.
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+]]>
+</system-err></testcase><testcase classname="dashboard.gui.gui_test_runs.Test Runs View Validation" name="Verify Project List and Back Navigation" status="passed" time="2.668916"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-271
+  Scenario: Verify Project List and Back Navigation
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.653s
+    And the "dashboard" page is displayed ... passed in 0.955s
+    When I click on the "test_runs_link" in the sidebar ... passed in 0.133s
+    Then the "test_runs" page is displayed ... passed in 0.134s
+    When I click on the "project_card" ... passed in 0.392s
+    Then the "project_detail" page is displayed ... passed in 0.037s
+    Then the following elements should contain these texts ... passed in 0.112s
+      | element  | value                           |
+      | runCount | [LANG:project_detail.run_count] |
+    When I click on the "back_button" ... passed in 0.126s
+    Then the "test_runs" page is displayed ... passed in 0.076s
+    Then I should see the text "[LANG:navigation.test_runs]" ... passed in 0.050s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
