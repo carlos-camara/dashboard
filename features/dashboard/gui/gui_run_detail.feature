@@ -6,6 +6,7 @@ Feature: Run Detail View Validation
     And the "dashboard" page is displayed
 
   @visual
+  @CC-200
   Scenario: Explore Run Detail View
     When I click on the "test_runs_link" in the sidebar
     Then the "test_runs" page is displayed
