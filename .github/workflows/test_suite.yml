@@ -54,6 +54,7 @@ jobs:
           jira-user: ${{ secrets.JIRA_USER }}
           jira-token: ${{ secrets.JIRA_API_TOKEN }}
           jira-project-key: "CC"
+          jira-parent-plan: "CC-10"
 
       - name: 🧪 Execute Test Suite
         uses: carlos-camara/qa-hub-actions/run-tests@main
