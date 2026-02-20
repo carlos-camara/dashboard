@@ -211,7 +211,11 @@ export async function parseRunFolder(folderPath, force = false) {
     let projectName = metadata.run_info?.project || "Auto-discovered";
 
     if (projectName === "Auto-discovered") {
-        if (folderName.toLowerCase().includes('dashboard')) {
+        // [NEW] Robust project inference from folder name (prefix before first underscore)
+        const folderPrefix = folderName.split('_')[0];
+        if (folderPrefix && folderPrefix !== folderName) {
+            projectName = folderPrefix;
+        } else if (folderName.toLowerCase().includes('dashboard')) {
             projectName = "dashboard";
         }
     }
