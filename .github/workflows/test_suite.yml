@@ -56,6 +56,11 @@ jobs:
             -u 10 -r 2 -t 1m --host http://localhost:3001
           test-command-gui: "qa-hub run --env staging --tags gui"
           headless: "true"
+          jira-sync: "true"
+          jira-url: ${{ secrets.JIRA_URL }}
+          jira-user: ${{ secrets.JIRA_USER }}
+          jira-token: ${{ secrets.JIRA_API_TOKEN }}
+          jira-project-key: "DAS"
 
       - name: 📊 Collect & Publish Results
         if: always()
