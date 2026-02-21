@@ -25,6 +25,11 @@ We maintain 100% vigilance across the following critical paths:
 - **[api_endpoints.feature](api_endpoints.feature)**: Surgical contract validation for high-traffic assets.
 - **[api_runs.feature](api_runs.feature)**: Execution chronology and result management logic.
 
+### 🔗 Jira End-to-End Traceability
+All API scenarios are deeply integrated with our Atlassian Jira instance:
+- **Zero-Touch Task Creation**: Missing coverage is automatically detected, and Tasks are created and mapped back into the codebase (`@CC-XXX`).
+- **Live Status Triggers**: API failures or successes are posted back to the Jira issue, along with an ongoing markdown table of its execution history.
+
 ---
 
 ## 🏃 Execution Protocol
@@ -46,6 +51,10 @@ behave features/dashboard/api --tags=@critical
 Every execution generates high-fidelity **JUnit XML** artifacts that are ingested by the **Unified Dashboard**.
 - **Aggregator**: Seamless integration into the Glassmorphism Presentation Tier.
 - **Diagnostics**: Detailed request/response payloads available for immediate failure analysis.
+
+### Jira Bi-Directional Linking
+The artifact engine connects `JUnit XML` results directly to **Jira REST API v3**. Test failures append a stacktrace inside the Jira issue's comment thread, notifying developers instantly without requiring them to check GitHub Actions.
+
 
 <br/>
 
