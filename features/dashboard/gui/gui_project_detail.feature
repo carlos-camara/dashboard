@@ -1,4 +1,4 @@
-@gui @project_detail
+@CC-460 @gui @project_detail
 Feature: Project Detail View Validation
 
   Background:
