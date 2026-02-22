@@ -74,6 +74,7 @@ The future of test reporting is already online. Experience the ultra-premium int
 | **Intelligent Dossiers** | Executive-Ready PDF Artifacts | `jsPDF`, `Modular Rendering` |
 | **Incremental Cloud** | High-Performance S3 Synchronization | `AWS SDK`, `Incremental Sync` |
 | **PR Intelligence** | Dynamic Labeling & Smart Summaries | `GitHub Actions`, `gh CLI` |
+| **Jira Intelligence** | Bi-directional synchronization mapping | `Jira REST API v3`, `Python` |
 
 ---
 
@@ -94,6 +95,12 @@ Maximize developer focus with an automated pull request management system:
 - **Smart Checklists**: "Automated Tests" and "Linting" boxes in PRs are automatically checked by CI upon success.
 - **High-Fidelity Reporting**: Full test results are injected directly into the PR description with a visual summary table.
 
+### 🔗 Jira Intelligence Ecosystem
+Achieve 100% traceability between your testing codebase and product backlog.
+- **Auto-Tagger**: Gherkin scenarios are automatically scanned; if an `@CC-XXX` tag is missing, the CI opens a task in Jira and injects the tag into the codebase dynamically.
+- **State Synchronization**: Execution results in CI (Passed/Failed) automatically transition their corresponding Jira tasks across the Kanban board.
+- **Execution History Tracking**: Automatically appends and maintains a historical Markdown table inside the Jira Issue Description (capped at 10 runs) keeping logs pristine.
+
 ---
 
 ## 🏗️ Architecture: Decoupled Full-Stack
@@ -110,12 +117,15 @@ graph TD
 
     subgraph "Intelligence Tier (Actions)"
         D["QA Hub Shared Actions"] -->|Standardizes| A
+        D -->|Auto-Tags & Syncs| J["Jira API (Cloud)"]
+        J -.->|Updates| A
     end
 
     subgraph "Persistence Tier (Cloud)"
         B & C & L -->|Artifacts| E["JUnit XML / JSON"]
         E -->|Synchronized| S3["AWS S3 History"]
         E -->|Materialized| DB["SQLite Intelligence DB"]
+        E -->|Transition States| J
     end
 
     subgraph "Presentation Tier (JS)"
@@ -128,6 +138,7 @@ graph TD
     style P fill:#2563eb,color:#fff
     style D fill:#f59e0b,color:#000
     style H fill:#14b8a6,color:#fff
+    style J fill:#0052CC,color:#fff
 ```
 
 > [!TIP]

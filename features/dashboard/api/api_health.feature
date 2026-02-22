@@ -1,4 +1,4 @@
-@api @dashboard @health
+@CC-452 @api @dashboard @health
 Feature: System Health Monitoring
   
   Background:

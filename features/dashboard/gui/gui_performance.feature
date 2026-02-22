@@ -1,4 +1,4 @@
-@gui @performance
+@CC-461 @gui @performance
 Feature: Ultra-Professional Performance Dashboard Validation
 
   Background:

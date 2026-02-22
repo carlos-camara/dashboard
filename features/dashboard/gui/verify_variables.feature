@@ -1,4 +1,4 @@
-@gui @variables
+@CC-456 @gui @variables
 Feature: Variable Transformation Validation
 
   Background:

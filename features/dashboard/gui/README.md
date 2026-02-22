@@ -25,6 +25,11 @@ We maintain constant vigilance over the Presentation Tier:
 - **`gui_test_runs.feature`**: Critical path audit for historical data visualization and filtration.
 - **`gui_endpoints.feature`**: Verification of telemetry rendering and latency visualization assets.
 
+### 🔗 Visual Regression Traceability (Jira Integration)
+Our GUI test suite is mapped 1:1 with Jira Tasks:
+- **Automated Issue Tracking**: Every visual verification scenario receives a unique `@CC-XXX` Jira identifier.
+- **Evidence Injection**: In the event of a frontend failure, the pipeline updates the Jira task's historical Markdown table and injects the failure stack trace so frontend developers have instant context directly in their Agile board.
+
 ---
 
 ## 🏃 Execution Protocol
