@@ -1,4 +1,4 @@
-@gui @dashboard
+@CC-457 @gui @dashboard
 Feature: Dashboard Overview & Visual Integrity
 
   Background:

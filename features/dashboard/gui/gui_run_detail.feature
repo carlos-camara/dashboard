@@ -1,4 +1,4 @@
-@gui @run_detail
+@CC-458 @gui @run_detail
 Feature: Run Detail View Validation
 
   Background:

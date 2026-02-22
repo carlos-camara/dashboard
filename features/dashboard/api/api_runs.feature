@@ -1,4 +1,4 @@
-@api @dashboard @runs
+@CC-454 @api @dashboard @runs
 Feature: Runs Endpoint Validations
 
   Background:

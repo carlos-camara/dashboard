@@ -1,4 +1,4 @@
-@gui @interactivity
+@CC-462 @gui @interactivity
 Feature: Dashboard Cross-Navigation Interactivity
 
   Background:

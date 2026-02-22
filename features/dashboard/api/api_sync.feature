@@ -1,4 +1,4 @@
-@api @dashboard @sync
+@CC-453 @api @dashboard @sync
 Feature: Sync Endpoint Validations
 
   Background:

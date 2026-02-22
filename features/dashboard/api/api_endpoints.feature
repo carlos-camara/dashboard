@@ -1,4 +1,4 @@
-@api @dashboard @endpoints
+@CC-451 @api @dashboard @endpoints
 Feature: System Endpoints Discovery
 
   Background:

@@ -1,4 +1,4 @@
-@gui @endpoints
+@CC-463 @gui @endpoints
 Feature: Endpoints Catalog & Insights
 
   Background:

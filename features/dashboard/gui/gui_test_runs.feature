@@ -1,4 +1,4 @@
-@gui @test_runs
+@CC-455 @gui @test_runs
 Feature: Test Runs View Validation
 
   Background:

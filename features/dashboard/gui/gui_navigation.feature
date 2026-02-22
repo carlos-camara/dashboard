@@ -1,4 +1,4 @@
-@gui @navigation
+@CC-459 @gui @navigation
 Feature: Application Navigation Validation
 
   Background:
