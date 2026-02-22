@@ -27,8 +27,9 @@ We maintain 100% vigilance across the following critical paths:
 
 ### 🔗 Jira End-to-End Traceability
 All API scenarios are deeply integrated with our Atlassian Jira instance:
-- **Zero-Touch Task Creation**: Missing coverage is automatically detected, and Tasks are created and mapped back into the codebase (`@CC-XXX`).
-- **Live Status Triggers**: API failures or successes are posted back to the Jira issue, along with an ongoing markdown table of its execution history.
+- **Test Plan ➡️ Feature ➡️ Scenario**: Every `.feature` file maps to a Jira Feature Task under a master Test Plan Epic. Every scenario maps to a Sub-task.
+- **Zero-Touch Task Creation**: Missing coverage is automatically detected during CI orchestration. The `jira-auto-tagger` action creates the corresponding hierarchy in Jira and dynamically injects `@CC-XXX` tags back into the codebase.
+- **Live Status Triggers**: API test step failures or successes are posted back to the Jira issue's comment thread, updating the Parent Feature Task's historical execution table status natively in the Kanban board.
 
 ---
 

@@ -118,11 +118,11 @@ pip install -r requirements.txt
 
 ### Python & Verification Tier (Behave)
 
-- **Framework Priority**: Always utilize the **[QA Hub Framework](https://github.com/carlos-camara/qa-hub-framework)** core before implementing local logic.
-- **Generic Step Strategy**: Leverage standardized steps for text validation, element interaction, and visual audits.
-- **Feature Manifestation**: Follow mission-critical **Gherkin** syntax. Utilize `Background` for state initialization.
+- **Framework Isolation Priority**: Always utilize the **[qa-automation-framework](https://github.com/carlos-camara/qa-hub-framework)** via `pip` package before implementing local logic. This project serves as an orchestrator, not a logic dump.
+- **Generic Step Strategy**: Leverage standard framework steps for element interaction (`qa_framework.steps.gui_steps`), REST validation (`qa_framework.steps.api_steps`), and visual audits (`qa_framework.steps.visual_steps`). Local code belongs in `gui_custom_steps.py` merely as an alias.
+- **Feature Manifestation**: Follow mission-critical **Gherkin** syntax. Utilize `Background` for state initialization. All `.feature` files must start with a descriptive markdown paragraph to be properly ingested into the Jira Feature Task.
 - **Stability Protocol**: Never utilize `time.sleep()`. Leverage the framework's stability wait logic for non-deterministic SPA transitions.
-- **Registry-Driven POM**: Externalize all selectors in the YAML-driven locator files.
+- **Registry-Driven POM**: Externalize all selectors in the YAML-driven locator files `locators.yaml`.
 
 ---
 
@@ -156,7 +156,8 @@ pip install -r requirements.txt
 
 6. **Pull Request Manifestation**:
    - Open a PR against the `devel` branch.
-   - Synchronize the PR description with the provided template.
+   - Synchronize the PR description with the provided template ensuring it meets the `pr-hygiene-validator` (Conventional Commits, >15 char body).
+   - Our `pr-size-labeler` will analyze lines changed, keeping changes modular (Prefer `size/S` or `size/M`).
    - Include high-fidelity screenshots/recordings for presentation-tier changes.
 
 ---
