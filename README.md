@@ -73,8 +73,8 @@ The future of test reporting is already online. Experience the ultra-premium int
 | **Visual Evidence** | Automated High-Res Evidence Capture | `html2canvas`, `AWS S3` |
 | **Intelligent Dossiers** | Executive-Ready PDF Artifacts | `jsPDF`, `Modular Rendering` |
 | **Incremental Cloud** | High-Performance S3 Synchronization | `AWS SDK`, `Incremental Sync` |
-| **PR Intelligence** | Dynamic Labeling & Smart Summaries | `GitHub Actions`, `gh CLI` |
-| **Jira Intelligence** | Bi-directional synchronization mapping | `Jira REST API v3`, `Python` |
+| **PR Intelligence** | Dynamic labeling, Risk analysis & Code Churn Debt Metrics | `GitHub Actions` |
+| **Jira Intelligence** | Bi-directional Sync: Test Plan > Feature > Scenario tracking | `Jira REST API v3`, `Python` |
 
 ---
 
@@ -89,17 +89,18 @@ Go beyond binary pass/fail results. Our **Performance Analytics Engine** establi
 ![Performance View](features/resources/screenshots/baselines/chrome_final_performance_dashboard_verification.png)
 
 ### 🤖 PR Intelligence
-Maximize developer focus with an automated pull request management system:
-- **Auto-Labeler**: Precise categorization (`DevOps`, `QA`, `Frontend`, `Backend`) based on modified file paths.
-- **Enhanced Reviewer Intelligence**: Changed files are automatically grouped and presented in **collapsible sections**.
-- **Smart Checklists**: "Automated Tests" and "Linting" boxes in PRs are automatically checked by CI upon success.
-- **High-Fidelity Reporting**: Full test results are injected directly into the PR description with a visual summary table.
+Maximize developer focus with an automated pull request management ecosystem powered by modular Actions:
+- **`pr-hygiene-validator`**: Enforces strict [Conventional Commits](https://www.conventionalcommits.org/) and minimum description requirements for clean histories.
+- **`pr-size-labeler`**: Surgical application of dynamic (S, M, L, XL) sizing labels based on delta LOC limits.
+- **`pr-risk-analyzer`**: Zero-day detection of changes in critical core files (like `package.json` or Workflows) raising blatant `high-risk` identifiers and Cautions within PR descriptions.
+- **`pr-churn-analyzer`**: Intelligent calculation of the "Test Tech Debt" tracking Logic additions vs Testing additions to prevent regressions.
 
 ### 🔗 Jira Intelligence Ecosystem
-Achieve 100% traceability between your testing codebase and product backlog.
-- **Auto-Tagger**: Gherkin scenarios are automatically scanned; if an `@CC-XXX` tag is missing, the CI opens a task in Jira and injects the tag into the codebase dynamically.
-- **State Synchronization**: Execution results in CI (Passed/Failed) automatically transition their corresponding Jira tasks across the Kanban board.
-- **Execution History Tracking**: Automatically appends and maintains a historical Markdown table inside the Jira Issue Description (capped at 10 runs) keeping logs pristine.
+Achieve 100% traceability between your testing codebase and product backlog via the `jira-auto-tagger` Action.
+- **Automated Hierarchy Definition:** Instantiates a direct 1:N architectural alignment: `Test Plan` ➡️ `Feature` (Task) ➡️ `Scenario` (Sub-task).
+- **Auto-Tagger**: Gherkin files are scanned automatically; missing mappings mandate the CI to create the corresponding Feature Tasks and Sub-tasks via the Rest V3 API, injecting the `@CC-XXX` tags into the codebase dynamically.
+- **Rich Task Enrichment**: Extracts `.feature` description summaries, Gherkin `Background` steps, and `Scenario` matrices to populate the Jira task body cleanly.
+- **Roll-up Verification State**: Execution status transitions flow recursively: Sub-task states flow up and enforce the parent Feature Task's final validation standard.
 
 ---
 
@@ -117,7 +118,7 @@ graph TD
 
     subgraph "Intelligence Tier (Actions)"
         D["QA Hub Shared Actions"] -->|Standardizes| A
-        D -->|Auto-Tags & Syncs| J["Jira API (Cloud)"]
+        D -->|Auto-Tags & Syncs Plan/Task/Subtask| J["Jira API (Cloud)"]
         J -.->|Updates| A
     end
 

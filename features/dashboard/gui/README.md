@@ -26,9 +26,10 @@ We maintain constant vigilance over the Presentation Tier:
 - **`gui_endpoints.feature`**: Verification of telemetry rendering and latency visualization assets.
 
 ### 🔗 Visual Regression Traceability (Jira Integration)
-Our GUI test suite is mapped 1:1 with Jira Tasks:
-- **Automated Issue Tracking**: Every visual verification scenario receives a unique `@CC-XXX` Jira identifier.
-- **Evidence Injection**: In the event of a frontend failure, the pipeline updates the Jira task's historical Markdown table and injects the failure stack trace so frontend developers have instant context directly in their Agile board.
+Our GUI test suite is strictly mapped via our Jira Hierarchy:
+- **Test Plan ➡️ Feature ➡️ Scenario**: High-fidelity BDD specifications map directly to a Parent Test Plan Epic. Each `.feature` file acts as a Feature Task, with individual visuals as Scenario Sub-tasks.
+- **Automated Issue Tracking**: Every visual verification scenario receives a unique `@CC-XXX` Jira Sub-task identifier via CI.
+- **Evidence Injection**: In the event of a frontend failure, the pipeline updates the Parent Feature Task's historical Markdown table and injects the Selenium failure stack trace directly, providing frontend engineers instant HTML rendering context in their Agile board.
 
 ---
 
