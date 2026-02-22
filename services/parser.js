@@ -71,7 +71,7 @@ export async function parseXmlContent(content, runId, projectName, discoveredTag
 
         if (beginIdx !== -1 && scenarioIdx !== -1 && scenarioIdx > beginIdx) {
             const rawTagSection = combinedLog.substring(beginIdx + beginMarker.length, scenarioIdx);
-            const tagsFound = rawTagSection.match(/@\w+/g);
+            const tagsFound = rawTagSection.match(/@[\w-]+/g);
             if (tagsFound) {
                 tagsFound.forEach(tag => {
                     const cleanTag = tag.trim();
