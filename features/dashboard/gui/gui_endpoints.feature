@@ -1,4 +1,4 @@
-@gui @endpoints
+@CC-463 @gui @endpoints
 Feature: Endpoints Catalog & Insights
 
   Background:
@@ -6,7 +6,7 @@ Feature: Endpoints Catalog & Insights
     And the "dashboard" page is displayed
     And I wait for "dashboard" to be stable
 
-  @visual
+  @CC-543 @visual
   Scenario: Analyze Endpoint Details
     When I click on the "endpoints_link" in the sidebar
     Then the "endpoints_view" page is displayed
