@@ -5,8 +5,7 @@ Feature: Ultra-Professional Performance Dashboard Validation
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     And the "dashboard" page is displayed
   
-  @visual
-  @CC-448
+  @CC-540 @visual
   Scenario: Validate High-Density Performance Audit Dossier
     When I click on the "endpoints_link" in the sidebar
     Then the "endpoints_view" page is displayed

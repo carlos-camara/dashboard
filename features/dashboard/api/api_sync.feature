@@ -4,8 +4,7 @@ Feature: Sync Endpoint Validations
   Background:
     Given the API base URL is "http://localhost:3001"
 
-  @smoke
-  @CC-429
+  @CC-512 @smoke
   Scenario: Trigger Sync scans reports directory
     When I send a "POST" request to "/api/sync"
     Then the response status code should be 200
@@ -17,8 +16,7 @@ Feature: Sync Endpoint Validations
     And the response JSON path "scanned_path" should be a "str"
     And the response JSON path "scanned_path" should contain "reports"
 
-  @smoke @idempotency
-  @CC-430
+  @CC-513 @smoke @idempotency
   Scenario: Sync is idempotent
     When I send a "POST" request to "/api/sync"
     Then the response status code should be 200
@@ -26,26 +24,22 @@ Feature: Sync Endpoint Validations
     Then the response status code should be 200
     And the response JSON path "new_runs_discovered" should be >= 0
 
-  @smoke @negative
-  @CC-431
+  @CC-514 @smoke @negative
   Scenario: Verify Method Not Allowed (GET)
     When I send a "GET" request to "/api/sync"
     Then the response status code should be 404
 
-  @negative
-  @CC-432
+  @CC-515 @negative
   Scenario: Verify Method Not Allowed (PUT)
     When I send a "PUT" request to "/api/sync"
     Then the response status code should be 404
 
-  @negative
-  @CC-433
+  @CC-516 @negative
   Scenario: Verify Method Not Allowed (DELETE)
     When I send a "DELETE" request to "/api/sync"
     Then the response status code should be 404
 
-  @negative
-  @CC-434
+  @CC-517 @negative
   Scenario: Verify Method Not Allowed (PATCH)
     When I send a "PATCH" request to "/api/sync"
     Then the response status code should be 404

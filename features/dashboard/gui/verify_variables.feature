@@ -5,7 +5,7 @@ Feature: Variable Transformation Validation
      Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     And the "dashboard" page is displayed
 
-  @CC-272
+  @CC-525
   Scenario: Verify basic generation tokens
     When I click on the "test_runs_link" in the sidebar
     Then the "test_runs" page is displayed
@@ -16,7 +16,7 @@ Feature: Variable Transformation Validation
     And I wait for 1 seconds
     Then I should see the "search_input"
     
-  @CC-273
+  @CC-526
   Scenario: Verify unique and random tokens
     When I click on the "test_runs_link" in the sidebar
     Then the "test_runs" page is displayed
@@ -25,7 +25,7 @@ Feature: Variable Transformation Validation
     When I type "[RANDOM]" into the "search_input"
     And I wait for 1 seconds
     
-  @CC-274
+  @CC-527
   Scenario: Verify temporal tokens
     # Using Now with current year which is likely in the page title or footer
     Then the page title should be "QA Hub - Execution Dashboard"
@@ -38,7 +38,7 @@ Feature: Variable Transformation Validation
          | element      | value     |
          | search_input | [NOW(%Y)] |
     
-  @CC-275
+  @CC-528
   Scenario: Verify transformation functions
     When I click on the "test_runs_link" in the sidebar
     Then the "test_runs" page is displayed
