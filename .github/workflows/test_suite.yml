@@ -50,7 +50,7 @@ jobs:
           ports-to-clean: "3000 3001"
 
       - name: 🏷️ Auto-Tag Gherkin Scenarios with Jira IDs
-        uses: carlos-camara/qa-hub-actions/jira-auto-tagger@main
+        uses: carlos-camara/qa-hub-actions/jira-auto-tagger@docs/jira-integration
         with:
           jira-url: ${{ secrets.JIRA_URL }}
           jira-user: ${{ secrets.JIRA_USER }}
@@ -59,7 +59,7 @@ jobs:
           jira-parent-plan: "CC-10"
 
       - name: 🧪 Execute Test Suite
-        uses: carlos-camara/qa-hub-actions/run-tests@main
+        uses: carlos-camara/qa-hub-actions/run-tests@docs/jira-integration
         with:
           test-command-api: "qa-hub run --env staging --tags api"
           test-command-performance: >-

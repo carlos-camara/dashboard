@@ -5,7 +5,6 @@ Feature: Dashboard Cross-Navigation Interactivity
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     And the "dashboard" page is displayed
 
-  @CC-288
   Scenario: Redirect from Sector Integrity to Project Detail
     Then the following elements should contain these texts
          | element             | value            |
@@ -16,7 +15,6 @@ Feature: Dashboard Cross-Navigation Interactivity
     And I should see at least 1 elements with selector "stability_comparison"
 
   @visual
-  @CC-449
   Scenario: Redirect from Latency Anomalies to Endpoint Detail
     When I scroll to the bottom of the page
     Then the following elements should contain these texts

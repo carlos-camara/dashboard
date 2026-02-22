@@ -6,7 +6,6 @@ Feature: Application Navigation Validation
     And the "dashboard" page is displayed
 
   @smoke
-  @CC-444
   Scenario: Navigate to all main sections
     When I click on the "test_runs_link" in the sidebar
     Then the "test_runs" page is displayed
@@ -22,7 +21,6 @@ Feature: Application Navigation Validation
          | header_subtitle | [LANG:dashboard.header.subtitle] |
 
   @visual
-  @CC-445
   Scenario: Sidebar navigation persistence
     When I click on the "test_runs_link" in the sidebar
     When I click on the "dashboard_link" in the sidebar
