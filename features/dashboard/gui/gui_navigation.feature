@@ -1,11 +1,11 @@
-@gui @navigation
+@CC-459 @gui @navigation
 Feature: Application Navigation Validation
 
   Background:
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     And the "dashboard" page is displayed
 
-  @smoke
+  @CC-534 @smoke
   Scenario: Navigate to all main sections
     When I click on the "test_runs_link" in the sidebar
     Then the "test_runs" page is displayed
@@ -20,7 +20,7 @@ Feature: Application Navigation Validation
          | element         | value                            |
          | header_subtitle | [LANG:dashboard.header.subtitle] |
 
-  @visual
+  @CC-535 @visual
   Scenario: Sidebar navigation persistence
     When I click on the "test_runs_link" in the sidebar
     When I click on the "dashboard_link" in the sidebar

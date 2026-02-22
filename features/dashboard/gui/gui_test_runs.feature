@@ -1,11 +1,11 @@
-@gui @test_runs
+@CC-455 @gui @test_runs
 Feature: Test Runs View Validation
 
   Background:
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     And the "dashboard" page is displayed
 
-  @smoke
+  @CC-523 @smoke
   Scenario: Search and Redirect to Project Analytics
     When I click on the "test_runs_link" in the sidebar
     Then the "test_runs" page is displayed
@@ -22,6 +22,7 @@ Feature: Test Runs View Validation
     Then the "projectName" should be visible
     And I should see at least 1 elements with selector "stability_chart"
 
+  @CC-524
   Scenario: Verify Project List and Back Navigation
     When I click on the "test_runs_link" in the sidebar
     Then the "test_runs" page is displayed
