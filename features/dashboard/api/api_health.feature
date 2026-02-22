@@ -4,7 +4,7 @@ Feature: System Health Monitoring
   Background:
     Given the API base URL is "http://localhost:3001"
 
-  @smoke @critical
+  @CC-508 @smoke @critical
   Scenario: Verify System Health Check
     When I send a "GET" request to "/api/health"
     Then the response status code should be 200
@@ -14,17 +14,17 @@ Feature: System Health Monitoring
     # Additional robust check
     And the response JSON path "timestamp" should be a "str"
 
-  @negative @security
+  @CC-509 @negative @security
   Scenario: Verify Method Not Allowed (POST)
     When I send a "POST" request to "/api/health"
     Then the response status code should be 404
 
-  @negative @security
+  @CC-510 @negative @security
   Scenario: Verify Method Not Allowed (PUT)
     When I send a "PUT" request to "/api/health"
     Then the response status code should be 404
 
-  @negative @security
+  @CC-511 @negative @security
   Scenario: Verify Method Not Allowed (DELETE)
     When I send a "DELETE" request to "/api/health"
     Then the response status code should be 404

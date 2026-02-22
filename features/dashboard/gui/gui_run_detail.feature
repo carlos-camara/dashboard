@@ -5,7 +5,7 @@ Feature: Run Detail View Validation
     Given I navigate to the dashboard at "http://localhost:3000/dashboard/"
     And the "dashboard" page is displayed
 
-  @visual
+  @CC-533 @visual
   Scenario: Explore Run Detail View
     When I click on the "test_runs_link" in the sidebar
     Then the "test_runs" page is displayed

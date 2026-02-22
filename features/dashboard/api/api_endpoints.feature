@@ -4,7 +4,7 @@ Feature: System Endpoints Discovery
   Background:
     Given the API base URL is "http://localhost:3001"
 
-  @smoke @critical
+  @CC-504 @smoke @critical
   Scenario: Retrieve System Endpoints List
     When I send a "GET" request to "/api/endpoints"
     Then the response status code should be 200
@@ -19,17 +19,17 @@ Feature: System Endpoints Discovery
     # Verify we seeded the system service
     And the response JSON path "0.service" should equal "dashboard-system"
 
-  @negative @security
+  @CC-505 @negative @security
   Scenario: Verify Method Not Allowed (POST)
     When I send a "POST" request to "/api/endpoints"
     Then the response status code should be 404
 
-  @negative @security
+  @CC-506 @negative @security
   Scenario: Verify Method Not Allowed (PUT)
     When I send a "PUT" request to "/api/endpoints"
     Then the response status code should be 404
 
-  @negative @security
+  @CC-507 @negative @security
   Scenario: Verify Method Not Allowed (PATCH)
     When I send a "PATCH" request to "/api/endpoints"
     Then the response status code should be 404
