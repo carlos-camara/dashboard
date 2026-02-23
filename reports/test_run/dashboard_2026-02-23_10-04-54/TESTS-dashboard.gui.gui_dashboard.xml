@@ -1,0 +1,149 @@
+<testsuite name="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" tests="4" errors="0" failures="0" skipped="0" time="16.672591" timestamp="2026-02-23T10:05:19.856135" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Validate Header and System Status" status="passed" time="6.556472"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-529 @visual @smoke
+  Scenario: Validate Header and System Status
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 1.079s
+    And the "dashboard" page is displayed ... passed in 1.055s
+    And I wait for "dashboard" to be stable ... passed in 1.000s
+    Then the page title should be "[LANG:common.page_title]" ... passed in 0.008s
+    And the "header_subtitle" element should contain text "[LANG:dashboard.header.subtitle]" ... passed in 0.037s
+    And the "status_ticker_system_status" text should be one of "SYSTEM OPTIMAL, ALL SYSTEMS OPERATIONAL, PARTIAL SERVICE DEGRADATION, MINOR ANOMALIES DETECTED, CRITICAL INSTABILITY DETECTED, CONNECTION SEVERED" ... passed in 0.035s
+    And I wait for "2" seconds ... passed in 2.000s
+    Then the "dashboard" page should visually match the baseline image "dashboard_full_view_masked" without elements and with a 15.0% tolerance ... passed in 1.342s
+      | element                     |
+      | status_ticker_system_status |
+      | status_ticker_container     |
+      | recent_runs_list_container  |
+      | stats_health_value          |
+      | stats_total_runs_value      |
+      | stats_pass_rate_value       |
+      | stats_avg_duration_value    |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+10:05:03 [Dashboard Overview & Visual Integrity | Validate Header and System Status] DEBUG: Waiting for 'dashboard' stability (1s wait)...
+10:05:05 [Dashboard Overview & Visual Integrity | Validate Header and System Status] WARNING: Explicit wait for 2 seconds. Prefer using wait_until_* on elements.
+10:05:07 [Dashboard Overview & Visual Integrity | Validate Header and System Status] INFO: Captured granular screenshot for masking: dashboard_full_view_masked (Element: dashboard)
+10:05:08 [Dashboard Overview & Visual Integrity | Validate Header and System Status] DEBUG: [DEBUG] Applying 8 mask regions.
+[Visual] 🐧 CI/Linux detected. Adjusting tolerance from 15.0% to 30.0%
+[Visual] ✅ Match for 'dashboard_full_view_masked': Similarity=83.15%
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+]]>
+</system-err></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Validate Statistics Key Metrics" status="passed" time="3.551685"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-530 @visual @critical @smoke
+  Scenario: Validate Statistics Key Metrics
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.587s
+    And the "dashboard" page is displayed ... passed in 0.948s
+    And I wait for "dashboard" to be stable ... passed in 1.000s
+    Then the following elements should contain these texts ... passed in 0.163s
+      | element            | value                                   |
+      | stats_passed_card  | [LANG:dashboard.stats.system_health]    |
+      | stats_total_runs   | [LANG:dashboard.stats.total_executions] |
+      | stats_pass_rate    | [LANG:dashboard.stats.pass_rate]        |
+      | stats_avg_duration | [LANG:dashboard.stats.avg_latency]      |
+    And the "stats_grid" element should visually match the baseline image "dashboard_stats_grid_masked" without elements and with a 15.0% tolerance ... passed in 0.854s
+      | element                  |
+      | stats_health_value       |
+      | stats_pass_rate_value    |
+      | stats_total_runs_value   |
+      | stats_avg_duration_value |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+10:05:10 [Dashboard Overview & Visual Integrity | Validate Statistics Key Metrics] DEBUG: Waiting for 'dashboard' stability (1s wait)...
+10:05:12 [Dashboard Overview & Visual Integrity | Validate Statistics Key Metrics] INFO: Captured granular screenshot for masking: dashboard_stats_grid_masked (Element: stats_grid)
+10:05:12 [Dashboard Overview & Visual Integrity | Validate Statistics Key Metrics] DEBUG: [DEBUG] Applying 4 mask regions.
+[Visual] 🐧 CI/Linux detected. Adjusting tolerance from 15.0% to 30.0%
+[Visual] ✅ Match for 'dashboard_stats_grid_masked': Similarity=94.95%
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+]]>
+</system-err></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Validate Recent Runs Panel" status="passed" time="2.715953"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-531
+  Scenario: Validate Recent Runs Panel
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.642s
+    And the "dashboard" page is displayed ... passed in 1.034s
+    And I wait for "dashboard" to be stable ... passed in 1.000s
+    Then the following elements should contain these texts ... passed in 0.040s
+      | element             | value                                |
+      | recent_runs_heading | [LANG:dashboard.recent_runs.heading] |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+10:05:14 [Dashboard Overview & Visual Integrity | Validate Recent Runs Panel] DEBUG: Waiting for 'dashboard' stability (1s wait)...
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+]]>
+</system-err></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Verify Mobile Viewport Layout" status="passed" time="3.848482"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-532 @responsive @mobile
+  Scenario: Verify Mobile Viewport Layout
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.629s
+    And the "dashboard" page is displayed ... passed in 1.012s
+    And I wait for "dashboard" to be stable ... passed in 1.000s
+    Given I set the viewport to "375" x "812" ... passed in 0.021s
+    Then the "header_subtitle" element should contain text "[LANG:dashboard.header.subtitle]" ... passed in 0.081s
+    And the "mobile_layout" page should visually match the baseline image "dashboard_responsiveness" without elements and with a 15.0% tolerance ... passed in 1.105s
+      | element                  |
+      | stats_health_value       |
+      | stats_pass_rate_value    |
+      | stats_total_runs_value   |
+      | stats_avg_duration_value |
+      | status_ticker_container  |
+      | timeline_chart           |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+10:05:17 [Dashboard Overview & Visual Integrity | Verify Mobile Viewport Layout] DEBUG: Waiting for 'dashboard' stability (1s wait)...
+10:05:18 [Dashboard Overview & Visual Integrity | Verify Mobile Viewport Layout] INFO: Setting viewport to 375x812
+10:05:19 [Dashboard Overview & Visual Integrity | Verify Mobile Viewport Layout] INFO: Captured granular screenshot for masking: dashboard_responsiveness (Element: mobile_layout)
+10:05:19 [Dashboard Overview & Visual Integrity | Verify Mobile Viewport Layout] DEBUG: [DEBUG] Applying 8 mask regions.
+[Visual] 🐧 CI/Linux detected. Adjusting tolerance from 15.0% to 30.0%
+[Visual] ✅ Match for 'dashboard_responsiveness': Similarity=94.91%
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+]]>
+</system-err></testcase></testsuite>

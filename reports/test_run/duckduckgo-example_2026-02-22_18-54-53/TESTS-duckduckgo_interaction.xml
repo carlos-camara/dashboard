@@ -1,0 +1,21 @@
+<testsuite name="duckduckgo_interaction.DuckDuckGo Search Functionality" tests="1" errors="0" failures="0" skipped="0" time="13.47155" timestamp="2026-02-22T18:55:13.145321" hostname="runnervmwffz4"><testcase classname="duckduckgo_interaction.DuckDuckGo Search Functionality" name="Basic Search Verification" status="passed" time="13.47155"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-548 @smoke
+  Scenario: Basic Search Verification
+    Given I navigate to the dashboard at "https://duckduckgo.com" ... passed in 1.117s
+    And the "duckduckgo_home" page is displayed ... passed in 0.144s
+    Then the URL should contain "duckduckgo" ... passed in 0.004s
+    And I handle the consent popup ... passed in 10.552s
+    When I type "Selenium" into the "search_input" ... passed in 0.157s
+    And I press the "ENTER" key on the element "search_input" ... passed in 0.139s
+    Then I should see the "results_container" ... passed in 1.041s
+    And I wait until the text "Selenium" is visible ... passed in 0.156s
+    And I should see the "first_result" ... passed in 0.028s
+    And I should see the text "Selenium" ... passed in 0.134s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
