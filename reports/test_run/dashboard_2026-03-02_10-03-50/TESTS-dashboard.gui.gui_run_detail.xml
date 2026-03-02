@@ -1,0 +1,54 @@
+<testsuite name="dashboard.gui.gui_run_detail.Run Detail View Validation" tests="1" errors="0" failures="1" skipped="0" time="32.946056" timestamp="2026-03-02T10:12:19.141593" hostname="runnervmnay03"><testcase classname="dashboard.gui.gui_run_detail.Run Detail View Validation" name="Explore Run Detail View" status="failed" time="32.946056"><failure type="AssertionError" message="Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds">
+<![CDATA[
+Failing step: And the "dashboard" page is displayed ... failed in 32.697s
+Location: features/dashboard/gui/gui_run_detail.feature:6
+ASSERT FAILED: Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds
+]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-533 @visual
+  Scenario: Explore Run Detail View
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.249s
+    And the "dashboard" page is displayed ... failed in 32.697s
+    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
+    Then the "test_runs" page is displayed ... skipped in 0.000s
+    When I click on the "project_card" ... skipped in 0.000s
+    Then the "project_detail" page is displayed ... skipped in 0.000s
+    When I click on the "item" ... skipped in 0.000s
+    Then the "run_detail" page is displayed ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element     | value                            |
+      | back_button | [LANG:run_detail.return_to_base] |
+    And I should see the text "[LANG:run_detail.success]" ... skipped in 0.000s
+    Then the "run_detail_view" page should visually match the baseline image "run_detail_full_view" without elements and with a 5.0% tolerance ... skipped in 0.000s
+      | element              |
+      | success_chart        |
+      | score_percentage     |
+      | metrics_duration     |
+      | metrics_avg_duration |
+      | metrics_steps        |
+      | metrics_timestamp    |
+      | passed_count         |
+      | failed_count         |
+      | scenario_card        |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FRAMEWORK] Scenario failed. Restarting driver for next test.
+
+[FAILURE] Screenshot: file:////home/runner/work/dashboard/dashboard/features/resources/screenshots/2026-03-02_10-03-51/FAILED_Explore_Run_Detail_View_the_"dashboard"_page_is_displa.png
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+
+]]>
+</system-err></testcase></testsuite>
