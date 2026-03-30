@@ -1,0 +1,73 @@
+<testsuite name="dashboard.api.api_health.System Health Monitoring" tests="4" errors="0" failures="0" skipped="0" time="0.010644" timestamp="2026-02-20T23:57:11.724007" hostname="runnervmwffz4"><testcase classname="dashboard.api.api_health.System Health Monitoring" name="Verify System Health Check" status="passed" time="0.00289"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke @critical @CC-425
+  Scenario: Verify System Health Check
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I send a "GET" request to "/api/health" ... passed in 0.002s
+    Then the response status code should be 200 ... passed in 0.000s
+    And the response header "Content-Type" should contain "application/json" ... passed in 0.000s
+    And the response time should be less than 200 ms ... passed in 0.000s
+    And the response JSON path "status" should equal "ok" ... passed in 0.000s
+    And the response JSON path "timestamp" should be a "str" ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+23:57:11 [System Health Monitoring | Verify System Health Check] INFO: Sending GET request to: http://localhost:3001/api/health
+
+]]>
+</system-out></testcase><testcase classname="dashboard.api.api_health.System Health Monitoring" name="Verify Method Not Allowed (POST)" status="passed" time="0.002448"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @negative @security @CC-426
+  Scenario: Verify Method Not Allowed (POST)
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I send a "POST" request to "/api/health" ... passed in 0.002s
+    Then the response status code should be 404 ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+23:57:11 [System Health Monitoring | Verify Method Not Allowed (POST)] INFO: Sending POST request to: http://localhost:3001/api/health
+
+]]>
+</system-out></testcase><testcase classname="dashboard.api.api_health.System Health Monitoring" name="Verify Method Not Allowed (PUT)" status="passed" time="0.002748"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @negative @security @CC-427
+  Scenario: Verify Method Not Allowed (PUT)
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I send a "PUT" request to "/api/health" ... passed in 0.002s
+    Then the response status code should be 404 ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+23:57:11 [System Health Monitoring | Verify Method Not Allowed (PUT)] INFO: Sending PUT request to: http://localhost:3001/api/health
+
+]]>
+</system-out></testcase><testcase classname="dashboard.api.api_health.System Health Monitoring" name="Verify Method Not Allowed (DELETE)" status="passed" time="0.002557"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @negative @security @CC-428
+  Scenario: Verify Method Not Allowed (DELETE)
+    Given the API base URL is "http://localhost:3001" ... passed in 0.000s
+    When I send a "DELETE" request to "/api/health" ... passed in 0.002s
+    Then the response status code should be 404 ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+23:57:11 [System Health Monitoring | Verify Method Not Allowed (DELETE)] INFO: Sending DELETE request to: http://localhost:3001/api/health
+
+]]>
+</system-out></testcase></testsuite>
