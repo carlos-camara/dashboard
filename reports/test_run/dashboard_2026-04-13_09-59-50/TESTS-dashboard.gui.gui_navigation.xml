@@ -1,0 +1,83 @@
+<testsuite name="dashboard.gui.gui_navigation.Application Navigation Validation" tests="2" errors="0" failures="2" skipped="0" time="65.943794" timestamp="2026-04-13T10:04:57.125092" hostname="runnervm35a4x"><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Navigate to all main sections" status="failed" time="33.018206"><failure type="AssertionError" message="Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds">
+<![CDATA[
+Failing step: And the "dashboard" page is displayed ... failed in 32.754s
+Location: features/dashboard/gui/gui_navigation.feature:6
+ASSERT FAILED: Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds
+]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-534 @smoke
+  Scenario: Navigate to all main sections
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.264s
+    And the "dashboard" page is displayed ... failed in 32.754s
+    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
+    Then the "test_runs" page is displayed ... skipped in 0.000s
+    Then the "title" should contain the text "[LANG:navigation.test_runs]" ... skipped in 0.000s
+    When I click on the "endpoints_link" in the sidebar ... skipped in 0.000s
+    Then the "endpoints_view" page is displayed ... skipped in 0.000s
+    Then the "title" should contain the text "[LANG:navigation.endpoints]" ... skipped in 0.000s
+    When I click on the "dashboard_link" in the sidebar ... skipped in 0.000s
+    Then the "dashboard" page is displayed ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element         | value                            |
+      | header_subtitle | [LANG:dashboard.header.subtitle] |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FRAMEWORK] Scenario failed. Restarting driver for next test.
+
+[FAILURE] Screenshot: file:////home/runner/work/dashboard/dashboard/features/resources/screenshots/2026-04-13_09-59-51/FAILED_Navigate_to_all_main_sections_the_"dashboard"_page_is_displa.png
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+
+]]>
+</system-err></testcase><testcase classname="dashboard.gui.gui_navigation.Application Navigation Validation" name="Sidebar navigation persistence" status="failed" time="32.925588"><failure type="AssertionError" message="Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds">
+<![CDATA[
+Failing step: And the "dashboard" page is displayed ... failed in 32.684s
+Location: features/dashboard/gui/gui_navigation.feature:6
+ASSERT FAILED: Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds
+]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-535 @visual
+  Scenario: Sidebar navigation persistence
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.242s
+    And the "dashboard" page is displayed ... failed in 32.684s
+    When I click on the "test_runs_link" in the sidebar ... skipped in 0.000s
+    When I click on the "dashboard_link" in the sidebar ... skipped in 0.000s
+    Then the "dashboard" page is displayed ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element         | value                            |
+      | header_subtitle | [LANG:dashboard.header.subtitle] |
+    Then the "sidebar.sidebar_container" element should visually match the baseline image "nav_sidebar_persistence" with a 5.0% tolerance ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FRAMEWORK] Scenario failed. Restarting driver for next test.
+
+[FAILURE] Screenshot: file:////home/runner/work/dashboard/dashboard/features/resources/screenshots/2026-04-13_09-59-51/FAILED_Sidebar_navigation_persistence_the_"dashboard"_page_is_displa.png
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+
+]]>
+</system-err></testcase></testsuite>
