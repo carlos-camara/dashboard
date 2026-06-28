@@ -26,7 +26,9 @@ jobs:
 
     steps:
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref }}
 
       - name: 🔧 Setup Environment
         uses: carlos-camara/qa-hub-actions/setup-environment@main
@@ -47,6 +49,15 @@ jobs:
           db-path: "data/database.sqlite"
           ports-to-clean: "3000 3001"
 
+      - name: 🏷️ Auto-Tag Gherkin Scenarios with Jira IDs
+        uses: carlos-camara/qa-hub-actions/jira-auto-tagger@main
+        with:
+          jira-url: ${{ secrets.JIRA_URL }}
+          jira-user: ${{ secrets.JIRA_USER }}
+          jira-token: ${{ secrets.JIRA_API_TOKEN }}
+          jira-project-key: "CC"
+          jira-parent-plan: "CC-10"
+
       - name: 🧪 Execute Test Suite
         uses: carlos-camara/qa-hub-actions/run-tests@main
         with:
@@ -56,6 +67,12 @@ jobs:
             -u 10 -r 2 -t 1m --host http://localhost:3001
           test-command-gui: "qa-hub run --env staging --tags gui"
           headless: "true"
+          jira-sync: "true"
+          jira-url: ${{ secrets.JIRA_URL }}
+          jira-user: ${{ secrets.JIRA_USER }}
+          jira-token: ${{ secrets.JIRA_API_TOKEN }}
+          jira-project-key: "CC"
+          jira-test-status-field: "Test Status"
 
       - name: 📊 Collect & Publish Results
         if: always()

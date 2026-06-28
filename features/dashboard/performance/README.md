@@ -17,6 +17,11 @@ The performance suite is designed to simulate realistic orchestration patterns a
 - **Drift Detection**: Identify stochastic latency spikes and regression drifts before production manifestation.
 - **Concurrency Verification**: Validate system stability during high-pressure user swarms.
 
+### 🔗 Jira End-to-End Traceability
+Performance suites align with our central Jira Intelligence Ecosystem:
+- **Test Plan ➡️ Feature ➡️ Scenario**: Performance criteria are mapped to overarching Test Plan Epics. Target thresholds act as Feature Tasks, with individual load tests as Sub-tasks.
+- **Execution History Tracking**: Automatically appends and maintains a historical Markdown table inside the corresponding Jira Issue Description keeping logs pristine and tracking latency regressions natively.
+
 ---
 
 ## 🚀 Execution Protocol
