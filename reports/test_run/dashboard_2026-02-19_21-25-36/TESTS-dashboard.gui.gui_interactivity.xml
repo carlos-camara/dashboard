@@ -1,0 +1,41 @@
+<testsuite name="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" tests="2" errors="0" failures="0" skipped="0" time="5.052701" timestamp="2026-02-19T21:26:26.053286" hostname="runnervmwffz4"><testcase classname="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" name="Redirect from Sector Integrity to Project Detail" status="passed" time="2.418689"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Redirect from Sector Integrity to Project Detail
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.612s
+    And the "dashboard" page is displayed ... passed in 1.034s
+    Then the following elements should contain these texts ... passed in 0.050s
+      | element             | value            |
+      | recent_runs_heading | Sector Integrity |
+    When I click on the "recent_runs_project_item" ... passed in 0.149s
+    Then the "project_detail" page is displayed ... passed in 0.505s
+    Then the "projectName" should be visible ... passed in 0.030s
+    And I should see at least 1 elements with selector "stability_comparison" ... passed in 0.038s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" name="Redirect from Latency Anomalies to Endpoint Detail" status="passed" time="2.634012"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @visual
+  Scenario: Redirect from Latency Anomalies to Endpoint Detail
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.636s
+    And the "dashboard" page is displayed ... passed in 0.980s
+    When I scroll to the bottom of the page ... passed in 0.504s
+    Then the following elements should contain these texts ... passed in 0.043s
+      | element           | value             |
+      | endpoints_heading | LATENCY ANOMALIES |
+    When I click on the "endpoints_anomaly_item" ... passed in 0.213s
+    Then the "endpoint_detail" page is displayed ... passed in 0.140s
+    Then the following elements should contain these texts ... passed in 0.025s
+      | element     | value           |
+      | back_button | Back to Catalog |
+    And I should see the text "Success Rate" ... passed in 0.046s
+    And I should see the text "Avg Latency" ... passed in 0.046s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

@@ -1,0 +1,171 @@
+<testsuite name="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" tests="4" errors="0" failures="4" skipped="0" time="131.336811" timestamp="2026-06-28T15:06:54.339859" hostname="runnervmmklqx"><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Validate Header and System Status" status="failed" time="32.872061"><failure type="AssertionError" message="Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds">
+<![CDATA[
+Failing step: And the "dashboard" page is displayed ... failed in 32.637s
+Location: features/dashboard/gui/gui_dashboard.feature:6
+ASSERT FAILED: Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds
+]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-529 @visual @smoke
+  Scenario: Validate Header and System Status
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.235s
+    And the "dashboard" page is displayed ... failed in 32.637s
+    And I wait for "dashboard" to be stable ... skipped in 0.000s
+    Then the page title should be "[LANG:common.page_title]" ... skipped in 0.000s
+    And the "header_subtitle" element should contain text "[LANG:dashboard.header.subtitle]" ... skipped in 0.000s
+    And the "status_ticker_system_status" text should be one of "SYSTEM OPTIMAL, ALL SYSTEMS OPERATIONAL, PARTIAL SERVICE DEGRADATION, MINOR ANOMALIES DETECTED, CRITICAL INSTABILITY DETECTED, CONNECTION SEVERED" ... skipped in 0.000s
+    And I wait for "2" seconds ... skipped in 0.000s
+    Then the "dashboard" page should visually match the baseline image "dashboard_full_view_masked" without elements and with a 15.0% tolerance ... skipped in 0.000s
+      | element                     |
+      | status_ticker_system_status |
+      | status_ticker_container     |
+      | recent_runs_list_container  |
+      | stats_health_value          |
+      | stats_total_runs_value      |
+      | stats_pass_rate_value       |
+      | stats_avg_duration_value    |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FRAMEWORK] Scenario failed. Restarting driver for next test.
+
+[FAILURE] Screenshot: file:////home/runner/work/dashboard/dashboard/features/resources/screenshots/2026-06-28_15-04-36/FAILED_Validate_Header_and_System_Status_the_"dashboard"_page_is_displa.png
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+
+]]>
+</system-err></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Validate Statistics Key Metrics" status="failed" time="32.810231"><failure type="AssertionError" message="Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds">
+<![CDATA[
+Failing step: And the "dashboard" page is displayed ... failed in 32.604s
+Location: features/dashboard/gui/gui_dashboard.feature:6
+ASSERT FAILED: Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds
+]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-530 @visual @critical @smoke
+  Scenario: Validate Statistics Key Metrics
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.206s
+    And the "dashboard" page is displayed ... failed in 32.604s
+    And I wait for "dashboard" to be stable ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element            | value                                   |
+      | stats_passed_card  | [LANG:dashboard.stats.system_health]    |
+      | stats_total_runs   | [LANG:dashboard.stats.total_executions] |
+      | stats_pass_rate    | [LANG:dashboard.stats.pass_rate]        |
+      | stats_avg_duration | [LANG:dashboard.stats.avg_latency]      |
+    And the "stats_grid" element should visually match the baseline image "dashboard_stats_grid_masked" without elements and with a 15.0% tolerance ... skipped in 0.000s
+      | element                  |
+      | stats_health_value       |
+      | stats_pass_rate_value    |
+      | stats_total_runs_value   |
+      | stats_avg_duration_value |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FRAMEWORK] Scenario failed. Restarting driver for next test.
+
+[FAILURE] Screenshot: file:////home/runner/work/dashboard/dashboard/features/resources/screenshots/2026-06-28_15-04-36/FAILED_Validate_Statistics_Key_Metrics_the_"dashboard"_page_is_displa.png
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+
+]]>
+</system-err></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Validate Recent Runs Panel" status="failed" time="32.828428"><failure type="AssertionError" message="Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds">
+<![CDATA[
+Failing step: And the "dashboard" page is displayed ... failed in 32.620s
+Location: features/dashboard/gui/gui_dashboard.feature:6
+ASSERT FAILED: Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds
+]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-531
+  Scenario: Validate Recent Runs Panel
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.208s
+    And the "dashboard" page is displayed ... failed in 32.620s
+    And I wait for "dashboard" to be stable ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element             | value                                |
+      | recent_runs_heading | [LANG:dashboard.recent_runs.heading] |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FRAMEWORK] Scenario failed. Restarting driver for next test.
+
+[FAILURE] Screenshot: file:////home/runner/work/dashboard/dashboard/features/resources/screenshots/2026-06-28_15-04-36/FAILED_Validate_Recent_Runs_Panel_the_"dashboard"_page_is_displa.png
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+
+]]>
+</system-err></testcase><testcase classname="dashboard.gui.gui_dashboard.Dashboard Overview &amp; Visual Integrity" name="Verify Mobile Viewport Layout" status="failed" time="32.826091"><failure type="AssertionError" message="Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds">
+<![CDATA[
+Failing step: And the "dashboard" page is displayed ... failed in 32.620s
+Location: features/dashboard/gui/gui_dashboard.feature:6
+ASSERT FAILED: Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds
+]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-532 @responsive @mobile
+  Scenario: Verify Mobile Viewport Layout
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.206s
+    And the "dashboard" page is displayed ... failed in 32.620s
+    And I wait for "dashboard" to be stable ... skipped in 0.000s
+    Given I set the viewport to "375" x "812" ... skipped in 0.000s
+    Then the "header_subtitle" element should contain text "[LANG:dashboard.header.subtitle]" ... skipped in 0.000s
+    And the "mobile_layout" page should visually match the baseline image "dashboard_responsiveness" without elements and with a 15.0% tolerance ... skipped in 0.000s
+      | element                  |
+      | stats_health_value       |
+      | stats_pass_rate_value    |
+      | stats_total_runs_value   |
+      | stats_avg_duration_value |
+      | status_ticker_container  |
+      | timeline_chart           |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FRAMEWORK] Scenario failed. Restarting driver for next test.
+
+[FAILURE] Screenshot: file:////home/runner/work/dashboard/dashboard/features/resources/screenshots/2026-06-28_15-04-36/FAILED_Verify_Mobile_Viewport_Layout_the_"dashboard"_page_is_displa.png
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+
+]]>
+</system-err></testcase></testsuite>

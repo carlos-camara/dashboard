@@ -1,0 +1,60 @@
+<testsuite name="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" tests="1" errors="0" failures="1" skipped="0" time="32.994004" timestamp="2026-03-30T09:58:21.665603" hostname="runnervmrg6be"><testcase classname="dashboard.gui.gui_performance.Ultra-Professional Performance Dashboard Validation" name="Validate High-Density Performance Audit Dossier" status="failed" time="32.994004"><failure type="AssertionError" message="Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds">
+<![CDATA[
+Failing step: And the "dashboard" page is displayed ... failed in 32.722s
+Location: features/dashboard/gui/gui_performance.feature:6
+ASSERT FAILED: Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds
+]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-540 @visual
+  Scenario: Validate High-Density Performance Audit Dossier
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.272s
+    And the "dashboard" page is displayed ... failed in 32.722s
+    When I click on the "endpoints_link" in the sidebar ... skipped in 0.000s
+    Then the "endpoints_view" page is displayed ... skipped in 0.000s
+    When I type "runs" into the "search_input" ... skipped in 0.000s
+    And I wait for 1 seconds ... skipped in 0.000s
+    When I click on the "endpoint_item" ... skipped in 0.000s
+    Then the "endpoint_detail" page is displayed ... skipped in 0.000s
+    Then I should see the "performance_card" ... skipped in 0.000s
+    When I click on the "open_report_button" ... skipped in 0.000s
+    Then the "performance_report_view" page is displayed ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element       | value                          |
+      | audit_title   | [LANG:performance.audit_title] |
+      | export_button | [LANG:performance.dossier]     |
+    And I should see the text "[LANG:performance.integrity]" ... skipped in 0.000s
+    And I should see the "rps_image" ... skipped in 0.000s
+    And I should see the "latency_image" ... skipped in 0.000s
+    And I should see the "original_report_link" ... skipped in 0.000s
+    Then the "performance dashboard" page should visually match the baseline image "final_performance_dashboard_verification" without elements and with a 10.0% tolerance ... skipped in 0.000s
+      | element               |
+      | efficiency_score      |
+      | velocity_score        |
+      | integrity_score       |
+      | saturation_score      |
+      | rps_image             |
+      | latency_image         |
+      | audit_timestamp_value |
+      | endpoint_matrix       |
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FRAMEWORK] Scenario failed. Restarting driver for next test.
+
+[FAILURE] Screenshot: file:////home/runner/work/dashboard/dashboard/features/resources/screenshots/2026-03-30_09-52-40/FAILED_Validate_High-Density_Performance_Audit_Dossier_the_"dashboard"_page_is_displa.png
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+
+]]>
+</system-err></testcase></testsuite>
