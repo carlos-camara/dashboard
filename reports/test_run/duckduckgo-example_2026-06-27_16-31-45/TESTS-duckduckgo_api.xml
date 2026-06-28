@@ -1,0 +1,20 @@
+<testsuite name="duckduckgo_api.DuckDuckGo API Availability" tests="1" errors="0" failures="0" skipped="0" time="0.10376" timestamp="2026-06-27T16:31:46.656981" hostname="runnervmmklqx"><testcase classname="duckduckgo_api.DuckDuckGo API Availability" name="Verify DuckDuckGo connectivity" status="passed" time="0.10376"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-546 @smoke
+  Scenario: Verify DuckDuckGo connectivity
+    Given the API base URL is "https://duckduckgo.com" ... passed in 0.000s
+    When I send a "GET" request to "/" ... passed in 0.103s
+    Then the response status code should be 200 ... passed in 0.000s
+    And the response time should be less than 2000 ms ... passed in 0.000s
+    And the response header "Content-Type" should contain "text/html" ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+16:31:46 [DuckDuckGo API Availability | Verify DuckDuckGo connectivity] INFO: Sending GET request to: https://duckduckgo.com/
+
+]]>
+</system-out></testcase></testsuite>

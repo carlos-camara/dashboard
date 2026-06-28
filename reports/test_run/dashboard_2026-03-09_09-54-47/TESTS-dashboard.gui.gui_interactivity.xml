@@ -1,0 +1,83 @@
+<testsuite name="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" tests="2" errors="0" failures="2" skipped="0" time="65.946657" timestamp="2026-03-09T09:58:49.133570" hostname="runnervm0kj6c"><testcase classname="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" name="Redirect from Sector Integrity to Project Detail" status="failed" time="32.948012"><failure type="AssertionError" message="Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds">
+<![CDATA[
+Failing step: And the "dashboard" page is displayed ... failed in 32.716s
+Location: features/dashboard/gui/gui_interactivity.feature:6
+ASSERT FAILED: Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds
+]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-541
+  Scenario: Redirect from Sector Integrity to Project Detail
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.232s
+    And the "dashboard" page is displayed ... failed in 32.716s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element             | value            |
+      | recent_runs_heading | Sector Integrity |
+    When I click on the "recent_runs_project_item" ... skipped in 0.000s
+    Then the "project_detail" page is displayed ... skipped in 0.000s
+    Then the "projectName" should be visible ... skipped in 0.000s
+    And I should see at least 1 elements with selector "stability_comparison" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FRAMEWORK] Scenario failed. Restarting driver for next test.
+
+[FAILURE] Screenshot: file:////home/runner/work/dashboard/dashboard/features/resources/screenshots/2026-03-09_09-54-48/FAILED_Redirect_from_Sector_Integrity_to_Project_Detail_the_"dashboard"_page_is_displa.png
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+
+]]>
+</system-err></testcase><testcase classname="dashboard.gui.gui_interactivity.Dashboard Cross-Navigation Interactivity" name="Redirect from Latency Anomalies to Endpoint Detail" status="failed" time="32.998645"><failure type="AssertionError" message="Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds">
+<![CDATA[
+Failing step: And the "dashboard" page is displayed ... failed in 32.762s
+Location: features/dashboard/gui/gui_interactivity.feature:6
+ASSERT FAILED: Page Load Failed: Critical element 'header_title' not visible on 'dashboard'. Error: Message: Element 'header_title' did not become visible within 30 seconds
+]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @CC-542 @visual
+  Scenario: Redirect from Latency Anomalies to Endpoint Detail
+    Given I navigate to the dashboard at "http://localhost:3000/dashboard/" ... passed in 0.237s
+    And the "dashboard" page is displayed ... failed in 32.762s
+    When I scroll to the bottom of the page ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element           | value             |
+      | endpoints_heading | LATENCY ANOMALIES |
+    When I click on the "endpoints_anomaly_item" ... skipped in 0.000s
+    Then the "endpoint_detail" page is displayed ... skipped in 0.000s
+    Then the following elements should contain these texts ... skipped in 0.000s
+      | element     | value           |
+      | back_button | Back to Catalog |
+    And I should see the text "Success Rate" ... skipped in 0.000s
+    And I should see the text "Avg Latency" ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+
+[FRAMEWORK] Scenario failed. Restarting driver for next test.
+
+[FAILURE] Screenshot: file:////home/runner/work/dashboard/dashboard/features/resources/screenshots/2026-03-09_09-54-48/FAILED_Redirect_from_Latency_Anomalies_to_Endpoint_Detail_the_"dashboard"_page_is_displa.png
+
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+
+
+
+]]>
+</system-err></testcase></testsuite>
